@@ -1,8 +1,10 @@
 language: generic
 sudo: true
 
-install:
-    - sudo apt install texlive-full
+addons:
+    apt:
+        packages:
+            - texlive-full
 
 script:
     - make
