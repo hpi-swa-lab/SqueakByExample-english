@@ -1,19 +1,15 @@
 language: generic
 sudo: true
-
 addons:
-    apt:
-        packages:
-            - texlive-full
-
+  apt:
+    packages:
+    - texlive-full
 script:
-    - make
-
+- make
 deploy:
-    provider: releases
-    api_key:
-        secure: pYQw2i/d36zdRohVQ6U9uCu+xWqJAEQKLWhmyJXvnSij+M6BGMBq4kNd4/Z/A0UHodvtszBRRkYLovkIgG22V6e7T9yVUdbcq0Gis8UuHSIr5y8fy89ypQLuDKWhvYdvlsvJK5Bh9USWcOlspukOcwIMAmPtLbz59yxQ/qjIOs5kNnz7+WoZ86/8OpPAtw+ZjqzqqpD7f72e0NfY06Cb9fw4Aa7HjFQGrCC6OZO0n/2JtWZqwTSHELVxkZ+vQl54dNofOPLcCxHAMCq6l+3pzag/FeGKZOihZzTDUGAi5/GcDhaGnNjtH2kB91JcvR2E7yZQfgQBMRrQfTvEXYCZ+JINZKo8Z/E5UDWj6Ce7D0WZOg4NBELFGBtV4O1AP9Smwk5Vz/FFPPgngCA8RJTzAEcRhBe4A9NEiHCU9NFHYsL5rMjnaEr/kN3ZRVWprxtC7X7T7FwbEWQNCYhhLtFsZaI3ZeOCXiIa/if9lQObcqlDPFpFphqOojytc42E1hoiC94OBbpDNlbq9Vn5gszY1G+8uQmf1SzkYpHv5Id1j7IzqU6YumKeq3OCeMmGSgKqRcDF42wl6F65/0ldzWF5mXVb1YHvW0yUnbhYj0YFgGZLfV2rBOpqUT5UNL+7WhITaUEbx3jTLmOZKbbetLtItwBff3nk23U9gE4rVdnGLrY=
-        file: SBE.pdf
-        branches:
-            only: 
-                - master
+  provider: releases
+  api_key:
+    secure: NonbhAGQoWcE2vHYVXvLJAK9YuvW0g3VnEVcjqqGIf+LQEP68FolnBfMpKL5gLg1p8nmsyU5z+zAFapQUxvSVxWzLhsSLGlyZmWlcyrt+zZwCxNaPGB0RvuOLhZABaPizAp2zLbf0b8s8v38ToTl7fLCamf39fjC1O4oEtyXuD3kWaUpj8S0hXbz9/SYJLSNyKvCXzjjfCFf8nG3B/QksoSGKaGVP0A8uRG3yJR3cWTJKYOhjLg2+utXaedW/MwnLz1re4bBdH2EwXJK90A9JhjgeH1hBAc57dXN3hCMBWu/9uvP9/+Vlv5w6W6k4zTPuLow28xIeT1baBCL7PXgqBwCK/u6pXWSZVIYZTfoxRNhff9rzD1Jvj2J1fEzm0IqL8Zvz/v7N7hoVtt7fOt2deStb56xWKCL0/EKCAd56EtXKmSQdSMSgcEoQnyLb+pIF0+AroVrLCKqT0z/tNugtRBaTrlUT4r3QGKiIGme3SlOFqeBVaa8M+YDB2ZGyp0K/EGuL8EPmzfLdh+ajlXfFPSNvmOmAOTeTbURtxPFblDsJhahrCaRIs/b6DrQNqWI4eAJomd9+Fs6CwpHCLg9heuwxSDZcbbjkeJ7svFIEMXbUJAprkUGoJhZ4hj3u6mC2wpG30x3WAZq32KuNb3hDN/V+X0Yop1mM/3WyOF8h8c=
+  file: SBE.pdf
+  on:
+    repo: MrModder/SqueakByExample-english
