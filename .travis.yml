@@ -6,15 +6,16 @@ addons:
         packages:
             - texlive-full
 
-        script:
-            - make
-        deploy:
-            provider: releases
-            api_key:
-                secure: pYQw2i/d36zdRohVQ6U9uCu+xWqJAEQKLWhmyJXvnSij+M6BGMBq4kNd4/Z/A0UHodvtszBRRkYLovkIgG22V6e7T9yVUdbcq0Gis8UuHSIr5y8fy89ypQLuDKWhvYdvlsvJK5Bh9USWcOlspukOcwIMAmPtLbz59yxQ/qjIOs5kNnz7+WoZ86/8OpPAtw+ZjqzqqpD7f72e0NfY06Cb9fw4Aa7HjFQGrCC6OZO0n/2JtWZqwTSHELVxkZ+vQl54dNofOPLcCxHAMCq6l+3pzag/FeGKZOihZzTDUGAi5/GcDhaGnNjtH2kB91JcvR2E7yZQfgQBMRrQfTvEXYCZ+JINZKo8Z/E5UDWj6Ce7D0WZOg4NBELFGBtV4O1AP9Smwk5Vz/FFPPgngCA8RJTzAEcRhBe4A9NEiHCU9NFHYsL5rMjnaEr/kN3ZRVWprxtC7X7T7FwbEWQNCYhhLtFsZaI3ZeOCXiIa/if9lQObcqlDPFpFphqOojytc42E1hoiC94OBbpDNlbq9Vn5gszY1G+8uQmf1SzkYpHv5Id1j7IzqU6YumKeq3OCeMmGSgKqRcDF42wl6F65/0ldzWF5mXVb1YHvW0yUnbhYj0YFgGZLfV2rBOpqUT5UNL+7WhITaUEbx3jTLmOZKbbetLtItwBff3nk23U9gE4rVdnGLrY=
-                file: SBE.pdf
-                on:
-                    repo: MrModder/SqueakByExample-english
-                branches:
-                    only:
-                        - master
+script:
+    - make
+
+deploy:
+    provider: releases
+    api_key:
+        secure: pYQw2i/d36zdRohVQ6U9uCu+xWqJAEQKLWhmyJXvnSij+M6BGMBq4kNd4/Z/A0UHodvtszBRRkYLovkIgG22V6e7T9yVUdbcq0Gis8UuHSIr5y8fy89ypQLuDKWhvYdvlsvJK5Bh9USWcOlspukOcwIMAmPtLbz59yxQ/qjIOs5kNnz7+WoZ86/8OpPAtw+ZjqzqqpD7f72e0NfY06Cb9fw4Aa7HjFQGrCC6OZO0n/2JtWZqwTSHELVxkZ+vQl54dNofOPLcCxHAMCq6l+3pzag/FeGKZOihZzTDUGAi5/GcDhaGnNjtH2kB91JcvR2E7yZQfgQBMRrQfTvEXYCZ+JINZKo8Z/E5UDWj6Ce7D0WZOg4NBELFGBtV4O1AP9Smwk5Vz/FFPPgngCA8RJTzAEcRhBe4A9NEiHCU9NFHYsL5rMjnaEr/kN3ZRVWprxtC7X7T7FwbEWQNCYhhLtFsZaI3ZeOCXiIa/if9lQObcqlDPFpFphqOojytc42E1hoiC94OBbpDNlbq9Vn5gszY1G+8uQmf1SzkYpHv5Id1j7IzqU6YumKeq3OCeMmGSgKqRcDF42wl6F65/0ldzWF5mXVb1YHvW0yUnbhYj0YFgGZLfV2rBOpqUT5UNL+7WhITaUEbx3jTLmOZKbbetLtItwBff3nk23U9gE4rVdnGLrY=
+        file: SBE.pdf
+        on:
+            repo: MrModder/SqueakByExample-english
+        branches:
+            only:
+                - master
