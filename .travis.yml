@@ -13,3 +13,5 @@ deploy:
   file: SBE.pdf
   on:
     repo: MrModder/SqueakByExample-english
+  branches:
+    only: master
