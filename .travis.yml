@@ -6,9 +6,9 @@ addons:
     - texlive-full
 
 script:
-- ll
+- ls
 - make
-- ll
+- ls
 
 deploy:
   provider: releases
