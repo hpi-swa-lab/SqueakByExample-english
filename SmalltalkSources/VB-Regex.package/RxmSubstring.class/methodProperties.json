@@ -1,0 +1,11 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"beCaseInsensitive" : "",
+		"beCaseSensitive" : "",
+		"character:ignoreCase:" : "",
+		"initialize" : "",
+		"matchAgainst:" : "",
+		"sampleStream" : "",
+		"substring:ignoreCase:" : "" } }

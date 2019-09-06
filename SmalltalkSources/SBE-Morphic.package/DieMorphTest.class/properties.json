@@ -1,0 +1,14 @@
+{
+	"category" : "SBE-Morphic",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "DieMorphTest",
+	"pools" : [
+		 ],
+	"super" : "CrossMorphTest",
+	"type" : "normal" }

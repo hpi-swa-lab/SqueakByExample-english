@@ -1,0 +1,14 @@
+{
+	"category" : "SBE2-SeasideRPN",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "on 11/16/2007 11:47",
+	"instvars" : [
+		 ],
+	"name" : "RPNDisplayStack",
+	"pools" : [
+		 ],
+	"super" : "RPNDisplay",
+	"type" : "normal" }

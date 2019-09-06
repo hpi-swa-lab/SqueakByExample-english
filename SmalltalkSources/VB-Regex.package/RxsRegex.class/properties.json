@@ -1,0 +1,15 @@
+{
+	"category" : "VB-Regex",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		"branch",
+		"regex" ],
+	"name" : "RxsRegex",
+	"pools" : [
+		 ],
+	"super" : "RxsNode",
+	"type" : "normal" }

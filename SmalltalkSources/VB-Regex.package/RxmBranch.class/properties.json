@@ -1,0 +1,15 @@
+{
+	"category" : "VB-Regex",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		"loopback",
+		"alternative" ],
+	"name" : "RxmBranch",
+	"pools" : [
+		 ],
+	"super" : "RxmLink",
+	"type" : "normal" }

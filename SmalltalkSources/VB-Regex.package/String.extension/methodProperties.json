@@ -1,0 +1,15 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"allRegexMatches:" : "",
+		"asRegex" : "",
+		"asRegexIgnoringCase" : "",
+		"copyWithRegex:matchesReplacedWith:" : "",
+		"copyWithRegex:matchesTranslatedUsing:" : "",
+		"matchesRegex:" : "",
+		"matchesRegexIgnoringCase:" : "",
+		"prefixMatchesRegex:" : "",
+		"prefixMatchesRegexIgnoringCase:" : "",
+		"regex:matchesCollect:" : "",
+		"regex:matchesDo:" : "" } }

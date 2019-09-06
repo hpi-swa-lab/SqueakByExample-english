@@ -1,0 +1,19 @@
+{
+	"category" : "SBE-Testing",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "on 6/12/2007 11:30",
+	"instvars" : [
+		"dir",
+		"file",
+		"stream",
+		"lineNumber",
+		"tests",
+		"testCase" ],
+	"name" : "SBEchapter",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

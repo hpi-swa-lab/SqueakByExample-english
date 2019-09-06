@@ -1,0 +1,14 @@
+{
+	"category" : "SBE-Testing",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "on 11/20/2008 13:59",
+	"instvars" : [
+		 ],
+	"name" : "SBE2main",
+	"pools" : [
+		 ],
+	"super" : "SBEmain",
+	"type" : "normal" }

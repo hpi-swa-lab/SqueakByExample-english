@@ -1,0 +1,16 @@
+{
+	"category" : "SBE-Morphic",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"faces",
+		"dieValue",
+		"isStopped" ],
+	"name" : "DieMorph",
+	"pools" : [
+		 ],
+	"super" : "BorderedMorph",
+	"type" : "normal" }

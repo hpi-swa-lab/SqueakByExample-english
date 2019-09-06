@@ -1,0 +1,16 @@
+{
+	"category" : "VB-Regex",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		"EscapedLetterSelectors",
+		"NamedClassSelectors" ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		"predicate",
+		"negation" ],
+	"name" : "RxsPredicate",
+	"pools" : [
+		 ],
+	"super" : "RxsNode",
+	"type" : "normal" }

@@ -1,0 +1,8 @@
+{
+	"class" : {
+		"with:" : "" },
+	"instance" : {
+		"bePerform:" : "",
+		"bePerformNot:" : "",
+		"matchAgainst:" : "",
+		"predicate:" : "" } }

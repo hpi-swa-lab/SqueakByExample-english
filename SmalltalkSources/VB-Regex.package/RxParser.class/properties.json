@@ -1,0 +1,17 @@
+{
+	"category" : "VB-Regex",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		"BackslashConstants",
+		"BackslashSpecials",
+		"ExceptionObjects" ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		"input",
+		"lookahead" ],
+	"name" : "RxParser",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

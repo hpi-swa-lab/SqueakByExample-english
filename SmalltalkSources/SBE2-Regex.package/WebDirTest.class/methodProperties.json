@@ -1,0 +1,20 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"cleanFixture" : "on 11/24/2008 11:40",
+		"createPage:title:contents:in:" : "on 11/24/2008 11:32",
+		"head" : "on 11/24/2008 11:31",
+		"makeFixture" : "on 11/24/2008 15:10",
+		"middle" : "on 11/24/2008 11:32",
+		"mkdir:in:" : "on 11/24/2008 11:35",
+		"setUp" : "on 11/24/2008 11:41",
+		"tail" : "on 11/24/2008 11:32",
+		"tearDown" : "on 11/24/2008 11:41",
+		"testAllHtmlFiles" : "on 11/24/2008 15:06",
+		"testDirs" : "on 11/24/2008 15:06",
+		"testFileNames" : "on 11/24/2008 15:07",
+		"testLink" : "on 11/24/2008 14:56",
+		"testTOC" : "on 12/8/2008 17:50",
+		"testTitles" : "on 11/24/2008 12:00",
+		"webDirName" : "on 11/24/2008 10:31" } }
