@@ -1,0 +1,15 @@
+{
+	"category" : "SBE2-Regex",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "on 11/24/2008 15:19",
+	"instvars" : [
+		"path",
+		"homePath" ],
+	"name" : "WebPage",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

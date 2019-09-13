@@ -1,0 +1,10 @@
+{
+	"class" : {
+		"applicationName" : "on 11/17/2007 14:24",
+		"canBeRoot" : "on 11/17/2007 11:53",
+		"initialize" : "on 11/17/2007 14:24" },
+	"instance" : {
+		"children" : "on 11/17/2007 12:12",
+		"initialize" : "on 11/29/2007 15:38",
+		"renderContentOn:" : "on 11/17/2007 12:12",
+		"states" : "on 11/17/2007 13:05" } }

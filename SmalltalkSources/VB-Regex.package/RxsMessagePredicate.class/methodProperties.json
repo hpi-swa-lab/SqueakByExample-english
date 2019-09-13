@@ -1,0 +1,9 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"dispatchTo:" : "",
+		"initializeSelector:" : "",
+		"initializeSelector:negated:" : "",
+		"negated" : "",
+		"selector" : "" } }

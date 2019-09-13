@@ -1,0 +1,1 @@
+Defines common css style for subclasses.

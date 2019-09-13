@@ -1,0 +1,14 @@
+{
+	"category" : "VB-Regex",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		"next" ],
+	"name" : "RxmLink",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

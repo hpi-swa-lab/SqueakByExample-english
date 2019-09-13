@@ -1,0 +1,3 @@
+constants
+testCategory
+	^ 'SBE-GeneratedTests'

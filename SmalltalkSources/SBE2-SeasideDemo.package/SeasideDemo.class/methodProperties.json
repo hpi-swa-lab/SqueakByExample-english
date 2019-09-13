@@ -1,0 +1,8 @@
+{
+	"class" : {
+		"canBeRoot" : "on 10/30/2007 10:49",
+		"initialize" : "on 11/17/2007 13:22" },
+	"instance" : {
+		"children" : "on 6/8/2008 16:47",
+		"initialize" : "on 11/26/2007 12:02",
+		"renderContentOn:" : "on 11/26/2007 13:49" } }

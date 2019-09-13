@@ -1,0 +1,14 @@
+{
+	"category" : "SBE2-SeasideRPN",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "on 11/16/2007 11:46",
+	"instvars" : [
+		"stackMachine" ],
+	"name" : "RPNWidget",
+	"pools" : [
+		 ],
+	"super" : "WAComponent",
+	"type" : "normal" }

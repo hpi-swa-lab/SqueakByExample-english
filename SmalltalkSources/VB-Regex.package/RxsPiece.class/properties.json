@@ -1,0 +1,16 @@
+{
+	"category" : "VB-Regex",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		"atom",
+		"min",
+		"max" ],
+	"name" : "RxsPiece",
+	"pools" : [
+		 ],
+	"super" : "RxsNode",
+	"type" : "normal" }

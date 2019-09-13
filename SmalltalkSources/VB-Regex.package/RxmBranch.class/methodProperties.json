@@ -1,0 +1,10 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"alternative:" : "",
+		"beLoopback" : "",
+		"initialize" : "",
+		"matchAgainst:" : "",
+		"pointTailTo:" : "",
+		"terminateWith:" : "" } }

@@ -1,0 +1,14 @@
+{
+	"category" : "VB-Regex",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		"predicate" ],
+	"name" : "RxmPredicate",
+	"pools" : [
+		 ],
+	"super" : "RxmLink",
+	"type" : "normal" }

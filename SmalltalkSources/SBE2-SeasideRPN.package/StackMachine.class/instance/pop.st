@@ -1,0 +1,3 @@
+operations
+pop
+	^ contents removeFirst

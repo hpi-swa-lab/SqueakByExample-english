@@ -1,0 +1,15 @@
+{
+	"category" : "SBE2-SeasideRPN",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "on 11/17/2007 14:29",
+	"instvars" : [
+		"stackMachine",
+		"display" ],
+	"name" : "RPNDisplayTask",
+	"pools" : [
+		 ],
+	"super" : "WATask",
+	"type" : "normal" }

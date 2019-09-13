@@ -200,3 +200,14 @@ Alternatively, you can check out a read-only version as follows:
 You should separately check out this file and link it in wherever it is needed.
 
 ---
+
+# Smalltalk Sources
+
+The "Squeak by Example" Monticello Repository can be found as a [FileTree](https://github.com/dalehenrich/filetree) repository in the `SmalltalkSources` folder.
+
+The package SBE-Testing includes as dependencies the code for the hands-on chapters.
+It will run all the test code in the latex sources and exercise the hands-on code.
+
+The repository was previously hosted on [squeaksource](http://www.squeaksource.com/@QJbXgqmsC7AwLgNB/jkjcsr-2).
+
+---

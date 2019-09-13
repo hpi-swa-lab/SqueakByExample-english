@@ -1,0 +1,14 @@
+{
+	"category" : "SBE2-SeasideRPN",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "on 11/17/2007 14:37",
+	"instvars" : [
+		"contents" ],
+	"name" : "StackMachine",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

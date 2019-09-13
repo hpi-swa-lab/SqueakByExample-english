@@ -1,0 +1,3 @@
+fixture
+webDirName
+	^ 'DummyWebSite'

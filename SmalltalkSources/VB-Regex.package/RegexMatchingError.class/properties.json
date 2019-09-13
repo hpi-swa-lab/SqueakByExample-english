@@ -1,0 +1,14 @@
+{
+	"category" : "VB-Regex-Exceptions",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "RegexMatchingError",
+	"pools" : [
+		 ],
+	"super" : "RegexError",
+	"type" : "normal" }

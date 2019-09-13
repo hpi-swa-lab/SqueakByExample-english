@@ -1,0 +1,3 @@
+operations
+add
+	self binOp: #+.

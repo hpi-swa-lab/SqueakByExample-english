@@ -1,0 +1,13 @@
+{
+	"class" : {
+		"on:" : "" },
+	"instance" : {
+		"addChar:" : "",
+		"addRangeFrom:to:" : "",
+		"initialize:" : "",
+		"match:" : "",
+		"parse" : "",
+		"parseCharOrRange" : "",
+		"parseEscapeChar" : "",
+		"parseNamedSet" : "",
+		"parseStep" : "" } }
