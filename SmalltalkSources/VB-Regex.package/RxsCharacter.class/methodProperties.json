@@ -1,0 +1,11 @@
+{
+	"class" : {
+		"with:" : "" },
+	"instance" : {
+		"character" : "",
+		"dispatchTo:" : "",
+		"enumerateTo:" : "",
+		"initializeCharacter:" : "",
+		"isAtomic" : "",
+		"isEnumerable" : "",
+		"isNullable" : "" } }

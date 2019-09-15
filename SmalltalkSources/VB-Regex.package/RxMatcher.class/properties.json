@@ -1,0 +1,22 @@
+{
+	"category" : "VB-Regex",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		"Cr",
+		"Lf" ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		"matcher",
+		"ignoreCase",
+		"startOptimizer",
+		"stream",
+		"markerPositions",
+		"markerCount",
+		"lastResult",
+		"lastChar" ],
+	"name" : "RxMatcher",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

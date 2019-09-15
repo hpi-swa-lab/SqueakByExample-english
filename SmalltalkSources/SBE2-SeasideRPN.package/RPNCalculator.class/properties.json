@@ -1,0 +1,15 @@
+{
+	"category" : "SBE2-SeasideRPN",
+	"classinstvars" : [
+		"html" ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"keypad",
+		"display" ],
+	"name" : "RPNCalculator",
+	"pools" : [
+		 ],
+	"super" : "RPNWidget",
+	"type" : "normal" }

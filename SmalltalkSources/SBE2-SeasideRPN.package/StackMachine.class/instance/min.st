@@ -1,0 +1,3 @@
+operations
+min
+	self binOp: #-.

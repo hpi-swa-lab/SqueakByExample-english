@@ -1,0 +1,15 @@
+{
+	"category" : "VB-Regex",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		"sample",
+		"compare" ],
+	"name" : "RxmSubstring",
+	"pools" : [
+		 ],
+	"super" : "RxmLink",
+	"type" : "normal" }

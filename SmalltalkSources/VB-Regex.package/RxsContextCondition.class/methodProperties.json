@@ -1,0 +1,13 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"beAny" : "",
+		"beBeginningOfLine" : "",
+		"beBeginningOfWord" : "",
+		"beEndOfLine" : "",
+		"beEndOfWord" : "",
+		"beNonWordBoundary" : "",
+		"beWordBoundary" : "",
+		"dispatchTo:" : "",
+		"isNullable" : "" } }

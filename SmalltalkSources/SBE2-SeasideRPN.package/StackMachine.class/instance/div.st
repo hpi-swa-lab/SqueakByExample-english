@@ -1,0 +1,3 @@
+operations
+div
+	self binOp: #/.

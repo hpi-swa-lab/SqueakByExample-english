@@ -1,0 +1,14 @@
+{
+	"category" : "SBE2-SeasideDemo",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"text" ],
+	"name" : "SeasideDialogDemo",
+	"pools" : [
+		 ],
+	"super" : "SeasideDemoWidget",
+	"type" : "normal" }

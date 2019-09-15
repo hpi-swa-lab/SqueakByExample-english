@@ -1,0 +1,20 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"atom" : "",
+		"character" : "",
+		"dispatchTo:" : "",
+		"initializeAtom:" : "",
+		"initializeAtom:min:max:" : "",
+		"initializeOptionalAtom:" : "",
+		"initializePlusAtom:" : "",
+		"initializeStarAtom:" : "",
+		"isAtomic" : "",
+		"isNullable" : "",
+		"isOptional" : "",
+		"isPlus" : "",
+		"isSingular" : "",
+		"isStar" : "",
+		"max" : "",
+		"min" : "" } }

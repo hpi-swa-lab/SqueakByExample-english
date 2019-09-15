@@ -1,0 +1,14 @@
+{
+	"category" : "SBE2-SeasideRPN",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "RPNTaskedCalculator",
+	"pools" : [
+		 ],
+	"super" : "RPNCalculator",
+	"type" : "normal" }

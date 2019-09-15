@@ -1,0 +1,17 @@
+{
+	"category" : "SBE2-SeasideDemo",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"color",
+		"radioOn",
+		"checked",
+		"heading" ],
+	"name" : "SeasideFormDemo",
+	"pools" : [
+		 ],
+	"super" : "SeasideDemoWidget",
+	"type" : "normal" }

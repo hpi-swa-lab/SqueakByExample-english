@@ -1,0 +1,3 @@
+toc
+tocFileName
+	^ 'toc.html'

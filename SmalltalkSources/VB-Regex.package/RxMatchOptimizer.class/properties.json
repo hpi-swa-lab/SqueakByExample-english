@@ -1,0 +1,22 @@
+{
+	"category" : "VB-Regex",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		"ignoreCase",
+		"prefixes",
+		"nonPrefixes",
+		"conditions",
+		"testBlock",
+		"methodPredicates",
+		"nonMethodPredicates",
+		"predicates",
+		"nonPredicates" ],
+	"name" : "RxMatchOptimizer",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

@@ -1,0 +1,14 @@
+{
+	"category" : "SBE-Quinto",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"mouseAction" ],
+	"name" : "SBECell",
+	"pools" : [
+		 ],
+	"super" : "SimpleSwitchMorph",
+	"type" : "normal" }

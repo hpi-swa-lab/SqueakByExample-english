@@ -1,0 +1,14 @@
+{
+	"category" : "VB-Regex",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		"index" ],
+	"name" : "RxmMarker",
+	"pools" : [
+		 ],
+	"super" : "RxmLink",
+	"type" : "normal" }

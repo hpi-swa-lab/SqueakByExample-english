@@ -1,0 +1,16 @@
+{
+	"category" : "SBE2-Regex",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "on 11/24/2008 15:51",
+	"instvars" : [
+		"homePath",
+		"webDir",
+		"htmlRegex" ],
+	"name" : "WebDir",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

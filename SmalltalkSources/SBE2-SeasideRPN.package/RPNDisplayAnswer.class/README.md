@@ -1,0 +1,1 @@
+Like RPNDisplay, but does an #answer instead of a #call in its action so it can be called from RPNDisplayTask.

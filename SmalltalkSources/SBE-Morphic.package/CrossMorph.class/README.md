@@ -1,0 +1,1 @@
+CrossMorph new openInWorld

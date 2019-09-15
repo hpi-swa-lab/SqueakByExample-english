@@ -1,0 +1,11 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"beBeginningOfLine" : "",
+		"beBeginningOfWord" : "",
+		"beEndOfLine" : "",
+		"beEndOfWord" : "",
+		"beNotWordBoundary" : "",
+		"beWordBoundary" : "",
+		"matchAgainst:" : "" } }

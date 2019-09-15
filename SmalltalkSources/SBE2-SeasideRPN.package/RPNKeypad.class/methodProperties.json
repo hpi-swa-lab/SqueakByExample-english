@@ -1,0 +1,19 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"ensureStackMachineNotEmpty" : "on 12/9/2007 13:37",
+		"handleAssertionFailure" : "on 11/17/2007 12:15",
+		"inClearMode" : "on 11/15/2007 15:28",
+		"inPushMode" : "on 11/15/2007 15:28",
+		"inTypingMode" : "on 11/15/2007 15:28",
+		"initialize" : "on 11/17/2007 11:59",
+		"renderContentOn:" : "on 12/9/2007 13:37",
+		"renderStackButton:callback:colSpan:on:" : "on 12/9/2007 13:38",
+		"renderStackButton:callback:on:" : "on 12/9/2007 13:31",
+		"setClearMode" : "on 11/15/2007 15:30",
+		"setPushMode" : "on 11/15/2007 15:30",
+		"setTypingMode" : "on 11/15/2007 15:30",
+		"stackClearTop" : "on 11/15/2007 15:31",
+		"stackOp:" : "on 11/17/2007 12:14",
+		"type:" : "on 11/17/2007 14:18" } }

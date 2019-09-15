@@ -1,0 +1,3 @@
+*vb-regex
+regex: rxString matchesDo: aBlock
+	^rxString asRegex matchesIn: self do: aBlock
