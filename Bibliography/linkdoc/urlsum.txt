@@ -1,0 +1,20 @@
+file: urlsum.txt
+date: Wed, 30 Nov 2005 17:55:18 (local)
+Linklint version: 2.3.5
+
+Linklink checked 938 urls:
+    777 were ok, 130 failed. 202 urls moved.
+    1 host failed: 22 urls could be retried.
+
+found 777 urls: ok
+-----  31 urls: moved permanently (301)
+----- 171 urls: moved temporarily (302)
+ERROR   2 urls: bad request (400)
+ERROR  11 urls: gateway timeout (503)
+ERROR 104 urls: not found (404)
+ERROR  11 urls: timed out waiting for data
+ERROR   2 urls: unknown error (303)
+warn    2 urls: access not authorized (401)
+warn    1 url: infinite redirect loop
+warn   28 urls: not an http link
+warn    2 warnings

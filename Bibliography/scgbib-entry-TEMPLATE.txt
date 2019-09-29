@@ -1,0 +1,36 @@
+@phdthesis{XX,
+	Title = {XX},
+	Author = {XX},
+	Abstract = {XX},
+	Keywords = {scg-phd snf-XX scgXX jbXX},
+	School = {University of Bern},
+	Type = {{PhD} thesis},
+	Url = {http://scg.unibe.ch/archive/phd/XX.pdf},
+	Month = XX,
+	Year = {XX}
+}
+
+@mastersthesis{XX,
+	Title = {XX},
+	Author = {XX},
+	Abstract = {XX},
+	Keywords = {scg-msc snf-XX scgXX jbXX},
+	School = {University of Bern},
+	Type = {Masters thesis},
+	Url = {http://scg.unibe.ch/archive/masters/XX.pdf},
+	Month = XX,
+	Year = {XX}
+}
+
+@techreport{XX,
+	Title = {XX},
+	Author = {XX},
+	Abstract = {XX},
+	Institution = {University of Bern},
+	Keywords = {scg-bp snf-XX scgXX jbXX},
+	Type = {Bachelor's thesis},
+	Url = {http://scg.unibe.ch/archive/projects/XX.pdf},
+	Month = XX,
+	Year = {XX}
+}
+

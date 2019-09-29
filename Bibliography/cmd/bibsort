@@ -1,0 +1,54 @@
+#! /usr/bin/perl -s
+#! /usr/bin/env perl -s
+#! /opt/local/bin/perl
+# bibsort -- sort bibtex entries by author and year
+#
+# -y option sorts by year first instead of author
+# -r reverses the sort
+#
+# Author: Oscar.Nierstrasz@acm.org
+#
+# $Id: bibsort,v 1.6 2006/08/25 11:13:27 oscar Exp $
+
+$/ = ""; # blank line separates records
+
+$usage = "bibsort [-y(ear)] [-r(everse)] <bibtex file> ...";
+
+bibsort();
+
+sub bibsort {
+	if ($y) {
+		if ($r) {
+			print sort { yat($b) cmp yat($a) } <>;
+		} else {
+			print sort { yat($a) cmp yat($b) } <>;
+		}
+	} else {
+		if ($r) {
+			print sort { ayt($b) cmp ayt($a) } <>;
+		} else {
+			print sort { ayt($a) cmp ayt($b) } <>;
+		}
+	}
+}
+
+sub ayt {
+	local($ref) = @_;
+	return sprintf "%s-%s-%s", getStats($ref);
+}
+
+sub yat {
+	local($ref) = @_;
+	@ayt = getStats($ref);
+	return sprintf "%s-%s-%s", @ayt[1,0,2];
+}
+
+sub getStats {
+	local($ref) = @_;
+	local($auth, $tag) = ($ref =~ /@[^{]+{([A-Za-z]+)\d*([a-z]?)/);
+	# local($auth, $tag) = ($ref =~ /@[^{]+{([A-Za-z]+)\d+([a-z]?)/);
+	local($year) = ($ref =~ /year\s*=\s*{\s*(\d+)/i);
+	return ($auth,$year,$tag);
+}
+
+__END__

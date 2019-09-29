@@ -1,0 +1,9 @@
+file: urlwarnX.txt
+date: Wed, 30 Nov 2005 17:55:18 (local)
+Linklint version: 2.3.5
+
+#------------------------------------------------------------
+# warn    2 warnings (cross referenced)
+#------------------------------------------------------------
+need password for "Digital Library [08:44:00:1718]"
+need password for "Digital Library [08:44:01:5255]"

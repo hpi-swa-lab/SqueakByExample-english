@@ -1,0 +1,5 @@
+#! /usr/bin/perl -p
+# Removes 8bit chars from the input file.
+# Sends cleaned file to output stream.
+
+tr/\t\n !-~//cd;

@@ -189,15 +189,10 @@ Note colon at end of TEXINPUTS that means "append current value here"
 
 # Bibliography
 
-The bibliography file scg.bib is available from a separate git repository:
+The bibliography can be found in the `Bibliography` folder.
+When the `make` command is run, the bibliography is automatically built as well.
 
-	git clone git@scg.unibe.ch:scgbib
-
-Alternatively, you can check out a read-only version as follows:
-
-	git clone git://scg.unibe.ch/scgbib
-
-You should separately check out this file and link it in wherever it is needed.
+The bibliography is a copy of the [SCG bibliography](http://scg.unibe.ch/scgbib?query=Tymc18a).
 
 ---
 

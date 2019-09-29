@@ -1,0 +1,80 @@
+% bizCard.tex
+% $Id: bizCard.tex 23771 2009-01-07 10:10:56Z oscar $
+
+\documentclass[11pt]{article}
+
+% Use Helvetica everywhere
+\renewcommand{\familydefault}{phv}
+
+\usepackage{a4wide}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{latexsym}
+
+\pagestyle{empty}
+
+\setlength{\textwidth}{18cm}
+\setlength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{-1in}
+\setlength{\textheight}{27cm}
+\setlength{\topmargin}{-0.75cm}
+
+\newcommand{\logo}{\includegraphics[width=2cm]{unibeNewLogo}}
+
+% EDIT THE FOLLOWING VARIABLES %%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\faca}{Philosophisch-naturwissenschaftliche}
+\newcommand{\facb}{Fakult\"at}
+
+\newcommand{\insta}{Institut f\"ur Informatik und}
+\newcommand{\instb}{angewandte Mathematik}
+
+\newcommand{\cadra}{Software Composition Group}
+\newcommand{\cadrb}{Neubr\"uckstrasse 10}
+\newcommand{\cadrc}{CH-3012 Bern, Switzerland}
+
+\newcommand{\cphone}{+41 31 631 4868}
+\newcommand{\cfax}{+41 31 631 3355}
+\newcommand{\cemail}{lanza@iam.unibe.ch}
+\newcommand{\curla}{www.iam.unibe.ch/$\sim$lanza}
+
+\newcommand{\personTitle}{Dr.}
+\newcommand{\personName}{Michele Lanza}
+
+\newcommand{\cfontsize}{\tiny}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+% {\sf 
+\setlength{\unitlength}{1mm}
+\begin{picture}(200,240)(-7,0)
+  \multiput(0,0)(0,54){5}{%
+    \multiput(0,0)(95,0){2}{
+      \begin{picture}(89,51)(0,0)
+        \put(32,40){\cfontsize \faca}
+        \put(32,37.5){\cfontsize \facb}
+
+        \put(32,32.5){\bf\cfontsize \insta}
+        \put(32,30){\bf\cfontsize \instb}
+
+        \put(32,25){\cfontsize \cadra}
+        \put(32,22.5){\cfontsize \cadrb}
+        \put(32,20){\cfontsize \cadrc}
+
+        \put(32,17.5){\cfontsize Tel.} \put(36,17.5){\cfontsize \cphone}
+        \put(32,15){\cfontsize Fax} \put(36,15){\cfontsize \cfax}
+        \put(32,12.5){\cfontsize \cemail}
+        \put(32,10){\cfontsize \curla}
+
+        \put(10,28){\logo}
+        \put(10,12.5){\cfontsize\personTitle}
+        \put(10,10){\bf\cfontsize\personName}
+      \end{picture}}}
+\end{picture}
+%}
+\end{document}
+
+% bizCard.tex
+% $Id: bizCard.tex 23771 2009-01-07 10:10:56Z oscar $
+

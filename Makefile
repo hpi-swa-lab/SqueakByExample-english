@@ -1,13 +1,6 @@
 # --------------------------------------------------------------------------------
 # $Id$
 # --------------------------------------------------------------------------------
-# NB: There is no separate rule for running bibtex, though perhaps there should be.
-# The idea is that there should be only very few references, so bibtex can be run
-# manually.  The generated .bbl file should be part of the subversion repository,
-# so it will always be up-to-date, and bibtex should not need to be run unless
-# new references are added.
-# The source bib file is in a separate repository, as described in the README file.
-# --------------------------------------------------------------------------------
 
 # export TEXINPUTS:=.:local
 export TEXINPUTS:=./local//:../local//:
@@ -17,6 +10,7 @@ C = Preface QuickTour FirstApp Syntax Messages \
 	Metaclasses
 
 PDFLATEX = pdflatex -file-line-error
+BIBTEX=bibtex
 BOOK=SBE
 ETC=SBE-etc
 
@@ -28,6 +22,8 @@ all : book
 
 book : clean examples
 	time ${PDFLATEX} ${BOOK}
+	time ${BIBTEX} ${BOOK}
+	time ${PDFLATEX} ${BOOK}
 	time ${PDFLATEX} ${BOOK} | tee warnings.txt
 	# Filter out blank lines and bogus warnings
 	perl -pi \
@@ -36,6 +32,7 @@ book : clean examples
 		-e 's/LaTeX Warning: Label `\w*:defaultlabel'\'' multiply defined.[\n\r]*//g;' \
 		-e 's/Package wrapfig Warning: wrapfigure used inside a conflicting environment[\n\r]*//g;' \
 		warnings.txt
+
 
 # We need a makefile rule to generate the index as well ...
 index :

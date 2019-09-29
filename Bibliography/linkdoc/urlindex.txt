@@ -1,0 +1,13 @@
+file: urlindex.txt
+date: Wed, 30 Nov 2005 17:55:18 (local)
+Linklint version: 2.3.5
+
+  urlsum.txt: summary of results
+  urllog.txt: log of progress
+    urlok.txt: found 777 urls: were ok
+ urlmoved.txt: ----- 202 urls: moved
+  urlhost.txt: ERROR   1 host: failed
+  urlfail.txt: ERROR 130 urls: failed
+  urlskip.txt: warn   31 urls: not checked
+  urlwarn.txt: warn    2 warnings
+ urlwarnX.txt: warn    2 warnings (cross referenced)
