@@ -1,0 +1,2258 @@
+
+checking 938 urls ...
+
+acl.ldc.upenn.edu/P/P97/
+  ok
+agilemanifesto.org/
+  ok
+aspectr.sourceforge.net/
+  ok
+bracha.org/mirrors.pdf
+  ok
+bracha.org/nwst.html
+  ok
+bracha.org/oopsla93.ps
+  ok
+caml.inria.fr/
+  ok
+cm.bell-labs.com/cm/cs/doc/92/2-bsb-1.ps.gz
+  ok
+cm.bell-labs.com/cm/cs/doc/93/2-bsb-1.ps.gz
+  ok
+cm.bell-labs.com/cm/cs/doc/93/2-bsb-2.ps.gz
+  ok
+cm.bell-labs.com/cm/cs/doc/94/2-bsb-1.ps.gz
+  ok
+cm.bell-labs.com/cm/cs/doc/95/2-bsb-1.ps.gz
+  ok
+cm.bell-labs.com/cm/cs/doc/95/2-bsb-4.ps.gz
+  ok
+cm.bell-labs.com/who/bsb/research.html
+  ok
+csdl.computer.org/comp/trans/ts/2004/08/e0491abs.htm
+  not an http link
+csdl.computer.org/dl/mags/so/2001/06/s6078.pdf
+  moved
+  csdl2.computer.org/dl/mags/so/2001/06/s6078.pdf
+WARNING: need password for "Digital Library [08:44:00:1718]"
+  access not authorized (401)
+csdl2.computer.org/dl/mags/so/2001/06/s6078.htm
+WARNING: need password for "Digital Library [08:44:01:5255]"
+  access not authorized (401)
+cseng.aw.com/bookdetail.qry?ISBN=0-201-63337-X\&ptype=0
+  not found (404)
+cui.unige.ch/~ralyte/publications/REjournal.pdf
+  not found (404)
+cuiwww.unige.ch/OSG/publications/OO-articles/Dimitri/ThesisKonstantas.pdf
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/Dimitri/ThesisKonstantas.pdf
+  ok
+cuiwww.unige.ch/OSG/publications/OO-articles/Dimitri/cellImplemntation.pdf
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/Dimitri/cellImplemntation.pdf
+  ok
+cuiwww.unige.ch/OSG/publications/OO-articles/Dimitri/hybridEvaluation.pdf
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/Dimitri/hybridEvaluation.pdf
+  ok
+cuiwww.unige.ch/OSG/publications/OO-articles/Dimitri/hybridImplementation.pdf
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/Dimitri/hybridImplementation.pdf
+  ok
+cuiwww.unige.ch/OSG/publications/OO-articles/Dimitri/hybridUpdate.pdf
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/Dimitri/hybridUpdate.pdf
+  ok
+cuiwww.unige.ch/OSG/publications/OO-articles/Dimitri/objectOrientedInterop.pdf
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/Dimitri/objectOrientedInterop.pdf
+  ok
+cuiwww.unige.ch/OSG/publications/OO-articles/ITHACA/AnEnvironmentForSpecReuse.pdf
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/ITHACA/AnEnvironmentForSpecReuse.pdf
+  ok
+cuiwww.unige.ch/OSG/publications/OO-articles/ITHACA/ReuseOfSpecsAndDesInADevInfoSys.pdf
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/ITHACA/ReuseOfSpecsAndDesInADevInfoSys.pdf
+  ok
+cuiwww.unige.ch/OSG/publications/OO-articles/ITHACA/WooRKS
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/ITHACA/WooRKS
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/ITHACA/WooRKS/
+  ok
+cuiwww.unige.ch/OSG/publications/OO-articles/ITHACA/cop.pdf
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/ITHACA/cop.pdf
+  ok
+cuiwww.unige.ch/OSG/publications/OO-articles/affinityBrowsing.pdf
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/affinityBrowsing.pdf
+  ok
+cuiwww.unige.ch/OSG/publications/OO-articles/behaviourCompatibility.pdf
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/behaviourCompatibility.pdf
+  ok
+cuiwww.unige.ch/OSG/publications/OO-articles/classEvolution.pdf
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/classEvolution.pdf
+  ok
+cuiwww.unige.ch/OSG/publications/OO-articles/concSemanticFrame.pdf
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/concSemanticFrame.pdf
+  ok
+cuiwww.unige.ch/OSG/publications/OO-articles/concurrency.pdf
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/concurrency.pdf
+  ok
+cuiwww.unige.ch/OSG/publications/OO-articles/curry.pdf
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/curry.pdf
+  ok
+cuiwww.unige.ch/OSG/publications/OO-articles/garbageCollection.pdf
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/garbageCollection.pdf
+  ok
+cuiwww.unige.ch/OSG/publications/OO-articles/integratedSoftwareCommunities.pdf
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/integratedSoftwareCommunities.pdf
+  ok
+cuiwww.unige.ch/OSG/publications/OO-articles/ithaca.pdf
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/ithaca.pdf
+  ok
+cuiwww.unige.ch/OSG/publications/OO-articles/knosImplementation.pdf
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/knosImplementation.pdf
+  ok
+cuiwww.unige.ch/OSG/publications/OO-articles/musicalScripting.pdf
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/musicalScripting.pdf
+  ok
+cuiwww.unige.ch/OSG/publications/OO-articles/objectLifeCycle.pdf
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/objectLifeCycle.pdf
+  ok
+cuiwww.unige.ch/OSG/publications/OO-articles/ooDevelopmentOpenSystems.pdf
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/ooDevelopmentOpenSystems.pdf
+  ok
+cuiwww.unige.ch/OSG/publications/OO-articles/papathomasThesis.pdf
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/papathomasThesis.pdf
+  not found (404)
+cuiwww.unige.ch/OSG/publications/OO-articles/queryingLargeClass.pdf
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/queryingLargeClass.pdf
+  ok
+cuiwww.unige.ch/OSG/publications/OO-articles/temporalScripting.pdf
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/temporalScripting.pdf
+  ok
+cuiwww.unige.ch/OSG/publications/OO-articles/tr92arapis.pdf
+  moved
+  cui.unige.ch/OSG/publications/OO-articles/tr92arapis.pdf
+  ok
+danae.uni-muenster.de/lehre/kuchen/JFLP/articles/2002/S02-01/JFLP-A02-04.pdf
+  ok
+developer.apple.com/documentation/Cocoa/Conceptual/ObjectiveC/index.html
+  ok
+developers.sun.com/dev/coolstuff/hotswap/publications.html
+  not found (404)
+dinf.vub.ac.be/~demeyer/Zypher/
+  not found (404)
+doi.acm.org/10.1145/1028664.1028713
+  moved
+  portal.acm.org/citation.cfm?doid=1028664.1028713
+  ok
+doi.acm.org/10.1145/1028976.1028986
+  moved
+  portal.acm.org/citation.cfm?doid=1028976.1028986
+  ok
+doi.acm.org/10.1145/1028976.1028994
+  moved
+  portal.acm.org/citation.cfm?doid=1028976.1028994
+  ok
+doi.acm.org/10.1145/1028976.1029003
+  moved
+  portal.acm.org/citation.cfm?doid=1028976.1029003
+  ok
+doi.acm.org/10.1145/1095430.1081707
+  moved
+  portal.acm.org/citation.cfm?doid=1095430.1081707
+  ok
+doi.acm.org/10.1145/127056.127092
+  moved
+  portal.acm.org/citation.cfm?doid=127056.127092
+  ok
+doi.acm.org/10.1145/130943.130947
+  moved
+  portal.acm.org/citation.cfm?doid=130943.130947
+  ok
+doi.acm.org/10.1145/130994.131005
+  moved
+  portal.acm.org/citation.cfm?doid=130994.131005
+  ok
+doi.acm.org/10.1145/134376.134386
+  moved
+  portal.acm.org/citation.cfm?doid=134376.134386
+  ok
+doi.acm.org/10.1145/165854.167976
+  moved
+  portal.acm.org/citation.cfm?doid=165854.167976
+  ok
+doi.acm.org/10.1145/190679.190681
+  timed out waiting for data
+doi.acm.org/10.1145/190679.190682
+  moved
+  portal.acm.org/citation.cfm?doid=190679.190682
+  ok
+doi.acm.org/10.1145/190679.190683
+  moved
+  portal.acm.org/citation.cfm?doid=190679.190683
+  ok
+doi.acm.org/10.1145/190679.190684
+  moved
+  portal.acm.org/citation.cfm?doid=190679.190684
+  ok
+doi.acm.org/10.1145/190679.199221
+  moved
+  portal.acm.org/citation.cfm?doid=190679.199221
+  ok
+doi.acm.org/10.1145/210376.210389
+  moved
+  portal.acm.org/citation.cfm?doid=210376.210389
+  ok
+doi.acm.org/10.1145/22890.23001
+  moved
+  portal.acm.org/citation.cfm?doid=22890.23001
+  ok
+doi.acm.org/10.1145/243327.243620
+  timed out waiting for data
+doi.acm.org/10.1145/243439.243441
+  timed out waiting for data
+doi.acm.org/10.1145/251759.251849
+  moved
+  portal.acm.org/citation.cfm?doid=251759.251849
+  ok
+doi.acm.org/10.1145/256167.256174
+  moved
+  portal.acm.org/citation.cfm?doid=256167.256174
+  ok
+doi.acm.org/10.1145/262793.262805
+  moved
+  portal.acm.org/citation.cfm?doid=262793.262805
+  ok
+doi.acm.org/10.1145/268946.268961
+  moved
+  portal.acm.org/citation.cfm?doid=268946.268961
+  timed out waiting for data
+doi.acm.org/10.1145/286936.286947
+  moved
+  portal.acm.org/citation.cfm?doid=286936.286947
+  ok
+doi.acm.org/10.1145/286936.286957
+  moved
+  portal.acm.org/citation.cfm?doid=286936.286957
+  ok
+doi.acm.org/10.1145/28697.28702
+  moved
+  portal.acm.org/citation.cfm?doid=28697.28702
+  ok
+doi.acm.org/10.1145/288195.288207
+  moved
+  portal.acm.org/citation.cfm?doid=288195.288207
+  ok
+doi.acm.org/10.1145/289423.289432
+  moved
+  portal.acm.org/citation.cfm?doid=289423.289432
+  ok
+doi.acm.org/10.1145/320384.320395
+  moved
+  portal.acm.org/citation.cfm?doid=320384.320395
+  ok
+doi.acm.org/10.1145/320384.320408
+  moved
+  portal.acm.org/citation.cfm?doid=320384.320408
+  ok
+doi.acm.org/10.1145/331499.331504
+  moved
+  portal.acm.org/citation.cfm?doid=331499.331504
+  ok
+doi.acm.org/10.1145/336512.336526
+  moved
+  portal.acm.org/citation.cfm?doid=336512.336526
+  ok
+doi.acm.org/10.1145/337180.337618
+  moved
+  portal.acm.org/citation.cfm?doid=337180.337618
+  ok
+doi.acm.org/10.1145/353171.353183
+  moved
+  portal.acm.org/citation.cfm?doid=353171.353183
+  ok
+doi.acm.org/10.1145/355045.355048
+  moved
+  portal.acm.org/citation.cfm?doid=355045.355048
+  ok
+doi.acm.org/10.1145/361598.361623
+  moved
+  portal.acm.org/citation.cfm?doid=361598.361623
+  ok
+doi.acm.org/10.1145/379605.379661
+  moved
+  portal.acm.org/citation.cfm?doid=379605.379661
+  ok
+doi.acm.org/10.1145/38765.38815
+  moved
+  portal.acm.org/citation.cfm?doid=38765.38815
+  ok
+doi.acm.org/10.1145/38765.38829
+  moved
+  portal.acm.org/citation.cfm?doid=38765.38829
+  ok
+doi.acm.org/10.1145/503502.503505
+  moved
+  portal.acm.org/citation.cfm?doid=503502.503505
+  ok
+doi.acm.org/10.1145/504282.504300
+  moved
+  portal.acm.org/citation.cfm?doid=504282.504300
+  ok
+doi.acm.org/10.1145/504282.504303
+  moved
+  portal.acm.org/citation.cfm?doid=504282.504303
+  ok
+doi.acm.org/10.1145/505145.505148
+  moved
+  portal.acm.org/citation.cfm?doid=505145.505148
+  ok
+doi.acm.org/10.1145/508386.508395
+  moved
+  portal.acm.org/citation.cfm?doid=508386.508395
+  ok
+doi.acm.org/10.1145/508386.508404
+  moved
+  portal.acm.org/citation.cfm?doid=508386.508404
+  ok
+doi.acm.org/10.1145/568760.568835
+  moved
+  portal.acm.org/citation.cfm?doid=568760.568835
+  ok
+doi.acm.org/10.1145/581339.581382
+  moved
+  portal.acm.org/citation.cfm?doid=581339.581382
+  ok
+doi.acm.org/10.1145/581630.581634
+  moved
+  portal.acm.org/citation.cfm?doid=581630.581634
+  ok
+doi.acm.org/10.1145/587051.587060
+  moved
+  portal.acm.org/citation.cfm?doid=587051.587060
+  ok
+doi.acm.org/10.1145/602461.602507
+  moved
+  portal.acm.org/citation.cfm?doid=602461.602507
+  ok
+doi.acm.org/10.1145/6041.6042
+  moved
+  portal.acm.org/citation.cfm?doid=6041.6042
+  ok
+doi.acm.org/10.1145/604131.604156
+  moved
+  portal.acm.org/citation.cfm?doid=604131.604156
+  ok
+doi.acm.org/10.1145/62070.45066
+  moved
+  portal.acm.org/citation.cfm?doid=62070.45066
+  ok
+doi.acm.org/10.1145/62678.62704
+  moved
+  portal.acm.org/citation.cfm?doid=62678.62704
+  ok
+doi.acm.org/10.1145/643603.643611
+  moved
+  portal.acm.org/citation.cfm?doid=643603.643611
+  ok
+doi.acm.org/10.1145/643603.643613
+  moved
+  portal.acm.org/citation.cfm?doid=643603.643613
+  ok
+doi.acm.org/10.1145/643603.643614
+  moved
+  portal.acm.org/citation.cfm?doid=643603.643614
+  ok
+doi.acm.org/10.1145/67386.67436
+  moved
+  portal.acm.org/citation.cfm?doid=67386.67436
+  ok
+doi.acm.org/10.1145/77250.77253
+  moved
+  portal.acm.org/citation.cfm?doid=77250.77253
+  ok
+doi.acm.org/10.1145/83880.84525
+  moved
+  portal.acm.org/citation.cfm?doid=83880.84525
+  ok
+doi.acm.org/10.1145/940071.940079
+  moved
+  portal.acm.org/citation.cfm?doid=940071.940079
+  ok
+doi.acm.org/10.1145/940923.940926
+  moved
+  portal.acm.org/citation.cfm?doid=940923.940926
+  ok
+doi.acm.org/10.1145/944705.944725
+  moved
+  portal.acm.org/citation.cfm?doid=944705.944725
+  ok
+doi.acm.org/10.1145/949305.949318
+  moved
+  portal.acm.org/citation.cfm?doid=949305.949318
+  ok
+doi.acm.org/10.1145/949305.949325
+  moved
+  portal.acm.org/citation.cfm?doid=949305.949325
+  ok
+doi.acm.org/10.1145/949305.949326
+  moved
+  portal.acm.org/citation.cfm?doid=949305.949326
+  ok
+doi.acm.org/10.1145/976270.976282
+  moved
+  portal.acm.org/citation.cfm?doid=976270.976282
+  ok
+doi.acm.org/10.1145/97945.97952
+  moved
+  portal.acm.org/citation.cfm?doid=97945.97952
+  ok
+doi.acm.org/10.1145/979743.979752
+  moved
+  portal.acm.org/citation.cfm?doid=979743.979752
+  ok
+doi.acm.org/10.1145/985692.985712
+  moved
+  portal.acm.org/citation.cfm?doid=985692.985712
+  ok
+doi.ieeecomputersociety.org/10.1109/52.965809
+  not an http link
+doi.ieeecomputersociety.org/10.1109/ICSM.2001.972707
+  not an http link
+doi.ieeecomputersociety.org/10.1109/ICSM.2003.1235420
+  not an http link
+doi.ieeecomputersociety.org/10.1109/IWPC.2003.10006
+  not an http link
+doi.ieeecomputersociety.org/10.1109/TSE.2003.1232284
+  not an http link
+doi.ieeecomputersociety.org/10.1109/TSE.2005.14
+  not an http link
+doi.ieeecomputersociety.org/10.1109/WCRE.2001.957834
+  not an http link
+doi.ieeecomputersociety.org/10.1109/WCRE.2002.1173075
+  not an http link
+doi.ieeecomputersociety.org/10.1109/WCRE.2003.1287251
+  not an http link
+doi.ieeecomputersociety.org/10.1109/WPC.1996.501117
+  not an http link
+doi.ieeecomputersociety.org/10.1109/WPC.2002.1021318
+  not an http link
+doi.ieeecs.org/10.1109/ICSM.1999.792645
+  not an http link
+doi.ieeecs.org/10.1109/ICSM.2002.1167807
+  not an http link
+doi.ieeecs.org/10.1109/ICSR.1998.685754
+  not an http link
+doi.wiley.com/10.1002/smr.254
+  moved
+  www3.interscience.wiley.com/cgi-bin/resolvedoi?DOI=10.1002/smr.254
+  moved
+  www3.interscience.wiley.com/cgi-bin/abstract/98016478/ABSTRACT
+  ok
+doi.wiley.com/10.1002/spe.423.abs
+  moved
+  www3.interscience.wiley.com/cgi-bin/resolvedoi?DOI=10.1002/spe.423
+  moved
+  www3.interscience.wiley.com/cgi-bin/abstract/85515683/ABSTRACT
+  ok
+dx.doi.org/10.1002/(SICI)1096-9942(1996)2:3%3C161::AID-TAPO3%3E3.0.CO;2-Z
+  moved
+  doi.wiley.com/10.1002/%28SICI%291096-9942%281996%292%3A3%3C161%3A%3AAID-TAPO3%3E3.0.CO%3B2-Z
+  moved
+  www3.interscience.wiley.com/cgi-bin/resolvedoi?DOI=10.1002/(SICI)1096-9942(1996)2:3<161::AID-TAPO3>3.0.CO;2-Z
+  moved
+  www3.interscience.wiley.com/cgi-bin/abstract/73141/ABSTRACT
+  ok
+dx.doi.org/10.1002/smr.270
+  moved
+  doi.wiley.com/10.1002/smr.270
+  moved
+  www3.interscience.wiley.com/cgi-bin/resolvedoi?DOI=10.1002/smr.270
+  moved
+  www3.interscience.wiley.com/cgi-bin/abstract/104519587/ABSTRACT
+  ok
+dx.doi.org/10.1002/spe.504
+  moved
+  doi.wiley.com/10.1002/spe.504
+  moved
+  www3.interscience.wiley.com/cgi-bin/resolvedoi?DOI=10.1002/spe.504
+  moved
+  www3.interscience.wiley.com/cgi-bin/abstract/102531471/ABSTRACT
+  ok
+dx.doi.org/10.1007/s007790170019
+  moved
+  www.springerlink.com/openurl.asp?genre=article&id=doi:10.1007/s007790170019
+  not an http link
+dx.doi.org/10.1016/S0020-0190(01)00239-3
+  moved
+  linkinghub.elsevier.com/retrieve/pii/S0020019001002393
+  moved
+  www.sciencedirect.com/science?_ob=GatewayURL&_origin=inwardhub&_urlversion=4&_method=citationSearch&_piikey=S0020019001002393&_version=1&md5=914e7b20890b82d9067553f9c505f3c0
+  moved
+  www.sciencedirect.com/science?_ob=ArticleURL&_udi=B6V0F-4475W6K-1&_coverDate=12%2F31%2F2001&_alid=341163113&_rdoc=1&_fmt=&_orig=search&_qd=1&_cdi=5645&_sort=d&view=c&_acct=C000049003&_version=1&_urlVersion=0&_userid=946156&md5=2218b49e19cd54f75172735e6b86d8c9
+  ok
+dx.doi.org/10.1109/32.6178
+  moved
+  ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?arnumber=6178
+  not an http link
+dx.doi.org/10.1109/32.748920
+  moved
+  ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?arnumber=748920
+  not an http link
+dx.doi.org/10.1109/52.43044
+  moved
+  ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?arnumber=43044
+  not an http link
+dx.doi.org/10.1109/REAL.2004.51
+  moved
+  ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?arnumber=1381311
+  not an http link
+dx.doi.org/10.1109/WPC.1998.693325
+  moved
+  ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?arnumber=693325
+  not an http link
+eclipse.org/aspectj/
+  ok
+ejp.sourceforge.net/
+  ok
+en.wikipedia.org/wiki/$100_laptop
+  ok
+en.wikipedia.org/wiki/Concentration\_(game)
+  ok
+en.wikipedia.org/wiki/Concentration_(game)
+  ok
+en.wikipedia.org/wiki/Lights\_Out\_(game)
+  ok
+en.wikipedia.org/wiki/Lights_Out_(game)
+  ok
+en.wikipedia.org/wiki/N-puzzle
+  ok
+en.wikipedia.org/wiki/\$100\_laptop
+  ok
+engine.ieee.org/comsoc/ISINM/)
+  not found (404)
+gatekeeper.dec.com/pub/DEC/SRC/research-report/SRC-138.ps
+  not found (404)
+gatekeeper.dec.com/pub/DEC/SRC/research-reports/abstracts/src-rr-001.html
+  ok
+goanna.cs.rmit.edu.au/~jz/Papers.html
+  ok
+heim.ifi.uio.no/~trygver/documents/book11d.pdf
+  moved
+  heim.ifi.uio.no/~trygver/1996/book/book11d.pdf
+  ok
+heim.ifi.uio.no/~trygver/documents/index.html
+  ok
+homepages.feis.herts.ac.uk/~nehaniv/pubs.html
+  moved
+  homepages.feis.herts.ac.uk/~comqcln//pubs.html
+  ok
+homepages.feis.herts.ac.uk/~nngroup/pubs/pubs-19956.html
+  ok
+i44www.info.uni-karlsruhe.de/~compost
+  moved
+  www.info.uni-karlsruhe.de/~compost
+  moved
+  www.info.uni-karlsruhe.de/~compost/
+  ok
+ieeexplore.ieee.org/xpl/abs_free.jsp?arNumber=287773
+  ok
+ieeexplore.ieee.org/xpl/abs_free.jsp?arNumber=957806
+  ok
+iip-lab.ics.es.osaka-u.ac.jp/~lab-db/betuzuri/archive/394/394.pdf
+  ok
+imagebeat.com/dotplot/rp3.pdf
+  ok
+java.sun.com/
+  ok
+java.sun.com/docs/index.html
+  ok
+java.sun.com/j2se/1.3/docs/api/java/awt/package-summary.html
+  ok
+java.sun.com/j2se/1.4.2/docs/api/javax/swing/package-summary.html
+  ok
+java.sun.com/j2se/1.5.0/docs/guide/jvmpi/
+  ok
+java.sun.com/j2se/1.5.0/docs/guide/jvmti/
+  ok
+java.sun.com/{\-
+  not found (404)
+jiangxi.cs.uwm.edu/publication/drafts/scoped04.pdf
+  ok
+jiangxi.cs.uwm.edu/publication/rtss04.pdf
+  ok
+jrefactory.sourceforge.net/
+  ok
+kilana.unibe.ch/traductionfranaisedepowerfulideasintheclassroom/
+  ok
+kilana.unibe.ch/nomenclatureofunittests/
+  ok
+lamp.epfl.ch/scala/
+  moved
+  scala.epfl.ch/
+  ok
+lampwww.epfl.ch/fn/
+  ok
+lampwww.epfl.ch/~zenger/research.html
+  ok
+link.springer.de/link/service/series/0558/tocs/t0322.htm
+  moved
+  www.springerlink.com/link.asp?id=105633
+  not an http link
+link.springer.de/link/service/series/0558/tocs/t0707.htm
+  moved
+  www.springerlink.com/link.asp?id=105633
+  not an http link
+link.springer.de/link/service/series/0558/tocs/t1687.htm
+  moved
+  www.springerlink.com/link.asp?id=KV19QQV2GRGH
+  not an http link
+lsewww.epfl.ch/~rachid/papers/surv96.ps
+  timed out waiting for data
+maven.apache.org/
+  ok
+members.pingnet.ch/gamma/junit.htm
+  ok
+minnow.cc.gatech.edu/squeak/3113
+  ok
+minnow.cc.gatech.edu/squeak/ClosureCompiler
+  ok
+msdn.microsoft.com/
+  ok
+msdn.microsoft.com/repository/technical/infosys/default.asp
+  not an http link
+nms.lcs.mit.edu/~mbalazin/publications/metrics99Balazinska.ps
+  ok
+nms.lcs.mit.edu/~mbalazin/publications/wcre2000Balazinska.ps
+  ok
+p-cos.net/documents/contextl-overview.pdf
+  ok
+pag.csail.mit.edu/~mernst/pubs/ct-user-study-issta2004.pdf
+  ok
+pag.csail.mit.edu/~mernst/pubs/mock-factoring-paste2004.pdf
+  ok
+patft.uspto.gov/netahtml/search-bool.html
+  ok
+pauillac.inria.fr/~fournet/papers/popl-96.ps.gz
+  not found (404)
+pico.vub.ac.be/%7Ewdmeuter/RDL04/index.html
+  ok
+pico.vub.ac.be/%7Ewdmeuter/RDL04/papers/Bracha.pdf
+  ok
+plg.uwaterloo.ca/~holt/papers/ta.html
+  not found (404)
+plg.uwaterloo.ca/~migod/846/project/KapserChiShinouda-report.pdf
+  not found (404)
+plg.uwaterloo.ca/~migod/papers/
+  ok
+plg.uwaterloo.ca/~migod/papers/coset00.pdf
+  ok
+portal.acm.org/citation.cfm?id=55832
+  ok
+pound.mit.edu/ccswp/CCSWP157.ps
+  gateway timeout (503)
+prog.vub.ac.be/Publications/2005/vub-prog-tr-05-13.pdf
+  ok
+prog.vub.ac.be/Publications/2005/vub-prog-tr-05-26.pdf
+  ok
+progwww.vub.ac.be/)
+  not found (404)
+progwww.vub.ac.be/papers/paperquery.html
+  not found (404)
+progwww.vub.ac.be/persons/kdehondt/
+  not found (404)
+remote.science.uva.nl/~mdr/Publications/
+  ok
+research.microsoft.com/Users/luca/Papers/ExplicitSub.ps
+  ok
+research.microsoft.com/Users/luca/Papers/TypeSystems.ps
+  not found (404)
+research.microsoft.com/~adg/Publications/details.html
+  not found (404)
+research.microsoft.com/~sdal/blueobj.htm
+  not found (404)
+research.microsoft.com/~sdal/bouncingobj.htm
+  not found (404)
+research.microsoft.com/~sdal/interptypcoo.htm
+  not found (404)
+researchweb.watson.ibm.com/journal/sj/364/finnigan.html
+  ok
+researchweb.watson.ibm.com/journal/sj/364/finnigan.pdf
+  ok
+roots.iai.uni-bonn.de/research/logicaj/downloads/papers/KnieselRhoHanenberg-RAM-SE04.pdf
+  ok
+roots.iai.uni-bonn.de/research/logicaj/downloads/papers/knieselRho
+  not found (404)
+ropas.snu.ac.kr/2005/aplas/
+  ok
+se.uwaterloo.ca/~dberry/inevitable.pain.html
+  ok
+sel.ics.es.osaka-u.ac.jp/~lab-db/betuzuri/contents.en/369.html
+  ok
+slate.tunes.org/
+  ok
+smallwiki.unibe.ch/smallwiki
+  ok
+squeaklab.org/comanche
+  moved
+  squeaklab.org/comanche/
+  ok
+staff.aist.go.jp/y-ichisugi/mj/
+  ok
+steam.stanford.edu/MT/91amast-tcs.ps.Z
+  ok
+stsc.hill.af.mil/RENG
+  not found (404)
+sunsite.dcc.uchile.cl/irbook
+  moved
+  sunsite.dcc.uchile.cl/irbook/
+  ok
+theory.stanford.edu/people/jcm/publications.htm
+  ok
+tina.lancs.ac.uk/projects/renaissance/project/Documents/Papers/AssessmentPaper.html
+  gateway timeout (503)
+toscanaj.sourceforge.net/
+  ok
+trese.cs.utwente.nl/Workshops/adc2000/
+  not found (404)
+ultibase.rmit.edu.au/Articles/dec98/gajad1.htm
+  timed out waiting for data
+virtualschool.edu/cox/IEEE97.html
+  not found (404)
+web.yl.is.u-tokyo.ac.jp/members/briot/actalk/papers/actalk-ecoop89.ps.Z
+  gateway timeout (503)
+web.yl.is.u-tokyo.ac.jp/members/briot/papers/cl4dai-fgcs88.ps.Z
+  gateway timeout (503)
+world.std.com/~pitman/Papers/Special-Forms.html
+  not found (404)
+www-2.cs.cmu.edu/afs/cs.cmu.edu/project/able/www/paper_abstracts/archmismatch-icse17.html
+  moved
+  www.cs.cmu.edu/afs/cs.cmu.edu/project/able/www/paper_abstracts/archmismatch-icse17.html
+  ok
+www-cse.ucsd.edu/users/goguen/projs/halg.html
+  ok
+www-dse.doc.ic.ac.uk/concurrency/index.html
+  ok
+www-rocq.inria.fr/solidor/members/issarny.html
+  ok
+www-sop.inria.fr/meije/personnel/Davide.Sangiorgi/mypapers.html
+  ok
+www-sop.inria.fr/meije/personnel/Gerard.Berry/cham.ps
+  ok
+www-sop.inria.fr/meije/personnel/Gerard.Boudol/blue.html
+  ok
+www-sop.inria.fr/mirho/Luigi.Liquori/PAPERS/ftj.pdf
+  not found (404)
+www-sop.inria.fr/oasis/Julien.Vayssiere/publications/21790193.pdf
+  ok
+www.\-eclipse\-.org/\-white\-papers/\-eclipse-over\-view.pdf
+  bad request (400)
+www.acm.org/conferences/sac/sac00/Proceed/FinalPapers
+  not found (404)
+www.argo.be/europlop/writers.htm
+  not found (404)
+www.artima.com/weblogs/viewpost.jsp?thread=4639
+  ok
+www.aspectc.org/
+  ok
+www.bauhaus-stuttgart.de/bauhaus/papers/DIP-1998.pdf
+  ok
+www.bauhaus-stuttgart.de/clones/
+  ok
+www.bauhaus-stuttgart.de/clones/index.html
+  ok
+www.bauhaus-stuttgart.de/iwdsc2003/
+  ok
+www.bell-labs.com/user/dep/work/papers/swa-sen.ps
+  not found (404)
+www.bpb.de/methodik/06K756,0,0,Squeak.html
+  ok
+www.ccs.neu.edu/home/lieber/theses/holland/thesis.ps
+  not found (404)
+www.ccs.neu.edu/home/lieber/theses/huersch/thesis.ps
+  not found (404)
+www.ccs.neu.edu/home/lorenz/papers/reports/NU-CCS-99-01.html
+  ok
+www.ccs.neu.edu/research/demeter/papers/ac-aspectj-hyperj
+  moved
+  www.ccs.neu.edu/research/demeter/papers/ac-aspectj-hyperj/
+  ok
+www.ccse.kfupm.edu.sa/~sohel/oometer/references/unified%20coupling%20framework-%20briand.pdf
+  ok
+www.cdif.org/
+  timed out waiting for data
+www.cincom.com/scripts/smalltalk.dll/
+  moved
+  smalltalk.cincom.com/
+  moved
+  smalltalk.cincom.com/index.ssp
+  ok
+www.cincomsmalltalk.com/CincomSmalltalkWiki/VWTraits+-+A+Traits+implementation+for+VW
+  ok
+www.cis.ksu.edu/~dwyer/papers/ooca.ps
+  ok
+www.cis.ohio-state.edu/rsrg/
+  unknown error (303)
+www.cis.ohio-state.edu/~paolo/research/cs-tr-97-32.ps
+  unknown error (303)
+www.cis.upenn.edu/~bcpierce/tapl/index.html
+  ok
+www.cl.cam.ac.uk/users/bcp1000/ftp/abstroop.ps.gz
+  moved
+  www.cis.upenn.edu/~bcpierce/ftp/abstroop.ps.gz
+  not found (404)
+www.cl.cam.ac.uk/users/bcp1000/ftp/copc.ps.gz
+  moved
+  www.cis.upenn.edu/~bcpierce/ftp/copc.ps.gz
+  not found (404)
+www.cl.cam.ac.uk/users/bcp1000/ftp/fmeet-tlca.ps.gz
+  moved
+  www.cis.upenn.edu/~bcpierce/ftp/fmeet-tlca.ps.gz
+  not found (404)
+www.cl.cam.ac.uk/users/bcp1000/ftp/fomeet.ps.gz
+  moved
+  www.cis.upenn.edu/~bcpierce/ftp/fomeet.ps.gz
+  not found (404)
+www.cl.cam.ac.uk/users/bcp1000/ftp/friendly.ps.gz
+  moved
+  www.cis.upenn.edu/~bcpierce/ftp/friendly.ps.gz
+  not found (404)
+www.cl.cam.ac.uk/users/bcp1000/ftp/leap.ps.gz
+  moved
+  www.cis.upenn.edu/~bcpierce/ftp/leap.ps.gz
+  not found (404)
+www.cl.cam.ac.uk/users/bcp1000/ftp/mutable.ps.gz
+  moved
+  www.cis.upenn.edu/~bcpierce/ftp/mutable.ps.gz
+  not found (404)
+www.cl.cam.ac.uk/users/bcp1000/ftp/pi.ps.gz
+  moved
+  www.cis.upenn.edu/~bcpierce/ftp/pi.ps.gz
+  not found (404)
+www.cl.cam.ac.uk/users/bcp1000/ftp/pict
+  moved
+  www.cis.upenn.edu/~bcpierce/ftp/pict
+  not found (404)
+www.cl.cam.ac.uk/users/bcp1000/ftp/pos.ps.gz
+  moved
+  www.cis.upenn.edu/~bcpierce/ftp/pos.ps.gz
+  not found (404)
+www.cl.cam.ac.uk/users/pes20/nomadicpict.html
+  ok
+www.clody.org/research/riva-dissertation-final-double.pdf
+  ok
+www.coldewey.com/europlop2000/papers.html
+  ok
+www.complang.tuwien.ac.at/franz/papers/fmoods96.ps.gz
+  ok
+www.computer.org/proceedings/ecbs/0028/00280099abs.htm
+  moved
+  www.computer.org/portal/pages/ieeecs/publications/cps/index.html
+  moved
+  www.computer.org/portal/site/ieeecs/index.jsp?pageID=ieeecs_level1&path=ieeecs/publications/cps&file=index.xml&xsl=generic.xsl
+  ok
+www.computer.org/proceedings/ecbs/0604/06040092abs.htm
+  moved
+  www.computer.org/portal/pages/ieeecs/publications/cps/index.html
+  moved
+  www.computer.org/portal/site/ieeecs/index.jsp?pageID=ieeecs_level1&path=ieeecs/publications/cps&file=index.xml&xsl=generic.xsl
+  ok
+www.computer.org/proceedings/icsm/7677/76770244abs.htm
+  moved
+  www.computer.org/portal/pages/ieeecs/publications/cps/index.html
+  moved
+  www.computer.org/portal/site/ieeecs/index.jsp?pageID=ieeecs_level1&path=ieeecs/publications/cps&file=index.xml&xsl=generic.xsl
+  ok
+www.cosc.canterbury.ac.nz/~wolfgang/cosc205/squeak.html
+  ok
+www.cs.cmu.edu/afs/cs.cmu.edu/project/able/www/paper_abstracts/hla-fse98.html
+  ok
+www.cs.cmu.edu/afs/cs/project/able/ftp/wright-tr.ps
+  ok
+www.cs.cmu.edu/afs/cs/project/able/www/paper_abstracts/ObjPatternsArch-ieee.html
+  ok
+www.cs.cmu.edu/afs/cs/project/able/www/paper_abstracts/rallen_thesis.htm
+  ok
+www.cs.iastate.edu/~leavens/FoCBS/allen.ps
+  not found (404)
+www.cs.iastate.edu/~leavens/SAVCBS/2001/papers-2001/
+  ok
+www.cs.iastate.edu/~lumpe/WCL2001/
+  ok
+www.cs.indiana.edu/hyplan/pierce/pierce/ftp/pict-design.ps.gz
+  moved
+  www.cs.indiana.edu/~pierce/pierce/ftp/pict-design.ps.gz
+  not found (404)
+www.cs.jhu.edu/labs/pll/cells/papers/ecoop02.ps
+  not found (404)
+www.cs.jyu.fi/~sakkinen/inhws/papers/Black.pdf
+  ok
+www.cs.man.ac.uk/csonly/cstechrep/Abstracts/UMCS-95-1-1.html
+  moved
+  www.cs.man.ac.uk/cstechrep/Abstracts/UMCS-95-1-1.html
+  ok
+www.cs.neu/home/lieber/theses/bergstein/thesis.ps
+  gateway timeout (503)
+www.cs.princeton.edu/sip/pub/effective-type-refinements03.pdf
+  ok
+www.cs.purdue.edu/homes/jv/publist.html
+  not found (404)
+www.cs.purdue.edu/homes/jv/pubs/oopsla03.pdf
+  ok
+www.cs.purdue.edu/homes/palsberg/publications.html
+  not found (404)
+www.cs.rice.edu/CS/PLT/Publications/mw01-cgkf.pdf
+  not found (404)
+www.cs.rutgers.edu/~minsky/public-papers/LGA-paper.ps
+  ok
+www.cs.rutgers.edu/~minsky/public-papers/linda-paper.ps
+  ok
+www.cs.rutgers.edu/~minsky/public-papers/trust-paper.ps
+  ok
+www.cs.ubc.ca/spider/murphy/
+  ok
+www.cs.uchicago.edu/research/publications/techreports/TR-2003-13
+  ok
+www.cs.ucla.edu/~palsberg/paper/oopsla01.pdf
+  ok
+www.cs.umd.edu/~jfoster/papers/pldi02.pdf
+  ok
+www.cs.umd.edu/~jfoster/papers/thesis.pdf
+  ok
+www.cs.unm.edu/~jon/dotplot/
+  not found (404)
+www.cs.utah.edu/flux/papers/knit-icse01-wasc-base.html
+  ok
+www.cs.utah.edu/plt/jiazzi/publications.html
+  ok
+www.cs.utah.edu/~beazley/Papers/tcl/newtcl.html
+  not found (404)
+www.cs.utexas.edu/users/schwartz/
+  ok
+www.cs.utexas.edu/users/schwartz/pub.htm
+  ok
+www.cs.utexas.edu/users/schwartz/pub.htm
+  ok
+www.cs.utexas.edu/users/schwartz/pub.htm
+  ok
+www.cs.utexas.edu/users/schwartz/pub.htm
+  ok
+www.cs.virginia.edu/~eos/Publications.htm
+  not found (404)
+www.cs.vu.nl/grammars/ge.html
+  ok
+www.cs.vu.nl/~x/sar/sar.pdf
+  ok
+www.cs.washington.edu/homes/jonal/archjava/
+  moved
+  www.cs.cmu.edu/~aldrich//archjava/
+  not found (404)
+www.cs.wisc.edu/~raghavan/esop01-demo.pdf
+  ok
+www.cs.wisc.edu/~raghavan/pldi03-paper.pdf
+  ok
+www.cs.wisc.edu/~raghavan/sas01.pdf
+  ok
+www.cs.wustl.edu/~schmidt/ACE_Concurrency.ps.gz
+  not found (404)
+www.cs.wustl.edu/~schmidt/Acceptor.ps.gz
+  not found (404)
+www.cs.wustl.edu/~schmidt/Active-Objects.ps.Z
+  not found (404)
+www.cs.wustl.edu/~schmidt/C++-USEUNIX-94.ps
+  not found (404)
+www.cs.wustl.edu/~schmidt/CACM-95.ps.gz
+  not found (404)
+www.cs.wustl.edu/~schmidt/Connector.ps.gz
+  not found (404)
+www.cs.wustl.edu/~schmidt/ECOOP-95.ps.gz
+  not found (404)
+www.cs.wustl.edu/~schmidt/IPC_SAP-92.ps.Z
+  not found (404)
+www.cs.wustl.edu/~schmidt/IWCDS.ps
+  not found (404)
+www.cs.wustl.edu/~schmidt/SUG-94.ps.Z
+  not found (404)
+www.cse.ucsc.edu/~abadi/Papers/main.ps
+  ok
+www.csl.sri.com/~moriconi/fswe94.ps.gz
+  moved
+  www.csl.sri.com/users/moriconi/fswe94.ps.gz
+  not found (404)
+www.csl.sri.com/~moriconi/tse95.ps.gz
+  moved
+  www.csl.sri.com/users/moriconi/tse95.ps.gz
+  not found (404)
+www.cutter.com/
+  ok
+www.cwi.nl/ftp/manifold/AICbook.ps.Z
+  moved
+  ftp.cwi.nl/manifold/AICbook.ps.Z
+  ok
+www.daimi.aau.dk/~kock/OHS-ECHT94/
+  gateway timeout (503)
+www.daimi.aau.dk/~kock/OHS-HT96/
+  gateway timeout (503)
+www.daimi.aau.dk/~kock/OHS-HT97/
+  gateway timeout (503)
+www.daimi.au.dk/~eernst/splat03/index.html
+  ok
+www.daimi.au.dk/~madst/ecoop04/
+  ok
+www.db.dk/pi/iri
+  moved
+  www.db.dk/pi/iri/
+  ok
+www.dbmsmag.com/9704i07.html
+  ok
+www.dcc.uchile.cl/~etanter/research/publi/2003/tanter-oopsla03.pdf
+  ok
+www.dcs.ed.ac.uk/home/rb/index.html
+  ok
+www.dcs.ed.ac.uk/home/rgd/wiki/html/PublicReengineering/ReengineeringPatterns.htm
+  ok
+www.dcs.gla.ac.uk/~dnt/KobayashiPierceTurner96.ps.gz
+  not found (404)
+www.dcs.gla.ac.uk/~dnt/thesis.ps
+  not found (404)
+www.dcs.gla.ac.uk/~simonpj/com.ps.gz
+  not found (404)
+www.dcs.gla.ac.uk/~wadler/topics/pizza.html
+  not found (404)
+www.dcs.shef.ac.uk/~ajhs/abstracts.html
+  ok
+www.dcs.shef.ac.uk/~cloughie/research.htm
+  not found (404)
+www.disi.unige.it/person/AnconaD/Conferences.html
+  ok
+www.disi.unige.it/person/AnconaD/Journals.html
+  ok
+www.docs.uu.se/~victor/tr/upd.html
+  moved
+  user.it.uu.se/~victor/tr/upd.html
+  ok
+www.dreamsongs.com/Books.html
+  ok
+www.dreamsongs.com/NewFiles/PatternsOfSoftware.pdf
+  ok
+www.drscheme.org/
+  ok
+www.dsg.cs.tod.ie/cgi-bin/TCD-CS-91-24.ps.gz
+  gateway timeout (503)
+www.dsg.cs.tod.ie/cgi-bin/TCD-CS-92-18.ps.gz
+  gateway timeout (503)
+www.dsg.cs.tod.ie/cgi-bin/TCD-CS-94-01.ps.gz
+  gateway timeout (503)
+www.dstc.edu.au/papers/icodp95.ps.gz
+  not found (404)
+www.ecma-international.org/publications/standards/Ecma-262.htm
+  ok
+www.ecma-international.org/publications/standards/Ecma-334.htm
+  ok
+www.elen.ktu.lt/~damarobe/promol/index.html
+  moved
+  kopustas.elen.ktu.lt/~damarobe/promol/index.html
+  not found (404)
+www.emergent.de/etoys.html
+  ok
+www.emn.fr/borne/ECOOP99-OOAE.html
+  not found (404)
+www.emn.fr/x-info/obasco/events/jfdlpa04/
+  ok
+www.ercim.org/publication/Ercim_News/enw52/nierstrasz.html
+  ok
+www.ercim.org/publication/Ercim_News/enw58/nierstrasz.html
+  ok
+www.erights.org/
+  ok
+www.esug.org/conferences/thirteenthinternationalconference2005/researchconference/acceptedpapers/
+  ok
+www.experimentalstuff.com/Technologies/JavaCC/
+  ok
+www.gnu.org/software/kawa/
+  ok
+www.heise.de/ct/02/01/004/
+  ok
+www.iam.unibe.ch/$\sim$lanza/CodeCrawler/codecrawler.html
+  not found (404)
+www.iam.unibe.ch/$\sim$scg/Research/Traits
+  not found (404)
+www.iam.unibe.ch/$\sim$wuyts/StarBrowser/
+  not found (404)
+www.iam.unibe.ch/publikationen/techreports/2004/iam-04-008
+  moved
+  www.iam.unibe.ch/publikationen/techreports/2004/iam-04-008
+  infinite redirect loop
+www.iam.unibe.ch/~booga/publications/papercollison.pdf
+  ok
+www.iam.unibe.ch/~demeyer/Deme92z/
+  ok
+www.iam.unibe.ch/~demeyer/Deme94m/
+  ok
+www.iam.unibe.ch/~demeyer/Deme94m/tchohs.html
+  ok
+www.iam.unibe.ch/~demeyer/Deme94z/
+  ok
+www.iam.unibe.ch/~demeyer/Deme94z/vrthypt.html
+  ok
+www.iam.unibe.ch/~demeyer/Deme95z/
+  ok
+www.iam.unibe.ch/~demeyer/Deme95z/dxpath.html
+  ok
+www.iam.unibe.ch/~demeyer/Deme96a/
+  ok
+www.iam.unibe.ch/~demeyer/Deme96m/
+  ok
+www.iam.unibe.ch/~demeyer/Deme96m/psstmnt.html
+  ok
+www.iam.unibe.ch/~demeyer/Deme97a/
+  ok
+www.iam.unibe.ch/~demeyer/Deme97m/
+  ok
+www.iam.unibe.ch/~demeyer/Deme97m/OHWS3scenaria.html
+  ok
+www.iam.unibe.ch/~demeyer/Deme97n/
+  ok
+www.iam.unibe.ch/~demeyer/Deme97n/ECOOP97.html
+  ok
+www.iam.unibe.ch/~demeyer/Deme97z/index.html
+  ok
+www.iam.unibe.ch/~demeyer/Deme98a/
+  ok
+www.iam.unibe.ch/~demeyer/Deme98a/paper.html
+  ok
+www.iam.unibe.ch/~demeyer/Deme98o/
+  ok
+www.iam.unibe.ch/~demeyer/Deme98o/paper.html
+  ok
+www.iam.unibe.ch/~demeyer/Deme99e/
+  ok
+www.iam.unibe.ch/~demeyer/Deme99f/
+  ok
+www.iam.unibe.ch/~demeyer/Deme99m/
+  ok
+www.iam.unibe.ch/~demeyer/Deme99m/ht99_02.html
+  ok
+www.iam.unibe.ch/~demeyer/Stey94a/
+  ok
+www.iam.unibe.ch/~demeyer/Stey96b/
+  ok
+www.iam.unibe.ch/~demeyer/Tich98z/
+  ok
+www.iam.unibe.ch/~demeyer/Wiil96a/
+  ok
+www.iam.unibe.ch/~demeyer/Wiil96m
+  moved
+  www.iam.unibe.ch/~demeyer/Wiil96m/
+  ok
+www.iam.unibe.ch/~demeyer/Zypher/
+  ok
+www.iam.unibe.ch/~ducasse/
+  ok
+www.iam.unibe.ch/~ducasse/WebPages/BOOKS/Scheme/book.html
+  not found (404)
+www.iam.unibe.ch/~ducasse/WebPages/Books.html
+  not found (404)
+www.iam.unibe.ch/~oscar/Champion/champion.pdf
+  ok
+www.iam.unibe.ch/~oscar/Champion/index.html
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Aebi03a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Blum00a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Buch03a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Bueh04a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Burk97a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Fran99a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Frei04a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Gert97a.html
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Gert97a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Gert97a.ps.gz
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Golo01a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Guen98a/Guen98a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Guen98a/index.html
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Held99a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Held99a.ps.gz
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Hofm01a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Horv04a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Kauf01a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Kneu03a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Kobe05a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Kueh98a/Kueh98a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Kueh98a/aproco.html
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Lanz99a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Lien04a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Loer97a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Loer97a.ps.gz
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Lose98a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Lose98a.ps.gz
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Minj04a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Rieg97a.html
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Rieg97a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Roet99a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Scha01a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Schl03a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Schw02a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Stei01a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Tale03a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Tich97a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Diploma/Voge04a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Drafts/Nier06aFlatteningTraits.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Drafts/TOPLASTraits.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Drafts/bridging.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OOSC/index.html
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Ader90aITHACA.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Fugi92aAppDevThroughReuse.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Gibb90aClassManagement.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Kapp89aPrototyping.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Kons88aHybridImplementation.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Mey93bIthacaADE.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Nier85bHybridUnified.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Nier85cOOEforOIS.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Nier86aWhatIsTheObject.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Nier87aOOIssuesLitReview.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Nier87bTriggeringObjects.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Nier87cActiveObjects.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Nier87dHybrid.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Nier88aMappingObjects.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Nier89aSurveyOfOOConcepts.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Nier89bIntegOfficeSystems.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Nier89cTwoModels.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Nier89dCRINTourOfHybrid.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Nier89eAbacusNotation.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Nier90aVisualScripting.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Nier90bObjectsAsPatterns.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Nier90cAbacusGuide.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Nier91aADLscripting.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Nier91bObjectsPlusScripts.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Nier91dTypedActiveObjects.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Nier92aAnObjectCalculus.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Nier92bCOSD.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Nier92cTourOfHybrid.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Nier93aChassis.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Nier93bChassis.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Nier93eCompActiveObjects.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Nier95dRegularTypes.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Papa91aSWReuseinCOOLs.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Trot92aGafSupport.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Tsic87cKnos.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Tsic88aRoundSquare.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Tsic88cAppDevtUsingObjects.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Tsic89cDirections.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Tsic92bBeyondObjects.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Vite90aEventsAndSensors.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/OSG/Weis85a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Ache00aScriptingCoordStyles.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Ache00bExplicitNamespaces.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Ache00dFeatureMixing.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Ache01aTour.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Ache01bPASCL.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Ache05aPiccolaReasoning.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Ardi97aSchemeTeaching.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Arev01aLMO01.doc
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Arev02aECOOP02ApplicationFrameworks.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Arev02bOOIS02FrameworkReuse.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Arev02cECOOP02InheritanceWorkshop.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Arev03aLMO03UnderstandingDependencies.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Arev03bWOOR03XRayViews.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Arev03cASE03XRayViews.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Arev03dMASPEGHI03XRayViews.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Arev04aWCRE04CollaborationPatterns.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Arev05bCSMR05ClassHierarchies.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Arev05cICFCA05LessonsLearned.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Berg03aClassboxes.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Berg03bClassboxes.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Berg04a-IAM-04-003.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Berg04cprototalk.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Berg04dDynamicClassboxes.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Berg05aclassboxesJournal.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Berg05b-classboxj.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Berg05d-TraitsClassbox.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Bert03aEcoopWorkshop.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Blac02aTraitsHierarchy.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Blac03aTraitsHierarchy.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Blac04aTraitsTools.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Cruz01LMO.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Cruz01OOIS.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Cruz02Coordination.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Cruz98bManagingEvolution.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Cruz99FTDCS.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Cruz99aGroupBasedApproach.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/DHon00a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/DHon99a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/DeVo00a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Deme00aFindingRefactoring.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Deme00dRevEng.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Deme05aLANRefactoring.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Deme97bDesignGuidelines.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Deme97zWCRE.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Deme98pThreeRevEngPatterns.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Deme99aDemeyerDucasseLMO99.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Deme99bClassComposition.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Deme99cCodeCrawler.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Deme99dUML99.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Deme99nEuroplop99.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Denk05aRuntimeBytecode.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca00aTieCode.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca00bMooseCoset.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca00cTransform.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca00dOpenSpaces.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca00xExperienceEnseig.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca00zCaroLecturesFr.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca01aTowardsAMethod.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca01bMoose.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca01cHab.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca03bSurfaces.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca03cOOPALEcoop.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca03dInfrastructures.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca04aRuntimePolymetricViews.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca04bTestLogicWoor04.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca04dPackageVisualization.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca04eSeaside.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca04fHismo.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca05aMooseBookChapter.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca05bTSEClassBlueprint.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca05dChaseSimCity.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca05ePackageVisualization.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca05fMooseDemo.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca05hSmallwikiWikiSymp05.pdf
+  not found (404)
+www.iam.unibe.ch/~scg/Archive/Papers/Duca05ySafeMetaclassTrait.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca95bAReflectiveModel.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca96aInhReify.ps.gz
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca96bDependencyOP.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca97aPhD.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca97aPhD.ps.gz
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca97bExecutableConnectors.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca97d-ReificationDP.ps.gz
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca97eMessagePassing.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca98bTwoReengPatterns.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca98cExplicitConnectors.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca99aMsgPassingControl.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca99bCodeDuplication.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca99cTypeCheckElim.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Duca99xFamoosHandBook.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Gael03aTestComposition.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Gael03bPartialOrderingTestsByCoverageSets.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Gael04aOrderingBrokenUnitTestsForFocusedDebugging.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Gael04bVonKleinenUndGrossenErfindern.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Gael04cLinkingMethodsAndTests.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Gael04dCorrelatingUnitTestsAndMethodsUnderTest.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Gael05aTowardsATaxonomyOfUnitTests.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Gael05bComposingUnitTests.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Gael96dolphin.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Girb04aHierarchiesEvolution.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Girb04bYesterdayWeather.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Girb04dEntitiesChangeTogether.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Girb05aHierarchiesEvolution.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Girb05bMetaModelTransATEM2004.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Girb05cOwnershipMap.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Gonz04aoolepje04-report.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Gree05aTraceScraperCSMR2005Features.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Gree05bTraceScraperWOOR2005.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Gree05cTraceScraperICSM2005.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Gree05dTraceCrawlerVissoft2005.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Kuhn05aSemanticClustering.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Lahi04aECOOP04MaspeghiWorkshop.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Lanz01aQueryEngine.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Lanz01bClassBlueprint.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Lanz01cEvolutionMatrix.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Lanz01dClassBlueprint.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Lanz02aEvolutionMatrix.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Lanz02bModelIndependentMetrics.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Lanz03aLessonsLearned.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Lanz03cVisSoft.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Lanz03dTSEPolymetric.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Lanz03eVisSoft.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Lanz05bCCBookChapter.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Lian02aPecosRMA.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Lien05aIdentifyingTraits.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Lump00aFormalLanguage.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Lump96aMetaobjectsWithPict.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Lump97aAFormalCompLang.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Lung05aExploreSemanticClusters.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Mari05aSAIL.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Meij96mClassComposition.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Meij97aExplicitDesignPatterns.pdf
+  not found (404)
+www.iam.unibe.ch/~scg/Archive/Papers/Meij97aFACE.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Meij97bBeyondObjects.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Mens01a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Mens01b.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Mens02a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Mens03a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Mens99a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Mens99b.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/MensAl98.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Minj05a-TraitClassbox.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Mira05aParcels.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Mose96aOOMetrics.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Moug03aOOPALOOPSLA.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Nier00aIdentifyTheChampion.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Nier00bSCS.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Nier00cAgentsEverywhere.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Nier00dSeparationOfConcerns.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Nier02aPecosModel.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Nier02bEvolution.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Nier03aJPiccolaGuide.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Nier03bcontractualTypes.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Nier03cPiccolaCalculus.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Nier04aEvolution.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Nier04bChange.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Nier04dRDLchange.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Nier05aNamespaces.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Nier05bRevival.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Nier05cStoryOfMoose.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Nier05dReengineeringPatterns.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Nier05eFlatteningTraitsTR.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Nier05fOORM.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Nier95aReqtsForaCompLang.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Nier95eResearchDirections.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Nier95fResearchTopics.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Nier96aCompositionResearch.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Nier97aKomponentenUndGluing.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Nier98bCDIFasReengFormat.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Rati04aHistoryImproveFlawsDetection.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Rich02aRolesExtractionICSM2002.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Rich97aLowLevel.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Rich98aFrameworkArch.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Rich98bEvents.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Rich99aRecoveringViews.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Rieg04a-IAM-04-002.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Rieg04bWCRE2004ClonesVisualization.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Rieg98aEcoopWorkshop.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Rieg99aToolSuppRefacOOCode.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Sade02aDynamicInterfaces.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Scha01bLanguageWrappers.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Scha02aTraitsPlusGlue2002.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Scha02bTraits.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Scha02cTraitsModel.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Scha03aTraits.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Scha03bTraitsBrowser.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Scha04aEncapsulationPolicies.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Scha04bOOEncapsulation.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Scha04cBrowser.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Schn00aMetamodelForOBCP.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Schn01bAgentCoordination.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Schn97aSyncConcObjPi.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Schn99bComptsScriptsAndGlue.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Tich00aDesignGuidelines.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Tich00bRefactoringMetamodel.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Tich00mFamixCdifXmi.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Tich00nFamixWCRE2000.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Tich97bArchExtraction.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Tich99mSniffToRationalRose.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Varo95aGSPinPict.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Wuyt01a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Wuyt01c.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Wuyt01d.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Wuyt01e.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Wuyt01f.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Wuyt03cClassifications.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Wuyt04x-OOR04Report.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Wuyt05aPecosElsevier.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Wuyt96a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Wuyt98a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Papers/Wuyt99a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/PhD/Wuyts-phd.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/PhD/acherman-phd.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/PhD/arevalo-phd.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/PhD/bergel-phd.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/PhD/deri-phd.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/PhD/girba-phd.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/PhD/lanza-phd.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/PhD/lumpe-phd.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/PhD/lumpe-phd.ps.gz
+  ok
+www.iam.unibe.ch/~scg/Archive/PhD/moser-phd.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/PhD/richner-phd.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/PhD/rieger-phd.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/PhD/schaerli-phd.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/PhD/schneider-phd.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/PhD/tichelaar-phd.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Bech99a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Blum97a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Buch02a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Bueh03a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Bute02a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Cris99a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Danz00a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Diet99a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Fank98a-bericht.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Fank98a-hb.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Frei00a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Guen99a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Halt02aSentinet.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Held96a-bericht.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Held96a-hb.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Held96a.html
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Herm00a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Hert01a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Hofm99a-code.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Hofm99a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Hutc01a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Jord05a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Kneu01a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Kobe04a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Kurt99a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Lien03a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Malor99a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Mars05a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Meer05a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Meye05aMerlin.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Neme00a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Oswa03a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Port96a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Reic05a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Reng03a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Robe00a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Roth04a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Scha02e.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Scha99b.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Schl01a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Schw00a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Spec04aMixinStyles.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Stet05aDomainGenerator.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Teti97a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Tsch02a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Voge02a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Wrob02a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Wyss04a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Wyss99a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Zuer01a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Projects/Zurb03a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/Software/OOPICT/index.html
+  not found (404)
+www.iam.unibe.ch/~scg/Archive/Software/OOPICT/pictObjM.pdf
+  not found (404)
+www.iam.unibe.ch/~scg/Archive/UW/Coll81a.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/UofT/Hogg81aTLA.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/UofT/Nier83bOz.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/UofT/Nier85dOz.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/UofT/Tsic82b.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/famoos/ESEC97/WOOR97rprt.html
+  ok
+www.iam.unibe.ch/~scg/Archive/famoos/ESEC97/index.html
+  ok
+www.iam.unibe.ch/~scg/Archive/famoos/ESEC99/WOOR99report.html
+  ok
+www.iam.unibe.ch/~scg/Archive/famoos/FAMIX/Plugins/AdaPlugin2.2.html
+  ok
+www.iam.unibe.ch/~scg/Archive/famoos/FAMIX/Plugins/AdaPlugin2.2.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/famoos/FAMIX/Plugins/JavaPlugin1.0.html
+  ok
+www.iam.unibe.ch/~scg/Archive/famoos/FAMIX/Plugins/JavaPlugin1.0.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/famoos/Nebb98m/nebbe_oosa.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/famoos/Nebb98n/nebbe_aop.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/famoos/Rapi98a/type.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/famoos/Rich99b/ecoop99.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/famoos/Tich98m/ecoop98exchmod.pdf
+  ok
+www.iam.unibe.ch/~scg/Archive/pecos/public_documents/Gens02b.pdf
+  not found (404)
+www.iam.unibe.ch/~scg/Archive/pecos/public_documents/Wint02a.pdf
+  ok
+www.iam.unibe.ch/~scg/Duca02aTeacherWorkshop.pdf
+  not found (404)
+www.iam.unibe.ch/~scg/OORP
+  moved
+  www.iam.unibe.ch/~scg/OORP/
+  ok
+www.iam.unibe.ch/~scg/Research/Piccola/History/jpict.pdf
+  ok
+www.iam.unibe.ch/~scg/Research/Piccola/History/white.pdf
+  ok
+www.iam.unibe.ch/~scg/Research/Piccola/index.html
+  ok
+www.iam.unibe.ch/~scg/Research/Traits/index.html
+  ok
+www.iam.unibe.ch/~schaerli/smalltalk/traits/traitsPrototype.htm
+  ok
+www.iam.unibe.ch/~tichel/Working/CoordVar.pdf
+  not found (404)
+www.iam.unibe.ch/~tichel/Working/CoordVar.ps.gz
+  not found (404)
+www.ida.liu.se/~uweas/InvasiveSoftwareComposition/
+  ok
+www.iese.fraunhofer.de/network/ISERN/pub/technical_reports/isern-99-03.pdf
+  ok
+www.ietf.org/rfc/rfc2396.txt
+  ok
+www.ifi.uio.no/~lc/FMOODS.ps
+  moved
+  heim.ifi.uio.no/~lc/FMOODS.ps
+  not found (404)
+www.ifs.uni-linz.ac.at/~ecoop/cd/papers/0322/03220055.pdf
+  ok
+www.ifs.uni-linz.ac.at/~ecoop/cd/papers/1445/14450550.pdf
+  ok
+www.ifs.uni-linz.ac.at/~ecoop/cd/papers/ec89/ec890057.pdf
+  ok
+www.ifs.uni-linz.ac.at/~ecoop/cd/tocs/t0322.htm
+  ok
+www.ifs.uni-linz.ac.at/~ecoop/cd/tocs/t1445.htm
+  ok
+www.ifs.uni-linz.ac.at/~ecoop/cd/tocs/tec89.htm
+  ok
+www.iicm.edu/keith
+  moved
+  www2.iicm.edu/keith
+  ok
+www.informatik.uni-oldenburg.de/~matrix/da/
+  ok
+www.informatik.uni-stuttgart.de/ifi/ps/bauhaus/papers/koschke.thesis.2000.html
+  moved
+  www.iste.uni-stuttgart.de/ps/bauhaus/papers/koschke.thesis.2000.html
+  ok
+www.infosys.tuwien.ac.at/Cafe/doc/mp-ar_for_families.pdf
+  ok
+www.infosys.tuwien.ac.at/reports/repository/TUV-1841-95-01.ps
+  not found (404)
+www.instantiations.com/jfactor/
+  ok
+www.iolanguage.com/
+  ok
+www.iro.umontreal.ca/~galicia
+  moved
+  www.iro.umontreal.ca/~galicia/
+  ok
+www.it-c.dk/people/birkedal/teaching/rar-seminar-Fall-2001/papers/alias.ps.gz
+  ok
+www.it.swin.edu.au/personal/jschneider/Pub/savcbs05.pdf
+  ok
+www.itu.dk/people/kasper/NWPER2002/
+  ok
+www.jot.fm/issues/issue_2002_05/column5
+  ok
+www.jot.fm/issues/issue_2002_07/column4
+  ok
+www.jot.fm/issues/issue_2002_09/column4
+  ok
+www.jot.fm/issues/issue_2002_11/column2
+  ok
+www.jot.fm/issues/issue_2003_01/column2
+  ok
+www.jot.fm/issues/issue_2003_03/column2
+  ok
+www.jot.fm/issues/issue_2003_05/column2
+  ok
+www.jot.fm/issues/issue_2003_07/column1
+  ok
+www.jot.fm/issues/issue_2003_07/column4
+  ok
+www.jot.fm/issues/issue_2004_05/column1
+  ok
+www.junit.org/
+  not an http link
+www.jython.org/
+  ok
+www.kfki.hu/~ferenczi/AH-WS-MonDP.html
+  ok
+www.kfki.hu/~ferenczi/InhAnom.html
+  ok
+www.kfki.hu/~ferenczi/MP94.html
+  ok
+www.ksccary.com/kbrown.htm
+  not found (404)
+www.laputan.org/mud/mud.html
+  ok
+www.leo.org/pub/comp/doc/techreports/tum/informatik/report/1997/TUM-I9735.ps.gz
+  not found (404)
+www.lirmm.fr/w3arc/fr/publications/1995/
+  not found (404)
+www.lirmm.fr/~ducour/Publis/spectyperr.ps.gz
+  ok
+www.lri.fr/~fekete/
+  ok
+www.lsc.nd.edu/~jsiek/concept_checking.pdf
+  timed out waiting for data
+www.luca.demon.co.uk/Bibliography.htm
+  ok
+www.mathematik.tu-darmstadt.de/~burmeister/
+  ok
+www.mindview.net/WebLog/log-0025
+  ok
+www.mip.sdu.dk/~bnj/library/Us_Ungar.pdf
+  ok
+www.mockobjects.com/
+  not an http link
+www.mozart-oz.org/index.html
+  ok
+www.mozart-oz.org/papers/
+  ok
+www.ncstrl.org/ncstrl/servlet/searchformname=detail\&id=oai%3Ancstrlh%3Amitai%3AMIT-AILab%2F%2FAIM-306
+  bad request (400)
+www.neci.nec.com/homepages/jagannathan/papers/popl87.ps
+  not found (404)
+www.object-arts.com/DolphinSmalltalk.htm
+  not found (404)
+www.objectivesoft.com/
+  ok
+www.objectmentor.com/resources/articles/Principles_and_Patterns.PDF
+  ok
+www.objectteams.org/
+  ok
+www.omg.org/cgi-bin/doc?formal/05-05-01
+  ok
+www.omg.org/corba/c2indx.htm
+  not found (404)
+www.omg.org/docs/ptc/03-10-14.pdf
+  ok
+www.omg.org/technology/corba/corba3releaseinfo.htm
+  ok
+www.opengroup.org/onlinepubs/009629399/
+  ok
+www.ora.com/catalog/jscript2/noframes.html
+  moved
+  www.oreilly.com/catalog/jscript2/noframes.html
+  ok
+www.oreilly.com/catalog/vbscriptian/index.html
+  ok
+www.parc.xerox.com/istl/projects/MagicLenses/
+  moved
+  www2.parc.com/istl/projects/MagicLenses/
+  ok
+www.parc.xerox.com/spl/projects/aop/position.html
+  moved
+  www2.parc.com/spl/projects/aop/position.html
+  not found (404)
+www.pecos-project.org/public_documents/pecosHandbook.pdf
+  ok
+www.peer-to-peer.com/catalog/language/icon.html
+  timed out waiting for data
+www.perl.com/pub/a/2004/04/16/a12.html
+  ok
+www.pnl.gov/infoviz/sigchi98/index.html
+  ok
+www.prevayler.org/
+  ok
+www.prothon.org/
+  timed out waiting for data
+www.reengineering.ed.ac.uk/
+  ok
+www.refactory.com/Software/SmaCC/
+  ok
+www.research.att.com/~chen/chen/acacia-tse98.ps
+  ok
+www.research.att.com/~trevor/papers.html
+  ok
+www.research.digital.com/SRC/personal/Luca_Cardelli/Papers/Obliq.A4.ps
+  moved
+  www.research.compaq.com/SRC/personal/Luca_Cardelli/Papers/Obliq.A4.ps
+  not found (404)
+www.research.microsoft.com/users/philbe/SIGMOD%20Record.doc
+  ok
+www.research.microsoft.com/users/philbe/VLDB97.DOC
+  not found (404)
+www.research.microsoft.com/~fournet/biblio.htm
+  ok
+www.rigi.csc.uvic.ca/
+  ok
+www.sato.kuis.kyoto-u.ac.jp/~masahiko/index-e.html
+  not found (404)
+www.sce.carleton.ca/faculty/briand/pubs/simula_tr_20035.pdf
+  ok
+www.scriptics.com/people/john.ousterhout/scripting.ps
+  moved
+  www.tcl.tk/people/john.ousterhout/scripting.ps
+  ok
+www.seaside.st/
+  ok
+www.sei.cmu.edu/architecture/ASE.pdf
+  ok
+www.sei.cmu.edu/ata/icsr5.pdf
+  ok
+www.sei.cmu.edu/plp/variability.pdf
+  ok
+www.sei.cmu.edu/pub/documents/01.reports/pdf/01tr022.pdf
+  ok
+www.sei.cmu.edu/pub/documents/99.reports/pdf/99tr010.pdf
+  ok
+www.sei.cmu.edu/publications/documents/99.reports/99tr010/99tr010abstract.html
+  ok
+www.servlets.com/index.html
+  ok
+www.sigs-datacom.de/sd/publications/pub_article_show.htm?&AID=1713&TABLE=sd_article
+  ok
+www.sigs.de/publications/os/2005/06/demeyer_nierstrasz_OS_06_05.pdf
+  ok
+www.site.uottawa.ca/\~{
+  not found (404)
+www.site.uottawa.ca/~tcl/papers/index.html
+  ok
+www.site.uottawa.ca/~tcl/papers/sief/standardProposalv1.html
+  ok
+www.smallscript.com/
+  ok
+www.smalltalkchronicles.net/edition3-2/Pages/moose.htm
+  ok
+www.springerlink.com/index/N0M725Q46126V741.pdf
+  moved
+  www.springerlink.com/link.asp?id=n0m725q46126v741
+  not an http link
+www.squeak.org/
+  ok
+www.st.cs.uni-sb.de/papers/iwpse2003/iwpse.pdf
+  ok
+www.tcm.hut.fi/~pnr/jacob/
+  not found (404)
+www.toa.com/shnn?searticles
+  ok
+www.ub.uni-marburg.de/digibib/ediss/welcome.html
+  timed out waiting for data
+www.ubs.com/e/index/about/ubilab/ext/publications/e_full_list.htm
+  moved
+  www.ubs.com/1/e/index/about/ubilab/ext/publications/e_full_list.htm
+  not found (404)
+www.uni-koblenz.de/fb4/publikationen/gelbereihe/RR-7-2002.pdf
+  ok
+www.uni-koblenz.de/~ist/gupro.en.html
+  not found (404)
+www.unisys.com/marketplace/urep/
+  not found (404)
+www.w3.org/TR/2000/PR-xlink-20001220
+  moved
+  www.w3.org/TR/2000/PR-xlink-20001220/
+  ok
+www.wikipedia.org/
+  ok
+www.wiley.com/compbooks/catalog/16351-1.htm
+  moved
+  www.wiley.com/legacy/compbooks/catalog/16351-1.htm
+  not found (404)
+www.win.ua.ac.be/~fvrys/publications/
+  ok
+www.windriver.com/products/sniff_plus/index.html
+  moved
+  cdn.windriver.com/scripts/redirect.html?ID=12
+  ok
+www.wiresong.ca/OmniBrowser/
+  ok
+www.xpuniverse.com/2001/pdfs/Testing03.pdf
+  ok
+www.zurich.ibm.com/~lde/MobilePaper/
+  not found (404)
+www.zurich.ibm.com/~lde/SimpleNM.ps.Z
+  not found (404)
+www.zurich.ibm.com/~lde/Surfin.ps.Z
+  not found (404)
+www2.telelogic.com/products/doorsers/doors/index.cfm
+  moved
+  www2.telelogic.com/corp/products/doors/doors
+  moved
+  www2.telelogic.com/corp/products/doors/doors/
+  ok
+wwwipd.ira.uka.de/~prechelt/Biblio/
+  moved
+  page.mi.fu-berlin.de/~prechelt/Biblio/
+  ok
+
+writing files to linkdoc
+wrote 9 txt files
+wrote 7 html files
+wrote index file urlindex.html
+
+found 777 urls: ok
+-----  31 urls: moved permanently (301)
+----- 171 urls: moved temporarily (302)
+ERROR   2 urls: bad request (400)
+ERROR  11 urls: gateway timeout (503)
+ERROR 104 urls: not found (404)
+ERROR  11 urls: timed out waiting for data
+ERROR   2 urls: unknown error (303)
+warn    2 urls: access not authorized (401)
+warn    1 url: infinite redirect loop
+warn   28 urls: not an http link
+warn    2 warnings
+
+Linklink checked 938 urls:
+    777 were ok, 130 failed. 202 urls moved.
+    1 host failed: 22 urls could be retried.
+

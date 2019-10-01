@@ -1,0 +1,87 @@
+% $Author: oscar $
+% $Date: 2009-11-06 14:37:12 +0100 (Fri, 06 Nov 2009) $
+% $Revision: 29604 $
+%=============================================================
+% ST80 listings macros
+% Adapted from Squeak by Example book
+%=============================================================
+% If you want >>> appearing as right guillemet, you need these two lines:
+%\usepackage[T1]{fontenc}
+%\newcommand{\sep}{\mbox{>>}}
+% Otherwise use this:
+\newcommand{\sep}{\mbox{$\gg$}}
+%=============================================================
+%:\needlines{N} before code block to force page feed
+\usepackage{needspace}
+\newcommand{\needlines}[1]{\Needspace{#1\baselineskip}}
+%=============================================================
+%:Listings package configuration for ST80
+\usepackage[english]{babel}
+\usepackage{amssymb,textcomp}
+\usepackage{listings}
+% \usepackage[usenames,dvipsnames]{color}
+\usepackage[usenames]{color}
+% \definecolor{source}{gray}{0.95}
+\lstdefinelanguage{Smalltalk}{
+  morekeywords={self,super,true,false,nil,thisContext, eachModel}, % This is overkill
+  morestring=[d]',
+  morecomment=[s]{"}{"},
+  alsoletter={\#:},
+  escapechar={!},
+  literate=
+    {BANG}{!}1
+    {UNDERSCORE}{\_}1
+    {\\st}{Smalltalk}9 % convenience -- in case \st occurs in code
+    % {'}{{\textquotesingle}}1 % replaced by upquote=true in \lstset
+    {_}{{$\leftarrow$}}1
+    {>>>}{{\sep}}1
+    {^}{{$\uparrow$}}1
+    {~}{{$\sim$}}1
+    {-}{{\sf -\hspace{-0.13em}-}}1  % the goal is to make - the same width as +
+    {+}{\raisebox{0.08ex}{+}}1		% and to raise + off the baseline to match -
+    {-->}{{\quad$\longrightarrow$\quad}}3
+	, % Don't forget the comma at the end!
+  tabsize=4
+}[keywords,comments,strings]
+
+\definecolor{source}{gray}{0.95}
+
+\lstset{language=Smalltalk,
+	basicstyle=\sffamily,
+	keywordstyle=\color{black}\bfseries,
+
+%	numbers=left,                   % where to put the line-numbers
+%	numberstyle=\footnotesize,      % the size of the fonts that are used for the line-numbers
+%	stepnumber=1,                   % the step between two line-numbers. If it is 1 each line will be numbered
+%	numbersep=5pt,                  % how far the line-numbers are from the code
+
+	% stringstyle=\ttfamily, % Ugly! do we really want this? -- on
+	mathescape=true,
+	showstringspaces=false,
+	keepspaces=true,
+	breaklines=true,
+	breakautoindent=true,
+	backgroundcolor=\color{source},
+	%lineskip={-1pt}, % Ugly hack
+	upquote=true, % straight quote; requires textcomp package
+	columns=fullflexible} % no fixed width fonts
+% In-line code (literal)
+% Normally use this for all in-line code:
+\newcommand{\ct}{\lstinline[mathescape=false,backgroundcolor=\color{white},basicstyle={\sffamily\upshape}]}
+% In-line code (latex enabled)
+% Use this only in special situations where \ct does not work
+% (within section headings ...):
+\newcommand{\lct}[1]{{\textsf{\textup{#1}}}}
+% Code environments
+\lstnewenvironment{code}{%
+	\lstset{%
+		% frame=lines,
+		frame=single,
+		framerule=0pt,
+		mathescape=false
+	}
+}{}
+
+% Useful to add a matching $ after code containing a $
+% \def\ignoredollar#1{}
+%=============================================================

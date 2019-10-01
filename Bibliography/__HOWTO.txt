@@ -1,0 +1,8 @@
+- check http://scg.unibe.ch/scgbib
+- find ref via google (ieee, acm, citeulike)
+- scgbib/ 
+	- pull 
+	- add ref (id: first 4 chars of first author + year + a,b,c..)
+	- format
+	- make
+- copy scg.bib to paper folder	

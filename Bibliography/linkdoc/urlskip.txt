@@ -1,0 +1,85 @@
+file: urlskip.txt
+date: Wed, 30 Nov 2005 17:55:18 (local)
+Linklint version: 2.3.5
+
+#------------------------------------------------------------
+# warn   31 urls: not checked
+#------------------------------------------------------------
+2 urls: access not authorized (401)
+    http://csdl.computer.org/dl/mags/so/2001/06/s6078.pdf
+      => http://csdl2.computer.org/dl/mags/so/2001/06/s6078.pdf
+    http://csdl2.computer.org/dl/mags/so/2001/06/s6078.htm
+
+1 url: infinite redirect loop
+    http://www.iam.unibe.ch/publikationen/techreports/2004/iam-04-008
+      => http://www.iam.unibe.ch/publikationen/techreports/2004/iam-04-008
+
+28 urls: not an http link
+    http://csdl.computer.org/comp/trans/ts/2004/08/e0491abs.htm
+      => /redirectDL.jsp?path=trans/ts/2004/08/e0491abs.htm
+    http://doi.ieeecomputersociety.org/10.1109/52.965809
+      => /DOIResolver/resolver/10.1109/52.965809
+    http://doi.ieeecomputersociety.org/10.1109/ICSM.2001.972707
+      => /DOIResolver/resolver/10.1109/ICSM.2001.972707
+    http://doi.ieeecomputersociety.org/10.1109/ICSM.2003.1235420
+      => /DOIResolver/resolver/10.1109/ICSM.2003.1235420
+    http://doi.ieeecomputersociety.org/10.1109/IWPC.2003.10006
+      => /DOIResolver/resolver/10.1109/IWPC.2003.10006
+    http://doi.ieeecomputersociety.org/10.1109/TSE.2003.1232284
+      => /DOIResolver/resolver/10.1109/TSE.2003.1232284
+    http://doi.ieeecomputersociety.org/10.1109/TSE.2005.14
+      => /DOIResolver/resolver/10.1109/TSE.2005.14
+    http://doi.ieeecomputersociety.org/10.1109/WCRE.2001.957834
+      => /DOIResolver/resolver/10.1109/WCRE.2001.957834
+    http://doi.ieeecomputersociety.org/10.1109/WCRE.2002.1173075
+      => /DOIResolver/resolver/10.1109/WCRE.2002.1173075
+    http://doi.ieeecomputersociety.org/10.1109/WCRE.2003.1287251
+      => /DOIResolver/resolver/10.1109/WCRE.2003.1287251
+    http://doi.ieeecomputersociety.org/10.1109/WPC.1996.501117
+      => /DOIResolver/resolver/10.1109/WPC.1996.501117
+    http://doi.ieeecomputersociety.org/10.1109/WPC.2002.1021318
+      => /DOIResolver/resolver/10.1109/WPC.2002.1021318
+    http://doi.ieeecs.org/10.1109/ICSM.1999.792645
+      => /DOIResolver/resolver/10.1109/ICSM.1999.792645
+    http://doi.ieeecs.org/10.1109/ICSM.2002.1167807
+      => /DOIResolver/resolver/10.1109/ICSM.2002.1167807
+    http://doi.ieeecs.org/10.1109/ICSR.1998.685754
+      => /DOIResolver/resolver/10.1109/ICSR.1998.685754
+    http://dx.doi.org/10.1007/s007790170019
+      => http://www.springerlink.com/openurl.asp?genre=article&id=doi:10.1007/s007790170019
+      => /(oevf0br3uosz4b55bnsyohv1)/openurl.asp?genre=article&id=doi:10.1007/s007790170019
+    http://dx.doi.org/10.1109/32.6178
+      => http://ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?arnumber=6178
+      => /search/wrapper.jsp?arnumber=6178
+    http://dx.doi.org/10.1109/32.748920
+      => http://ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?arnumber=748920
+      => /search/wrapper.jsp?arnumber=748920
+    http://dx.doi.org/10.1109/52.43044
+      => http://ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?arnumber=43044
+      => /search/wrapper.jsp?arnumber=43044
+    http://dx.doi.org/10.1109/REAL.2004.51
+      => http://ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?arnumber=1381311
+      => /search/wrapper.jsp?arnumber=1381311
+    http://dx.doi.org/10.1109/WPC.1998.693325
+      => http://ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?arnumber=693325
+      => /search/wrapper.jsp?arnumber=693325
+    http://link.springer.de/link/service/series/0558/tocs/t0322.htm
+      => http://www.springerlink.com/link.asp?id=105633
+      => /(qwuucvqzjqdubz45fhll0qy0)/link.asp?id=105633
+    http://link.springer.de/link/service/series/0558/tocs/t0707.htm
+      => http://www.springerlink.com/link.asp?id=105633
+      => /(qwuucvqzjqdubz45fhll0qy0)/link.asp?id=105633
+    http://link.springer.de/link/service/series/0558/tocs/t1687.htm
+      => http://www.springerlink.com/link.asp?id=KV19QQV2GRGH
+      => /(ywqnqujca51dhiqoedskde45)/link.asp?id=KV19QQV2GRGH
+    http://msdn.microsoft.com/repository/technical/infosys/default.asp
+      => /library/shared/HappyURL/404.asp?404;http://msdn.microsoft.com/repository/technical/infosys/default.asp
+    http://www.junit.org
+      => index.htm
+    http://www.mockobjects.com
+      => FrontPage.html
+    http://www.springerlink.com/index/N0M725Q46126V741.pdf
+      => http://www.springerlink.com/link.asp?id=n0m725q46126v741
+      => /(un3nkq45ho4n3x55wplqsqb2)/link.asp?id=n0m725q46126v741
+
+

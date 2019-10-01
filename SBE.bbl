@@ -25,10 +25,12 @@
          {{{Smalltalk} Best Practice Patterns}%
           {}{}{2}{}{}{}{}{}}%
         ]{Beck97a}
+ \jburldef
+  {Beck97a}{http://stephane.ducasse.free.fr/FreeBooks/BestSmalltalkPractices/Draft-Smalltalk%20Best%20Practice%20Patterns%20Kent%20Beck.pdf}%
  \jbbibargs {\bibnf {Beck} {Kent} {K.} {} {}} {Kent Beck} {au} {\bibtfont
   {{Smalltalk} Best Practice Patterns}\bibatsep\  \apyformat
-  {Prentice-Hall\bibbdsep {} 1997}} {\bibhowcited} \jbdoitem
-  {{Beck}{Kent}{K.}{}{}} {} {} \bibAnnoteFile {Beck97a}
+  {Prentice-Hall\bibbdsep {} 1997} \jburluse {Beck97a}} {\bibhowcited}
+  \jbdoitem {{Beck}{Kent}{K.}{}{}} {} {} \bibAnnoteFile {Beck97a}
 
 \bibitem[{Beck\jbdy {2003}}%
          {}%
@@ -45,15 +47,16 @@
 \bibitem[{Gamma\Bibetal\jbdy {1995}}%
          {}%
          {{0}{}{book}{1995}{}{}{}{}%
-          {Reading, Mass.\bpubaddr {} Addison Wesley\bibbdsep {} 1995}}%
+          {Reading, Mass.\bpubaddr {} Addison Wesley Professional\bibbdsep {}
+  1995}}%
          {{Design Patterns: Elements of Reusable Object-Oriented Software}%
           {}{}{2}{}{}{}{}{}}%
         ]{Gamm95a}
  \jbbibargs {\bibnf {Gamma} {Erich} {E.} {} {}\bibIMfont {\Bibetal}} {Erich
   GammaRichard HelmRalph JohnsonJohn Vlissides} {aus} {\bibtfont {Design
   Patterns: Elements of Reusable Object-Oriented Software}\bibatsep\
-  \apyformat {Reading, Mass.\bpubaddr {} Addison Wesley\bibbdsep {}
-  1995}\jbisbn {0--201--63361--2--(3)}} {\bibhowcited} \jbdoitem
+  \apyformat {Reading, Mass.\bpubaddr {} Addison Wesley Professional\bibbdsep
+  {} 1995}\jbisbn {978--0201633610}} {\bibhowcited} \jbdoitem
   {{Gamma}{Erich}{E.}{}{}; {Helm}{Richard}{R.}{}{}; {Johnson}{Ralph}{R.}{}{};
   {Vlissides}{John}{J.}{}{}} {} {} \bibAnnoteFile {Gamm95a}
 
@@ -64,12 +67,15 @@
          {{{Smalltalk} 80: the Language and its Implementation}%
           {}{}{2}{}{}{}{}{}}%
         ]{Gold83a}
+ \jburldef
+  {Gold83a}{http://stephane.ducasse.free.fr/FreeBooks/BlueBook/Bluebook.pdf}%
  \jbbibargs {\bibnf {Goldberg} {Adele} {A.} {} {}\Bibbtasep \bibnf {Robson}
   {David} {D.} {} {}} {Adele GoldbergDavid Robson} {aus} {\bibtfont
   {{Smalltalk} 80: the Language and its Implementation}\bibatsep\  \apyformat
-  {Reading, Mass.\bpubaddr {} Addison Wesley\bibbdsep {} \mayname\ 1983}\jbisbn
-  {0--201--13688--0}} {\bibhowcited} \jbdoitem {{Goldberg}{Adele}{A.}{}{};
-  {Robson}{David}{D.}{}{}} {} {} \bibAnnoteFile {Gold83a}
+  {Reading, Mass.\bpubaddr {} Addison Wesley\bibbdsep {} \mayname\ 1983}
+  \jburluse {Gold83a}\jbisbn {0--201--13688--0}} {\bibhowcited} \jbdoitem
+  {{Goldberg}{Adele}{A.}{}{}; {Robson}{David}{D.}{}{}} {} {} \bibAnnoteFile
+  {Gold83a}
 
 \bibitem[{LaLonde\jbbtasep Pugh\jbdy {1990}}%
          {}%
