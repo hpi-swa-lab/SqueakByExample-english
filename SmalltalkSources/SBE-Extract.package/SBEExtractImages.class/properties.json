@@ -1,0 +1,14 @@
+{
+	"category" : "SBE-Extract",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "SBEExtractImages",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

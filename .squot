@@ -1,12 +1,3 @@
 OrderedDictionary {
-	'SmalltalkSources\/SBE-Quinto.package' : #SquotCypressCodeSerializer,
-	'SmalltalkSources\/SBE2-Regex.package' : #SquotCypressCodeSerializer,
-	'SmalltalkSources\/SBE-Testing.package' : #SquotCypressCodeSerializer,
-	'SmalltalkSources\/VB-Regex.package' : #SquotCypressCodeSerializer,
-	'SmalltalkSources\/SBE2-SeasideDemo.package' : #SquotCypressCodeSerializer,
-	'SmalltalkSources\/SBE2-SeasideRPN.package' : #SquotCypressCodeSerializer,
-	'SmalltalkSources\/SBE-Streams.package' : #SquotCypressCodeSerializer,
-	'SmalltalkSources\/SBE-QuickTour.package' : #SquotCypressCodeSerializer,
-	'SmalltalkSources\/SBE-Environment.package' : #SquotCypressCodeSerializer,
-	'SmalltalkSources\/SBE-Morphic.package' : #SquotCypressCodeSerializer
+	'SmalltalkSources\/SBE-Extract.package' : #SquotCypressCodeSerializer
 }
