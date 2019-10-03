@@ -1,0 +1,1 @@
+A SBEWorldHelper contains a set of utilities for managing an offscreen world. Most of the functions are copied from PHEventTestCase/UiTestCase.
