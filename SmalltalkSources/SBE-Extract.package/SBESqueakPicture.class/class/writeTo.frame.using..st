@@ -19,6 +19,7 @@ writeTo: aPathString frame: aFrameSpecifier using: aBlock
 			picture := wrapper world imageFormForRectangle: wrapper morphsArea].
 		aFrameSpecifier isRectangle ifTrue: [
 			picture := wrapper world imageFormForRectangle: aFrameSpecifier]] on: Error do: [:err | error := err].
+	
 	] ensure: [
 		ActiveWorld := priorWorld.
 		ActiveHand := priorHand].
