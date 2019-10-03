@@ -32,7 +32,7 @@
 		"setUp" : "tobe 10/3/2019 20:08",
 		"simulateKeyEvent:key:buttons:morph:" : "tobe 10/3/2019 20:01",
 		"simulateMouseEvent:at:buttons:start:morph:" : "tobe 10/3/2019 20:01",
-		"simulateMouseEvent:morph:" : "tobe 10/3/2019 20:01",
+		"simulateMouseEvent:morph:" : "tobe 10/3/2019 21:19",
 		"tearDown" : "tobe 10/3/2019 20:09",
 		"type:into:" : "tobe 10/3/2019 20:00",
 		"windowLabeled:" : "tobe 10/3/2019 20:00",
