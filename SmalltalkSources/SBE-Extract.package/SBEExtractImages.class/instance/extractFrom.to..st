@@ -9,8 +9,8 @@ extractFrom: aFSReference to: anOutputFileDirectory
 	
 	commands := Array streamContents: [:stream |
 		texFiles do: [:texFile |
-			FileStream concreteStream readOnlyFileNamed: texFile fullName do: [:file |
-				file contents regex: '%%{SBESqueakPicture[\s\S]+%%]}' matchesDo: [:command | stream nextPut: {texFile parent. ((command lines collect: [:line | line allButFirst: 2]) joinSeparatedBy: String cr) allButFirst allButLast}]]]].
+			FileStream concreteStream readOnlyFileNamed: texFile fullName do: [:fileStream |
+				self commandsFrom: fileStream do: [:command | stream nextPut: {texFile parent. command}]]]].
 	
 	commands do: [:command |
 		SBESqueakPicture currentDirectory: command first.

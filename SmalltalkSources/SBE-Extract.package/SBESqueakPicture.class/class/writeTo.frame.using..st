@@ -1,24 +1,30 @@
 as yet unclassified
-writeTo: aPathString frame: aSymbolOrRectangle using: aBlock
+writeTo: aPathString frame: aFrameSpecifier using: aBlock
 
-	| world picture |
-	world := (PasteUpMorph newWorldForProject: nil)
-		extent: self worldSize;
-		viewBox: (0 @ 0 extent: self worldSize);
-		yourself.
+	| picture wrapper priorHand priorWorld error |
+	wrapper := SBEWorldHelper new worldSize: 1000 @ 1000; setUp.
+	wrapper world color: Color transparent.
 	
-	(world instVarNamed: #worldState)
-		instVarNamed: #canvas
-		put: (Form extent: self worldSize depth: 32) getCanvas.
+	priorWorld := ActiveWorld.
+	priorHand := ActiveHand.
+	error := nil.
+	ActiveWorld := wrapper world.
+	ActiveHand := wrapper hand.
+	[
+		[aBlock value: wrapper.
+		
+		aFrameSpecifier isBlock ifTrue: [
+			picture := wrapper world imageFormForRectangle: (aFrameSpecifier value: wrapper morphsArea)].
+		aFrameSpecifier = #morphs ifTrue: [
+			picture := wrapper world imageFormForRectangle: wrapper morphsArea].
+		aFrameSpecifier isRectangle ifTrue: [
+			picture := wrapper world imageFormForRectangle: aFrameSpecifier]] on: Error do: [:err | error := err].
+	] ensure: [
+		ActiveWorld := priorWorld.
+		ActiveHand := priorHand].
 	
-	world becomeActiveDuring: aBlock.
+	error ifNotNil: #signal.
 	
-	aSymbolOrRectangle = #morphs ifTrue: [
-		world hasSubmorphs ifFalse: [self error: 'World did not contain any morphs'].
-		picture := world imageFormForRectangle: (Rectangle merging: (world submorphs collect: #bounds))].
-	
-	aSymbolOrRectangle isRectangle ifTrue: [
-		picture := world imageFormForRectangle: aSymbolOrRectangle].
-	
-	picture ifNil: [self error: 'Invalid frame specified: ', aSymbolOrRectangle printString].
-	picture writePNGfileNamed: (self currentDirectory resolve: aPathString) fullName
+	picture ifNil: [self error: 'Invalid frame specified: ', aFrameSpecifier printString].
+	picture writePNGfileNamed: (self currentDirectory resolve: aPathString) fullName.
+	wrapper tearDown
