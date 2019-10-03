@@ -1,6 +1,5 @@
 running
 setUp
-	super setUp.
 
 	world := (PasteUpMorph newWorldForProject: nil)
 		extent: self worldSize;
