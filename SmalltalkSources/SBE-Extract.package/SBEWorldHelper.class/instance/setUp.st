@@ -10,7 +10,7 @@ setUp
 		instVarNamed: #canvas
 		put: (Form extent: self worldSize depth: 32) getCanvas. 
 	
-	hand := PHTestHandMorph new.
+	hand := SBEHandMorph new.
 	world
 		removeHand: world firstHand; "the default hand"
 		addHand: hand

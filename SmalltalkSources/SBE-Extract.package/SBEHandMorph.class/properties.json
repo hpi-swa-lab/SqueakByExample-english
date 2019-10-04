@@ -1,0 +1,14 @@
+{
+	"category" : "SBE-Extract",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "SBEHandMorph",
+	"pools" : [
+		 ],
+	"super" : "HandMorph",
+	"type" : "normal" }
