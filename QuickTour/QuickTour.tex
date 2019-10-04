@@ -297,6 +297,21 @@ Notice how the text ``hello world'' appears in the transcript window
 Do it again.
 (The \menu{(d)} in the menu item \menu{do it (d)} tells you that the keyboard shortcut to \emph{do it} is \short{d}. More on this in the next section!)
 
+%%{SBESqueakPicture writeTo: './figures/Doit.png' frame: [:morphsRect | morphsRect withBottom: morphsRect bottom - 150] using: [:helper | | workspace |
+%%  Transcript open.
+%%  Transcript show: 'hello world'.
+%%  helper world firstSubmorph bounds: (0 @ 120 extent: 450 @ 230).
+%%  
+%%  workspace := ToolBuilder open: Workspace new.
+%%  workspace position: 200 @ 100.
+%%  
+%%  helper type: 'Transcript show; ''hello world''' into: workspace.
+%%  helper keyStroke: workspace key: $a modifiers: #(cmd).
+%%  
+%%  helper click: workspace at: workspace topCenter + (0 @ 30) buttons: #(right).
+%%  helper mouseEnter: (helper menuItemMorphLabeled: 'do it (d)' in: helper world).
+%%  helper closeBalloons.
+%%]}
 \begin{figure}[htb]
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{Doit}}}
@@ -333,6 +348,14 @@ Do not be surprised if you saw nothing happen! What you just did is send the mes
 This time we see the result we expect (\figref{printit}).
 \index{keyboard shortcut!print it}
 
+%%{SBESqueakPicture writeTo: './figures/PrintIt.png' frame: #morphs using: [:helper | | workspace |
+%%  workspace := ToolBuilder open: Workspace new.
+%%  workspace extent: 277 @ 143.
+%%  
+%%  helper type: '3 + 4' into: workspace.
+%%  helper keyStroke: workspace key: $a modifiers: #(cmd).
+%%  helper keyStroke: workspace key: $p modifiers: #(cmd).
+%%]}
 \begin{figure}[htb]
 % \centerline {\includegraphics[width=0.4\textwidth]{PrintIt}}
 \centerline {\includegraphics[scale=0.7]{PrintIt}}
@@ -354,6 +377,15 @@ The title tells us that \ct{7} is an instance of the class \clsind{SmallInteger}
 The left panel allows us to browse the instance variables of an object, the values of which are shown in the right panel.
 The bottom panel can be used to write expressions to send messages to the object.
 
+%%{SBESqueakPicture writeTo: './figures/InspectIt.png' frame: #morphs using: [:helper | | workspace |
+%%  workspace := ToolBuilder open: Workspace new.
+%%  workspace bounds: (0 @ 30 extent: 277 @ 143).
+%%  
+%%  helper type: '3 + 4' into: workspace.
+%%  helper keyStroke: workspace key: $a modifiers: #(cmd).
+%%  helper keyStroke: workspace key: $i modifiers: #(cmd).
+%%  (helper windowLabeled: 'SmallInteger.+' asRegex) position: 120 @ 0.
+%%]}
 \begin{figure}[htb]
 \centerline {\includegraphics[scale=0.7]{InspectIt}}
 \caption{Inspecting an object. \label{fig:inspectit}}
@@ -370,6 +402,9 @@ This time you should see a window labelled \clsind{Object} containing the text
 \mbox{$\triangleright$ \ct{root: Object}}.
 Click on the triangle to open it up (\figref{exploreit}).
 
+%%{SBESqueakPicture writeTo: './figures/ExploreIt.png' frame: #morphs using: [:helper |
+%%  Object explore
+%%]}
 \begin{figure}[htb]
 \centerline {\includegraphics[scale=0.7]{ExploreIt}}
 \caption{Exploring an object. \label{fig:exploreit}}
@@ -398,6 +433,11 @@ With the mouse in the list pane, use the yellow-button menu to \menu{install} th
 (If \sq complains that it is not sure this version of the game will work in your image, just say ``yes'' and go ahead.)
 Notice that once a package has been installed, it is marked with an asterisk in the list in the \sqmap package loader. 
 
+% TODO try selecting Sokoban package and first figure out how to get SM to actually search
+%%{SBESqueakPicture writeTo: './figures/SqueakMap.png' frame: #morphs using: [:helper |
+%%  SMLoaderPlus open.
+%%  helper type: 'Sokoban', String cr into: (helper morphWithBalloonText: 'Search packages...' in: helper world)
+%%]}
 \begin{figure}[htb]
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{SqueakMap}}}
@@ -422,6 +462,10 @@ As we shall see, there are several interesting browsers available for \sq, but t
 
 \dothis{Open a browser by selecting \menu{World \go open \ldots \go class browser}, or by dragging a Browser from the \toolsflapind.}
 
+%%{SBESqueakPicture writeTo: './figures/SqueakMap.png' frame: #morphs using: [:helper |
+%%  Browser fullOnClass: Object selector: #printString.
+%%  "SBELabelRectangle new text: 'Classes'; center:" 
+%%]}
 \begin{figure}[htb]
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{ClassBrowser2}}}

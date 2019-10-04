@@ -1,0 +1,14 @@
+{
+	"category" : "SBE-Extract",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		"CurrentDirectory" ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "SBESqueakPicture",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }
