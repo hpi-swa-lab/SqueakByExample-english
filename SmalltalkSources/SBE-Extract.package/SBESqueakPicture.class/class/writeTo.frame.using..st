@@ -3,7 +3,10 @@ writeTo: aPathString frame: aFrameSpecifier using: aBlock
 
 	| picture wrapper priorHand priorWorld error |
 	wrapper := SBEWorldHelper new worldSize: 1000 @ 1000; setUp.
-	wrapper world color: Color transparent.
+	"We use white as a color so in case the pdf reader can not deal
+	with transparent PNGs well, they generally look transparent in
+	front of a white page. --pre"
+	wrapper world color: (Color white alpha: 0).
 	
 	priorWorld := ActiveWorld.
 	priorHand := ActiveHand.
