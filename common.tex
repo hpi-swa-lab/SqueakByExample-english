@@ -438,6 +438,20 @@ Damien Pollet},
 		label={mth:#1}
 	}
 }{}
+\newcommand\numMethodInput[3][]{%
+	\bgroup%
+	\renewcommand*{\lstlistingname}{Method}%
+	\lstinputlisting[
+	numbers=left,
+	numberstyle={\tiny\sffamily},
+	% frame=lines,
+	frame=single,
+	framerule=0pt,
+	mathescape=false,
+	name={Method},
+	caption={\emph{#2}},
+	label={mth:#1}]{#3}
+	\egroup}
 \lstnewenvironment{classdef}[2][defaultlabel]{%
 	\renewcommand{\lstlistingname}{Class}%
 	\lstset{

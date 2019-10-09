@@ -169,17 +169,7 @@ Select it, and replace it by the text of \mthref{scbecellinitialize}.
 \index{system browser!defining a method}
 
 \needlines{10}
-\begin{numMethod}[scbecellinitialize]{Initializing instances of \ct{SBECell}}
-initialize
-   super initialize.
-   self label: ''.
-   self borderWidth: 2.
-   bounds := 0@0 corner: 16@16.
-   offColor := Color paleYellow.
-   onColor := Color paleBlue darker.
-   self useSquareCorners.
-   self turnOff
-\end{numMethod}
+\numMethodInput[scbecellinitialize]{Initializing instances of \ct{SBECell}}{SmalltalkSources/SBE-Quinto.package/SBECell.class/instance/initialize.st}
 \index{initialization}
 
 \noindent
