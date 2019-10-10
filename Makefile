@@ -52,7 +52,7 @@ examples :
 	./examples.rb $C > $@.txt
 
 listings :
-	rm -r ListingSources
+	rm -r ListingSources ||:
 	cp -fR SmalltalkSources ListingSources
 	./annotate-listings.rb
 
