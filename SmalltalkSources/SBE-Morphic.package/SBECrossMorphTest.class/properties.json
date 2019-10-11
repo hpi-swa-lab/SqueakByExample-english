@@ -1,0 +1,14 @@
+{
+	"category" : "SBE-Morphic",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"morph" ],
+	"name" : "SBECrossMorphTest",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"type" : "normal" }
