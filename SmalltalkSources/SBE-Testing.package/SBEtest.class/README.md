@@ -1,1 +1,0 @@
-Stores the source code of a test. Remembers where the source came from. Generates the actual SUnit Test.

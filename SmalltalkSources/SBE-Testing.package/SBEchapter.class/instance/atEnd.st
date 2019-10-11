@@ -1,3 +1,0 @@
-streaming
-atEnd
-	^ stream atEnd

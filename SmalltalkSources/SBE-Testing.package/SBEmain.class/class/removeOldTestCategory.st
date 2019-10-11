@@ -1,3 +1,0 @@
-cleanup
-removeOldTestCategory
-	SystemOrganization removeSystemCategory: self testCategory.

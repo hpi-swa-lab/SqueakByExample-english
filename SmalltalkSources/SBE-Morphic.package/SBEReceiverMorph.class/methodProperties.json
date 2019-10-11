@@ -1,7 +1,0 @@
-{
-	"class" : {
-		 },
-	"instance" : {
-		"initialize" : "pre 10/11/2019 10:49",
-		"repelsMorph:event:" : "pre 10/11/2019 10:53",
-		"wantsDroppedMorph:event:" : "pre 10/11/2019 10:52" } }
