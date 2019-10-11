@@ -24,6 +24,6 @@ writeTo: aPathString frame: aFrameSpecifier using: aBlock
 	ActiveWorld := priorWorld.
 	ActiveHand := priorHand.
 	
-	picture ifNil: [self error: 'Invalid frame specified: ', aFrameSpecifier printString].
+	picture ifNil: [self error: 'Invalid frame specified (or error occured in picture block): ', aFrameSpecifier printString].
 	picture writePNGfileNamed: (self currentDirectory resolve: aPathString) fullName.
 	helper tearDown
