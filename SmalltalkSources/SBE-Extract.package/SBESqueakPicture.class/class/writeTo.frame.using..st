@@ -3,10 +3,7 @@ writeTo: aPathString frame: aFrameSpecifier using: aBlock
 
 	| picture wrapper priorHand priorWorld error |
 	wrapper := SBEWorldHelper new worldSize: 1000 @ 1000; setUp.
-	"We use white as a color so in case the pdf reader can not deal
-	with transparent PNGs well, they generally look transparent in
-	front of a white page. --pre"
-	wrapper world color: (Color white alpha: 0).
+	wrapper world color: Color transparent.
 	
 	priorWorld := ActiveWorld.
 	priorHand := ActiveHand.
@@ -14,14 +11,16 @@ writeTo: aPathString frame: aFrameSpecifier using: aBlock
 	ActiveWorld := wrapper world.
 	ActiveHand := wrapper hand.
 	[
-		[aBlock value: wrapper.
-		
-		aFrameSpecifier isBlock ifTrue: [
-			picture := wrapper world imageFormForRectangle: (aFrameSpecifier value: wrapper morphsArea)].
-		aFrameSpecifier = #morphs ifTrue: [
-			picture := wrapper world imageFormForRectangle: wrapper morphsArea].
-		aFrameSpecifier isRectangle ifTrue: [
-			picture := wrapper world imageFormForRectangle: aFrameSpecifier]] on: Error do: [:err | error := err].
+		[
+			aBlock value: wrapper.
+			
+			aFrameSpecifier isBlock ifTrue: [
+				picture := wrapper world imageFormForRectangle: (aFrameSpecifier value: wrapper morphsArea)].
+			aFrameSpecifier = #morphs ifTrue: [
+				picture := wrapper world imageFormForRectangle: wrapper morphsArea].
+			aFrameSpecifier isRectangle ifTrue: [
+				picture := wrapper world imageFormForRectangle: aFrameSpecifier]
+		] on: Error do: [:err | error := err].
 	
 	] ensure: [
 		ActiveWorld := priorWorld.
