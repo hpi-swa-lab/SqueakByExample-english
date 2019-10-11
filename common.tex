@@ -339,7 +339,7 @@ Damien Pollet},
 	basicstyle=\sffamily,
 	keywordstyle=\color{black}\bfseries,
 	% stringstyle=\ttfamily, % Ugly! do we really want this? -- on
-	mathescape=true,
+	mathescape=false,
 	showstringspaces=false,
 	keepspaces=true,
 	breaklines=true,
@@ -364,13 +364,15 @@ Damien Pollet},
 % Code environments
 % NB: the arg is for tests
 % Only code and example environments may be tests
-\lstnewenvironment{code}[1]{%
+\newcommand{\sbeLstSet}[0]{%
+	\bgroup%
 	\lstset{%
-		% frame=lines,
 		frame=single,
 		framerule=0pt,
-		mathescape=false
-	}
+		mathescape=false}%
+	\egroup}
+\lstnewenvironment{code}[1]{%
+	\sbeLstSet{}
 }{}
 \def\ignoredollar#1{}
 %=============================================================
@@ -379,22 +381,16 @@ Damien Pollet},
 % Only code and example environments may be tests
 \lstnewenvironment{example}[3][defaultlabel]{%
 	\renewcommand{\lstlistingname}{Example}%
+	\sbeLstSet{}%
 	\lstset{
-		% frame=lines,
-		frame=single,
-		framerule=0pt,
-		mathescape=false,
 		caption={\emph{#2}},
 		label={eg:#1}
 	}
 }{}
 \lstnewenvironment{script}[2][defaultlabel]{%
-\renewcommand{\lstlistingname}{Script}%
+	\renewcommand{\lstlistingname}{Script}%
+	\sbeLstSet{}%
 	\lstset{
-		% frame=lines,
-		frame=single,
-		framerule=0pt,
-		mathescape=false,
 		name={Script},
 		caption={\emph{#2}},
 		label={scr:#1}
@@ -402,11 +398,8 @@ Damien Pollet},
 }{}
 \lstnewenvironment{method}[2][defaultlabel]{%
 	\renewcommand{\lstlistingname}{Method}%
+	\sbeLstSet{}%
 	\lstset{
-		% frame=lines,
-		frame=single,
-		framerule=0pt,
-		mathescape=false,
 		name={Method},
 		caption={\emph{#2}},
 		label={mth:#1}
@@ -414,11 +407,8 @@ Damien Pollet},
 }{}
 \lstnewenvironment{methods}[2][defaultlabel]{% just for multiple methods at once
 	\renewcommand{\lstlistingname}{Methods}%
+	\sbeLstSet{}%
 	\lstset{
-		% frame=lines,
-		frame=single,
-		framerule=0pt,
-		mathescape=false,
 		name={Method},
 		caption={\emph{#2}},
 		label={mth:#1}
@@ -426,25 +416,30 @@ Damien Pollet},
 }{}
 \lstnewenvironment{numMethod}[2][defaultlabel]{%
 	\renewcommand{\lstlistingname}{Method}%
+	\sbeLstSet{}%
 	\lstset{
 		numbers=left,
 		numberstyle={\tiny\sffamily},
-		% frame=lines,
-		frame=single,
-		framerule=0pt,
-		mathescape=false,
 		name={Method},
 		caption={\emph{#2}},
 		label={mth:#1}
 	}
 }{}
+\newcommand\numFiletreeMethodInput[3][]{%
+	\bgroup%
+	\renewcommand*{\lstlistingname}{Method}%
+	\sbeLstSet{}%
+	\lstinputlisting[
+	numbers=left,
+	numberstyle={\tiny\sffamily},
+	name={Method},
+	caption={\emph{#2}},
+	label={mth:#1}]{#3}
+	\egroup}
 \lstnewenvironment{classdef}[2][defaultlabel]{%
 	\renewcommand{\lstlistingname}{Class}%
+	\sbeLstSet{}%
 	\lstset{
-		% frame=lines,
-		frame=single,
-		framerule=0pt,
-		mathescape=false,
 		name={Class},
 		caption={\emph{#2}},
 		label={cls:#1}

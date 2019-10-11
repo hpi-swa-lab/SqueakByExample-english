@@ -6,5 +6,7 @@ SBE.out
 SBE.pdf
 SBE.toc
 SBE.url
+*.bbl
 *.changes
 *.image
+ListingSources/

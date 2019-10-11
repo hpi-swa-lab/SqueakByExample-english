@@ -78,7 +78,7 @@ specialization. It prints the name of the class followed by the family
 name, the size and the subfamily name of the font as shown by the code
 below which prints an instance of the class.
 
-% \needlines{7}
+\needlines{7}
 \begin{method}[zork]{printOn: redefinition.}
 TTCFont>>>printOn: aStream
         aStream nextPutAll: 'TTCFont(';
@@ -86,7 +86,7 @@ TTCFont>>>printOn: aStream
 		print: self pointSize; space;
 		nextPutAll: self subfamilyName;
 		nextPut: $)
-\end{method}\ignoredollar$
+\end{method}
 
 \begin{code}{@TEST}
 TTCFont allInstances anyOne printString --> 'TTCFont(BitstreamVeraSans 6 Bold)'
@@ -123,7 +123,7 @@ Point>>>printOn: aStream
     x printOn: aStream.
     aStream nextPut: $@.
     y printOn: aStream
-\end{method}\ignoredollar$
+\end{method}
 
 \begin{method}[Self-evaluating intervals]{Self-evaluation of \ct{Interval}}
 Interval>>>printOn: aStream
@@ -565,7 +565,7 @@ The \mthind{Character}{printOn:} method is clever enough to know which of the th
 Character value: 1   --> Character value: 1
 Character value: 32 --> Character space
 Character value: 97 --> $a
-\end{code}\ignoredollar$
+\end{code}
 
 Various convenient \emph{testing} methods are built in: \mthind{Character}{isAlphaNumeric}, \mthind{Character}{isCharacter}, \mthind{Character}{isDigit}, \mthind{Character}{isLowercase}, \mthind{Character}{isVowel}, and so on.
 
@@ -581,7 +581,7 @@ Every ascii \ct{Character} is a unique instance, stored in the class variable \c
 
 \begin{code}{@TEST}
 (Character value: 97) == $a --> true
-\end{code}\ignoredollar$
+\end{code}
 
 \ct{Characters} outside the range 0 to 255 are not unique, however: 
 
@@ -623,17 +623,17 @@ Another important difference is that a \ct{String} is mutable, whereas a \ct{Sym
 
 \begin{code}{@TEST}
 'hello' at: 2 put: $u; yourself --> 'hullo'
-\end{code}\ignoredollar$
+\end{code}
 
 \begin{code}{NB: CANNOT TEST}
 #hello at: 2 put: $u --> error!
-\end{code}\ignoredollar$
+\end{code}
 
 It is easy to forget that since strings are collections, they understand the same messages that other collections do:
 
 \begin{code}{@TEST}
 #hello indexOf: $o --> 5
-\end{code}\ignoredollar$
+\end{code}
 
 Although \ct{String} does not inherit from \clsind{Magnitude}, it does support the usual \protind{comparing} methods, \ct{<}, \ct{=} and so on.  In addition, \cmind{String}{match:} is useful for some basic glob-style pattern-matching:
 

@@ -169,17 +169,9 @@ Select it, and replace it by the text of \mthref{scbecellinitialize}.
 \index{system browser!defining a method}
 
 \needlines{10}
-\begin{numMethod}[scbecellinitialize]{Initializing instances of \ct{SBECell}}
-initialize
-   super initialize.
-   self label: ''.
-   self borderWidth: 2.
-   bounds := 0@0 corner: 16@16.
-   offColor := Color paleYellow.
-   onColor := Color paleBlue darker.
-   self useSquareCorners.
-   self turnOff
-\end{numMethod}
+\numFiletreeMethodInput[scbecellinitialize]%
+{Initializing instances of \ct{SBECell}}%
+{ListingSources/SBE-Quinto.package/SBECell.class/instance/initialize.st}	
 \index{initialization}
 
 \noindent
@@ -207,17 +199,7 @@ Sending \ct{self label: ''}, for example, sets the label of this object to the e
 
 The expression \ct{0@0 corner: 16@16} probably needs some explanation. 
 \lct{0@0} represents a \clsind{Point} object with $x$ and $y$ coordinates both set to 0.
-In fact, \ct{0@0} sends the message \ct{@}
-% Yuck... the following should be \mthind{Number}{@} 
-%%% THIS IS BROKEN -- don't do it! (on)
-%\def\atsign{\textsf{@}}%
-%{\makeatletter
-%	\protected@write\@indexfile{}%
-%    {\string\indexentry{\string\atsign|see{Number, \string\atsign}}{\thepage}}%
-%	\protected@write\@indexfile{}%
-%    {\string\indexentry{Number!\string\atsign|hyperpage}{\thepage}}%
-%	\makeatother}
-to the number \ct{0} with argument \ct{0}.
+In fact, \ct{0@0} sends the message \ct{@} to the \clsind{Number} object \ct{0} with argument \ct{0}.
 The effect will be that the number \ct{0} will ask the \ct{Point} class to create a new instance with coordinates (0,0).
 Now we send this newly created point the message \ct{corner: 16@16}, which causes it to create a \clsind{Rectangle} with corners \ct{0@0} and \ct{16@16}.
 This newly created rectangle will be assigned to the \ct{bounds} variable, inherited from the superclass.
@@ -289,17 +271,10 @@ Now let's define an \mthind{SBEGame}{initialize} method for \ct{SBEGame}.
 
 \dothis{Type the following into the browser as a method for \ct{SBEGame} and try to \menu{accept} it:}
 
-\begin{numMethod}[sbegameinitialize]{Initializing the game}
-initialize
-   | sampleCell width height n |
-   super initialize.
-   n := self cellsPerSide.
-   sampleCell := SBECell new.
-   width := sampleCell width.
-   height := sampleCell height.
-   self bounds: (5@5 extent: ((width*n) @(height*n)) + (2 * self borderWidth)).
-   cells := Matrix new: n tabulate: [ :i :j | self newCellAt: i at: j ].
-\end{numMethod}
+\needlines{9}
+\numFiletreeMethodInput[sbegameinitialize]%
+{Initializing the game}%
+{ListingSources/SBE-Quinto.package/SBEGame.class/instance/initialize.st}	
 
 %\sd{it would be nicer if we would not have to create an instance of SBECell for nothing}
 %\on{yes}
@@ -410,30 +385,27 @@ From now on, when we show a method in this book, we will write the name of the m
 
 Now let's define the other two methods that are used by the \ct{SBEGame>>>initialize} method. Both of them can go in the \prot{initialization} protocol.
 
-\begin{method}[sbegamecellsperside]{A constant method.}
-SBEGame>>>cellsPerSide
-   "The number of cells along each side of the game"
-   ^ 10
-\end{method}
+\numFiletreeMethodInput[sbegamecellsperside]%
+{A constant method.}%
+{ListingSources/SBE-Quinto.package/SBEGame.class/instance/cellsPerSide.st}	
 \cmindex{SBEGame}{cellsPerSide}
 \index{constant methods}
 
 This method could hardly be simpler: it answers the constant 10.  One advantage of representing constants as methods is that if the program evolves so that the constant then depends on some other features, the method can be changed to calculate this value.
 
-\needlines{10}
+\needlines{10}	
 \begin{method}[newCellAt:at:]{An initialization helper method}
-SBEGame>>>newCellAt: i at: j
-   "Create a cell for position (i,j) and add it to my on-screen
-   representation at the appropriate screen position.  Answer the new cell"
-   | c origin |
-   c := SBECell new.
-   origin := self innerBounds origin.
-   self addMorph: c.
-   c position: ((i - 1) * c width) @ ((j - 1) * c height) + origin.
-   c mouseAction: [self toggleNeighboursOfCellAt: i at: j].
+SBEGame>>>newCellAt: i at: j 
+	"Create a cell for position (i,j) and add it to my on-screen
+	representation at the appropriate screen position.  Answer the new cell"
+	| cell origin |
+	cell := SBECell new.
+	origin := self innerBounds origin.
+	self addMorph: cell.
+	cell position: ((i - 1) * cell width) @ ((j - 1) * cell height) + origin.
+	cell mouseAction: [self toggleNeighboursOfCellAt: i at: j].
 \end{method}
 \cmindex{SBEGame}{newCellAt:at:}
-%   ^ c      "omit this final line to create a bug"
 
 \dothis{Add the methods \ct{SBEGame>>>cellsPerSide} and \ct{SBEGame>>>newCellAt:at:}.}
 Confirm the spelling of the new selectors \ct{toggleNeighboursOfCellAt:at:} and \ct{mouseAction:}.
@@ -444,13 +416,9 @@ The last line defines the new cell's \ct{mouseAction} to be the \emph{block}
  In effect, this defines the callback behaviour to perform when the mouse is clicked.
 The corresponding method also needs to be defined.
 
-\begin{method}[toggleNeighboursOfCellAt:at:]{The callback method}
-SBEGame>>>toggleNeighboursOfCellAt: i at: j
-   (i > 1) ifTrue: [ (cells at: i - 1 at: j ) toggleState].
-   (i < self cellsPerSide) ifTrue: [ (cells at: i + 1 at: j) toggleState].
-   (j > 1) ifTrue: [ (cells at: i  at: j - 1) toggleState].
-   (j < self cellsPerSide) ifTrue: [ (cells at: i at: j + 1) toggleState].
-\end{method}
+\numFiletreeMethodInput[toggleNeighboursOfCellAt:at:]%
+{The callback method.}%
+{ListingSources/SBE-Quinto.package/SBEGame.class/instance/toggleNeighboursOfCellAt.at..st}
 \cmindex{SBEGame}{toggleNeighboursOfCellAt:at:}
 
 \Mthref{toggleNeighboursOfCellAt:at:} toggles the state of the four cells to the north, south, west and east of cell (\ct{i}, \ct{j}).  The only complication is that the board is finite, so we have to make sure that a neighboring cell exists before we toggle its state.
@@ -467,10 +435,9 @@ To move the method, you can simply click on its name and drag it to the newly-cr
 \end{figure}
 
 To complete the Quinto game, we need to define two more methods in class \ct{SBECell} to handle mouse events.
-\begin{method}[mouseAction:]{A typical setter method}
-SBECell>>>mouseAction: aBlock
-   ^ mouseAction := aBlock
-\end{method}
+\numFiletreeMethodInput[mouseAction:]%
+{A typical setter method.}%
+{ListingSources/SBE-Quinto.package/SBECell.class/instance/mouseAction..st}
 \cmindex{SBECell}{mouseAction:}
 
 \Mthref{mouseAction:} does nothing more than set the cell's \ct{mouseAction} variable to the argument, and then answers the new value.
@@ -489,10 +456,9 @@ In Smalltalk, \emph{all} instance variables are private to the object that owns 
 
 Finally, we need to define a method \ct{mouseUp:}; this will be called automatically by the GUI framework if the mouse button is released while the mouse is over this cell on the screen.
 
-\begin{method}[sbecellmouseup]{An event handler}
-SBECell>>>mouseUp: anEvent
-   mouseAction value
-\end{method}
+\numFiletreeMethodInput[sbecellmouseup]%
+{An event handler.}%
+{ListingSources/SBE-Quinto.package/SBECell.class/instance/mouseUp..st}
 \cmindex{SBECell}{mouseUp:}
 
 \dothis{Add the method \ct{SBECell>>>mouseUp:} and then \menu{categorize all uncategorized} methods.}
@@ -564,19 +530,8 @@ Add the expression ``\ct{^ c}'' to the end of the method \ct{SBEGame>>>newCellAt
 % It should now look as shown in \mthref{newCellAt:at:nobug}.}
 (See \mthref{newCellAt:at:nobug}.)}
 
-% \needlines{6}
-\begin{method}[newCellAt:at:nobug]{Fixing the bug.}
-SBEGame>>>newCellAt: i at: j
-   "Create a cell for position (i,j) and add it to my on-screen
-   representation at the appropriate screen position.  Answer the new cell"
-   | c origin |
-   c := SBECell new.
-   origin := self innerBounds origin.
-   self addMorph: c.
-   c position: ((i - 1) * c width) @ ((j - 1) * c height) + origin.
-   c mouseAction: [self toggleNeighboursOfCellAt: i at: j].
-   ^ c
-\end{method}
+\needlines{10}
+\numFiletreeMethodInput[newCellAt:at:nobug]{Fixing the bug.}{ListingSources/SBE-Quinto.package/SBEGame.class/instance/newCellAt.at..st}
 \cmindex{SBEGame}{newCellAt:at:}
 
 \noindent

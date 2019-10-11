@@ -20,7 +20,7 @@ all : book
 # NB: be sure to use texlive and to set the TEXINPUTS variable accordingly
 # See README.txt
 
-book : clean examples
+book : clean examples listings
 	time ${PDFLATEX} ${BOOK}
 	time ${BIBTEX} ${BOOK}
 	time ${PDFLATEX} ${BOOK}
@@ -50,6 +50,11 @@ etc :
 
 examples :
 	./examples.rb $C > $@.txt
+
+listings :
+	rm -r ListingSources ||:
+	cp -fR SmalltalkSources ListingSources
+	./annotate-listings.rb
 
 fun :
 	time ./examples.rb $C > $@1.txt

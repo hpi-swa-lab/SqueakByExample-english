@@ -1,10 +1,11 @@
 initialization
 initialize
-	| sampleCell width height n |
+	| height overallBorderWidth sampleCell width |
 	super initialize.
-	n := self cellsPerSide..
 	sampleCell := SBECell new.
 	width := sampleCell width.
 	height := sampleCell height.
-	bounds := (5@5 extent: ((width*n) @(height*n)) + (2 * self borderWidth)).
-	cells := Matrix new: n tabulate: [ :i :j | self newCellAt: i at: j].
+	overallBorderWidth := 2 * self borderWidth.
+	self position: 5@5.
+	self extent: (width * self cellsPerSide)@(height * self cellsPerSide) + overallBorderWidth.
+	cells := Matrix new: self cellsPerSide tabulate: [:i :j | self newCellAt: i at: j].
