@@ -181,6 +181,13 @@ The world menu provides you a simple means to access many of the tools that \sq 
 You will see a list of several of the core tools in \sq, including the system browser (one of many available class browsers) and the workspace.
 We will encounter most of them in the coming chapters.
 
+%%{SBESqueakPicture writeTo: './figures/OpenMenu.png' frame: #morphs using: [:helper | | worldMenu |
+%%  worldMenu := helper click: helper world.
+%%  "helper click: (helper menuItemMorphLabeled: 'open...' in: worldMenu).
+%%  helper hand releaseMouseFocus.
+%%  helper closeBalloons."
+%%]}
+
 \begin{figure}[htb]
 \ifluluelse
 	%{\centerline {\includegraphics[width=0.3\textwidth]{OpenMenu}}}
@@ -282,10 +289,22 @@ Workspaces are often used to hold documentation about a captured image, as is th
 Transcript show: 'hello world'; cr.
 \end{code}
 
-%\begin{figure}[htb]
-%\centerline {\includegraphics[width=0.6\textwidth]{HelloWorld}}
-%\caption{Overlapping windows. The workspace is active.\label{fig:helloworld}}
-%\end{figure}
+%%{SBESqueakPicture writeTo: './figures/HelloWorld.png' frame: #morphs using: [:helper | | workspace |
+%%  ToolBuilder open: Transcript.
+%%  helper world firstSubmorph bounds: (0 @ 120 extent: 450 @ 230).
+%%  
+%%  workspace := ToolBuilder open: Workspace new.
+%%  workspace position: 200 @ 100.
+%%  helper type: 'Transcript show: ''hello world''' into: workspace.
+%%  
+%%  helper hand releaseMouseFocus.
+%%  helper closeBalloons.
+%%]}
+
+\begin{figure}[htb]
+\centerline {\includegraphics[width=0.6\textwidth]{HelloWorld}}
+\caption{Overlapping windows. The workspace is active.\label{fig:helloworld}}
+\end{figure}
 
 Try double-clicking in the workspace at various points in the text you have just typed.
 Notice how an entire word, entire string, or the whole text is selected, depending on where you click.
@@ -305,7 +324,7 @@ Do it again.
 %%  workspace := ToolBuilder open: Workspace new.
 %%  workspace position: 200 @ 100.
 %%  
-%%  helper type: 'Transcript show; ''hello world''' into: workspace.
+%%  helper type: 'Transcript show: ''hello world''' into: workspace.
 %%  helper keyStroke: workspace key: $a modifiers: #(cmd).
 %%  
 %%  helper click: workspace at: workspace topCenter + (0 @ 30) buttons: #(right).
@@ -561,6 +580,7 @@ You will be presented with a list of classes whose names contain ``time'' (see \
 %%    runModal: [helper keyStroke: browser submorphs sixth key: $f modifiers: #(cmd)]
 %%    then: [helper dialogWindow position: 60 asPoint]
 %%]}
+
 \begin{figure}[hbt]
 \centerline{
 \ifluluelse{
