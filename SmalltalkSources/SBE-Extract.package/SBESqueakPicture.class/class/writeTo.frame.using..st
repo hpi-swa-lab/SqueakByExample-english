@@ -1,33 +1,23 @@
 as yet unclassified
 writeTo: aPathString frame: aFrameSpecifier using: aBlock
 
-	| picture wrapper priorHand priorWorld error |
-	wrapper := SBEWorldHelper new worldSize: 1000 @ 1000; setUp.
-	wrapper world color: Color transparent.
+	| helper priorHand priorWorld process |
+	helper := SBEWorldHelper new worldSize: 1000 @ 1000; frameSpecifier: aFrameSpecifier; setUp.
+	helper world color: Color transparent.
 	
 	priorWorld := ActiveWorld.
 	priorHand := ActiveHand.
-	error := nil.
-	ActiveWorld := wrapper world.
-	ActiveHand := wrapper hand.
-	[
-		[
-			aBlock value: wrapper.
-			
-			aFrameSpecifier isBlock ifTrue: [
-				picture := wrapper world imageFormForRectangle: (aFrameSpecifier value: wrapper morphsArea)].
-			aFrameSpecifier = #morphs ifTrue: [
-				picture := wrapper world imageFormForRectangle: wrapper morphsArea].
-			aFrameSpecifier isRectangle ifTrue: [
-				picture := wrapper world imageFormForRectangle: aFrameSpecifier]
-		] on: Error do: [:err | error := err].
+	ActiveWorld := helper world.
+	ActiveHand := helper hand.
 	
-	] ensure: [
-		ActiveWorld := priorWorld.
-		ActiveHand := priorHand].
+	process := [
+		[Processor yield. helper takeScreenshot] forkAt: 41.
+		aBlock cull: helper
+	] forkAt: 41.
 	
-	error ifNotNil: #signal.
+	ActiveWorld := priorWorld.
+	ActiveHand := priorHand.
 	
-	picture ifNil: [self error: 'Invalid frame specified: ', aFrameSpecifier printString].
-	picture writePNGfileNamed: (self currentDirectory resolve: aPathString) fullName.
-	wrapper tearDown
+	helper picture ifNil: [^ self].
+	helper picture writePNGfileNamed: (self currentDirectory resolve: aPathString) fullName.
+	helper tearDown

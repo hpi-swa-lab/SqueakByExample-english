@@ -108,6 +108,22 @@ Once \sq is running, you should see a single large window, possibly containing s
 A good place to get started is the \ind{world menu} shown in \figref{threeButtons:red}. 
 
 \dothis{Click with the mouse on the background of the main window to show the world menu, then choose \menu{open \ldots \go workspace} to create a new workspace.}
+%%{SBESqueakPicture writeTo: './figures/worldMenu.png' frame: #morphs using: [:helper |
+%%  helper click: helper world at: helper world topCenter + (0 @ 30) buttons: #(left).
+%%  helper hand releaseMouseFocus.
+%%  helper mouseEnter: (helper menuItemMorphLabeled: 'open...' in: helper world).
+%%  helper closeBalloons.
+%%]}
+
+%%{SBESqueakPicture writeTo: './figures/yellowButtonMenuOnWorkspace.png' frame: #morphs using: [:helper | | workspace |
+%%  workspace := ToolBuilder open: Workspace new.
+%%  helper type: 'Time now ' into: workspace.
+%%
+%%  helper click: workspace at: workspace topCenter + (0 @ 30) buttons: #(right).
+%%  helper hand releaseMouseFocus.
+%%  helper mouseEnter: (helper menuItemMorphLabeled: 'print it (p)' in: helper world).
+%%  helper closeBalloons.
+%%]}
 
 \begin{figure}[tbh]
 	\centering
@@ -526,7 +542,7 @@ There are several ways to find a class in \sq.  The first, as we have just seen 
 \index{class!finding}
 
 A second way is to send the \ct{browse} message to the class, asking it to open a browser on itself.  Suppose we want to browse the class \clsind{Boolean}.
-
+ 
 \dothis{Type \ct{Boolean browse} into a workspace and \menu{do it}.}
 A browser will open on the Boolean class (\figref{browseBoolean}).
 There is also a \ind{keyboard shortcut} \short{b} (browse) that you can use in any tool where you find a class name;
@@ -562,6 +578,16 @@ The hierarchy browser is like the system browser, except that the list of classe
 \noindent
 This will open a hierarchy browser showing the superclasses and subclasses of \clsind{Boolean}.
 % (\figref{booleanhierarchybrowser}).
+
+%%{SBESqueakPicture writeTo: './figures/BooleanHierarchyBrowser.png' frame: [:morphsRect | morphsRect] using: [:helper | | browser browserMorph |
+%%  browser := HierarchyBrowser new.
+%%  browser setClass: Boolean.
+%%  browser buildDefaultBrowserWith: ToolBuilder default.
+%%  b_morph := ToolBuilder open: browser.
+%%  b_morph submorphs ninth repositionBy: (0@60).
+%%  helper closeBalloons.
+%%]}
+
 Navigate to the immediate superclass and subclasses of \ct{Boolean}.
 
 Often, the fastest way to find a class is to search for it by name.  For example, suppose that you are looking for some unknown class that represents dates and times.
