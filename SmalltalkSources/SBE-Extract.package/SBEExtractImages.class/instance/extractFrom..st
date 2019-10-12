@@ -1,5 +1,5 @@
 as yet unclassified
-extractFrom: aFSReference to: anOutputFileDirectory
+extractFrom: aFSReference
 	" note: not thread-safe, as we override globals in SBESqueakPicture "
 
 	| texFiles commands |
