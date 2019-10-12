@@ -298,7 +298,7 @@ Do it again.
 (The \menu{(d)} in the menu item \menu{do it (d)} tells you that the keyboard shortcut to \emph{do it} is \short{d}. More on this in the next section!)
 
 %%{SBESqueakPicture writeTo: './figures/Doit.png' frame: [:morphsRect | morphsRect withBottom: morphsRect bottom - 150] using: [:helper | | workspace |
-%%  Transcript open.
+%%  ToolBuilder open: Transcript.
 %%  Transcript show: 'hello world'.
 %%  helper world firstSubmorph bounds: (0 @ 120 extent: 450 @ 230).
 %%  
@@ -463,7 +463,7 @@ As we shall see, there are several interesting browsers available for \sq, but t
 
 \dothis{Open a browser by selecting \menu{World \go open \ldots \go class browser}, or by dragging a Browser from the \toolsflapind.}
 
-%%{SBESqueakPicture writeTo: './figures/SqueakMap.png' frame: #morphs using: [:helper |
+%%{SBESqueakPicture writeTo: './figures/ClassBrowser2.png' frame: #morphs using: [:helper |
 %%  Browser fullOnClass: Object selector: #printString.
 %%  "SBELabelRectangle new text: 'Classes'; center:" 
 %%]}
@@ -554,10 +554,13 @@ You will be presented with a list of classes whose names contain ``time'' (see \
 \index{keyboard shortcut!browse it}
 
 %%{SBESqueakPicture writeTo: './figures/FindIt.png' frame: #morphs using: [:helper | | browser |
-%%  browser := ToolBuilder open: Browser new
-%%  helper keyStroke: browser key: $f modifiers: #(cmd).
+%%  browser := ToolBuilder open: Browser.
+%%  browser position: 0 @ 0.
+%%  
+%%  helper
+%%    runModal: [helper keyStroke: browser submorphs sixth key: $f modifiers: #(cmd)]
+%%    then: [helper dialogWindow position: 60 asPoint]
 %%]}
-
 \begin{figure}[hbt]
 \centerline{
 \ifluluelse{
