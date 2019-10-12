@@ -39,7 +39,7 @@ There will be plenty of opportunities to try things out, so it would be a good i
 
 We will use this icon: \dothisicon{} to mark places in the text where you should try something out in \sq.
 In particular, you will fire up \sq, learn about the different ways of interacting with the system, and discover some of the basic tools.
-You will also learn how to define a new method, create an object and send it messages.
+You will also learn how to define a new method, create an object, and send it messages.
 
 %=================================================================
 \section{Getting started}
@@ -64,24 +64,20 @@ Actually, we will use a slightly different image in this book.
 \end{enumerate}
 
 \dothis{Download and install \sq on your computer.
-We recommend that you use the image provided on the Squeak by Example web page.\footnote{Visit \url{http://SqueakByExample.org} and look for ``Download Squeak'' in the sidebar.}}
+We recommend that you use the standard image provided on the \sq web page.}
 \index{download}
 \label{sec:sbeImage}
 
-%The version of \sq that we have used for developing the examples in this book is derived from \emphind{Squeak-dev}.\footnote{\url{http://damien.cassou.free.fr/squeak-dev.html}}
-%\label{sec:squeakDev}
-%We chose this image because it has a wider variety of programming tools pre-installed, and because additional packages can be loaded with a single click.  
 Most of the introductory material in this book will work with any version, so if you already have one installed, you may as well continue to use it.
-However, if you notice differences between the appearance or behaviour of your system and what is described here, do not be surprised. 
-On the other hand, if you are about to download \sq for the first time, you may as well grab the \emph{Squeak by Example} image.
+However, if you notice differences between the appearance or behavior of your system and what is described here, do not be surprised.
 
-As you work in \sq, the image and changes files are modified, so you need to make sure that they are writable.
+As you work in \sq, the \emphind{image} and \emphind{changes} files are modified, so you need to make sure that they are writable.
 Always keep these two files together.
 Never edit them directly with a text editor, as \sq uses them to store the objects you work with and to log the changes you make to the source code.
 It is a good idea to keep a backup copy of the downloaded image and changes files so you can always start from a fresh image and reload your code.
 
-The \emphind{sources} file and the VM can be read-only\,---\,they can be shared between different users.
-All of these files can be placed in the same directory, but it is also possible to put the Virtual Machine and sources file in separate directory where everyone has access to them.
+The \emphind{sources} file and the \emphind{VM} can be read-only\,---\,they can be shared between different users.
+All of these files can be placed in the same directory, but it is also possible to put the virtual machine and sources file in a separate directory where everyone has access to them.
 Do whatever works best for your style of working and your operating system.
 
 \sd{it would be really nice to have a setup and startup section on PC, Mac and Linux}
@@ -97,10 +93,9 @@ Do whatever works best for your style of working and your operating system.
 \index{launching Squeak}
 \paragraph{Launching.} To start \sq, do whatever your operating system expects: drag the \emph{.}\emphind{image} file onto the icon of the virtual machine, or double-click the \emph{.image} file, or  at the command line type the name of the virtual machine followed by the path to the \emph{.image} file. (When you have multiple VMs installed on your machine the operating system may not automatically pick the right one; in this case it is safer to drag and drop the image onto the virtual machine, or to use the command line.)
 
-Once \sq is running, you should see a single large window, possibly containing some open workspace windows (see \figref{startup}), and it's not obvious how to proceed!  You will notice that there is no menu bar, or at least not a useful one.  Instead,  \sq makes heavy use of context-dependent pop-up menus.
+Once \sq is running, you should see a single large window, possibly containing some open workspace windows (see \figref{startup}). You will also notice that there is a small menu bar at the top. Beyond this one global menu, \sq makes heavy use of context-dependent pop-up menus.
 
-
-\dothis{Start \sq. You can dismiss any open workspaces by clicking on the {\sf X} in the top left corner of the workspace window.  You can collapse the windows (so that they can be expanded again later) by clicking on the \raisebox{-0.2ex}{{\Large $\circ$}} in the top-right corner.}
+\dothis{Start \sq. You can dismiss any open workspaces by clicking on the {\sf X} in the top left corner of the workspace window.  You can collapse the windows (so that they can be expanded again later) by clicking on the \raisebox{-0.2ex}{{\Large $-$}} in the top-right corner.}
 
 %-----------------------------------------------------------------
 \paragraph{First Interaction.}
@@ -135,7 +130,7 @@ A good place to get started is the \ind{world menu} shown in \figref{threeButton
 \label{fig:colouredMouse}
 \end{wrapfigure}
 
-\sq was originally designed for a computer with a \ind{three button mouse}.  If your mouse has fewer than three buttons, you will have to press extra keys while clicking the mouse to simulate the extra buttons.  A two-button mouse works quite well with \sq, but if you have only a single-button mouse, you should seriously consider buying a two-button mouse with a clickable scroll wheel: it will make working with \sq much more pleasant.
+\sq was originally designed for a computer with a \ind{three button mouse}.  If your mouse has fewer than three buttons, you will have to press extra keys while clicking the mouse to simulate the extra buttons.
 
 \sq avoids terms like ``left mouse click'' because different computers, mice, keyboards and personal configurations mean that different users will need to press different physical buttons to achieve the same effect.  Instead, the mouse buttons are labeled with colors.  The mouse button that you pressed to get the ``World'' menu is called the \emphind{red button}; it is most often used for selecting items in lists, selecting text, and selecting menu items.
 When you start using \sq, it can be surprisingly helpful to actually label your mouse, as shown in \figref{colouredMouse}.\footnote{We will avoid the term ``red-click'' and use ``click'' instead, since this is the default.}
@@ -152,13 +147,13 @@ If you let the mouse linger over a handle, a help balloon will explain its funct
 \dothis{Click the blue button on the workspace.
 Grab the \raisebox{-0.4ex}{\includegraphics[width=1em]{morphicRotate}} handle near the bottom left corner and drag it to rotate the workspace.}
 
-We recommend that right-handed people configure their mouse to put the \ind{red button} on the left side of their mouse, the \ind{yellow button} on the right, and use a clickable scroll wheel, if one is available, for the blue button.  If you don't have a clickable scroll wheel, then you can get the Morphic halo by holding down the \ct{alt} or \ct{option} key while clicking the \ind{red button}.  If you are using a Macintosh without a second mouse button, you can simulate one by holding down the \clover{} key while clicking the mouse.  However, if you are going to be using \sq at all often, we recommend investing in a mouse with at least two buttons.
+We recommend that right-handed people configure their mouse to put the \ind{red button} on the left side of their mouse, the \ind{yellow button} on the right, and use a clickable scroll wheel, if one is available, for the blue button.  If you don't have a clickable scroll wheel, then you can get the Morphic halo by holding down the \ct{alt} or \ct{option} key while clicking the \ind{red button}.  If you use a Mac without a second mouse button, you can simulate one by holding down the \clover{} key while clicking the mouse.
 
 You can configure your mouse to work the way you want by using the preferences of your operating system and mouse driver.
 \sq has some preferences for customising the mouse and the meta keys on your keyboard. You can find the \ind{preference browser} in the \menu{open} item of the \menu{World} menu. 
-In the preference browser, the \menu{general} category contains an option \menu{swapMouseButtons} that switches the yellow and blue functions (see \figref{prefBrowser}).  The \menu{keyboard} category has options to duplicate the various command keys.   
+In the preference browser, the \menu{general} category contains an option \menu{Swap mouse buttons} that switches the yellow and blue functions (see \figref{prefBrowser}).  The \menu{keyboard} category has options to duplicate the various command keys.   
 
-\dothis{Open the preference browser and find the \menu{swapMouseButtons} option using the search box.}
+\dothis{Open the preference browser and find the \menu{Swap mouse buttons} option using the search box.}
 
 \begin{figure}[htb]
 \ifluluelse
@@ -193,9 +188,9 @@ We will encounter most of them in the coming chapters.
 \section{Saving, quitting and restarting a \sq session}
 
 \dothis{Bring up the world menu.
-Now select \menu{new morph \ldots} and navigate to \menu{from alphabetical list{\go}A-C{\go}BlobMorph}.
-You now have a blob ``in hand''.
-Put the blob down (by clicking) somewhere. It will start to move.}
+Now select \menu{new morph \ldots} and navigate to \menu{from alphabetical list{\go}A-C{\go}BouncingAtomsMorph}.
+You now have a morph full of bouncing atoms ``in hand''.
+Put the atoms morph down (by clicking) somewhere.}
 \index{Morphic}
 
 \begin{figure}[htb]
@@ -218,12 +213,12 @@ Put the blob down (by clicking) somewhere. It will start to move.}
 Now click on the \menu{Accept(s)} button.
 Now select \menu{World\go{}save and quit}.}
 
-Now if you go to the location where the original image and changes files were, you will find two new files called ``SBE.\ind{image}'' and ``SBE.\ind{changes}'' that represent the working state of the \sq image at the moment before you told \sq to \menu{save and quit}.
+Now if you go to the location where the original image and changes files were, you will find two new files called ``SBE.\ind{image}'' and ``SBE.\ind{changes}''\footnote{} that represent the working state of the \sq image at the moment before you told \sq to \menu{save and quit}.
 If you wish, you can move these two files anywhere that you like on your disk, but if you do so you may (depending on your operating system) need to also move, copy or link to the virtual machine and the \emph{.source} file.
 
 \dothis{Start up \sq from the newly created ``SBE.image'' file.}
 
-Now you should find yourself in precisely the state you were when you quit \sq. The blob is there again and it continues to move from where it was when you left it.
+Now you should find yourself in precisely the state you were when you quit \sq. The bouncing atoms morph is there again and the atoms continue to move from where they where when you left it.
 
 When you start \sq for the first time, the \sq \ind{virtual machine} loads the image file that you provide. This file contains a snapshot of a large number of objects, including a vast amount of pre-existing code and a large number of programming tools (all of which are objects). As you work with \sq, you will send messages to these objects, you will create new objects, and some of these objects will die and their memory will be reclaimed (\ie garbage-collected).
 
@@ -238,9 +233,9 @@ More about this later!
 The image that you have been working with is a descendant of the original \st-80 image created in the late 1970s.
 Some of these objects have been around for decades!
 
-You might think that the image is the key mechanism for storing and managing software projects, but you would be wrong.
-As we shall see very soon, there are much better tools for managing code and sharing software developed by teams.
-Images are very useful, but you should learn to be very cavalier about creating and throwing away images, since tools like Monticello offer much better ways to manage versions and share code amongst developers.
+The image can be used as a mechanism for storing and managing software projects you are working on.
+However, as we shall see later on, there are also tools for managing code and sharing software developed by teams.
+For now we will continue by cleaning up the image before we take a look at tools \sq provides.
 
 \dothis{Blue-click on the Blob.}
 You will see a collection of colored dots that are collectively called the blob's morphic \subind{Morphic}{halo}.
