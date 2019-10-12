@@ -506,7 +506,7 @@ There are several ways to find a class in \sq.  The first, as we have just seen 
 \index{class!finding}
 
 A second way is to send the \ct{browse} message to the class, asking it to open a browser on itself.  Suppose we want to browse the class \clsind{Boolean}.
- 
+
 \dothis{Type \ct{Boolean browse} into a workspace and \menu{do it}.}
 A browser will open on the Boolean class (\figref{browseBoolean}).
 There is also a \ind{keyboard shortcut} \short{b} (browse) that you can use in any tool where you find a class name;
@@ -542,16 +542,6 @@ The hierarchy browser is like the system browser, except that the list of classe
 \noindent
 This will open a hierarchy browser showing the superclasses and subclasses of \clsind{Boolean}.
 % (\figref{booleanhierarchybrowser}).
-
-%%{SBESqueakPicture writeTo: './figures/BooleanHierarchyBrowser.png' frame: [:morphsRect | morphsRect] using: [:helper | | browser browserMorph |
-%%  browser := HierarchyBrowser new.
-%%  browser setClass: Boolean.
-%%  browser buildDefaultBrowserWith: ToolBuilder default.
-%%  b_morph := ToolBuilder open: browser.
-%%  b_morph submorphs ninth repositionBy: (0@60).
-%%  helper closeBalloons.
-%%]}
-
 Navigate to the immediate superclass and subclasses of \ct{Boolean}.
 
 Often, the fastest way to find a class is to search for it by name.  For example, suppose that you are looking for some unknown class that represents dates and times.
