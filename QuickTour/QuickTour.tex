@@ -410,44 +410,6 @@ In this case the object we are looking at is the \ct{Object} class.
 We can see directly all the information stored in this class, and we can easily navigate to all its parts, e.g. its super class which is stored in \ct{superclass}.
 
 %=================================================================
-\section{\sqmap}
-\index{SqueakMap}
-
-\sqmap is a web-based catalog of ``packages''\,---\,applications and libraries\,---\,that you can download to your image.
-The \ind{package}{}s are hosted in many different places in the world and maintained by many different people. Some of them may only work with a specific version of \sq.
-\lr{Maybe mention Package Universes (SqueakMap is not maintained anymore)}
-
-\dothis{Open \menu{World \go open... \go \sqmap package loader}.}
-You will need an Internet connection for this to work.  After some time, the \sqmap loader window should appear (\figref{sokoban}).
-On the left side is a very long list of packages.
-The field in the top-left corner is a search pane that can be used to find what you want in the list.
-Type ``\ind{Sokoban}'' in the search pane and hit the return key.
-Clicking on the right-pointing triangle by the name of a package reveals a list of available versions. When a package or a version is selected, information about it appears in the right-hand pane.
-Navigate to the latest version of \ct{Sokoban}.
-With the mouse in the list pane, use the yellow-button menu to \menu{install} the selected package.
-(If \sq complains that it is not sure this version of the game will work in your image, just say ``yes'' and go ahead.)
-Notice that once a package has been installed, it is marked with an asterisk in the list in the \sqmap package loader. 
-
-% TODO try selecting Sokoban package and first figure out how to get SM to actually search
-%%{SBESqueakPicture writeTo: './figures/SqueakMap.png' frame: #morphs using: [:helper |
-%%  SMLoaderPlus open.
-%%  helper type: 'Sokoban', String cr into: (helper morphWithBalloonText: 'Search packages...' in: helper world)
-%%]}
-\begin{figure}[htb]
-\ifluluelse
-	{\centerline {\includegraphics[width=\textwidth]{SqueakMap}}}
-	{\centerline {\includegraphics[scale=0.7]{SqueakMap}}}
-\caption{Using \sqmap to install the Sokoban game.\label{fig:sokoban}}
-\end{figure}
-
-\dothis{After installing this package, start up \ct{Sokoban} by evaluating \ct{SokobanMorph random openInWorld} in a workspace.}
-
-% You can also try the \ct{NsGame}; execute it using \ct{NsGame new openInWorld}.
-% ON: I could not find NsGame anywhere!
-
-The bottom-left pane in the \sqmap package loader provides various ways to filter the list of packages.   You can choose to see only those packages that are compatible with a particular version of \sq, or only games, and so on.
-
-%=================================================================
 \section{The System Browser}
 
 The \ind{system browser} is one of the key tools used for programming.
@@ -746,7 +708,6 @@ This chapter has introduced you to the \sq environment and shown you how to use 
   \item You use the \ind{red button} on the \sq background to bring up the \emph{World menu} and launch various tools. You can also launch tools from the \toolsflapind at the right of the \sq screen.
   \item A \emph{workspace} is a tool for writing and evaluating snippets of code. You can also use it to store arbitrary text.
   \item You can use \ind{keyboard shortcuts} on text in the workspace, or any other tool, to evaluate code. The most important of these are \menu{do it} (\short{d}), \menu{print it} (\short{p}), \menu{inspect it} (\short{i}), \menu{explore it} (\short{I}) and \menu{browse it} (\short{b}).
-  \item \sqmap is a tool for loading useful packages from the Internet.
   \item The \emph{system browser} is the main tool for browsing \sq code, and for developing new code.
   \item The \emph{test runner} is a tool for running unit tests. It also supports Test Driven Development.
 \end{itemize}
