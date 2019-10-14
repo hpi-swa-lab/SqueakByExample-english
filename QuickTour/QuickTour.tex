@@ -176,6 +176,12 @@ In the preference browser, the \menu{general} category contains an option \menu{
 
 \dothis{Open the preference browser and find the \menu{swapMouseButtons} option using the search box.}
 
+%%{SBESqueakPicture writeTo: './figures/PreferenceBrowser.png' frame: #morphs using: [:helper | | browser |
+%%  browser := PreferenceBrowser open.
+%%  browser searchPreferencesFor: 'swap'.
+%%  helper click: (helper preferenceButtonMorphLabeled: 'swapMouseButtons' in: helper world).
+%%]}
+
 \begin{figure}[htb]
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{PreferenceBrowser}}}
@@ -198,10 +204,10 @@ You will see a list of several of the core tools in \sq, including the system br
 We will encounter most of them in the coming chapters.
 
 %%{SBESqueakPicture writeTo: './figures/OpenMenu.png' frame: #morphs using: [:helper | | worldMenu |
-%%  worldMenu := helper click: helper world.
-%%  "helper click: (helper menuItemMorphLabeled: 'open...' in: worldMenu).
+%%  helper click: helper world.
+%%  (helper menuItemMorphLabeled: 'open...' in: helper world) invokeWithEvent: nil.
+%%  helper closeBalloons.
 %%  helper hand releaseMouseFocus.
-%%  helper closeBalloons."
 %%]}
 
 \begin{figure}[htb]
@@ -602,9 +608,9 @@ You will be presented with a list of classes whose names contain ``time'' (see \
 %%  browser := ToolBuilder open: Browser.
 %%  browser position: 0 @ 0.
 %%  
-%%  helper
+%%  "helper
 %%    runModal: [helper keyStroke: browser submorphs sixth key: $f modifiers: #(cmd)]
-%%    then: [helper dialogWindow position: 60 asPoint]
+%%    then: [helper dialogWindow position: 60 asPoint]"
 %%]}
 
 \begin{figure}[hbt]
