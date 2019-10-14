@@ -176,10 +176,12 @@ In the preference browser, the \menu{general} category contains an option \menu{
 
 \dothis{Open the preference browser and find the \menu{swapMouseButtons} option using the search box.}
 
-%%{SBESqueakPicture writeTo: './figures/PreferenceBrowser.png' frame: #morphs using: [:helper | | browser |
+%%{SBESqueakPicture writeTo: './figures/PreferenceBrowser.png' frame: #morphs using: [:helper | | browser searchText |
+%%  searchText := 'swap'.
 %%  browser := PreferenceBrowser open.
+%%  (browser dependents at: 2) setText: searchText.
 %%  browser searchPreferencesFor: 'swap'.
-%%  helper click: (helper preferenceButtonMorphLabeled: 'swapMouseButtons' in: helper world).
+%%  (helper preferenceButtonMorphLabeled: 'swapMouseButtons' in: helper world) highlightOn.
 %%]}
 
 \begin{figure}[htb]
@@ -753,6 +755,25 @@ If you click on that line of text, the erroneous test will run again, this time 
 The window that opens with the error message is the \st debugger (see \figref{predebugger}).
 \ab{Well, it's actually the \emph{pre-}debugger.  Does this matter?}\damien{I don't think it's important at this point.}
 We will look at the \ind{debugger} and how to use it in \charef{env}.
+
+%%{SBESqueakPicture writeTo: './figures/Predebugger.png' frame: #morphs using: [:helper |
+%%  helper restoreMethods: {String>>#shout} after: [
+%%    String removeSelector: #shout.
+%%    [StringTest new testShout] forkAt: 41.
+%%    Processor yield.
+%%    helper world doOneCycleNow.
+%%    helper takeScreenshot]
+%%]}
+
+SBESqueakPicture writeTo: '...' frame: #morphs using: [:helper | | sem |
+  helper restoreMethods: {String>>#shout} after: [
+    sem := Semaphore new.
+    [Error signal] forkAt: 41.
+    Processor yield.
+    Project current addDeferredUIMessage: [sem signal].
+    sem wait.
+    helper takeScreenshot]
+]}
 
 \begin{figure}[hbt]
 \ifluluelse
