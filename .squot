@@ -1,9 +1,9 @@
 OrderedDictionary {
-	'SmalltalkSources\/SBE-Environment.package' : #SquotCypressCodeSerializer,
-	'SmalltalkSources\/SBE-Morphic.package' : #SquotCypressCodeSerializer,
-	'SmalltalkSources\/SBE-QuickTour.package' : #SquotCypressCodeSerializer,
+	'SmalltalkSources\/SBE-Environment.package' : nil,
+	'SmalltalkSources\/SBE-Morphic.package' : nil,
+	'SmalltalkSources\/SBE-QuickTour.package' : nil,
 	'SmalltalkSources\/SBE-Quinto.package' : #SquotCypressCodeSerializer,
-	'SmalltalkSources\/SBE-Streams.package' : #SquotCypressCodeSerializer,
-	'SmalltalkSources\/SBE-Testing.package' : #SquotCypressCodeSerializer,
+	'SmalltalkSources\/SBE-Streams.package' : nil,
+	'SmalltalkSources\/SBE-Testing.package' : nil,
 	'SmalltalkSources\/SBE-Extract.package' : #SquotCypressCodeSerializer
 }
