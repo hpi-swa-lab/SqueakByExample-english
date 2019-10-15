@@ -125,6 +125,13 @@ A good place to get started is the \ind{world menu} shown in \figref{threeButton
 %%  helper closeBalloons.
 %%]}
 
+%%{SBESqueakPicture writeTo: './figures/morphicHaloOnWorkspace.png' frame: #morphs using: [:helper | | workspace |
+%%  workspace := ToolBuilder open: Workspace new.
+%%  helper type: 'Time now ' into: workspace.
+%%  helper click: workspace at: workspace center buttons: #(middle).
+%%  "screenshot does currently not include the workspace's halo, please fix"
+%%]}
+
 \begin{figure}[tbh]
 	\centering
 	\subfigure[The world menu]{\label{fig:threeButtons:red}%
@@ -165,6 +172,10 @@ Select \menu{print it}.}
 Finally, there is the \emphind{blue button}, which is used to activate the ``morphic \subind{Morphic}{halo}'', an array of handles that are used to perform operations on the on-screen objects themselves, such as rotating them or resizing them; see \figref{threeButtons:blue}. 
 If you let the mouse linger over a handle, a help balloon will explain its function.
 
+%%{SBESqueakPicture writeTo: './figures/morphicRotate.png' frame: #morphs using: [:helper | | workspace |
+%%  "could not find a message to open just the rotate icon"
+%%]}
+
 \dothis{Click the blue button on the workspace.
 Grab the \raisebox{-0.4ex}{\includegraphics[width=1em]{morphicRotate}} handle near the bottom left corner and drag it to rotate the workspace.}
 
@@ -180,7 +191,7 @@ In the preference browser, the \menu{general} category contains an option \menu{
 %%  searchText := 'swap'.
 %%  browser := PreferenceBrowser open.
 %%  (browser dependents at: 2) setText: searchText.
-%%  browser searchPreferencesFor: 'swap'.
+%%  browser searchPreferencesFor: searchText.
 %%  (helper preferenceButtonMorphLabeled: 'swapMouseButtons' in: helper world) highlightOn.
 %%]}
 
@@ -205,7 +216,7 @@ The world menu provides you a simple means to access many of the tools that \sq 
 You will see a list of several of the core tools in \sq, including the system browser (one of many available class browsers) and the workspace.
 We will encounter most of them in the coming chapters.
 
-%%{SBESqueakPicture writeTo: './figures/OpenMenu.png' frame: #morphs using: [:helper | | worldMenu |
+%%{SBESqueakPicture writeTo: './figures/OpenMenu.png' frame: #morphs using: [:helper |
 %%  helper click: helper world.
 %%  (helper menuItemMorphLabeled: 'open...' in: helper world) invokeWithEvent: nil.
 %%  helper closeBalloons.
@@ -228,6 +239,10 @@ Now select \menu{new morph \ldots} and navigate to \menu{from alphabetical list{
 You now have a blob ``in hand''.
 Put the blob down (by clicking) somewhere. It will start to move.}
 \index{Morphic}
+
+%%{SBESqueakPicture writeTo: './figures/saveAs.png' frame: #morphs using: [:helper |
+%%  "open world menu, click 'save as...', type 'SBE' into text field"
+%%]}
 
 \begin{figure}[htb]
 \begin{minipage}[b]{0.48\textwidth}
@@ -610,9 +625,23 @@ You will be presented with a list of classes whose names contain ``time'' (see \
 %%  browser := ToolBuilder open: Browser.
 %%  browser position: 0 @ 0.
 %%  
-%%  "helper
+%%  helper
 %%    runModal: [helper keyStroke: browser submorphs sixth key: $f modifiers: #(cmd)]
-%%    then: [helper dialogWindow position: 60 asPoint]"
+%%    then: [helper dialogWindow position: 60 asPoint]
+%%]}
+
+%%{SBESqueakPicture writeTo: './figures/TimeClasses.png' frame: #morphs using: [:helper | | browser |
+%%  browser := ToolBuilder open: Browser.
+%%  browser position: 0 @ 0.
+%%  
+%%  helper
+%%    runModal: [helper keyStroke: browser submorphs sixth key: $f modifiers: #(cmd)]
+%%    then: [helper dialogWindow position: 60 asPoint].
+%%  
+%%  "This should type 'time' into the dialog window's search panel: (but currently doesn't)
+%%  helper dialogWindow messageMorph contents: 'time'."
+%%  
+%%  helper closeBalloons.
 %%]}
 
 \begin{figure}[hbt]
@@ -646,6 +675,12 @@ The \emphind{method finder} can help you.
 Type ``now'' in the top left pane, and \menu{accept} it (or just press the \textsc{return} key).}
 The method finder will display a list of all the method names that contain the substring ``now''.  
 To scroll to \ct{now} itself, move the cursor to the list and type ``\ct{n}''; this trick works in all scrolling windows.  Select ``now'' and the right-hand pane shows you the three classes that define a method with this name, as shown in \figref{MethodFinder}.  Selecting any one of them will open a browser on it.
+
+%%{SBESqueakPicture writeTo: './figures/methodFinder-now.png' frame: #morphs using: [:helper | | browser |
+%%  browser := ToolBuilder open: SelectorBrowser new.
+%%  "now type 'now' into the window's 4th submorph and press enter.
+%%  then click on 'now' in the result list (window's 3rd submorph)"
+%%]}
 
 \begin{figure}[hbt]
 \centerline {\includegraphics[scale=0.6]{methodFinder-now}}
@@ -704,6 +739,12 @@ testShout
 How do we create a new method in \sq?   First, we have to decide which class the method should belong to.
 In this case, the \ct{shout} method that we are testing will go in class \clsind{String}, so the corresponding test will, by convention, go in a class called \clsind{StringTest}.
 
+%%{SBESqueakPicture writeTo: './figures/StringTest-newMethodTemplate.png' frame: #morphs using: [:helper |
+%%  Browser fullOnClass: StringTest category: #'tests - converting'
+%%  "the message template should be highlighted. this can be achieved by clicking on the message category name, which is to be found in the browser's 3rd submorph"
+%%]}
+
+
 \begin{figure}[hbt]
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{StringTest-newMethodTemplate}}}
@@ -724,6 +765,14 @@ So select \menu{accept (s)} from the yellow-button menu in the bottom pane, or j
 Because there is as yet no method called \ct{shout}, the browser will ask you to confirm that this is the name that you really want\,---\,and it will suggest some other names that you might have intended (\figref{testShoutConfirm}).
 This can be quite useful if you have merely made a typing mistake, but in this case, we really \emph{do} mean \ct{shout}, since that is the method we are about to create, so we have to confirm this by selecting the first option from the menu of choices, as shown in \figref{testShoutConfirm}. 
 
+%%{SBESqueakPicture writeTo: './figures/testShoutConfirm.png' frame: #morphs using: [:helper |
+%%  Browser fullOnClass: StringTest category: #'tests - converting'
+%%  "type 'testShout
+%%	self assert: ('Don''t panic' shout = 'DON''T PANICBANG')'    into the browser's 3rd submorph.
+%%   now press cmd-s to save the code.
+%%   "
+%%]}
+
 \begin{figure}[hbt]
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{testShoutConfirm}}}
@@ -737,6 +786,12 @@ This can be quite useful if you have merely made a typing mistake, but in this c
 The leftmost two panes are a bit like the top panes in the system browser.  The left pane contains a list of system categories, but it's restricted to those categories that contain test classes.
 
 \dothis{Select \scat{CollectionsTests-Text} and the pane to the right will show all of the test classes in that category, which includes the class \ct{StringTest}.  The names of the classes are already selected, so click \menu{Run Selected} to run all these tests.}
+
+%%{SBESqueakPicture writeTo: './figures/testRunnerOnStringTest.png' frame: #morphs using: [:helper |
+%%  ToolBuilder open: TestRunner new.
+%%  "select 'CollectionsTests-Text' in test runner's 6th submorph,
+%%  then click 'Run Selected' button"
+%%]}
 
 \begin{figure}[hbt]
 \ifluluelse
@@ -813,6 +868,11 @@ Don't worry about this.
 %:PROBLEM --- StringTest has a broken test!
 % ON: There is a broken test in \ct{StringTest>>>\#testIndexOf}!
 }
+
+%%{SBESqueakPicture writeTo: './figures/String-Shout.png' frame: #morphs using: [:helper |
+%%  ToolSet browse: String selector: #shout
+%%]}
+
 
 \begin{figure}[hbt]
 \ifluluelse
