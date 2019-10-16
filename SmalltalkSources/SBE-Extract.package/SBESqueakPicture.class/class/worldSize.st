@@ -1,4 +1,4 @@
-as yet unclassified
+accessing
 worldSize
 
 	^ 600 @ 400
