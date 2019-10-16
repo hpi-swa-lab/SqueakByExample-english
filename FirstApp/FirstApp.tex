@@ -70,7 +70,8 @@ Now we will see how to create system categories and classes.
 \dothis{Open a system browser and yellow-click in the category pane.
 Select \menu{add item \ldots}.}
 
-+%%{SBESqueakPicture writeTo: './figures/AddCategory.png' frame: [:rect | rect topLeft extent: rect width / 2 @ rect height * 2/3] using: [:helper | 
+%%{SBESqueakPicture writeTo: './figures/AddCategory.png' frame: [:rect | rect topLeft extent: rect width / 2 @ rect height * 2/3] using: [:helper |
+%%	  | window |
 %%    Browser open.
 %%    window := helper world firstSubmorph.
 %%    window bounds: (0 @ 120 extent: 550 @ 375).
@@ -137,6 +138,18 @@ Note that the border of the class template pane has changed to red (\figref{acce
 This means that there are \emph{unsaved changes}.
 To actually send this message, you must \menu{accept} it.
 
+%%{SBESqueakPicture writeTo: './figures/AcceptClassDef.png' frame: [:rect | rect bottomHalf] using: [:helper | 
+%%	| window menu |
+%%	SBECell browse.
+%%	window := helper world firstSubmorph.
+%%	window bounds: (0 @ 120 extent: 500 @ 400).
+%%	helper click: window at: window bottomCenter - (0 @ 30) buttons: #(right).
+%%	helper closeBalloons.
+%%	menu := helper world firstSubmorph.
+%%	menu bottomRight: window bottomRight - (50 @ 30).
+%%	helper hand releaseMouseFocus.
+%%	helper mouseEnter: (helper menuItemMorphLabeled: 'accept.*' asRegex in: helper world).
+%%]}
 \begin{figure}[h!t]
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{AcceptClassDef}}}
