@@ -268,6 +268,20 @@ Blue-click on the cell to bring up the morphic \subind{Morphic}{halo}.
 Move the cell with the brown (next to top-right) handle and resize it with the yellow (bottom-right) handle.
 Notice how the bounds reported by the inspector also change.
 
+%%{SBESqueakPicture writeTo: './figures/SBECellResize.png' frame: [:area | area insetOriginBy: -50 cornerBy: 0] using: [:helper |
+%%  | cell window list bottomPane |
+%%  cell := SBECell new.
+%%  cell inspect.
+%%  window := helper world firstSubmorph.
+%%  list := window findDeepSubmorphThat: #isPluggableListMorph ifAbsent: [self error: 'list not found'].
+%%  list selectionIndex: 3.
+%%  bottomPane := window findDeepSubmorphThat: [:m | m isTextView and: [m text isEmptyOrNil]] ifAbsent: [self error: 'bottom pane not found'].
+%%  bottomPane setText: 'self openInWorld'; doIt.
+%%  cell position: 100 @ 100; extent: 98 @ 89.
+%%  window position: 350 @ 100.
+%%  cell addHalo.
+%%  (NewBalloonMorph string: 'Change size' for: cell) popUpAt: cell bottomRight + 31.
+%%]}
 \begin{figure}[htbp]
 \centering
 \ifluluelse
