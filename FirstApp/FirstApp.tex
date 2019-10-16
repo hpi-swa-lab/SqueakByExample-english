@@ -242,6 +242,14 @@ You can test the effect of the code you have written by creating a new \ct{SBECe
 
 \dothis{Open a workspace. Type the expression \ct{SBECell new} and \menu{inspect it}.}
 
+%%{SBESqueakPicture writeTo: './figures/SBECellInspector.png' frame: #morphs using: [:helper |
+%%  | window pane |
+%%  SBECell new inspect.
+%%  window := helper world firstSubmorph.
+%%  pane := window findDeepSubmorphThat: #isPluggableListMorph ifAbsent: [self error: 'list not found'].
+%%	pane selectionIndex: 3.
+%%  window lookFocused.
+%%]}
 \begin{figure}[htbp]
    \centering
    \includegraphics[scale=0.7]{SBECellInspector} 
