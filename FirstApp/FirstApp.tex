@@ -362,6 +362,18 @@ If there are only a few methods in a class, the extra level of hierarchy provide
 This is why the browser also offers us the \prot{-{}-all-{}-} virtual protocol, which, you will not be surprised to learn, contains all of the methods in the class.
 \protindex{all}
 
+%%{SBESqueakPicture writeTo: './figures/Categorize.png' frame: [:rect | rect topCenter corner: rect right @ (rect top + (rect height * 2/3))] using: [:helper | | workspace |
+%%  browser := Browser newSubclass.
+%%  browser compile: 'hasClassSelected ^true'.
+%%  class := Object newSubclass.
+%%  class compile: 'initialize'.
+%%  browser fullOnClass: class.
+%%  window := helper world firstSubmorph.
+%%  window bounds: (0 @ 120 extent: 550 @ 350).
+%%  helper click: window at: window topCenter + (30 @ 60) buttons: #(right).
+%%  helper mouseEnter: (helper menuItemMorphLabeled: 'categorize all uncategorized' in: helper world).
+%%  helper closeBalloons.
+%%]}
 \begin{figure}[htbp]
    \centering
    \includegraphics[scale=0.7]{Categorize} 
