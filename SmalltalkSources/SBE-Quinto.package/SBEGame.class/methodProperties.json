@@ -1,0 +1,8 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"cellsPerSide" : "apb 11/29/2006 22:19",
+		"initialize" : "pre 10/10/2019 10:24",
+		"newCellAt:at:" : "pre 10/9/2019 15:45",
+		"toggleNeighboursOfCellAt:at:" : "pre 10/9/2019 15:46" } }

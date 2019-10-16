@@ -1,0 +1,14 @@
+{
+	"category" : "SBE-Environment",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "StringSuffixTest",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"type" : "normal" }

@@ -1,0 +1,2 @@
+Represents a chapter of the book. Created with SBEchapter>>dir:file: when SBEmain is initialized.
+Will read the chapter file looking for tests, and automatically create test classes with one test method per test.

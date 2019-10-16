@@ -1,0 +1,14 @@
+{
+	"category" : "SBE-Morphic",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "SBEReceiverMorph",
+	"pools" : [
+		 ],
+	"super" : "Morph",
+	"type" : "normal" }
