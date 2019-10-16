@@ -1,23 +1,7 @@
-as yet unclassified
+screenshots
 writeTo: aPathString frame: aFrameSpecifier using: aBlock
 
-	| helper priorHand priorWorld process |
-	helper := SBEWorldHelper new worldSize: 1000 @ 1000; frameSpecifier: aFrameSpecifier; setUp.
-	helper world color: Color transparent.
-	
-	priorWorld := ActiveWorld.
-	priorHand := ActiveHand.
-	ActiveWorld := helper world.
-	ActiveHand := helper hand.
-	
-	process := [
-		[Processor yield. helper takeScreenshot] forkAt: 41.
-		aBlock cull: helper
-	] forkAt: 41.
-	
-	ActiveWorld := priorWorld.
-	ActiveHand := priorHand.
-	
-	helper picture ifNil: [^ self].
-	helper picture writePNGfileNamed: (self currentDirectory resolve: aPathString) fullName.
-	helper tearDown
+	| picture |
+	picture := self createInFrame: aFrameSpecifier using: aBlock.
+	picture ifNil: [^ self].
+	picture writePNGfileNamed: (self currentDirectory resolve: aPathString) fullName.

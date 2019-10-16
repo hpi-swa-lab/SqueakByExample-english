@@ -1,8 +1,10 @@
 {
 	"class" : {
+		"createInFrame:using:" : "ct 10/16/2019 18:02",
 		"currentDirectory" : "tobe 10/2/2019 20:48",
 		"currentDirectory:" : "tobe 10/2/2019 20:48",
+		"openFrame:using:" : "ct 10/16/2019 18:08",
 		"worldSize" : "tobe 10/2/2019 20:18",
-		"writeTo:frame:using:" : "tobe 10/12/2019 07:44" },
+		"writeTo:frame:using:" : "ct 10/16/2019 18:02" },
 	"instance" : {
 		 } }
