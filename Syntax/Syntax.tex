@@ -98,7 +98,7 @@ Expressions are composed of the following building blocks:
 		\lct{3+4}					&	binary messages \\
 		\lct{2 raisedTo: 6 modulo: 10}		&	keyword message \\
 		\midrule
-		\lct{$\uparrow$ true} 			&	return the value true	\\
+		\lct{\textasciicircum true} 			&	return the value true	\\
 		\lct{Transcript show: 'hello'. Transcript cr }		&	expression separator (\lct{.})	\\
 		\lct{Transcript show: 'hello'; cr}					&	message cascade (\lct{;}) \\
 		\bottomrule
@@ -195,7 +195,7 @@ In the expression \ct{2 raisedTo: 6 modulo: 10}, the \emphind{message selector} 
 	\index{message!keyword}
 	\seeindex{keyword message}{message, keyword}
 
-\item[Method return.] \ct{^} is used to \emphind{return} a value from a method.  (You must type \verb|^| to obtain the \ct{^} character.)
+\item[Method return.] \ct{^} is used to \emphind{return} a value from a method. 
 \md{\ct{^} always returns from the method, even if used in a block, it returns from the enclosing method.}
 
 \item[Sequences of statements.]	A period or full-stop (\ct{.}) is the \emph{statement} \emphsubind{statement}{separator}. Putting a period between two expressions turns them into independent statements.	
