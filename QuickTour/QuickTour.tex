@@ -652,12 +652,12 @@ You will be presented with a list of classes whose names contain ``time'' (see \
 %%  
 %%  helper
 %%    runModal: [helper keyStroke: browser submorphs sixth key: $f modifiers: #(cmd)]
-%%    then: [helper dialogWindow position: 60 asPoint].
+%%    then: [
+%%      helper dialogWindow position: 60 asPoint.
+%%      helper type: 'time' into: (helper morphByExternalName: 'searchText' in: helper world).
+%%      helper closeBalloons.
+%%    ].
 %%  
-%%  "This should type 'time' into the dialog window's search panel: (but currently doesn't)
-%%  helper dialogWindow messageMorph contents: 'time'."
-%%  
-%%  helper closeBalloons.
 %%]}
 
 \begin{figure}[hbt]
@@ -886,10 +886,9 @@ Don't worry about this.
 }
 
 %%{SBESqueakPicture writeTo: './figures/String-Shout.png' frame: #morphs using: [:helper |
+%%  String compile: 'shout\\    ^ self asUppercase, ''!''' withCRs classified: 'converting'.
 %%  ToolSet browse: String selector: #shout
 %%]}
-
-
 \begin{figure}[hbt]
 \ifluluelse
 	{\centerline{\includegraphics[width=\textwidth]{String-Shout}}}
