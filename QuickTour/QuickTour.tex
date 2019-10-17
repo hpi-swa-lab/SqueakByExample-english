@@ -131,8 +131,9 @@ A good place to get started is the \ind{world menu} shown in \figref{threeButton
 %%  helper closeBalloons.
 %%]}
 
-%%{SBESqueakPicture writeTo: './figures/morphicHaloOnWorkspace.png' frame: #morphs using: [:helper | | workspace |
+%%{SBESqueakPicture writeTo: './figures/morphicHaloOnWorkspace.png' frame: [:rect | rect expandBy: 60] using: [:helper | | workspace |
 %%  workspace := ToolBuilder open: Workspace new.
+%   workspace position: 100 asPoint.
 %%  helper type: 'Time now ' into: workspace.
 %%  helper click: workspace at: workspace center buttons: #(middle).
 %%  "screenshot does currently not include the workspace's halo, please fix"
@@ -805,7 +806,8 @@ The leftmost two panes are a bit like the top panes in the system browser.  The 
 \dothis{Select \scat{CollectionsTests-Text} and the pane to the right will show all of the test classes in that category, which includes the class \ct{StringTest}.  The names of the classes are already selected, so click \menu{Run Selected} to run all these tests.}
 
 %%{SBESqueakPicture writeTo: './figures/testRunnerOnStringTest.png' frame: #morphs using: [:helper | | testRunner categoryIndex |
-%%  [StringTest compile: 'testShout self assert: false'.
+%%  [
+%%  StringTest compile: 'testShout self assert: false'.
 %%  testRunner := (ToolBuilder open: TestRunner new) model.
 %%  categoryIndex := testRunner categoryList indexOf: 'CollectionsTests-Text'.
 %%  testRunner categorySelected: categoryIndex.
