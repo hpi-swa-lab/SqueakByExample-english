@@ -198,7 +198,7 @@ In the preference browser, the \menu{general} category contains an option \menu{
 %%  browser := PreferenceBrowser open.
 %%  (browser dependents at: 2) setText: searchText.
 %%  browser searchPreferencesFor: searchText.
-%%  (helper preferenceButtonMorphLabeled: 'swapMouseButtons' in: helper world) highlightOn.
+%%  (helper preferenceButtonMorphLabeled: 'Swap mouse buttons' in: helper world) highlightOn.
 %%]}
 
 \begin{figure}[htb]
@@ -756,8 +756,9 @@ How do we create a new method in \sq?   First, we have to decide which class the
 In this case, the \ct{shout} method that we are testing will go in class \clsind{String}, so the corresponding test will, by convention, go in a class called \clsind{StringTest}.
 
 %%{SBESqueakPicture writeTo: './figures/StringTest-newMethodTemplate.png' frame: #morphs using: [:helper |
-%%  Browser fullOnClass: StringTest category: #'tests - converting'
-%%  "the message template should be highlighted. this can be achieved by clicking on the message category name, which is to be found in the browser's 3rd submorph"
+%%  Browser fullOnClass: StringTest category: #'tests - converting'.
+%%  helper click: helper world firstSubmorph firstSubmorph firstSubmorph.
+%%  helper click: helper world firstSubmorph firstSubmorph firstSubmorph.
 %%]}
 
 
