@@ -88,6 +88,12 @@ Do whatever works best for your style of working and your operating system.
 \ab{I agree entirely; the reason that this is not here is because I could do only the Mac section.  Damien can probably do Windoze.  Perhaps we can ask on the list for a Linux volunteer?}
 
 %-----------------------------------------------------------------
+%%{SBESqueakPicture writeTo: './figures/startup.png' frame: (0 @ 0 extent: 900 @ 700) using: [:helper |
+%%  helper world color: Color darkGray.
+%%  " note: only if you have balloon.png in your image's folder, you'll get the balloon for the startup screen "
+%%  ReleaseBuilder openWelcomeWorkspacesWith: ReleaseBuilder getBalloonForm.
+%%  PreferenceWizardMorph open.
+%%]}
 \begin{figure}[htb]
 % \centerline {\includegraphics[width=0.6\textwidth]{download}}
 \centerline {\includegraphics[width=\textwidth]{startup}}
@@ -173,7 +179,7 @@ Finally, there is the \emphind{blue button}, which is used to activate the ``mor
 If you let the mouse linger over a handle, a help balloon will explain its function.
 
 %%{SBESqueakPicture writeTo: './figures/morphicRotate.png' frame: #morphs using: [:helper | | workspace |
-%%  "could not find a message to open just the rotate icon"
+%%  (HaloMorph new createHandleAt: 0 @ 0 color: Color blue iconName: 'Halo-Rot') openInWorld; position: 0 @ 0
 %%]}
 
 \dothis{Click the blue button on the workspace.
@@ -241,7 +247,17 @@ Put the blob down (by clicking) somewhere. It will start to move.}
 \index{Morphic}
 
 %%{SBESqueakPicture writeTo: './figures/saveAs.png' frame: #morphs using: [:helper |
-%%  "open world menu, click 'save as...', type 'SBE' into text field"
+%%  helper click: helper world.
+%%  
+%%  helper
+%%    runModal: [(helper menuItemMorphLabeled: 'save as...' in: helper world) invokeWithEvent: nil]
+%%    then: [
+%%      helper closeBalloons.
+%%      helper type: 'SBE' into: (helper morphByExternalName: 'inputText' in: helper world) firstSubmorph firstSubmorph].
+%%]}
+
+%%{SBESqueakPicture writeTo: './figures/Blob.png' frame: #morphs using: [:helper |
+%%  BouncingAtomsMorph new openInWorld
 %%]}
 
 \begin{figure}[htb]
@@ -602,7 +618,7 @@ The hierarchy browser is like the system browser, except that the list of classe
 This will open a hierarchy browser showing the superclasses and subclasses of \clsind{Boolean}.
 % (\figref{booleanhierarchybrowser}).
 
-%%{SBESqueakPicture writeTo: './figures/BooleanHierarchyBrowser.png' frame: [:morphsRect | morphsRect] using: [:helper | | browser browserMorph |
+%%{SBESqueakPicture writeTo: './figures/BooleanHierarchyBrowser.png' frame: [:morphsRect | morphsRect] using: [:helper | | browser browserMorph b_morph |
 %%  browser := HierarchyBrowser new.
 %%  browser setClass: Boolean.
 %%  browser buildDefaultBrowserWith: ToolBuilder default.
