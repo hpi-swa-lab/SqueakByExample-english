@@ -1,0 +1,1 @@
+I represent a single cell of a SBEGame.
