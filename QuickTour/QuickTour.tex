@@ -783,12 +783,15 @@ So select \menu{accept (s)} from the yellow-button menu in the bottom pane, or j
 Because there is as yet no method called \ct{shout}, the browser will ask you to confirm that this is the name that you really want\,---\,and it will suggest some other names that you might have intended (\figref{testShoutConfirm}).
 This can be quite useful if you have merely made a typing mistake, but in this case, we really \emph{do} mean \ct{shout}, since that is the method we are about to create, so we have to confirm this by selecting the first option from the menu of choices, as shown in \figref{testShoutConfirm}. 
 
-%%{SBESqueakPicture writeTo: './figures/testShoutConfirm.png' frame: #morphs using: [:helper |
-%%  Browser fullOnClass: StringTest category: #'tests - converting'
-%%  "type 'testShout
-%%	self assert: ('Don''t panic' shout = 'DON''T PANICBANG')'    into the browser's 3rd submorph.
-%%   now press cmd-s to save the code.
-%%   "
+%%{SBESqueakPicture writeTo: './figures/testShoutConfirm.png' frame: #morphs using: [:helper | | browser textField |
+%%  Browser fullOnClass: StringTest selector: #testCapitalized.
+%%  textField := helper world firstSubmorph firstSubmorph firstSubmorph.
+%%  helper click: textField.
+%%  helper keyStroke: textField key: $a modifiers: #(cmd).
+%%  (Symbol classPool at: #SymbolTable) remove: 'shout' ifAbsent: [].
+%%  (Symbol classPool at: #NewSymbols) remove: 'shout' ifAbsent: [].
+%%  helper type: 'testShout\\    self assert: (''Don''''t panic'' shout = ''DON''''T PANIC!'')' withCRs into: textField.
+%%  helper runModal: [helper keyStroke: textField key: $s modifiers: #(cmd)] then: [helper dialogWindow position: 500 @ 40]
 %%]}
 
 \begin{figure}[hbt]
