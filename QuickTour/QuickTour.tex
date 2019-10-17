@@ -591,6 +591,9 @@ select the name and type \short{b}.
 
 \dothis{Use the keyboard shortcut to browse the class \ct{Boolean}.}
 
+%%{SBESqueakPicture writeTo: './figures/Kernel-objects-boolean.png' frame: #morphs using: [:helper | | workspace |
+%%  Browser fullOnClass: Boolean
+%%]}
 \begin{figure}[hbt]
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{Kernel-objects-boolean}}}
@@ -644,7 +647,7 @@ You will be presented with a list of classes whose names contain ``time'' (see \
 %%  
 %%  helper
 %%    runModal: [helper keyStroke: browser submorphs sixth key: $f modifiers: #(cmd)]
-%%    then: [helper dialogWindow position: 60 asPoint]
+%%    then: [helper dialogWindow position: 60 asPoint].
 %%]}
 
 %%{SBESqueakPicture writeTo: './figures/TimeClasses.png' frame: #morphs using: [:helper | | browser |
