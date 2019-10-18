@@ -1,0 +1,15 @@
+{
+	"category" : "SBE-Extract",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"targetPosition",
+		"realOrientation" ],
+	"name" : "SBEBalloonMorph",
+	"pools" : [
+		 ],
+	"super" : "NewBalloonMorph",
+	"type" : "normal" }
