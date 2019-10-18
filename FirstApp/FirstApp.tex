@@ -751,6 +751,14 @@ MCHttpRepository
 %You can then load the code in your image by selecting the version you want. You can browse the code without loading it, using the \button{Browse} button.
 Once you have accepted this template, your new repository should be listed on the right-hand side of the Monticello browser.
 
+%%{SBESqueakPicture writeTo: './figures/BrowseRepository.png' frame: #morphs using: [:helper |
+%%	| window packageList |
+%%	MCCacheRepository default morphicOpen.
+%%	window := helper world firstSubmorph.
+%%	packageList := helper listMorphIncludingMatch: 'SBE-Quinto' in: window.
+%%	helper type: 'SBE-Quinto' into: packageList listSource.
+%%	window model versionSelection: 1
+%%]}
 \begin{figure}[hbt]
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{BrowseRepository}}}
