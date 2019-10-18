@@ -5,9 +5,8 @@ simulateMouseEvent: aSymbol at: aPoint buttons: someMouseButtons start: aStartPo
 	morphicEvent := MorphicEvent readFrom: ('{1} {2} {3} {4} {5} {6} {7}' format: {
 		aSymbol.
 		0. "time"
-		aPoint x. aPoint y.
+		aPoint x rounded. aPoint y rounded.
 		self mapButtons: someMouseButtons.
-		aStartPoint x.
-		aStartPoint y}) readStream.
+		aStartPoint x rounded. aStartPoint y rounded}) readStream.
 	
 	self simulateMouseEvent: morphicEvent

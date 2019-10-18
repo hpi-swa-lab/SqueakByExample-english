@@ -8,9 +8,11 @@ extractFrom: aFSReference
 	texFiles := aFSReference allFiles select: [:file | file extension = 'tex'].
 	
 	commands := Array streamContents: [:stream |
-		texFiles do: [:texFile |
-			FileStream concreteStream readOnlyFileNamed: texFile fullName do: [:fileStream |
-				self commandsFrom: fileStream do: [:command | stream nextPut: {texFile parent. command}]]]].
+		texFiles
+			do: [:texFile |
+				FileStream concreteStream readOnlyFileNamed: texFile fullName do: [:fileStream |
+					self commandsFrom: fileStream do: [:command | stream nextPut: {texFile parent. command}]]]
+			displayingProgress: 'Extracting images...'].
 	
 	commands do: [:command |
 		SBESqueakPicture currentDirectory: command first.
