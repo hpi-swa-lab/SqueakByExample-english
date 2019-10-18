@@ -700,6 +700,18 @@ The method finder will suggest a method that does what you want.
 An asterisk at the beginning of a line in the right pane of the method finder indicates that this method is the one that was actually used to obtain the requested result. 
 So, the asterisk in front of \ct{String asUppercase} lets us know that the method \mthind{String}{asUppercase} defined on the class \clsind{String} was executed and returned the result we wanted. The methods that do not have an asterisk are just the other methods that have the same name as the ones that returned the expected result. So \cmind{Character}{asUppercase} was not executed on our example, because \ct{'eureka'} is not a \clsind{Character} object.
 
+%%{SBESqueakPicture writeTo: './figures/MethodFinder-example1.png' frame: #morphs using: [:helper |
+%%	| window inputField hitList |
+%%	window := ToolBuilder open: SelectorBrowser.
+%%	window extent: 500 @ 210.
+%%	inputField := (window rootMorphsAt: window topLeft + 30) first.
+%%	hitList := (window rootMorphsAt: inputField bottomLeft + 30) first.
+%%	helper
+%%		mouseEnter: inputField;
+%%		type: '''eureka''. ''EUREKA''' into: inputField;
+%%		keyStroke: inputField key: $s modifiers: #(cmd).
+%%	helper click: hitList at: hitList topLeft + 10 buttons: #(left)
+%%]}
 \begin{figure}[hbt]
 \ifluluelse
 	{\centerline {\includegraphics[width=0.9\textwidth]{MethodFinder-example1}}}
