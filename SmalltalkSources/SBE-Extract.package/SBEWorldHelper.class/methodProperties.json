@@ -2,6 +2,8 @@
 	"class" : {
 		 },
 	"instance" : {
+		"boundsOfItemMatching:in:" : "ct 10/18/2019 10:42",
+		"boundsOfItemThat:in:" : "ct 10/18/2019 10:42",
 		"buttonLabeled:in:" : "ct 10/16/2019 20:40",
 		"click:" : "tobe 10/3/2019 19:59",
 		"click:at:buttons:" : "tobe 10/3/2019 19:59",
@@ -18,6 +20,8 @@
 		"keyRelease:key:modifiers:" : "tobe 10/3/2019 20:00",
 		"keyStroke:key:" : "tobe 10/3/2019 20:00",
 		"keyStroke:key:modifiers:" : "tobe 10/3/2019 20:00",
+		"listMorphIncludingMatch:in:" : "ct 10/17/2019 19:44",
+		"listMorphIncludingThat:in:" : "ct 10/17/2019 19:28",
 		"mapButton:" : "tobe 10/3/2019 20:01",
 		"mapButtons:" : "tobe 10/3/2019 20:01",
 		"menuItemMorphLabeled:in:" : "tobe 10/3/2019 20:00",
