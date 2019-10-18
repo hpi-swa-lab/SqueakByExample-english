@@ -718,10 +718,20 @@ Type ``now'' in the top left pane, and \menu{accept} it (or just press the \text
 The method finder will display a list of all the method names that contain the substring ``now''.  
 To scroll to \ct{now} itself, move the cursor to the list and type ``\ct{n}''; this trick works in all scrolling windows.  Select ``now'' and the right-hand pane shows you the three classes that define a method with this name, as shown in \figref{MethodFinder}.  Selecting any one of them will open a browser on it.
 
-%%{SBESqueakPicture writeTo: './figures/methodFinder-now.png' frame: #morphs using: [:helper | | browser |
-%%  browser := ToolBuilder open: SelectorBrowser new.
-%%  "now type 'now' into the window's 4th submorph and press enter.
-%%  then click on 'now' in the result list (window's 3rd submorph)"
+%%{SBESqueakPicture writeTo: './figures/methodFinder-now.png' frame: #morphs using: [:helper |
+%%	| window inputField hitList |
+%%	window := ToolBuilder open: SelectorBrowser new.
+%%	inputField := (window rootMorphsAt: window topLeft + 30) first.
+%%	hitList := (window rootMorphsAt: inputField bottomLeft + 30) first.
+%%	helper
+%%		mouseEnter: inputField;
+%%		type: 'now' into: inputField;
+%%		keyStroke: inputField key: $s modifiers: #(cmd).
+%%	['now' matches: hitList selection] whileFalse: [
+%%		helper keyStroke: hitList key: Character arrowDown].
+%%	4 "scroll the selection nicely into view"
+%%		timesRepeat: [helper keyStroke: hitList key: Character arrowDown];
+%%		timesRepeat: [helper keyStroke: hitList key: Character arrowUp]
 %%]}
 
 \begin{figure}[hbt]
