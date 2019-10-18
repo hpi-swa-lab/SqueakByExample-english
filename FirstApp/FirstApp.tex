@@ -501,17 +501,17 @@ The corresponding method also needs to be defined.
 \dothis{Place this method in a new protocol called \prot{game logic}.\damien{this has to be explained. There were no explications before on how to create a new protocol.}}
 To move the method, you can simply click on its name and drag it to the newly-created protocol (\figref{dragMethod}).
 
-%%{SBESqueakPicture writeTo: './figures/DragMethod.png' frame: #morphs using: [:helper |
-%% 	| window messageList categoryList startPoint stopPoint |
-%% 	SBEGame browse.
-%% 	window := helper world firstSubmorph.
-%% 	window extent: 600 @ 300.
-%% 	messageList := helper listMorphIncludingMatch: #toggleNeighboursOfCellAt:at: in: window.
-%% 	categoryList := helper listMorphIncludingMatch: 'game logic' in: window.
-%% 	startPoint := (helper boundsOfItemMatching: #toggleNeighboursOfCellAt:at: in: messageList) center.
-%% 	stopPoint := (helper boundsOfItemMatching: 'game logic' in: categoryList) pointAtFraction: 0.2 @ 0.6.
-%% 	helper mouseDrag: messageList from: startPoint to: stopPoint buttons: #(left).
-%% 	helper spawnHand.
+%%{SBESqueakPicture writeTo: './figures/DragMethod.png' frame: [:rectangle | rectangle withHeight: rectangle height * 2 / 3] using: [:helper |
+%%	| window messageList categoryList startPoint stopPoint |
+%%	SBEGame browse.
+%%	window := helper world firstSubmorph.
+%%	window extent: 600 @ 300.
+%%	messageList := helper listMorphIncludingMatch: #toggleNeighboursOfCellAt:at: in: window.
+%%	categoryList := helper listMorphIncludingMatch: 'game logic' in: window.
+%%	startPoint := (helper boundsOfItemMatching: #toggleNeighboursOfCellAt:at: in: messageList) center.
+%%	stopPoint := (helper boundsOfItemMatching: 'game logic' in: categoryList) pointAtFraction: 0.2 @ 0.6.
+%%	helper mouseDrag: messageList from: startPoint to: stopPoint buttons: #(left).
+%%	helper spawnHand.
 %%]}
 \begin{figure}[htbp]
    \centering
