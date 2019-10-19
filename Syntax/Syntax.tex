@@ -41,7 +41,7 @@
 The \ind{syntax} is designed so that program text can be read aloud as though it were a kind of pidgin English:
 
 \begin{code}{}
-(Smalltalk includes: Class) ifTrue: [ Transcript show: Class superclass ]
+(Smalltalk includes: Class) ifTrue: [Transcript show: Class superclass]
 \end{code}
 
 \noindent
@@ -83,21 +83,22 @@ Expressions are composed of the following building blocks:
 		\lct{\$a}					&	the character `a' \\
 		\lct{'Hello'}				&	the string ``Hello'' \\
 		\lct{\#Hello}				&	the symbol \lct{\#Hello} \\
-		\lct{\#(1 2 3)}			&	a literal array \\
 		\lct{\{1. 2. 1+2\}}		&	a dynamic array \\
+		\lct{\#(1 2 3)}			&	a literal array \\
+		\lct{\#[255 33 200 1]}   &	a byte array \\
 		\midrule
 		\lct{"a comment"} 		&	a comment \\
 		\midrule
 		\lct{| x y |}				&	declaration of variables \lct{x} and \lct{y}	\\
 		\lct{x := 1}				&	assign 1 to \lct{x} \\
-		\lct{[ x + y ]}			&	a block that evaluates to \lct{x+y} \\
+		\lct{[x + y]}			&	a block that evaluates to \lct{x+y} \\
 		\lct{<primitive: 1>}		&	virtual machine primitive or annotation\\
 		\midrule
 		\lct{3 factorial}			&	unary message \\
 		\lct{3+4}					&	binary messages \\
 		\lct{2 raisedTo: 6 modulo: 10}		&	keyword message \\
 		\midrule
-		\lct{$\uparrow$ true} 			&	return the value true	\\
+		\lct{\textasciicircum true} 			&	return the value true	\\
 		\lct{Transcript show: 'hello'. Transcript cr }		&	expression separator (\lct{.})	\\
 		\lct{Transcript show: 'hello'; cr}					&	message cascade (\lct{;}) \\
 		\bottomrule
@@ -140,15 +141,17 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 		There is only one Symbol object \ct{#Hello} but there may be multiple String objects with the value \ct{'Hello'}.
 		\seeindex{\#@{\textsf{\#}}}{literal symbol}
 
-\item[Compile-time arrays] are defined by \ct{#( )}, surrounding space-separated literals.
-		Everything within the parentheses must be a compile-time constant.
-		For example,  \ct{#(27 #(true false) abc)} is a \subind{Array}{literal} \subind{literal}{array} of three elements: the integer \ct{27}, the compile-time array containing the two booleans, and the symbol \ct{#abc}.
-
 \item[Run-time arrays.] Curly braces \ct|{ }| define a (\subind{Array}{dynamic}) array at run-time.
 		Elements are expressions separated by periods.
 		So \ct|{ 1. 2. 1+2 }| defines an array with elements 1, 2, and the result of evaluating 1+2.
 		(The curly-brace notation is peculiar to the \sq dialect of \st!
 		In other \st{}s you must build up dynamic arrays explicitly.)
+		
+\item[Literal arrays] are defined by \ct{#( )}, surrounding space-separated literals.
+Everything within the parentheses must be a compile-time constant. These arrays are created at compile-time of the method.
+For example,  \ct{#(27 #(true false) abc)} is a \subind{Array}{literal} \subind{literal}{array} of three elements: the integer \ct{27}, the literal array containing the two booleans, and the symbol \ct{#abc}. Whenever a method including such an array is executed the same instance is used. That is why these arrays are often used to represent constant values and avoid repeated array instantiations.
+
+\item[Byte arrays] are defined by \ct{#[ ]}, surrounding integers between 0 and 255. This creates an instance of ByteArray which can be used to work with binary data.
 
 \item[Comments] are enclosed in double quotes.
 		\ct{"hello"} is a \ind{comment}, not a string, and is ignored by the \sq compiler.
@@ -192,7 +195,7 @@ In the expression \ct{2 raisedTo: 6 modulo: 10}, the \emphind{message selector} 
 	\index{message!keyword}
 	\seeindex{keyword message}{message, keyword}
 
-\item[Method return.] \ct{^} is used to \emphind{return} a value from a method.  (You must type \verb|^| to obtain the \ct{^} character.)
+\item[Method return.] \ct{^} is used to \emphind{return} a value from a method. 
 \md{\ct{^} always returns from the method, even if used in a block, it returns from the enclosing method.}
 
 \item[Sequences of statements.]	A period or full-stop (\ct{.}) is the \emph{statement} \emphsubind{statement}{separator}. Putting a period between two expressions turns them into independent statements.	
@@ -212,7 +215,7 @@ The classes \ct{Number}, \ct{Character}, \ct{String} and \ct{Boolean} are descri
 %=================================================================
 \section{Pseudo-variables}
 
-In \st, there are 6 reserved keywords, or \emph{pseudo-variables}:
+In \st, there are six reserved keywords, or \emph{pseudo-variables}:
 \pvind{nil}, \pvind{true},  \pvind{false},  \pvind{self}, \pvind{super}, and \pvind{thisContext}.
 They are called \subind{variable}{pseudo}-variables because they are predefined and cannot be assigned to.
 \ct{true}, \ct{false}, and \ct{nil} are constants while the values of \ct{self}, \ct{super}, and \ct{thisContext} vary dynamically as code is executed.
@@ -285,7 +288,7 @@ Message sends may be composed with periods and semi-colons. A period-separated s
 \begin{code}{}
 Transcript cr.
 Transcript show: 'hello world'.
-Transcript cr
+Transcript cr.
 \end{code}
 
 \noindent
@@ -295,7 +298,8 @@ When a series of messages is being sent to the \emph{same} receiver, then this c
 The receiver is specified just once, and the sequence of messages is separated by semi-colons:
 
 \begin{code}{}
-Transcript cr;
+Transcript 
+	cr;
     show: 'hello world';
     cr
 \end{code}
@@ -321,8 +325,8 @@ String>>>lineCount
    | cr count |
    cr := Character cr.
    count := 1 min: self size.
-   self do:
-      [:c | c == cr ifTrue: [count := count + 1]].
+   self do: [:c | 
+      c = cr ifTrue: [count := count + 1]].
    ^ count
 \end{method}
 
@@ -351,7 +355,7 @@ The block answers the value of the last expression in its body, unless there is 
 \seeindex{value}{BlockClosure}
 
 \begin{code}{@TEST}
-[ 1 + 2 ] value --> 3
+[1 + 2] value --> 3
 \end{code}
 
 Blocks may take parameters, each of which is declared with a leading colon.
@@ -360,8 +364,8 @@ To evaluate a block with one parameter, you must send it the message \mthind{Blo
 A two-parameter block must be sent \mthind{BlockClosure}{value:value:}, and so on, up to 4 arguments.
 
 \begin{code}{@TEST}
-[ :x | 1 + x ] value: 2 --> 3
-[ :x :y | x + y ] value: 1 value: 2 --> 3
+[:x | 1 + x] value: 2 --> 3
+[:x :y | x + y] value: 1 value: 2 --> 3
 \end{code}
 
 If you have a block with more than four parameters, you must use \mthind{BlockClosure}{valueWithArguments:} and pass the arguments in an array.
@@ -372,7 +376,7 @@ Locals are declared after any arguments:
 \index{variable!declaration}
 
 \begin{code}{@TEST}
-[ :x :y | | z | z := x+ y. z ] value: 1 value: 2 --> 3
+[:x :y | | z | z := x+ y. z] value: 1 value: 2 --> 3
 \end{code}
 
 Blocks are actually lexical \emph{closures}, since they can refer to variables of the surrounding environment.
@@ -381,35 +385,24 @@ The following block refers to the variable \ct{x} of its enclosing environment:
 \begin{code}{@TEST}
 | x |
 x := 1.
-[ :y | x + y ] value: 2 --> 3
+[:y | x + y] value: 2 --> 3
 \end{code}
 
 Blocks are instances of the class \clsind{BlockContext}.
 This means that they are objects, so they can be assigned to variables and passed as arguments just like any other object.
-% For both understandability and performance, it is better for blocks to refer only to their parameters and local variables; blocks that do not refer external variables are optimized by the compiler.
-% MARCUS sez: I would just delete the sentence. There is nothing optimized, accessign outer temps is as fast as inner, so the only reason to avoid accessing outer temps would be that the code is easier to understand. But that's a relatively weak argument, I think.
-% However, the ability to refer (``capture'') non-local variables can be very powerful when it is needed. 
 
-\emph{Caveat:}
-In the current version (3.9), \sq does not actually support true block-closures, since block arguments are actually simulated as temporary variables of the enclosing method. There is a new compiler that supports full block closures, but it is still being worked on and is not used by default.
-In somewhat obscure situations this problem can lead to naming conflicts.
-This situation arises because \sq is based on an early implementation of \st.
-If you encounter this problem, have a look at the senders of the method \mthind{BlockClosure}{fixTemps}, or load the \emphind{Closure Compiler}.
+\paragraph{Returning inside blocks.} Returning inside blocks acts as an escaping mechanism. 
+Return expressions inside a nested block expression will terminate the lexically enclosing method.
+In the following example (see \mthref{detectReturnBlock}), when the expression \ct{^ foundBlock value: element} is executed, the method \ct{detect:ifFound:ifNone:} escapes the current iteration and returns it. 
 
-%\paragraph{Really important.} \^\ acts as an escaping mechanism. 
-%Return expressions inside a nested block expression will terminate the enclosing method.
-%In the example 
-
-%\begin{script}[detect]{...} when the expression \ct{^\ x@y} is executed, the method \ct{detect:}
-% escapes the current iteration and returns it. 
-
-%TwoLevelSet>>detect: aBlock
-
-%   firstLevel keysAndValuesDo: [ :x :v |
-%      v do: [ :y | (aBlock value: x@y) ifTrue: [^x@y]]
-%   ].
-%   ^nil
-%\end{script}
+\needlines{5}	
+\begin{method}[detectReturnBlock]{The method \ct{detect:ifFound:ifNone:} illustrating how returning inside blocks can be used}
+Collection>>>detect: aBlock ifFound: foundBlock ifNone: exceptionBlock 
+   "foundBlock takes one argument, the found object."
+   self do: [:element | 
+      (aBlock value: element) ifTrue: [^ foundBlock value: element]].
+   ^ exceptionBlock value
+\end{method}
 
 
 %=================================================================
@@ -421,12 +414,10 @@ Instead, these are typically expressed by sending messages to booleans, numbers 
 Conditionals are expressed by sending one of the messages \mthind{Boolean}{ifTrue:}, \mthind{Boolean}{ifFalse:} or \mthind{Boolean}{ifTrue:ifFalse:} to the result of a boolean expression. See \charef{basic} for more about booleans.
 
 \begin{code}{}
-(17 * 13 > 220)
-   ifTrue: [ 'bigger' ]
-   ifFalse: [ 'smaller' ] --> 'bigger'
+17 * 13 > 220
+   ifTrue: ['bigger']
+   ifFalse: ['smaller'] --> 'bigger'
 \end{code}
-% ON: Not a test.
-% My regex approach cannot handle multi-line expressions :-(
 
 Loops are typically expressed by sending messages to blocks, integers or collections.
 Since the exit condition for a loop may be repeatedly evaluated, it should be a block rather than a boolean value.
@@ -439,7 +430,7 @@ Here is an example of a very procedural loop:
 
 \begin{code}{@TEST | n |}
 n := 1.
-[ n < 1000 ] whileTrue: [ n := n*2 ].
+[n < 1000] whileTrue: [n := n*2].
 n --> 1024
 \end{code}
 \cmindex{BlockClosure}{whileTrue:}
@@ -448,7 +439,7 @@ n --> 1024
 \mthind{BlockClosure}{whileFalse:} reverses the exit condition.
 \begin{code}{@TEST | n |}
 n := 1.
-[ n > 1000 ] whileFalse: [ n := n*2 ].
+[n > 1000] whileFalse: [n := n*2].
 n --> 1024
 \end{code}
 
@@ -457,7 +448,7 @@ n --> 1024
 
 \begin{code}{@TEST | n |}
 n := 1.
-10 timesRepeat: [ n := n*2 ].
+10 timesRepeat: [n := n*2].
 n --> 1024
 \end{code}
 
@@ -470,13 +461,6 @@ result := String new.
 1 to: 10 do: [:n | result := result, n printString, ' '].
 result --> '1 2 3 4 5 6 7 8 9 10 '
 \end{code}
-
-\damien{I think the previous example that I've just added is clearer than the one which is commented here.}
-% \begin{code}{@TEST | n |}
-% n := 0.
-% 1 to: 10 do: [ :counter | n := n + counter ].
-% n --> 55
-% \end{code}
 
 \paragraph{High-Order Iterators.}
 Collections comprise a large number of different classes, many of which support the same protocol.
@@ -495,16 +479,9 @@ result := String new.
 result --> '1 2 3 4 5 6 7 8 9 10 '
 \end{code}
 
-\damien{Again, I think the previous example is clearer than the one which is commented here.}
-% \begin{code}{@TEST | n |}
-% n := 0.
-% (1 to: 10) do: [ :element | n := n + element ].
-% n --> 55
-% \end{code}
-
 \ct{collect:} builds a new collection of the same size, transforming each element.
 \begin{code}{@TEST}
-(1 to: 10) collect: [ :each | each * each ] --> #(1 4 9 16 25 36 49 64 81 100)
+(1 to: 10) collect: [:each | each * each] --> #(1 4 9 16 25 36 49 64 81 100)
 \end{code}
 
 \ct{select:} and \ct{reject:} build new collections, each containing a subset of the elements satisfying (or not) the boolean block condition.
@@ -512,18 +489,18 @@ result --> '1 2 3 4 5 6 7 8 9 10 '
 Don't forget that strings are also collections, so you can iterate over all the characters.
 
 \begin{code}{@TEST}
-'hello there' select: [ :char | char isVowel ] --> 'eoee'
-'hello there' reject: [ :char | char isVowel ] --> 'hll thr'
-'hello there' detect: [ :char | char isVowel ] --> $e
+'hello there' select: [:char | char isVowel] --> 'eoee'
+'hello there' reject: [:char | char isVowel] --> 'hll thr'
+'hello there' detect: [:char | char isVowel] --> $e
 \end{code}
 
-Finally, you should be aware that collections also support a functional-style \emph{fold} operator in the \ct{inject:into:} method.
+Finally, you should be aware that collections also support a functional-style generic \emph{fold} message called \ct{inject:into:}.
 This lets you generate a cumulative result using an expression that starts with a seed value and injects each element of the collection.
 Sums and products are typical examples.
 \seeindex{fold}{\ct{Collection>>>inject:into}}
 
 \begin{code}{@TEST}
-(1 to: 10) inject: 0 into: [ :sum :each | sum + each ] --> 55
+(1 to: 10) inject: 0 into: [:sum :each | sum + each] --> 55
 \end{code}
 
 \noindent
@@ -621,7 +598,7 @@ Since \sq 3.9, the angle bracket syntax is also used for method annotations call
 		\ct{[:x | x + 2] value: 4 --> 6}.
 
 \item	There is no dedicated syntax for control constructs, just messages that conditionally evaluate blocks.\\
-		\ct{(\st includes: Class) ifTrue: [ Transcript show: Class superclass ]}
+		\ct{(\st includes: Class) ifTrue: [Transcript show: Class superclass]}
 
 \end{itemize}
 
