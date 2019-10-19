@@ -876,24 +876,11 @@ The window that opens with the error message is the \st debugger (see \figref{pr
 We will look at the \ind{debugger} and how to use it in \charef{env}.
 
 %%{SBESqueakPicture writeTo: './figures/Predebugger.png' frame: #morphs using: [:helper |
-%%  helper restoreMethods: {String>>#shout} after: [
-%%    String removeSelector: #shout.
-%%    [StringTest new testShout] forkAt: 41.
-%%    Processor yield.
-%%    helper world doOneCycleNow.
-%%    helper takeScreenshot]
-%%]}
-
-SBESqueakPicture writeTo: '...' frame: #morphs using: [:helper | | sem |
-  helper restoreMethods: {String>>#shout} after: [
-    sem := Semaphore new.
-    [Error signal] forkAt: 41.
-    Processor yield.
-    Project current addDeferredUIMessage: [sem signal].
-    sem wait.
-    helper takeScreenshot]
-]}
-
+%%	helper restoreMethods: {String>>#shout} after: [
+%%		String removeSelector: #shout.
+%%		helper runModal: [StringTest new testShout].
+%%	]
+%%]}.
 \begin{figure}[hbt]
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{Predebugger}}}
