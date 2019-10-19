@@ -609,6 +609,22 @@ In the upper part of the debugger window you can see the execution stack, showin
 \ct{SBEGame>>>toggleNeighboursOfCellAt:at:} (near the top).}
 The debugger will show you the \ind{execution context} within this method where the error occurred (\figref{debugToggle}).
 
+%%{SBESqueakPicture writeTo: './figures/Debugger.png' frame: #morphs using: [:helper |
+%%	helper restoreMethods: {SBEGame >> #newCellAt:at:} after: [
+%%		| game stackList |
+%%		SBEGame compile: ((SBEGame sourceCodeAt: #newCellAt:at:) asString
+%%			lines allButLast joinSeparatedBy: String cr).
+%%		game := SBEGame new.
+%%		game openInWorld.
+%%		helper
+%%			runModal: [helper click: game]
+%%			then: [
+%%				helper hand dropMorphs.
+%%				game abandon.
+%%				stackList := helper listMorphIncludingMatch: '.*toggleNeighboursOfCellAt\:at\:.*' asRegex in: helper world firstSubmorph.
+%%				helper keyStroke: stackList listSource key: Character arrowDown.
+%%				helper world firstSubmorph extent: 600 @ 400]]
+%%]}
 \begin{figure}[ht]
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{Debugger}}}
