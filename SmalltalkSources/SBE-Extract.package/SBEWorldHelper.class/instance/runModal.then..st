@@ -2,11 +2,10 @@ utils
 runModal: aBlock then: anotherBlock
 
 	[
-		[
-			Processor yield.
-			anotherBlock value.
-			self takeScreenshot.
-			self dialogWindow delete
-		] forkAt: 42.
-	
-	aBlock value] forkAt: 42
+		| modalProcess |
+		modalProcess := aBlock fork.
+		Processor yield.
+		ActiveWorld doOneCycleNow.
+		anotherBlock ensure: [
+			modalProcess terminate]
+	] forkAt: Processor activePriority + 1.

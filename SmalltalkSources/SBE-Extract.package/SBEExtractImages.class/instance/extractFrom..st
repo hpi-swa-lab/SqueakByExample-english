@@ -12,7 +12,7 @@ extractFrom: aFSReference
 			do: [:texFile |
 				FileStream concreteStream readOnlyFileNamed: texFile fullName do: [:fileStream |
 					self commandsFrom: fileStream do: [:command | stream nextPut: {texFile parent. command}]]]
-			displayingProgress: 'Extracting images...'].
+			displayingProgress: [:texFile | 'Extracting images from {1}' format: {texFile}]].
 	
 	commands do: [:command |
 		SBESqueakPicture currentDirectory: command first.
