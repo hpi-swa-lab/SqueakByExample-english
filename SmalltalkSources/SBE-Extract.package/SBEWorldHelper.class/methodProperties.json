@@ -2,6 +2,7 @@
 	"class" : {
 		 },
 	"instance" : {
+		"adjustMorphsArea" : "ct 10/19/2019 03:47",
 		"adjustMorphsArea:" : "ct 10/19/2019 01:35",
 		"boundsOfItemMatching:in:" : "ct 10/18/2019 10:42",
 		"boundsOfItemThat:in:" : "ct 10/18/2019 10:42",
@@ -54,7 +55,7 @@
 		"simulateMouseEvent:" : "10/14/2019 15:19:11",
 		"simulateMouseEvent:at:buttons:start:morph:" : "ct 10/17/2019 18:43",
 		"spawnHand" : "ct 10/18/2019 10:33",
-		"takeScreenshot" : "ct 10/19/2019 01:39",
+		"takeScreenshot" : "ct 10/19/2019 03:47",
 		"tearDown" : "tobe 10/3/2019 20:09",
 		"textMorphIn:textMatchedBy:" : "ct 10/18/2019 14:31",
 		"type:into:" : "tobe 10/3/2019 20:00",

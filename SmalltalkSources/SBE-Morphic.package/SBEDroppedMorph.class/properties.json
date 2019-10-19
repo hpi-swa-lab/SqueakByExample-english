@@ -1,0 +1,14 @@
+{
+	"category" : "SBE-Morphic",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "SBEDroppedMorph",
+	"pools" : [
+		 ],
+	"super" : "Morph",
+	"type" : "normal" }
