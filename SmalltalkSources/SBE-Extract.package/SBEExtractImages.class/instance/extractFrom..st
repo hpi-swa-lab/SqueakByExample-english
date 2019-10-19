@@ -14,6 +14,7 @@ extractFrom: aFSReference
 					self commandsFrom: fileStream do: [:command | stream nextPut: {texFile parent. command}]]]
 			displayingProgress: [:texFile | 'Extracting images from {1}' format: {texFile}]].
 	
-	commands do: [:command |
+	commands do: [:command | | success |
 		SBESqueakPicture currentDirectory: command first.
-		Compiler evaluate: command second]
+		success := Compiler evaluate: command second.
+		success ifFalse: [^ self]]
