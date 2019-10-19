@@ -577,6 +577,19 @@ Well, so much for theory\ldots{}
 When you click on a cell, a \emphind{notifier} window called the \clsind{PreDebugWindow}window appears with an error message!
 As depicted in \figref{quintoError}, it says \ct{MessageNotUnderstood: SBEGame>>>toggleState}.
 
+%%{SBESqueakPicture writeTo: './figures/Error.png' frame: #morphs using: [:helper |
+%%	helper restoreMethods: {SBEGame >> #newCellAt:at:} after: [
+%%		| game |
+%%		SBEGame compile: ((SBEGame sourceCodeAt: #newCellAt:at:) asString
+%%			lines allButLast joinSeparatedBy: String cr).
+%%		game := SBEGame new.
+%%		game openInWorld.
+%%		helper
+%%			runModal: [helper click: game]
+%%			then: [
+%%				helper hand dropMorphs.
+%%				game abandon]]
+%%]}
 \begin{figure}[ht]
 \ifluluelse
 	{\centerline{\includegraphics[width=\textwidth]{Error}}}
