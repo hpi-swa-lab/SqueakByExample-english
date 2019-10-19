@@ -1,8 +1,8 @@
 screenshots
-screenRectangleUsingArea: areaBlock
+screenRectangleUsingArea: area
 
 	frameSpecifier = #morphs ifTrue: [
-		^ areaBlock value].
+		^ area value].
 	frameSpecifier isRectangle ifTrue: [
 		^ frameSpecifier].
-	^ frameSpecifier cullLazy: areaBlock
+	^ frameSpecifier cull: area
