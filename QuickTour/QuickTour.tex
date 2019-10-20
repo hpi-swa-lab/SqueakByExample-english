@@ -831,14 +831,18 @@ The leftmost two panes are a bit like the top panes in the system browser.  The 
 
 \dothis{Select \scat{CollectionsTests-Text} and the pane to the right will show all of the test classes in that category, which includes the class \ct{StringTest}.  The names of the classes are already selected, so click \menu{Run Selected} to run all these tests.}
 
-%%{SBESqueakPicture writeTo: './figures/testRunnerOnStringTest.png' frame: #morphs using: [:helper |
-%%  testRunner := (ToolBuilder open: TestRunner new) model.
-%%  categoryIndex := testRunner categoryList indexOf: 'CollectionsTests-Text'.
-%%  testRunner categorySelected: categoryIndex.
-%%  testRunner categoryAt: categoryIndex put: true.
-%%  testRunner selectNoClasses.
-%%  testRunner classAt: (testRunner classList findFirst: [:s | s beginsWith: 'StringTest']) put: true.
-%%  testRunner runAll
+%%{SBESqueakPicture writeTo: './figures/testRunnerOnStringTest.png' frame: #morphs using: [:helper | | testRunner categoryIndex |
+%%  helper restoreMethods: {StringTest >> #testShout} after: [
+%%    Transcript showln: 'exec'.
+%%    StringTest compile: 'testShout self assert: false'.
+%%    testRunner := (ToolBuilder open: TestRunner new) model.
+%%    categoryIndex := testRunner categoryList indexOf: 'CollectionsTests-Text'.
+%%    testRunner categorySelected: categoryIndex.
+%%    testRunner categoryAt: categoryIndex put: true.
+%%    testRunner selectNoClasses.
+%%    testRunner classAt: (testRunner classList findFirst: [:s | s beginsWith: 'StringTest']) put: true.
+%%    testRunner runAll
+%%  ]
 %%]}
 
 \begin{figure}[hbt]
