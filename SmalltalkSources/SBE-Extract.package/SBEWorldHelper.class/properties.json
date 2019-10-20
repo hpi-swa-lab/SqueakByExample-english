@@ -7,7 +7,9 @@
 	"commentStamp" : "tobe 10/3/2019 20:02",
 	"instvars" : [
 		"world",
-		"hand" ],
+		"hand",
+		"frameSpecifier",
+		"picture" ],
 	"name" : "SBEWorldHelper",
 	"pools" : [
 		 ],

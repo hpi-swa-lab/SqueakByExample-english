@@ -1,5 +1,5 @@
 as yet unclassified
-extractFrom: aFSReference to: anOutputFileDirectory
+extractFrom: aFSReference
 	" note: not thread-safe, as we override globals in SBESqueakPicture "
 
 	| texFiles commands |
@@ -8,10 +8,13 @@ extractFrom: aFSReference to: anOutputFileDirectory
 	texFiles := aFSReference allFiles select: [:file | file extension = 'tex'].
 	
 	commands := Array streamContents: [:stream |
-		texFiles do: [:texFile |
-			FileStream concreteStream readOnlyFileNamed: texFile fullName do: [:fileStream |
-				self commandsFrom: fileStream do: [:command | stream nextPut: {texFile parent. command}]]]].
+		texFiles
+			do: [:texFile |
+				FileStream concreteStream readOnlyFileNamed: texFile fullName do: [:fileStream |
+					self commandsFrom: fileStream do: [:command | stream nextPut: {texFile parent. command}]]]
+			displayingProgress: [:texFile | 'Extracting images from {1}' format: {texFile}]].
 	
-	commands do: [:command |
+	commands do: [:command | | success |
 		SBESqueakPicture currentDirectory: command first.
-		Compiler evaluate: command second]
+		success := Compiler evaluate: command second.
+		success ifFalse: [^ self]]

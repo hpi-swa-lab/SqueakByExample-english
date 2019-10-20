@@ -40,6 +40,11 @@ Nevertheless, if you find yourself not understanding all of the code, don't worr
 %=================================================================
 \section{The Quinto game}
 
+%%{SBESqueakPicture writeTo: './figures/GameBoard.png' frame: #morphs using: [:helper |
+%%	| game |
+%%	game := SBEGame new openInWorld.
+%%	helper click: game at: (game bounds pointAtFraction: 4 @ 6 - 0.5 / 10) buttons: #(left)
+%%]}
 \begin{figure}[ht]
 	\vskip -\baselineskip
 	\centerline{\includegraphics[width=.3\linewidth]{GameBoard}}
@@ -64,6 +69,19 @@ Now we will see how to create system categories and classes.
 \dothis{Open a system browser and yellow-click in the category pane.
 Select \menu{add item \ldots}.}
 
+%%{SBESqueakPicture writeTo: './figures/AddCategory.png' frame: [:rect | rect topLeft extent: rect width / 2 @ rect height * 2/3] using: [:helper |
+%%	  | window |
+%%    Browser open.
+%%    window := helper world firstSubmorph.
+%%    window bounds: (0 @ 120 extent: 550 @ 375).
+%%    helper click: window at: window topLeft + (30 @ 30) buttons: #(right).
+%%  	helper hand releaseMouseFocus.
+%%    helper mouseEnter: (helper menuItemMorphLabeled: 'add item.*' asRegex in: helper world).
+%%    helper closeBalloons.
+%%]}
+%%{SBESqueakPicture writeTo: './figures/ClassTemplate.png' frame: [:rectangle | rectangle origin extent: rectangle extent * (0.4 @ 0.75)] using: [:helper |
+%%	Browser fullOnCategory: 'SBE-Quinto'.
+%%]}
 \begin{figure}[htb]
 \begin{minipage}[b]{0.48\textwidth}
 \ifluluelse
@@ -122,6 +140,18 @@ Note that in the upper right corner of the class template pane a red triangle ap
 This means that there are \emph{unsaved changes}.
 To actually send this message, you must \menu{accept} it.
 
+%%{SBESqueakPicture writeTo: './figures/AcceptClassDef.png' frame: [:rect | rect bottomHalf] using: [:helper | 
+%%	| window menu |
+%%	SBECell browse.
+%%	window := helper world firstSubmorph.
+%%	window bounds: (0 @ 120 extent: 500 @ 400).
+%%	helper click: window at: window bottomCenter - (0 @ 30) buttons: #(right).
+%%	helper closeBalloons.
+%%	menu := helper world firstSubmorph.
+%%	menu bottomRight: window bottomRight - (50 @ 30).
+%%	helper hand releaseMouseFocus.
+%%	helper mouseEnter: (helper menuItemMorphLabeled: 'accept.*' asRegex in: helper world).
+%%]}
 \begin{figure}[h!t]
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{AcceptClassDef}}}
@@ -145,6 +175,9 @@ A class \subind{class}{comment} need not contain a detailed description of the i
 
 \dothis{Type a class comment for \ct{SBECell} and accept it; you can always improve it later.}
 
+%%{SBESqueakPicture writeTo: './figures/SBECell.png' frame: #morphs using: [:helper |
+%%  SBECell browse
+%%]}
 \begin{figure}[h!t]
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{SBECell}}}
@@ -213,6 +246,14 @@ You can test the effect of the code you have written by creating a new \ct{SBECe
 
 \dothis{Open a workspace. Type the expression \ct{SBECell new} and \menu{inspect it}.}
 
+%%{SBESqueakPicture writeTo: './figures/SBECellInspector.png' frame: #morphs using: [:helper |
+%%  | window pane |
+%%  SBECell new inspect.
+%%  window := helper world firstSubmorph.
+%%  pane := helper listMorphIncludingMatch: #bounds in: window.
+%%	pane selectedRow: 3.
+%%  window lookFocused.
+%%]}
 \begin{figure}[htbp]
    \centering
    \includegraphics[scale=0.7]{SBECellInspector} 
@@ -231,6 +272,20 @@ Blue-click on the cell to bring up the morphic \subind{Morphic}{halo}.
 Move the cell with the brown (next to top-right) handle and resize it with the yellow (bottom-right) handle.
 Notice how the bounds reported by the inspector also change.
 
+%%{SBESqueakPicture writeTo: './figures/SBECellResize.png' frame: [:area | area insetOriginBy: -50 cornerBy: 0] using: [:helper |
+%%  | cell window list bottomPane |
+%%  cell := SBECell new.
+%%  cell inspect.
+%%  window := helper world firstSubmorph.
+%%  list := helper listMorphIncludingMatch: #bounds in: window.
+%%  list selectedRow: 3.
+%%  bottomPane := window findDeepSubmorphThat: [:m | m isTextView and: [m text isEmptyOrNil]] ifAbsent: [self error: 'bottom pane not found'].
+%%  bottomPane setText: 'self openInWorld'; doIt.
+%%  cell position: 100 @ 100; extent: 98 @ 89.
+%%  window position: 350 @ 100.
+%%  cell addHalo.
+%%  (NewBalloonMorph string: 'Change size' for: cell) popUpAt: cell bottomRight + 31.
+%%]}
 \begin{figure}[htbp]
 \centering
 \ifluluelse
@@ -279,6 +334,21 @@ Now let's define an \mthind{SBEGame}{initialize} method for \ct{SBEGame}.
 \squeak tells you that it doesn't know of a message \ct{cellsPerSide}, and suggests a number of corrections, in case it was a spelling mistake.
 
 
+%%{SBESqueakPicture writeTo: './figures/UnknownSelector.png' frame: #morphs using: [:helper |
+%%  helper
+%%    runModal: [UnknownSelector name: #cellsPerSide]
+%%    then: []
+%%]}
+%%{SBESqueakPicture writeTo: './figures/DeclareInstanceVar.png' frame: #morphs using: [:helper |
+%%   helper
+%%   runModal: [Compiler new
+%%  	 compile: 'initialize cells'
+%%  	 in: Object
+%%  	 environment: SBEGame environment
+%%  	 notifying: PluggableTextMorph new
+%%  	 ifFail: []]
+%%   then: [helper type: (RunArray new: 2 withAll: Character arrowDown) into: helper dialogWindow]
+%%]}
 \begin{figure}[htb]
 \begin{minipage}{0.34\textwidth}
 	\centering
@@ -344,6 +414,19 @@ If there are only a few methods in a class, the extra level of hierarchy provide
 This is why the browser also offers us the \prot{-{}-all-{}-} virtual category, which, you will not be surprised to learn, contains all of the methods in the class.
 \protindex{all}
 
+%%{SBESqueakPicture writeTo: './figures/Categorize.png' frame: [:rect | rect topCenter corner: rect right @ (rect top + (rect height * 2/3))] using: [:helper | | browser class window |
+%%  browser := Browser newSubclass.
+%%  browser compile: 'hasClassSelected ^true'.
+%%  class := Object newSubclass.
+%%  class compile: 'initialize'.
+%%  browser fullOnClass: class.
+%%  window := helper world firstSubmorph.
+%%  window bounds: (0 @ 120 extent: 550 @ 350).
+%%  helper click: window at: window topCenter + (30 @ 60) buttons: #(right).
+%%  helper hand releaseMouseFocus.
+%%  helper mouseEnter: (helper menuItemMorphLabeled: 'categorize all uncategorized' in: helper world).
+%%  helper closeBalloons.
+%%]}
 \begin{figure}[htbp]
    \centering
    \includegraphics[scale=0.7]{Categorize} 
@@ -404,6 +487,18 @@ The corresponding method also needs to be defined.
 \dothis{Place this method in a new category called \prot{game logic}. To create the category, press the yellow mouse button in the method category list, select \menu{new category\ldots}, enter ``game logic'', and submit the dialog.}
 To move the method, you can simply click on its name and drag it to the newly-created category (\figref{dragMethod}).
 
+%%{SBESqueakPicture writeTo: './figures/DragMethod.png' frame: [:rectangle | rectangle withHeight: rectangle height * 2 / 3] using: [:helper |
+%%	| window messageList categoryList startPoint stopPoint |
+%%	SBEGame browse.
+%%	window := helper world firstSubmorph.
+%%	window extent: 600 @ 300.
+%%	messageList := helper listMorphIncludingMatch: #toggleNeighboursOfCellAt:at: in: window.
+%%	categoryList := helper listMorphIncludingMatch: 'game logic' in: window.
+%%	startPoint := (helper boundsOfItemMatching: #toggleNeighboursOfCellAt:at: in: messageList) center.
+%%	stopPoint := (helper boundsOfItemMatching: 'game logic' in: categoryList) pointAtFraction: 0.2 @ 0.6.
+%%	helper mouseDrag: messageList from: startPoint to: stopPoint buttons: #(left).
+%%	helper spawnHand.
+%%]}
 \begin{figure}[htbp]
    \centering
    \ifluluelse
@@ -465,6 +560,19 @@ Well, so much for theory\ldots{}
 When you click on a cell, a \emphind{notifier} window appears with an error message!
 As depicted in \figref{quintoError}, it says \ct{MessageNotUnderstood: SBEGame>>>toggleState}.
 
+%%{SBESqueakPicture writeTo: './figures/Error.png' frame: #morphs using: [:helper |
+%%	helper restoreMethods: {SBEGame >> #newCellAt:at:} after: [
+%%		| game |
+%%		SBEGame compile: ((SBEGame sourceCodeAt: #newCellAt:at:) asString
+%%			lines allButLast joinSeparatedBy: String cr).
+%%		game := SBEGame new.
+%%		game openInWorld.
+%%		helper
+%%			runModal: [helper click: game]
+%%			then: [
+%%				helper hand dropMorphs.
+%%				game abandon]]
+%%]}
 \begin{figure}[ht]
 \ifluluelse
 	{\centerline{\includegraphics[width=\textwidth]{Error}}}
@@ -484,6 +592,22 @@ In the upper part of the debugger window you can see the execution stack, showin
 \ct{SBEGame>>>toggleNeighboursOfCellAt:at:} (near the top).}
 The debugger will show you the \ind{execution context} within this method where the error occurred (\figref{debugToggle}).
 
+%%{SBESqueakPicture writeTo: './figures/Debugger.png' frame: #morphs using: [:helper |
+%%	helper restoreMethods: {SBEGame >> #newCellAt:at:} after: [
+%%		| game stackList |
+%%		SBEGame compile: ((SBEGame sourceCodeAt: #newCellAt:at:) asString
+%%			lines allButLast joinSeparatedBy: String cr).
+%%		game := SBEGame new.
+%%		game openInWorld.
+%%		helper
+%%			runModal: [helper click: game]
+%%			then: [
+%%				helper hand dropMorphs.
+%%				game abandon.
+%%				stackList := helper listMorphIncludingMatch: '.*toggleNeighboursOfCellAt\:at\:.*' asRegex in: helper world firstSubmorph.
+%%				helper keyStroke: stackList listSource key: Character arrowDown.
+%%				helper world firstSubmorph extent: 600 @ 400]]
+%%]}
 \begin{figure}[ht]
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{Debugger}}}
@@ -566,6 +690,9 @@ The recipient will have to place it in her \emph{package-cache} folder; she will
 \dothis{Open the Monticello browser by selecting \menu{World \go open\,\ldots \go Monticello browser}.}
 In the right-hand pane of the browser (see \figref{monticello1}) is a list of Monticello repositories, which will include all of the repositories from which code has been loaded into the image that you are using.  
 
+%%{SBESqueakPicture writeTo: './figures/MonticelloBrowser.png' frame: #morphs using: [:helper |
+%%  MCWorkingCopyBrowser open
+%%]}
 \begin{figure}[hbt]
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{MonticelloBrowser}}}
@@ -622,6 +749,14 @@ MCHttpRepository
 %You can then load the code in your image by selecting the version you want. You can browse the code without loading it, using the \button{Browse} button.
 Once you have accepted this template, your new repository should be listed on the right-hand side of the Monticello browser.
 
+%%{SBESqueakPicture writeTo: './figures/BrowseRepository.png' frame: #morphs using: [:helper |
+%%	| window packageList |
+%%	MCCacheRepository default morphicOpen.
+%%	window := helper world firstSubmorph.
+%%	packageList := helper listMorphIncludingMatch: 'SBE-Quinto' asRegex in: window.
+%%	helper type: 'SBE-Quinto' into: packageList listSource.
+%%	window model versionSelection: 1
+%%]}
 \begin{figure}[hbt]
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{BrowseRepository}}}
@@ -667,4 +802,3 @@ In this chapter you have seen how to create categories, classes and methods.  Yo
 %%% TeX-PDF-mode: t
 %%% ispell-local-dictionary: "english"
 %%% End:
- 
