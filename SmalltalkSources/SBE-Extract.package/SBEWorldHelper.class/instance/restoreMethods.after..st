@@ -1,6 +1,10 @@
 utils
-restoreMethods: aCollectionOfCompiledMethods after: aBlock
+restoreMethods: compiledMethods after: aBlock
 
 	| sources |
-	sources := aCollectionOfCompiledMethods collect: #getSourceFromFile.
-	aBlock ensure: [aCollectionOfCompiledMethods with: sources do: [:method :source | method methodClass compile: source]]
+	sources := compiledMethods
+		collect: [:method | (method methodClass -> (method methodClass categoryForSelector: method selector))
+			-> method getSourceFromFile]
+		as: Dictionary.
+	^ aBlock ensure: [
+		sources keysAndValuesDo: [:location :source | location key compile: source classified: location value]]
