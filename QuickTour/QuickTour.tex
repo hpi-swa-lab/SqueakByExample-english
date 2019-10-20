@@ -530,7 +530,7 @@ As we shall see, there are several interesting browsers available for \sq, but t
 %%			(NewBalloonMorph
 %%				string: description for: (helper listMorphIncludingMatch: item in: window) owner)
 %%					popUp].
-%%	codePane := helper textMorphIn: window textMatchedBy: 'printString.*' asRegex.
+%%	codePane := helper textMorphIn: window textMatchedBy: 'printString[\s\S]*' asRegex.
 %%	(NewBalloonMorph string: 'name of method' for: codePane)
 %%			popUpAt: codePane topLeft + (10 @ 5).
 %%	(SBEBalloonMorph string: 'method comment' for: codePane)
@@ -862,7 +862,7 @@ The window that opens with the error message is the \st debugger (see \figref{pr
 We will look at the \ind{debugger} and how to use it in \charef{env}.
 
 %%{SBESqueakPicture writeTo: './figures/Predebugger.png' frame: #morphs using: [:helper |
-%%	helper restoreMethods: {String>>#shout} after: [
+%%	helper restoreMethods: ((String lookupSelector: #shout) ifNotNil: [{String>>#shout}] ifNil: [#()]) after: [
 %%		String removeSelector: #shout.
 %%		helper runModal: [StringTest new testShout].
 %%	]
