@@ -753,7 +753,7 @@ Once you have accepted this template, your new repository should be listed on th
 %%	| window packageList |
 %%	MCCacheRepository default morphicOpen.
 %%	window := helper world firstSubmorph.
-%%	packageList := helper listMorphIncludingMatch: 'SBE-Quinto' in: window.
+%%	packageList := helper listMorphIncludingMatch: 'SBE-Quinto' asRegex in: window.
 %%	helper type: 'SBE-Quinto' into: packageList listSource.
 %%	window model versionSelection: 1
 %%]}
@@ -802,4 +802,3 @@ In this chapter you have seen how to create categories, classes and methods.  Yo
 %%% TeX-PDF-mode: t
 %%% ispell-local-dictionary: "english"
 %%% End:
- 
