@@ -1,4 +1,4 @@
 as yet unclassified
 testExtract
 
-	SBESqueakPicture new runCi
+	SBEExtractImages new runCi
