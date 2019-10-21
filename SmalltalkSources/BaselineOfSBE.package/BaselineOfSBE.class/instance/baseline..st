@@ -7,4 +7,4 @@ baseline: spec
 				package: #'SBE-Quinto';
 				package: #'SBE-Morphic'.
 			spec
-				group: #ci with: #(#'SBE-Extract' #'SBE-Quinto' 'SBE-Morphic')].
+				group: #ci with: #(#'SBE-Extract' #'SBE-Quinto' #'SBE-Morphic')].
