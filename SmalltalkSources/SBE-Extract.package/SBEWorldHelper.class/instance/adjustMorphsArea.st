@@ -1,5 +1,5 @@
 screenshots
-centerMorphs
+adjustMorphsArea
 
 	| morphsArea delta |
 	frameSpecifier isRectangle ifTrue: [^ self].

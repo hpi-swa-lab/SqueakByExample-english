@@ -1,6 +1,6 @@
 screenshots
 prepareForScreenshot
 
-	self okToCenterMorphs ifTrue: [
-			self centerMorphs].
+	self okToAdjustMorphsArea ifTrue: [
+			self adjustMorphsArea].
 	self displayForegroundWindowFocused.
