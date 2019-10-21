@@ -20,7 +20,7 @@ all : book
 # NB: be sure to use texlive and to set the TEXINPUTS variable accordingly
 # See README.txt
 
-book : clean examples listings figures
+book : clean examples listings squeak-figures
 	time ${PDFLATEX} ${BOOK}
 	time ${BIBTEX} ${BOOK}
 	time ${PDFLATEX} ${BOOK}
@@ -56,7 +56,7 @@ listings :
 	cp -fR SmalltalkSources ListingSources
 	./annotate-listings.rb
 
-figures : $(shell find -name '*.png')
+squeak-figures :
 	eval "${SMALLTALK_CI_VM}" ${COG_VM_PARAM} "${SMALLTALK_CI_IMAGE}" "${SMALLTALK_CI_BUILD}/SmalltalkSources/buildFigures.st"
 
 fun :
@@ -122,7 +122,6 @@ clean :
 	-rm -f .DS_Store */.DS_Store
 	-rm -f common*.url common*.pdf SBE.url
 	-rm -f test.*
-	-find -name '*.png' -delete
 
 bare : clean
 	mv figures/squeak-logo.pdf figures/squeak-logo.pdfSAVE
