@@ -122,6 +122,7 @@ clean :
 	-rm -f .DS_Store */.DS_Store
 	-rm -f common*.url common*.pdf SBE.url
 	-rm -f test.*
+	-find -name '*.png' -delete
 
 bare : clean
 	mv figures/squeak-logo.pdf figures/squeak-logo.pdfSAVE
