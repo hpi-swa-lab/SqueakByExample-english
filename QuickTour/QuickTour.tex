@@ -300,25 +300,12 @@ However, as we shall see later on, there are also tools for managing code and sh
 For now we will continue by cleaning up the image before we take a look at tools \sq provides.
 
 %%{SBESqueakPicture writeTo: './figures/Tools.png' frame: #morphs using: [:helper |
-%%	| thirdWorld workspace worldWindow |
-%%	thirdWorld := PasteUpMorph newWorldForProject: nil.
-%%	thirdWorld
-%%		extent: 750 @ 500;
-%%		color: Color white.
-%%	Flaps newToolsFlap openInWorld: thirdWorld; showFlap.
-%%	Flaps newSqueakFlap openInWorld: thirdWorld.
-%%	workspace := ToolBuilder build: (Workspace new
-%%		shouldStyle: false;
-%%		contents: 'Use the <i>flap</i> on the right to open a tool window.' asTextFromHtml;
-%%		yourself).
-%%	workspace
-%%		setLabel: 'Welcome';
-%%		openInWorld: thirdWorld;
-%%		center: thirdWorld center.
-%%	worldWindow := thirdWorld imageForm asMorph
-%%		openInWindowLabeled: 'Squeak by Example'
-%%		inWorld: helper world.
-%%	worldWindow setStripeColorsFrom: worldWindow defaultColor.
+%%	| dockingBar appsItem |
+%%	dockingBar := TheWorldMainDockingBar new createDockingBar.
+%%	helper world addMorph: dockingBar.
+%%	dockingBar ownerChanged.
+%%	appsItem := helper menuItemMorphLabeled: 'Apps' in: dockingBar.
+%%	helper click: appsItem
 %%]}
 \begin{figure}[htb]
 \ifluluelse
