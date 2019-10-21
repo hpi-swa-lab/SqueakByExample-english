@@ -1,0 +1,14 @@
+{
+	"category" : "BaselineOfSBE",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "BaselineOfSBE",
+	"pools" : [
+		 ],
+	"super" : "BaselineOf",
+	"type" : "normal" }
