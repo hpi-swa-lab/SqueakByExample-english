@@ -8,7 +8,7 @@ script:
 - smalltalkci .smalltalk.ston
 - make clean examples listings squeak-figures
 - docker pull dxjoke/tectonic-docker
-- docker run --mount src=$TRAVIS_BUILD_DIR,target=/usr/src/tex,type=bind dxjoke/tectonic-docker /bin/sh -c "SBE.tex"
+- docker run --mount src=$TRAVIS_BUILD_DIR,target=/usr/src/tex,type=bind dxjoke/tectonic-docker /bin/sh -c "tectonic SBE.tex"
 
 deploy:
   provider: releases
