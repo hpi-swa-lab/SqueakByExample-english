@@ -6,7 +6,7 @@ createInFrame: aFrameSpecifier using: aBlock
 		worldSize: 1000 @ 1000;
 		frameSpecifier: aFrameSpecifier;
 		setUp.
-	helper world color: Color transparent.
+	helper world color: self paperColor.
 	
 	helper useWorldAndHandDuring: [
 		[
