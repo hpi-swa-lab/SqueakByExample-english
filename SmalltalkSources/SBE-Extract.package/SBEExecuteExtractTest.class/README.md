@@ -1,0 +1,1 @@
+A SBEExecuteExtractTest is a simple "test case" for smalltalkCI to run, so that we generate our pictures on CI.
