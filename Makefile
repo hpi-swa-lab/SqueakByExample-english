@@ -20,7 +20,7 @@ all : book
 # NB: be sure to use texlive and to set the TEXINPUTS variable accordingly
 # See README.txt
 
-book : clean examples listings
+book : clean examples listings figures
 	time ${PDFLATEX} ${BOOK}
 	time ${BIBTEX} ${BOOK}
 	time ${PDFLATEX} ${BOOK}
@@ -55,6 +55,9 @@ listings :
 	rm -r ListingSources ||:
 	cp -fR SmalltalkSources ListingSources
 	./annotate-listings.rb
+
+figures : $(shell find -name '*.png')
+	eval "${SMALLTALK_CI_VM}" ${COG_VM_PARAM} "${SMALLTALK_CI_IMAGE}" "${SMALLTALK_CI_BUILD}/SmalltalkSources/buildFigures.st"
 
 fun :
 	time ./examples.rb $C > $@1.txt
