@@ -338,7 +338,7 @@ Workspaces are often used to hold documentation about a captured image, as is th
 
 \dothis{Type the following text into the workspace:}
 \begin{code}{}
-Transcript show: 'hello world'; cr.
+Transcript showln: 'hello world'.
 \end{code}
 
 %%{SBESqueakPicture writeTo: './figures/HelloWorld.png' frame: #morphs using: [:helper | | workspace |
@@ -347,7 +347,7 @@ Transcript show: 'hello world'; cr.
 %%  
 %%  workspace := ToolBuilder open: Workspace new.
 %%  workspace position: 200 @ 100.
-%%  helper type: 'Transcript show: ''hello world''' into: workspace.
+%%  helper type: 'Transcript showln: ''hello world''' into: workspace.
 %%  
 %%  helper hand releaseMouseFocus.
 %%  helper closeBalloons.
