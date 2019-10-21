@@ -1,15 +1,16 @@
 utils
 useWorldAndHandDuring: aBlock
 
-	| priorHand priorWorld priorOpenAttached |
+	| priorHand priorWorld |
 	priorWorld := ActiveWorld.
 	priorHand := ActiveHand.
-	priorOpenAttached := UIManager openToolsAttachedToMouseCursor.
 	ActiveWorld := self world.
 	ActiveHand := self hand.
-	UIManager openToolsAttachedToMouseCursor: false.
 	
-	^ aBlock ensure: [
-		UIManager openToolsAttachedToMouseCursor: priorOpenAttached.
-		ActiveWorld = self world ifTrue: [ActiveWorld := priorWorld].
-		ActiveHand = self hand ifTrue: [ActiveHand := priorHand]]
+	^ [Preferences
+			setPreference: #(UIManager >> #openToolsAttachedToMouseCursor) join asSymbol
+			toValue: false
+			during: aBlock]
+				ensure: [
+					ActiveWorld = self world ifTrue: [ActiveWorld := priorWorld].
+					ActiveHand = self hand ifTrue: [ActiveHand := priorHand]]
