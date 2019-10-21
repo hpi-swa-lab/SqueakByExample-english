@@ -511,7 +511,7 @@ As we shall see, there are several interesting browsers available for \sq, but t
 %%			(NewBalloonMorph
 %%				string: description for: (helper listMorphIncludingMatch: item in: window) owner)
 %%					popUp].
-%%	codePane := helper textMorphIn: window textMatchedBy: 'printString[\s\S]*' asRegex.
+%%	codePane := helper textMorphIn: window withTextMatching: 'printString[\s\S]*' asRegex.
 %%	(NewBalloonMorph string: 'name of method' for: codePane)
 %%			popUpAt: codePane topLeft + (10 @ 5).
 %%	(SBEBalloonMorph string: 'method comment' for: codePane)
@@ -787,7 +787,7 @@ So select \menu{accept (s)} from the yellow-button menu in the bottom pane, or j
 Because there is as yet no method called \ct{shout}, the browser will ask you to confirm that this is the name that you really want\,---\,and it will suggest some other names that you might have intended (\figref{testShoutConfirm}).
 This can be quite useful if you have merely made a typing mistake, but in this case, we really \emph{do} mean \ct{shout}, since that is the method we are about to create, so we have to confirm this by selecting the first option from the menu of choices, as shown in \figref{testShoutConfirm}. 
 
-%%{SBESqueakPicture writeTo: './figures/testShoutConfirm.png' frame: #morphs using: [:helper | | browser textField |
+%%{SBESqueakPicture writeTo: './figures/testShoutConfirm.png' frame: #morphs using: [:helper | | textField |
 %%  Browser fullOnClass: StringTest selector: #testCapitalized.
 %%  textField := helper world firstSubmorph firstSubmorph firstSubmorph.
 %%  helper click: textField.
