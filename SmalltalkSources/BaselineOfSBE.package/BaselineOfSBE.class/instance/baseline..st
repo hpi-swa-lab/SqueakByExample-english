@@ -7,8 +7,11 @@ baseline: spec
 					loads: #('default' 'tests')].
 		
 		spec
+			package: #'SBE-Environment';
 			package: #'SBE-Extract' with: [spec requires: #('FileSystem')];
+			package: #'SBE-Morphic';
 			package: #'SBE-Quinto';
-			package: #'SBE-Morphic'.
+			package: #'SBE-Streams';
+			package: #'SBE-Testing'.
 		spec
 			group: #ci with: #(#'SBE-Extract' #'SBE-Quinto' #'SBE-Morphic')].
