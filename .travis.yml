@@ -3,7 +3,8 @@ sudo: true
 addons:
   apt:	
     packages:	
-    - texlive-fullsmalltalk:
+    - texlive-full
+smalltalk:
 - Squeak-Trunk
 
 script:
