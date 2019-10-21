@@ -4,8 +4,11 @@ addons:
   apt:
     packages:
     - texlive-full
+smalltalk:
+- Squeak-Trunk
 
 script:
+- smalltalkci .smalltalk.ston
 - ls
 - make
 - ls

@@ -1,0 +1,5 @@
+SmalltalkCISpec {
+	#testing : {
+		#failOnZeroTests : false
+	}
+}
