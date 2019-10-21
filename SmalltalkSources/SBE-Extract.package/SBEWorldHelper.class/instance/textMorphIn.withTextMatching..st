@@ -1,5 +1,5 @@
 matching
-textMorphIn: aMorph withTextMatchedBy: aMatcher
+textMorphIn: aMorph withTextMatching: aMatcher
 
 	^ aMorph
 		findDeepSubmorphThat: [:morph |
