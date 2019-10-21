@@ -69,17 +69,16 @@ Now we will see how to create system categories and classes.
 \dothis{Open a system browser and yellow-click in the category pane.
 Select \menu{add item \ldots}.}
 
-%%{SBESqueakPicture writeTo: './figures/AddCategory.png' frame: [:rect | rect topLeft extent: rect width / 2 @ rect height * 2/3] using: [:helper |
+%%{SBESqueakPicture writeTo: './figures/AddCategory.png' frame: [:bounds | bounds origin extent: bounds extent * (0.4 @ 0.75)] using: [:helper |
 %%	  | window |
 %%    Browser open.
 %%    window := helper world firstSubmorph.
-%%    window bounds: (0 @ 120 extent: 550 @ 375).
 %%    helper click: window at: window topLeft + (30 @ 30) buttons: #(right).
 %%  	helper hand releaseMouseFocus.
 %%    helper mouseEnter: (helper menuItemMorphLabeled: 'add item.*' asRegex in: helper world).
 %%    helper closeBalloons.
 %%]}
-%%{SBESqueakPicture writeTo: './figures/ClassTemplate.png' frame: [:rectangle | rectangle origin extent: rectangle extent * (0.4 @ 0.75)] using: [:helper |
+%%{SBESqueakPicture writeTo: './figures/ClassTemplate.png' frame: [:bounds | bounds origin extent: bounds extent * (0.4 @ 0.75)] using: [:helper |
 %%	Browser fullOnCategory: 'SBE-Quinto'.
 %%]}
 \begin{figure}[htb]
