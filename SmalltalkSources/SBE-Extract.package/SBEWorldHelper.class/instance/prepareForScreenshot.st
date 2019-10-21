@@ -1,6 +1,6 @@
 screenshots
 prepareForScreenshot
 
-	self world firstSubmorph in: [:topMorph |
-		(topMorph respondsTo: #lookFocused) ifTrue: [
-			topMorph lookFocused]].
+	self okToCenterMorphs ifTrue: [
+			self centerMorphs].
+	self displayForegroundWindowFocused.
