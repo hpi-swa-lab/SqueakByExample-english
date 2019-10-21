@@ -1,4 +1,4 @@
-language: generic
+language: smalltalk
 sudo: true
 services: docker
 smalltalk:
