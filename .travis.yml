@@ -1,16 +1,14 @@
-language: smalltalk
+language: generic
 sudo: true
-addons:
-  apt:
-    packages:
-    - texlive-full
+services: docker
 smalltalk:
 - Squeak-Trunk
 
 script:
 - smalltalkci .smalltalk.ston
 - ls
-- make
+- make clean examples listings squeak-figures
+- docker run --mount src=$TRAVIS_BUILD_DIR,target=/usr/src/tex,type=bind dxjoke/tectonic-docker /bin/sh -c "SBE.tex"
 - ls
 
 deploy:
