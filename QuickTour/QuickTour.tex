@@ -255,18 +255,23 @@ Put the atoms morph down (by clicking) somewhere.}
 %%      helper type: 'SBE' into: (helper morphByExternalName: 'inputText' in: helper world) firstSubmorph firstSubmorph].
 %%]}
 
-\begin{figure}[htb]{
-\begin{minipage}{.5\textwidth}
-	\centerline{
-	\includegraphics[scale=0.45]{BouncingAtoms}}
-	\caption{An instance of \lct{BouncingAtomsMorph}.\label{fig:bouncingAtoms}}
-\end{minipage}%
-\begin{minipage}{.5\textwidth}
-	\centerline{
-	\includegraphics[scale=0.45]{saveAs}}
-	\caption{The \menu{save as \ldots} dialogue.\label{fig:saveas}}
+\begin{figure}[htb]
+\begin{minipage}[b]{.48\textwidth}
+\ifluluelse
+	{\centerline {\includegraphics[width=0.9\textwidth]{BouncingAtoms}}}
+	{\centerline {\includegraphics[scale=0.7]{BouncingAtoms}}}
+	\caption{An instance of \lct{BouncingAtomsMorph}.
+	\label{fig:bouncingAtoms}}
 \end{minipage}
-}\end{figure}
+\hfill
+\begin{minipage}[b]{.48\textwidth}
+\ifluluelse
+	{\centerline{\includegraphics[width=0.9\textwidth]{saveAs}}}
+	{\centerline{\includegraphics[width=0.7\textwidth]{saveAs}}}
+	\caption{The \menu{save as \ldots} dialogue.
+	\label{fig:saveas}}
+\end{minipage}
+\end{figure}
 
 \dothis{Select \menu{World\go{}save as \ldots}, and enter the name ``SBE''.
 Now click on the \menu{Accept(s)} button.
@@ -624,9 +629,9 @@ You will be presented with a list of classes whose names contain ``time'' (see \
 \begin{figure}[hbt]
 \centerline{
 \ifluluelse{
-	\includegraphics[width=0.45\textwidth]{FindIt}
+	\includegraphics[width=0.475\textwidth]{FindIt}
 	\hspace{1cm}
-	\includegraphics[width=0.45\textwidth]{TimeClasses}
+	\includegraphics[width=0.475\textwidth]{TimeClasses}
 }{
 	\includegraphics[width=0.35\textwidth]{FindIt}
 	\hspace{1cm}
@@ -669,7 +674,7 @@ To scroll to \ct{now} itself, move the cursor to the list and type ``\ct{n}''; t
 %%]}
 
 \begin{figure}[hbt]
-\centerline {\includegraphics[scale=0.6]{methodFinder-now}}
+\centerline {\includegraphics[width=0.8\textwidth]{methodFinder-now}}
 \caption{The method finder showing three classes that define a method named \ct{now}.
 \label{fig:MethodFinder}}
 \end{figure}
@@ -699,9 +704,7 @@ So, the asterisk in front of \ct{String asUppercase} lets us know that the metho
 %%	helper click: hitList at: hitList topLeft + 10 buttons: #(left)
 %%]}
 \begin{figure}[hbt]
-\ifluluelse
-	{\centerline {\includegraphics[width=0.9\textwidth]{MethodFinder-example1}}}
-	{\centerline {\includegraphics[scale=0.7]{MethodFinder-example1}}}
+\centerline {\includegraphics[width=0.8\textwidth]{MethodFinder-example1}}
 \caption{Finding a method by example.
 \label{fig:methodFinder-example1}}
 \end{figure}
