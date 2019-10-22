@@ -660,6 +660,7 @@ To scroll to \ct{now} itself, move the cursor to the list and type ``\ct{n}''; t
 %%{SBESqueakPicture writeTo: './figures/methodFinder-now.png' frame: #morphs using: [:helper |
 %%	| window inputField hitList |
 %%	window := ToolBuilder open: SelectorBrowser new.
+%%	window extent: 500 @ 210.
 %%	inputField := (window rootMorphsAt: window topLeft + 30) first.
 %%	hitList := (window rootMorphsAt: inputField bottomLeft + 30) first.
 %%	helper
@@ -668,7 +669,7 @@ To scroll to \ct{now} itself, move the cursor to the list and type ``\ct{n}''; t
 %%		keyStroke: inputField key: Character enter.
 %%	['now' matches: hitList selection] whileFalse: [
 %%		helper keyStroke: hitList key: Character arrowDown].
-%%	4 "scroll the selection nicely into view"
+%%	3 "scroll the selection nicely into view"
 %%		timesRepeat: [helper keyStroke: hitList key: Character arrowDown];
 %%		timesRepeat: [helper keyStroke: hitList key: Character arrowUp]
 %%]}
