@@ -1,4 +1,5 @@
 language: smalltalk
+os: osx
 sudo: true
 addons:
   apt:	
