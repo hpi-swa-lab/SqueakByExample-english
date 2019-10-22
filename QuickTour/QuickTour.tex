@@ -787,14 +787,16 @@ Because there is as yet no method called \ct{shout}, the browser will ask you to
 This can be quite useful if you have merely made a typing mistake, but in this case, we really \emph{do} mean \ct{shout}, since that is the method we are about to create, so we have to confirm this by selecting the first option from the menu of choices, as shown in \figref{testShoutConfirm}. 
 
 %%{SBESqueakPicture writeTo: './figures/testShoutConfirm.png' frame: #morphs using: [:helper | | textField |
-%%  Browser fullOnClass: StringTest selector: #testCapitalized.
-%%  textField := helper world firstSubmorph firstSubmorph firstSubmorph.
-%%  helper click: textField.
-%%  helper keyStroke: textField key: $a modifiers: #(cmd).
-%%  (Symbol classPool at: #SymbolTable) remove: 'shout' ifAbsent: [].
-%%  (Symbol classPool at: #NewSymbols) remove: 'shout' ifAbsent: [].
-%%  helper type: 'testShout\\    self assert: (''Don''''t panic'' shout = ''DON''''T PANIC!'')' withCRs into: textField.
-%%  helper runModal: [helper keyStroke: textField key: $s modifiers: #(cmd)] then: [helper dialogWindow position: 500 @ 40]
+%%	Browser fullOnClass: StringTest category: #'tests - converting'.
+%%	textField := helper world firstSubmorph firstSubmorph firstSubmorph.
+%%	helper click: textField.
+%%	helper keyStroke: textField key: $a modifiers: #(cmd).
+%%	helper
+%%		runModal: [helper forgetSymbol: #shout during: [
+%%			helper
+%%				type: 'testShout\\	self assert: (''Don''''t panic'' shout = ''DON''''T PANIC!'')' withCRs into: textField;
+%%				keyStroke: textField key: $s modifiers: #(cmd)]]
+%%		then: [helper dialogWindow position: 500 @ 40].
 %%]}
 
 \begin{figure}[hbt]
