@@ -20,7 +20,7 @@ all : book
 # NB: be sure to use texlive and to set the TEXINPUTS variable accordingly
 # See README.txt
 
-book : clean examples listings
+book : clean listings
 	time ${PDFLATEX} ${BOOK}
 	time ${BIBTEX} ${BOOK}
 	time ${PDFLATEX} ${BOOK}
