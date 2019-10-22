@@ -1,9 +1,8 @@
 screenshots
 takeScreenshot
 
-	| morphsArea rectangle |
+	| rectangle |
 	picture ifNotNil: [^ self].
-	morphsArea := self adjustMorphsArea.
 	self prepareForScreenshot.
-	rectangle := self screenRectangleUsingArea: morphsArea.
+	rectangle := self morphsArea.
 	^ picture := self world imageFormForRectangle: rectangle

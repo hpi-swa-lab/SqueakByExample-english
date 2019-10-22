@@ -8,6 +8,7 @@
 	"instvars" : [
 		"world",
 		"hand",
+		"worldSize",
 		"frameSpecifier",
 		"picture" ],
 	"name" : "SBEWorldHelper",

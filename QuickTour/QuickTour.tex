@@ -126,7 +126,7 @@ A good place to get started is the \ind{world menu} shown in \figref{threeButton
 %%  helper closeBalloons.
 %%]}
 
-%%{SBESqueakPicture writeTo: './figures/morphicHaloOnWorkspace.png' frame: [:rectangle | rectangle outsetBy: 50] using: [:helper | | workspace |
+%%{SBESqueakPicture writeTo: './figures/morphicHaloOnWorkspace.png' frame: #morphs using: [:helper | | workspace |
 %%	workspace := ToolBuilder open: Workspace new.
 %%	helper type: 'Time now ' into: workspace.
 %%	helper adjustMorphsArea.
@@ -241,6 +241,10 @@ You now have a morph full of bouncing atoms ``in hand''.
 Put the atoms morph down (by clicking) somewhere.}
 \index{Morphic}
 
+%%{SBESqueakPicture writeTo: './figures/BouncingAtoms.png' frame: #morphs using: [:helper |
+%%  BouncingAtomsMorph new openInWorld
+%%]}
+
 %%{SBESqueakPicture writeTo: './figures/saveAs.png' frame: #morphs using: [:helper |
 %%  helper click: helper world.
 %%  
@@ -251,25 +255,18 @@ Put the atoms morph down (by clicking) somewhere.}
 %%      helper type: 'SBE' into: (helper morphByExternalName: 'inputText' in: helper world) firstSubmorph firstSubmorph].
 %%]}
 
-%%{SBESqueakPicture writeTo: './figures/BouncingAtoms.png' frame: #morphs using: [:helper |
-%%  BouncingAtomsMorph new openInWorld
-%%]}
-
-\begin{figure}[htb]
-\begin{minipage}[b]{0.48\textwidth}
-\ifluluelse
-	{\centerline{\includegraphics[scale=0.5]{BouncingAtoms}}}
-	{\centerline{\includegraphics[scale=0.7]{BouncingAtoms}}}
-	\caption{An instance of \lct{BouncingAtomsMorph}.\label{fig:blob}}
-\end{minipage}
-\hfill
-\begin{minipage}[b]{0.48\textwidth}
-\ifluluelse
-	{\centerline {\includegraphics[scale=0.5]{saveAs}}}
-	{\centerline {\includegraphics[scale=0.7]{saveAs}}}
+\begin{figure}[htb]{
+\begin{minipage}{.5\textwidth}
+	\centerline{
+	\includegraphics[scale=0.45]{BouncingAtoms}}
+	\caption{An instance of \lct{BouncingAtomsMorph}.\label{fig:bouncingAtoms}}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+	\centerline{
+	\includegraphics[scale=0.45]{saveAs}}
 	\caption{The \menu{save as \ldots} dialogue.\label{fig:saveas}}
 \end{minipage}
-\end{figure}
+}\end{figure}
 
 \dothis{Select \menu{World\go{}save as \ldots}, and enter the name ``SBE''.
 Now click on the \menu{Accept(s)} button.
@@ -299,38 +296,19 @@ The image can be used as a mechanism for storing and managing software projects 
 However, as we shall see later on, there are also tools for managing code and sharing software developed by teams.
 For now we will continue by cleaning up the image before we take a look at tools \sq provides.
 
-\dothis{Blue-click on the Blob.}
-You will see a collection of colored dots that are collectively called the blob's morphic \subind{Morphic}{halo}.
-Each dot is called a \emph{handle}.
-Click in the pink handle containing the cross; the blob should go away. 
-(You may have to try several times as the Blob squirms around and tries to get away from the mouse.)
-
 %%{SBESqueakPicture writeTo: './figures/Tools.png' frame: #morphs using: [:helper |
-%%	| thirdWorld workspace worldWindow |
-%%	thirdWorld := PasteUpMorph newWorldForProject: nil.
-%%	thirdWorld
-%%		extent: 750 @ 500;
-%%		color: Color white.
-%%	Flaps newToolsFlap openInWorld: thirdWorld; showFlap.
-%%	Flaps newSqueakFlap openInWorld: thirdWorld.
-%%	workspace := ToolBuilder build: (Workspace new
-%%		shouldStyle: false;
-%%		contents: 'Use the <i>flap</i> on the right to open a tool window.' asTextFromHtml;
-%%		yourself).
-%%	workspace
-%%		setLabel: 'Welcome';
-%%		openInWorld: thirdWorld;
-%%		center: thirdWorld center.
-%%	worldWindow := thirdWorld imageForm asMorph
-%%		openInWindowLabeled: 'Squeak by Example'
-%%		inWorld: helper world.
-%%	worldWindow setStripeColorsFrom: worldWindow defaultColor.
+%%	| dockingBar appsItem |
+%%	dockingBar := TheWorldMainDockingBar new createDockingBar.
+%%	helper world addMorph: dockingBar.
+%%	dockingBar ownerChanged.
+%%	appsItem := helper menuItemMorphLabeled: 'Apps' in: dockingBar.
+%%	helper click: appsItem
 %%]}
 \begin{figure}[htb]
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{Tools}}}
 	{\centerline {\includegraphics[width=0.8\textwidth]{Tools}}}
-\caption{The \sq \toolsflap.\label{fig:tools}}
+\caption{The \sq \toolsmenu.\label{fig:tools}}
 \end{figure}
 
 %=================================================================
@@ -357,25 +335,8 @@ Workspaces are often used to hold documentation about a captured image, as is th
 
 \dothis{Type the following text into the workspace:}
 \begin{code}{}
-Transcript show: 'hello world'; cr.
+Transcript showln: 'hello world'.
 \end{code}
-
-%%{SBESqueakPicture writeTo: './figures/HelloWorld.png' frame: #morphs using: [:helper | | workspace |
-%%  ToolBuilder open: Transcript.
-%%  helper world firstSubmorph bounds: (0 @ 120 extent: 450 @ 230).
-%%  
-%%  workspace := ToolBuilder open: Workspace new.
-%%  workspace position: 200 @ 100.
-%%  helper type: 'Transcript show: ''hello world''' into: workspace.
-%%  
-%%  helper hand releaseMouseFocus.
-%%  helper closeBalloons.
-%%]}
-
-\begin{figure}[htb]
-\centerline {\includegraphics[width=0.6\textwidth]{HelloWorld}}
-\caption{Overlapping windows. The workspace is active.\label{fig:helloworld}}
-\end{figure}
 
 Try double-clicking in the workspace at various points in the text you have just typed.
 Notice how an entire word, entire string, or the whole text is selected, depending on where you click.
@@ -444,7 +405,6 @@ This time we see the result we expect (\figref{printit}).
 %%  workspace extent: 277 @ 143.
 %%  
 %%  helper type: '3 + 4' into: workspace.
-%%  helper keyStroke: workspace key: $a modifiers: #(cmd).
 %%  helper keyStroke: workspace key: $p modifiers: #(cmd).
 %%]}
 \begin{figure}[htb]
@@ -530,7 +490,7 @@ As we shall see, there are several interesting browsers available for \sq, but t
 %%			(NewBalloonMorph
 %%				string: description for: (helper listMorphIncludingMatch: item in: window) owner)
 %%					popUp].
-%%	codePane := helper textMorphIn: window textMatchedBy: 'printString[\s\S]*' asRegex.
+%%	codePane := helper textMorphIn: window withTextMatching: 'printString[\s\S]*' asRegex.
 %%	(NewBalloonMorph string: 'name of method' for: codePane)
 %%			popUpAt: codePane topLeft + (10 @ 5).
 %%	(SBEBalloonMorph string: 'method comment' for: codePane)
@@ -664,13 +624,13 @@ You will be presented with a list of classes whose names contain ``time'' (see \
 \begin{figure}[hbt]
 \centerline{
 \ifluluelse{
-	\includegraphics[width=0.5\textwidth]{FindIt}
+	\includegraphics[width=0.45\textwidth]{FindIt}
 	\hspace{1cm}
-	\includegraphics[width=0.4\textwidth]{TimeClasses}
+	\includegraphics[width=0.45\textwidth]{TimeClasses}
 }{
-	\includegraphics[width=0.4\textwidth]{FindIt}
+	\includegraphics[width=0.35\textwidth]{FindIt}
 	\hspace{1cm}
-	\includegraphics[width=0.3\textwidth]{TimeClasses}
+	\includegraphics[width=0.35\textwidth]{TimeClasses}
 }
 }
 \caption{Searching for a class by name.
@@ -694,15 +654,16 @@ To scroll to \ct{now} itself, move the cursor to the list and type ``\ct{n}''; t
 %%{SBESqueakPicture writeTo: './figures/methodFinder-now.png' frame: #morphs using: [:helper |
 %%	| window inputField hitList |
 %%	window := ToolBuilder open: SelectorBrowser new.
+%%	window extent: 500 @ 210.
 %%	inputField := (window rootMorphsAt: window topLeft + 30) first.
 %%	hitList := (window rootMorphsAt: inputField bottomLeft + 30) first.
 %%	helper
 %%		mouseEnter: inputField;
 %%		type: 'now' into: inputField;
-%%		keyStroke: inputField key: $s modifiers: #(cmd).
+%%		keyStroke: inputField key: Character enter.
 %%	['now' matches: hitList selection] whileFalse: [
 %%		helper keyStroke: hitList key: Character arrowDown].
-%%	4 "scroll the selection nicely into view"
+%%	3 "scroll the selection nicely into view"
 %%		timesRepeat: [helper keyStroke: hitList key: Character arrowDown];
 %%		timesRepeat: [helper keyStroke: hitList key: Character arrowUp]
 %%]}
@@ -806,15 +767,17 @@ So select \menu{accept (s)} from the yellow-button menu in the bottom pane, or j
 Because there is as yet no method called \ct{shout}, the browser will ask you to confirm that this is the name that you really want\,---\,and it will suggest some other names that you might have intended (\figref{testShoutConfirm}).
 This can be quite useful if you have merely made a typing mistake, but in this case, we really \emph{do} mean \ct{shout}, since that is the method we are about to create, so we have to confirm this by selecting the first option from the menu of choices, as shown in \figref{testShoutConfirm}. 
 
-%%{SBESqueakPicture writeTo: './figures/testShoutConfirm.png' frame: #morphs using: [:helper | | browser textField |
-%%  Browser fullOnClass: StringTest selector: #testCapitalized.
-%%  textField := helper world firstSubmorph firstSubmorph firstSubmorph.
-%%  helper click: textField.
-%%  helper keyStroke: textField key: $a modifiers: #(cmd).
-%%  (Symbol classPool at: #SymbolTable) remove: 'shout' ifAbsent: [].
-%%  (Symbol classPool at: #NewSymbols) remove: 'shout' ifAbsent: [].
-%%  helper type: 'testShout\\    self assert: (''Don''''t panic'' shout = ''DON''''T PANIC!'')' withCRs into: textField.
-%%  helper runModal: [helper keyStroke: textField key: $s modifiers: #(cmd)] then: [helper dialogWindow position: 500 @ 40]
+%%{SBESqueakPicture writeTo: './figures/testShoutConfirm.png' frame: #morphs using: [:helper | | textField |
+%%	Browser fullOnClass: StringTest category: #'tests - converting'.
+%%	textField := helper world firstSubmorph firstSubmorph firstSubmorph.
+%%	helper click: textField.
+%%	helper keyStroke: textField key: $a modifiers: #(cmd).
+%%	helper
+%%		runModal: [helper forgetSymbol: #shout during: [
+%%			helper
+%%				type: 'testShout\\	self assert: (''Don''''t panic'' shout = ''DON''''T PANIC!'')' withCRs into: textField;
+%%				keyStroke: textField key: $s modifiers: #(cmd)]]
+%%		then: [helper dialogWindow position: 500 @ 40].
 %%]}
 
 \begin{figure}[hbt]
@@ -831,18 +794,17 @@ The leftmost two panes are a bit like the top panes in the system browser.  The 
 
 \dothis{Select \scat{CollectionsTests-Text} and the pane to the right will show all of the test classes in that category, which includes the class \ct{StringTest}.  The names of the classes are already selected, so click \menu{Run Selected} to run all these tests.}
 
-%%{SBESqueakPicture writeTo: './figures/testRunnerOnStringTest.png' frame: #morphs using: [:helper | | testRunner categoryIndex |
-%%  helper restoreMethods: {StringTest >> #testShout} after: [
-%%    Transcript showln: 'exec'.
-%%    StringTest compile: 'testShout self assert: false'.
-%%    testRunner := (ToolBuilder open: TestRunner new) model.
-%%    categoryIndex := testRunner categoryList indexOf: 'CollectionsTests-Text'.
-%%    testRunner categorySelected: categoryIndex.
-%%    testRunner categoryAt: categoryIndex put: true.
-%%    testRunner selectNoClasses.
-%%    testRunner classAt: (testRunner classList findFirst: [:s | s beginsWith: 'StringTest']) put: true.
-%%    testRunner runAll
-%%  ]
+%%{SBESqueakPicture writeTo: './figures/testRunnerOnStringTest.png' frame: #morphs using: [:helper |
+%%	[| testRunner categoryIndex |
+%%	StringTest compile: 'testShout self assert: false'.
+%%	testRunner := (ToolBuilder open: TestRunner new) model.
+%%	categoryIndex := testRunner categoryList indexOf: 'CollectionsTests-Text'.
+%%	testRunner
+%%		categorySelected: categoryIndex;
+%%		categoryAt: categoryIndex put: true;
+%%		selectNoClasses;
+%%		classAt: (testRunner classList findFirst: [:s | s beginsWith: 'StringTest']) put: true;
+%%		runAll] ensure: [StringTest removeSelector: #testShout]
 %%]}
 
 \begin{figure}[hbt]
@@ -902,14 +864,12 @@ When you get to a green bar\footnotemark, it's a good idea to save your work and
 So do that right now!
 \footnotetext{Actually, you might not get a green bar since some images contains tests for bugs that still need to be fixed.
 Don't worry about this.
-\Squeak is constantly evolving.
-%:PROBLEM --- StringTest has a broken test!
-% ON: There is a broken test in \ct{StringTest>>>\#testIndexOf}!
-}
+\Squeak is constantly evolving.}
 
 %%{SBESqueakPicture writeTo: './figures/String-Shout.png' frame: #morphs using: [:helper |
-%%  String compile: 'shout\\    ^ self asUppercase, ''!''' withCRs classified: 'converting'.
-%%  ToolSet browse: String selector: #shout
+%%	helper restoreMethods: {String >> #shout} after: [
+%%		String organization classify: #shout under: 'converting' logged: true.
+%%		ToolSet browse: String selector: #shout]
 %%]}
 \begin{figure}[hbt]
 \ifluluelse

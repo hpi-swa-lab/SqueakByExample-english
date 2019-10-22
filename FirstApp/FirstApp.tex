@@ -69,17 +69,16 @@ Now we will see how to create system categories and classes.
 \dothis{Open a system browser and yellow-click in the category pane.
 Select \menu{add item \ldots}.}
 
-%%{SBESqueakPicture writeTo: './figures/AddCategory.png' frame: [:rect | rect topLeft extent: rect width / 2 @ rect height * 2/3] using: [:helper |
-%%	  | window |
-%%    Browser open.
-%%    window := helper world firstSubmorph.
-%%    window bounds: (0 @ 120 extent: 550 @ 375).
-%%    helper click: window at: window topLeft + (30 @ 30) buttons: #(right).
-%%  	helper hand releaseMouseFocus.
-%%    helper mouseEnter: (helper menuItemMorphLabeled: 'add item.*' asRegex in: helper world).
-%%    helper closeBalloons.
+%%{SBESqueakPicture writeTo: './figures/AddCategory.png' frame: [:bounds | bounds origin extent: bounds extent * (0.4 @ 0.75)] using: [:helper |
+%%	| window |
+%%	Browser open.
+%%	window := helper world firstSubmorph.
+%%	helper click: window at: window topLeft + (30 @ 30) buttons: #(right).
+%%	helper hand releaseMouseFocus.
+%%	helper mouseEnter: (helper menuItemMorphLabeled: 'add item.*' asRegex in: helper world).
+%%	helper closeBalloons.
 %%]}
-%%{SBESqueakPicture writeTo: './figures/ClassTemplate.png' frame: [:rectangle | rectangle origin extent: rectangle extent * (0.4 @ 0.75)] using: [:helper |
+%%{SBESqueakPicture writeTo: './figures/ClassTemplate.png' frame: [:bounds | bounds origin extent: bounds extent * (0.4 @ 0.75)] using: [:helper |
 %%	Browser fullOnCategory: 'SBE-Quinto'.
 %%]}
 \begin{figure}[htb]
@@ -141,10 +140,12 @@ This means that there are \emph{unsaved changes}.
 To actually send this message, you must \menu{accept} it.
 
 %%{SBESqueakPicture writeTo: './figures/AcceptClassDef.png' frame: [:rect | rect bottomHalf] using: [:helper | 
-%%	| window menu |
+%%	| window codePane menu |
 %%	SBECell browse.
 %%	window := helper world firstSubmorph.
 %%	window bounds: (0 @ 120 extent: 500 @ 400).
+%%	codePane := helper textMorphIn: window withTextMatching: 'SimpleSwitchMorph.*' asRegex.
+%%	codePane hasUnacceptedEdits: true.
 %%	helper click: window at: window bottomCenter - (0 @ 30) buttons: #(right).
 %%	helper closeBalloons.
 %%	menu := helper world firstSubmorph.
@@ -251,7 +252,7 @@ You can test the effect of the code you have written by creating a new \ct{SBECe
 %%  SBECell new inspect.
 %%  window := helper world firstSubmorph.
 %%  pane := helper listMorphIncludingMatch: #bounds in: window.
-%%	pane selectedRow: 3.
+%%	pane listSource changeModelSelection: 3.
 %%  window lookFocused.
 %%]}
 \begin{figure}[htbp]
@@ -272,7 +273,7 @@ Blue-click on the cell to bring up the morphic \subind{Morphic}{halo}.
 Move the cell with the brown (next to top-right) handle and resize it with the yellow (bottom-right) handle.
 Notice how the bounds reported by the inspector also change.
 
-%%{SBESqueakPicture writeTo: './figures/SBECellResize.png' frame: [:area | area insetOriginBy: -50 cornerBy: 0] using: [:helper |
+%%{SBESqueakPicture writeTo: './figures/SBECellResize.png' frame: #morphs using: [:helper |
 %%  | cell window list bottomPane |
 %%  cell := SBECell new.
 %%  cell inspect.
