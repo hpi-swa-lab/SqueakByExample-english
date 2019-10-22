@@ -241,6 +241,10 @@ You now have a morph full of bouncing atoms ``in hand''.
 Put the atoms morph down (by clicking) somewhere.}
 \index{Morphic}
 
+%%{SBESqueakPicture writeTo: './figures/BouncingAtoms.png' frame: #morphs using: [:helper |
+%%  BouncingAtomsMorph new openInWorld
+%%]}
+
 %%{SBESqueakPicture writeTo: './figures/saveAs.png' frame: #morphs using: [:helper |
 %%  helper click: helper world.
 %%  
@@ -251,25 +255,24 @@ Put the atoms morph down (by clicking) somewhere.}
 %%      helper type: 'SBE' into: (helper morphByExternalName: 'inputText' in: helper world) firstSubmorph firstSubmorph].
 %%]}
 
-%%{SBESqueakPicture writeTo: './figures/BouncingAtoms.png' frame: #morphs using: [:helper |
-%%  BouncingAtomsMorph new openInWorld
-%%]}
-
-\begin{figure}[htb]
-\begin{minipage}[b]{0.48\textwidth}
-\ifluluelse
-	{\centerline{\includegraphics[scale=0.5]{BouncingAtoms}}}
-	{\centerline{\includegraphics[scale=0.7]{BouncingAtoms}}}
+\begin{figure}[htb]{
+\begin{minipage}{.5\textwidth}
+	\centerline{
+	\ifluluelse
+		{\includegraphics[scale=0.45]{BouncingAtoms}}
+		{\includegraphics[scale=0.65]{BouncingAtoms}}
+	}
 	\caption{An instance of \lct{BouncingAtomsMorph}.\label{fig:bouncingAtoms}}
-\end{minipage}
-\hfill
-\begin{minipage}[b]{0.48\textwidth}
-\ifluluelse
-	{\centerline {\includegraphics[scale=0.5]{saveAs}}}
-	{\centerline {\includegraphics[scale=0.7]{saveAs}}}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+	\centerline{
+	\ifluluelse
+		{\includegraphics[scale=0.45]{saveAs}}
+		{\includegraphics[scale=0.65]{saveAs}}
+	}
 	\caption{The \menu{save as \ldots} dialogue.\label{fig:saveas}}
 \end{minipage}
-\end{figure}
+}\end{figure}
 
 \dothis{Select \menu{World\go{}save as \ldots}, and enter the name ``SBE''.
 Now click on the \menu{Accept(s)} button.
@@ -644,13 +647,13 @@ You will be presented with a list of classes whose names contain ``time'' (see \
 \begin{figure}[hbt]
 \centerline{
 \ifluluelse{
-	\includegraphics[width=0.5\textwidth]{FindIt}
+	\includegraphics[width=0.45\textwidth]{FindIt}
 	\hspace{1cm}
-	\includegraphics[width=0.4\textwidth]{TimeClasses}
+	\includegraphics[width=0.45\textwidth]{TimeClasses}
 }{
-	\includegraphics[width=0.4\textwidth]{FindIt}
+	\includegraphics[width=0.35\textwidth]{FindIt}
 	\hspace{1cm}
-	\includegraphics[width=0.3\textwidth]{TimeClasses}
+	\includegraphics[width=0.35\textwidth]{TimeClasses}
 }
 }
 \caption{Searching for a class by name.
