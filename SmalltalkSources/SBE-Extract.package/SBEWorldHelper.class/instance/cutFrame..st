@@ -1,5 +1,5 @@
 screenshots
-screenRectangleUsingArea: area
+cutFrame: area
 
 	frameSpecifier = #morphs ifTrue: [
 		^ area].
