@@ -1,18 +1,13 @@
 utils
 forgetSymbol: aSymbol during: aBlock
 
-	^ self restoreMethods: {Symbol class >> #lookup:} after: [
-		| source signature |
-		source := (Symbol class sourceCodeAt: #lookup:) asString.
-		signature := (source lines first: 3) joinSeparatedBy: String cr.
-		Symbol class compile: (String streamContents: [:stream |
-			stream
-				nextPutAll: signature;
-				cr; tab;
-				nextPutAll: (source lines first allButFirst: 'lookup:' size) withoutLeadingBlanks;
-				nextPutAll: ' asString = ';
-				store: aSymbol asString;
-				nextPutAll: ' ifTrue: [^ nil].';
-				cr;
-				nextPutAll: ((source lines allButFirst: 3) joinSeparatedBy: String cr)]).
-		aBlock value]
+	| classPool |
+	classPool := Symbol classPool.
+	#(SymbolTable NewSymbols)
+		collect: [:name | classPool at: name]
+		thenDo: [:table |
+			(table includes: aSymbol) ifTrue: [
+				table remove: aSymbol.
+				thisContext home insertSender: (Context contextEnsure: [
+					table add: aSymbol])]].
+	^ aBlock value
