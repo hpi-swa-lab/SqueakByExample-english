@@ -883,13 +883,11 @@ So do that right now!
 \footnotetext{Actually, you might not get a green bar since some images contains tests for bugs that still need to be fixed.
 Don't worry about this.
 \Squeak is constantly evolving.
-%:PROBLEM --- StringTest has a broken test!
-% ON: There is a broken test in \ct{StringTest>>>\#testIndexOf}!
-}
 
 %%{SBESqueakPicture writeTo: './figures/String-Shout.png' frame: #morphs using: [:helper |
-%%  String compile: 'shout\\    ^ self asUppercase, ''!''' withCRs classified: 'converting'.
-%%  ToolSet browse: String selector: #shout
+%%	helper restoreMethods: {String >> #shout} after: [
+%%		String organization classify: #shout under: 'converting' logged: true.
+%%		ToolSet browse: String selector: #shout]
 %%]}
 \begin{figure}[hbt]
 \ifluluelse
