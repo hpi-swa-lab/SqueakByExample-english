@@ -1,5 +1,5 @@
 language: smalltalk
-os: osx
+os: windows
 sudo: true
 addons:
   apt:	
