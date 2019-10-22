@@ -344,23 +344,6 @@ Workspaces are often used to hold documentation about a captured image, as is th
 Transcript showln: 'hello world'.
 \end{code}
 
-%%{SBESqueakPicture writeTo: './figures/HelloWorld.png' frame: #morphs using: [:helper | | workspace |
-%%  ToolBuilder open: Transcript.
-%%  helper world firstSubmorph bounds: (0 @ 120 extent: 450 @ 230).
-%%  
-%%  workspace := ToolBuilder open: Workspace new.
-%%  workspace position: 200 @ 100.
-%%  helper type: 'Transcript showln: ''hello world''' into: workspace.
-%%  
-%%  helper hand releaseMouseFocus.
-%%  helper closeBalloons.
-%%]}
-
-\begin{figure}[htb]
-\centerline {\includegraphics[width=0.6\textwidth]{HelloWorld}}
-\caption{Overlapping windows. The workspace is active.\label{fig:helloworld}}
-\end{figure}
-
 Try double-clicking in the workspace at various points in the text you have just typed.
 Notice how an entire word, entire string, or the whole text is selected, depending on where you click.
 
