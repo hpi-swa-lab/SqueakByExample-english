@@ -4,5 +4,5 @@ takeScreenshot
 	| rectangle |
 	picture ifNotNil: [^ self].
 	self prepareForScreenshot.
-	rectangle := self screenRectangleUsingArea: self morphsArea.
+	rectangle := self morphsArea.
 	^ picture := self world imageFormForRectangle: rectangle

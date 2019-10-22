@@ -2,5 +2,5 @@ screenshots
 prepareForScreenshot
 
 	self okToAdjustMorphsArea ifTrue: [
-			self adjustMorphsArea].
+		self adjustMorphsArea].
 	self displayForegroundWindowFocused.
