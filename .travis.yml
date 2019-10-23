@@ -1,14 +1,15 @@
-language: generic
+language: smalltalk
 sudo: true
 addons:
-  apt:
-    packages:
+  apt:	
+    packages:	
     - texlive-full
+smalltalk:
+- Squeak-Trunk
 
 script:
-- ls
+- smalltalkci .smalltalk.ston
 - make
-- ls
 
 deploy:
   provider: releases

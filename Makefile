@@ -51,10 +51,9 @@ etc :
 examples :
 	./examples.rb $C > $@.txt
 
-listings :
-	rm -r ListingSources ||:
+listings : clean_listings
 	cp -fR SmalltalkSources ListingSources
-	./annotate-listings.rb
+	bash annotate-listings.sh
 
 fun :
 	time ./examples.rb $C > $@1.txt
@@ -113,12 +112,15 @@ ps :
 	xargs svn ps svn:mime-type application/octet-stream
 
 # --------------------------------------------------------------------------------
-clean :
+clean : clean_listings
 	-rm -f *.aux *.log *.out *.glo *.toc *.ilg *.blg *.idx
 	-rm -f */*.aux */*.log */*.out
 	-rm -f .DS_Store */.DS_Store
 	-rm -f common*.url common*.pdf SBE.url
 	-rm -f test.*
+
+clean_listings :
+	-rm -rf ListingSources ||:
 
 bare : clean
 	mv figures/squeak-logo.pdf figures/squeak-logo.pdfSAVE

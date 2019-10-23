@@ -1,0 +1,16 @@
+SmalltalkCISpec {
+    #loading : [
+      SCIMetacelloLoadSpec {
+        #baseline : 'SBE',
+        #directory : 'SmalltalkSources',
+        #platforms : [ #squeak ],
+        #load : [ 'ci' ],
+        #useLatestMetacello : true
+      }
+    ],
+	#testing : {
+		#failOnZeroTests : false,
+		#failOnSCIDeprecationWarnings : false,
+		#classes : [ #SBEExecuteExtractTest ]
+	}
+}

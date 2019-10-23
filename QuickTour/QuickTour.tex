@@ -45,21 +45,33 @@ You will also learn how to define a new method, create an object, and send it me
 \section{Getting started}
 
 \sq is available as a free \ind{download} from \url{www.squeak.org}.
-There are three parts that you will need to download, consisting of four files (see \figref{download}).
+Your download will be an archive file that contents vary from platform to platform. However, there are two important components common to all versions (see \figref{download}).
 
-\begin{figure}[htb]
-\centerline {\includegraphics[width=\textwidth]{annotatedDownload}}
-\caption{The \sq download files.\label{fig:download}}
+\begin{figure}[hbt]
+\centerline{
+	\ifluluelse{
+		\includegraphics[width=0.25\textwidth]{DownloadedVM}
+		\hspace{.5cm}
+		\includegraphics[width=0.25\textwidth]{DownloadedImageFile}
+		\hspace{.5cm}
+		\includegraphics[width=0.25\textwidth]{DownloadedChangesFile}
+	}{
+		\includegraphics[width=0.15\textwidth]{DownloadedVM}
+		\hspace{.5cm}
+		\includegraphics[width=0.15\textwidth]{DownloadedImageFile}
+		\hspace{.5cm}
+		\includegraphics[width=0.15\textwidth]{DownloadedChangesFile}
+	}
+}
+\caption{The \sq download files (in this example, for 64-bit Windows).\label{fig:download}}
 \end{figure}
 
 \begin{enumerate}
 
-  \item The \emphind{virtual machine} (VM) is the only part of the system that is different for each operating system and processor.  Pre-compiled virtual machines are available for all the major computing environments.  In \figref{download} we see the VM for the Mac is called \textit{\sq 3.8.15beta1U.app}.
-
-  \item The \emphind{sources} file contains the source code for all of the parts of \sq that don't change very frequently. In \figref{download} it is called \emph{SqueakV39.sources}. Note that the file SqueakV39.sources is only for versions 3.9 and later of \sq. For earlier versions, use a sources file corresponding to the main version \eg \textit{SqueakV3.sources} for versions of \sq from 3.0 up to 3.8.
+  \item The \emphind{virtual machine} (VM) is the only part of the system that is different for each operating system and processor.  Pre-compiled virtual machines are available for all the major computing environments.  In \figref{download} we see the VM for the Windows is called \textit{\sq.exe}.
 
   \item The current \emph{system \ind{image}} is a snapshot of a running \sq system, frozen in time.  It consists of two files: an \emph{.}\emphind{image} file, which contains the state of all of the objects in the system (including classes and methods, since they are objects too), and a \emph{.}\emphind{changes} file, which contains a log of all of the changes to the source code of the system.
-In \figref{download}, we see that we have grabbed the \textit{Squeak3.9-final-7067} image and changes files.
+In \figref{download}, we see that we have grabbed the \textit{{\sq}5.2-18231} image and changes files.
 Actually, we will use a slightly different image in this book.
 \end{enumerate}
 
@@ -84,11 +96,19 @@ Do whatever works best for your style of working and your operating system.
 \ab{I agree entirely; the reason that this is not here is because I could do only the Mac section.  Damien can probably do Windoze.  Perhaps we can ask on the list for a Linux volunteer?}
 
 %-----------------------------------------------------------------
-%%{SBESqueakPicture writeTo: './figures/startup.png' frame: (0 @ 0 extent: 900 @ 700) using: [:helper |
-%%  helper world color: Color darkGray.
-%%  " note: only if you have balloon.png in your image's folder, you'll get the balloon for the startup screen "
-%%  ReleaseBuilder openWelcomeWorkspacesWith: ReleaseBuilder getBalloonForm.
-%%  PreferenceWizardMorph open.
+%%{SBESqueakPicture writeTo: './figures/startup.png' frame: #fullScreen using: [:helper |
+%%	| balloon |
+%%	helper world
+%%		color: (Color gray: 15 / 16); "Think green & save ink"
+%%		extent: 800 @ 450.
+%%	balloon := Form fromBinaryStream: (helper resourceDirectory
+%%		/ 'branding' fileNamed: 'balloon.png').
+%%	ReleaseBuilder openWelcomeWorkspacesWith: balloon.
+%%	helper world firstSubmorph
+%%		height: helper world height * 0.75;
+%%		center: helper world center.
+%%	PreferenceWizardMorph open.
+%%	self flag: #ct "After Objectland has been merged into Trunk, simplify this call and don't ask PreferenceWizardMorph".
 %%]}
 \begin{figure}[htb]
 % \centerline {\includegraphics[width=0.6\textwidth]{download}}
@@ -116,14 +136,17 @@ A good place to get started is the \ind{world menu} shown in \figref{threeButton
 %%  helper closeBalloons.
 %%]}
 
-%%{SBESqueakPicture writeTo: './figures/yellowButtonMenuOnWorkspace.png' frame: #morphs using: [:helper | | workspace |
-%%  workspace := ToolBuilder open: Workspace new.
-%%  helper type: 'Time now ' into: workspace.
-%%
-%%  helper click: workspace at: workspace topCenter + (0 @ 30) buttons: #(right).
-%%  helper hand releaseMouseFocus.
-%%  helper mouseEnter: (helper menuItemMorphLabeled: 'print it (p)' in: helper world).
-%%  helper closeBalloons.
+%%{SBESqueakPicture writeTo: './figures/yellowButtonMenuOnWorkspace.png' frame: #morphs using: [:helper |
+%%	| workspace |
+%%	workspace := ToolBuilder open: Workspace new.
+%%	helper type: 'Time now ' into: workspace.
+%%	
+%%	helper click: workspace at: workspace topCenter + (0 @ 30) buttons: #(right).
+%%	helper hand releaseMouseFocus.
+%%	helper mouseEnter: (helper menuItemMorphLabeled: 'print it (p)' in: helper world).
+%%	helper closeBalloons.
+%%	menu := helper world firstSubmorph.
+%%	menu position: menu position + (30 @ 0).
 %%]}
 
 %%{SBESqueakPicture writeTo: './figures/morphicHaloOnWorkspace.png' frame: #morphs using: [:helper | | workspace |
@@ -138,9 +161,13 @@ A good place to get started is the \ind{world menu} shown in \figref{threeButton
 	\subfigure[The world menu]{\label{fig:threeButtons:red}%
 		\includegraphics[width=0.2\linewidth]{worldMenu}}\hfill
 	\subfigure[The contextual menu]{\label{fig:threeButtons:yellow}%
-		\includegraphics[width=0.25\linewidth]{yellowButtonMenuOnWorkspace}}\hfill
-	\subfigure[The morphic halo]{\label{fig:threeButtons:blue}%
-		\includegraphics[width=0.25\linewidth]{morphicHaloOnWorkspace}}% these braces needed (else no whitespace at end of line)
+		\includegraphics[width=0.6\linewidth]{yellowButtonMenuOnWorkspace}}\hfill
+	\begin{center}
+	\vspace{0.1in}
+		\subfigure[The morphic halo]{\label{fig:threeButtons:blue}%
+		%\ct{TODO: Display this figure between the other figures, technically overlap them. I did not "figure" out how to do without installing extra packages.}
+		\includegraphics[width=0.4\linewidth]{morphicHaloOnWorkspace}}% these braces needed (else no whitespace at end of line)
+	\end{center}		
 	\caption{The world menu (brought up by the red mouse button), a contextual menu (yellow mouse button), and a morphic \subind{Morphic}{halo} (blue mouse button).\label{fig:threeButtons}}
 \end{figure}
 \index{red button}
@@ -148,9 +175,12 @@ A good place to get started is the \ind{world menu} shown in \figref{threeButton
 \index{blue button}
 \seeindex{morphic halo}{Morphic}
 
-% ON: I had to shrink this and move it up to avoid
-% it running over the end of the page.
-\begin{wrapfigure}[19]{r}{0.25\linewidth}
+\sq was originally designed for a computer with a \ind{three button mouse}.  If your mouse has fewer than three buttons, you will have to press extra keys while clicking the mouse to simulate the extra buttons.
+
+\sq avoids terms like ``left mouse click'' because different computers, mice, keyboards and personal configurations mean that different users will need to press different physical buttons to achieve the same effect.  Instead, the mouse buttons are labeled with colors.  The mouse button that you pressed to get the ``World'' menu is called the \emphind{red button}; it is most often used for selecting items in lists, selecting text, and selecting menu items.
+When you start using \sq, it can be surprisingly helpful to actually label your mouse, as shown in \figref{colouredMouse}.\footnote{We will avoid the term ``red-click'' and use ``click'' instead, since this is the default.}
+
+\begin{wrapfigure}[19]{R}{0.25\linewidth}
 % The parameters are the number of narrow lines to the right of the figure [19],
 % the placement {r} for right, and the width of the figure. Capital R will allow some float.
 % Inside the wrapfig environment, linewidth is special --- the width of the figure.
@@ -158,11 +188,6 @@ A good place to get started is the \ind{world menu} shown in \figref{threeButton
 \caption{The author's mouse. Clicking the scroll wheel activates the blue button.}
 \label{fig:colouredMouse}
 \end{wrapfigure}
-
-\sq was originally designed for a computer with a \ind{three button mouse}.  If your mouse has fewer than three buttons, you will have to press extra keys while clicking the mouse to simulate the extra buttons.
-
-\sq avoids terms like ``left mouse click'' because different computers, mice, keyboards and personal configurations mean that different users will need to press different physical buttons to achieve the same effect.  Instead, the mouse buttons are labeled with colors.  The mouse button that you pressed to get the ``World'' menu is called the \emphind{red button}; it is most often used for selecting items in lists, selecting text, and selecting menu items.
-When you start using \sq, it can be surprisingly helpful to actually label your mouse, as shown in \figref{colouredMouse}.\footnote{We will avoid the term ``red-click'' and use ``click'' instead, since this is the default.}
 
 The \emphind{yellow button} is the next most used button; it is used to bring up a contextual menu, that is, a menu that offers different sets of actions depending on where the mouse is pointing; see \figref{threeButtons:yellow}.
 
@@ -174,7 +199,7 @@ Finally, there is the \emphind{blue button}, which is used to activate the ``mor
 If you let the mouse linger over a handle, a help balloon will explain its function.
 
 %%{SBESqueakPicture writeTo: './figures/morphicRotate.png' frame: #morphs using: [:helper | | workspace |
-%%  (HaloMorph new createHandleAt: 0 @ 0 color: Color blue iconName: 'Halo-Rot') openInWorld; position: 0 @ 0
+%%  (HaloMorph new createHandleAt: 0 @ 0 color: Color blue iconName: 'Halo-Rot') openInWorld.
 %%]}
 
 \dothis{Click the blue button on the workspace.
@@ -188,12 +213,15 @@ In the preference browser, the \menu{general} category contains an option \menu{
 
 \dothis{Open the preference browser and find the \menu{Swap mouse buttons} option using the search box.}
 
-%%{SBESqueakPicture writeTo: './figures/PreferenceBrowser.png' frame: #morphs using: [:helper | | browser searchText |
-%%  searchText := 'swap'.
-%%  browser := PreferenceBrowser open.
-%%  (browser dependents at: 2) setText: searchText.
-%%  browser searchPreferencesFor: searchText.
-%%  (helper preferenceButtonMorphLabeled: 'Swap mouse buttons' in: helper world) highlightOn.
+%%{SBESqueakPicture writeTo: './figures/PreferenceBrowser.png' frame: #morphs using: [:helper |
+%%	| browser searchBox |
+%%	PreferenceBrowser open.
+%%	browser := helper world firstSubmorph.
+%%	browser extent: 600 @ 275.
+%%	searchBox := helper morphWithBalloonText: 'Search preference.*' asRegex in: browser.
+%%	helper type: 'swap' into: searchBox.
+%%	searchBox model searchSelected.
+%%	(helper preferenceButtonMorphLabeled: 'Swap mouse buttons' in: browser) highlightOn.
 %%]}
 
 \begin{figure}[htb]
@@ -433,14 +461,15 @@ The title tells us that \ct{7} is an instance of the class \clsind{SmallInteger}
 The left panel allows us to browse the instance variables of an object, the values of which are shown in the right panel.
 The bottom panel can be used to write expressions to send messages to the object.
 
-%%{SBESqueakPicture writeTo: './figures/InspectIt.png' frame: #morphs using: [:helper | | workspace |
-%%  workspace := ToolBuilder open: Workspace new.
-%%  workspace bounds: (0 @ 30 extent: 277 @ 143).
-%%  
-%%  helper type: '3 + 4' into: workspace.
-%%  helper keyStroke: workspace key: $a modifiers: #(cmd).
-%%  helper keyStroke: workspace key: $i modifiers: #(cmd).
-%%  (helper windowLabeled: 'SmallInteger.+' asRegex) position: 120 @ 0.
+%%{SBESqueakPicture writeTo: './figures/InspectIt.png' frame: #morphs using: [:helper |
+%%	| workspace |
+%%	workspace := ToolBuilder open: Workspace new.
+%%	workspace bounds: (0 @ 30 extent: 277 @ 143).
+%%	
+%%	helper type: '3 + 4' into: workspace.
+%%	helper keyStroke: workspace key: $i modifiers: #(cmd).
+%%	(helper windowLabeled: 'SmallInteger.+' asRegex)
+%%		position: 120 @ 20; extent: 300 @ 185.
 %%]}
 \begin{figure}[htb]
 \centerline {\includegraphics[scale=0.65]{InspectIt}}
@@ -630,7 +659,7 @@ You will be presented with a list of classes whose names contain ``time'' (see \
 \centerline{
 \ifluluelse{
 	\includegraphics[width=0.475\textwidth]{FindIt}
-	\hspace{1cm}
+	\hspace{0.25cm}
 	\includegraphics[width=0.475\textwidth]{TimeClasses}
 }{
 	\includegraphics[width=0.35\textwidth]{FindIt}
@@ -836,7 +865,7 @@ We will look at the \ind{debugger} and how to use it in \charef{env}.
 %%]}.
 \begin{figure}[hbt]
 \ifluluelse
-	{\centerline {\includegraphics[width=\textwidth]{Predebugger}}}
+	{\centerline {\includegraphics[width=0.75\textwidth]{Predebugger}}}
 	{\centerline {\includegraphics[scale=0.7]{Predebugger}}}
 \caption{The (pre-)debugger.}
 \label{fig:predebugger}
