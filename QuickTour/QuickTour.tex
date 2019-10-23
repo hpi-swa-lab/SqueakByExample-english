@@ -84,11 +84,19 @@ Do whatever works best for your style of working and your operating system.
 \ab{I agree entirely; the reason that this is not here is because I could do only the Mac section.  Damien can probably do Windoze.  Perhaps we can ask on the list for a Linux volunteer?}
 
 %-----------------------------------------------------------------
-%%{SBESqueakPicture writeTo: './figures/startup.png' frame: (0 @ 0 extent: 900 @ 700) using: [:helper |
-%%  helper world color: Color darkGray.
-%%  " note: only if you have balloon.png in your image's folder, you'll get the balloon for the startup screen "
-%%  ReleaseBuilder openWelcomeWorkspacesWith: ReleaseBuilder getBalloonForm.
-%%  PreferenceWizardMorph open.
+%%{SBESqueakPicture writeTo: './figures/startup.png' frame: #fullScreen using: [:helper |
+%%	| balloon |
+%%	helper world
+%%		color: (Color gray: 15 / 16); "Think green & save ink"
+%%		extent: 800 @ 450.
+%%	balloon := Form fromBinaryStream: (helper resourceDirectory
+%%		/ 'branding' fileNamed: 'balloon.png').
+%%	ReleaseBuilder openWelcomeWorkspacesWith: balloon.
+%%	helper world firstSubmorph
+%%		height: helper world height * 0.75;
+%%		center: helper world center.
+%%	PreferenceWizardMorph open.
+%%	self flag: #ct "After Objectland has been merged into Trunk, simplify this call and don't ask PreferenceWizardMorph".
 %%]}
 \begin{figure}[htb]
 % \centerline {\includegraphics[width=0.6\textwidth]{download}}
