@@ -1,0 +1,14 @@
+{
+	"category" : "SBE-Extract",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "tobe 10/21/2019 16:37",
+	"instvars" : [
+		 ],
+	"name" : "SBEExecuteExtractTest",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"type" : "normal" }
