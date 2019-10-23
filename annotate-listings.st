@@ -8,3 +8,5 @@ matches keysAndValuesDo: [:file :class | file writeStreamDo: [:stream |
 		<< class;
 		<< #>>>;
 		<< (file contents lines allButFirst joinSeparatedBy: String cr)]].
+
+Smalltalk snapshot: true andQuit: true.
