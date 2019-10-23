@@ -54,7 +54,7 @@ examples :
 listings :
 	rm -r ListingSources ||:
 	cp -fR SmalltalkSources ListingSources
-	eval "${SMALLTALK_CI_VM}" -vm-display-null ${COG_VM_PARAM} "${SMALLTALK_CI_IMAGE}" "${SMALLTALK_CI_BUILD}/annotate-listings.st"
+	./annotate-listings.sh
 
 fun :
 	time ./examples.rb $C > $@1.txt
