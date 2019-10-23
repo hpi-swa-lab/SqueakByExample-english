@@ -54,7 +54,7 @@ examples :
 listings :
 	rm -r ListingSources ||:
 	cp -fR SmalltalkSources ListingSources
-	./annotate-listings.rb
+	bash annotate-listings.sh
 
 fun :
 	time ./examples.rb $C > $@1.txt
