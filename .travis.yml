@@ -1,5 +1,4 @@
 language: smalltalk
-os: windows
 sudo: true
 addons:
   apt:	
