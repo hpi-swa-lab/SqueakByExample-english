@@ -251,6 +251,7 @@ You can test the effect of the code you have written by creating a new \ct{SBECe
 %%  | window pane |
 %%  SBECell new inspect.
 %%  window := helper world firstSubmorph.
+%%	window extent: 315 @ 165.
 %%  pane := helper listMorphIncludingMatch: #bounds in: window.
 %%	pane listSource changeModelSelection: 3.
 %%  window lookFocused.
@@ -415,7 +416,8 @@ If there are only a few methods in a class, the extra level of hierarchy provide
 This is why the browser also offers us the \prot{-{}-all-{}-} virtual category, which, you will not be surprised to learn, contains all of the methods in the class.
 \protindex{all}
 
-%%{SBESqueakPicture writeTo: './figures/Categorize.png' frame: [:rect | rect topCenter corner: rect right @ (rect top + (rect height * 2/3))] using: [:helper | | browser class window |
+%%{SBESqueakPicture writeTo: './figures/Categorize.png' frame: [:rect | rect topRight rect: (rect pointAtFraction: 1 @ 3 / 4) rounded] using: [:helper |
+%%	| browser class window |
 %%  browser := Browser newSubclass.
 %%  browser compile: 'hasClassSelected ^true'.
 %%  class := Object newSubclass.
@@ -430,7 +432,7 @@ This is why the browser also offers us the \prot{-{}-all-{}-} virtual category, 
 %%]}
 \begin{figure}[htbp]
    \centering
-   \includegraphics[scale=0.7]{Categorize} 
+   \includegraphics[scale=0.65]{Categorize} 
    \caption{Categorize all uncategorized methods.\label{fig:categorize}}
 \end{figure}
 
@@ -576,7 +578,7 @@ As depicted in \figref{quintoError}, it says \ct{MessageNotUnderstood: SBEGame>>
 %%]}
 \begin{figure}[ht]
 \ifluluelse
-	{\centerline{\includegraphics[width=\textwidth]{Error}}}
+	{\centerline{\includegraphics[width=0.75\textwidth]{Error}}}
 	{\centerline{\includegraphics[scale=0.7]{Error}}}
 \caption{There is a bug in our game when a cell is clicked!
 \label{fig:quintoError}}
