@@ -136,14 +136,17 @@ A good place to get started is the \ind{world menu} shown in \figref{threeButton
 %%  helper closeBalloons.
 %%]}
 
-%%{SBESqueakPicture writeTo: './figures/yellowButtonMenuOnWorkspace.png' frame: #morphs using: [:helper | | workspace |
-%%  workspace := ToolBuilder open: Workspace new.
-%%  helper type: 'Time now ' into: workspace.
-%%
-%%  helper click: workspace at: workspace topCenter + (0 @ 30) buttons: #(right).
-%%  helper hand releaseMouseFocus.
-%%  helper mouseEnter: (helper menuItemMorphLabeled: 'print it (p)' in: helper world).
-%%  helper closeBalloons.
+%%{SBESqueakPicture writeTo: './figures/yellowButtonMenuOnWorkspace.png' frame: #morphs using: [:helper |
+%%	| workspace |
+%%	workspace := ToolBuilder open: Workspace new.
+%%	helper type: 'Time now ' into: workspace.
+%%	
+%%	helper click: workspace at: workspace topCenter + (0 @ 30) buttons: #(right).
+%%	helper hand releaseMouseFocus.
+%%	helper mouseEnter: (helper menuItemMorphLabeled: 'print it (p)' in: helper world).
+%%	helper closeBalloons.
+%%	menu := helper world firstSubmorph.
+%%	menu position: menu position + (30 @ 0).
 %%]}
 
 %%{SBESqueakPicture writeTo: './figures/morphicHaloOnWorkspace.png' frame: #morphs using: [:helper | | workspace |
@@ -158,9 +161,13 @@ A good place to get started is the \ind{world menu} shown in \figref{threeButton
 	\subfigure[The world menu]{\label{fig:threeButtons:red}%
 		\includegraphics[width=0.2\linewidth]{worldMenu}}\hfill
 	\subfigure[The contextual menu]{\label{fig:threeButtons:yellow}%
-		\includegraphics[width=0.25\linewidth]{yellowButtonMenuOnWorkspace}}\hfill
-	\subfigure[The morphic halo]{\label{fig:threeButtons:blue}%
-		\includegraphics[width=0.25\linewidth]{morphicHaloOnWorkspace}}% these braces needed (else no whitespace at end of line)
+		\includegraphics[width=0.6\linewidth]{yellowButtonMenuOnWorkspace}}\hfill
+	\begin{center}
+	\vspace{0.1in}
+		\subfigure[The morphic halo]{\label{fig:threeButtons:blue}%
+		%\ct{TODO: Display this figure between the other figures, technically overlap them. I did not "figure" out how to do without installing extra packages.}
+		\includegraphics[width=0.4\linewidth]{morphicHaloOnWorkspace}}% these braces needed (else no whitespace at end of line)
+	\end{center}		
 	\caption{The world menu (brought up by the red mouse button), a contextual menu (yellow mouse button), and a morphic \subind{Morphic}{halo} (blue mouse button).\label{fig:threeButtons}}
 \end{figure}
 \index{red button}
