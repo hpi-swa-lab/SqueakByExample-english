@@ -9,4 +9,4 @@ matches keysAndValuesDo: [:file :class | file writeStreamDo: [:stream |
 		<< #>>>;
 		<< (file contents lines allButFirst joinSeparatedBy: String cr)]].
 
-Smalltalk snapshot: true andQuit: true.
+Smalltalk snapshot: false andQuit: true.
