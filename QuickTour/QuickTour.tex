@@ -454,14 +454,15 @@ The title tells us that \ct{7} is an instance of the class \clsind{SmallInteger}
 The left panel allows us to browse the instance variables of an object, the values of which are shown in the right panel.
 The bottom panel can be used to write expressions to send messages to the object.
 
-%%{SBESqueakPicture writeTo: './figures/InspectIt.png' frame: #morphs using: [:helper | | workspace |
-%%  workspace := ToolBuilder open: Workspace new.
-%%  workspace bounds: (0 @ 30 extent: 277 @ 143).
-%%  
-%%  helper type: '3 + 4' into: workspace.
-%%  helper keyStroke: workspace key: $a modifiers: #(cmd).
-%%  helper keyStroke: workspace key: $i modifiers: #(cmd).
-%%  (helper windowLabeled: 'SmallInteger.+' asRegex) position: 120 @ 0.
+%%{SBESqueakPicture writeTo: './figures/InspectIt.png' frame: #morphs using: [:helper |
+%%	| workspace |
+%%	workspace := ToolBuilder open: Workspace new.
+%%	workspace bounds: (0 @ 30 extent: 277 @ 143).
+%%	
+%%	helper type: '3 + 4' into: workspace.
+%%	helper keyStroke: workspace key: $i modifiers: #(cmd).
+%%	(helper windowLabeled: 'SmallInteger.+' asRegex)
+%%		position: 120 @ 20; extent: 300 @ 185.
 %%]}
 \begin{figure}[htb]
 \centerline {\includegraphics[scale=0.65]{InspectIt}}
