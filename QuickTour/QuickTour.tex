@@ -208,12 +208,15 @@ In the preference browser, the \menu{general} category contains an option \menu{
 
 \dothis{Open the preference browser and find the \menu{Swap mouse buttons} option using the search box.}
 
-%%{SBESqueakPicture writeTo: './figures/PreferenceBrowser.png' frame: #morphs using: [:helper | | browser searchText |
-%%  searchText := 'swap'.
-%%  browser := PreferenceBrowser open.
-%%  (browser dependents at: 2) setText: searchText.
-%%  browser searchPreferencesFor: searchText.
-%%  (helper preferenceButtonMorphLabeled: 'Swap mouse buttons' in: helper world) highlightOn.
+%%{SBESqueakPicture writeTo: './figures/PreferenceBrowser.png' frame: #morphs using: [:helper |
+%%	| browser searchBox |
+%%	PreferenceBrowser open.
+%%	browser := helper world firstSubmorph.
+%%	browser extent: 600 @ 275.
+%%	searchBox := helper morphWithBalloonText: 'Search preference.*' asRegex in: browser.
+%%	helper type: 'swap' into: searchBox.
+%%	searchBox model searchSelected.
+%%	(helper preferenceButtonMorphLabeled: 'Swap mouse buttons' in: browser) highlightOn.
 %%]}
 
 \begin{figure}[htb]
