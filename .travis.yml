@@ -8,7 +8,7 @@ smalltalk:
 - Squeak-Trunk
 
 script:
-- smalltalkci .smalltalk.ston
+- smalltalkci .smalltalk.ston || travis_terminate 1;
 - make
 
 deploy:
