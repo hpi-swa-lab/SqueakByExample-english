@@ -1,4 +1,4 @@
 as yet unclassified
 runCi
 
-	^ self run: SBESqueakPicture resourceDirectory fullName
+	^ self run: SBESqueakPicture resourceDirectory
