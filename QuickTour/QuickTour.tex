@@ -101,8 +101,8 @@ Do whatever works best for your style of working and your operating system.
 %%	helper world
 %%		color: (Color gray: 15 / 16); "Think green & save ink"
 %%		extent: 800 @ 450.
-%%	balloon := Form fromBinaryStream: (helper resourceDirectory
-%%		/ 'branding' fileNamed: 'balloon.png').
+%%	balloon := Form fromFileNamed: (helper resourceDirectory
+%%		/ 'branding' / 'balloon.png') fullName.
 %%	ReleaseBuilder openWelcomeWorkspacesWith: balloon.
 %%	helper world firstSubmorph
 %%		height: helper world height * 0.75;
