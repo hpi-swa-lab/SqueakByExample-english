@@ -18,5 +18,5 @@ extractFrom: aFSReference
 		do: [:command | | success |
 			SBESqueakPicture currentDirectory: command first.
 			success := Compiler evaluate: command second.
-			success ifFalse: [^ self]]
+			success ifFalse: [self error: 'Error generating ', command second printString]]
 		"displayingProgress: 'Generating'"
