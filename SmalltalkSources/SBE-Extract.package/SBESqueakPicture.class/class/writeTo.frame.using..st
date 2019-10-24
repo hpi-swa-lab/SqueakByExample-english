@@ -1,8 +1,10 @@
 screenshots
 writeTo: aPathString frame: aFrameSpecifier using: aBlock
 
-	| picture |
+	| picture path |
 	picture := self createInFrame: aFrameSpecifier using: aBlock.
 	picture ifNil: [^ false].
-	picture writePNGfileNamed: (self currentDirectory resolve: aPathString) fullName.
+	path := (self currentDirectory resolve: aPathString) fullName.
+	(FileDirectory on: path) containingDirectory assureExistence.
+	picture writePNGfileNamed: path.
 	^ true

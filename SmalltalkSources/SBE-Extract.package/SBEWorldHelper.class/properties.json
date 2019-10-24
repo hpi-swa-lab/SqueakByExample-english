@@ -3,7 +3,7 @@
 	"classinstvars" : [
 		 ],
 	"classvars" : [
-		"ResourceDirectory" ],
+		 ],
 	"commentStamp" : "tobe 10/3/2019 20:02",
 	"instvars" : [
 		"world",
