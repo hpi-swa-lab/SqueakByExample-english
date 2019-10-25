@@ -33,6 +33,14 @@
 %Then we need a cookbook of how to do simple things in Morphic.
 %The observer pattern and its implementation with changed:  and update: messages could go here.  Or in ``Idiomatic design patterns'' later.}
 
+
+%%{SBESqueakPicture writeTo: '../figures/blackHandle.png' frame: #morphs using: [:helper | | workspace |
+%%  (HaloMorph new createHandleAt: 0 @ 0 color: Color blue iconName: 'Halo-Grab') openInWorld.
+%%]}
+%%{SBESqueakPicture writeTo: '../figures/moveHandle.png' frame: #morphs using: [:helper | | workspace |
+%%  (HaloMorph new createHandleAt: 0 @ 0 color: Color blue iconName: 'Halo-Drag') openInWorld.
+%%]}
+
 \indmain{Morphic} is the name given to \sq's graphical interface.
 Morphic is written in \st, so it is fully portable between operating systems; as a consequence, \sq looks exactly the same on Unix, MacOS and Windows.
 What distinguishes Morphic from most other user interface toolkits is that it does not have separate modes for ``composing'' and ``running'' the interface: all the graphical elements can be assembled and disassembled by the user, at any time.\footnote{We thank Hilaire Fernandes for permission to base this chapter on his original article in French.}
@@ -155,6 +163,17 @@ There are many  methods available to position a morph; browse the \protind{geome
 For example, 
 to center the star inside joe, execute \ct{star} \mthind{Morph}{center:} \ct{joe center}.
 
+%%{SBESqueakPicture writeTo: './figures/joeStar.png' frame: #morphs using: [:helper |
+%%	| joe bill star |
+%%	joe := Morph new color: Color blue.
+%%	joe openInWorld.
+%%  bill := Morph new color: Color red.
+%%  bill openInWorld.
+%%  bill position: (joe position + (100@0)).
+%%	start := StarMorph new color: Color yellow.
+%%  joe addMorph: star.
+%%  star center: joe center.
+%%]}
 \begin{figure}[ht]
 	\centerline{\includegraphics{joeStar}}
 	\caption{The star is contained inside joe, the translucent blue morph.
@@ -211,13 +230,17 @@ drawOn: aCanvas
 	aCanvas fillRectangle: verticalBar color: self color
 \end{method}
 
-
+%%{SBESqueakPicture writeTo: './figures/NewCross.png' frame: #morphs using: [:helper |
+%%  | cross |
+%%	cross := SBECrossMorph new openInWorld.
+%%  cross addHalo.
+%%]}
 \begin{figure}[hbt]
 	\ifluluelse
 		{\centerline{\includegraphics[width=0.3\textwidth]{NewCross}}}
 		{\centerline{\includegraphics{NewCross}}}
 	\caption{A \ct{CrossMorph} with its halo; you can resize it as you wish.
-		\label{fig:cross}}
+	\label{fig:cross}}
 \end{figure}
 
 
