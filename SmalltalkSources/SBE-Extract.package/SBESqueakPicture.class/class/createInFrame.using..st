@@ -23,10 +23,7 @@ createInFrame: aFrameSpecifier using: aBlock
 		^ Error new
 			tag: {aBlock. error};
 			signal: ('Error creating picture. Error was: "{1}". Raised in: "{2"}. Stack: "{3}".'
-				format: {
-					error.
-					aBlock decompileWithTemps.
-					error signalerContext longStack })].
+				format: { error. aBlock decompile. error signalerContext longStack })].
 	
 	^ helper picture]
 		ensure: [helper tearDown]
