@@ -8,7 +8,7 @@ createInFrame: aFrameSpecifier using: aBlock
 		setUp.
 	helper world color: self paperColor.
 	
-	helper useWorldAndHandDuring: [
+	helper useScreenshotSettingsDuring: [
 		[
 			process := [aBlock cull: helper] fork.
 			Processor yield.
@@ -17,7 +17,13 @@ createInFrame: aFrameSpecifier using: aBlock
 		Processor yield].
 	
 	Project current world doOneCycleNow.
-	process isSuspended ifTrue: [^ nil].
+	process isSuspended ifTrue: [
+		| error |
+		error := process activeError.
+		^ Error new
+			tag: {aBlock. error};
+			signal: ('Error creating picture. Error was: "{1}". Raised in: "{2}". Stack: "{3}".'
+				format: { error. aBlock decompile. error signalerContext longStack })].
 	
 	^ helper picture]
 		ensure: [helper tearDown]

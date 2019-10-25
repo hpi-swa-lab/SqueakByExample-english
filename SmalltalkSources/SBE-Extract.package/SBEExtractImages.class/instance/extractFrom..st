@@ -15,8 +15,7 @@ extractFrom: aFSReference
 			displayingProgress: [:texFile | 'Extracting images from {1}' format: {texFile}]].
 	
 	commands
-		do: [:command | | success |
+		do: [:command | 
 			SBESqueakPicture currentDirectory: command first.
-			success := Compiler evaluate: command second.
-			success ifFalse: [self error: 'Error generating ', command second printString]]
+			Compiler evaluate: command second]
 		"displayingProgress: 'Generating'"

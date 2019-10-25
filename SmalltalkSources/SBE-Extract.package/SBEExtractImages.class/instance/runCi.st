@@ -1,4 +1,4 @@
 as yet unclassified
 runCi
 
-	^ self run: FileDirectory default fullName
+	^ self run: SBESqueakPicture resourceDirectory
