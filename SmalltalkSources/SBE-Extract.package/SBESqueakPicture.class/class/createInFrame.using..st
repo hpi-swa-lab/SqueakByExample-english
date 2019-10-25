@@ -17,7 +17,9 @@ createInFrame: aFrameSpecifier using: aBlock
 		Processor yield].
 	
 	Project current world doOneCycleNow.
-	process isSuspended ifTrue: [^ nil].
+	process isSuspended ifTrue: [^ Error new
+			tag: aBlock;
+			signal: 'Error creating picture'].
 	
 	^ helper picture]
 		ensure: [helper tearDown]
