@@ -3,7 +3,8 @@ resourceDirectory
 	"Returns a FSReference"
 
 	^ ResourceDirectory ifNil: [
+		| directory |
 		Smalltalk globals at: #SmalltalkCI
-			ifPresent: [:sci | FileSystem disk referenceTo: (
-				sci perform: #getEnv: with: 'TRAVIS_BUILD_DIR')]
-			ifAbsent: [FileDirectory default asFSReference]]
+			ifPresent: [:sci | (sci perform: #getEnv: with: 'TRAVIS_BUILD_DIR')
+				ifNotNil: [:path | directory := FileSystem disk referenceTo: path]].
+		directory ifNil: [FileDirectory default asFSReference]]
