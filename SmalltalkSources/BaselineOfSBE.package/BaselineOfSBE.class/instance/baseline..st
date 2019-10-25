@@ -11,7 +11,8 @@ baseline: spec
 			package: #'SBE-Extract' with: [spec requires: #('FileSystem')];
 			package: #'SBE-Morphic';
 			package: #'SBE-Quinto';
+			package: #'SBE-QuickTour';
 			package: #'SBE-Streams';
 			package: #'SBE-Testing'.
 		spec
-			group: #ci with: #(#'SBE-Extract' #'SBE-Quinto' #'SBE-Morphic')].
+			group: #ci with: #(#'SBE-Extract' #'SBE-Quinto' #'SBE-QuickTour' #'SBE-Morphic')].
