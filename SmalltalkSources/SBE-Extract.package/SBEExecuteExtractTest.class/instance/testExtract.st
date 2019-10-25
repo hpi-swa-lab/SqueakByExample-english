@@ -2,4 +2,5 @@ as yet unclassified
 testExtract
 	<timeout: 300 "seconds">
 
-	SBEExtractImages new runCi
+	ToolSet setDefault: StandardToolSet during: [
+		SBEExtractImages new runCi]
