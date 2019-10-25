@@ -757,6 +757,7 @@ Once you have accepted this template, your new repository should be listed on th
 %%	(MCWorkingCopy forPackageNamed: 'SBE-Quinto') modified: false.
 %%	MCCacheRepository default morphicOpen.
 %%	window := helper world firstSubmorph.
+%%	Transcript showln: self firstSubmorph getList; flag: #debug.
 %%	packageList := helper listMorphIncludingMatch: 'SBE-Quinto' asRegex in: window.
 %%	helper type: 'SBE-Quinto' into: packageList listSource.
 %%	window model versionSelection: 1
