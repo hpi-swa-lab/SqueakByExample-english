@@ -22,7 +22,7 @@ createInFrame: aFrameSpecifier using: aBlock
 		error := process activeError.
 		^ Error new
 			tag: {aBlock. error};
-			signal: ('Error creating picture. Error was: "{1}". Raised in: "{2"}. Stack: "{3}".'
+			signal: ('Error creating picture. Error was: "{1}". Raised in: "{2}". Stack: "{3}".'
 				format: { error. aBlock decompile. error signalerContext longStack })].
 	
 	^ helper picture]
