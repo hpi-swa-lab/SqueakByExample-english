@@ -8,7 +8,7 @@ createInFrame: aFrameSpecifier using: aBlock
 		setUp.
 	helper world color: self paperColor.
 	
-	helper useWorldAndHandDuring: [
+	helper useScreenshotSettingsDuring: [
 		[
 			process := [aBlock cull: helper] fork.
 			Processor yield.
