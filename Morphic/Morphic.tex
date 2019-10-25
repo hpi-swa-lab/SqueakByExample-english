@@ -35,10 +35,10 @@
 
 
 %%{SBESqueakPicture writeTo: '../figures/blackHandle.png' frame: #morphs using: [:helper | | workspace |
-%%  (HaloMorph new createHandleAt: 0 @ 0 color: Color blue iconName: 'Halo-Grab') openInWorld.
+%%  (HaloMorph new createHandleAt: 0 @ 0 color: Color black iconName: 'Halo-Grab') openInWorld.
 %%]}
 %%{SBESqueakPicture writeTo: '../figures/moveHandle.png' frame: #morphs using: [:helper | | workspace |
-%%  (HaloMorph new createHandleAt: 0 @ 0 color: Color blue iconName: 'Halo-Drag') openInWorld.
+%%  (HaloMorph new createHandleAt: 0 @ 0 color: Color brown iconName: 'Halo-Drag') openInWorld.
 %%]}
 
 \indmain{Morphic} is the name given to \sq's graphical interface.
@@ -62,12 +62,33 @@ A simple example of this is that you can detach a menu item and keep it as a but
 \index{Morphic!halo}
 \index{blue button}
 
+%%{SBESqueakPicture writeTo: './figures/detachingMenu.png' frame: [:morphsRect | (morphsRect withBottom: morphsRect bottom - 160) withTop: morphsRect top + 250] using: [:helper | | menuItem haloMorph halo |
+%%	helper click: helper world.
+%%	menuItem := helper menuItemMorphLabeled: 'new morph...' in: helper world.
+%%	helper hand releaseMouseFocus.
+%%	helper mouseEnter: menuItem.
+%%	menuItem addHalo.
+%%	haloMorph := helper morphWithBalloonText: 'Pick up' in: helper world.
+%%	halo := haloMorph owner.
+%%	helper mousePress: haloMorph at: haloMorph center buttons: #(left).
+%%	helper mouseMoveTo: haloMorph center - (10@0) buttons: #() in: halo.
+%%	
+%%	"The following is a hack as the event simulation and the HaloMorph do not work
+%%	nicely together."
+%%	halo abandon.
+%%	haloMorph := (HaloMorph new createHandleAt: 0 @ 0 color: Color black iconName: 'Halo-Grab') 
+%%	center: helper hand center;
+%%	openInWorld;
+%%	yourself.
+%%	haloMorph position: haloMorph position + ((menuItem width / 2)@0).
+%%	helper spawnHand.
+%%]}
 \begin{figure}[ht]
 	\ifluluelse
 		{\centerline{\includegraphics[width=0.6\textwidth]{detachingMenu}}}
 		{\centerline{\includegraphics[width=0.4\textwidth]{detachingMenu}}}
 	\caption{Detaching a morph, here the \menu{new morph} menu item, to make it an independent button.
-		\label{fig:detachingMenu}}
+	\label{fig:detachingMenu}}
 \end{figure}
 
 All of the objects that you see on the screen when you run \sq are \emph{Morphs}, that is, they are instances of subclasses of class \ct{Morph}.
@@ -169,10 +190,12 @@ to center the star inside joe, execute \ct{star} \mthind{Morph}{center:} \ct{joe
 %%	joe openInWorld.
 %%  bill := Morph new color: Color red.
 %%  bill openInWorld.
-%%  bill position: (joe position + (100@0)).
-%%	start := StarMorph new color: Color yellow.
+%%	star := StarMorph new color: Color yellow.
+%%  {joe . bill . star} do: [:m | m extent: m extent * 2].
 %%  joe addMorph: star.
 %%  star center: joe center.
+%%  joe position: bill center.
+%%  joe comeToFront.
 %%]}
 \begin{figure}[ht]
 	\centerline{\includegraphics{joeStar}}
@@ -233,6 +256,8 @@ drawOn: aCanvas
 %%{SBESqueakPicture writeTo: './figures/NewCross.png' frame: #morphs using: [:helper |
 %%  | cross |
 %%	cross := SBECrossMorph new openInWorld.
+%%  cross position: 30@30.
+%%  cross extent: 250@250.
 %%  cross addHalo.
 %%]}
 \begin{figure}[hbt]
@@ -552,6 +577,14 @@ Alternatively, you can modify the \ct{handleKeystroke:} method so that you can u
 To prompt the user for input, the \clsind{FillInTheBlank} class provides a few ready-to-use dialog boxes.
 For instance, the \mthind{FillInTheBlank}{request:initialAnswer:} method returns the string entered by the user (\figref{dialogName}).
 
+
+
+%%{SBESqueakPicture writeTo: './figures/dialog.png' frame: #morphs using: [:helper |
+%%	helper
+%%    runModal: [UIManager default request: 'What'' your name?' initialAnswer: 'no name']
+%%    then: [
+%%      helper closeBalloons]
+%%]}
 \begin{figure}[htb]
 \begin{minipage}{0.55\textwidth}
 	\ifluluelse
@@ -689,8 +722,16 @@ The green morph is rejected and therefore stays attached to the mouse pointer.
 
 Let's design a morph to roll a die\footnote{NB: One die, two dice.}. Clicking on it will display the values of all sides of the die in a quick loop, and another click will stop the animation.
 
+%%{SBESqueakPicture writeTo: './figures/die.png' frame: #morphs using: [:helper |
+%%  | die |
+%%	die := SBEDieMorph new openInWorld.
+%%	die dieValue: 5.
+%%  die position: 40@40.
+%%  die extent: 150@150.
+%%  die addHalo.
+%%]}
 \begin{figure}[ht]
-	\centerline{\includegraphics[scale=0.65]{die}}
+	\centerline{\includegraphics[scale=0.35]{die}}
 	\caption{The die in Morphic.
 		\label{fig:dialogDie}}
 \end{figure}
