@@ -1,9 +1,7 @@
 language: smalltalk
 sudo: true
-addons:
-  apt:	
-    packages:	
-    - texlive-full
+services:
+- docker
 smalltalk:
 - Squeak-Trunk
 

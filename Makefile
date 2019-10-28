@@ -9,8 +9,10 @@ C = Preface QuickTour FirstApp Syntax Messages \
 	Model Environment SUnit BasicClasses Collections Streams Morphic \
 	Metaclasses
 
-PDFLATEX = pdflatex -file-line-error
-BIBTEX=bibtex
+#PDFLATEX = pdflatex -file-line-error
+# BIBTEX=bibtex
+PDFLATEX = docker run -v $(CURDIR):/src tom95/texlive-docker-swa pdflatex
+BIBTEX = docker run -v $(CURDIR):/src tom95/texlive-docker-swa bibtex
 BOOK=SBE
 ETC=SBE-etc
 
