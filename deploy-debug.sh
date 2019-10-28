@@ -18,6 +18,7 @@ echo "Downloading gdrive ..."
 GDRIVE_URL='https://docs.google.com/uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&export=download'
 mkdir -p "bin"
 curl -fSL "${GDRIVE_URL}" -o ./bin/gdrive --progress-bar
+chmod +x ./bin/gdrive
 
 FIXED_BRANCH=$(echo $BRANCH | sed 's/\//-/g')
 ./bin/gdrive update $GDRIVE_FILE --refresh-token $GDRIVE_REFRESH_TOKEN $TARGET
