@@ -41,7 +41,7 @@
 %%  (HaloMorph new createHandleAt: 0 @ 0 color: Color brown iconName: 'Halo-Drag') openInWorld.
 %%]}
 
-\indmain{Morphic} is the name given to \sq's graphical interface.
+\indmain{Morphic} is the name of one of \sq's graphical interfaces.
 Morphic is written in \st, so it is fully portable between operating systems; as a consequence, \sq looks exactly the same on Unix, MacOS and Windows.
 What distinguishes Morphic from most other user interface toolkits is that it does not have separate modes for ``composing'' and ``running'' the interface: all the graphical elements can be assembled and disassembled by the user, at any time.\footnote{We thank Hilaire Fernandes for permission to base this chapter on his original article in French.}
 
@@ -93,18 +93,18 @@ A simple example of this is that you can detach a menu item and keep it as a but
 
 All of the objects that you see on the screen when you run \sq are \emph{Morphs}, that is, they are instances of subclasses of class \ct{Morph}.
 \mbox{\ct{Morph}} itself is a large class with many methods; this makes it possible for subclasses to implement interesting behaviour with little code.
-You can create a morph to represent any object, although how good a representation you get depends on the object!
+You can create a morph to represent any graphical object.
 
 \dothis{To create a morph to represent a string object, execute the following code in a workspace, one line at a time.}
 \begin{code}{}
-s := 'Morph' asMorph openInWorld.
-s openViewerForArgument
+stringMorph := 'An illustrating example' asMorph openInWorld.
+stringMorph explore
 \end{code}
 \cmindex{Morph}{openInWorld}
 
 The first line creates a Morph to represent the string \ct{'Morph'}, and then opens it (that is, displays it) in the ``world'', which is the name that \sq gives to the screen.  
 You should obtain a graphical element\,---\,a Morph\,---\,which you can manipulate by blue-clicking.
-The second line opens a ``viewer'' that shows you attributes of this Morph, such as its \ct{x} and \ct{y}  coordinates on the screen.  Clicking on one of the yellow exclamation marks sends a message to the Morph, which responds appropriately.
+The second line opens an ``explorer'' that shows you attributes of this Morph, such as its bounds on the screen.  Clicking on one of the yellow exclamation marks sends a message to the Morph, which responds appropriately.
 
 Of course, it is possible to define morphs that are more interesting graphical representations than the one that you have just seen.
 The method \mthind{Object}{asMorph} has a default implementation in class \ct{Object} class that just creates a StringMorph.
@@ -140,20 +140,19 @@ bill openInWorld.
 \end{code}
 \noindent
 Then type \ct{joe position} and \menu{print it}.
-To move joe, execute \ct{joe position: (joe position + (10@3))} repeatedly.
+To move joe, execute \ct{joe position: joe position + (10@3)} repeatedly.
 
 It is possible to do a similar thing with size.
-\ct{joe} \mthind{Morph}{extent} answers joe's size; to have joe grow, execute \ct{joe extent: (joe extent * 1.1)}.
+\ct{joe} \mthind{Morph}{extent} answers joe's size; to have joe grow, execute \ct{joe extent: joe extent * 1.1}.
 To change the color of a morph, send it the \mthind{Morph}{color:} message with the desired \ct{Color} object as argument, for instance, \ct{joe color: Color orange}.
 To add transparency, try \ct{joe color: (Color orange alpha: 0.5)}.
 
 \dothis{To make bill follow joe, you can repeatedly execute this code:}
 \begin{code}{}
-bill position: (joe position + (100@0))
+bill position: joe position + (100@0)
 \end{code}
 \noindent
 If you move joe using the mouse and then execute this code, bill will move so that it is 100 pixels to the right of joe.
-\ab{It would seem that this would be a good place to introduce the \ct{step} method}.
 
 %=================================================================
 \section{Composing morphs}
@@ -168,7 +167,7 @@ This is called \emph{composition}; morphs can be composed to any depth.
 %\end{enumerate}
 %}
 \index{Morph!composing}
-You can place a morph inside another by sending the message \mthind{Morph}{addMorph:} to the container morph.
+You can place a morph inside another by sending the message \mthind{Morph}{addMorph:} to the container morph. Thereby, you make the added morph a ``submorph''.
 
 \dothis{Try adding a morph to another one:}
 \begin{code}{}
@@ -180,9 +179,8 @@ star position: joe position.
 \noindent
 The last line positions the star at the same coordinates as joe.
 Notice that the coordinates of the contained morph are still relative to the screen, not to the containing morph.
-There are many  methods available to position a morph; browse the \protind{geometry} protocol of class \ct{Morph} to see for yourself.
-For example, 
-to center the star inside joe, execute \ct{star} \mthind{Morph}{center:} \ct{joe center}.
+There are many  methods available to position a morph; browse the \protind{geometry} method category of class \ct{Morph} to see for yourself.
+For example, to center the star inside joe, execute \ct{star} \mthind{Morph}{center:} \ct{joe center}.
 
 %%{SBESqueakPicture writeTo: './figures/joeStar.png' frame: #morphs using: [:helper |
 %%	| joe bill star |
@@ -208,12 +206,11 @@ It is possible to embed more morphs inside joe.
 In addition to doing this programmatically, you can also embed morphs by direct manipulation.
 
 \dothis{From the world menu select ``objects'' and click on the button labeled ``Graphics''.
-% If you don't have a \menu{Supplies} flap at the bottom of your screen, execute \ct{Flaps enableGlobalFlaps} to create one.  
-Drag an ellipse and a star from the \menu{Supplies} flap.  Place the star over the ellipse, and yellow-click the star to bring up a menu\footnote{You can also blue-click the star to bring up the morphic halo, and then click the red menu handle.}.   Select \menu{embed into \go Ellipse}.  Now the star and the ellipse move together.}
+Drag an ellipse and a star from the list.  Place the star over the ellipse, and yellow-click the star to bring up a menu\footnote{You can also blue-click the star to bring up the morphic halo, and then click the red menu handle.}.   Select \menu{embed into \go Ellipse}.  Now the star and the ellipse move together.}
 
 %\dothis{If you don't have a \menu{Supplies} flap at the bottom of your screen, execute \ct{Flaps enableGlobalFlaps} to create one.  Drag a yellow ellipse and a white star from the \menu{Supplies} flap.  Place the star over the ellipse, and yellow-click the star to bring up a menu\footnote{You can also blue-click the star to bring up the morphic halo, and then click the red menu handle.}.   Select \menu{embed into \go Ellipse}.  Now the star and the ellipse move together.}
 
-To remove a sub-morph, do \ct{joe} \mthind{Morph}{removeMorph:} \ct{star} or \ct{star} \mthind{Morph}{delete}.  This can also be done by direct manipulation:
+To remove a sub-morph, do \ct{joe} \mthind{Morph}{removeMorph:} \ct{star} or \ct{star} \mthind{Morph}{abandon}.  This can also be done by direct manipulation:
 
 \dothis{Blue click twice on the star.  Drag the star away from the ellipse using the grab handle \grabHandle{}.}
 
@@ -299,7 +296,7 @@ Notice how we leverage the \mthind{Rectangle}{containsPoint:} method in class \c
 There are two problems with the code in \mthsref{firstDrawOn} and \ref{mth:firstContains}.
 The most obvious is that we have duplicated code.
 This is a cardinal error: if we find that we need to change the way that \ct{horizonatalBar} or \ct{verticalBar} are calculated, we are quite likely to forget to change one of the two occurrences.
-The solution is to factor out these calculations into two new methods, which we put in the \ct{private} protocol:
+The solution is to factor out these calculations into two new methods, which we put in the \ct{private} method category:
 
 \needlines{4}
 \begin{method}{\ct{horizontalBar}.}
@@ -516,31 +513,33 @@ CrossMorph>>>mouseEnter: anEvent
 
 \begin{method}{Handing back the focus when the pointer goes away.}
 CrossMorph>>>mouseLeave: anEvent
-	anEvent hand newKeyboardFocus: nil
+	anEvent hand releaseKeyboardFocus: self
+\end{method}
+
+\begin{method}{Declare that \ct{CrossMorph} will react to all keyboard events.}
+CrossMorph>>>handlesKeyboard: anEvent
+	^ true
 \end{method}
 
 \begin{method}[handleKeystroke]{Receiving and handling keyboard events.}
-CrossMorph>>>handleKeystroke: anEvent
-	| keyValue |
-	keyValue := anEvent keyValue.
-	keyValue = 30	 "up arrow"
-		ifTrue: [self position: self position - (0 @ 1)].
-	keyValue = 31	 "down arrow"
-		ifTrue: [self position: self position + (0 @ 1)].
-	keyValue = 29	 "right arrow"
-		ifTrue: [self position: self position + (1 @ 0)].
-	keyValue = 28	 "left arrow"
-		ifTrue: [self position: self position - (1 @ 0)]
+CrossMorph>>>keyStroke: anEvent
+
+	| keyCharacter |
+	keyCharacter := anEvent keyCharacter.
+	keyCharacter = Character arrowUp ifTrue: [self position: self position - (0@1)].
+	keyCharacter = Character arrowDown ifTrue: [self position: self position + (0@1)].
+	keyCharacter = Character arrowLeft ifTrue: [self position: self position - (1@0)].
+	keyCharacter = Character arrowRight ifTrue: [self position: self position + (1@0)].
 \end{method}
 
-We have written this method so that you can move the morph using the arrow keys.
-Note that when the mouse is no longer over the morph, the \mthind{Morph}{handleKeystroke:} message is not sent, so the morph stops responding to keyboard commands.
-To discover the key values, you can open a Transcript window and add \glbind{Transcript} \ct{show: anEvent keyValue} to \mthref{handleKeystroke}.
-The \ct{anEvent} argument of \ct{handleKeystroke:} is an instance of \clsind{KeyboardEvent}, another subclass of \clsind{MorphicEvent}. Browse this class to learn more about keyboard events.
+We have written these methods so that you can move the morph using the arrow keys. When the mouse is over the morph, the morph will be asked via the \ct{handlesKeyboard:} method whether it wants to handle the incoming keyboard events.
+Note that when the mouse is no longer over the morph, the \mthind{Morph}{keyStroke:} message is not sent, so the morph stops responding to keyboard commands.
+To discover the key values, you can open a Transcript window and add \glbind{Transcript} \ct{show: anEvent keyCharacter} to \mthref{handleKeystroke}.
+The \ct{anEvent} argument of \ct{keyStroke:} is an instance of \clsind{KeyboardEvent}, another subclass of \clsind{MorphicEvent}. Browse this class to learn more about keyboard events.
 
 \subsection{Morphic animations}
 
-Morphic provides a simple animation system with two main methods: \mthind{Morphic}{step} is sent to a morph at regular intervals of time, while \mthind{Morphic}{stepTime} specifies the time in milliseconds between \ct{step}s.\footnote{\ct{stepTime} is actually the \emph{minimum} time between \ct{step}s.   If you ask for a \ct{stepTime} of 1\,ms, don't be surprised if \sq is too busy to step your morph that often.}
+Morphic provides a simple animation system with two main methods: \mthind{Morphic}{step} is sent to a morph at regular intervals of time, while \mthind{Morphic}{stepTime} specifies the time in milliseconds between \ct{step}s.\footnote{\ct{stepTime} is actually the \emph{minimum} time between \ct{step}s. If you ask for a \ct{stepTime} of 1\,ms, and you generate a high system load, \sq might not step your morph that often.}
 In addition, 
 \mthind{Morphic}{startStepping} turns on the stepping mechanism, while \mthind{Morphic}{stopStepping} turns it off again;  \mthind{Morphic}{isStepping} can be used to find out whether a morph is currently being stepped.
 \index{Morphic!animation}
@@ -563,10 +562,8 @@ Alternatively, you can modify the \ct{handleKeystroke:} method so that you can u
 \dothis{Add the following code to \mthref{handleKeystroke}:}
 
 \begin{code}{}
-	keyValue = $+ asciiValue 
-		ifTrue: [self startStepping].
-	keyValue = $- asciiValue
-		ifTrue: [self stopStepping].
+	keyCharacter = $+ ifTrue: [self startStepping].
+	keyCharacter = $- ifTrue: [self stopStepping].
 \end{code}
 
 % \on{You can also \menu{debug \go inspect morph} and evaluate: \ct{self currentWorld startStepping: self}.}
@@ -574,9 +571,8 @@ Alternatively, you can modify the \ct{handleKeystroke:} method so that you can u
 %=================================================================
 \section{Interactors}
 
-To prompt the user for input, the \clsind{FillInTheBlank} class provides a few ready-to-use dialog boxes.
-For instance, the \mthind{FillInTheBlank}{request:initialAnswer:} method returns the string entered by the user (\figref{dialogName}).
-
+To prompt the user for input, the \clsind{UIManager} class provides a few ready-to-use interactions. Note, that there is only one UIManager instance active at the time which you can get by sending the message \ct{default} to the class \clsind{UIManager}.
+For instance, the \mthind{UIManager}{request:initialAnswer:} method returns the string entered by the user (\figref{dialogName}).
 
 
 %%{SBESqueakPicture writeTo: './figures/dialog.png' frame: #morphs using: [:helper |
@@ -586,23 +582,11 @@ For instance, the \mthind{FillInTheBlank}{request:initialAnswer:} method returns
 %%      helper closeBalloons]
 %%]}
 \begin{figure}[htb]
-\begin{minipage}{0.55\textwidth}
 	\ifluluelse
-		{\centerline{\includegraphics[scale=0.65]{dialog}}}
-		{\centerline{\includegraphics[width=5cm]{dialog}}}
-	\caption{Dialog displayed by \ct{FillInTheBlank request: 'What''s your name?' initialAnswer: 'no name'}.
+		{\centerline{\includegraphics[width=0.55\textwidth]{dialog}}}
+		{\centerline{\includegraphics[width=0.55\textwidth]{dialog}}}
+	\caption{Dialog displayed by \ct{UIManager default request: 'What''s your name?' initialAnswer: 'no name'}.
 		\label{fig:dialogName}}
-\end{minipage}
-\hfill
-\begin{minipage}{0.38\textwidth}
-	\vfill
-	\ifluluelse
-		{\centerline{\includegraphics [scale=0.65]{popup}}}
-		{\centerline{\includegraphics[width=3cm]{popup}}}
-	\vfill
-	\vspace{4ex}
-	\caption{Pop-up menu displayed by \ct{PopUpMenu>>>startUpWithCaption:}.}
-\end{minipage}
 \end{figure}
 
 %\begin{figure}[ht]
@@ -632,7 +616,7 @@ The receiver will accept a morph only if the dropped morph matches a given condi
 
 \dothis{Let's first define the receiver morph:}
 \begin{classdef}{Defining a morph on which we can drop other morphs}
-Morph subclass: #ReceiverMorph
+BorderedMorph subclass: #ReceiverMorph
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
@@ -643,14 +627,14 @@ Morph subclass: #ReceiverMorph
 \begin{method}{Initializing \ct{ReceiverMorph}.}
 ReceiverMorph>>>initialize
 	super initialize.
-	color := Color red.
-	bounds := 0 @ 0 extent: 200 @ 200
+	self color: Color red.
+	self bounds: (0@0 extent: 200@200).
 \end{method}
 
 How do we decide if the receiver morph will accept or repel the dropped morph?
 In general, both of the morphs will have to agree to the interaction.
 The receiver does this by responding to \mthind{Morph}{wantsDroppedMorph:event:}; the first argument is the dropped morph, and the second the mouse event, so that the receiver can, for example, see if any modifier keys were held down at the time of the drop. 
-The dropped morph is also given the opportunity to check and see if it likes the morph onto which it is being dropped; it is sent the message \ct{wantsToBeDroppedInto:}.  The default implementation of  this method (in class \ct{Morph}) answers \ct{true}.
+The dropped morph is also given the opportunity to check and see if it likes the morph onto which it is being dropped; it is sent the message \ct{wantsToBeDroppedInto:}.  The default implementation of this method (in class \ct{Morph}) always answers \ct{true}.
 
 \begin{method}{Accept dropped morphs based on their color.}
 ReceiverMorph>>>wantsDroppedMorph: aMorph event: anEvent
@@ -720,7 +704,7 @@ The green morph is rejected and therefore stays attached to the mouse pointer.
 %=================================================================
 \section{A complete example}
 
-Let's design a morph to roll a die\footnote{NB: One die, two dice.}. Clicking on it will display the values of all sides of the die in a quick loop, and another click will stop the animation.
+Let's design a morph to roll a die. Clicking on it will display the values of all sides of the die in a quick loop, and another click will stop the animation.
 
 %%{SBESqueakPicture writeTo: './figures/die.png' frame: #morphs using: [:helper |
 %%  | die |
@@ -946,11 +930,11 @@ Morphic is a graphical framework in which graphical interface elements can be dy
 \begin{itemize}
   \item You can convert an object into a morph and display that morph on the screen by sending it the messages \ct{asMorph openInWorld}.
   \item You can manipulate a morph by blue-clicking on it and using the handles that appear. (Handles have help balloons that explain what they do.)
-  \item You can compose morphs by embedding one onto another, either by drag and drop or by sending the message \ct{addMorph:}.
+  \item You can compose morphs by making them submorphs through embedding one onto another, either by drag and drop or by sending the message \ct{addMorph:}.
   \item You can subclass an existing morph class and redefine key methods, like \ct{initialize} and \ct{drawOn:}.
   \item You can control how a morph reacts to mouse and keyboard events by redefining the methods \ct{handlesMouseDown:}, \ct{handlesMouseOver:}, \etc
   \item You can animate a morph by defining the methods \ct{step} (what to do) and \ct{stepTime} (the number of milliseconds between steps).
-  \item Various pre-defined morphs, like \ct{PopUpMenu} and \ct{FillInTheBlank}, are available for interacting with users.
+  \item The \ct{UIManager} provides several ready-made interactions with users.
 \end{itemize}
 
 %=================================================================
