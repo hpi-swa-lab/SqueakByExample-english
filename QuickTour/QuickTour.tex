@@ -137,7 +137,7 @@ A good place to get started is the \ind{world menu} shown in \figref{threeButton
 %%]}
 
 %%{SBESqueakPicture writeTo: './figures/yellowButtonMenuOnWorkspace.png' frame: #morphs using: [:helper |
-%%	| workspace |
+%%	| workspace menu |
 %%	workspace := ToolBuilder open: Workspace new.
 %%	helper type: 'Time now ' into: workspace.
 %%	
@@ -518,7 +518,7 @@ As we shall see, there are several interesting browsers available for \sq, but t
 %%	Dictionary new
 %%		at: class category put: 'System categories';
 %%		at: ('\s*' , class) asRegex put: 'Classes';
-%%		at: (class categoryForSelector: selector) put: 'Protocols';
+%%		at: (class whichCategoryIncludesSelector: selector) put: 'Protocols';
 %%		at: selector put: 'Methods';
 %%		keysAndValuesDo: [:item :description |
 %%			(NewBalloonMorph

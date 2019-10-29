@@ -3,8 +3,10 @@ useScreenshotSettingsDuring: aBlock
 
 	thisContext
 		wrap: [:block | Preferences
-			setPreference: #(UIManager >> #openToolsAttachedToMouseCursor) join asSymbol
-			toValue: false
+			setPreferences: ({
+				#(UIManager >> #openToolsAttachedToMouseCursor) -> false.
+				#(Model >> #useColorfulWindows) -> true }
+					collect: [:setting | setting key join asSymbol -> setting value])
 			during: block];
 		wrap: [:block |
 			| priorHand priorWorld |
