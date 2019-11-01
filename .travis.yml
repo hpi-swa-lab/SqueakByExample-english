@@ -5,6 +5,9 @@ services:
 smalltalk:
 - Squeak-Trunk
 
+before_script:
+- export DEBUG_FIGURES=true && [ "$TRAVIS_BRANCH" = "master" ] && export DEBUG_FIGURES=false
+
 script:
 - smalltalkci .smalltalk.ston || travis_terminate 1;
 - make

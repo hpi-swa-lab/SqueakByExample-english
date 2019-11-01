@@ -15,6 +15,7 @@ PDFLATEX = docker run -v $(CURDIR):/src tom95/texlive-docker-swa pdflatex
 BIBTEX = docker run -v $(CURDIR):/src tom95/texlive-docker-swa bibtex
 BOOK=SBE
 ETC=SBE-etc
+TEXINPUT=$(shell TEXINPUT='\\\\input{${BOOK}}' && [ "$$DEBUG_FIGURES" = true ] && TEXINPUT='\\\\AtBeginDocument{\\\\include{robustize-figures}}'"$$TEXINPUT" ;echo $$TEXINPUT)
 
 # --------------------------------------------------------------------------------
 all : book
@@ -23,10 +24,10 @@ all : book
 # See README.txt
 
 book : clean listings
-	time ${PDFLATEX} ${BOOK}
+	time ${PDFLATEX} ${TEXINPUT}
 	time ${BIBTEX} ${BOOK}
-	time ${PDFLATEX} ${BOOK}
-	time ${PDFLATEX} ${BOOK} | tee warnings.txt
+	time ${PDFLATEX} ${TEXINPUT}
+	time ${PDFLATEX} ${TEXINPUT} | tee warnings.txt
 	# Filter out blank lines and bogus warnings
 	perl -pi \
 		-e '$$/ = "";' \

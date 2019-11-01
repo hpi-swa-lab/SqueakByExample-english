@@ -1,0 +1,68 @@
+\let\StandardIncludeGraphics\includegraphics
+
+%==========================================
+% CREDITS: https://tex.stackexchange.com/questions/99070/check-for-a-valid-file-before-using-includegraphics/99099#99099
+\makeatletter
+\newif\ifgraphicexist
+
+\catcode`\*=11
+\newcommand\imagetest[1]{%
+ \begingroup
+ \global\graphicexisttrue
+   \let\input@path\Ginput@path
+  \filename@parse{#1}%
+  \ifx\filename@ext\relax
+    \@for\Gin@temp:=\Gin@extensions\do{%
+      \ifx\Gin@ext\relax
+        \Gin@getbase\Gin@temp
+      \fi}%
+  \else
+    \Gin@getbase{\Gin@sepdefault\filename@ext}%
+    \ifx\Gin@ext\relax
+       \global\graphicexistfalse
+       \def\Gin@base{\filename@area\filename@base}%
+       \edef\Gin@ext{\Gin@sepdefault\filename@ext}%
+    \fi
+  \fi
+  \ifx\Gin@ext\relax
+         \global\graphicexistfalse
+    \else 
+       \@ifundefined{Gin@rule@\Gin@ext}%
+         {\global\graphicexistfalse}%
+         {}%
+    \fi  
+  \ifx\Gin@ext\relax 
+   \gdef\imageextension{unknown}%
+  \else
+   \xdef\imageextension{\Gin@ext}%
+  \fi 
+ \endgroup 
+ \ifgraphicexist
+  \expandafter \@firstoftwo
+ \else
+  \expandafter \@secondoftwo
+ \fi 
+ } 
+\catcode`\*=12
+\makeatother
+%==========================================
+
+
+
+\renewcommand{\includegraphics}[2][]{
+
+\imagetest{#2}{
+	\StandardIncludeGraphics[#1]{#2}
+}{
+	\ClassWarning{robustize-figures}{Figure #2 does not exist -- but robust mode is activated, so I am going to replace this with a placeholder}
+	\noindent\colorbox{gray!20}{
+	\begin{minipage}[t][4.2cm][t]{0.8\textwidth}
+		\vspace*{\fill} 
+		\centering 
+		Missing figure
+		
+		\texttt{#2}
+		\vspace*{\fill}
+	\end{minipage}}
+}
+}
