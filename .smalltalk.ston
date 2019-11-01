@@ -8,7 +8,7 @@ SmalltalkCISpec {
 			#useLatestMetacello : true
 		}
 	],
-	#preTesting : 'SmalltalkSources/SBE-Extract.package/SBEFigureBuilder.class/generateAllTexBuilders.st',
+	#preTesting : 'prepareSuite.st',
 	#testing : {
 		#failOnSCIDeprecationWarnings : false,
 		#allTestCases : true
