@@ -11,6 +11,6 @@ SmalltalkCISpec {
 	#preTesting : 'prepareSuite.st',
 	#testing : {
 		#failOnSCIDeprecationWarnings : false,
-		#allTestCases : true
+		#categories : [ 'SBEGenerated' ]
 	}
 }
