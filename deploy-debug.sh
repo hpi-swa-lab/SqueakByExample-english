@@ -23,5 +23,5 @@ chmod +x ./bin/gdrive
 FIXED_BRANCH=$(echo $BRANCH | sed 's/\//-/g')
 ./bin/gdrive update $GDRIVE_FILE --refresh-token $GDRIVE_REFRESH_TOKEN $TARGET
 
-echo -e "\e[1mFinished Google Drive upload."
-echo -e "\e[1mYou can download the PDF here: \e[34mhttps://drive.google.com/open?id=$GDRIVE_FILE"
+echo -e "\e[93mFinished Google Drive upload."
+echo -e "\e[93mYou can download the PDF here: \e[94mhttps://drive.google.com/open?id=$GDRIVE_FILE"
