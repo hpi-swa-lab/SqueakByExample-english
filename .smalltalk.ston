@@ -1,16 +1,16 @@
 SmalltalkCISpec {
-    #loading : [
-      SCIMetacelloLoadSpec {
-        #baseline : 'SBE',
-        #directory : 'SmalltalkSources',
-        #platforms : [ #squeak ],
-        #load : [ 'ci' ],
-        #useLatestMetacello : true
-      }
-    ],
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'SBE',
+      #directory : 'SmalltalkSources',
+      #platforms : [ #squeak ],
+      #load : [ 'ci' ],
+      #useLatestMetacello : true
+    }
+  ],
+  #preTesting : 'SmalltalkSources/SBE-Extract.package/SBEFigureBuilder.class/generateAllTexBuilders.st'
 	#testing : {
-		#failOnZeroTests : false,
 		#failOnSCIDeprecationWarnings : false,
-		#classes : [ #SBEExecuteExtractTest ]
+		#allTestCases : true,
 	}
 }
