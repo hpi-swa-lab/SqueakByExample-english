@@ -9,19 +9,15 @@ before_script: |
   export DEBUG_FIGURES=true && [ "$TRAVIS_BRANCH" = "master" ] && export DEBUG_FIGURES=false ; :
 
 script:
-- smalltalkci .smalltalk.ston || travis_terminate 1;
+- smalltalkci .smalltalk.ston || [ $DEBUG_FIGURES = true ]
 - make
+- "bash -e deploy-debug.sh SBE.pdf ; :"
 
 deploy:
-  - provider: script
-    script: bash -e deploy-debug.sh SBE.pdf
-    skip_cleanup: true
-    on:
-      all_branches: true
-  - provider: releases
-    api_key:
-      secure: KcvH99B3Ab567MgJxsMOfvvxs0Q7qQw3WHlmyESkF5/B+wOBX3XJkFKF+3HeRejqUiZCIjsHEfgamufPGp/a9vdrEgOnLsjnlrsheje9/hHIC+fmQp0g6BpeIfF/eHlyE2W4Lx+mwQASzYjEvGIERlnrXUAWG+0k1BbB31JhF1kznjFe1gEwlfltIqxL7Bxm6dFyucn8PV1N8liq2B9iKsUapXBC7Qfen2L/tTuVljhdWb1GsIX8FzeIFXdJbmlBjaiUNb8uCFYyWqaqcq2+N+nmUos/flqaQZor0bz1WtrKvwdpoenWrLmh7FDjSRdpTCXWaaH62Rw2p+bcWxdjz9sGEu/NAEPvdpFirNRPX2k8bhA7QbdqrLPrznu9vs6Ygo6pBeapUSIU6KwK5LazoWn61HIh8Ib6s3sZeu7w/N3u7jGMhhbGNRGcISCHKTYw0oYIdT0+F6nRUpV0ov2h/u9qslVPtksxbdjFeuy/BAKmTiCseiaVBol5TWG++SY7Uo5sQT6/2jpjAV2bOUV35VU4/zObftCo21WzZXzWV+Q9XruOPBs0XRRTFJxrKm35ECS/5FputYtD7EJ3+xtPAEHp/JZxHTydN20XDxM0iDS19tk7t+L6bYpWDjuul2GLJOjUp5kVfzSt0cEjuNX1E6YH7SmNJFvF5snwlYrHESs=
-    file: ${TRAVIS_BUILD_DIR}/SBE.pdf
-    skip_cleanup: true
-    on:
-      branch: master
+  provider: releases
+  api_key:
+    secure: KcvH99B3Ab567MgJxsMOfvvxs0Q7qQw3WHlmyESkF5/B+wOBX3XJkFKF+3HeRejqUiZCIjsHEfgamufPGp/a9vdrEgOnLsjnlrsheje9/hHIC+fmQp0g6BpeIfF/eHlyE2W4Lx+mwQASzYjEvGIERlnrXUAWG+0k1BbB31JhF1kznjFe1gEwlfltIqxL7Bxm6dFyucn8PV1N8liq2B9iKsUapXBC7Qfen2L/tTuVljhdWb1GsIX8FzeIFXdJbmlBjaiUNb8uCFYyWqaqcq2+N+nmUos/flqaQZor0bz1WtrKvwdpoenWrLmh7FDjSRdpTCXWaaH62Rw2p+bcWxdjz9sGEu/NAEPvdpFirNRPX2k8bhA7QbdqrLPrznu9vs6Ygo6pBeapUSIU6KwK5LazoWn61HIh8Ib6s3sZeu7w/N3u7jGMhhbGNRGcISCHKTYw0oYIdT0+F6nRUpV0ov2h/u9qslVPtksxbdjFeuy/BAKmTiCseiaVBol5TWG++SY7Uo5sQT6/2jpjAV2bOUV35VU4/zObftCo21WzZXzWV+Q9XruOPBs0XRRTFJxrKm35ECS/5FputYtD7EJ3+xtPAEHp/JZxHTydN20XDxM0iDS19tk7t+L6bYpWDjuul2GLJOjUp5kVfzSt0cEjuNX1E6YH7SmNJFvF5snwlYrHESs=
+  file: ${TRAVIS_BUILD_DIR}/SBE.pdf
+  skip_cleanup: true
+  on:
+    branch: master
