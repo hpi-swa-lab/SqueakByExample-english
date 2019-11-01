@@ -1,0 +1,14 @@
+{
+	"category" : "SBE-Extract",
+	"classinstvars" : [
+		"fileReference" ],
+	"classvars" : [
+		"ResourceDirectory" ],
+	"commentStamp" : "ct 11/1/2019 16:10",
+	"instvars" : [
+		 ],
+	"name" : "SBEFigureBuilder",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"type" : "normal" }
