@@ -1,4 +1,5 @@
 code generation
 generateAllTexBuilders
 
-	^ self generateBuildersIn: self resourceDirectory
+	^ [self generateBuildersIn: self resourceDirectory]
+		valueSuppressingMessages: #('*safety checks*')
