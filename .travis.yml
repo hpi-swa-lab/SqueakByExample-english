@@ -9,9 +9,9 @@ before_script: |
   export DEBUG_FIGURES=true && [ "$TRAVIS_BRANCH" = "master" ] && export DEBUG_FIGURES=false ; :
 
 script:
-- smalltalkci .smalltalk.ston || [ $DEBUG_FIGURES = true ]
+- smalltalkci .smalltalk.ston
 - make
-- "bash -e deploy-debug.sh SBE.pdf ; :"
+- "[ -f SBE.pdf ] && bash -e deploy-debug.sh SBE.pdf ; :"
 
 deploy:
   provider: releases
