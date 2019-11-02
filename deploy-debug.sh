@@ -8,7 +8,7 @@ else
 fi
 
 ./travis_fold -start
-echo "I will now export the build file $TARGET to Google Drive."
+echo "\033[1;36mI will now export the build file $TARGET to Google Drive.\033[0m"
 
 # Note: This token may expire after some time. Just create a fake account and update the token below to reactive it :P
 GDRIVE_REFRESH_TOKEN="1//09E6QalRd0WHbCgYIARAAGAkSNwF-L9IrA4CQiIhYB_RUnaJYYy9h76ShYfqYLioZdIyZMpD9x4replF0JYuRZRLfwHL1PybqdpI"
@@ -26,5 +26,5 @@ FIXED_BRANCH=$(echo $BRANCH | sed 's/\//-/g')
 
 ./travis_fold -end
 
-echo -e "\e[93mFinished Google Drive upload."
-echo -e "\e[93mYou can download the PDF here: \e[94mhttps://drive.google.com/open?id=$GDRIVE_FILE"
+echo "\033[0;36mFinished Google Drive upload."
+echo "\033[1;36mYou can download the PDF here: \033[1;34mhttps://drive.google.com/open?id=$GDRIVE_FILE\033[0m"
