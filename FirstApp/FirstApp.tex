@@ -338,17 +338,17 @@ Now let's define an \mthind{SBEGame}{initialize} method for \ct{SBEGame}.
 
 
 %%{SBESqueakPicture writeTo: './figures/UnknownSelector.png' frame: #morphs using: [:helper |
-%%  helper runModal: [UnknownSelector name: #cellsPerSide]
+%%	helper runModal: [UnknownSelector name: #cellsPerSide]
 %%]}
 %%{SBESqueakPicture writeTo: './figures/DeclareInstanceVar.png' frame: #morphs using: [:helper |
-%%   helper
-%%   runModal: [Compiler new
-%%  	 compile: 'initialize cells'
-%%  	 in: Object
-%%  	 environment: SBEGame environment
-%%  	 notifying: PluggableTextMorph new
-%%  	 ifFail: []]
-%%   then: [helper type: (RunArray new: 2 withAll: Character arrowDown) into: helper dialogWindow]
+%%	helper
+%%		runModal: [Compiler new
+%%			compile: 'initialize cells'
+%%			in: Object
+%%			environment: SBEGame environment
+%%			notifying: PluggableTextMorph new
+%%			ifFail: []]
+%% 		then: [helper select: helper dialogWindow at: '.*instance.*' asRegex]
 %%]}
 \begin{figure}[htb]
 \begin{minipage}{0.34\textwidth}

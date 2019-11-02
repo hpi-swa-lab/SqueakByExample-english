@@ -521,9 +521,8 @@ As we shall see, there are several interesting browsers available for \sq, but t
 %%		at: (class whichCategoryIncludesSelector: selector) put: 'Protocols';
 %%		at: selector put: 'Methods';
 %%		keysAndValuesDo: [:item :description |
-%%			(NewBalloonMorph
-%%				string: description for: (helper listMorphIncludingMatch: item in: window) owner)
-%%					popUp].
+%%			(NewBalloonMorph string: description for: (helper listMorphIncludingMatch: item in: window))
+%%				popUp].
 %%	codePane := helper textMorphIn: window withTextMatching: 'printString[\s\S]*' asRegex.
 %%	(NewBalloonMorph string: 'name of method' for: codePane)
 %%			popUpAt: codePane topLeft + (10 @ 5).
@@ -694,12 +693,8 @@ To scroll to \ct{now} itself, move the cursor to the list and type ``\ct{n}''; t
 %%	helper
 %%		mouseEnter: inputField;
 %%		type: 'now' into: inputField;
-%%		keyStroke: inputField key: Character enter.
-%%	['now' matches: hitList selection] whileFalse: [
-%%		helper keyStroke: hitList key: Character arrowDown].
-%%	3 "scroll the selection nicely into view"
-%%		timesRepeat: [helper keyStroke: hitList key: Character arrowDown];
-%%		timesRepeat: [helper keyStroke: hitList key: Character arrowUp]
+%%		keyStroke: inputField key: Character enter;
+%%		select: hitList at: 'now' andScrollIntoViewBy: 3.
 %%]}
 
 \begin{figure}[hbt]
