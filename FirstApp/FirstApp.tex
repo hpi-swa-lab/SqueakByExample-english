@@ -43,7 +43,8 @@ Nevertheless, if you find yourself not understanding all of the code, don't worr
 %%{SBESqueakPicture writeTo: './figures/GameBoard.png' frame: #morphs using: [:helper |
 %%	| game |
 %%	game := SBEGame new openInWorld.
-%%	helper click: game at: (game bounds pointAtFraction: 4 @ 6 - 0.5 / 10) buttons: #(left)
+%%	helper click: game at: (game bounds pointAtFraction: 4 @ 6 - 0.5 / 10) buttons: #(left).
+%%	helper spawnHand.
 %%]}
 \begin{figure}[ht]
 	\vskip -\baselineskip
