@@ -14,3 +14,4 @@ display start
 [ -z $1 ] || echo $*
 cat
 display end
+echo
