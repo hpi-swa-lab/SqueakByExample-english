@@ -47,6 +47,7 @@
 \makeatother
 %==========================================
 
+\newcommand{\shrug}{\texttt{\raisebox{0.75em}{\char`\_}\char`\\\char`\_\kern-0.5ex(\kern-0.25ex\raisebox{0.25ex}{\rotatebox{45}{\raisebox{-.75ex}"\kern-1.5ex\rotatebox{-90})}}\kern-0.5ex)\kern-0.5ex\char`\_/\raisebox{0.75em}{\char`\_}}}
 
 
 \renewcommand{\includegraphics}[2][]{
@@ -61,7 +62,11 @@
 		\centering 
 		Missing figure
 		
-		\texttt{#2}
+    \texttt{#2}
+    
+    \medskip
+    
+    \shrug
 		\vspace*{\fill}
 	\end{minipage}}
 }
