@@ -249,6 +249,15 @@ It shouldn't be all that surprising that so many classes implement this method: 
 If you look at the send of \ct{drawOn:} in \ct{AtomMorph>>>drawOn:}, you will see that it is a super \subind{super}{send}.  So we know that the method that will be executed will be in \ct{AtomMorph}'s superclass.  What class is that?  Click the \button{hierarchy} button and you will see that it is \ct{EllipseMorph}. 
 \index{system browser!hierarchy button}
 
+%%{SBESqueakPicture writeTo: './figures/CanvasDraw.png' frame: #morphs using: [:helper |
+%%	| method window list |
+%%	helper systemNavigation browseAllCallsOn: #drawOn:.
+%%	method := 'Canvas draw\:.*' asRegex.
+%%	window := helper foregroundWindow.
+%%	window extent: 600 @ 300; fullBounds.
+%%	list := helper listMorphIncludingMatch: method in: helper foregroundWindow.
+%%	helper select: list at: 'Canvas draw\:.*' asRegex andScrollIntoViewBy: 3.
+%%]}
 \begin{figure}[htbp]
 	\begin{center}
    \ifluluelse
