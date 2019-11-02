@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
+name="custom_fold"
 function display() {
-	echo -en "travis_fold:start:$1\r\033[0K"
+	echo -en "travis_fold:start:${name}\r\033[0K"
 }
 
 if [[ "$1" =~ -.+ ]]; then
@@ -9,7 +10,6 @@ if [[ "$1" =~ -.+ ]]; then
 	exit
 fi
 
-name="custom_fold"
 display start
 [ -z $1 ] || echo $*
 cat
