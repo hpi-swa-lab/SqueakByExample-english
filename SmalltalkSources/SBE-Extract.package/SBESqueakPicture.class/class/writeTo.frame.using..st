@@ -1,8 +1,7 @@
 screenshots
-writeTo: aPathString frame: aFrameSpecifier using: aBlock
+writeTo: aString frame: aFrameSpecifier using: aBlock
 
-	| picture path |
-	picture := self createInFrame: aFrameSpecifier using: aBlock.
-	path := (self currentDirectory resolve: aPathString) fullName.
-	(FileDirectory on: path) containingDirectory assureExistence.
-	picture writePNGfileNamed: path.
+	^ self
+		filePath: (FSPath from: aString delimiter: $/)
+		frame: aFrameSpecifier
+		buildBlock: aBlock

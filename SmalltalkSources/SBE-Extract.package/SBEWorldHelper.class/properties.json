@@ -10,7 +10,8 @@
 		"hand",
 		"worldSize",
 		"frameSpecifier",
-		"picture" ],
+		"picture",
+		"hiddenMorphs" ],
 	"name" : "SBEWorldHelper",
 	"pools" : [
 		 ],

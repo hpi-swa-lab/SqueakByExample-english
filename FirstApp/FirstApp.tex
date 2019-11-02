@@ -43,7 +43,8 @@ Nevertheless, if you find yourself not understanding all of the code, don't worr
 %%{SBESqueakPicture writeTo: './figures/GameBoard.png' frame: #morphs using: [:helper |
 %%	| game |
 %%	game := SBEGame new openInWorld.
-%%	helper click: game at: (game bounds pointAtFraction: 4 @ 6 - 0.5 / 10) buttons: #(left)
+%%	helper click: game at: (game bounds pointAtFraction: 4 @ 6 - 0.5 / 10) buttons: #(left).
+%%	helper spawnHand.
 %%]}
 \begin{figure}[ht]
 	\vskip -\baselineskip
@@ -337,9 +338,7 @@ Now let's define an \mthind{SBEGame}{initialize} method for \ct{SBEGame}.
 
 
 %%{SBESqueakPicture writeTo: './figures/UnknownSelector.png' frame: #morphs using: [:helper |
-%%  helper
-%%    runModal: [UnknownSelector name: #cellsPerSide]
-%%    then: []
+%%  helper runModal: [UnknownSelector name: #cellsPerSide]
 %%]}
 %%{SBESqueakPicture writeTo: './figures/DeclareInstanceVar.png' frame: #morphs using: [:helper |
 %%   helper
@@ -754,10 +753,11 @@ Once you have accepted this template, your new repository should be listed on th
 
 %%{SBESqueakPicture writeTo: './figures/BrowseRepository.png' frame: #morphs using: [:helper |
 %%	| window packageList |
-%%	(MCWorkingCopy forPackageNamed: 'SBE-Quinto') modified: false.
+%%	helper mcAssureCachedPackages: #('SBE-Morphic' 'SBE-QuickTour' 'SBE-Quinto').
+%%	helper hideProgressMorph.
 %%	MCCacheRepository default morphicOpen.
 %%	window := helper world firstSubmorph.
-%%	packageList := helper listMorphIncludingMatch: "'SBE-Quinto'"'Collections' asRegex in: window.
+%%	packageList := helper listMorphIncludingMatch: 'SBE-Quinto' asRegex in: window.
 %%	helper type: 'SBE-Quinto' into: packageList listSource.
 %%	window model versionSelection: 1
 %%]}

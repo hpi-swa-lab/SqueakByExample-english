@@ -13,4 +13,6 @@ setUp
 	hand := SBEHandMorph new.
 	world
 		removeHand: world firstHand; "the default hand"
-		addHand: hand
+		addHand: hand.
+	
+	hiddenMorphs := OrderedCollection new.

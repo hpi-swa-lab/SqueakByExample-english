@@ -1,4 +1,4 @@
 accessing
 resourceDirectory
 
-	^ SBESqueakPicture resourceDirectory
+	^ SBEFigureBuilder resourceDirectory

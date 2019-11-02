@@ -5,9 +5,11 @@
 	"classvars" : [
 		"CurrentDirectory",
 		"ResourceDirectory" ],
-	"commentStamp" : "",
+	"commentStamp" : "ct 11/1/2019 16:12",
 	"instvars" : [
-		 ],
+		"filePath",
+		"frameSpecifier",
+		"buildBlock" ],
 	"name" : "SBESqueakPicture",
 	"pools" : [
 		 ],

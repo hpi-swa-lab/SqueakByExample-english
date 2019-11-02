@@ -1,4 +1,4 @@
-*SBE-Extract
+*SBE-Extract-prefs - fonts
 useFontSize: pointSize during: aBlock
 
 	| currentDelta |
