@@ -2,7 +2,7 @@
 
 name="custom_fold"
 function display() {
-	echo -en "travis_fold:${name}\r\033[0K"
+	echo -en "travis_fold:$1:${name}\r\033[0K"
 }
 
 if [[ "$1" =~ -.+ ]]; then
