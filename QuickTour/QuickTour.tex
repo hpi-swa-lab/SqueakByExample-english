@@ -198,8 +198,8 @@ Select \menu{print it}.}
 Finally, there is the \emphind{blue button}, which is used to activate the ``morphic \subind{Morphic}{halo}'', an array of handles that are used to perform operations on the on-screen objects themselves, such as rotating them or resizing them; see \figref{threeButtons:blue}. 
 If you let the mouse linger over a handle, a help balloon will explain its function.
 
-%%{SBESqueakPicture writeTo: './figures/morphicRotate.png' fromForm: [
-%%  (HaloMorph new createHandleAt: 0 @ 0 color: Color blue iconName: 'Halo-Rot')
+%%{SBESqueakPicture writeTo: './figures/morphicRotate.png' fromForm: [:helper |
+%%  helper haloHandleFormFor: 'Halo-Rot'
 %%]}
 
 \dothis{Click the blue button on the workspace.
