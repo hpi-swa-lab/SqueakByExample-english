@@ -254,7 +254,7 @@ You can test the effect of the code you have written by creating a new \ct{SBECe
 %%  window := helper world firstSubmorph.
 %%	window extent: 315 @ 165.
 %%  pane := helper listMorphIncludingMatch: #bounds in: window.
-%%	pane listSource changeModelSelection: 3.
+%%	pane changeModelSelection: 3.
 %%  window lookFocused.
 %%]}
 \begin{figure}[htbp]
@@ -281,7 +281,7 @@ Notice how the bounds reported by the inspector also change.
 %%  cell inspect.
 %%  window := helper world firstSubmorph.
 %%  list := helper listMorphIncludingMatch: #bounds in: window.
-%%  list selectedRow: 3.
+%%  list changeModelSelection: 3.
 %%  bottomPane := window findDeepSubmorphThat: [:m | m isTextView and: [m text isEmptyOrNil]] ifAbsent: [self error: 'bottom pane not found'].
 %%  bottomPane setText: 'self openInWorld'; doIt.
 %%  cell position: 100 @ 100; extent: 98 @ 89.
@@ -607,7 +607,7 @@ The debugger will show you the \ind{execution context} within this method where 
 %%				helper hand dropMorphs.
 %%				game abandon.
 %%				stackList := helper listMorphIncludingMatch: '.*toggleNeighboursOfCellAt\:at\:.*' asRegex in: helper world firstSubmorph.
-%%				helper keyStroke: stackList listSource key: Character arrowDown.
+%%				helper keyStroke: stackList key: Character arrowDown.
 %%				helper world firstSubmorph extent: 600 @ 400]]
 %%]}
 \begin{figure}[ht]
@@ -758,7 +758,7 @@ Once you have accepted this template, your new repository should be listed on th
 %%	MCCacheRepository default morphicOpen.
 %%	window := helper world firstSubmorph.
 %%	packageList := helper listMorphIncludingMatch: 'SBE-Quinto' asRegex in: window.
-%%	helper type: 'SBE-Quinto' into: packageList listSource.
+%%	helper type: 'SBE-Quinto' into: packageList.
 %%	window model versionSelection: 1
 %%]}
 \begin{figure}[hbt]
