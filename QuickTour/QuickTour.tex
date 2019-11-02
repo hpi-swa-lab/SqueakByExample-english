@@ -514,7 +514,7 @@ As we shall see, there are several interesting browsers available for \sq, but t
 %%	| class selector window codePane |
 %%	class := Object. selector := #printString.
 %%	Browser fullOnClass: class selector: selector.
-%%	window := helper world firstSubmorph.
+%%	window := helper foregroundWindow.
 %%	
 %%	Dictionary new
 %%		at: class category put: 'System categories';
@@ -770,8 +770,8 @@ In this case, the \ct{shout} method that we are testing will go in class \clsind
 
 %%{SBESqueakPicture writeTo: './figures/StringTest-newMethodTemplate.png' frame: #morphs using: [:helper |
 %%  Browser fullOnClass: StringTest category: #'tests - converting'.
-%%  helper click: helper world firstSubmorph firstSubmorph firstSubmorph.
-%%  helper click: helper world firstSubmorph firstSubmorph firstSubmorph.
+%%  helper click: helper foregroundWindow firstSubmorph firstSubmorph.
+%%  helper click: helper foregroundWindow firstSubmorph firstSubmorph.
 %%]}
 
 
@@ -797,7 +797,7 @@ This can be quite useful if you have merely made a typing mistake, but in this c
 
 %%{SBESqueakPicture writeTo: './figures/testShoutConfirm.png' frame: #morphs using: [:helper | | textField |
 %%	Browser fullOnClass: StringTest category: #'tests - converting'.
-%%	textField := helper world firstSubmorph firstSubmorph firstSubmorph.
+%%	textField := helper foregroundWindow firstSubmorph firstSubmorph.
 %%	helper click: textField.
 %%	helper keyStroke: textField key: $a modifiers: #(cmd).
 %%	helper
