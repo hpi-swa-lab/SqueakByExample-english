@@ -18,15 +18,12 @@
 		"generateBuildersIn:" : "ct 11/1/2019 19:05",
 		"getTexFilesIn:" : "ct 10/29/2019 15:55",
 		"isAbstract" : "ct 10/29/2019 10:30",
-		"isCiImage" : "ct 10/29/2019 10:10",
 		"nameForBuilderMethodFor:" : "ct 10/30/2019 09:20",
 		"nameForBuilderWith:" : "ct 10/29/2019 19:59",
 		"okToGenerate" : "ct 11/1/2019 15:59",
 		"resourceDirectory" : "ct 10/30/2019 10:39",
 		"resourceDirectory:" : "ct 10/30/2019 10:39",
-		"runSuite:" : "ct 11/1/2019 15:39",
-		"runSuiteLocally:" : "ct 11/1/2019 15:40",
-		"runSuiteOnSci:" : "ct 11/1/2019 15:39",
+		"runSuite:" : "ct 11/2/2019 03:26",
 		"totalSuite" : "ct 10/30/2019 11:02" },
 	"instance" : {
 		"targetDirectory" : "ct 10/29/2019 17:17" } }

@@ -1,4 +1,4 @@
-building
+building (convenience)
 buildFiguresWith: builders
 	"Return a boolean for whether the build has passed"
 

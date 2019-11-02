@@ -1,4 +1,4 @@
-building
+building (convenience)
 buildTexFiguresFrom: aFileReference
 	"If the build was successful, remove the generated code afterwards"
 

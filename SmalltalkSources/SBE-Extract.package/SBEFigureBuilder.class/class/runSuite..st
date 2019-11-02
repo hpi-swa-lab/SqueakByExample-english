@@ -1,7 +1,10 @@
-building
+building (convenience)
 runSuite: aSuite
 	"Return a boolean for whether all tests passed"
 
-	^ self isCiImage
-		ifTrue: [self runSuiteOnSci: aSuite]
-		ifFalse: [self runSuiteLocally: aSuite]
+	| runner |
+	runner := TestRunner newForSuite: aSuite.
+	runner runSuite: aSuite.
+	^ runner result hasPassed
+		ifFalse: [ToolBuilder open: runner];
+		yourself
