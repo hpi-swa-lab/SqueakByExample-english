@@ -1,6 +1,6 @@
 screenshots
 displayForegroundWindowFocused
 
-	self world firstSubmorph in: [:topMorph |
+	self foregroundMorph in: [:topMorph |
 		(topMorph respondsTo: #lookFocused) ifTrue: [
 			topMorph lookFocused]].

@@ -1,6 +1,6 @@
 matching
 foregroundWindow
 
-	^ world submorphs first
+	^ self foregroundMorph
 		in: [:morph | self assert: [morph isSystemWindow]];
 		yourself
