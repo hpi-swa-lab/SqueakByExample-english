@@ -104,7 +104,7 @@ Do whatever works best for your style of working and your operating system.
 %%	balloon := Form fromFileNamed: (helper resourceDirectory
 %%		/ 'branding' / 'balloon.png') fullName.
 %%	ReleaseBuilder openWelcomeWorkspacesWith: balloon.
-%%	helper world firstSubmorph
+%%	helper foregroundWindow
 %%		height: helper world height * 0.75;
 %%		center: helper world center.
 %%	PreferenceWizardMorph open.
@@ -145,7 +145,7 @@ A good place to get started is the \ind{world menu} shown in \figref{threeButton
 %%	helper hand releaseMouseFocus.
 %%	helper mouseEnter: (helper menuItemMorphLabeled: 'print it (p)' in: helper world).
 %%	helper closeBalloons.
-%%	menu := helper world firstSubmorph.
+%%	menu := helper foregroundMorph.
 %%	menu position: menu position + (30 @ 0).
 %%]}
 
@@ -216,7 +216,7 @@ In the preference browser, the \menu{general} category contains an option \menu{
 %%{SBESqueakPicture writeTo: './figures/PreferenceBrowser.png' frame: #morphs using: [:helper |
 %%	| browser searchBox |
 %%	PreferenceBrowser open.
-%%	browser := helper world firstSubmorph.
+%%	browser := helper foregroundWindow.
 %%	browser extent: 600 @ 275.
 %%	searchBox := helper morphWithBalloonText: 'Search preference.*' asRegex in: browser.
 %%	helper type: 'swap' into: searchBox.
@@ -381,10 +381,11 @@ Notice how the text ``hello world'' appears in the transcript window
 Do it again.
 (The \menu{(d)} in the menu item \menu{do it (d)} tells you that the keyboard shortcut to \emph{do it} is \short{d}. More on this in the next section!)
 
-%%{SBESqueakPicture writeTo: './figures/Doit.png' frame: [:morphsRect | morphsRect withBottom: morphsRect bottom - 150] using: [:helper | | workspace |
+%%{SBESqueakPicture writeTo: './figures/Doit.png' frame: [:morphsRect | morphsRect withBottom: morphsRect bottom - 150] using: [:helper |
+%%  | workspace |
 %%  ToolBuilder open: Transcript.
 %%  Transcript show: 'hello world'.
-%%  helper world firstSubmorph bounds: (0 @ 120 extent: 450 @ 230).
+%%  helper foregroundWindow bounds: (0 @ 120 extent: 450 @ 230).
 %%  
 %%  workspace := ToolBuilder open: Workspace new.
 %%  workspace position: 200 @ 100.
