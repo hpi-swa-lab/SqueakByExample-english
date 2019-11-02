@@ -1,8 +1,11 @@
 matching
 boundsOfItemThat: anItemPredicate in: aListMorph
-	"Does not scroll the item into view, if required"
+	"Note: This does not scroll the item into view, if required"
 
-	^ (0 @ ((aListMorph getList findFirst: anItemPredicate)
-		- 1 / aListMorph getListSize * aListMorph listMorph height)
-			translateBy: (aListMorph localPointToGlobal: aListMorph topLeft))
-				extent: aListMorph width @ (aListMorph listMorph height / aListMorph getListSize)
+	| itemIndex lazyList y |
+	itemIndex := aListMorph getList findFirst: anItemPredicate.
+	lazyList := aListMorph listMorph.
+	y := itemIndex  - 1 / aListMorph getListSize * lazyList height.
+	^ (0 @ y extent: lazyList width @ (lazyList height / aListMorph getListSize))
+			translateBy: (aListMorph localPointToGlobal: aListMorph topLeft)
+				
