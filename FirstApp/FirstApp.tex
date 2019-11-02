@@ -753,7 +753,8 @@ Once you have accepted this template, your new repository should be listed on th
 %%{SBESqueakPicture writeTo: './figures/BrowseRepository.png' frame: #morphs using: [:helper |
 %%	| window packageList |
 %%	helper mcAssureCachedPackages: #('SBE-Morphic' 'SBE-QuickTour' 'SBE-Quinto').
-%%	helper hideProgressMorphDuring: [MCCacheRepository default morphicOpen].
+%%	helper hideProgressMorph.
+%%	MCCacheRepository default morphicOpen.
 %%	window := helper world firstSubmorph.
 %%	packageList := helper listMorphIncludingMatch: 'SBE-Quinto' asRegex in: window.
 %%	helper type: 'SBE-Quinto' into: packageList listSource.
