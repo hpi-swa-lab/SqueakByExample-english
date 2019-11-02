@@ -1,4 +1,4 @@
-testing
+building
 buildSuiteFromClasses: classes
 
 	| suite |
