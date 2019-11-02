@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+name="custom_fold"
+echo -en "travis_fold:start:${name}\r\033[0K"
+[ -z $1 ] || echo $1
+cat
+echo -en "travis_fold:end:${name}\r\033[0K\n"

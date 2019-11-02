@@ -10,8 +10,8 @@ before_script: |
 
 script:
 - smalltalkci .smalltalk.ston
-- make
-- "[ -f SBE.pdf ] && bash -e deploy-debug.sh SBE.pdf ; :"
+- "make | ./travis_fold "
+- "([ -f SBE.pdf ] && bash -e deploy-debug.sh SBE.pdf ; :) | ./travis_fold"
 
 deploy:
   provider: releases
