@@ -5,7 +5,9 @@ services:
 smalltalk:
 - Squeak-Trunk
 
-before_script: |
+before_script:
+- chmod +x travis_fold
+- |
   export DEBUG_FIGURES=true && [ "$TRAVIS_BRANCH" = "master" ] && export DEBUG_FIGURES=false ; :
 
 script:
