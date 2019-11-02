@@ -490,15 +490,17 @@ The corresponding method also needs to be defined.
 To move the method, you can simply click on its name and drag it to the newly-created category (\figref{dragMethod}).
 
 %%{SBESqueakPicture writeTo: './figures/DragMethod.png' frame: [:rectangle | rectangle withHeight: rectangle height * 2 / 3] using: [:helper |
-%%	| window messageList categoryList startPoint stopPoint |
+%%	| window messageList categoryList |
 %%	SBEGame browse.
 %%	window := helper foregroundWindow.
 %%	window extent: 600 @ 300.
 %%	messageList := helper listMorphIncludingMatch: #toggleNeighboursOfCellAt:at: in: window.
 %%	categoryList := helper listMorphIncludingMatch: 'game logic' in: window.
-%%	startPoint := (helper boundsOfItemMatching: #toggleNeighboursOfCellAt:at: in: messageList) center.
-%%	stopPoint := (helper boundsOfItemMatching: 'game logic' in: categoryList) pointAtFraction: 0.2 @ 0.6.
-%%	helper mouseDrag: messageList from: startPoint to: stopPoint buttons: #(left).
+%%	helper
+%%		mouseDrag: messageList
+%%		from: (helper boundsOfItemMatching: #toggleNeighboursOfCellAt:at: in: messageList) center
+%%		to: ((helper boundsOfItemMatching: 'game logic' in: categoryList) pointAtFraction: 0.2 @ 0.6)
+%%		buttons: #(left).
 %%	helper spawnHand.
 %%]}
 \begin{figure}[htbp]
