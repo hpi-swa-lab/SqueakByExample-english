@@ -1,7 +1,16 @@
 #!/usr/bin/env bash
 
+function display() {
+	echo -en "travis_fold:start:$1\r\033[0K"
+}
+
+if [[ "$1" =~ -.+ ]]; then
+	display $(echo $1 | sed 's/^\-//')
+	exit
+fi
+
 name="custom_fold"
-echo -en "travis_fold:start:${name}\r\033[0K"
-[ -z $1 ] || echo $1
+display start
+[ -z $1 ] || echo $*
 cat
-echo -en "travis_fold:end:${name}\r\033[0K\n"
+display end

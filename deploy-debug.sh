@@ -7,6 +7,7 @@ else
 	TARGET=$1
 fi
 
+./travis_fold -start
 echo "I will now export the build file $TARGET to Google Drive."
 
 # Note: This token may expire after some time. Just create a fake account and update the token below to reactive it :P
@@ -22,6 +23,8 @@ chmod +x ./bin/gdrive
 
 FIXED_BRANCH=$(echo $BRANCH | sed 's/\//-/g')
 ./bin/gdrive update $GDRIVE_FILE --refresh-token $GDRIVE_REFRESH_TOKEN $TARGET
+
+./travis_fold -end
 
 echo -e "\e[93mFinished Google Drive upload."
 echo -e "\e[93mYou can download the PDF here: \e[94mhttps://drive.google.com/open?id=$GDRIVE_FILE"
