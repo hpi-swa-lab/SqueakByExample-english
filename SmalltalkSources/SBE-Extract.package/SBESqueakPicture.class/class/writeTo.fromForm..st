@@ -1,9 +1,7 @@
 screenshots
 writeTo: aString fromForm: aFormBlock
 
-	^ self
-		filePath: (FSPath from: aString delimiter: $/)
+	^ SBESqueakFormPicture
+		writeTo: aString
 		frame: #morphs
-		buildBlock: [:helper |
-			helper world color: Color transparent.
-			(aFormBlock cull: helper) asMorph openInWorld]
+		using: aFormBlock
