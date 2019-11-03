@@ -1,4 +1,4 @@
-events
+accessing
 frameSpecifier: aSpecifier
 
 	frameSpecifier := aSpecifier
