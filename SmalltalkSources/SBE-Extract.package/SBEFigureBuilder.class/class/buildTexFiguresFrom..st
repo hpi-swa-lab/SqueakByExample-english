@@ -7,7 +7,6 @@ buildTexFiguresFrom: aFileReference
 		bar value: 'Building figures ...'.
 		[| builders success |
 		builders := self generateBuildersIn: aFileReference.
-		self generateBuildersIn: aFileReference.
 		success := self buildFiguresWith: builders.
 		success ifTrue: [builders do: #removeFromSystem].
 		success]
