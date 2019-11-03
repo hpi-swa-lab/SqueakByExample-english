@@ -110,8 +110,10 @@ There are actually several browsers in \sq: the standard system browser, the pac
 We will take a look at the standard \ind{system browser} first, since the others are variations on it.
 \figref{SystemBrowser0} shows the browser as it appears when you first drag it out of the \toolsflapind.\footnote{If the browser you see looks different from the one we describe, then you might be using an image with a different default browser installed. See \faqref{omnibrowser}.}
 
-%%{SBESqueakPicture writeTo: './figures/SystemBrowser0.png' frame: #morphs using: [
-%%	Browser open
+%%{SBESqueakPicture writeTo: './figures/SystemBrowser0.png' frame: #morphs using: [:helper |
+%%	Browser open.
+%%	helper foregroundWindow extent: 600 @ 300.
+%%	helper scrollSelectionsIntoView: helper foregroundWindow.
 %%]}
 \begin{figure}[htbp]
    \centering
@@ -126,8 +128,10 @@ The four small panes at the top of the browser represent a hierarchic view of th
 The leftmost pane lists \emph{categories} of classes; select one (say \scat{Kernel-Objects}) and the pane immediately to the right will then show all of the classes in that category.
 \on{I adopted the spelling of NeXTstep recommended by wikipedia}
 
-%%{SBESqueakPicture writeTo: './figures/SystemBrowser1.png' frame: #morphs using: [
-%%	Browser fullOnClass: Model
+%%{SBESqueakPicture writeTo: './figures/SystemBrowser1.png' frame: #morphs using: [:helper |
+%%	Browser fullOnClass: Model.
+%%	helper foregroundWindow extent: 600 @ 300.
+%%	helper scrollSelectionsIntoView: helper foregroundWindow.
 %%]}
 \begin{figure}[htbp]
    \centering
@@ -146,8 +150,10 @@ If you select class \menu{Model},  protocol \protind{dependents} and the method 
 \protindex{all}
 \cmindex{Model}{myDependents}
 
-%%{SBESqueakPicture writeTo: './figures/SystemBrowserMyDependents.png' frame: #morphs using: [
-%%	Browser fullOnClass: Model selector: #myDependents
+%%{SBESqueakPicture writeTo: './figures/SystemBrowserMyDependents.png' frame: #morphs using: [:helper |
+%%	Browser fullOnClass: Model selector: #myDependents.
+%%	helper foregroundWindow extent: 600 @ 300.
+%%	helper scrollSelectionsIntoView: helper foregroundWindow.
 %%]}
 \begin{figure}[htbp]
    \centering
@@ -166,8 +172,10 @@ Because of this, the way that you create a new category or a new protocol is dif
 Enter the name of the new thing in the dialog, and you are done: there is nothing more to a category or a protocol than its name and its contents.
 \index{category!creating}
 
-%%{SBESqueakPicture writeTo: './figures/SystemBrowserClassCreation.png' frame: #morphs using: [
-%%	Browser fullOnCategory: 'Kernel-Objects'
+%%{SBESqueakPicture writeTo: './figures/SystemBrowserClassCreation.png' frame: #morphs using: [:helper |
+%%	Browser fullOnCategory: 'Kernel-Objects'.
+%%	helper foregroundWindow extent: 600 @ 300.
+%%	helper scrollSelectionsIntoView: helper foregroundWindow.
 %%]}
 \begin{figure}[htbp]
    \centering
@@ -207,6 +215,12 @@ The process of creating a new method is similar.  First select the class in whic
 \index{method!creation}
 \index{system browser!defining a method}
 
+%%{SBESqueakPicture writeTo: './figures/SystemBrowserMethodTemplate.png' frame: #morphs using: [:helper |
+%%	Browser fullOnClass: Model category: #'morphic ui'.
+%%	helper foregroundWindow extent: 600 @ 300.
+%%	helper scrollSelectionsIntoView: helper foregroundWindow.
+%%	helper mouseEnter: (helper codePaneOfBrowser: helper foregroundWindow).
+%%]}
 \begin{figure}[htbp]
    \centering
    \ifluluelse
