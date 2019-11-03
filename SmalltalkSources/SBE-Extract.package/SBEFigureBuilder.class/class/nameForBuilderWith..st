@@ -1,5 +1,8 @@
 code generation - constants
 nameForBuilderWith: aName
 
-	^ ('SBE{1}FigureBuilder' format: {
-		(aName findFeatures collect: #capitalized) join}) asSymbol
+	| identifierName |
+	identifierName := aName asIdentifier: true.
+	^ self
+		uniqueNameBy: [:number | 'SBE{1}{2}FigureBuilder' format: {identifierName. number}]
+		lest: [:name | Smalltalk hasClassNamed: name]

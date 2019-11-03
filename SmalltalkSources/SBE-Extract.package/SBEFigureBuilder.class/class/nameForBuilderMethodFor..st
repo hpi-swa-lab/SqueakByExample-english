@@ -1,4 +1,6 @@
 code generation - constants
 nameForBuilderMethodFor: aName
 
-	^ 'build' , (aName findFeatures collect: #capitalized) join
+	^ self
+		uniqueNameFrom: 'build' , (aName asIdentifier: true)
+		lest: [:name | self canUnderstand: name]
