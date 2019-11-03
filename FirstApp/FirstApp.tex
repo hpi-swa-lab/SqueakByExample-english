@@ -141,12 +141,11 @@ This means that there are \emph{unsaved changes}.
 To actually send this message, you must \menu{accept} it.
 
 %%{SBESqueakPicture writeTo: './figures/AcceptClassDef.png' frame: [:rect | rect bottomHalf] using: [:helper | 
-%%	| window codePane menu |
+%%	| window menu |
 %%	SBECell browse.
 %%	window := helper foregroundWindow.
 %%	window bounds: (0 @ 120 extent: 500 @ 400).
-%%	codePane := helper textMorphIn: window withTextMatching: 'SimpleSwitchMorph.*' asRegex.
-%%	codePane hasUnacceptedEdits: true.
+%%	(helper codePaneOfBrowser: window) hasUnacceptedEdits: true.
 %%	helper click: window at: window bottomCenter - (0 @ 30) buttons: #(right).
 %%	helper closeBalloons.
 %%	menu := helper foregroundMorph.

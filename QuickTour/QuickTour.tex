@@ -524,7 +524,7 @@ As we shall see, there are several interesting browsers available for \sq, but t
 %%		keysAndValuesDo: [:item :description |
 %%			(NewBalloonMorph string: description for: (helper listMorphIncludingMatch: item in: window))
 %%				popUp].
-%%	codePane := helper textMorphIn: window withTextMatching: 'printString[\s\S]*' asRegex.
+%%	codePane := helper codePaneOfBrowser: window.
 %%	(NewBalloonMorph string: 'name of method' for: codePane)
 %%			popUpAt: codePane topLeft + (10 @ 5).
 %%	(SBEBalloonMorph string: 'method comment' for: codePane)
@@ -769,9 +769,8 @@ How do we create a new method in \sq?   First, we have to decide which class the
 In this case, the \ct{shout} method that we are testing will go in class \clsind{String}, so the corresponding test will, by convention, go in a class called \clsind{StringTest}.
 
 %%{SBESqueakPicture writeTo: './figures/StringTest-newMethodTemplate.png' frame: #morphs using: [:helper |
-%%  Browser fullOnClass: StringTest category: #'tests - converting'.
-%%  helper click: helper foregroundWindow firstSubmorph firstSubmorph.
-%%  helper click: helper foregroundWindow firstSubmorph firstSubmorph.
+%%	Browser fullOnClass: StringTest category: #'tests - converting'.
+%%	(helper codePaneOfBrowser: helper foregroundWindow) setSelection: (1 to: 0).
 %%]}
 
 
@@ -797,7 +796,7 @@ This can be quite useful if you have merely made a typing mistake, but in this c
 
 %%{SBESqueakPicture writeTo: './figures/testShoutConfirm.png' frame: #morphs using: [:helper | | textField |
 %%	Browser fullOnClass: StringTest category: #'tests - converting'.
-%%	textField := helper foregroundWindow firstSubmorph firstSubmorph.
+%%	textField := helper codePaneOfBrowser: helper foregroundWindow.
 %%	helper click: textField.
 %%	helper keyStroke: textField key: $a modifiers: #(cmd).
 %%	helper
