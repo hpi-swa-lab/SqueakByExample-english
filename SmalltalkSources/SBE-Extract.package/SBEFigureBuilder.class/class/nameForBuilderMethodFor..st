@@ -1,6 +1,6 @@
 code generation - constants
-nameForBuilderMethodFor: aName
+nameForBuilderMethodFor: baseName
 
 	^ self
-		uniqueNameFrom: 'build' , (aName asIdentifier: true)
-		lest: [:name | self canUnderstand: name]
+		uniqueNameFrom: 'build' , (baseName asIdentifier: true)
+		lest: [:nextName | self canUnderstand: nextName]

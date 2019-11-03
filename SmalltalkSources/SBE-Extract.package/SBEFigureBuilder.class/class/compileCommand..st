@@ -1,15 +1,15 @@
 code generation
 compileCommand: command
 
-	| picture name |
+	| picture methodName |
 	picture := Compiler new evaluateWithTempNames: command.
-	name := self nameForBuilderMethodFor:
+	methodName := self nameForBuilderMethodFor:
 		(self fileReference parent resolvePath: picture filePath) base.
 	self
 		compile: (String streamContents: [:stream |
 			| pictureLines |
 			stream
-				nextPutAll: name;
+				nextPutAll: methodName;
 				crtab; nextPutAll: '<generated>';
 				cr;
 				crtab; nextPutAll: '| picture |';
