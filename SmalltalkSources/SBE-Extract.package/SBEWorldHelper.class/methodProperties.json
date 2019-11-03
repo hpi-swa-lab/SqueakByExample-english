@@ -59,6 +59,7 @@
 		"restoreMethods:after:" : "ct 10/22/2019 15:38",
 		"runModal:" : "ct 10/18/2019 23:22",
 		"runModal:then:" : "ct 11/2/2019 18:06",
+		"scrollSelectionsIntoView:" : "ct 11/4/2019 00:12",
 		"select:at:" : "ct 11/2/2019 19:01",
 		"select:at:andScrollIntoViewBy:" : "ct 11/2/2019 18:58",
 		"select:where:" : "ct 11/2/2019 18:56",
