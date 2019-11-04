@@ -326,7 +326,7 @@ When you save a new \subind{method}{version} of a method, the old one is not los
 %%				nextPutAll: 'mouseUp: anEvent';
 %%				crtab; nextPutAll: '(self containsPoint: anEvent position)';
 %%				crtab: 2; nextPutAll: 'ifTrue: [mouseAction value]'])
-%%			classified: (SBECell categoryForSelector: #mouseUp:).
+%%			classified: (SBECell whichCategoryIncludesSelector: #mouseUp:).
 %%		helper takeScreenshot]
 %%]}
 \begin{figure}[btp]
