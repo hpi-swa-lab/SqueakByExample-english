@@ -310,6 +310,25 @@ Since all of the methods with the same selector ought to be used in the same way
 \label{sec:versions}
 
 When you save a new \subind{method}{version} of a method, the old one is not lost.  \sq keeps all of the old versions, and allows you to compare different versions and to go back (``revert'') to an old version.
+
+%%{SBESqueakPicture writeTo: './figures/VersionsOfMouseUp.png' frame: #morphs using: [:helper |
+%%	helper restoreMethods: {SBECell >> #mouseUp:} after: [
+%%		SBECell removeSelector: #mouseUp:.
+%%		"Just open browser now so it will select the newest version by itself"
+%%		ToolSet browseVersionsOf: SBECell selector: #mouseUp:.
+%%		SBECell
+%%			compile: (String streamContents: [:stream | stream
+%%				nextPutAll: 'mouseUp: anEvent';
+%%				crtab; nextPutAll: 'mouseAction value']).
+%%		SBECell organization classifyAllUnclassified.
+%%		SBECell
+%%			compile: (String streamContents: [:stream | stream
+%%				nextPutAll: 'mouseUp: anEvent';
+%%				crtab; nextPutAll: '(self containsPoint: anEvent position)';
+%%				crtab: 2; nextPutAll: 'ifTrue: [mouseAction value]'])
+%%			classified: (SBECell categoryForSelector: #mouseUp:).
+%%		helper takeScreenshot]
+%%]}
 \begin{figure}[btp]
    \centering
    \ifluluelse
