@@ -3,9 +3,8 @@ baseline: spec
 	<baseline>
 	spec for: #'common' do: [
 		spec baseline: 'FileSystem' with: [spec
-					repository: 'github://j4yk/Squeak-FileSystem:master/src';
-					loads: #('default' 'tests')].
-		
+			repository: 'github://j4yk/Squeak-FileSystem:master/src';
+			loads: #('default' 'tests')].
 		spec
 			package: #'SBE-Environment';
 			package: #'SBE-Extract' with: [spec requires: #('FileSystem')];
@@ -14,5 +13,4 @@ baseline: spec
 			package: #'SBE-QuickTour';
 			package: #'SBE-Streams';
 			package: #'SBE-Testing'.
-		spec
-			group: #ci with: #(#'SBE-Extract' #'SBE-Quinto' #'SBE-QuickTour' #'SBE-Morphic' #'SBE-Streams')].
+		spec group: #ci with: #(#'SBE-Extract' #'SBE-Quinto' #'SBE-QuickTour' #'SBE-Morphic' #'SBE-Streams')].
