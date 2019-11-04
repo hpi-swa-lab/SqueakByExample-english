@@ -684,13 +684,12 @@ MCHttpRepository
 
 %%{SBESqueakPicture writeTo: './figures/SqueakSource-SBE.png' frame: #morphs using: [:helper |
 %%	| window packageList |
-%%	helper mcAssureCachedPackages: #('SBE-Morphic' 'SBE-QuickTour' 'SBE-Quinto').
-%%	helper hideProgressMorph.
-%%	MCCacheRepository default morphicOpen.
-%%	window := helper foregroundWindow.
-%%	packageList := helper listMorphIncludingMatch: 'SBE-Quinto' asRegex in: window.
-%%	helper type: 'SBE-' into: packageList.
-%%	window model versionSelection: 1
+%%	helper mcCachePackages: #('SBE-QuickTour' 'SBE-Streams') during: [
+%%		helper hideProgressMorph.
+%%		MCCacheRepository default morphicOpen.
+%%		window := helper foregroundWindow.
+%%		packageList := helper listMorphIncludingMatch: 'SBE-QuickTour' asRegex in: window.
+%%		window model versionSelection: 1]
 %%]}
 \begin{figure}[btp]
 	\begin{center}

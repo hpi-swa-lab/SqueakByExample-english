@@ -754,13 +754,12 @@ Once you have accepted this template, your new repository should be listed on th
 
 %%{SBESqueakPicture writeTo: './figures/BrowseRepository.png' frame: #morphs using: [:helper |
 %%	| window packageList |
-%%	helper mcAssureCachedPackages: #('SBE-Morphic' 'SBE-QuickTour' 'SBE-Quinto').
-%%	helper hideProgressMorph.
-%%	MCCacheRepository default morphicOpen.
-%%	window := helper foregroundWindow.
-%%	packageList := helper listMorphIncludingMatch: 'SBE-Quinto' asRegex in: window.
-%%	helper type: 'SBE-Quinto' into: packageList.
-%%	window model versionSelection: 1
+%%	helper mcCachePackages: #('SBE-Quinto') during: [
+%%		helper hideProgressMorph.
+%%		MCCacheRepository default morphicOpen.
+%%		window := helper foregroundWindow.
+%%		packageList := helper listMorphIncludingMatch: 'SBE-Quinto' asRegex in: window.
+%%		window model versionSelection: 1]
 %%]}
 \begin{figure}[hbt]
 \ifluluelse
