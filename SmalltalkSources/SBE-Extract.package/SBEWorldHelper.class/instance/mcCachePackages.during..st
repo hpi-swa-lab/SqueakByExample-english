@@ -1,11 +1,16 @@
 utils
 mcCachePackages: names during: aBlock
 
-	| cache |
-	cache := MCCacheRepository path: (MCCacheRepository default directory fullName , '-' , self name).
+	| directory cache |
+	directory := FileDirectory on: MCCacheRepository default directory fullName
+		, '-' , self name.
+	directory assureAbsence; assureExistence.
+	cache := MCCacheRepository path: directory fullName.
 	^ MCCacheRepository setDefault: cache during: [ | packages |
 		packages := names collect: [:name | MCWorkingCopy forPackageNamed: name].
-		packages do: [:package | package
-			newVersionWithName: package uniqueVersionName
-			message: ''].
+		packages
+			collect: [:package | package
+				newVersionWithName: package uniqueVersionName
+				message: '']
+			thenDo: [:version | cache storeVersion: version].
 		aBlock value]
