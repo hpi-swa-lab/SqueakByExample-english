@@ -249,6 +249,16 @@ You can also open a browser on a class named by any selected text using the \sho
 \index{system browser!senders button}
 The \button{senders} button will give you a list of all methods that may use the selected method. With the browser open on \ct{ScaleMorph}, click on the \mthind{ScaleMorph}{checkExtent:} method in the method pane near the top right corner of the browser; the body of \ct{checkExtent:} displays in the bottom part of the browser. If you now press the \button{senders} button, a menu will appear with \ct{checkExtent:} as the topmost item, and below it, all the messages that \ct{checkExtent:} sends (see \figref{SendersOfCheckEvent}).  Selecting an item in this menu will open a browser with the list of all methods in the image that send the selected message. 
 
+%%{SBESqueakPicture writeTo: './figures/SendersOfCheckEvent.png' frame: #morphs using: [:helper |
+%%	| window sendersButton |
+%%	ToolSet browse: ScaleMorph selector: #checkExtent:.
+%%	window := helper foregroundWindow.
+%%	helper scaleDefaultBrowser: window.
+%%	sendersButton := helper buttonLabeled: 'senders' in: window.
+%%	helper
+%%		runModal: [helper click: sendersButton buttons: #(left)]
+%%		then: [helper dialogWindow center: (window bounds pointAtFraction: 0.7 @ 0.6)]
+%%]}
 \begin{figure}[htbp]
 	\begin{center}
    \ifluluelse
