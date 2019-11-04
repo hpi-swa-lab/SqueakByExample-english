@@ -3,6 +3,7 @@
 		 },
 	"instance" : {
 		"adjustMorphsArea" : "ct 10/22/2019 19:26",
+		"authorInitials" : "ct 11/4/2019 01:49",
 		"boundsOfItemMatching:in:" : "ct 10/18/2019 10:42",
 		"boundsOfItemThat:in:" : "ct 11/2/2019 20:03",
 		"buttonLabeled:in:" : "ct 10/16/2019 20:40",
@@ -77,7 +78,7 @@
 		"textMorphIn:withTextMatching:" : "ct 10/21/2019 13:05",
 		"type:into:" : "ct 10/21/2019 17:58",
 		"useScreenshotPreferencesDuring:" : "ct 11/1/2019 14:59",
-		"useScreenshotSettingsDuring:" : "ct 11/1/2019 15:01",
+		"useScreenshotSettingsDuring:" : "ct 11/4/2019 01:48",
 		"useWorldAndHandDuring:" : "ct 11/1/2019 15:00",
 		"windowLabeled:" : "tobe 10/3/2019 20:00",
 		"world" : "tobe 10/3/2019 20:01",
