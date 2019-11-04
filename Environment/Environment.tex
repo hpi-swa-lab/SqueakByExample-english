@@ -375,6 +375,14 @@ To see how it works, display the \cmind{ScaleMorph}{defaultColor} method and cli
 	\emph{violet:} & the displayed method overrides, is overridden, and makes a \ct!super!-send.
 \end{tabular}
 
+%%{SBESqueakPicture writeTo: './figures/inheritanceOverriding.png' frame: #morphs using: [:helper |
+%%	| pane |
+%%	self systemNavigation
+%%		methodHierarchyBrowserForClass: ScaleMorph
+%%		selector: #defaultColor.
+%%	pane := helper listMorphIncludingMatch: '.*Morph.*' asRegex in: helper foregroundWindow.
+%%	helper select: pane at: '.*Morph.*' asRegex
+%%]}
 \begin{figure}[tbp]
 	\begin{center}
    \ifluluelse
