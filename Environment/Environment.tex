@@ -253,11 +253,11 @@ The \button{senders} button will give you a list of all methods that may use the
 %%	| window sendersButton |
 %%	ToolSet browse: ScaleMorph selector: #checkExtent:.
 %%	window := helper foregroundWindow.
-%%	helper scaleDefaultBrowser: window.
+%%	helper scaleWindow: window extent: 600 @ 400.
 %%	sendersButton := helper buttonLabeled: 'senders' in: window.
 %%	helper
 %%		runModal: [helper click: sendersButton buttons: #(left)]
-%%		then: [helper dialogWindow center: (window bounds pointAtFraction: 0.7 @ 0.6)]
+%%		then: [helper dialogWindow center: (window bounds pointAtFraction: 3 @ 2 / 4)]
 %%]}
 \begin{figure}[htbp]
 	\begin{center}
