@@ -112,8 +112,7 @@ We will take a look at the standard \ind{system browser} first, since the others
 
 %%{SBESqueakPicture writeTo: './figures/SystemBrowser0.png' frame: #morphs using: [:helper |
 %%	Browser open.
-%%	helper foregroundWindow extent: 600 @ 300.
-%%	helper scrollSelectionsIntoView: helper foregroundWindow.
+%%	helper scaleDefaultBrowser: helper foregroundWindow.
 %%]}
 \begin{figure}[htbp]
    \centering
@@ -130,8 +129,7 @@ The leftmost pane lists \emph{categories} of classes; select one (say \scat{Kern
 
 %%{SBESqueakPicture writeTo: './figures/SystemBrowser1.png' frame: #morphs using: [:helper |
 %%	Browser fullOnClass: Model.
-%%	helper foregroundWindow extent: 600 @ 300.
-%%	helper scrollSelectionsIntoView: helper foregroundWindow.
+%%	helper scaleDefaultBrowser: helper foregroundWindow.
 %%]}
 \begin{figure}[htbp]
    \centering
@@ -152,8 +150,7 @@ If you select class \menu{Model},  protocol \protind{dependents} and the method 
 
 %%{SBESqueakPicture writeTo: './figures/SystemBrowserMyDependents.png' frame: #morphs using: [:helper |
 %%	Browser fullOnClass: Model selector: #myDependents.
-%%	helper foregroundWindow extent: 600 @ 300.
-%%	helper scrollSelectionsIntoView: helper foregroundWindow.
+%%	helper scaleDefaultBrowser: helper foregroundWindow.
 %%]}
 \begin{figure}[htbp]
    \centering
@@ -174,8 +171,7 @@ Enter the name of the new thing in the dialog, and you are done: there is nothin
 
 %%{SBESqueakPicture writeTo: './figures/SystemBrowserClassCreation.png' frame: #morphs using: [:helper |
 %%	Browser fullOnCategory: 'Kernel-Objects'.
-%%	helper foregroundWindow extent: 600 @ 300.
-%%	helper scrollSelectionsIntoView: helper foregroundWindow.
+%%	helper scaleDefaultBrowser: helper foregroundWindow.
 %%]}
 \begin{figure}[htbp]
    \centering
@@ -217,8 +213,7 @@ The process of creating a new method is similar.  First select the class in whic
 
 %%{SBESqueakPicture writeTo: './figures/SystemBrowserMethodTemplate.png' frame: #morphs using: [:helper |
 %%	Browser fullOnClass: Model category: #'morphic ui'.
-%%	helper foregroundWindow extent: 600 @ 300.
-%%	helper scrollSelectionsIntoView: helper foregroundWindow.
+%%	helper scaleDefaultBrowser: helper foregroundWindow.
 %%	helper mouseEnter: (helper codePaneOfBrowser: helper foregroundWindow).
 %%]}
 \begin{figure}[htbp]
