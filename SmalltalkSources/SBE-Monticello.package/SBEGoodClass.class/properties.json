@@ -1,0 +1,14 @@
+{
+	"category" : "SBE-Monticello",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ct 11/5/2019 09:09",
+	"instvars" : [
+		 ],
+	"name" : "SBEGoodClass",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }
