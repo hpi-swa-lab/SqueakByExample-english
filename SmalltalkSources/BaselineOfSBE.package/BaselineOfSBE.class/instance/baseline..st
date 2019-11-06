@@ -8,9 +8,16 @@ baseline: spec
 		spec
 			package: #'SBE-Environment';
 			package: #'SBE-Extract' with: [spec requires: #('FileSystem')];
+			package: #'SBE-Monticello';
 			package: #'SBE-Morphic';
 			package: #'SBE-Quinto';
 			package: #'SBE-QuickTour';
 			package: #'SBE-Streams';
 			package: #'SBE-Testing'.
-		spec group: #ci with: #(#'SBE-Extract' #'SBE-Quinto' #'SBE-QuickTour' #'SBE-Morphic' #'SBE-Streams')].
+		spec group: #ci with: #(
+			#'SBE-Extract'
+			#'SBE-Quinto'
+			#'SBE-QuickTour'
+			#'SBBE-Monticello'
+			#'SBE-Morphic'
+			#'SBE-Streams')].
