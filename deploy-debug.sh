@@ -27,7 +27,8 @@ install_gdrive() {
 	echo " Did chmod"
 }
 
-find_file() {
+function find_file {
+	echo " enter find_file"
 	echo " finding file $1"
 	echo " query is '${GDRIVE_FOLDER}' in parents and name = '$1' and trashed = false"
 	echo " result is:"
