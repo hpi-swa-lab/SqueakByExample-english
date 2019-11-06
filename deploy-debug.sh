@@ -28,6 +28,11 @@ install_gdrive() {
 }
 
 find_file() {
+	echo " finding file $1"
+	echo " query is '${GDRIVE_FOLDER}' in parents and name = '$1' and trashed = false"
+	echo " result is:"
+	echo $($GDRIVE list -q "'${GDRIVE_FOLDER}' in parents and name = '$1' and trashed = false" --no-header)
+	echo " ."
 	$GDRIVE list -q "'${GDRIVE_FOLDER}' in parents and name = '$1' and trashed = false" --no-header | awk '{print $1}'
 }
 
