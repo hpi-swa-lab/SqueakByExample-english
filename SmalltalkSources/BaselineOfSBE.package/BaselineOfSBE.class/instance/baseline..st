@@ -18,6 +18,6 @@ baseline: spec
 			#'SBE-Extract'
 			#'SBE-Quinto'
 			#'SBE-QuickTour'
-			#'SBBE-Monticello'
+			#'SBE-Monticello'
 			#'SBE-Morphic'
 			#'SBE-Streams')].
