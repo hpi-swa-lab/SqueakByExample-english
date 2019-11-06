@@ -19,7 +19,7 @@ GDRIVE_URL="https://drive.google.com/drive/folders/1tNIvN-9Vx8djNZYfSYuqhjheb-Eg
 install_gdrive() {
 	echo "Downloading gdrive ..."
 	GDRIVE_URL='https://docs.google.com/uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&export=download'
-	mkdir -p $(dirname $GDRIVE_URL)
+	mkdir -p $(dirname $GDRIVE)
 	curl -fSL "${GDRIVE_URL}" -o $GDRIVE --progress-bar
 	chmod +x $GDRIVE
 }
