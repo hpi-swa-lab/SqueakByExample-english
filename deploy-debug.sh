@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh 
 # Inspired by https://joeyrobert.org/2016/07/13/artifact-deployment-via-google-drive/
 
 if [ -z "$1" ]; then
