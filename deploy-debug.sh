@@ -44,6 +44,9 @@ FIXED_BRANCH=$(echo $TRAVIS_BRANCH | sed 's/\//-/g')
 echo " fixed branch is ${FIXED_BRANCH}"
 FILE_NAME="SBE-$FIXED_BRANCH.pdf"
 echo " file name is ${FILE_NAME}"
+echo " debug find_file"
+find_file $FILE_NAME
+echo " debugged findfile"
 GDRIVE_FILE=$(find_file $FILE_NAME)
 echo " gdrive_file is ${GDRIVE_FILE}"
 if [[ $GDRIVE_FILE ]]; then
