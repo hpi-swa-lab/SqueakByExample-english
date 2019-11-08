@@ -106,9 +106,9 @@ The \menu{Debugger} has an obvious role, but you will discover that it has a mor
 \label{sec:browser} % (fold)
 %apb: what does the fold comment mean?
 
-There are actually several browsers in \sq: the standard system browser, the package browser, the Omnibrowser, and the Refactoring Browser. 
+There are actually several browsers in \sq: the standard system browser, the package browser, and the Monticello snapshot browser. 
 We will take a look at the standard \ind{system browser} first, since the others are variations on it.
-\figref{SystemBrowser0} shows the browser as it appears when you first drag it out of the \toolsflapind.\footnote{If the browser you see looks different from the one we describe, then you might be using an image with a different default browser installed. See \faqref{omnibrowser}.}
+\figref{SystemBrowser0} shows the browser as it appears when you first drag it out of the \toolsflapind.
 
 %%{SBESqueakPicture writeTo: './figures/SystemBrowser0.png' frame: #morphs using: [:helper |
 %%	Browser open.
@@ -399,19 +399,6 @@ To see how it works, display the \cmind{ScaleMorph}{defaultColor} method and cli
 	\label{fig:inheritanceOverriding}
 \end{figure}
 
-\hyphenation{Omni-Brow-ser}
-Note that there are currently two versions of the inheritance browser.  If you are using the version of the system browser based on the \ind{OmniBrowser} framework, the \button{inheritance} button does not change colour, and the inheritance browser looks different.  It also displays more information: it shows not only the methods on the inheritance chain, but also their siblings.  This version of the \ind{inheritance browser} is shown in \figref{OBinheritanceBrowser}.
-
-\begin{figure}[btp]
-	\begin{center}
-   \ifluluelse
-		{\includegraphics[width=\textwidth]{OBInheritanceOverriding}}
-		{\includegraphics[scale=0.7]{OBInheritanceOverriding}}
-	\end{center}
-	\caption{\ct{ScaleMorph>>>defaultColor} and the methods that it overrides, as shown by the new OmniBrowser based inheritance browser.   The siblings of the selected methods are shown in the scrolling lists.}
-	\label{fig:OBinheritanceBrowser}
-\end{figure}
-
 
 \subsubsection{The Hierarchy Browser}
 \label{sec:hierarchy}
@@ -511,21 +498,7 @@ For example, the \ct{ScaleMorph} class belongs to the \scat{Morphic-Widgets} cat
 The package browser assumes that the part before the hyphen, \ct{Morphic} is the name of a ``package'', and adds a fifth pane that allows you to browse only those categories in a particular package.
 However, if you select no package at all, then all the categories are available, just as with the ordinary four-pane browser.
 
-Unfortunately, the meaning of the term \ind{package} has changed since the package pane browser was developed.  ``Package'' now has a more precise meaning, related to the \emph{Monticello} packaging tool, as we will discuss in the next section.  At present there is no tool that lets you browse packages as defined by \ind{Monticello}, however there is one currently being developed.
-
-The Squeak community is in the process of developing a whole new family of browsers based on a new, highly customizable framework called the \emphind{OmniBrowser}.  The implementation of the OmniBrowser is worth looking at as a good example of object-oriented design, \ab{and I'ld like to add a chapter on it somewhere, perhaps starting with parts of the excellent document written by Niklaus Haldimann on the classbox browser} but from the outside, most of the OmniBrowser-based tools look very similar to the ones that we have just described.  
-The main enhancement that you will notice in the Omni System Browser is the addition of \emph{virtual protocols}.
-\lr{"Virtual Protocols" are a non-default extension to OB (p. 140)}
-In addition to the traditional programmer-defined protocols, each class has a number of virtual protocols defined on it by definitional rules.  For example, the \prot{-{}-supersend-{}-} protocol includes all of the methods that send to \super, while the \prot{-{}-required-{}-} protocol lists all of the messages that are sent by the methods in the current class or its superclasses but not defined.
-\protindex{supersend}
-\protindex{required}
-
-\on{Is this related to abstract methods or not?  It is not clear.}
-
-\ab{You are right, it's not clear.  The definition of abstract method that we have given is a method that has \ct{self subclassResponsibility} as a body.
-By this definition, the two things are different.  I happen to think that the definition that we used for required method is better, and should be adopted for abstract method, \ie an abstract method is one that is either required, or has a marker method \ct{self subclassResponsibility} or \ct{self explicitRequirment}.}
-
-\on{So, what should we say? As it stands, without comment it is confusing. Everyone will ask: uh ... is this different from an abstract method?}
+Unfortunately, the meaning of the term \ind{package} has changed since the package pane browser was developed.  ``Package'' now has a more precise meaning, related to the \emph{Monticello} packaging tool, as we will discuss in the next section.  To browse all classes of a Monticello package, you can open a Snapshot Browser from the Monticello Browser by selecting a package and then pressing \button{Browse}.
 
 %---------------------------------------------------------
 \subsection{Browsing programmatically}
@@ -1424,7 +1397,7 @@ In order to develop effectively with Squeak, it is important to invest some effo
 \begin{itemize}
   \item The standard \emph{system browser} is your main interface for browsing existing class categories, classes, method protocols and methods, and for defining new ones.
   The system browser offers several useful buttons to directly jump to senders or implementors of a message, versions of a method, and so on.
-  \item There exist several different class browsers (such as the OmniBrowser and the Refactoring Browser), and several specialized browsers (such as the hierarchy browser) which provide different views of classes and methods.
+  \item There exist several different class browsers (such as the System Browser and the Snapshot Browser from Monticello), and several specialized browsers (such as the hierarchy browser) which provide different views of classes and methods.
   \item From any of the tools, you can highlight the name of a class or a method and immediately jump to a browser by using the keyboard shortcut \short{b}.
   \item You can also browse the \st system programmatically by sending messages to \ct{SystemNavigation default}.
   \item \emph{Monticello} is a tool for exporting, importing, versioning and sharing packages of classes and methods.
