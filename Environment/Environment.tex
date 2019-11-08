@@ -723,6 +723,15 @@ If you then make a change to the package\,---\,say by adding a method to one of 
 You can of course save the new version to the repository too; once you \button{Refresh} the repository view, it should look like \figref{package-cache-browser}.
 \index{package!cache}
 
+%%{SBESqueakPicture writeTo: './figures/MC+SBE.png' frame: #morphs using: [:helper |
+%%	| packageList |
+%%	thisContext wrap: [:block | helper mcIgnoreAllModificationsBut: #('SBE') during: [
+%%		block value.
+%%		helper takeScreenshot]].
+%%	MCWorkingCopyBrowser open.
+%%	packageList := helper listMorphIncludingMatch: '* SBE ()' in: helper foregroundWindow.
+%%	helper select: packageList at: '* SBE ()' andScrollIntoViewBy: 5.
+%%]}
 \begin{figure}[tbp]
 	\begin{center}
 		\includegraphics[width=\textwidth]{MC+SBE}
