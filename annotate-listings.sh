@@ -15,7 +15,7 @@ mkdir -p $TARGET
 
 for file in $(find $SOURCE -type f -name "*.st"); do
 	if [[ $file =~ package\/(.*)\.(class|extension)\/ ]]; then
-		new_file="${TARGET}/$(cut -sd / -f 2 <<< "$file")"
+		new_file="${TARGET}/$(cut -sd / -f2- <<< "$file")"
 		mkdir -p $(dirname $new_file)
 		echo -e "${BASH_REMATCH[1]}>>>$(tail -n +2 "$file")" > $new_file
 	fi
