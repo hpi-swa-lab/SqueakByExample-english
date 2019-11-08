@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -e 
 if [ -z $1 ] || [ -z $2 ]; then
 	echo "usage: $(basename $0) <source_directory> <target_directory>"
 	exit
