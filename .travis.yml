@@ -9,6 +9,7 @@ before_script:
 - chmod +x travis_fold
 - |
   export DEBUG_FIGURES=true && [ "$TRAVIS_BRANCH" = "master" ] && export DEBUG_FIGURES=false ; :
+- set -o pipefail
 
 script:
 - smalltalkci .smalltalk.ston
