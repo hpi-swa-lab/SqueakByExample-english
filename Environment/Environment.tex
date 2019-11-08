@@ -729,6 +729,8 @@ You can of course save the new version to the repository too; once you \button{R
 %%		block value.
 %%		helper takeScreenshot]].
 %%	MCWorkingCopyBrowser open.
+%%	[helper click: (helper buttonLabeled: '+Package' in: helper foregroundWindow)]
+%%		valueSupplyingAnswer: #('Name of package*' 'SBE').
 %%	packageList := helper listMorphIncludingMatch: '* SBE ()' in: helper foregroundWindow.
 %%	helper select: packageList at: '* SBE ()' andScrollIntoViewBy: 5.
 %%]}
