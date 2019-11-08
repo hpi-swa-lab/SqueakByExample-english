@@ -18,6 +18,7 @@ GDRIVE_FOLDER="1tNIvN-9Vx8djNZYfSYuqhjheb-EgJuTc"
 GDRIVE_URL="https://drive.google.com/drive/folders/1tNIvN-9Vx8djNZYfSYuqhjheb-EgJuTc?usp=sharing"
 
 install_gdrive() {
+	echo "Downloading gdrive ..."
 	GDRIVE_URL='https://docs.google.com/uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&export=download'
 	mkdir -p $(dirname $GDRIVE)
 	curl -fSL "${GDRIVE_URL}" -o $GDRIVE --progress-bar
@@ -31,7 +32,8 @@ function find_file {
 if [ ! -f $GDRIVE ]; then install_gdrive; fi
 
 FIXED_BRANCH=$(echo $TRAVIS_BRANCH | sed 's/\//-/g')
-FILE_NAME="SBE-$REPO_NAME-$FIXED_BRANCH.pdf"
+FIXED_REPO=$(echo $TRAVIS_REPO_SLUG | sed 's/\//-/g')
+FILE_NAME="SBE-$FIXED_REPO-$FIXED_BRANCH.pdf"
 GDRIVE_FILE=$(find_file $FILE_NAME)
 if [[ $GDRIVE_FILE ]]; then
 	echo "Uploading new version of ${FILE_NAME} ..."
