@@ -25,7 +25,7 @@ install_gdrive() {
 }
 
 function find_file {
-	$GDRIVE list -q "'${GDRIVE_FOLDER}' in parents and name = '$1' and trashed = false" --no-header | awk '{print $1}'
+	$GDRIVE list $GDRIVE_ARGS -q "'${GDRIVE_FOLDER}' in parents and name = '$1' and trashed = false" --no-header | awk '{print $1}'
 }
 
 if [ ! -f $GDRIVE ]; then install_gdrive; fi
