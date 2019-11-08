@@ -59,8 +59,7 @@ examples :
 	./examples.rb $C > $@.txt
 
 listings : clean_listings
-	cp -fR SmalltalkSources ListingSources
-	bash -e annotate-listings.sh
+	bash -e annotate-listings.sh SmalltalkSources/ ListingSources/
 
 fun :
 	time ./examples.rb $C > $@1.txt
