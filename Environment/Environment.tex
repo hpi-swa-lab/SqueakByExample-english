@@ -724,26 +724,37 @@ You can of course save the new version to the repository too; once you \button{R
 \index{package!cache}
 
 %%{SBESqueakPicture writeTo: './figures/MC+SBE.png' frame: #morphs using: [:helper |
-%%	| packageList |
+%%	| packageFilter packageList |
 %%	thisContext wrap: [:block | helper mcIgnoreAllModificationsBut: #('SBE') during: [
 %%		block value.
 %%		helper takeScreenshot]].
 %%	MCWorkingCopyBrowser open.
 %%	[helper click: (helper buttonLabeled: '+Package' in: helper foregroundWindow)]
 %%		valueSupplyingAnswer: #('Name of package*' 'SBE').
-%%	packageList := helper listMorphIncludingMatch: 'SBE ()' in: helper foregroundWindow.
-%%	helper select: packageList at: 'SBE ()' andScrollIntoViewBy: 5.
+%%	packageFilter := '(\* )?SBE \(\)' asRegex.
+%%	packageList := helper listMorphIncludingMatch: packageFilter in: helper foregroundWindow.
+%%	helper select: packageList at: packageFilter andScrollIntoViewBy: 5.
 %%]}
 \begin{figure}[tbp]
 	\begin{center}
 		\includegraphics[width=\textwidth]{MC+SBE}
-		% \on{Sorry Andrew, this one is too wide!}
-		% \includegraphics[scale=0.7]{MC+SBE}
 	\end{center}
 	\caption{The as-yet-unsaved SBE package in Monticello.}
 	\label{fig:MC+SBE}
 \end{figure}
 
+%%	helper select: packageList at: packageFilter andScrollIntoViewBy: 5.
+%%	repositoryFilter := '.*package-cache.*' asRegex.
+%%	repositoryList := helper listMorphIncludingMatch: repositoryFilter in: helper foregroundWindow.
+%%	helper select: repositoryList at: repositoryFilter andScrollIntoViewBy: 5.
+%%	helper
+%%		runModal: [helper click: (helper buttonLabeled: 'Save' in: helper foregroundWindow)]
+%%		then: [| messageField |
+%%			messageField := helper textMorphIn: helper foregroundWindow withTextMatching: '.*log message.*' asRegex.
+%%			messageField textMorph editor selectAt: 1; selectLine.
+%%			helper type: 'Initial commit for the SBE package' into: messageField.
+%%			helper takeScreenshotOf: {helper foregroundWindow}].
+%%]}
 \begin{figure}[tbp]
 	\begin{center}
 	\ifluluelse
