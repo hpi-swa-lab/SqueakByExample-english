@@ -3,7 +3,9 @@ select: aMorph where: aPredicate
 
 	| firstSelection |
 	firstSelection := aMorph selection.
-	[aPredicate value: aMorph selection] whileFalse: [
+	[aMorph selection
+			ifNotNil: [:selection | aPredicate value: selection]
+			ifNil: [false]] whileFalse: [
 		| latestSelection |
 		latestSelection := aMorph selection.
 		self keyStroke: aMorph key: Character arrowDown.
