@@ -3,6 +3,5 @@ create
 
 	| helper |
 	helper := self setUpHelper.
-	[self tryTakeScreenshotFor: helper.
-	^ helper picture]
+	^ [self tryTakeScreenshotFor: helper]
 		ensure: [helper tearDown]

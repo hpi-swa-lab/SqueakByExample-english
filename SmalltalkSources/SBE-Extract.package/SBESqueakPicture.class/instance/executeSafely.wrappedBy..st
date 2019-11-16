@@ -4,7 +4,7 @@ executeSafely: aBlock wrappedBy: aWrapBlock
 	
 	For the implementation, this requires us to run aBlock in a different process. The complexity of this code is caused by the need to assure synchronized execution."
 
-	| process buildException debugSemaphore resumeSemaphore |
+	| process buildException debugSemaphore resumeSemaphore result |
 	debugSemaphore := Semaphore new.
 	resumeSemaphore := Semaphore new.
 	"*** EXECUTING aBlock ***"
@@ -14,7 +14,7 @@ executeSafely: aBlock wrappedBy: aWrapBlock
 			process := [
 				success := false.
 				[
-					aBlock on: UnhandledError, ProvideAnswerNotification do: [:exception |
+					result := aBlock on: UnhandledError, ProvideAnswerNotification do: [:exception |
 						buildException := exception.
 						resumeSemaphore signal.
 						debugSemaphore wait.
@@ -29,7 +29,7 @@ executeSafely: aBlock wrappedBy: aWrapBlock
 				success := true.
 			] forkAt: Processor activePriority + 1.
 			"If no error occurred, return control here"
-			success ifTrue: [^ self]
+			success ifTrue: [^ result]
 		]
 	] ensure: [
 		Project current world doOneCycleNow
@@ -58,3 +58,4 @@ executeSafely: aBlock wrappedBy: aWrapBlock
 	] ensure: [
 		process terminate
 	].
+	^ result
