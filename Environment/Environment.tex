@@ -743,6 +743,14 @@ You can of course save the new version to the repository too; once you \button{R
 	\label{fig:MC+SBE}
 \end{figure}
 
+%%{SBESqueakPicture writeTo: './figures/SBE-apb.png' frame: #morphs using: [:helper |
+%%	| packageFilter packageList repositoryFilter repositoryList |
+%%	thisContext wrap: [:block | helper mcIgnoreAllModificationsBut: #('SBE') during: [
+%%		block value.
+%%		helper assureScreenshot]].
+%%	MCWorkingCopyBrowser open.
+%%	packageFilter := '(\* )?SBE \(\)' asRegex.
+%%	packageList := helper listMorphIncludingMatch: packageFilter in: helper foregroundWindow.
 %%	helper select: packageList at: packageFilter andScrollIntoViewBy: 5.
 %%	repositoryFilter := '.*package-cache.*' asRegex.
 %%	repositoryList := helper listMorphIncludingMatch: repositoryFilter in: helper foregroundWindow.
