@@ -743,26 +743,28 @@ You can of course save the new version to the repository too; once you \button{R
 	\label{fig:MC+SBE}
 \end{figure}
 
-%%{SBESqueakPicture writeTo: './figures/SBE-apb.png' frame: #morphs using: [:helper |
-%%	| packageFilter packageList repositoryFilter repositoryList |
-%%	thisContext wrap: [:block | helper mcIgnoreAllModificationsBut: #('SBE') during: [
-%%		block value.
-%%		helper assureScreenshot]].
-%%	MCWorkingCopyBrowser open.
-%%	packageFilter := '(\* )?SBE \(\)' asRegex.
-%%	packageList := helper listMorphIncludingMatch: packageFilter in: helper foregroundWindow.
-%%	helper select: packageList at: packageFilter andScrollIntoViewBy: 5.
-%%	repositoryFilter := '.*package-cache.*' asRegex.
-%%	repositoryList := helper listMorphIncludingMatch: repositoryFilter in: helper foregroundWindow.
-%%	helper select: repositoryList at: repositoryFilter andScrollIntoViewBy: 5.
-%%	helper
-%%		runModal: [helper click: (helper buttonLabeled: 'Save' in: helper foregroundWindow)]
-%%		then: [| messageField |
-%%			messageField := helper textMorphIn: helper foregroundWindow withTextMatching: '.*log message.*' asRegex.
-%%			messageField textMorph editor selectAt: 1; selectLine.
-%%			helper type: 'Initial commit for the SBE package' into: messageField.
-%%			helper takeScreenshotOf: {helper foregroundWindow}].
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/SBE-apb.png' frame: #morphs using: [:helper |
+	| packageFilter packageList repositoryFilter repositoryList |
+	thisContext wrap: [:block | helper mcIgnoreAllModificationsBut: #('SBE') during: [
+		block value.
+		helper assureScreenshot]].
+	MCWorkingCopyBrowser open.
+	packageFilter := '(\* )?SBE \(\)' asRegex.
+	packageList := helper listMorphIncludingMatch: packageFilter in: helper foregroundWindow.
+	helper select: packageList at: packageFilter andScrollIntoViewBy: 5.
+	repositoryFilter := '.*package-cache.*' asRegex.
+	repositoryList := helper listMorphIncludingMatch: repositoryFilter in: helper foregroundWindow.
+	helper select: repositoryList at: repositoryFilter andScrollIntoViewBy: 5.
+	helper
+		runModal: [helper click: (helper buttonLabeled: 'Save' in: helper foregroundWindow)]
+		then: [| messageField |
+			messageField := helper textMorphIn: helper foregroundWindow withTextMatching: '.*log message.*' asRegex.
+			messageField textMorph editor selectAt: 1; selectLine.
+			helper type: 'Initial commit for the SBE package' into: messageField.
+			helper takeScreenshotOf: {helper foregroundWindow}].
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[tbp]
 	\begin{center}
 	\ifluluelse

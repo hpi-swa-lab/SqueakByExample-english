@@ -129,12 +129,14 @@ Once \sq is running, you should see a single large window, possibly containing s
 A good place to get started is the \ind{world menu} shown in \figref{threeButtons:red}. 
 
 \dothis{Click with the mouse on the background of the main window to show the world menu, then choose \menu{open \ldots \go workspace} to create a new workspace.}
-%%{SBESqueakPicture writeTo: './figures/worldMenu.png' frame: #morphs using: [:helper |
-%%  helper click: helper world at: helper world topCenter + (0 @ 30) buttons: #(left).
-%%  helper hand releaseMouseFocus.
-%%  helper mouseEnter: (helper menuItemMorphLabeled: 'open...' in: helper world).
-%%  helper closeBalloons.
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/worldMenu.png' frame: #morphs using: [:helper |
+	helper click: helper world at: helper world topCenter + (0 @ 30) buttons: #(left).
+	helper hand releaseMouseFocus.
+	helper mouseEnter: (helper menuItemMorphLabeled: 'open...' in: helper world).
+	helper closeBalloons.
+]
+\end{ExecuteSmalltalkScript}
 
 %%{SBESqueakPicture writeTo: './figures/yellowButtonMenuOnWorkspace.png' frame: #morphs using: [:helper |
 %%	| workspace menu |
