@@ -1,7 +1,8 @@
 code generation
-collectCommandsFromStream: fileStream
+collectScriptsClassicFromStream: fileStream
 
 	| prefix suffix |
+	self flag: #deprecated: "ct: We want to get rid of this format".
 	prefix := '%%{SBESqueakPicture'.
 	suffix := '%%]}'.
 	^ Array streamContents: [:results |

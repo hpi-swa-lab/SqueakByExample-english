@@ -1,5 +1,5 @@
 code generation
-generateBuilderFor: file with: commands
+generateBuilderFor: file withScripts: scripts
 
 	| class className |
 	className := self nameForBuilderWith: file base.
@@ -7,5 +7,5 @@ generateBuilderFor: file with: commands
 		self subclass: className category: self builderSystemCategory].
 	class
 		fileReference: file;
-		compileCommands: commands.
+		compileScripts: scripts.
 	^ class

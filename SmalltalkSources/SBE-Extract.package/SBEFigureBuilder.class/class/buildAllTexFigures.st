@@ -1,4 +1,4 @@
-building (convenience)
+building
 buildAllTexFigures
 
 	^ self buildTexFiguresFrom: self resourceDirectory

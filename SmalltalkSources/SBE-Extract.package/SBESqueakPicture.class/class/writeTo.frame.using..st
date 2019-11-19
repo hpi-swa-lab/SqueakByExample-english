@@ -1,7 +1,9 @@
 screenshots
 writeTo: aString frame: aFrameSpecifier using: aBlock
 
-	^ self
+	| picture |
+	picture := self
 		filePath: (FSPath from: aString delimiter: $/)
 		frame: aFrameSpecifier
-		buildBlock: aBlock
+		buildBlock: aBlock.
+	^ picture save

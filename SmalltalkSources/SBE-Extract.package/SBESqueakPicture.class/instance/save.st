@@ -1,7 +1,8 @@
 export
 save
 
-	| picture |
+	| picture fileReference |
 	picture := self create.
-	self filePath parent ensureDirectory.
-	picture writePNGfileNamed: self filePath fullName.
+	fileReference := FileSystem disk workingDirectory resolve: self filePath.
+	fileReference parent ensureDirectory.
+	picture writePNGfileNamed: fileReference fullName.

@@ -1,4 +1,4 @@
-building (convenience)
+building
 buildAllLocalFigures
 
 	^ self buildFiguresWith: self allSubclasses
