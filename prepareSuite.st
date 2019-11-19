@@ -1,2 +1,2 @@
 [SBEFigureBuilder generateBuildersIn: SBEFigureBuilder resourceDirectory]
-		valueSuppressingMessages: #('*safety checks*').
+	valueSuppressingMessages: #('*safety checks*').
