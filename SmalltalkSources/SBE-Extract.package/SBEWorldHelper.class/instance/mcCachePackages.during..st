@@ -9,8 +9,9 @@ mcCachePackages: names during: aBlock
 	^ MCCacheRepository setDefault: cache during: [ | packages |
 		packages := names collect: [:name | MCWorkingCopy forPackageNamed: name].
 		packages
-			collect: [:package | package
+			collect: [:package | [package
 				newVersionWithName: package uniqueVersionName
 				message: '']
+					on: MCEmptyVersion do: #resume]
 			thenDo: [:version | cache storeVersion: version].
 		aBlock value]
