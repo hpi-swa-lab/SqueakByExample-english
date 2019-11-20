@@ -759,9 +759,12 @@ SBESqueakPicture writeTo: './figures/SBE-apb.png' frame: #morphs using: [:helper
 	helper
 		runModal: [helper click: (helper buttonLabeled: 'Save' in: helper foregroundWindow)]
 		then: [| messageField |
+			helper hideProgressMorph.
+			helper foregroundWindow comeToFront.
 			messageField := helper textMorphIn: helper foregroundWindow withTextMatching: '.*log message.*' asRegex.
+			helper mouseEnter: messageField.
 			messageField textMorph editor selectAt: 1; selectLine.
-			helper type: 'Initial commit for the SBE package' into: messageField.
+			"helper type: 'Initial commit for the SBE package' into: messageField."
 			helper takeScreenshotOf: {helper foregroundWindow}].
 ]
 \end{ExecuteSmalltalkScript}
