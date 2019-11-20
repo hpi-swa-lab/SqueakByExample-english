@@ -1,0 +1,24 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"executeShould:inScopeOf:where:" : "ct 11/18/2019 15:25",
+		"executeShould:inScopeOfDebuggerThat:thenDo:" : "ct 11/18/2019 19:44",
+		"expectedFailures" : "ct 11/18/2019 16:38",
+		"findDebuggersThat:" : "ct 11/18/2019 15:38",
+		"performTest" : "ct 11/18/2019 16:33",
+		"setUp" : "ct 11/18/2019 15:13",
+		"should:raise:where:" : "ct 11/18/2019 15:05",
+		"shouldOpenDebugger:" : "ct 11/18/2019 16:03",
+		"shouldOpenDebugger:that:thenDo:" : "ct 11/18/2019 19:44",
+		"shouldOpenDebugger:thenDo:" : "ct 11/18/2019 16:03",
+		"shouldntMessUpProcesses:" : "ct 11/18/2019 16:33",
+		"testAbandonDebugger" : "ct 11/18/2019 19:27",
+		"testHandleNotification" : "ct 11/18/2019 15:26",
+		"testInform" : "ct 11/18/2019 20:18",
+		"testNoop" : "ct 11/18/2019 15:19",
+		"testResumeDebugger" : "ct 11/18/2019 16:18",
+		"testResumeNotification" : "ct 11/18/2019 15:27",
+		"testSimple" : "ct 11/18/2019 15:19",
+		"testTerminate" : "ct 11/18/2019 16:36",
+		"testYield" : "ct 11/18/2019 15:19" } }
