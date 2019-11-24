@@ -5,7 +5,7 @@ wrapStrictlyToggleOn: aBlock toggleOff: anotherBlock
 	self
 		insertEnsure: anotherBlock;
 		insertSender: (self class
-			contextOn: UnhandledError
+			contextOn: Exception
 			do: [:error |
 				thisContext
 					wrapToggleOn: anotherBlock
