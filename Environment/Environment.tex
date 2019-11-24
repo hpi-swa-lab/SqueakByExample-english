@@ -727,6 +727,7 @@ You can of course save the new version to the repository too; once you \button{R
 "SBEMonticelloSeries"
 SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 	thisContext wrap: [:block | helper mcIgnoreAllModificationsBut: #('SBE') during: block].
+	helper hideProgressMorph.
 	
 	MCWorkingCopyBrowser open.
 	picture writeTo: 'MC+SBE.png' frame: #morphs building: [
@@ -747,9 +748,9 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 			then: [| messageField |
 				helper hideProgressMorph.
 				helper foregroundWindow comeToFront.
-				messageField := helper textMorphIn: helper foregroundWindow withTextMatching: '.*log message.*' asRegex.
+				"messageField := helper textMorphIn: helper foregroundWindow withTextMatching: '.*log message.*' asRegex.
 				helper mouseEnter: messageField.
-				"messageField textMorph editor selectAt: 1; selectLine.
+				messageField textMorph editor selectAt: 1; selectLine.
 				helper type: 'Change a few things' into: messageField."
 				helper scaleWindow: helper foregroundWindow extent: 400 @ 350.
 				helper takeScreenshotOf: {helper foregroundWindow}.
