@@ -723,18 +723,39 @@ If you then make a change to the package\,---\,say by adding a method to one of 
 You can of course save the new version to the repository too; once you \button{Refresh} the repository view, it should look like \figref{package-cache-browser}.
 \index{package!cache}
 
-%%{SBESqueakPicture writeTo: './figures/MC+SBE.png' frame: #morphs using: [:helper |
-%%	| packageFilter packageList |
-%%	thisContext wrap: [:block | helper mcIgnoreAllModificationsBut: #('SBE') during: [
-%%		block value.
-%%		helper takeScreenshot]].
-%%	MCWorkingCopyBrowser open.
-%%	[helper click: (helper buttonLabeled: '+Package' in: helper foregroundWindow)]
-%%		valueSupplyingAnswer: #('Name of package*' 'SBE').
-%%	packageFilter := '(\* )?SBE \(\)' asRegex.
-%%	packageList := helper listMorphIncludingMatch: packageFilter in: helper foregroundWindow.
-%%	helper select: packageList at: packageFilter andScrollIntoViewBy: 5.
-%%]}
+\begin{ExecuteSmalltalkScript}
+"SBE Monticello series"
+SBEScreenshotRecorder recordSeries: [:picture :helper |
+	thisContext wrap: [:block | helper mcIgnoreAllModificationsBut: #('SBE') during: block].
+	
+	MCWorkingCopyBrowser open.
+	picture writeTo: './figures/MC+SBE.png' frame: #morphs building: [
+		| packageFilter packageList |
+		[helper click: (helper buttonLabeled: '+Package' in: helper foregroundWindow)]
+			valueSupplyingAnswer: #('Name of package*' 'SBE').
+		packageFilter := '(\* )?SBE \(\)' asRegex.
+		packageList := helper listMorphIncludingMatch: packageFilter in: helper foregroundWindow.
+		helper select: packageList at: packageFilter andScrollIntoViewBy: 5.
+	].
+	picture writeTo: './figures/SBE-apb.png' frame: #morphs building: [
+		| repositoryFilter repositoryList |
+		repositoryFilter := '.*package-cache.*' asRegex.
+		repositoryList := helper listMorphIncludingMatch: repositoryFilter in: helper foregroundWindow.
+		helper select: repositoryList at: repositoryFilter andScrollIntoViewBy: 5.
+		helper
+			runModal: [helper click: (helper buttonLabeled: 'Save' in: helper foregroundWindow)]
+			then: [| messageField |
+				helper hideProgressMorph.
+				helper foregroundWindow comeToFront.
+				messageField := helper textMorphIn: helper foregroundWindow withTextMatching: '.*log message.*' asRegex.
+				helper mouseEnter: messageField.
+				messageField textMorph editor selectAt: 1; selectLine.
+				"helper type: 'Initial commit for the SBE package' into: messageField."
+				helper scaleWindow: helper foregroundWindow extent: 400 @ 350.
+				helper takeScreenshotOf: {helper foregroundWindow}].
+	].
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[tbp]
 	\begin{center}
 		\includegraphics[width=\textwidth]{MC+SBE}
@@ -743,31 +764,6 @@ You can of course save the new version to the repository too; once you \button{R
 	\label{fig:MC+SBE}
 \end{figure}
 
-\begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/SBE-apb.png' frame: #morphs using: [:helper |
-	| packageFilter packageList repositoryFilter repositoryList |
-	thisContext wrap: [:block | helper mcIgnoreAllModificationsBut: #('SBE') during: [
-		block value.
-		helper assureScreenshot]].
-	MCWorkingCopyBrowser open.
-	packageFilter := '(\* )?SBE \(\)' asRegex.
-	packageList := helper listMorphIncludingMatch: packageFilter in: helper foregroundWindow.
-	helper select: packageList at: packageFilter andScrollIntoViewBy: 5.
-	repositoryFilter := '.*package-cache.*' asRegex.
-	repositoryList := helper listMorphIncludingMatch: repositoryFilter in: helper foregroundWindow.
-	helper select: repositoryList at: repositoryFilter andScrollIntoViewBy: 5.
-	helper
-		runModal: [helper click: (helper buttonLabeled: 'Save' in: helper foregroundWindow)]
-		then: [| messageField |
-			helper hideProgressMorph.
-			helper foregroundWindow comeToFront.
-			messageField := helper textMorphIn: helper foregroundWindow withTextMatching: '.*log message.*' asRegex.
-			helper mouseEnter: messageField.
-			messageField textMorph editor selectAt: 1; selectLine.
-			"helper type: 'Initial commit for the SBE package' into: messageField."
-			helper takeScreenshotOf: {helper foregroundWindow}].
-]
-\end{ExecuteSmalltalkScript}
 \begin{figure}[tbp]
 	\begin{center}
 		\includegraphics[width=\textwidth]{SBE-apb}
