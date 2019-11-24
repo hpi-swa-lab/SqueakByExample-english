@@ -4,10 +4,9 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "",
+	"commentStamp" : "ct 11/24/2019 13:51",
 	"instvars" : [
-		"targetPosition",
-		"realOrientation" ],
+		 ],
 	"name" : "SBEBalloonMorph",
 	"pools" : [
 		 ],
