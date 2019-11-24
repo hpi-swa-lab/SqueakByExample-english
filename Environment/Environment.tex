@@ -753,7 +753,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 				messageField textMorph editor selectAt: 1; selectLine.
 				helper type: 'Change a few things' into: messageField."
 				helper scaleWindow: helper foregroundWindow extent: 550 @ 350.
-				helper takeScreenshotOf: {helper foregroundWindow}.
+				helper takeScreenshotOf: helper foregroundWindow.
 				
 				[helper click: (helper buttonLabeled: 'Accept' in: helper foregroundWindow)]
 					valueSuppressingMessages: #('*message*empty*');
@@ -767,7 +767,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 		helper select: packageList at: 'SBE.*' asRegex.
 		window model versionSelection: 1.
 		helper scaleWindow: helper foregroundWindow extent: 600 @ 350.
-		helper takeScreenshotOf: {window}.
+		helper takeScreenshotOf: window.
 	].
 ]
 \end{ExecuteSmalltalkScript}
