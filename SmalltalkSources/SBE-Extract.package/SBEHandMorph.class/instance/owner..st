@@ -1,4 +1,4 @@
-as yet unclassified
+accessing
 owner: aMorph
 
-	owner := aMorph.
+	self privateOwner: aMorph.

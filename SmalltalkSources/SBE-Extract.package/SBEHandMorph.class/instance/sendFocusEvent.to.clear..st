@@ -1,4 +1,4 @@
-as yet unclassified
+private events
 sendFocusEvent: anEvent to: focusHolder clear: aBlock
 	"Send the event to the morph currently holding the focus"
 
