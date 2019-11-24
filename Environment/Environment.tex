@@ -766,7 +766,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 		packageList := helper listMorphIncludingMatch: 'SBE' in: window.
 		helper select: packageList at: 'SBE.*' asRegex.
 		window model versionSelection: 1.
-		helper scaleWindow: helper foregroundWindow extent: 600 @ 350.
+		helper scaleWindow: helper foregroundWindow extent: 600 @ "350"1000.
 		helper takeScreenshotOf: window.
 	].
 ]
