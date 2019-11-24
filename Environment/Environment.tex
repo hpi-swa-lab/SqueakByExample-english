@@ -806,6 +806,23 @@ The \ct{SqueakByExample} repository on \emphind{SqueakSource} is world readable 
 However, you can create your own repository on \emph{SqueakSource} by using the web interface at \url{http://www.squeaksource.com}, and use this to save your work. 
 This is especially useful as a mechanism to share your code with friends, or if you use multiple computers.
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/MCaddToPackage.png' building: [:helper |
+	| repositoryMatch repositoryList |
+	thisContext wrap: [:block | helper mcIgnoreAllModificationsDuring: block].
+	MCWorkingCopyBrowser open.
+	repositoryMatch := MCRepository trunk description.
+	repositoryList := helper listMorphIncludingMatch: repositoryMatch in: helper foregroundWindow.
+	helper select: repositoryList at: repositoryMatch.
+	helper keyStroke: repositoryList key: Character escape.
+	helper menu
+		center: repositoryList center x @ 0;
+		top: ((helper boundsOfItemMatching: repositoryMatch in: repositoryList)
+			pointAtFraction: 0 @ 0.75) y.
+	helper select: helper menu at: 'add to package.*' asRegex.
+	helper closeBalloons.
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[tbp]
 	\begin{center}
 		\includegraphics[width=\textwidth]{MCaddToPackage}
