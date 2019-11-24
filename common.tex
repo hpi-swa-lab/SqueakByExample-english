@@ -220,7 +220,7 @@
 #(('blackHandle' 'Halo-Grab') ('moveHandle' 'Halo-Drag') ('debugHandle' 'Halo-Debug') ('rotateHandle' 'Halo-Rot'))
 	do: [ :each |
 		SBEScreenshotRecorder
-			writeTo: ('./figures/{1}.png' format: each first)
+			writeTo: ('./figures/{1}.png' format: {each first})
 			buildingForm: [ :helper |
 				helper haloHandleFormFor: each second ] ]
 \end{ExecuteSmalltalkScript}
