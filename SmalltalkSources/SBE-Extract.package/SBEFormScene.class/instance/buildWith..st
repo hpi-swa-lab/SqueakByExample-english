@@ -5,5 +5,5 @@ buildWith: aWorldHelper
 		| form formInWorld |
 		form := self basicBuildWith: aWorldHelper.
 		[formInWorld := form asMorph openInWorld.
-		^ aWorldHelper takeScreenshotOf: {formInWorld}]
+		^ aWorldHelper takeScreenshotOf: formInWorld]
 			ensure: [formInWorld abandon]]
