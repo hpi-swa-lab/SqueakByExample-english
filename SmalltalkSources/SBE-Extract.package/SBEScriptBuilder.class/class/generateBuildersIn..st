@@ -2,7 +2,6 @@ code generation
 generateBuildersIn: aFileReference
 
 	| files allScripts builders |
-	self okToGenerate ifFalse: [^ false].
 	Project current uiManager informUserDuring: [:bar |
 		bar value: 'Gathering tex files'.
 		files := self getTexFilesIn: aFileReference.
