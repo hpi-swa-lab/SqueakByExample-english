@@ -763,9 +763,9 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 		| packageList window |
 		MCCacheRepository default morphicOpen.
 		window := helper foregroundWindow.
-		packageList := helper listMorphIncludingMatch: 'SBE' in: window.
+		"packageList := helper listMorphIncludingMatch: 'SBE' in: window.
 		helper select: packageList at: 'SBE'.
-		window model versionSelection: 1.
+		window model versionSelection: 1."
 		helper scaleWindow: helper foregroundWindow extent: 600 @ 350.
 		helper takeScreenshotOf: {window}.
 	].
