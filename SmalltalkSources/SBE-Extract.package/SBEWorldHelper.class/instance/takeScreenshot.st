@@ -1,4 +1,4 @@
 screenshots
 takeScreenshot
 
-	^ self takeScreenshotOf: self world submorphs
+	^ self takeScreenshotOfAll: self world submorphs
