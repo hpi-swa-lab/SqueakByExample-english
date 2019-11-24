@@ -9,9 +9,7 @@
 		"collectScriptsFromStream:" : "ct 11/18/2019 21:12",
 		"compileScript:" : "ct 11/18/2019 13:36",
 		"compileScripts:" : "ct 11/18/2019 13:13",
-		"fileReference" : "ct 10/29/2019 15:54",
-		"fileReference:" : "ct 10/30/2019 11:41",
-		"generateBuilderFor:withScripts:" : "ct 11/18/2019 13:14",
+		"generateBuilderFor:withScripts:" : "ct 11/24/2019 13:45",
 		"generateBuildersIn:" : "ct 11/18/2019 21:12",
 		"getTexFilesIn:" : "ct 10/29/2019 15:55",
 		"isAbstract" : "ct 11/18/2019 13:58",
@@ -25,5 +23,4 @@
 		"uniqueNameFrom:orNumberedNameBy:lest:" : "ct 11/4/2019 00:01" },
 	"instance" : {
 		"executeSafely:" : "ct 11/19/2019 20:14",
-		"performTest" : "ct 11/18/2019 15:12",
-		"targetDirectory" : "ct 10/29/2019 17:17" } }
+		"performTest" : "ct 11/18/2019 15:12" } }

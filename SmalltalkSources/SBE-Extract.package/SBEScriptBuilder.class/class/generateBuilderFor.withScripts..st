@@ -5,7 +5,5 @@ generateBuilderFor: file withScripts: scripts
 	className := self nameForBuilderWith: file base.
 	class := Smalltalk at: className ifAbsent: [
 		self subclass: className category: self builderSystemCategory].
-	class
-		fileReference: file;
-		compileScripts: scripts.
+	class compileScripts: scripts.
 	^ class
