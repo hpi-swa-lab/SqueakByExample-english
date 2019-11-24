@@ -813,6 +813,7 @@ SBEScreenshotRecorder writeTo: './figures/MCaddToPackage.png' building: [:helper
 	MCWorkingCopyBrowser open.
 	repositoryMatch := MCRepository trunk description.
 	repositoryList := helper listMorphIncludingMatch: repositoryMatch in: helper foregroundWindow.
+	helper mouseEnter: repositoryList.
 	helper select: repositoryList at: repositoryMatch.
 	helper keyStroke: repositoryList key: Character escape.
 	helper menu
