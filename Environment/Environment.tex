@@ -724,20 +724,20 @@ You can of course save the new version to the repository too; once you \button{R
 \index{package!cache}
 
 \begin{ExecuteSmalltalkScript}
-"SBE Monticello series"
-SBEScreenshotRecorder recordSeries: [:picture :helper |
+"SBEMonticelloSeries"
+SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 	thisContext wrap: [:block | helper mcIgnoreAllModificationsBut: #('SBE') during: block].
 	
 	MCWorkingCopyBrowser open.
-	picture writeTo: './figures/MC+SBE.png' frame: #morphs building: [
+	picture writeTo: 'MC+SBE.png' frame: #morphs building: [
 		| packageFilter packageList |
 		[helper click: (helper buttonLabeled: '+Package' in: helper foregroundWindow)]
 			valueSupplyingAnswer: #('Name of package*' 'SBE').
-		packageFilter := '(\* )?SBE \(\)' asRegex.
+		packageFilter := '(\* )?SBE \(.*\)' asRegex.
 		packageList := helper listMorphIncludingMatch: packageFilter in: helper foregroundWindow.
 		helper select: packageList at: packageFilter andScrollIntoViewBy: 5.
 	].
-	picture writeTo: './figures/SBE-apb.png' frame: #morphs building: [
+	picture writeTo: 'SBE-apb.png' frame: #morphs building: [
 		| repositoryFilter repositoryList |
 		repositoryFilter := '.*package-cache.*' asRegex.
 		repositoryList := helper listMorphIncludingMatch: repositoryFilter in: helper foregroundWindow.
@@ -749,10 +749,24 @@ SBEScreenshotRecorder recordSeries: [:picture :helper |
 				helper foregroundWindow comeToFront.
 				messageField := helper textMorphIn: helper foregroundWindow withTextMatching: '.*log message.*' asRegex.
 				helper mouseEnter: messageField.
-				messageField textMorph editor selectAt: 1; selectLine.
-				"helper type: 'Initial commit for the SBE package' into: messageField."
+				"messageField textMorph editor selectAt: 1; selectLine.
+				helper type: 'Change a few things' into: messageField."
 				helper scaleWindow: helper foregroundWindow extent: 400 @ 350.
-				helper takeScreenshotOf: {helper foregroundWindow}].
+				helper takeScreenshotOf: {helper foregroundWindow}.
+				
+				[helper click: (helper buttonLabeled: 'Accept' in: helper foregroundWindow)]
+					valueSuppressingMessages: #('*message*empty*');
+					flag: #workaround].
+	].
+	picture writeTo: 'package-cache-browser.png' building: [
+		| packageList window |
+		MCCacheRepository default morphicOpen.
+		window := helper foregroundWindow.
+		packageList := helper listMorphIncludingMatch: 'SBE' in: window.
+		helper select: packageList at: 'SBE'.
+		window model versionSelection: 1.
+		helper scaleWindow: helper foregroundWindow extent: 600 @ 350.
+		helper takeScreenshotOf: {window}.
 	].
 ]
 \end{ExecuteSmalltalkScript}
