@@ -1,0 +1,14 @@
+{
+	"category" : "SBE-Extract",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ct 11/24/2019 13:55",
+	"instvars" : [
+		"isDebugging" ],
+	"name" : "SBEDebuggingScreenshotRecorder",
+	"pools" : [
+		 ],
+	"super" : "SBEScreenshotRecorder",
+	"type" : "normal" }

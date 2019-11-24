@@ -1,9 +1,8 @@
 screenshots
 writeTo: aString frame: aFrameSpecifier using: aBlock
 
-	| picture |
-	picture := self
-		filePath: (FSPath from: aString delimiter: $/)
+	self flag: #deprecated. "ct: Use SBEScreenshotRecorder instead"
+	^ SBEScreenshotRecorder
+		writeTo: aString
 		frame: aFrameSpecifier
-		buildBlock: aBlock.
-	^ picture save
+		building: aBlock

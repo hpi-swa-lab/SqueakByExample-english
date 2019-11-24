@@ -1,0 +1,1 @@
+I represent a GUI scene in Squeak. I can also create screenshots of it, open them in the hand of the user, or save them into a file.

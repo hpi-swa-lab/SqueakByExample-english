@@ -4,6 +4,7 @@ setUp
 	world := (PasteUpMorph newWorldForProject: nil)
 		extent: self worldSize;
 		viewBox: (0 @ 0 extent: self worldSize);
+		color: self worldColor;
 		yourself.
 	
 	(world instVarNamed: #worldState)

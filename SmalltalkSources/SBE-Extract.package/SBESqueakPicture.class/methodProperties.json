@@ -1,22 +1,8 @@
 {
 	"class" : {
-		"filePath:frame:buildBlock:" : "ct 10/29/2019 16:54",
-		"openFrame:using:" : "ct 11/2/2019 14:56",
-		"standardFontSize" : "ct 10/30/2019 09:56",
-		"useLowDpiDuring:" : "ct 10/30/2019 10:01",
-		"writeTo:frame:using:" : "ct 11/18/2019 14:04",
-		"writeTo:fromForm:" : "ct 11/18/2019 16:44" },
+		"isDeprecated" : "ct 11/24/2019 14:08",
+		"openFrame:using:" : "ct 11/23/2019 19:15",
+		"writeTo:frame:using:" : "ct 11/23/2019 19:15",
+		"writeTo:fromForm:" : "xyz 11/23/2019 19:43" },
 	"instance" : {
-		"buildBlock" : "ct 10/29/2019 15:43",
-		"create" : "ct 11/16/2019 21:09",
-		"createInLowDpi" : "ct 10/30/2019 10:00",
-		"filePath" : "ct 10/29/2019 15:45",
-		"filePath:frame:buildBlock:" : "ct 10/29/2019 16:55",
-		"frameSpecifier" : "ct 10/29/2019 15:44",
-		"open" : "ct 10/30/2019 09:39",
-		"openInLowDpi" : "ct 10/30/2019 10:02",
-		"paperColor" : "ct 10/29/2019 09:27",
-		"save" : "ct 11/18/2019 16:54",
-		"setUpHelper" : "ct 10/30/2019 10:05",
-		"tryTakeScreenshotFor:" : "ct 11/18/2019 14:29",
-		"worldSize" : "ct 10/30/2019 10:05" } }
+		 } }

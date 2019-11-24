@@ -2,7 +2,7 @@ screenshots
 adjustMorphsAreaOf: morphs
 
 	| morphsArea delta |
-	frameSpecifier isRectangle ifTrue: [^ self].
+	scene hasRelativeFrameSpecifier ifFalse: [^ self].
 	morphsArea := self morphsAreaOf: morphs.
 	delta := world center - morphsArea center.
 	delta isZero ifTrue: [^ self].

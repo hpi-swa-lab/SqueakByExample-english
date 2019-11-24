@@ -1,4 +1,0 @@
-accessing
-paperColor
-
-	^ Color white

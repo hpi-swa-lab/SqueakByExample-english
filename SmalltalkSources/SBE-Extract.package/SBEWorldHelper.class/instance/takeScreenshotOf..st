@@ -1,9 +1,11 @@
 screenshots
 takeScreenshotOf: morphs
 
-	| rectangle |
+	| rectangle picture |
 	self prepareForScreenshotOf: morphs.
 	rectangle := self morphsAreaOf: morphs.
-	^ picture := self world
+	picture := self world
 		forgetSubmorphs: (self world submorphs copyWithoutAll: morphs)
-		during: [self world imageFormForRectangle: rectangle]
+		during: [self world imageFormForRectangle: rectangle].
+	scene picture: picture.
+	^ picture

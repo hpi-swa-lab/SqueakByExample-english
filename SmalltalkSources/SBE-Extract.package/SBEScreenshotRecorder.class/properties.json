@@ -1,0 +1,15 @@
+{
+	"category" : "SBE-Extract",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ct 11/24/2019 13:54",
+	"instvars" : [
+		"worldHelper",
+		"fileDirectory" ],
+	"name" : "SBEScreenshotRecorder",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

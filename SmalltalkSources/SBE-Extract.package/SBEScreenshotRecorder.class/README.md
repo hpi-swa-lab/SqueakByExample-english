@@ -1,0 +1,1 @@
+I allow to record one or many screenshot scenes with a shared world.

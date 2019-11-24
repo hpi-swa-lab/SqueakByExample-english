@@ -1,4 +1,0 @@
-accessing
-standardFontSize
-
-	^ 9

@@ -1,0 +1,16 @@
+{
+	"category" : "SBE-Extract",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ct 11/24/2019 13:57",
+	"instvars" : [
+		"buildBlock",
+		"frameSpecifier",
+		"picture" ],
+	"name" : "SBEScreenshotScene",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

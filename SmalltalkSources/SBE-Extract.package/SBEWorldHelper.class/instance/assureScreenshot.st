@@ -1,5 +1,5 @@
 screenshots
 assureScreenshot
 
-	^ self picture ifNil: [
+	^ scene picture ifNil: [
 		self takeScreenshot]

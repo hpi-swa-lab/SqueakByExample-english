@@ -1,7 +1,7 @@
 screenshots
 writeTo: aString fromForm: aFormBlock
 
-	^ SBESqueakFormPicture
+	self flag: #deprecated. "ct: Use SBEScreenshotRecorder instead"
+	^ SBEScreenshotRecorder
 		writeTo: aString
-		frame: #morphs
-		using: aFormBlock
+		buildingForm: aFormBlock
