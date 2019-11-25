@@ -284,7 +284,7 @@ Notice how the bounds reported by the inspector also change.
 %%  bottomPane := window findDeepSubmorphThat: [:m | m isTextView and: [m text isEmptyOrNil]] ifAbsent: [self error: 'bottom pane not found'].
 %%  bottomPane setText: 'self openInWorld'; doIt.
 %%  cell position: 100 @ 100; extent: 98 @ 89.
-%%  window position: 350 @ 100.
+%%  window position: 350 @ 50.
 %%  cell addHalo.
 %%  (NewBalloonMorph string: 'Change size' for: cell) popUpAt: cell bottomRight + 31.
 %%]}
