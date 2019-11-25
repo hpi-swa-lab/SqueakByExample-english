@@ -248,13 +248,13 @@ You can test the effect of the code you have written by creating a new \ct{SBECe
 \dothis{Open a workspace. Type the expression \ct{SBECell new} and \menu{inspect it}.}
 
 %%{SBESqueakPicture writeTo: './figures/SBECellInspector.png' frame: #morphs using: [:helper |
-%%  | window pane |
-%%  SBECell new inspect.
-%%  window := helper foregroundWindow.
-%%	window extent: 315 @ 165.
-%%  pane := helper listMorphIncludingMatch: #bounds in: window.
+%%	| window pane |
+%%	SBECell new inspect.
+%%	window := helper foregroundWindow.
+%	helper scaleDefaultInspector: window.
+%%	pane := helper listMorphIncludingMatch: #bounds in: window.
 %%	pane changeModelSelection: 3.
-%%  window lookFocused.
+%%	window lookFocused.
 %%]}
 \begin{figure}[htbp]
    \centering
