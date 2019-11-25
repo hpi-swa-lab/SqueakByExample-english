@@ -748,8 +748,8 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 			then: [| messageField |
 				helper hideProgressMorph.
 				helper foregroundWindow comeToFront.
-				"messageField := helper textMorphIn: helper foregroundWindow withTextMatching: '.*log message.*' asRegex.
-				helper mouseEnter: messageField.
+				messageField := helper textMorphIn: helper foregroundWindow withTextMatching: '.*log message.*' asRegex.
+				"helper mouseEnter: messageField.
 				messageField textMorph editor selectAt: 1; selectLine.
 				helper type: 'Change a few things' into: messageField."
 				messageField setText: 'Change a few things'; flag: #workaround.
