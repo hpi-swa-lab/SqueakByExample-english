@@ -752,6 +752,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 				helper mouseEnter: messageField.
 				messageField textMorph editor selectAt: 1; selectLine.
 				helper type: 'Change a few things' into: messageField."
+				messageField setText: 'Change a few things'; flag: #workaround.
 				helper scaleWindow: helper foregroundWindow extent: 550 @ 350.
 				helper takeScreenshotOf: helper foregroundWindow.
 				
