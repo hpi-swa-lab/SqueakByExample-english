@@ -887,6 +887,16 @@ You can also type \short{i} for \menu{\textbf{i}nspect it}.)
 \clsindex{TimeStamp}
 \index{keyboard shortcut!inspect it}
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/inspectTimeNow1.png' building: [:helper |
+	| fieldToSelect fieldList |
+	TimeStamp now inspect.
+	helper scaleDefaultInspector: helper foregroundWindow.
+	fieldToSelect := #utcMicroseconds.
+	fieldList := helper listMorphIncludingMatch: fieldToSelect in: helper foregroundWindow.
+	helper select: fieldList at: fieldToSelect.
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
 	\begin{center}
 		\includegraphics[scale=0.65]{inspectTimeNow1}
