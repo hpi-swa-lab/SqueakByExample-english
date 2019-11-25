@@ -762,6 +762,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 	picture writeTo: 'package-cache-browser.png' building: [
 		| packageList window |
 		MCCacheRepository default morphicOpen.
+		helper hideProgressMorph.
 		window := helper foregroundWindow.
 		"packageList := helper listMorphIncludingMatch: 'SBE' in: window.
 		helper select: packageList at: 'SBE.*' asRegex.
