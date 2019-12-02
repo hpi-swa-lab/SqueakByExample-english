@@ -938,6 +938,24 @@ In addition to \ct{self}, all the instance variables of the object are in scope 
 You can change instance variables directly by selecting them, replacing the old value in the right-hand  pane by a Squeak expression, and accepting.  
 Squeak will evaluate the expression and assign the result to the instance variable.
 
+There are special variants of the inspector for Dictionaries, OrderedCollections, CompiledMethods and a few other classes that make it easier to examine the contents of these special objects.
+
+%---------------------------------------------------------
+\begin{ExecuteSmalltalkScript}"exploreTimeStampNow"
+SBEScreenshotRecorder writeInto: './figures/' recordSeries: [:recorder |
+	recorder writeTo: 'exploreTimeStampNow.png' building: [
+		TimeStamp now explore.
+	].
+	recorder writeTo: 'exploreTimeStampNow2.png' building: [:helper |
+		| tree |
+		tree := helper foregroundWindow findA: PluggableTreeMorph.
+		helper
+			select: tree
+			at: 'localOffsetSeconds.*' asRegex.
+		tree toggleExpandedState: tree selectedMorph.
+	].
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[tbp]
 \begin{minipage}{0.48\textwidth}
 	\begin{center}
@@ -960,9 +978,6 @@ Squeak will evaluate the expression and assign the result to the instance variab
 \end{minipage}
 \end{figure}
 
-There are special variants of the inspector for Dictionaries, OrderedCollections, CompiledMethods and a few other classes that make it easier to examine the contents of these special objects.
-
-%---------------------------------------------------------
 \subsection{The Object Explorer}
 
 The \emph{object explorer} is conceptually similar to the inspector, but presents its information in a different way.
@@ -971,14 +986,12 @@ To see the difference, we'll \emph{explore} the same object that we were just in
 \dothis{Select \menu{self} in the inspector's left-hand pane,  and choose \menu{explore (I)} from the \ind{yellow button} menu.}
 The \ind{explorer} window looks like \figref{exploreTimeStampNow}.
 If you click on the small triangle next to \ct{root}, the view will change to \figref{exploreTimeStampNow2}, which shows the instance variables of object that you are exploring.
-Click on the triangle next to \ct{offset}, and you will see \emph{its} instance variables.  
+Click on the triangle next to \ct{localOffsetSeconds}, and you will see \emph{its} instance variables. (Actually, in this example \ct{hexadecimal}, \ct{octal} etc. are no instance variables of the Integer object, but rather different representations.)  
 The explorer is really useful when you need to explore a complex hierarchic structure\,---\,hence the name.
 \index{keyboard shortcut!explore it}
 
 The workspace pane of the object explorer works slightly differently to that of the inspector.
 \ct{self} is not bound to the root object, but rather to the object that is currently selected; the instance variables of the selected object are also in scope.
-% ON: Fixed. Inadvertently left off the "l" in \lr
-\lr{Maybe explain what "self" refers too in the inspector (always the object) and explorer (the selected item) (p. 154)}
 
 To see the value of the explorer, let's use it to explore a deeply-nested structure of objects.
 
