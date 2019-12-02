@@ -1002,18 +1002,17 @@ Open the root object (by clicking in its triangle), open its \ct{submorphs}, and
 \index{red button}
 
 \begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder writeTo: './figures/explorePluggableListMorph.png' building: [:helper |
-	| lists |	
+	SBEScreenshotRecorder debugging writeTo: './figures/explorePluggableListMorph.png' building: [:helper |
+	| lists tree |	
 	Browser open.
 	lists := (helper foregroundWindow submorphsSatisfying: #isPluggableListMorph)
 		collect: [:list | list center x -> list] as: Dictionary.
 	(lists at: lists keys max) explore.
-	helper foregroundWindow roots first openPath:
-	helper
-		select: tree
-		at: 'submorphs.*' asRegex.
-	tree toggleExpandedState: tree selectedMorph.
+	tree := helper foregroundWindow findA: PluggableTreeMorph.
+	tree roots first openPathMatching: (#('root.*' 'submorphs.*' '1.*') collect: #asRegex).
+	helper scaleWindow: helper foregroundWindow extent: 500 @ 350.
 	helper takeScreenshotOf: helper foregroundWindow.
+]
 \end{ExecuteSmalltalkScript
 \begin{figure}[tbp]
 	\begin{center}
