@@ -14,4 +14,4 @@ select: aMorph where: aPredicate
 		Transcript showln: latestSelection asString , ' -> ' , aMorph selection.
 		Transcript showln: 'feyboardFocus morph is ' , hand keyboardFocus.
 		({firstSelection. latestSelection} includes: aMorph selection) ifTrue: [
-			^ self error: 'No item found matching ', aPredicate]].
+			^ "self error: 'No item found matching ', aPredicate"nil flag: #DEBUG]].
