@@ -691,7 +691,6 @@ To scroll to \ct{now} itself, move the cursor to the list and type ``\ct{n}''; t
 %%	inputField := (window rootMorphsAt: window topLeft + 30) first.
 %%	hitList := (window rootMorphsAt: inputField bottomLeft + 30) first.
 %%	helper
-%%		mouseEnter: inputField;
 %%		type: 'now' into: inputField;
 %%		keyStroke: inputField key: Character enter;
 %%		select: hitList at: 'now' andScrollIntoViewBy: 3.
@@ -722,7 +721,6 @@ So, the asterisk in front of \ct{String asUppercase} lets us know that the metho
 %%	inputField := (window rootMorphsAt: window topLeft + 30) first.
 %%	hitList := (window rootMorphsAt: inputField bottomLeft + 30) first.
 %%	helper
-%%		mouseEnter: inputField;
 %%		type: '''eureka''. ''EUREKA''' into: inputField;
 %%		keyStroke: inputField key: $s modifiers: #(cmd).
 %%	helper click: hitList at: hitList topLeft + 10 buttons: #(left)
