@@ -942,7 +942,7 @@ There are special variants of the inspector for Dictionaries, OrderedCollections
 %---------------------------------------------------------
 \begin{ExecuteSmalltalkScript}"exploreTimeStampNow"
 SBEScreenshotRecorder writeInto: './figures/' recordSeries: [:recorder |
-	recorder writeTo: 'exploreTimeStampNow.png' building: [
+	recorder writeTo: 'exploreTimeStampNow.png' building: [:helper |
 		TimeStamp now explore.
 		helper scaleDefaultExplorer: helper foregroundWindow.
 	].
