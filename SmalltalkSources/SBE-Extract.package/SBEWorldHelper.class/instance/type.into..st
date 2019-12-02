@@ -1,7 +1,7 @@
 events
 type: aString into: aWidget
 
-	self mouseEnter: aWidget.
+	self focus: aWidget.
 	aString do: [:character |
 		self basicKeyStroke: aWidget key: character modifiers: #()].
 	aWidget allMorphsDo: [:morph |

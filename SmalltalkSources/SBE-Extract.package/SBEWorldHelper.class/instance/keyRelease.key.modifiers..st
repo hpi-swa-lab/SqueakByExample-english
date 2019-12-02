@@ -1,7 +1,7 @@
 events
 keyRelease: aWidget key: aCharacter modifiers: aCollectionOfButtons
 
-	self mouseEnter: aWidget.
+	self focus: aWidget.
 	self
 		simulateKeyEvent: #keyUp
 		key: aCharacter
