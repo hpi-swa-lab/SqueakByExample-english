@@ -743,12 +743,13 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 		repositoryFilter := '.*package-cache.*' asRegex.
 		repositoryList := helper listMorphIncludingMatch: repositoryFilter in: helper foregroundWindow.
 		helper select: repositoryList at: repositoryFilter andScrollIntoViewBy: 5.
-		(MCWorkingCopy forPackageNamed: 'SBE-Monticello') in: [:workingCopy |
+		[(MCWorkingCopy forPackageNamed: 'SBE-Monticello') in: [:workingCopy |
 			relevantOperations := (workingCopy package snapshot patchRelativeToBase: workingCopy parentSnapshot) operations].
 		[[helper click: (helper buttonLabeled: 'Save' in: helper foregroundWindow)]
 			on: MCVersionNameAndMessageRequest
 			do: [:ex | ex resumeExcluding: relevantOperations]]
 				valueSuppressingMessages: #('*versions*may be newer*').
+		helper foregroundWindow delete] value.
 		helper
 			runModal: [helper click: (helper buttonLabeled: 'Save' in: helper foregroundWindow)]
 			then: [| messageField |
