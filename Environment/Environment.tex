@@ -763,9 +763,10 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 				messageField textMorph editor selectAt: 1; selectLine; backTo: 1.
 				helper type: 'Change a few things' into: messageField.
 				"messageField setText: 'Change a few things'; flag: #fallback."
-				helper scaleWindow: helper foregroundWindow extent: 325 @ 275.
+				helper scaleWindow: helper foregroundWindow extent: 375 @ 300.
 				helper takeScreenshotOf: helper foregroundWindow.
 				
+				"This is preparation for the next screenshot"
 				[helper click: (helper buttonLabeled: 'Accept' in: helper foregroundWindow)]
 					valueSuppressingMessages: #('*message*empty*');
 					flag: #workaround].
