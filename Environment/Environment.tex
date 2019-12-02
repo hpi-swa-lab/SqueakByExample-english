@@ -944,6 +944,7 @@ There are special variants of the inspector for Dictionaries, OrderedCollections
 SBEScreenshotRecorder writeInto: './figures/' recordSeries: [:recorder |
 	recorder writeTo: 'exploreTimeStampNow.png' building: [
 		TimeStamp now explore.
+		helper scaleDefaultExplorer: helper foregroundWindow.
 	].
 	recorder writeTo: 'exploreTimeStampNow2.png' building: [:helper |
 		| tree |
