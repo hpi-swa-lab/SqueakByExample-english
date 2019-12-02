@@ -3,6 +3,7 @@ select: aMorph where: aPredicate
 
 	| firstSelection |
 	firstSelection := aMorph selection.
+	Transcript showln: 'About to select ' , aPredicate , ' in ' , aMorph , ' (initially selected ' , firstSelection , ', inst vars: ' , aMorph longPrintString , ')'.
 	[aMorph selection
 			ifNotNil: [:selection | aPredicate value: selection]
 			ifNil: [false]] whileFalse: [
