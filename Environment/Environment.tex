@@ -748,7 +748,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 		[[helper click: (helper buttonLabeled: 'Save' in: helper foregroundWindow)]
 			on: MCVersionNameAndMessageRequest
 			do: [:ex | ex resumeExcluding: relevantOperations]]
-				valueSuppressingMessages: '*versions*may be newer*'.
+				valueSuppressingMessages: #('*versions*may be newer*').
 		helper
 			runModal: [helper click: (helper buttonLabeled: 'Save' in: helper foregroundWindow)]
 			then: [| messageField |
