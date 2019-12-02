@@ -1,7 +1,5 @@
 events
 keyStroke: aWidget key: aCharacter modifiers: aCollectionOfModifiers
-	self
-		simulateKeyEvent: #keystroke
-		key: aCharacter
-		buttons: aCollectionOfModifiers
-		morph: aWidget
+
+	self mouseEnter: aWidget.
+	self basicKeyStroke: aWidget key: aCharacter modifiers: aCollectionOfModifiers
