@@ -1001,6 +1001,20 @@ from the menu that appears.  This will open an Explorer on the \clsind{Pluggable
 Open the root object (by clicking in its triangle), open its \ct{submorphs}, and continue exploring the structure of the objects that underlie this Morph, as shown in \figref{explorePluggableListMorph}.}
 \index{red button}
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/explorePluggableListMorph.png' building: [:helper |
+	| lists |	
+	Browser open.
+	lists := (helper foregroundWindow submorphsSatisfying: #isPluggableListMorph)
+		collect: [:list | list center x -> list] as: Dictionary.
+	(lists at: lists keys max) explore.
+	helper foregroundWindow roots first openPath:
+	helper
+		select: tree
+		at: 'submorphs.*' asRegex.
+	tree toggleExpandedState: tree selectedMorph.
+	helper takeScreenshotOf: helper foregroundWindow.
+\end{ExecuteSmalltalkScript
 \begin{figure}[tbp]
 	\begin{center}
 		\includegraphics[scale=0.7]{explorePluggableListMorph}
