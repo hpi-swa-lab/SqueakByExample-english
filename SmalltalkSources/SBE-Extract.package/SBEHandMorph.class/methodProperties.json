@@ -2,6 +2,7 @@
 	"class" : {
 		 },
 	"instance" : {
+		"activateWithEvent:during:" : "xyz 12/4/2019 12:06",
 		"owner:" : "ct 11/23/2019 17:50",
-		"processEvent:in:" : "ct 12/4/2019 10:38",
-		"sendFocusEvent:to:clear:" : "ct 11/24/2019 20:17" } }
+		"processEvent:in:" : "ct 12/4/2019 12:07",
+		"sendFocusEvent:to:clear:" : "xyz 12/4/2019 12:09" } }
