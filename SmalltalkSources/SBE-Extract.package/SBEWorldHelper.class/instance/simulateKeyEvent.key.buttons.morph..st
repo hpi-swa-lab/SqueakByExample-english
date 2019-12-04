@@ -12,4 +12,4 @@ simulateKeyEvent: aSymbol key: aCharacter buttons: someButtons morph: aMorph
 		setHand: hand;
 		setPosition: aMorph center.
 	
-	hand handleEvent: morphicEvent.
+	hand sendEvent: morphicEvent focus: aMorph.
