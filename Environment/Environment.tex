@@ -1080,6 +1080,16 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 	recorder writeTo: 'RestartDetect.png' building: [:helper |
 		helper click: (helper buttonLabeled: 'Restart.*' asRegex in: helper foregroundWindow).
 	].
+	recorder writeTo: 'steppingIntoValue.png' building: [:helper |
+		| stepThrough contextVarList debugger |
+		stepThrough := helper buttonLabeled: 'Through.*' asRegex in: helper foregroundWindow.
+		contextVarList := helper listMorphIncludingMatch: #thisContext in: helper foregroundWindow.
+		helper click: stepThrough.
+		helper select: contextVarList at: #each asString.
+		debugger := helper foregroundWindow model.
+		[((debugger instVarNamed: #contextVariablesInspector) object tempNamed: #each) > 7]
+			whileTrue: [helper click: stepThrough].
+	].
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
