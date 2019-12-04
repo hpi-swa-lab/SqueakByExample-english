@@ -15,9 +15,10 @@ baseline: spec
 			package: #'SBE-Streams';
 			package: #'SBE-Testing'.
 		spec group: #ci with: #(
+			#'SBE-Environment'
 			#'SBE-Extract'
-			#'SBE-Quinto'
-			#'SBE-QuickTour'
 			#'SBE-Monticello'
 			#'SBE-Morphic'
+			#'SBE-Quinto'
+			#'SBE-QuickTour'
 			#'SBE-Streams')].
