@@ -1076,6 +1076,10 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 		stackList := helper listMorphIncludingMatch: targetContext in: helper foregroundWindow.
 		helper select: stackList at: targetContext.
 	].
+	recorder writeTo: 'RestartDetect.png' building: [:helper |
+		helper click: (helper buttonLabeled: 'Restart.*' asRegex in: helper foregroundWindow).
+	].
+]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
 	\begin{center}
@@ -1144,16 +1148,16 @@ Looking back at the method window, we see that we expected the penultimate line 
 \sq does not let us run an execution backwards, but it does let us start a method again, which works very well in code such as this that does not mutate objects, but instead creates new ones.  
 
 \dothis{Click \button{Restart}, and you will see that the locus of execution returns to the first statement of the current method.  
-The blue highlight shows that the next message to be sent will be {\ct{do:}} (see \figref{RestartDetectIfNone}).}
+The blue highlight shows that the next message to be sent will be {\ct{do:}} (see \figref{RestartDetect}).}
 
 \begin{figure}[btp]
 	\begin{center}
 	\ifluluelse
-		{\includegraphics[width=\textwidth]{RestartDetectIfNone}}
-		{\includegraphics[scale=0.7]{RestartDetectIfNone}}
+		{\includegraphics[width=\textwidth]{RestartDetect}}
+		{\includegraphics[scale=0.7]{RestartDetect}}
 	\end{center}
-	\caption{The debugger after restarting the \ct{detect: ifNone:} method}
-	\label{fig:RestartDetectIfNone}
+	\caption{The debugger after restarting the \ct{detect:ifFound:ifNone:} method}
+	\label{fig:RestartDetect}
 \end{figure}
 
 The \button{Into} and \button{Over} buttons give us two different ways to step through the execution.  If you click \button{Over}, \sq executes the current message-send (in this case the \ct{do:}) in one step, unless there is an error.  
