@@ -1072,6 +1072,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 	recorder writeTo: 'debuggerDetect.png' building: [:helper |
 		| targetContext stackList |
 		helper click: (helper buttonLabeled: 'Debug.*' asRegex in: helper foregroundWindow).
+		helper scaleDefaultDebugger: helper foregroundWindow.
 		targetContext := '.*detect\:ifFound\:ifNone\:' asRegex.
 		stackList := helper listMorphIncludingMatch: targetContext in: helper foregroundWindow.
 		helper select: stackList at: targetContext.
