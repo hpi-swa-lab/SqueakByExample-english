@@ -919,7 +919,6 @@ Linklint version: 2.3.5
     http://www.win.ua.ac.be/~fvrys/publications/
     http://www.windriver.com/products/sniff_plus/index.html
       => http://cdn.windriver.com/scripts/redirect.html?ID=12
-    http://www.wiresong.ca/OmniBrowser/
     http://www.xpuniverse.com/2001/pdfs/Testing03.pdf
     http://www2.telelogic.com/products/doorsers/doors/index.cfm
       => http://www2.telelogic.com/corp/products/doors/doors

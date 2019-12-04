@@ -2213,8 +2213,6 @@ www.windriver.com/products/sniff_plus/index.html
   moved
   cdn.windriver.com/scripts/redirect.html?ID=12
   ok
-www.wiresong.ca/OmniBrowser/
-  ok
 www.xpuniverse.com/2001/pdfs/Testing03.pdf
   ok
 www.zurich.ibm.com/~lde/MobilePaper/
