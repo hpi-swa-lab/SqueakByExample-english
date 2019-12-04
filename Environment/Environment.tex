@@ -1047,7 +1047,7 @@ Of course, we are sure that such a trivial method will work, so instead of writi
 What a surprise!  Instead of getting the expected answer \ct{'txt'}, a \clsind{PreDebugWindow} pops up, as shown in \figref{PreDebugWindow}.
 
 \begin{ExecuteSmalltalkScript}
-"debuggerDetect"
+"debuggers"
 SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 	| home |
 	home := thisContext.
@@ -1089,6 +1089,9 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 		debugger := helper foregroundWindow model.
 		[((debugger instVarNamed: #contextVariablesInspector) object tempNamed: #each) > 7]
 			whileTrue: [helper click: stepThrough].
+	].
+	recorder writeTo: 'dotIsAString.png' building: [:helper |
+		helper click: (helper buttonLabeled: 'Into.*' asRegex in: helper foregroundWindow).
 	].
 ]
 \end{ExecuteSmalltalkScript}
