@@ -76,7 +76,7 @@ Select \menu{add item \ldots}.}
 %%	window := helper foregroundWindow.
 %%	helper click: window at: window topLeft + (30 @ 30) buttons: #(right).
 %%	helper hand releaseMouseFocus.
-%%	helper mouseEnter: (helper menuItemMorphLabeled: 'add item.*' asRegex in: helper world).
+%%	helper mouseEnter: (helper menuItemMorphLabeled: 'add item*' in: helper world).
 %%	helper closeBalloons.
 %%]}
 %%{SBESqueakPicture writeTo: './figures/ClassTemplate.png' frame: [:bounds | bounds origin extent: bounds extent * (0.4 @ 0.75)] using: [:helper |
@@ -151,7 +151,7 @@ To actually send this message, you must \menu{accept} it.
 %%	menu := helper foregroundMorph.
 %%	menu bottomRight: window bottomRight - (50 @ 30).
 %%	helper hand releaseMouseFocus.
-%%	helper mouseEnter: (helper menuItemMorphLabeled: 'accept.*' asRegex in: helper world).
+%%	helper mouseEnter: (helper menuItemMorphLabeled: 'accept*' in: helper world).
 %%]}
 \begin{figure}[h!t]
 \ifluluelse
@@ -347,7 +347,7 @@ Now let's define an \mthind{SBEGame}{initialize} method for \ct{SBEGame}.
 %%			environment: SBEGame environment
 %%			notifying: PluggableTextMorph new
 %%			ifFail: []]
-%% 		then: [helper select: helper dialogWindow at: '.*instance.*' asRegex]
+%% 		then: [helper select: helper dialogWindow at: '*instance*']
 %%]}
 \begin{figure}[htb]
 \begin{minipage}{0.34\textwidth}
@@ -607,7 +607,7 @@ The debugger will show you the \ind{execution context} within this method where 
 %%			then: [
 %%				helper hand dropMorphs.
 %%				game abandon.
-%%				stackList := helper listMorphIncludingMatch: '.*toggleNeighboursOfCellAt\:at\:.*' asRegex in: helper foregroundWindow.
+%%				stackList := helper listMorphIncludingMatch: '*toggleNeighboursOfCellAt:at:*' in: helper foregroundWindow.
 %%				helper keyStroke: stackList key: Character arrowDown.
 %%				helper foregroundWindow extent: 600 @ 400]]
 %%]}
@@ -758,7 +758,7 @@ Once you have accepted this template, your new repository should be listed on th
 %%		helper hideProgressMorph.
 %%		MCCacheRepository default morphicOpen.
 %%		window := helper foregroundWindow.
-%%		packageList := helper listMorphIncludingMatch: 'SBE-Quinto' asRegex in: window.
+%%		packageList := helper listMorphIncludingMatch: 'SBE-Quinto' in: window.
 %%		window model versionSelection: 1]
 %%]}
 \begin{figure}[hbt]

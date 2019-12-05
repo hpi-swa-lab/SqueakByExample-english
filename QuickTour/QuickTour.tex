@@ -217,7 +217,7 @@ In the preference browser, the \menu{general} category contains an option \menu{
 %%	PreferenceBrowser open.
 %%	browser := helper foregroundWindow.
 %%	browser extent: 600 @ 275.
-%%	searchBox := helper morphWithBalloonText: 'Search preference.*' asRegex in: browser.
+%%	searchBox := helper morphWithBalloonText: 'Search preference*' in: browser.
 %%	helper type: 'swap' into: searchBox.
 %%	searchBox model searchSelected.
 %%	(helper preferenceButtonMorphLabeled: 'Swap mouse buttons' in: browser) highlightOn.
@@ -468,7 +468,7 @@ The bottom panel can be used to write expressions to send messages to the object
 %%	
 %%	helper type: '3 + 4' into: workspace.
 %%	helper keyStroke: workspace key: $i modifiers: #(cmd).
-%%	(helper windowLabeled: 'SmallInteger.+' asRegex)
+%%	(helper windowLabeled: 'SmallInteger#*')
 %%		position: 120 @ 20; extent: 300 @ 185.
 %%]}
 \begin{figure}[htb]

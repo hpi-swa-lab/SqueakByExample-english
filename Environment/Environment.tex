@@ -283,11 +283,11 @@ If you look at the send of \ct{drawOn:} in \ct{AtomMorph>>>drawOn:}, you will se
 %%{SBESqueakPicture writeTo: './figures/CanvasDraw.png' frame: #morphs using: [:helper |
 %%	| method window list |
 %%	helper systemNavigation browseAllCallsOn: #drawOn:.
-%%	method := 'Canvas draw\:.*' asRegex.
+%%	method := 'Canvas draw:*'.
 %%	window := helper foregroundWindow.
 %%	window extent: 600 @ 300; fullBounds.
 %%	list := helper listMorphIncludingMatch: method in: helper foregroundWindow.
-%%	helper select: list at: 'Canvas draw\:.*' asRegex andScrollIntoViewBy: 3.
+%%	helper select: list at: 'Canvas draw:*' andScrollIntoViewBy: 3.
 %%]}
 \begin{figure}[htbp]
 	\begin{center}
@@ -329,7 +329,7 @@ When you save a new \subind{method}{version} of a method, the old one is not los
 %%			classified: (SBECell whichCategoryIncludesSelector: #mouseUp:).
 %%		ToolSet browseVersionsOf: SBECell selector: #mouseUp:.
 %%		helper scaleWindow: helper foregroundWindow extent: 500 @ 250.
-%%		list := helper listMorphIncludingMatch: '.*mouseUp.*' asRegex in: helper foregroundWindow.
+%%		list := helper listMorphIncludingMatch: '*mouseUp*' in: helper foregroundWindow.
 %%		list changeModelSelection: 1.
 %%		helper takeScreenshot]
 %%]}
@@ -385,8 +385,8 @@ To see how it works, display the \cmind{ScaleMorph}{defaultColor} method and cli
 %%		methodHierarchyBrowserForClass: ScaleMorph
 %%		selector: #defaultColor.
 %%	helper scaleWindow: helper foregroundWindow extent: 500 @ 250.
-%%	pane := helper listMorphIncludingMatch: '.*Morph.*' asRegex in: helper foregroundWindow.
-%%	helper select: pane at: '.*Morph.*' asRegex
+%%	pane := helper listMorphIncludingMatch: '*Morph*' in: helper foregroundWindow.
+%%	helper select: pane at: '*Morph*'
 %%]}
 \begin{figure}[tbp]
 	\begin{center}
@@ -662,7 +662,7 @@ MCHttpRepository
 %%		helper hideProgressMorph.
 %%		MCCacheRepository default morphicOpen.
 %%		window := helper foregroundWindow.
-%%		packageList := helper listMorphIncludingMatch: 'SBE-QuickTour' asRegex in: window.
+%%		packageList := helper listMorphIncludingMatch: 'SBE-QuickTour' in: window.
 %%		window model versionSelection: 1]
 %%]}
 \begin{figure}[btp]
@@ -740,7 +740,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 	].
 	picture writeTo: 'SBE-apb.png' frame: #morphs building: [
 		| repositoryFilter repositoryList |
-		repositoryFilter := '.*package-cache.*' asRegex.
+		repositoryFilter := '*package-cache*'.
 		repositoryList := helper listMorphIncludingMatch: repositoryFilter in: helper foregroundWindow.
 		helper select: repositoryList at: repositoryFilter andScrollIntoViewBy: 5.
 		
@@ -758,7 +758,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 			then: [| messageField |
 				helper hideProgressMorph.
 				helper foregroundWindow comeToFront.
-				messageField := helper textMorphIn: helper foregroundWindow withTextMatching: '.*log message.*' asRegex.
+				messageField := helper textMorphIn: helper foregroundWindow withTextMatching: '*log message*'.
 				helper focus: messageField.
 				messageField textMorph editor selectAt: 1; selectLine; backTo: 1.
 				helper type: 'Change a few things' into: messageField.
@@ -832,7 +832,7 @@ SBEScreenshotRecorder writeTo: './figures/MCaddToPackage.png' building: [:helper
 		center: repositoryList center x @ 0;
 		top: ((helper boundsOfItemMatching: repositoryMatch in: repositoryList)
 			pointAtFraction: 0 @ 0.75) y.
-	helper select: helper menu at: 'add to package.*' asRegex.
+	helper select: helper menu at: 'add to package*'.
 	helper closeBalloons.
 ]
 \end{ExecuteSmalltalkScript}
@@ -952,7 +952,7 @@ SBEScreenshotRecorder writeInto: './figures/' recordSeries: [:recorder |
 		tree := helper foregroundWindow findA: PluggableTreeMorph.
 		helper
 			select: tree
-			at: 'localOffsetSeconds.*' asRegex.
+			at: 'localOffsetSeconds*'.
 		tree toggleExpandedState: tree selectedMorph.
 	].
 ]
@@ -1071,18 +1071,18 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 	].
 	recorder writeTo: 'debuggerDetect.png' building: [:helper |
 		| targetContext stackList |
-		helper click: (helper buttonLabeled: 'Debug.*' asRegex in: helper foregroundWindow).
+		helper click: (helper buttonLabeled: 'Debug*' in: helper foregroundWindow).
 		helper scaleDefaultDebugger: helper foregroundWindow.
-		targetContext := '.*detect\:ifFound\:ifNone\:' asRegex.
+		targetContext := '*detect:ifFound:ifNone:'.
 		stackList := helper listMorphIncludingMatch: targetContext in: helper foregroundWindow.
 		helper select: stackList at: targetContext.
 	].
 	recorder writeTo: 'RestartDetect.png' building: [:helper |
-		helper click: (helper buttonLabeled: 'Restart.*' asRegex in: helper foregroundWindow).
+		helper click: (helper buttonLabeled: 'Restart*' in: helper foregroundWindow).
 	].
 	recorder writeTo: 'steppingIntoValue.png' building: [:helper |
 		| stepThrough contextVarList debugger |
-		stepThrough := helper buttonLabeled: 'Through.*' asRegex in: helper foregroundWindow.
+		stepThrough := helper buttonLabeled: 'Through*' in: helper foregroundWindow.
 		contextVarList := helper listMorphIncludingMatch: #thisContext in: helper foregroundWindow.
 		helper click: stepThrough.
 		helper select: contextVarList at: #each asString.
@@ -1091,7 +1091,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 			whileTrue: [helper click: stepThrough].
 	].
 	recorder writeTo: 'dotIsAString.png' building: [:helper |
-		helper click: (helper buttonLabeled: 'Into.*' asRegex in: helper foregroundWindow).
+		helper click: (helper buttonLabeled: 'Into*' in: helper foregroundWindow).
 	].
 ]
 \end{ExecuteSmalltalkScript}
