@@ -1076,6 +1076,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 		targetContext := '*detect:ifFound:ifNone:'.
 		stackList := helper listMorphIncludingMatch: targetContext in: helper foregroundWindow.
 		helper select: stackList at: targetContext.
+		helper mouseEnter: (helper textMorphIn: helper foregroundWindow withTextMatching: 'detect:*').
 	].
 	recorder writeTo: 'RestartDetect.png' building: [:helper |
 		helper click: (helper buttonLabeled: 'Restart*' in: helper foregroundWindow).
