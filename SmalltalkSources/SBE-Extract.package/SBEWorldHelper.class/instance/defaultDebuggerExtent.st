@@ -1,4 +1,4 @@
 accessing
 defaultDebuggerExtent
 
-	^ 600 @ 421
+	^ 600 @ 400
