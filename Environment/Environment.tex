@@ -1367,6 +1367,17 @@ We will learn more about SUnit in \charef{SUnit}.
 \st is a multi-threaded system: there are many lightweight processes (also known as threads) running concurrently in your image. 
 In the future the \sq virtual machine may take advantage of multiprocessors when they are available, but at present concurrency is implemented by time-slicing.
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/processBrowser.png' building: [:helper |
+	| processList stackList |
+	ProcessBrowser open.
+	helper scaleWindow: helper foregroundWindow.
+	processList := helper listMorphIncludingMatch: '*the UI process*' in: helper foregroundWindow.
+	helper select: processList at: '*the UI process*'.
+	stackList := helper foregroundWindow findDeepSubmorphThat: [:m | m isPluggableListMorph and: [m ~= processList]] ifAbsent: [NotFound signal].
+	stackList changeModelSelection: 1
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
 	\begin{center}
 	\ifluluelse
