@@ -1062,6 +1062,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 		helper scaleWindow: debugger.
 		helper selectAnyListIn: debugger at: '*detect:ifFound:ifNone:'.
 		codePane := helper textMorphIn: debugger withTextMatching: 'detect:*'.
+		helper selectAnyListIn: debugger at: #self.
 		helper focus: codePane.
 	].
 	recorder writeTo: 'RestartDetect.png' building: [:helper |
