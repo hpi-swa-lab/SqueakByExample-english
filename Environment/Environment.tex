@@ -1069,21 +1069,19 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 				thisContext preponeSender: home.
 			].
 	].
-	recorder writeTo: 'debuggerNotFound.png' building: [:helper |
+	recorder writeTo: 'debuggerDetect.png' building: [:helper |
+		| targetContext stackList |
 		helper click: (helper buttonLabeled: 'Debug*' in: helper foregroundWindow).
 		debugger := helper foregroundWindow.
 		helper scaleWindow: debugger.
-		codePane := helper textMorphIn: debugger withTextMatching: 'errorNotFound:*'.
-		helper focus: codePane.
-	].
-	recorder writeTo: 'RestartDetect.png' building: [:helper |
-		| targetContext stackList |
 		targetContext := '*detect:ifFound:ifNone:'.
 		stackList := helper listMorphIncludingMatch: targetContext in: debugger.
 		helper select: stackList at: targetContext.
 		codePane := helper textMorphIn: debugger withTextMatching: 'detect:*'.
-		helper click: (helper buttonLabeled: 'Restart*' in: debugger).
 		helper focus: codePane.
+	].
+	recorder writeTo: 'RestartDetect.png' building: [:helper |
+		helper click: (helper buttonLabeled: 'Restart*' in: debugger).
 	].
 	recorder writeTo: 'steppingIntoValue.png' building: [:helper |
 		| stepThrough |
@@ -1137,24 +1135,24 @@ Working up the stack, we can see that \ct{suffix} sent \ct{detect:}\ldots and ev
 \begin{figure}[btp]
 	\begin{center}
 	\ifluluelse
-		{\includegraphics[width=\textwidth]{debuggerNotFound}}
-		{\includegraphics[scale=0.7]{debuggerNotFound}}
+		{\includegraphics[width=\textwidth]{debuggerDetect}}
+		{\includegraphics[scale=0.7]{debuggerDetect}}
 	\end{center}
 	\caption{The debugger.}
-	\label{fig:debuggerNotFound}
+	\label{fig:debuggerDetect}
 \end{figure}
 
 To find out \emph{why} the dot was not found, we need the debugger itself, so click on \button{Debug}.
 
 \dothis{You can also open the debugger by clicking on any of the lines on the stack trace.  If you do this, the debugger will open already focussed on the corresponding method.}
 
-The debugger is shown in \figref{debuggerNotFound}; it looks intimidating at first, but it is quite easy to use.
+The debugger is shown in \figref{debuggerDetect}; it looks intimidating at first, but it is quite easy to use.
 The title-bar and the top pane are very similar to those that we saw in the \lct{PreDebugWindow}.  
 However, the debugger combines the stack trace with a method browser, so when you select a line in the stack trace, the corresponding method is shown in the pane below.
 It's important to realize that the execution that caused the error is still in your image, but in a suspended state.  
 Each line of the stack trace represents a frame on the execution stack that contains all of the information necessary to continue the execution.  This includes all of the objects involved in the computation, with their instance variables, and all of the temporary variables of the executing methods.
 
-In \figref{debuggerNotFound} we have selected the \ct{detect:ifFound:ifNone:} method in the top pane.
+In \figref{debuggerDetect} we have selected the \ct{detect:ifFound:ifNone:} method in the top pane.
 The method body is displayed in the center pane; the blue highlight around the message \ct{value} shows that the current method has sent the message \ct{value} and is waiting for an answer.
 
 The four panes at the bottom of the debugger are really two mini-inspectors (without workspace panes).
@@ -1168,7 +1166,7 @@ You can always \menu{cancel (l)} your changes using the menu or \short{\textit{l
 \index{keyboard shortcut!cancel}
 
 The inspector on the right shows the temporary variables of the current context.
-In \figref{debuggerNotFound},
+In \figref{debuggerDetect},
 \ct{value} was sent to the parameter \ct{exceptionBlock}.
 
 \dothis{To see the current value of this parameter, click on \ct{exceptionBlock} in the context inspector.
