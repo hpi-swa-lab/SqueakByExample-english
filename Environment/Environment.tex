@@ -1572,6 +1572,29 @@ This requires the use of another tool, the file list browser.
 %=========================================================
 \section{The File List Browser}
 
+\begin{ExecuteSmalltalkScript}"fileListBrowser"
+SBEScreenshotRecorder debugging writeInto: './figures' recordSeries: [:recorder |
+	recorder writeTo: 'fileList.png' building: [:helper |
+		| csName csPattern fileList |
+		csName := 'my cool changeset'.
+		thisContext wrap: [:block | ChangeSet newChangesNamed: csName during: block].
+		thisContext wrap: [:block | helper restoreMethods: {SearchBar >> #buildWith:. TheWorldMainDockingBar >> #createDockingBar} after: block].
+		SearchBar compile: ((SearchBar sourceCodeAt: #buildWith:)
+			copyReplaceAll: 'Search or evaluate...' with: 'Carpe Squeak!').
+		TheWorldMainDockingBar compile: ((TheWorldMainDockingBar sourceCodeAt: #createDockingBar)
+			copyReplaceAll: #adhereToTop with: #adhereToBottom).
+		ChangeSet current fileOut.
+		FileList open.
+		csPattern := '*{1}*.cs' format: {csName}.
+		fileList := helper listMorphIncludingMatch: csPattern in: helper foregroundWindow.
+		helper select: fileList at: csPattern].
+	recorder writeTo: 'fileContentsBrowser.png' building: [:helper |
+		helper click: (helper buttonLabeled: 'Code' in: helper foregroundWindow).
+		helper foregroundWindow model
+			selectClassNamed: #SearchBar;
+			selectMessageNamed: #buildWith:.
+		helper takeScreenshotOf: helper foregroundWindow].
+]\end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
 	\begin{center}
 	\ifluluelse
