@@ -1379,7 +1379,7 @@ SBEScreenshotRecorder writeTo: './figures/processBrowser.png' building: [:helper
 	processList := helper listMorphIncludingMatch: '*the UI process*' in: helper foregroundWindow.
 	helper select: processList at: '*the UI process*'.
 	stackList := helper foregroundWindow findDeepSubmorphThat: [:m | m isPluggableListMorph and: [m ~= processList]] ifAbsent: [NotFound signal].
-	stackList changeModelSelection: 1
+	stackList changeModelSelection: 1.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
@@ -1419,8 +1419,13 @@ This can quickly become overwhelming.
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/methodNamesRandom.png' building: [:helper |
+	| messageList methodList |
 	(MessageNames methodBrowserSearchingFor: 'random') openInWorld.
 	helper scaleWindow: helper foregroundWindow.
+	messageList := helper listMorphIncludingMatch: 'atRandom:' in: helper foregroundWindow.
+	helper select: messageList at: 'atRandom:'.
+	methodList := helper listMorphIncludingMatch: 'Integer*' in: helper foregroundWindow.
+	helper select: methodList at: 'Integer*'.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
