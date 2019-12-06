@@ -1049,7 +1049,7 @@ What a surprise!  Instead of getting the expected answer \ct{'txt'}, a \clsind{P
 \begin{ExecuteSmalltalkScript}
 "debuggers"
 SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
-	| home debugger codePane |
+	| home debugger codePane contextVarList |
 	home := thisContext.
 	recorder writeTo: 'PreDebugWindow.png' building: [:helper |
 		thisContext wrap: [:block | helper restoreMethods: {String >> #suffix} after: block].
@@ -1084,18 +1084,22 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 		helper click: (helper buttonLabeled: 'Restart*' in: debugger).
 	].
 	recorder writeTo: 'steppingIntoValue.png' building: [:helper |
-		| stepThrough contextVarList |
+		| stepThrough |
 		stepThrough := helper buttonLabeled: 'Through*' in: debugger.
 		contextVarList := helper listMorphIncludingMatch: #thisContext in: debugger.
 		helper
 			click: stepThrough;
-			select: contextVarList at: #each asString;
+			select: contextVarList at: #each;
 			focus: codePane.
 		[((debugger model instVarNamed: #contextVariablesInspector) object tempNamed: #each) > 7]
 			whileTrue: [helper click: stepThrough].
 	].
 	recorder writeTo: 'dotIsAString.png' building: [:helper |
+		| instVarList |
 		helper click: (helper buttonLabeled: 'Into*' in: debugger).
+		helper select: contextVarList at: #i.
+		instVarList := helper listMorphIncludingMatch: #self in: debugger.
+		helper select: instVarList at: #'7' andScrollIntoViewBy: 1.
 		helper focus: codePane.
 	].
 	recorder writeTo: 'revertDialog.png' building: [:helper |
