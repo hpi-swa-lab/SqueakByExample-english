@@ -1417,6 +1417,11 @@ The \emph{method finder} was described at some length in \secref{quick:methodFin
 However, to look at the body of a method, the method finder opens a new browser.
 This can quickly become overwhelming.
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/methodNamesRandom.png' building: [:helper |
+	(MessageNames methodBrowserSearchingFor: aString) openInWorld
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
 	\begin{center}
 	\ifluluelse
