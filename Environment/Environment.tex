@@ -1323,7 +1323,7 @@ dotPosition := (self size to: 1 by: -1) detect: [ :i | (self at: i) = dot ].
 \end{figure}
 
 There are a few other ways to get into the debugger in addition to catching errors and assertion failures.
-If you execute code that goes into an infinite loop, you can interrupt it and open a debugger on the computation by typing \short{.} (that's a full stop or a period, depending  on where you learned English).\footnote{It is also useful to know that you can bring up an emergency debugger at any time by typing \short{{\sc shift--}.}}
+If you execute code that goes into an infinite loop, you can interrupt it and open a debugger on the computation by typing \short{.} (that's a full stop or a period, depending  on where you learned English).
 You can also just edit the suspect code to insert \ct{self halt}.
 So, for example, we might edit the \ct{suffix} method to read as follows:
 \index{process!interrupting}
