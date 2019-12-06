@@ -1299,7 +1299,7 @@ self assert: ''txt'' equals: ''readme.txt'' suffix'
 	StringTest removeSelector: #testSuffixNotFound.
 	testRunner := TestRunner newForSuite: StringTest suite.
 	testRunner runAll.
-	testRunner open.
+	ToolBuilder open: testRunner.
 	helper
 		runModal: [ testRunner debugSuite: testRunner suiteAll ]
 		then: [
