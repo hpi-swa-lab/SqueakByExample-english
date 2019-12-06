@@ -112,7 +112,7 @@ We will take a look at the standard \ind{system browser} first, since the others
 
 %%{SBESqueakPicture writeTo: './figures/SystemBrowser0.png' frame: #morphs using: [:helper |
 %%	Browser open.
-%%	helper scaleDefaultBrowser: helper foregroundWindow.
+%%	helper scaleWindow: helper foregroundWindow.
 %%]}
 \begin{figure}[htbp]
    \centering
@@ -129,7 +129,7 @@ The leftmost pane lists \emph{categories} of classes; select one (say \scat{Kern
 
 %%{SBESqueakPicture writeTo: './figures/SystemBrowser1.png' frame: #morphs using: [:helper |
 %%	Browser fullOnClass: Model.
-%%	helper scaleDefaultBrowser: helper foregroundWindow.
+%%	helper scaleWindow: helper foregroundWindow.
 %%]}
 \begin{figure}[htbp]
    \centering
@@ -150,7 +150,7 @@ If you select class \menu{Model},  protocol \protind{dependents} and the method 
 
 %%{SBESqueakPicture writeTo: './figures/SystemBrowserMyDependents.png' frame: #morphs using: [:helper |
 %%	Browser fullOnClass: Model selector: #myDependents.
-%%	helper scaleDefaultBrowser: helper foregroundWindow.
+%%	helper scaleWindow: helper foregroundWindow.
 %%]}
 \begin{figure}[htbp]
    \centering
@@ -171,7 +171,7 @@ Enter the name of the new thing in the dialog, and you are done: there is nothin
 
 %%{SBESqueakPicture writeTo: './figures/SystemBrowserClassCreation.png' frame: #morphs using: [:helper |
 %%	Browser fullOnCategory: 'Kernel-Objects'.
-%%	helper scaleDefaultBrowser: helper foregroundWindow.
+%%	helper scaleWindow: helper foregroundWindow.
 %%]}
 \begin{figure}[htbp]
    \centering
@@ -213,7 +213,7 @@ The process of creating a new method is similar.  First select the class in whic
 
 %%{SBESqueakPicture writeTo: './figures/SystemBrowserMethodTemplate.png' frame: #morphs using: [:helper |
 %%	Browser fullOnClass: Model category: #'morphic ui'.
-%%	helper scaleDefaultBrowser: helper foregroundWindow.
+%%	helper scaleWindow: helper foregroundWindow.
 %%	helper focus: (helper codePaneOfBrowser: helper foregroundWindow).
 %%]}
 \begin{figure}[htbp]
@@ -687,7 +687,7 @@ To create a package with Monticello, you have to do two things: write some code,
 
 %%{SBESqueakPicture writeTo: './figures/MCnewcategory.png' frame: #morphs using: [:helper |
 %%	ToolSet browse: SBEGoodClass selector: #trialMethod.
-%%	helper scaleDefaultBrowser: helper foregroundWindow.
+%%	helper scaleWindow: helper foregroundWindow.
 %%]}
 \begin{figure}[btp]
 	\begin{center}
@@ -701,7 +701,7 @@ To create a package with Monticello, you have to do two things: write some code,
 
 %%{SBESqueakPicture writeTo: './figures/MCnewmethod.png' frame: #morphs using: [:helper |
 %%	ToolSet browse: Object selector: #exampleMethod.
-%%	helper scaleDefaultBrowser: helper foregroundWindow.
+%%	helper scaleWindow: helper foregroundWindow.
 %%]}
 \begin{figure}[btp]
 	\begin{center}
@@ -901,7 +901,7 @@ You can also type \short{i} for \menu{\textbf{i}nspect it}.)
 SBEScreenshotRecorder writeTo: './figures/inspectTimeNow1.png' building: [:helper |
 	| fieldToSelect fieldList |
 	TimeStamp now inspect.
-	helper scaleDefaultInspector: helper foregroundWindow.
+	helper scaleWindow: helper foregroundWindow.
 	fieldToSelect := #utcMicroseconds.
 	fieldList := helper listMorphIncludingMatch: fieldToSelect in: helper foregroundWindow.
 	helper select: fieldList at: fieldToSelect.
@@ -945,7 +945,7 @@ There are special variants of the inspector for Dictionaries, OrderedCollections
 SBEScreenshotRecorder writeInto: './figures/' recordSeries: [:recorder |
 	recorder writeTo: 'exploreTimeStampNow.png' building: [:helper |
 		TimeStamp now explore.
-		helper scaleDefaultExplorer: helper foregroundWindow.
+		helper scaleWindow: helper foregroundWindow.
 	].
 	recorder writeTo: 'exploreTimeStampNow2.png' building: [:helper |
 		| tree |
@@ -1073,7 +1073,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 		| targetContext stackList |
 		helper click: (helper buttonLabeled: 'Debug*' in: helper foregroundWindow).
 		debugger := helper foregroundWindow.
-		helper scaleDefaultDebugger: debugger.
+		helper scaleWindow: debugger.
 		targetContext := '*detect:ifFound:ifNone:'.
 		stackList := helper listMorphIncludingMatch: targetContext in: debugger.
 		helper select: stackList at: targetContext.
@@ -1258,7 +1258,7 @@ The way to avoid this sort of problem is to write an \ind{SUnit} test that defin
 
 \begin{method}[testSuffix]{A simple test for the \ct{suffix} method}
 testSuffixFound
-	self assert: 'readme.txt' suffix = 'txt'
+	self assert: 'txt' equals: 'readme.txt' suffix
 \end{method}
 
 The effort required to do that was little more than to run the same test in the workspace, but using \sunit saves the test as executable documentation, and makes it easy for others to run.
@@ -1270,8 +1270,8 @@ Here is a better test:
 
 \begin{method}[testSuffix2]{A better test for the \ct{suffix} method}
 testSuffixFound
-	self assert: 'readme.txt' suffix = 'txt'.
-	self assert: 'read.me.txt' suffix = 'txt'
+	self assert: 'txt' equals: 'readme.txt' suffix.
+	self assert: 'txt' equals: 'read.me.txt' suffix
 \end{method}
 \noindent
 Why is this test better?  Because it tells the reader what the method should do if there is more than one dot in the target String.
@@ -1300,7 +1300,7 @@ dotPosition := (self size to: 1 by: -1) detect: [ :i | (self at: i) = dot ].
 			| debugger targetContext stackList codePane |
 			helper click: (helper buttonLabeled: 'debug*' in: helper foregroundWindow).
 			debugger := helper foregroundWindow.
-			helper scaleDefaultDebugger: debugger.
+			helper scaleWindow: debugger.
 			targetContext := '*testSuffixFound'.
 			stackList := helper listMorphIncludingMatch: targetContext in: debugger.
 			helper select: stackList at: targetContext.
