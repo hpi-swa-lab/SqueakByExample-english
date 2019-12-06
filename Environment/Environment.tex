@@ -1049,7 +1049,7 @@ What a surprise!  Instead of getting the expected answer \ct{'txt'}, a \clsind{P
 \begin{ExecuteSmalltalkScript}
 "debuggers"
 SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
-	| home |
+	| home debugger codePane |
 	home := thisContext.
 	recorder writeTo: 'PreDebugWindow.png' building: [:helper |
 		thisContext wrap: [:block | helper restoreMethods: {String >> #suffix} after: block].
@@ -1072,27 +1072,42 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 	recorder writeTo: 'debuggerDetect.png' building: [:helper |
 		| targetContext stackList |
 		helper click: (helper buttonLabeled: 'Debug*' in: helper foregroundWindow).
-		helper scaleDefaultDebugger: helper foregroundWindow.
+		debugger := helper foregroundWindow.
+		helper scaleDefaultDebugger: debugger.
 		targetContext := '*detect:ifFound:ifNone:'.
-		stackList := helper listMorphIncludingMatch: targetContext in: helper foregroundWindow.
+		stackList := helper listMorphIncludingMatch: targetContext in: debugger.
 		helper select: stackList at: targetContext.
-		helper mouseEnter: (helper textMorphIn: helper foregroundWindow withTextMatching: 'detect:*').
+		codePane := helper textMorphIn: debugger withTextMatching: 'detect:*'.
+		helper focus: codePane.
 	].
 	recorder writeTo: 'RestartDetect.png' building: [:helper |
-		helper click: (helper buttonLabeled: 'Restart*' in: helper foregroundWindow).
+		helper click: (helper buttonLabeled: 'Restart*' in: debugger).
 	].
 	recorder writeTo: 'steppingIntoValue.png' building: [:helper |
-		| stepThrough contextVarList debugger |
-		stepThrough := helper buttonLabeled: 'Through*' in: helper foregroundWindow.
-		contextVarList := helper listMorphIncludingMatch: #thisContext in: helper foregroundWindow.
-		helper click: stepThrough.
-		helper select: contextVarList at: #each asString.
-		debugger := helper foregroundWindow model.
-		[((debugger instVarNamed: #contextVariablesInspector) object tempNamed: #each) > 7]
+		| stepThrough contextVarList |
+		stepThrough := helper buttonLabeled: 'Through*' in: debugger.
+		contextVarList := helper listMorphIncludingMatch: #thisContext in: debugger.
+		helper
+			click: stepThrough;
+			select: contextVarList at: #each asString;
+			focus: codePane.
+		[((debugger model instVarNamed: #contextVariablesInspector) object tempNamed: #each) > 7]
 			whileTrue: [helper click: stepThrough].
 	].
 	recorder writeTo: 'dotIsAString.png' building: [:helper |
-		helper click: (helper buttonLabeled: 'Into*' in: helper foregroundWindow).
+		helper click: (helper buttonLabeled: 'Into*' in: debugger).
+		helper focus: codePane.
+	].
+	recorder writeTo: 'revertDialog.png' building: [:helper |
+		codePane setSelection: (1 to: 0).
+		[codePane find]
+			valueSupplyingAnswer: 'FileDirectory dot'.
+		helper type: 'FileDirectory dot asCharacter' into: codePane.
+		helper
+			runModal: [codePane accept]
+			then: [
+				helper dialogWindow center: (debugger bounds pointAtFraction: 3 / 4 @ (2 / 5)).
+				helper takeScreenshot].
 	].
 ]
 \end{ExecuteSmalltalkScript}
