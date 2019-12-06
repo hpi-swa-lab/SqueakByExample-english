@@ -1456,24 +1456,49 @@ This includes creating new classes, re-naming classes, changing categories, addi
 However, arbitrary \emph{doits} are not included, so if, for example, you create a new global variable by assigning to it in a workspace, the variable creation will not make it into a \subind{file}{change set}.
 \index{change set browser}
 
-\begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder writeTo: './figures/changeSetBrowser.png' building: [:helper |
+\begin{ExecuteSmalltalkScript}"changeSetBrowsers"
+| buildChangeSet buildChangeSorter |
+buildChangeSet := [:helper :outerBlock |
+	| methods |
+	thisContext wrap: [:block | ChangeSet newChangesNamed: 'My cool changeset' during: block].
+	methods := {
+		String >> #suffix.
+		StringSuffixTest >> #testSuffixFound }.
+	thisContext wrap: [:block | helper restoreMethods: methods after: block].
+helper touchMethods: methods.
+	outerBlock value].
+
+buildChangeSorter := [:helper |
 	| classList messageList |
-	thisContext wrap: [:block |
-		| methods |
-		thisContext wrap: [:blockk | ChangeSet newChangesNamed: 'My cool changeset' during: blockk].
-		methods := {
-			String >> #suffix.
-			StringSuffixTest >> #testSuffixFound }.
-		helper restoreMethods: methods after: [
-			helper touchMethods: methods].
-		block value].
-	ChangeSorter open.
-	classList := helper listMorphIncludingMatch: 'String*' in: helper foregroundWindow.
+	classList := helper listMorphIncludingMatch: 'String {*}' in: helper foregroundWindow.
 	helper select: classList at: 'String*'.
 	messageList := helper listMorphIncludingMatch: 'suffix*' in: helper foregroundWindow.
 	helper select: messageList at: 'suffix*'.
 	helper hand newKeyboardFocus: nil.
+	classList].
+
+SBEScreenshotRecorder writeTo: './figures/changeSetBrowser.png' building: [:helper |
+	thisContext wrap: [:block | buildChangeSet value: helper value: block].
+	ChangeSorter open.
+	helper scaleWindow: helper foregroundWindow.
+	buildChangeSorter value: helper.
+].
+
+SBEScreenshotRecorder writeTo: './figures/changeSorter.png' building: [:helper |
+	| sorter leftChangeSetMatch leftChangeList rightClassList |
+	thisContext wrap: [:block | buildChangeSet value: helper value: block].
+	thisContext wrap: [:block | ChangeSet newChangesNamed: 'String enhancements' during: block].
+	sorter := DualChangeSorter new.
+	sorter open.
+	helper scaleWindow: helper foregroundWindow.
+	leftChangeSetMatch := ChangeSet secondaryChangeSet name.
+	leftChangeList := helper foregroundWindow
+		findDeepSubmorphThat: [:m | m isPluggableListMorph and: [sorter isLeftSide: m model] and: [m getList anySatisfy: [:ea | leftChangeSetMatch match: ea]]]
+		ifAbsent: [NotFound signal].
+	helper select: leftChangeList at: leftChangeSetMatch asString.
+	rightClassList := buildChangeSorter value: helper.
+	helper click: rightClassList at: (helper boundsOfItemMatching: 'String*' in: rightClassList) center buttons: #(right).
+	helper select: helper menu at: 'move*to other*'.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
