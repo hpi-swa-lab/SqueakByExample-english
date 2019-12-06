@@ -1456,6 +1456,26 @@ This includes creating new classes, re-naming classes, changing categories, addi
 However, arbitrary \emph{doits} are not included, so if, for example, you create a new global variable by assigning to it in a workspace, the variable creation will not make it into a \subind{file}{change set}.
 \index{change set browser}
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/changeSetBrowser.png' building: [:helper |
+	| classList messageList |
+	thisContext wrap: [:block |
+		| methods |
+		thisContext wrap: [:blockk | ChangeSet newChangesNamed: 'My cool changeset' during: blockk].
+		methods := {
+			String >> #suffix.
+			StringSuffixTest >> #testSuffixFound }.
+		helper restoreMethods: methods after: [
+			helper touchMethods: methods].
+		block value].
+	ChangeSorter open.
+	classList := helper listMorphIncludingMatch: 'String*' in: helper foregroundWindow.
+	helper select: classList at: 'String*'.
+	messageList := helper listMorphIncludingMatch: 'suffix*' in: helper foregroundWindow.
+	helper select: messageList at: 'suffix*'.
+	helper hand newKeyboardFocus: nil.
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
 	\begin{center}
 	\ifluluelse
