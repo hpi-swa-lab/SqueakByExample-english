@@ -1058,7 +1058,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 	| dot dotPosition |
 	dot := FileDirectory dot.
 	dotPosition := (self size to: 1 by: -1) detect: [ :i | (self at: i) = dot ].
-	^ self copyFrom: dotPosition + 1 to: self size'
+	^ self copyFrom: dotPosition to: self size'
 .
 		helper
 			runModal: ['readme.txt' suffix]
