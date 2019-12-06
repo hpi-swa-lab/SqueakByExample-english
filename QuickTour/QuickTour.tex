@@ -821,9 +821,9 @@ The leftmost two panes are a bit like the top panes in the system browser.  The 
 
 %%{SBESqueakPicture writeTo: './figures/testRunnerOnStringTest.png' frame: #morphs using: [:helper |
 %%	| testRunner categoryIndex |
+%%	thisContext wrap: [:block | helper restoreMethods: {StringTest >> #testShout} after: block].
 %%	StringTest compile: 'testShout self assert: false'.
 %%	testRunner := (ToolBuilder open: TestRunner new) model.
-%%	thisContext insertEnsure: [StringTest removeSelector: #testShout].
 %%	categoryIndex := testRunner categoryList indexOf: 'CollectionsTests-Text'.
 %%	testRunner
 %%		categorySelected: categoryIndex;
