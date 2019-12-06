@@ -286,8 +286,7 @@ If you look at the send of \ct{drawOn:} in \ct{AtomMorph>>>drawOn:}, you will se
 %%	method := 'Canvas draw:*'.
 %%	window := helper foregroundWindow.
 %%	window extent: 600 @ 300; fullBounds.
-%%	list := helper listMorphIncludingMatch: method in: helper foregroundWindow.
-%%	helper select: list at: 'Canvas draw:*' andScrollIntoViewBy: 3.
+%%	helper selectAnyListIn: helper foregroundWindow at: method andScrollIntoViewBy: 3.
 %%]}
 \begin{figure}[htbp]
 	\begin{center}
@@ -380,13 +379,11 @@ To see how it works, display the \cmind{ScaleMorph}{defaultColor} method and cli
 \end{tabular}
 
 %%{SBESqueakPicture writeTo: './figures/inheritanceOverriding.png' frame: #morphs using: [:helper |
-%%	| pane |
 %%	self systemNavigation
 %%		methodHierarchyBrowserForClass: ScaleMorph
 %%		selector: #defaultColor.
 %%	helper scaleWindow: helper foregroundWindow extent: 500 @ 250.
-%%	pane := helper listMorphIncludingMatch: '*Morph*' in: helper foregroundWindow.
-%%	helper select: pane at: '*Morph*'
+%%	helper selectAnyListIn: helper foregroundWindow at: '*Morph*'.
 %%]}
 \begin{figure}[tbp]
 	\begin{center}
@@ -731,18 +728,12 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 	
 	MCWorkingCopyBrowser open.
 	picture writeTo: 'MC+SBE.png' frame: #morphs building: [
-		| packageFilter packageList |
 		[helper click: (helper buttonLabeled: '+Package' in: helper foregroundWindow)]
 			valueSupplyingAnswer: #('Name of package*' 'SBE').
-		packageFilter := '(\* )?SBE \(.*\)' asRegex.
-		packageList := helper listMorphIncludingMatch: packageFilter in: helper foregroundWindow.
-		helper select: packageList at: packageFilter andScrollIntoViewBy: 5.
+		helper selectAnyListIn: helper foregroundWindow at: '(\* )?SBE \(.*\)' asRegex andScrollIntoViewBy: 5.
 	].
 	picture writeTo: 'SBE-apb.png' frame: #morphs building: [
-		| repositoryFilter repositoryList |
-		repositoryFilter := '*package-cache*'.
-		repositoryList := helper listMorphIncludingMatch: repositoryFilter in: helper foregroundWindow.
-		helper select: repositoryList at: repositoryFilter andScrollIntoViewBy: 5.
+		helper selectAnyListIn: helper foregroundWindow at: '*package-cache*' andScrollIntoViewBy: 5.
 		
 		[| relevantOperations |
 		relevantOperations := ((MCWorkingCopy forPackageNamed: 'SBE-Monticello') package snapshot
@@ -772,12 +763,11 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 					flag: #workaround].
 	].
 	picture writeTo: 'package-cache-browser.png' building: [
-		| packageList window |
+		| window |
 		MCCacheRepository default morphicOpen.
 		helper hideProgressMorph.
 		window := helper foregroundWindow.
-		packageList := helper listMorphIncludingMatch: 'SBE' in: window.
-		helper select: packageList at: 'SBE'.
+		helper selectAnyListIn: helper foregroundWindow at: 'SBE'.
 		window model versionSelection: 1.
 		helper scaleWindow: helper foregroundWindow extent: 400 @ 275.
 		helper takeScreenshotOf: window.
@@ -899,12 +889,9 @@ You can also type \short{i} for \menu{\textbf{i}nspect it}.)
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/inspectTimeNow1.png' building: [:helper |
-	| fieldToSelect fieldList |
 	TimeStamp now inspect.
 	helper scaleWindow: helper foregroundWindow.
-	fieldToSelect := #utcMicroseconds.
-	fieldList := helper listMorphIncludingMatch: fieldToSelect in: helper foregroundWindow.
-	helper select: fieldList at: fieldToSelect.
+	helper selectAnyListIn: helper foregroundWindow at: #utcMicroseconds.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
@@ -1070,13 +1057,10 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 			].
 	].
 	recorder writeTo: 'debuggerDetect.png' building: [:helper |
-		| targetContext stackList |
 		helper click: (helper buttonLabeled: 'Debug*' in: helper foregroundWindow).
 		debugger := helper foregroundWindow.
 		helper scaleWindow: debugger.
-		targetContext := '*detect:ifFound:ifNone:'.
-		stackList := helper listMorphIncludingMatch: targetContext in: debugger.
-		helper select: stackList at: targetContext.
+		helper selectAnyListIn: debugger at: '*detect:ifFound:ifNone:'.
 		codePane := helper textMorphIn: debugger withTextMatching: 'detect:*'.
 		helper focus: codePane.
 	].
@@ -1095,12 +1079,11 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 			whileTrue: [helper click: stepThrough].
 	].
 	recorder writeTo: 'dotIsAString.png' building: [:helper |
-		| instVarList |
-		helper click: (helper buttonLabeled: 'Into*' in: debugger).
-		helper select: contextVarList at: #i.
-		instVarList := helper listMorphIncludingMatch: #self in: debugger.
-		helper select: instVarList at: #'7' andScrollIntoViewBy: 1.
-		helper focus: codePane.
+		helper
+			click: (helper buttonLabeled: 'Into*' in: debugger);
+			select: contextVarList at: #i;
+			selectAnyListIn: debugger at: #self andScrollIntoViewBy: 1;
+			focus: codePane.
 	].
 	recorder writeTo: 'revertDialog.png' building: [:helper |
 		codePane setSelection: (1 to: 0).
@@ -1303,14 +1286,12 @@ self assert: ''txt'' equals: ''readme.txt'' suffix'
 	helper
 		runModal: [ testRunner debugSuite: testRunner suiteAll ]
 		then: [
-			| debugger targetContext stackList codePane |
+			| debugger codePane |
 			thisContext wrap: [:block | helper hideProgressMorphDuring: block].
 			helper click: (helper buttonLabeled: 'debug*' in: helper foregroundWindow).
 			debugger := helper foregroundWindow.
 			helper scaleWindow: debugger.
-			targetContext := '*testSuffixFound'.
-			stackList := helper listMorphIncludingMatch: targetContext in: debugger.
-			helper select: stackList at: targetContext.
+			helper selectAnyListIn: debugger at: '*testSuffixFound'.
 			codePane := helper textMorphIn: debugger withTextMatching: 'testSuffixFound*'.
 			debugger model restart; stepInto.
 			helper focus: codePane.
@@ -1379,8 +1360,7 @@ SBEScreenshotRecorder writeTo: './figures/processBrowser.png' building: [:helper
 	| processList stackList |
 	ProcessBrowser open.
 	helper scaleWindow: helper foregroundWindow.
-	processList := helper listMorphIncludingMatch: '*the UI process*' in: helper foregroundWindow.
-	helper select: processList at: '*the UI process*'.
+	processList := helper selectAnyListIn: helper foregroundWindow at: '*the UI process*'.
 	stackList := helper foregroundWindow findDeepSubmorphThat: [:m | m isPluggableListMorph and: [m ~= processList]] ifAbsent: [NotFound signal].
 	stackList changeModelSelection: 1.
 ]
@@ -1422,13 +1402,12 @@ This can quickly become overwhelming.
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/methodNamesRandom.png' building: [:helper |
-	| messageList methodList |
+	| methodList |
 	(MessageNames methodBrowserSearchingFor: 'random') openInWorld.
 	helper scaleWindow: helper foregroundWindow.
-	messageList := helper listMorphIncludingMatch: 'atRandom:' in: helper foregroundWindow.
-	helper select: messageList at: 'atRandom:'.
-	methodList := helper listMorphIncludingMatch: 'Integer*' in: helper foregroundWindow.
-	helper select: methodList at: 'Integer*'.
+	helper
+		selectAnyListIn: helper foregroundWindow at: 'atRandom:';
+		selectAnyListIn: helper foregroundWindow at: 'Integer*'.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
@@ -1472,11 +1451,9 @@ helper touchMethods: methods.
 	outerBlock value].
 
 buildChangeSorter := [:helper |
-	| classList messageList |
-	classList := helper listMorphIncludingMatch: 'String {*}' in: helper foregroundWindow.
-	helper select: classList at: 'String*'.
-	messageList := helper listMorphIncludingMatch: 'suffix*' in: helper foregroundWindow.
-	helper select: messageList at: 'suffix*'.
+	| classList |
+	classList := helper selectAnyListIn: helper foregroundWindow at: 'String {*}'.
+	helper selectAnyListIn: helper foregroundWindow at: 'suffix*'.
 	helper hand newKeyboardFocus: nil.
 	classList].
 
@@ -1575,7 +1552,7 @@ This requires the use of another tool, the file list browser.
 \begin{ExecuteSmalltalkScript}"fileListBrowser"
 SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 	recorder writeTo: 'fileList.png' building: [:helper |
-		| csName csPattern fileList |
+		| csName |
 		csName := 'my cool changeset'.
 		thisContext wrap: [:block | ChangeSet newChangesNamed: csName during: block].
 		thisContext wrap: [:block | helper restoreMethods: {SearchBar >> #buildWith:. TheWorldMainDockingBar >> #createDockingBar} after: block].
@@ -1585,9 +1562,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 			copyReplaceAll: #adhereToTop with: #adhereToBottom).
 		ChangeSet current fileOut.
 		FileList open.
-		csPattern := '*{1}*.cs' format: {csName}.
-		fileList := helper listMorphIncludingMatch: csPattern in: helper foregroundWindow.
-		helper select: fileList at: csPattern].
+		helper selectAnyListIn: helper foregroundWindow at: ('*{1}*.cs' format: {csName})].
 	recorder writeTo: 'fileContentsBrowser.png' building: [:helper |
 		helper click: (helper buttonLabeled: 'Code' in: helper foregroundWindow).
 		helper foregroundWindow model
