@@ -1573,7 +1573,7 @@ This requires the use of another tool, the file list browser.
 \section{The File List Browser}
 
 \begin{ExecuteSmalltalkScript}"fileListBrowser"
-SBEScreenshotRecorder debugging writeInto: './figures' recordSeries: [:recorder |
+SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 	recorder writeTo: 'fileList.png' building: [:helper |
 		| csName csPattern fileList |
 		csName := 'my cool changeset'.
