@@ -1293,7 +1293,7 @@ dotPosition := (self size to: 1 by: -1) detect: [ :i | (self at: i) = dot ].
 ^ self copyFrom: dotPosition to: self size'
 .
 	StringTest compile: 'testSuffixFound
-self assert: 'txt' equals: 'readme.txt' suffix'
+self assert: ''txt'' equals: ''readme.txt'' suffix'
 .
 	allTests := StringTest testSelectors.
 	thisContext wrap: [:block | helper restoreMethods: (allTests collect: [:test | StringSuffixTest >> test]) after: block].
