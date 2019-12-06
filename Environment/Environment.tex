@@ -1283,7 +1283,7 @@ Why is this test better?  Because it tells the reader what the method should do 
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/fixOffByOne.png' building: [:helper |
-	| allTests testRunner |
+	| testRunner |
 	thisContext wrap: [:block | helper restoreMethods: {String >> #suffix} after: block].
 	String compile: 'suffix
 "assumes that I''m a file name, and answers my suffix, the part after the last dot"
@@ -1295,16 +1295,16 @@ dotPosition := (self size to: 1 by: -1) detect: [ :i | (self at: i) = dot ].
 	StringTest compile: 'testSuffixFound
 self assert: ''txt'' equals: ''readme.txt'' suffix'
 .
-	allTests := StringTest testSelectors.
-	thisContext wrap: [:block | helper restoreMethods: (allTests collect: [:test | StringTest >> test]) after: block].
-	(allTests copyWithout: #testSuffixFound) do: [:test | StringTest removeSelector: test].
+	thisContext wrap: [:block | helper restoreMethods: {StringTest >> #testSuffixNotFound} after: block].
+	StringTest removeSelector: #testSuffixNotFound.
 	testRunner := TestRunner newForSuite: StringTest suite.
-	ToolBuilder open: testRunner.
 	testRunner runAll.
+	testRunner open.
 	helper
 		runModal: [ testRunner debugSuite: testRunner suiteAll ]
 		then: [
 			| debugger targetContext stackList codePane |
+			thisContext wrap: [:block | helper hideProgressMorphDuring: block].
 			helper click: (helper buttonLabeled: 'debug*' in: helper foregroundWindow).
 			debugger := helper foregroundWindow.
 			helper scaleWindow: debugger.
