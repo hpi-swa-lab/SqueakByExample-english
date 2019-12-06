@@ -76,6 +76,8 @@
 		"select:at:" : "xyz 11/24/2019 19:24",
 		"select:at:andScrollIntoViewBy:" : "ct 11/2/2019 18:58",
 		"select:where:" : "xyz 12/4/2019 13:14",
+		"selectAnyListIn:at:" : "ct 12/6/2019 22:49",
+		"selectAnyListIn:at:andScrollIntoViewBy:" : "ct 12/6/2019 22:54",
 		"setUp" : "ct 11/23/2019 18:03",
 		"simulateKeyEvent:key:buttons:morph:" : "ct 12/4/2019 10:39",
 		"simulateMouseEvent:" : "10/14/2019 15:19:11",
