@@ -1277,6 +1277,43 @@ testSuffixFound
 Why is this test better?  Because it tells the reader what the method should do if there is more than one dot in the target String.
 
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/fixOffByOne.png' building: [:helper |
+	| allTests testRunner |
+	thisContext wrap: [:block | helper restoreMethods: {String >> #suffix} after: block].
+	String compile: 'suffix
+"assumes that I''m a file name, and answers my suffix, the part after the last dot"
+| dot dotPosition |
+dot := FileDirectory dot asCharacter.
+dotPosition := (self size to: 1 by: -1) detect: [ :i | (self at: i) = dot ].
+^ self copyFrom: dotPosition to: self size'
+.
+	allTests := StringSuffixTest selectors select: #isTestSelector.
+	thisContext wrap: [:block | helper restoreMethods: (allTests collect: [:test | StringSuffixTest >> test]) after: block].
+	(allTests copyWithout: #testSuffixFound) do: [:test | StringSuffixTest removeSelector: test].
+	testRunner := TestRunner newForSuite: StringSuffixTest suite.
+	ToolBuilder open: testRunner.
+	testRunner runAll.
+	helper
+		runModal: [ testRunner debugSuite: testRunner suiteAll ]
+		then: [
+			| debugger targetContext stackList codePane |
+			helper click: (helper buttonLabeled: 'debug*' in: helper foregroundWindow).
+			debugger := helper foregroundWindow.
+			helper scaleDefaultDebugger: debugger.
+			targetContext := '*testSuffixFound'.
+			stackList := helper listMorphIncludingMatch: targetContext in: debugger.
+			helper select: stackList at: targetContext.
+			codePane := helper textMorphIn: debugger withTextMatching: 'testSuffixFound*'.
+			debugger model restart; stepInto.
+			helper focus: codePane.
+			codePane setSelection: (1 to: 0).
+			[codePane find]
+				valueSupplyingAnswer: 'dotPosition to:'.
+			helper type: 'dotPosition + 1 to:' into: codePane.
+			helper takeScreenshot].
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
 	\begin{center}
 		\includegraphics[width=\textwidth]{fixOffByOne}
