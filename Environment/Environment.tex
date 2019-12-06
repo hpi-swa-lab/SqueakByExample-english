@@ -1294,7 +1294,10 @@ dot := FileDirectory dot asCharacter.
 dotPosition := (self size to: 1 by: -1) detect: [ :i | (self at: i) = dot ].
 ^ self copyFrom: dotPosition to: self size'
 .
-	allTests := StringSuffixTest selectors select: #isTestSelector.
+	StringTest compile: 'testSuffixFound
+self assert: 'txt' equals: 'readme.txt' suffix'
+.
+	allTests := StringTest testSelectors.
 	thisContext wrap: [:block | helper restoreMethods: (allTests collect: [:test | StringSuffixTest >> test]) after: block].
 	(allTests copyWithout: #testSuffixFound) do: [:test | StringSuffixTest removeSelector: test].
 	testRunner := TestRunner newForSuite: StringSuffixTest suite.
