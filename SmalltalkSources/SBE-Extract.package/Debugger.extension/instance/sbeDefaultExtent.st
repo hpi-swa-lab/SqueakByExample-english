@@ -1,4 +1,6 @@
 *SBE-Extract-scaling
 sbeDefaultExtent
 
-	^ 600 @ 400
+	^ true caseOf: {
+		[self isNotifier] -> [self initialExtentForNotifier].
+		[self isFull] -> [600 @ 400]. }
