@@ -10,7 +10,9 @@ runModal: aBlock then: anotherBlock
 		semaphore signal
 	] forkAt: Processor activePriority + 1.
 	semaphore wait.
-	[result := [SBEFigureBuilder new executeSafely: anotherBlock] ensure: [
-		modalProcess terminate]]
-			ifCurtailed: [semaphore terminateProcess].
+	[[result := SBEFigureBuilder new executeSafely: anotherBlock.
+	self assureScreenshot]
+		ensure: [
+			modalProcess terminate]]
+				ifCurtailed: [semaphore terminateProcess].
 	^ result

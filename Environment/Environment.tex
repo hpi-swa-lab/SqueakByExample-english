@@ -1268,7 +1268,11 @@ Why is this test better?  Because it tells the reader what the method should do 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/fixOffByOne.png' building: [:helper |
 	| testRunner |
-	thisContext wrap: [:block | helper restoreMethods: {String >> #suffix} after: block].
+	thisContext wrap: [:block | helper restoreMethods: {
+			String >> #suffix.
+			StringTest >> #testSuffixFound.
+			StringTest >> #testSuffixNotFound }
+		after: block].
 	String compile: 'suffix
 "assumes that I''m a file name, and answers my suffix, the part after the last dot"
 | dot dotPosition |
@@ -1279,7 +1283,6 @@ dotPosition := (self size to: 1 by: -1) detect: [ :i | (self at: i) = dot ].
 	StringTest compile: 'testSuffixFound
 self assert: ''txt'' equals: ''readme.txt'' suffix'
 .
-	thisContext wrap: [:block | helper restoreMethods: {StringTest >> #testSuffixNotFound} after: block].
 	StringTest removeSelector: #testSuffixNotFound.
 	testRunner := TestRunner newForSuite: StringTest suite.
 	testRunner runAll.
