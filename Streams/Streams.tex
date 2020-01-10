@@ -677,6 +677,24 @@ FileStream
 
 This creates a 4x4 checkerboard as shown in \figref{checkerboard4x4}.
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: 'figures/checkerboard4x4.png' buildingForm: [
+	FileStream
+		forceNewFileNamed: 'test.pgm'
+		do: [:stream |
+			stream
+				nextPutAll: 'P5'; cr;
+				nextPutAll: '4 4'; cr;
+				nextPutAll: '255'; cr;
+				binary;
+				nextPutAll: #[255 0 255 0];
+				nextPutAll: #[0 255 0 255];
+				nextPutAll: #[255 0 255 0];
+				nextPutAll: #[0 255 0 255]
+	].
+	(Form fromFileNamed: 'test.pgm') scaledToSize: 112 asPoint.
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[!ht]
 \centerline{\includegraphics[width=0.25\textwidth]{checkerboard4x4}}
 \caption{A 4x4 checkerboard you can draw using binary streams.}
