@@ -321,6 +321,12 @@ The \emph{TestRunner}, shown in \figref{test-runner}, is designed to make it eas
 The left-most pane lists all of the system categories that contain test classes (\ie  subclasses of \ct{TestCase}); when some of these categories are selected, the test classes that they contain appear in the pane to the right.
 Abstract classes are italicized, and the test class hierarchy is shown by indentation, so subclasses of \ct{ClassTestCase} are indented more than subclasses of \ct{TestCase}.
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: 'figures/test-runner.png' building: [:helper |
+	TestRunner openForSuite: (PackageInfo named: #CollectionsTests) suite.
+	helper scaleWindow: helper foregroundWindow.
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[tbh]
   \begin{center}
 	\includegraphics[width=\linewidth]{test-runner}
