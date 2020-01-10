@@ -642,7 +642,7 @@ FileStream
   do: [:stream |
           stream
             binary;
-            nextPutAll: #(145 250 139 98) asByteArray].
+            nextPutAll: #[145 250 139 98]].
 
 FileStream
   readOnlyFileNamed: 'test.bin'
@@ -668,10 +668,10 @@ FileStream
 		nextPutAll: '4 4'; cr;
 		nextPutAll: '255'; cr;
 		binary;
-		nextPutAll: #(255 0 255 0) asByteArray;
-		nextPutAll: #(0 255 0 255) asByteArray;
-		nextPutAll: #(255 0 255 0) asByteArray;
-		nextPutAll: #(0 255 0 255) asByteArray
+		nextPutAll: #[255 0 255 0];
+		nextPutAll: #[0 255 0 255];
+		nextPutAll: #[255 0 255 0];
+		nextPutAll: #[0 255 0 255]
 	]
 \end{code}
 
