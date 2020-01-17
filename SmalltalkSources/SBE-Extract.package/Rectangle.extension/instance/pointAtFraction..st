@@ -1,4 +1,5 @@
-*SBE-Extract
+*SBE-Extract-transforming
 pointAtFraction: relativePoint
 	
-	^ self origin + (self extent * relativePoint)
+	self flag: #deprecate.
+	^ self @* relativePoint
