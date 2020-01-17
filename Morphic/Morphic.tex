@@ -172,6 +172,21 @@ There are many  methods available to position a morph; browse the \protind{geome
 For example, 
 to center the star inside joe, execute \ct{star} \mthind{Morph}{center:} \ct{joe center}.
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeInto: 'figures/joeStar.png' building: [:helper |
+	| bill joe star |
+	bill := Morph new color: Color red .
+	bill openInWorld.
+	joe := Morph new color: (Color blue alpha: 0.5).
+	joe extent: 55 @ 60.
+	joe openInWorld.
+	bill position: joe position - (27 @ 20).
+	star := StarMorph new color: Color yellow.
+	joe addMorph: star.
+	star center: joe center.
+	helper centerAllMorphs.
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[ht]
 	\centerline{\includegraphics{joeStar}}
 	\caption{The star is contained inside joe, the translucent blue morph.
