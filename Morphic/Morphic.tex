@@ -55,7 +55,7 @@ A simple example of this is that you can detach a menu item and keep it as a but
 \index{blue button}
 
 \begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder writeTo: 'figures/detachingMenu.png' frame: [:rect | rect * ((0 to: 1) rect: (0.457 to: 0.748))] building: [:helper |
+SBEScreenshotRecorder writeTo: 'figures/detachingMenu.png' frame: [:bounds | bounds * ((0 to: 1) rect: (0.457 to: 0.748))] building: [:helper |
 	| item halo handle |
 	helper click: helper world.
 	helper closeBalloons.

@@ -70,18 +70,22 @@ Now we will see how to create system categories and classes.
 \dothis{Open a system browser and yellow-click in the category pane.
 Select \menu{add item \ldots}.}
 
-%%{SBESqueakPicture writeTo: './figures/AddCategory.png' frame: [:bounds | bounds origin extent: bounds extent * (0.4 @ 0.75)] using: [:helper |
-%%	| window |
-%%	Browser open.
-%%	window := helper foregroundWindow.
-%%	helper click: window at: window topLeft + (30 @ 30) buttons: #(right).
-%%	helper hand releaseMouseFocus.
-%%	helper mouseEnter: (helper menuItemMorphLabeled: 'add item*' in: helper world).
-%%	helper closeBalloons.
-%%]}
-%%{SBESqueakPicture writeTo: './figures/ClassTemplate.png' frame: [:bounds | bounds origin extent: bounds extent * (0.4 @ 0.75)] using: [:helper |
-%%	Browser fullOnCategory: 'SBE-Quinto'.
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/AddCategory.png' frame: [:bounds | bounds * (0 asPoint corner: (0.4 @ 0.75))] building: [:helper |
+	| window |
+	Browser open.
+	window := helper foregroundWindow.
+	helper click: window at: window topLeft + (30 @ 30) buttons: #(right).
+	helper hand releaseMouseFocus.
+	helper mouseEnter: (helper menuItemMorphLabeled: 'add item*' in: helper world).
+	helper closeBalloons.
+]
+\end{ExecuteSmalltalkScript}
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/ClassTemplate.png' frame: [:bounds | bounds * (0 asPoint @ (0.4 @ 0.75))] using: [:helper |
+	Browser fullOnCategory: 'SBE-Quinto'.
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
 \begin{minipage}[b]{0.48\textwidth}
 \ifluluelse
@@ -414,20 +418,22 @@ If there are only a few methods in a class, the extra level of hierarchy provide
 This is why the browser also offers us the \prot{-{}-all-{}-} virtual category, which, you will not be surprised to learn, contains all of the methods in the class.
 \protindex{all}
 
-%%{SBESqueakPicture writeTo: './figures/Categorize.png' frame: [:rect | rect topRight rect: (rect pointAtFraction: 1 @ 3 / 4) rounded] using: [:helper |
-%%	| browser class window |
-%%  browser := Browser newSubclass.
-%%  browser compile: 'hasClassSelected ^true'.
-%%  class := Object newSubclass.
-%%  class compile: 'initialize'.
-%%  browser fullOnClass: class.
-%%  window := helper foregroundWindow.
-%%  window bounds: (0 @ 120 extent: 550 @ 350).
-%%  helper click: window at: window topCenter + (30 @ 60) buttons: #(right).
-%%  helper hand releaseMouseFocus.
-%%  helper mouseEnter: (helper menuItemMorphLabeled: 'categorize all uncategorized' in: helper world).
-%%  helper closeBalloons.
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/Categorize.png' frame: [:bounds | bounds * (1 @ 0 rect: 1 @ 3 / 4)] building: [:helper |
+	| browser class window |
+  browser := Browser newSubclass.
+  browser compile: 'hasClassSelected ^true'.
+  class := Object newSubclass.
+  class compile: 'initialize'.
+  browser fullOnClass: class.
+  window := helper foregroundWindow.
+  window bounds: (0 @ 120 extent: 550 @ 350).
+  helper click: window at: window topCenter + (30 @ 60) buttons: #(right).
+  helper hand releaseMouseFocus.
+  helper mouseEnter: (helper menuItemMorphLabeled: 'categorize all uncategorized' in: helper world).
+  helper closeBalloons.
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[htbp]
    \centering
    \includegraphics[scale=0.65]{Categorize} 
