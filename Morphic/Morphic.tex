@@ -61,7 +61,6 @@ SBEScreenshotRecorder writeTo: 'figures/detachingMenu.png' frame: [:bounds | bou
 	helper closeBalloons.
 	item := helper menuItemMorphLabeled: 'new morph*' in: helper menu.
 	helper select: helper menu at: item contents.
-	helper hand newMouseFocus: nil.
 	halo := helper mouseOpenHaloFor: item.
 	handle := halo handles at: #doGrab:with:.
 	helper
