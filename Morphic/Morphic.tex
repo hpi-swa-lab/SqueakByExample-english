@@ -54,6 +54,24 @@ A simple example of this is that you can detach a menu item and keep it as a but
 \index{Morphic!halo}
 \index{blue button}
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: 'figures/detachingMenu.png' frame: [:rect | rect * ((0 to: 1) rect: (0.457 to: 0.748))] building: [:helper |
+	| item halo handle |
+	helper click: helper world.
+	helper closeBalloons.
+	item := helper menuItemMorphLabeled: 'new morph*' in: helper menu.
+	helper select: helper menu at: item contents.
+	helper hand newMouseFocus: nil.
+	halo := helper mouseOpenHaloFor: item.
+	handle := halo handles at: #doGrab:with:.
+	helper
+		mouseDrag: handle
+			from: handle center
+			to: handle center + (-100 @ 15)
+			buttons: #(left);
+		spawnHand
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[ht]
 	\ifluluelse
 		{\centerline{\includegraphics[width=0.6\textwidth]{detachingMenu}}}
