@@ -128,16 +128,16 @@ bill openInWorld.
 \end{code}
 \noindent
 Then type \ct{joe position} and \menu{print it}.
-To move joe, execute \ct{joe position: (joe position + (10@3))} repeatedly.
+To move joe, execute \ct{joe position: joe position + (10@3)} repeatedly.
 
 It is possible to do a similar thing with size.
-\ct{joe} \mthind{Morph}{extent} answers joe's size; to have joe grow, execute \ct{joe extent: (joe extent * 1.1)}.
+\ct{joe} \mthind{Morph}{extent} answers joe's size; to have joe grow, execute \ct{joe extent: joe extent * 1.1}.
 To change the color of a morph, send it the \mthind{Morph}{color:} message with the desired \ct{Color} object as argument, for instance, \ct{joe color: Color orange}.
 To add transparency, try \ct{joe color: (Color orange alpha: 0.5)}.
 
 \dothis{To make bill follow joe, you can repeatedly execute this code:}
 \begin{code}{}
-bill position: (joe position + (100@0))
+bill position: joe position + (100@0)
 \end{code}
 \noindent
 If you move joe using the mouse and then execute this code, bill will move so that it is 100 pixels to the right of joe.
