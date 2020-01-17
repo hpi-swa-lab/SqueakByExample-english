@@ -173,7 +173,7 @@ For example,
 to center the star inside joe, execute \ct{star} \mthind{Morph}{center:} \ct{joe center}.
 
 \begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder writeInto: 'figures/joeStar.png' building: [:helper |
+SBEScreenshotRecorder writeTo: 'figures/joeStar.png' building: [:helper |
 	| bill joe star |
 	bill := Morph new color: Color red .
 	bill openInWorld.
