@@ -71,7 +71,7 @@ Now we will see how to create system categories and classes.
 Select \menu{add item \ldots}.}
 
 \begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder writeTo: './figures/AddCategory.png' frame: [:bounds | bounds * (0 asPoint corner: (0.4 @ 0.75))] building: [:helper |
+SBEScreenshotRecorder writeTo: './figures/AddCategory.png' frame: [:bounds | bounds * (0 asPoint corner: 0.4 @ 0.75)] building: [:helper |
 	| window |
 	Browser open.
 	window := helper foregroundWindow.
@@ -82,7 +82,7 @@ SBEScreenshotRecorder writeTo: './figures/AddCategory.png' frame: [:bounds | bou
 ]
 \end{ExecuteSmalltalkScript}
 \begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder writeTo: './figures/ClassTemplate.png' frame: [:bounds | bounds * (0 asPoint @ (0.4 @ 0.75))] building: [:helper |
+SBEScreenshotRecorder writeTo: './figures/ClassTemplate.png' frame: [:bounds | bounds * (0 asPoint corner: 0.4 @ 0.75)] building: [:helper |
 	Browser fullOnCategory: 'SBE-Quinto'.
 ]
 \end{ExecuteSmalltalkScript}
