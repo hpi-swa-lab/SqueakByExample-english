@@ -598,6 +598,14 @@ Alternatively, you can modify the \ct{handleKeystroke:} method so that you can u
 To prompt the user for input, the \clsind{FillInTheBlank} class provides a few ready-to-use dialog boxes.
 For instance, the \mthind{FillInTheBlank}{request:initialAnswer:} method returns the string entered by the user (\figref{dialogName}).
 
+\begin{ExecuteSmalltalkScript}
+	SBEScreenshotRecorder writeTo: 'figures/dialog.png' building: [:helper |
+		helper runModal: [
+			FillInTheBlank
+				request: 'What''s your name?'
+				initialAnswer: 'no name'].
+	]
+	\end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
 \begin{minipage}{0.55\textwidth}
 	\ifluluelse
@@ -607,6 +615,17 @@ For instance, the \mthind{FillInTheBlank}{request:initialAnswer:} method returns
 		\label{fig:dialogName}}
 \end{minipage}
 \hfill
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: 'figures/popup.png' building: [:helper |
+	| menu |
+	menu := PopUpMenu
+		labelArray: #('circle' 'oval' 'square' 'rectangle' 'triangle')
+		lines: #(2 4).
+	helper
+		runModal: [menu startUpWithCaption: 'Choose a shape']
+		then: [helper closeBalloons].
+]
+\end{ExecuteSmalltalkScript}
 \begin{minipage}{0.38\textwidth}
 	\vfill
 	\ifluluelse
