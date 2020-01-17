@@ -1,7 +1,7 @@
-private events
+private
 sendFocusEvent: anEvent to: focusHolder clear: aBlock
 	"Send the event to the morph currently holding the focus"
 
 	self activateWithEvent: anEvent during: [
-		^ focusHolder handleFocusEvent:
+		^ focusHolder processFocusEvent:
 			(anEvent transformedBy: (focusHolder transformedFrom: self))]
