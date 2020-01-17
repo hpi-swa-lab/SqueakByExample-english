@@ -7,7 +7,7 @@ nameForBuilderScript: script
 			#('''''' '""') includes: ({token first. token last} as: String)].
 	idString := idToken allButFirst allButLast.
 	"Heuristic"
-	(['\./figures/(.*)\.png' asRegex] once submatchesIn: idString)
+	(['(\./)?figures/(.*)\.png' asRegex] once submatchesIn: idString)
 		ifNotEmpty: [:matches | idString := matches anyOne last].
 	^ self
 		uniqueNameFrom: 'build' , (idString asIdentifier: true)
