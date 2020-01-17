@@ -82,7 +82,7 @@ SBEScreenshotRecorder writeTo: './figures/AddCategory.png' frame: [:bounds | bou
 ]
 \end{ExecuteSmalltalkScript}
 \begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder writeTo: './figures/ClassTemplate.png' frame: [:bounds | bounds * (0 asPoint @ (0.4 @ 0.75))] using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/ClassTemplate.png' frame: [:bounds | bounds * (0 asPoint @ (0.4 @ 0.75))] building: [:helper |
 	Browser fullOnCategory: 'SBE-Quinto'.
 ]
 \end{ExecuteSmalltalkScript}
