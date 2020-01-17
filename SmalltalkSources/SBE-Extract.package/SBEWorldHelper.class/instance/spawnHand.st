@@ -2,5 +2,5 @@ utils
 spawnHand
 
 	self world addMorph: (self hand imageForm asMorph
-		position: self hand position;
+		topLeft: self hand fullTopLeft;
 		yourself).
