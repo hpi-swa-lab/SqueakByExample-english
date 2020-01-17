@@ -3,4 +3,4 @@ cutFrame: area
 
 	^ scene
 		cutFrame: area
-		fullFrame: (self world bounds)
+		fullFrame: self world bounds

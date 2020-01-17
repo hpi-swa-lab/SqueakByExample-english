@@ -2,4 +2,5 @@
 	"class" : {
 		 },
 	"instance" : {
-		"forgetSubmorphs:during:" : "ct 11/16/2019 21:13" } }
+		"forgetSubmorphs:during:" : "ct 11/16/2019 21:13",
+		"wantsAdhereToEdge" : "ct 1/15/2020 19:11" } }
