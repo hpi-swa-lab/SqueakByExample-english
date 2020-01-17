@@ -754,6 +754,15 @@ The green morph is rejected and therefore stays attached to the mouse pointer.
 
 Let's design a morph to roll a die\footnote{NB: One die, two dice.}. Clicking on it will display the values of all sides of the die in a quick loop, and another click will stop the animation.
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: 'figures/die.png' building: [:helper |
+	SBEDieMorph new
+		openCenteredInWorld;
+		stopStepping;
+		dieValue: 5;
+		addHalo
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[ht]
 	\centerline{\includegraphics[scale=0.65]{die}}
 	\caption{The die in Morphic.
