@@ -3,6 +3,12 @@
 		 },
 	"instance" : {
 		"activateWithEvent:during:" : "xyz 12/4/2019 12:06",
+		"dequeueEvent" : "ct 1/15/2020 10:44",
+		"hasQueuedEvents" : "ct 1/15/2020 10:43",
+		"initialize" : "ct 1/15/2020 10:44",
 		"owner:" : "ct 11/23/2019 17:50",
 		"processEvent:in:" : "ct 12/4/2019 12:07",
+		"processEvents" : "ct 1/17/2020 19:30",
+		"processNewEvent:" : "ct 1/15/2020 12:13",
+		"queueEvent:" : "ct 1/15/2020 10:43",
 		"sendFocusEvent:to:clear:" : "xyz 12/4/2019 12:09" } }

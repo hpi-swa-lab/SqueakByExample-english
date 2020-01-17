@@ -7,4 +7,4 @@ simulateMouseEvent: morphicEvent
 	
 	hand
 		position: morphicEvent position;
-		handleEvent: morphicEvent
+		processNewEvent: morphicEvent.

@@ -1,4 +1,4 @@
-private events
+private
 activateWithEvent: anEvent during: aBlock
 
 	thisContext

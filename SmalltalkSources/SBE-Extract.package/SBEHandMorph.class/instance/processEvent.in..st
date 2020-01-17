@@ -1,4 +1,4 @@
-private events
+event simulation
 processEvent: anEvent in: aMorph
 
 	| result |
