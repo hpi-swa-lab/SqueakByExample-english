@@ -153,8 +153,8 @@ SBESqueakPicture writeTo: './figures/worldMenu.png' frame: #morphs using: [:help
 
 %%{SBESqueakPicture writeTo: './figures/morphicHaloOnWorkspace.png' frame: #morphs using: [:helper | | workspace |
 %%	workspace := ToolBuilder open: Workspace new.
-%%	helper type: 'Time now ' into: workspace.
-%%	helper adjustMorphsArea.
+%%	helper type: 'Time now' into: workspace.
+%%	helper centerAllMorphs.
 %%	helper foregroundWindow lookFocused.
 %%	workspace addHalo.
 %%]}
