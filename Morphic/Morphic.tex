@@ -244,6 +244,43 @@ drawOn: aCanvas
 \end{method}
 
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeInto: 'figures' recordSeries: [:recorder :helper |
+	thisContext wrap: [:block | helper restoreMethods: SBECrossMorph methodDict values after: block].
+	SBECrossMorph removeSelector: #step.
+	recorder writeTo: 'NewCross.png' building: [
+		| cross |
+		cross := SBECrossMorph new
+			extent: 123 asPoint;
+			openInWorld.
+		helper centerAllMorphs.
+		cross addHalo
+	].
+	helper world removeAllMorphs.
+	recorder writeTo: 'overdrawBug.png' building: [
+		| cross |
+		SBECrossMorph compile: 'drawOn: aCanvas
+	aCanvas fillRectangle: self horizontalBar color: self color.
+	aCanvas fillRectangle: self verticalBar color: self color'
+		.
+		cross := SBECrossMorph newBounds: (0 @ 0 corner: 160 @ 160).
+		cross openInWorld.
+		cross color: (Color blue alpha: 0.3).
+		helper centerAllMorphs.
+	].
+	recorder writeTo: 'hairlineBug.png' building: [
+		SBECrossMorph
+			compile: 'drawOn: aCanvas
+	| topAndBottom |
+	aCanvas fillRectangle: self horizontalBar color: self color.
+	topAndBottom := self verticalBar areasOutside: (self horizontalBar in: [:bar |
+		self flag: #hacked.
+		bar withHeight: bar height + 1]).
+	topAndBottom do: [ :each | aCanvas fillRectangle: each color: self color]'
+			.
+	]
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[hbt]
 	\ifluluelse
 		{\centerline{\includegraphics[width=0.3\textwidth]{NewCross}}}
@@ -344,7 +381,7 @@ This doesn't matter when we fill the cross with an opaque colour, but the bug be
 \dothis{Execute the following code in  a workspace, line by line:}
 
 \begin{code}{}
-m := CrossMorph new bounds: (0@0 corner: 300@300).
+m := CrossMorph newBounds: (0@0 corner: 300@300).
 m openInWorld.
 m color: (Color blue alpha: 0.3).
 
