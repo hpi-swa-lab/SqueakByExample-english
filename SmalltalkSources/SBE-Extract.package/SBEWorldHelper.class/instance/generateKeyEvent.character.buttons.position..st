@@ -4,8 +4,8 @@ generateKeyEvent: aType character: aCharacter buttons: buttons position: aPoint
 	| event |
 	event := KeyboardEvent readFrom: ({aType.
 		0 milliSeconds asMilliSeconds.
-		aCharacter asciiValue.
-		self mapButtons: buttons }
+		self mapButtons: buttons.
+		aCharacter asciiValue }
 			joinSeparatedBy: ' ') readStream.
 	event
 		wasHandled: false;
