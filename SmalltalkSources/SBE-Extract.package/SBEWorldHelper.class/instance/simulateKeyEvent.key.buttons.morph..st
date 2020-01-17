@@ -1,15 +1,10 @@
 private
 simulateKeyEvent: aSymbol key: aCharacter buttons: someButtons morph: aMorph
+	
 	| morphicEvent |
-	morphicEvent := MorphicEvent readFrom: ('{1} {2} {3} {4}' format: {
-		aSymbol.
-		0. "time"
-		self mapButtons: someButtons.
-		aCharacter asciiValue}) readStream.
-	
-	morphicEvent
-		wasHandled: false;
-		setHand: hand;
-		setPosition: aMorph center.
-	
+	morphicEvent := self
+		generateKeyEvent: aSymbol
+		character: aCharacter
+		buttons: someButtons
+		position: aMorph center.
 	hand processEvent: morphicEvent in: aMorph.
