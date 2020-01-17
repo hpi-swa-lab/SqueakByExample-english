@@ -166,12 +166,15 @@ SBESqueakPicture writeTo: './figures/worldMenu.png' frame: #morphs using: [:help
 	\subfigure[The contextual menu]{\label{fig:threeButtons:yellow}%
 		\includegraphics[width=0.6\linewidth]{yellowButtonMenuOnWorkspace}}\hfill
 	\begin{center}
-	\vspace{0.1in}
+	\vspace{-5.5cm}
 		\subfigure[The morphic halo]{\label{fig:threeButtons:blue}%
-		%\ct{TODO: Display this figure between the other figures, technically overlap them. I did not "figure" out how to do without installing extra packages.}
-		\includegraphics[width=0.4\linewidth]{morphicHaloOnWorkspace}}% these braces needed (else no whitespace at end of line)
-	\end{center}		
-	\caption{The world menu (brought up by the red mouse button), a contextual menu (yellow mouse button), and a morphic \subind{Morphic}{halo} (blue mouse button).\label{fig:threeButtons}}
+		%\ct{HACKED AND HARDCODED LAYOUT: A better approach might use \usepackage[absolute]{textpos}.}
+		\includegraphics[width=0.4\linewidth]{morphicHaloOnWorkspace}
+		\hspace{0.5cm}
+		}% these braces needed (else no whitespace at end of line)
+    \vspace{2cm}
+	\end{center}
+	\caption{The world menu (brought up by the red mouse button), a contextual menu (yellow mouse button), and a morphic halo (blue mouse button).\label{fig:threeButtons}}
 \end{figure}
 \index{red button}
 \index{yellow button}
