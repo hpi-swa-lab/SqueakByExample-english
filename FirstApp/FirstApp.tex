@@ -341,6 +341,7 @@ Now let's define an \mthind{SBEGame}{initialize} method for \ct{SBEGame}.
 
 
 %%{SBESqueakPicture writeTo: './figures/UnknownSelector.png' frame: #morphs using: [:helper |
+%%	thisContext wrap: [:block | helper forgetSymbol: #cellsPerSide during: block].
 %%	helper runModal: [UnknownSelector name: #cellsPerSide]
 %%]}
 %%{SBESqueakPicture writeTo: './figures/DeclareInstanceVar.png' frame: #morphs using: [:helper |
