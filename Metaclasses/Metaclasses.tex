@@ -128,6 +128,22 @@ EllipseMorph new color: (Color blue alpha: 0.4); openInWorld
 \noindent
 You can see the effect in \figref{translucentEllipse}.
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: 'figures/TranslucentEllipse.png' building: [:helper |
+	| workspace |
+	workspace := Workspace open.
+	helper
+		type: [EllipseMorph new
+			color: (Color blue alpha: 0.4);
+			openInWorld]
+				sourceString allButFirst allButLast
+		into: workspace.
+	#($a $d) do: [:c | helper keyStroke: workspace key: c modifiers: #(cmd)].
+	helper foregroundMorph
+		extent: (workspace extent * (0.7 @ 0.8));
+		center: (workspace bounds @* (0.73 @ 0.78)).
+]
+\end{ExecuteSmalltalkScript}
 \begin{center}
 \begin{figure}[!ht]
 \ifluluelse
