@@ -283,6 +283,19 @@ This can be a bit confusing, because the title bar of the inspector names the \e
 
 The inspector on \ct{Color} allows you to see the superclass, instance variables, method \subind{method}{dictionary}, and so on, of the \ct{Color} class, as shown in \figref{inspectingColor}.
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: 'figures/InspectingColor.png' building: [:helper |
+	| leftInspector codePane rightInspector |
+	Color blue inspect.
+	leftInspector := helper foregroundWindow.
+	codePane := helper morphWithBalloonText: '*evaluate*' in: helper foregroundWindow.
+	helper type: 'self class inspect' into: codePane.
+	helper keyStroke: codePane key: $d modifiers: #(cmd).
+	rightInspector := helper foregroundWindow.
+	rightInspector topLeft: leftInspector topRight + (42 @ 0).
+	SystemWindow new beKeyWindow "fast hack to display none of the windows as a key window"
+]
+\end{ExecuteSmalltalkScript}
 \begin{center}
 \begin{figure}[!ht]
 \ifluluelse
