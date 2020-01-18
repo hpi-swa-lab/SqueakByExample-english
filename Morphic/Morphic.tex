@@ -946,6 +946,28 @@ That's all you need to do!
 If you're curious, have a look at the \mthind{Canvas}{asAlphaBlendingCanvas:} method.
 You can also get antialiasing by using \clsind{BalloonCanvas} and transforming the die drawing methods as shown in \mthsref{aadie}.
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: 'figures/multiMorphs.png' building: [:helper |
+	thisContext wrap: [:block | helper restoreMethods: {SBEDieMorph >> #drawOn:} after: block].
+	SBEDieMorph compile: 'drawOn: aCanvas
+	| theCanvas |
+	theCanvas := aCanvas asAlphaBlendingCanvas: 0.5.
+	super drawOn: theCanvas.
+	(self perform: (''face'' , dieValue asString) asSymbol)
+		do: [:aPoint | self drawDotOn: theCanvas at: aPoint]'
+	.
+	{ Morph new
+		position: 30 @ 0;
+		color: Color red.
+	Morph new
+		position: 0 @ 20;
+		color: Color blue.
+	SBEDieMorph new
+		position: 25 @ 18;
+		extent: 75 @ 75 } do: #openInWorld.
+	helper takeScreenshot. "before the drawing method is reverted"
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[ht]
 	\centerline{\includegraphics[scale=0.7]{multiMorphs}}
 	\caption{The die displayed with alpha-transparency.
