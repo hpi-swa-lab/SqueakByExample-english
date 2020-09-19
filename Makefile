@@ -10,8 +10,13 @@ C = Preface QuickTour FirstApp Syntax Messages \
 	Metaclasses
 
 ifndef TRAVIS
-	PDFLATEX = pdflatex -file-line-error
-	BIBTEX=bibtex
+	ifdef NO_WSL
+		PREFIX = cmd.exe /c
+	else
+		PREFIX = ""
+	endif
+	PDFLATEX = ${PREFIX} pdflatex -file-line-error
+	BIBTEX = ${PREFIX} bibtex
 else
 	PDFLATEX = docker run -v $(CURDIR):/src tom95/texlive-docker-swa pdflatex
 	BIBTEX = docker run -v $(CURDIR):/src tom95/texlive-docker-swa bibtex
