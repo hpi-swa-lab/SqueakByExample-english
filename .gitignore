@@ -1,4 +1,5 @@
-SBE.aux
+*.aux
+SBE.blg
 SBE.glo
 SBE.idx
 SBE.log
@@ -12,3 +13,6 @@ SBE.url
 ListingSources/
 warnings.txt
 bin/gdrive
+
+# Editors
+.vscode/
