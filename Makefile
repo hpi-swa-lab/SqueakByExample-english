@@ -15,10 +15,10 @@ ifndef TRAVIS
 	else
 		PREFIX = ""
 	endif
-	PDFLATEX = ${PREFIX} pdflatex -file-line-error
+	PDFLATEX = ${PREFIX} pdflatex -file-line-error -interaction=nonstopmode
 	BIBTEX = ${PREFIX} bibtex
 else
-	PDFLATEX = docker run -v $(CURDIR):/src tom95/texlive-docker-swa pdflatex
+	PDFLATEX = docker run -v $(CURDIR):/src tom95/texlive-docker-swa pdflatex -interaction=nonstopmode
 	BIBTEX = docker run -v $(CURDIR):/src tom95/texlive-docker-swa bibtex
 endif
 
@@ -27,12 +27,12 @@ ETC=SBE-etc
 TEXINPUT=$(shell TEXINPUT='\\\\input{${BOOK}}' && [ "$$DEBUG_FIGURES" = true ] && TEXINPUT='\\\\AtBeginDocument{\\\\include{robustize-figures}}'"$$TEXINPUT" ;echo $$TEXINPUT)
 
 # --------------------------------------------------------------------------------
-all : book
+all : clean listings book
 
 # NB: be sure to use texlive and to set the TEXINPUTS variable accordingly
 # See README.txt
 
-book : clean listings
+book-only :
 	time ${PDFLATEX} ${TEXINPUT}
 	time ${BIBTEX} ${BOOK}
 	time ${PDFLATEX} ${TEXINPUT}
