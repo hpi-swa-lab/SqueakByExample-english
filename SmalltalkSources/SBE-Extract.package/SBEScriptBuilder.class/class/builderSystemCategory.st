@@ -1,4 +1,4 @@
 code generation - constants
 builderSystemCategory
 
-	^ 'SBEGenerated'
+	^ 'SBEGenerated-Figures'
