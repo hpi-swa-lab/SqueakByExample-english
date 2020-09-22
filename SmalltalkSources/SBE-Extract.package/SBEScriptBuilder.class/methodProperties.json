@@ -1,0 +1,26 @@
+{
+	"class" : {
+		"allTestSelectors" : "ct 10/29/2019 10:09",
+		"buildSuiteFromClasses:" : "ct 10/30/2019 10:48",
+		"builderMethodCategory" : "ct 10/30/2019 09:16",
+		"builderSystemCategory" : "ct 10/30/2019 09:16",
+		"collectScriptsClassicFromStream:" : "ct 11/18/2019 13:16",
+		"collectScriptsFromFile:" : "ct 11/18/2019 13:15",
+		"collectScriptsFromStream:" : "ct 12/3/2019 00:02",
+		"compileScript:" : "ct 11/18/2019 13:36",
+		"compileScripts:" : "ct 11/18/2019 13:13",
+		"generateBuilderFor:withScripts:" : "ct 11/24/2019 13:45",
+		"generateBuildersIn:" : "ct 11/24/2019 14:52",
+		"getTexFilesIn:" : "ct 10/29/2019 15:55",
+		"isAbstract" : "ct 11/18/2019 13:58",
+		"nameForBuilderScript:" : "ct 1/17/2020 22:46",
+		"nameForBuilderWith:" : "ct 11/4/2019 00:54",
+		"okToGenerate" : "ct 11/3/2019 23:25",
+		"runSuite:" : "ct 11/2/2019 03:26",
+		"totalSuite" : "ct 10/30/2019 11:02",
+		"uniqueNameBy:lest:" : "ct 11/4/2019 00:01",
+		"uniqueNameFrom:lest:" : "ct 11/4/2019 00:02",
+		"uniqueNameFrom:orNumberedNameBy:lest:" : "ct 11/4/2019 00:01" },
+	"instance" : {
+		"executeSafely:" : "ct 11/19/2019 20:14",
+		"performTest" : "ct 11/18/2019 15:12" } }

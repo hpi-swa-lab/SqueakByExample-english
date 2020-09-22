@@ -4,6 +4,9 @@ setUp
 	world := (PasteUpMorph newWorldForProject: nil)
 		extent: self worldSize;
 		viewBox: (0 @ 0 extent: self worldSize);
+		color: Color transparent;
+		clipSubmorphs: false;
+		flag: #refactor "ct: maybe make a subclass of PasteUpMorph?";
 		yourself.
 	
 	(world instVarNamed: #worldState)

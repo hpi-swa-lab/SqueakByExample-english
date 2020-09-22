@@ -1,0 +1,4 @@
+accessing
+worldColor
+
+	^ worldColor

@@ -6,6 +6,6 @@ contextWrap: aBlock
 	ctxt := thisContext.
 	aBlock value: [
 		chain := thisContext sender cut: ctxt.
-		ctxt push: chain.
+		ctxt push: ctxt.
 		ctxt jump].
 	^ chain

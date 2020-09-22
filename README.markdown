@@ -79,10 +79,27 @@ If you add a new chapter:
 IMPORTANT: Please check out a fresh copy of the book and compile the book
 to verify that you have added all the dependent files (e.g., figures).
 
-## Makefile
+## Build process
 
-To build the PDF of the book, simply run "make" in the Book folder.
-Be sure you have texlive installed (see below).
+The PDF of the book is built automatically via TravisCI on each commit, which includes generation of all screenshots, that are codified, for the latest Squeak version. The usual workflow how to codify a screenshot is documented [here](https://github.com/codeZeilen/SqueakByExample-english/issues/21#issue-516598115). If the build process completed, you can watch the results [here](https://drive.google.com/drive/folders/1tNIvN-9Vx8djNZYfSYuqhjheb-EgJuTc).
+To build the PDF manually, do the following:
+### I. Installation
+1. Get the latest Trunk image for Squeak
+2. Install [Squot](https://github.com/hpi-swa/Squot)
+3. Open the Git Browser and clone this repository
+4. Make sure to set the resource directory to the path of your working copy:
+ ```smalltalk
+SBEFigureBuilder resourceDirectory: FileDirectory default asFSReference / 'path' / 'to' / 'workingCopy'.
+ ```
+5. Install any unix system.
+### II. Building
+1. Do it:
+ ```smalltalk
+SBEFigureBuilder buildAllTexFigures.
+ ```
+2. From the shell, run "make" in the working copy.
+
+For more insights into the build process, have a look at the `Makefile` and the `.travis.yml`.
 
 ## Printing
 

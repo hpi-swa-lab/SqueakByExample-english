@@ -106,10 +106,14 @@ The \menu{Debugger} has an obvious role, but you will discover that it has a mor
 \label{sec:browser} % (fold)
 %apb: what does the fold comment mean?
 
-There are actually several browsers in \sq: the standard system browser, the package browser, the Omnibrowser, and the Refactoring Browser. 
+There are actually several browsers in \sq: the standard system browser, the package browser, and the Monticello snapshot browser. 
 We will take a look at the standard \ind{system browser} first, since the others are variations on it.
-\figref{SystemBrowser0} shows the browser as it appears when you first drag it out of the \toolsflapind.\footnote{If the browser you see looks different from the one we describe, then you might be using an image with a different default browser installed. See \faqref{omnibrowser}.}
+\figref{SystemBrowser0} shows the browser as it appears when you first drag it out of the \toolsflapind.
 
+%%{SBESqueakPicture writeTo: './figures/SystemBrowser0.png' frame: #morphs using: [:helper |
+%%	Browser open.
+%%	helper scaleWindow: helper foregroundWindow.
+%%]}
 \begin{figure}[htbp]
    \centering
    \ifluluelse
@@ -123,6 +127,10 @@ The four small panes at the top of the browser represent a hierarchic view of th
 The leftmost pane lists \emph{categories} of classes; select one (say \scat{Kernel-Objects}) and the pane immediately to the right will then show all of the classes in that category.
 \on{I adopted the spelling of NeXTstep recommended by wikipedia}
 
+%%{SBESqueakPicture writeTo: './figures/SystemBrowser1.png' frame: #morphs using: [:helper |
+%%	Browser fullOnClass: Model.
+%%	helper scaleWindow: helper foregroundWindow.
+%%]}
 \begin{figure}[htbp]
    \centering
    \ifluluelse
@@ -140,6 +148,10 @@ If you select class \menu{Model},  protocol \protind{dependents} and the method 
 \protindex{all}
 \cmindex{Model}{myDependents}
 
+%%{SBESqueakPicture writeTo: './figures/SystemBrowserMyDependents.png' frame: #morphs using: [:helper |
+%%	Browser fullOnClass: Model selector: #myDependents.
+%%	helper scaleWindow: helper foregroundWindow.
+%%]}
 \begin{figure}[htbp]
    \centering
    \ifluluelse
@@ -157,6 +169,10 @@ Because of this, the way that you create a new category or a new protocol is dif
 Enter the name of the new thing in the dialog, and you are done: there is nothing more to a category or a protocol than its name and its contents.
 \index{category!creating}
 
+%%{SBESqueakPicture writeTo: './figures/SystemBrowserClassCreation.png' frame: #morphs using: [:helper |
+%%	Browser fullOnCategory: 'Kernel-Objects'.
+%%	helper scaleWindow: helper foregroundWindow.
+%%]}
 \begin{figure}[htbp]
    \centering
    \ifluluelse
@@ -195,6 +211,11 @@ The process of creating a new method is similar.  First select the class in whic
 \index{method!creation}
 \index{system browser!defining a method}
 
+%%{SBESqueakPicture writeTo: './figures/SystemBrowserMethodTemplate.png' frame: #morphs using: [:helper |
+%%	Browser fullOnClass: Model category: #'morphic ui'.
+%%	helper scaleWindow: helper foregroundWindow.
+%%	helper focus: (helper codePaneOfBrowser: helper foregroundWindow).
+%%]}
 \begin{figure}[htbp]
    \centering
    \ifluluelse
@@ -228,6 +249,16 @@ You can also open a browser on a class named by any selected text using the \sho
 \index{system browser!senders button}
 The \button{senders} button will give you a list of all methods that may use the selected method. With the browser open on \ct{ScaleMorph}, click on the \mthind{ScaleMorph}{checkExtent:} method in the method pane near the top right corner of the browser; the body of \ct{checkExtent:} displays in the bottom part of the browser. If you now press the \button{senders} button, a menu will appear with \ct{checkExtent:} as the topmost item, and below it, all the messages that \ct{checkExtent:} sends (see \figref{SendersOfCheckEvent}).  Selecting an item in this menu will open a browser with the list of all methods in the image that send the selected message. 
 
+%%{SBESqueakPicture writeTo: './figures/SendersOfCheckEvent.png' frame: #morphs using: [:helper |
+%%	| window sendersButton |
+%%	ToolSet browse: ScaleMorph selector: #checkExtent:.
+%%	window := helper foregroundWindow.
+%%	helper scaleWindow: window extent: 600 @ 400.
+%%	sendersButton := helper buttonLabeled: 'senders' in: window.
+%%	helper
+%%		runModal: [helper click: sendersButton buttons: #(left)]
+%%		then: [helper dialogWindow center: (window bounds pointAtFraction: 3 @ 2 / 4)]
+%%]}
 \begin{figure}[htbp]
 	\begin{center}
    \ifluluelse
@@ -249,6 +280,14 @@ It shouldn't be all that surprising that so many classes implement this method: 
 If you look at the send of \ct{drawOn:} in \ct{AtomMorph>>>drawOn:}, you will see that it is a super \subind{super}{send}.  So we know that the method that will be executed will be in \ct{AtomMorph}'s superclass.  What class is that?  Click the \button{hierarchy} button and you will see that it is \ct{EllipseMorph}. 
 \index{system browser!hierarchy button}
 
+%%{SBESqueakPicture writeTo: './figures/CanvasDraw.png' frame: #morphs using: [:helper |
+%%	| method window list |
+%%	helper systemNavigation browseAllCallsOn: #drawOn:.
+%%	method := 'Canvas draw:*'.
+%%	window := helper foregroundWindow.
+%%	window extent: 600 @ 300; fullBounds.
+%%	helper selectAnyListIn: helper foregroundWindow at: method andScrollIntoViewBy: 3.
+%%]}
 \begin{figure}[htbp]
 	\begin{center}
    \ifluluelse
@@ -270,6 +309,29 @@ Since all of the methods with the same selector ought to be used in the same way
 \label{sec:versions}
 
 When you save a new \subind{method}{version} of a method, the old one is not lost.  \sq keeps all of the old versions, and allows you to compare different versions and to go back (``revert'') to an old version.
+
+%%{SBESqueakPicture writeTo: './figures/VersionsOfMouseUp.png' frame: #morphs using: [:helper |
+%%	| list |
+%%	helper restoreMethods: {SBECell >> #mouseUp:} after: [
+%%		SBECell removeSelector: #mouseUp:.
+%%		"Just open browser now so it will select the newest version by itself"
+%%		SBECell
+%%			compile: (String streamContents: [:stream | stream
+%%				nextPutAll: 'mouseUp: anEvent';
+%%				crtab; nextPutAll: 'mouseAction value']).
+%%		SBECell organization classifyAllUnclassified.
+%%		SBECell
+%%			compile: (String streamContents: [:stream | stream
+%%				nextPutAll: 'mouseUp: anEvent';
+%%				crtab; nextPutAll: '(self containsPoint: anEvent position)';
+%%				crtab: 2; nextPutAll: 'ifTrue: [mouseAction value]'])
+%%			classified: (SBECell whichCategoryIncludesSelector: #mouseUp:).
+%%		ToolSet browseVersionsOf: SBECell selector: #mouseUp:.
+%%		helper scaleWindow: helper foregroundWindow extent: 500 @ 250.
+%%		list := helper listMorphIncludingMatch: '*mouseUp*' in: helper foregroundWindow.
+%%		list changeModelSelection: 1.
+%%		helper takeScreenshot]
+%%]}
 \begin{figure}[btp]
    \centering
    \ifluluelse
@@ -316,6 +378,13 @@ To see how it works, display the \cmind{ScaleMorph}{defaultColor} method and cli
 	\emph{violet:} & the displayed method overrides, is overridden, and makes a \ct!super!-send.
 \end{tabular}
 
+%%{SBESqueakPicture writeTo: './figures/inheritanceOverriding.png' frame: #morphs using: [:helper |
+%%	self systemNavigation
+%%		methodHierarchyBrowserForClass: ScaleMorph
+%%		selector: #defaultColor.
+%%	helper scaleWindow: helper foregroundWindow extent: 500 @ 250.
+%%	helper selectAnyListIn: helper foregroundWindow at: '*Morph*'.
+%%]}
 \begin{figure}[tbp]
 	\begin{center}
    \ifluluelse
@@ -325,19 +394,6 @@ To see how it works, display the \cmind{ScaleMorph}{defaultColor} method and cli
 	\caption{\ct{ScaleMorph>>>defaultColor} and the methods that it overrides, in inheritance order. 
 	The \lct{inheritance} button is gold because the displayed method is overridden in a subclass}
 	\label{fig:inheritanceOverriding}
-\end{figure}
-
-\hyphenation{Omni-Brow-ser}
-Note that there are currently two versions of the inheritance browser.  If you are using the version of the system browser based on the \ind{OmniBrowser} framework, the \button{inheritance} button does not change colour, and the inheritance browser looks different.  It also displays more information: it shows not only the methods on the inheritance chain, but also their siblings.  This version of the \ind{inheritance browser} is shown in \figref{OBinheritanceBrowser}.
-
-\begin{figure}[btp]
-	\begin{center}
-   \ifluluelse
-		{\includegraphics[width=\textwidth]{OBInheritanceOverriding}}
-		{\includegraphics[scale=0.7]{OBInheritanceOverriding}}
-	\end{center}
-	\caption{\ct{ScaleMorph>>>defaultColor} and the methods that it overrides, as shown by the new OmniBrowser based inheritance browser.   The siblings of the selected methods are shown in the scrolling lists.}
-	\label{fig:OBinheritanceBrowser}
 \end{figure}
 
 
@@ -352,6 +408,10 @@ The hierarchy browser is designed to make it easy to navigate through the inheri
 In \figref{hierarchyBrowser}, the hierarchy browser reveals that the direct superclass of \clsind{ScaleMorph} is \clsind{RectangleMorph}.
 \index{system browser!hierarchy button}
 
+%%{SBESqueakPicture writeTo: './figures/hierarchyBrowser.png' frame: #morphs using: [:helper |
+%%	ScaleMorph browseHierarchy.
+%%	helper scaleWindow: helper foregroundWindow extent: 600 @ 400.
+%%]}
 \begin{figure}[btp]
 	\begin{center}
 	\ifluluelse
@@ -388,13 +448,6 @@ You can verify this  by opening two browsers, and selecting \menu{prettyPrint} i
 In fact, focussing two browsers on the same method and selecting \menu{byteCodes} in one and \menu{decompile} in another is a good way to learn about the Squeak virtual machine's byte-coded instruction set.
 
 \subsubsection{Refactoring}
-
-\index{system browser!refactor button}
-Did you notice the small \button{R} at the end of the button bar?\footnote{That is, you will notice this button if you first load the AST and RefactoringBrowser packages from SqueakSource or use the \emph{Squeak-dev} image.} 
-Although unobtrusive, this button gives access to one of the most powerful and important features of the Smalltalk environment.  
-Clicking on \button{R} gives you access to a hierarchy of menus for refactoring your code.  
-The same refactoring engine is also available in several other ways, for example, through the \ind{yellow button} menu in the class, method and code panes.
-Refactoring was formerly available only in a special browser called the refactoring browser, but it can now be accessed from any browser.
 
 %---------------------------------------------------------
 \subsection{The browser menus}
@@ -435,21 +488,7 @@ For example, the \ct{ScaleMorph} class belongs to the \scat{Morphic-Widgets} cat
 The package browser assumes that the part before the hyphen, \ct{Morphic} is the name of a ``package'', and adds a fifth pane that allows you to browse only those categories in a particular package.
 However, if you select no package at all, then all the categories are available, just as with the ordinary four-pane browser.
 
-Unfortunately, the meaning of the term \ind{package} has changed since the package pane browser was developed.  ``Package'' now has a more precise meaning, related to the \emph{Monticello} packaging tool, as we will discuss in the next section.  At present there is no tool that lets you browse packages as defined by \ind{Monticello}, however there is one currently being developed.
-
-The Squeak community is in the process of developing a whole new family of browsers based on a new, highly customizable framework called the \emphind{OmniBrowser}.  The implementation of the OmniBrowser is worth looking at as a good example of object-oriented design, \ab{and I'ld like to add a chapter on it somewhere, perhaps starting with parts of the excellent document written by Niklaus Haldimann on the classbox browser} but from the outside, most of the OmniBrowser-based tools look very similar to the ones that we have just described.  
-The main enhancement that you will notice in the Omni System Browser is the addition of \emph{virtual protocols}.
-\lr{"Virtual Protocols" are a non-default extension to OB (p. 140)}
-In addition to the traditional programmer-defined protocols, each class has a number of virtual protocols defined on it by definitional rules.  For example, the \prot{-{}-supersend-{}-} protocol includes all of the methods that send to \super, while the \prot{-{}-required-{}-} protocol lists all of the messages that are sent by the methods in the current class or its superclasses but not defined.
-\protindex{supersend}
-\protindex{required}
-
-\on{Is this related to abstract methods or not?  It is not clear.}
-
-\ab{You are right, it's not clear.  The definition of abstract method that we have given is a method that has \ct{self subclassResponsibility} as a body.
-By this definition, the two things are different.  I happen to think that the definition that we used for required method is better, and should be adopted for abstract method, \ie an abstract method is one that is either required, or has a marker method \ct{self subclassResponsibility} or \ct{self explicitRequirment}.}
-
-\on{So, what should we say? As it stands, without comment it is confusing. Everyone will ask: uh ... is this different from an abstract method?}
+Unfortunately, the meaning of the term \ind{package} has changed since the package pane browser was developed.  ``Package'' now has a more precise meaning, related to the \emph{Monticello} packaging tool, as we will discuss in the next section.  To browse all classes of a Monticello package, you can open a Snapshot Browser from the Monticello Browser by selecting a package and then pressing \button{Browse}.
 
 %---------------------------------------------------------
 \subsection{Browsing programmatically}
@@ -571,6 +610,9 @@ entire package.  For more sophisticated versioning of packages, we use Monticell
 \ind{Monticello} is named after the mountaintop home of Thomas Jefferson, third president of the United States and author of the Statute of Virginia for Religious Freedom.  The name means ``little mountain'' in Italian, and so it is always pronounced with an Italian ``c'', which sounds like the ``ch'' in chair: Mont-y'-che-llo.
 
 
+%%{SBESqueakPicture writeTo: './figures/freshMonticello.png' frame: #morphs using: [:helper |
+%%  MCWorkingCopyBrowser open
+%%]}
 \begin{figure}[btp]
 	\begin{center}
 	\ifluluelse
@@ -604,10 +646,19 @@ MCHttpRepository
 	password: ''
 \end{code}
 
+%%{SBESqueakPicture writeTo: './figures/SqueakSource-SBE.png' frame: #morphs using: [:helper |
+%%	| window packageList |
+%%	helper mcCachePackages: #('SBE-QuickTour' 'SBE-Streams') during: [
+%%		helper hideProgressMorph.
+%%		MCCacheRepository default morphicOpen.
+%%		window := helper foregroundWindow.
+%%		packageList := helper listMorphIncludingMatch: 'SBE-QuickTour' in: window.
+%%		window model versionSelection: 1]
+%%]}
 \begin{figure}[btp]
 	\begin{center}
 	\ifluluelse
-		{\includegraphics[scale=0.65]{SqueakSource-SBE}}
+		{\includegraphics[width=\textwidth]{SqueakSource-SBE}}
 		{\includegraphics[scale=0.7]{SqueakSource-SBE}}
 	\end{center}
 	\caption{A Repository browser.}
@@ -624,6 +675,10 @@ To create a package with Monticello, you have to do two things: write some code,
 
 \dothis{Create a category called \scat{SBE-Monticello}, and put a couple of classes in it, as shown in \figref{MCnewcategory}.  Also, create a method in an existing class, and put it in the same package as your classes, using the rules from page \pageref{sec:packageRules}\,---\,see \figref{MCnewmethod}.}
 
+%%{SBESqueakPicture writeTo: './figures/MCnewcategory.png' frame: #morphs using: [:helper |
+%%	ToolSet browse: SBEGoodClass selector: #trialMethod.
+%%	helper scaleWindow: helper foregroundWindow.
+%%]}
 \begin{figure}[btp]
 	\begin{center}
 	\ifluluelse
@@ -634,6 +689,10 @@ To create a package with Monticello, you have to do two things: write some code,
 	\label{fig:MCnewcategory}
 \end{figure}
 
+%%{SBESqueakPicture writeTo: './figures/MCnewmethod.png' frame: #morphs using: [:helper |
+%%	ToolSet browse: Object selector: #exampleMethod.
+%%	helper scaleWindow: helper foregroundWindow.
+%%]}
 \begin{figure}[btp]
 	\begin{center}
 	\ifluluelse
@@ -654,11 +713,63 @@ If you then make a change to the package\,---\,say by adding a method to one of 
 You can of course save the new version to the repository too; once you \button{Refresh} the repository view, it should look like \figref{package-cache-browser}.
 \index{package!cache}
 
+\begin{ExecuteSmalltalkScript}
+"SBEMonticelloSeries"
+SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
+	thisContext wrap: [:block | helper mcIgnoreAllModificationsBut: #('SBE') during: block].
+	helper hideProgressMorph.
+	
+	MCWorkingCopyBrowser open.
+	picture writeTo: 'MC+SBE.png' frame: #morphs building: [
+		[helper click: (helper buttonLabeled: '+Package' in: helper foregroundWindow)]
+			valueSupplyingAnswer: #('Name of package*' 'SBE').
+		helper selectAnyListIn: helper foregroundWindow at: '(\* )?SBE \(.*\)' asRegex andScrollIntoViewBy: 5.
+	].
+	picture writeTo: 'SBE-apb.png' frame: #morphs building: [
+		helper selectAnyListIn: helper foregroundWindow at: '*package-cache*' andScrollIntoViewBy: 5.
+		
+		[| relevantOperations |
+		relevantOperations := ((MCWorkingCopy forPackageNamed: 'SBE-Monticello') package snapshot
+			patchRelativeToBase: MCSnapshot empty) operations.
+		[[helper click: (helper buttonLabeled: 'Save' in: helper foregroundWindow)]
+			on: MCVersionNameAndMessageRequest
+			do: [:ex | ex resumeExcluding: relevantOperations]]
+				valueSuppressingMessages: #('*versions*may be newer*').
+		helper foregroundWindow delete] value.
+		
+		helper
+			runModal: [helper click: (helper buttonLabeled: 'Save' in: helper foregroundWindow)]
+			then: [| messageField |
+				helper hideProgressMorph.
+				helper foregroundWindow comeToFront.
+				messageField := helper textMorphIn: helper foregroundWindow withTextMatching: '*log message*'.
+				helper focus: messageField.
+				messageField textMorph editor selectAt: 1; selectLine; backTo: 1.
+				helper type: 'Change a few things' into: messageField.
+				"messageField setText: 'Change a few things'; flag: #fallback."
+				helper scaleWindow: helper foregroundWindow extent: 375 @ 300.
+				helper takeScreenshotOf: helper foregroundWindow.
+				
+				"This is preparation for the next screenshot"
+				[helper click: (helper buttonLabeled: 'Accept' in: helper foregroundWindow)]
+					valueSuppressingMessages: #('*message*empty*');
+					flag: #workaround].
+	].
+	picture writeTo: 'package-cache-browser.png' building: [
+		| window |
+		MCCacheRepository default morphicOpen.
+		helper hideProgressMorph.
+		window := helper foregroundWindow.
+		helper selectAnyListIn: helper foregroundWindow at: 'SBE'.
+		window model versionSelection: 1.
+		helper scaleWindow: helper foregroundWindow extent: 400 @ 275.
+		helper takeScreenshotOf: window.
+	].
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[tbp]
 	\begin{center}
 		\includegraphics[width=\textwidth]{MC+SBE}
-		% \on{Sorry Andrew, this one is too wide!}
-		% \includegraphics[scale=0.7]{MC+SBE}
 	\end{center}
 	\caption{The as-yet-unsaved SBE package in Monticello.}
 	\label{fig:MC+SBE}
@@ -667,8 +778,8 @@ You can of course save the new version to the repository too; once you \button{R
 \begin{figure}[tbp]
 	\begin{center}
 	\ifluluelse
-		{\includegraphics[scale=0.65]{SBE-apb}}
-		{\includegraphics[scale=0.7]{SBE-apb}}
+		{\includegraphics[scale=0.55]{SBE-apb}}
+		{\includegraphics[scale=0.6]{SBE-apb}}
 	\end{center}
 	\caption{Providing a log message for a new version of a package.}
 	\label{fig:SBE-apb}
@@ -676,9 +787,7 @@ You can of course save the new version to the repository too; once you \button{R
 
 \begin{figure}[tbp]
 	\begin{center}
-	\ifluluelse
-		{\includegraphics[scale=0.65]{package-cache-browser}}
-		{\includegraphics[scale=0.7]{package-cache-browser}}
+	\includegraphics[width=0.6\textwidth]{package-cache-browser}
 	\end{center}
 	\caption{Two versions of our package are now in the package cache.}
 	\label{fig:package-cache-browser}
@@ -693,6 +802,23 @@ The \ct{SqueakByExample} repository on \emphind{SqueakSource} is world readable 
 However, you can create your own repository on \emph{SqueakSource} by using the web interface at \url{http://www.squeaksource.com}, and use this to save your work. 
 This is especially useful as a mechanism to share your code with friends, or if you use multiple computers.
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/MCaddToPackage.png' building: [:helper |
+	| repositoryMatch repositoryList |
+	thisContext wrap: [:block | helper mcIgnoreAllModificationsDuring: block].
+	MCWorkingCopyBrowser open.
+	repositoryMatch := MCRepository trunk description.
+	repositoryList := helper listMorphIncludingMatch: repositoryMatch in: helper foregroundWindow.
+	helper select: repositoryList at: repositoryMatch.
+	helper keyStroke: repositoryList key: Character escape.
+	helper menu
+		center: repositoryList center x @ 0;
+		top: ((helper boundsOfItemMatching: repositoryMatch in: repositoryList)
+			pointAtFraction: 0 @ 0.75) y.
+	helper select: helper menu at: 'add to package*'.
+	helper closeBalloons.
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[tbp]
 	\begin{center}
 		\includegraphics[width=\textwidth]{MCaddToPackage}
@@ -754,6 +880,13 @@ You can also type \short{i} for \menu{\textbf{i}nspect it}.)
 \clsindex{TimeStamp}
 \index{keyboard shortcut!inspect it}
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/inspectTimeNow1.png' building: [:helper |
+	TimeStamp now inspect.
+	helper scaleWindow: helper foregroundWindow.
+	helper selectAnyListIn: helper foregroundWindow at: #utcMicroseconds.
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
 	\begin{center}
 		\includegraphics[scale=0.65]{inspectTimeNow1}
@@ -785,6 +918,25 @@ In addition to \ct{self}, all the instance variables of the object are in scope 
 You can change instance variables directly by selecting them, replacing the old value in the right-hand  pane by a Squeak expression, and accepting.  
 Squeak will evaluate the expression and assign the result to the instance variable.
 
+There are special variants of the inspector for Dictionaries, OrderedCollections, CompiledMethods and a few other classes that make it easier to examine the contents of these special objects.
+
+%---------------------------------------------------------
+\begin{ExecuteSmalltalkScript}"exploreTimeStampNow"
+SBEScreenshotRecorder writeInto: './figures/' recordSeries: [:recorder |
+	recorder writeTo: 'exploreTimeStampNow.png' building: [:helper |
+		TimeStamp now explore.
+		helper scaleWindow: helper foregroundWindow.
+	].
+	recorder writeTo: 'exploreTimeStampNow2.png' building: [:helper |
+		| tree |
+		tree := helper foregroundWindow findA: PluggableTreeMorph.
+		helper
+			select: tree
+			at: 'localOffsetSeconds*'.
+		tree toggleExpandedState: tree selectedMorph.
+	].
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[tbp]
 \begin{minipage}{0.48\textwidth}
 	\begin{center}
@@ -807,9 +959,6 @@ Squeak will evaluate the expression and assign the result to the instance variab
 \end{minipage}
 \end{figure}
 
-There are special variants of the inspector for Dictionaries, OrderedCollections, CompiledMethods and a few other classes that make it easier to examine the contents of these special objects.
-
-%---------------------------------------------------------
 \subsection{The Object Explorer}
 
 The \emph{object explorer} is conceptually similar to the inspector, but presents its information in a different way.
@@ -818,14 +967,12 @@ To see the difference, we'll \emph{explore} the same object that we were just in
 \dothis{Select \menu{self} in the inspector's left-hand pane,  and choose \menu{explore (I)} from the \ind{yellow button} menu.}
 The \ind{explorer} window looks like \figref{exploreTimeStampNow}.
 If you click on the small triangle next to \ct{root}, the view will change to \figref{exploreTimeStampNow2}, which shows the instance variables of object that you are exploring.
-Click on the triangle next to \ct{offset}, and you will see \emph{its} instance variables.  
+Click on the triangle next to \ct{localOffsetSeconds}, and you will see \emph{its} instance variables. (Actually, in this example \ct{hexadecimal}, \ct{octal} etc. are no instance variables of the Integer object, but rather different representations.)  
 The explorer is really useful when you need to explore a complex hierarchic structure\,---\,hence the name.
 \index{keyboard shortcut!explore it}
 
 The workspace pane of the object explorer works slightly differently to that of the inspector.
 \ct{self} is not bound to the root object, but rather to the object that is currently selected; the instance variables of the selected object are also in scope.
-% ON: Fixed. Inadvertently left off the "l" in \lr
-\lr{Maybe explain what "self" refers too in the inspector (always the object) and explorer (the selected item) (p. 154)}
 
 To see the value of the explorer, let's use it to explore a deeply-nested structure of objects.
 
@@ -835,9 +982,22 @@ from the menu that appears.  This will open an Explorer on the \clsind{Pluggable
 Open the root object (by clicking in its triangle), open its \ct{submorphs}, and continue exploring the structure of the objects that underlie this Morph, as shown in \figref{explorePluggableListMorph}.}
 \index{red button}
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/explorePluggableListMorph.png' building: [:helper |
+	| lists tree |	
+	Browser open.
+	lists := (helper foregroundWindow submorphsSatisfying: #isPluggableListMorph)
+		collect: [:list | list center x -> list] as: Dictionary.
+	(lists at: lists keys max) explore.
+	tree := helper foregroundWindow findA: PluggableTreeMorph.
+	tree roots first openPathMatching: (#('root.*' 'submorphs.*' '1.*') collect: #asRegex).
+	helper scaleWindow: helper foregroundWindow extent: 500 @ 350.
+	helper takeScreenshotOf: helper foregroundWindow.
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[tbp]
 	\begin{center}
-		\includegraphics[scale=0.7]{explorePluggableListMorph}
+		\includegraphics[scale=0.45]{explorePluggableListMorph}
 	\end{center}
 	\caption{Exploring a \ct{PluggableListMorph}}
 	\label{fig:explorePluggableListMorph}
@@ -866,10 +1026,76 @@ Of course, we are sure that such a trivial method will work, so instead of writi
 \ct{'readme.txt' suffix} in a workspace and \menu{print it (p)}.
 What a surprise!  Instead of getting the expected answer \ct{'txt'}, a \clsind{PreDebugWindow} pops up, as shown in \figref{PreDebugWindow}.
 
+\begin{ExecuteSmalltalkScript}
+"debuggers"
+SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
+	| home debugger codePane contextVarList |
+	home := thisContext.
+	recorder writeTo: 'PreDebugWindow.png' building: [:helper |
+		thisContext wrap: [:block | helper restoreMethods: {String >> #suffix} after: block].
+		String compile: 'suffix
+	"assumes that I''m a file name, and answers my suffix, the part after the last dot"
+	| dot dotPosition |
+	dot := FileDirectory dot.
+	dotPosition := (self size to: 1 by: -1) detect: [ :i | (self at: i) = dot ].
+	^ self copyFrom: dotPosition to: self size'
+.
+		helper
+			runModal: ['readme.txt' suffix]
+			then: [
+				helper takeScreenshot.
+				
+				"Next screenshots"
+				thisContext preponeSender: home.
+			].
+	].
+	recorder writeTo: 'debuggerDetect.png' building: [:helper |
+		helper click: (helper buttonLabeled: 'Debug*' in: helper foregroundWindow).
+		debugger := helper foregroundWindow.
+		helper scaleWindow: debugger.
+		helper selectAnyListIn: debugger at: '*detect:ifFound:ifNone:'.
+		codePane := helper textMorphIn: debugger withTextMatching: 'detect:*'.
+		helper selectAnyListIn: debugger at: #self.
+		helper focus: codePane.
+	].
+	recorder writeTo: 'RestartDetect.png' building: [:helper |
+		helper click: (helper buttonLabeled: 'Restart*' in: debugger).
+	].
+	recorder writeTo: 'steppingIntoValue.png' building: [:helper |
+		| stepThrough |
+		stepThrough := helper buttonLabeled: 'Through*' in: debugger.
+		contextVarList := helper listMorphIncludingMatch: #thisContext in: debugger.
+		helper
+			click: stepThrough;
+			select: contextVarList at: #each;
+			focus: codePane.
+		[((debugger model instVarNamed: #contextVariablesInspector) object tempNamed: #each) > 7]
+			whileTrue: [helper click: stepThrough].
+	].
+	recorder writeTo: 'dotIsAString.png' building: [:helper |
+		helper
+			click: (helper buttonLabeled: 'Into*' in: debugger);
+			select: contextVarList at: #i;
+			selectAnyListIn: debugger at: #self andScrollIntoViewBy: 1;
+			focus: codePane.
+	].
+	recorder writeTo: 'revertDialog.png' building: [:helper |
+		codePane setSelection: (1 to: 0).
+		[codePane find]
+			valueSupplyingAnswer: 'FileDirectory dot'.
+		helper type: 'FileDirectory dot asCharacter' into: codePane.
+		helper
+			runModal: [codePane accept]
+			then: [
+				helper dialogWindow center: (debugger bounds pointAtFraction: 3 / 4 @ (4 / 11)).
+				helper takeScreenshot].
+	].
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
 	\begin{center}
 	\ifluluelse
-		{\includegraphics[scale=0.65]{PreDebugWindow}}
+		{\includegraphics[width=0.7\textwidth]{PreDebugWindow}}
 		{\includegraphics[scale=0.7]{PreDebugWindow}}
 	\end{center}
 	\caption{A \ct{PreDebugWindow} notifies us of a bug.}
@@ -880,30 +1106,30 @@ The \ct{PreDebugWindow} has a title-bar that tells us what error occurred, and s
 Starting from the bottom of the trace, \ct{UndefinedObject>>>DoIt} represents the code that was compiled and run when we selected \ct{'readme.txt' suffix} in the workspace and asked \sq to \menu{print it}.
 This code, of course, sent the message \ct{suffix} to a \clsind{ByteString} object (\ct{'readme.txt'}). 
 This caused the inherited \ct{suffix} method in class \ct{String} to execute; all this information is encoded in the next line of the stack trace, \ct{ByteString(String)>>>suffix}.  
-Working up the stack, we can see that \ct{suffix} sent \ct{detect:}\ldots and eventually \ct{detect:ifNone} sent \ct{errorNotFound}.
+Working up the stack, we can see that \ct{suffix} sent \ct{detect:}\ldots and eventually \ct{detect:ifFound:ifNone:} sent \ct{errorNotFound}.
 \clsindex{UndefinedObject}
 
 \begin{figure}[btp]
 	\begin{center}
 	\ifluluelse
-		{\includegraphics[width=\textwidth]{debuggerDetectIfNone}}
-		{\includegraphics[scale=0.7]{debuggerDetectIfNone}}
+		{\includegraphics[width=0.9\textwidth]{debuggerDetect}}
+		{\includegraphics[scale=0.7]{debuggerDetect}}
 	\end{center}
 	\caption{The debugger.}
-	\label{fig:debuggerDetectIfNone}
+	\label{fig:debuggerDetect}
 \end{figure}
 
 To find out \emph{why} the dot was not found, we need the debugger itself, so click on \button{Debug}.
 
 \dothis{You can also open the debugger by clicking on any of the lines on the stack trace.  If you do this, the debugger will open already focussed on the corresponding method.}
 
-The debugger is shown in \figref{debuggerDetectIfNone}; it looks intimidating at first, but it is quite easy to use.
+The debugger is shown in \figref{debuggerDetect}; it looks intimidating at first, but it is quite easy to use.
 The title-bar and the top pane are very similar to those that we saw in the \lct{PreDebugWindow}.  
 However, the debugger combines the stack trace with a method browser, so when you select a line in the stack trace, the corresponding method is shown in the pane below.
 It's important to realize that the execution that caused the error is still in your image, but in a suspended state.  
 Each line of the stack trace represents a frame on the execution stack that contains all of the information necessary to continue the execution.  This includes all of the objects involved in the computation, with their instance variables, and all of the temporary variables of the executing methods.
 
-In \figref{debuggerDetectIfNone} we have selected the \ct{detect:ifNone:} method in the top pane.
+In \figref{debuggerDetect} we have selected the \ct{detect:ifFound:ifNone:} method in the top pane.
 The method body is displayed in the center pane; the blue highlight around the message \ct{value} shows that the current method has sent the message \ct{value} and is waiting for an answer.
 
 The four panes at the bottom of the debugger are really two mini-inspectors (without workspace panes).
@@ -917,14 +1143,14 @@ You can always \menu{cancel (l)} your changes using the menu or \short{\textit{l
 \index{keyboard shortcut!cancel}
 
 The inspector on the right shows the temporary variables of the current context.
-In \figref{debuggerDetectIfNone},
+In \figref{debuggerDetect},
 \ct{value} was sent to the parameter \ct{exceptionBlock}.
 
 \dothis{To see the current value of this parameter, click on \ct{exceptionBlock} in the context inspector.
 This will tell you that \ct{exceptionBlock} is \ct{[self errorNotFound: ...]}.
 So, it is not surprising that we see the corresponding error message.}
 
-Incidentally, if you want to open a full inspector or explorer on one of the variables shown in the mini-inspectors, just double-click on the name of the variable, or select the name of the variable and choose \menu{inspect (i)} or \menu{explore (I)} from the yellow button menu.  
+Incidentally, if you want to open a full inspector or explorer on one of the variables shown in the mini-inspectors, select the name of the variable and choose \menu{inspect (i)} or \menu{explore (I)} from the yellow button menu.  
 This can be useful if you want to watch how a variable changes while you execute other code. 
 \index{keyboard shortcut!inspect it}
 \index{keyboard shortcut!explore it}
@@ -933,23 +1159,23 @@ Looking back at the method window, we see that we expected the penultimate line 
 \sq does not let us run an execution backwards, but it does let us start a method again, which works very well in code such as this that does not mutate objects, but instead creates new ones.  
 
 \dothis{Click \button{Restart}, and you will see that the locus of execution returns to the first statement of the current method.  
-The blue highlight shows that the next message to be sent will be {\ct{do:}} (see \figref{RestartDetectIfNone}).}
+The blue highlight shows that the next message to be sent will be {\ct{do:}} (see \figref{RestartDetect}).}
 
 \begin{figure}[btp]
 	\begin{center}
 	\ifluluelse
-		{\includegraphics[width=\textwidth]{RestartDetectIfNone}}
-		{\includegraphics[scale=0.7]{RestartDetectIfNone}}
+		{\includegraphics[width=\textwidth]{RestartDetect}}
+		{\includegraphics[scale=0.7]{RestartDetect}}
 	\end{center}
-	\caption{The debugger after restarting the \ct{detect: ifNone:} method}
-	\label{fig:RestartDetectIfNone}
+	\caption{The debugger after restarting the \ct{detect:ifFound:ifNone:} method}
+	\label{fig:RestartDetect}
 \end{figure}
 
 The \button{Into} and \button{Over} buttons give us two different ways to step through the execution.  If you click \button{Over}, \sq executes the current message-send (in this case the \ct{do:}) in one step, unless there is an error.  
 So \button{Over} will take us to the next message-send in the current method, which is \ct{value}: this is exactly where we started, and not much help. 
 What we need to do is to find out why the \ct{do:} is not finding the character that we are looking for.
 
-\dothis{Click \button{Over}, and then click \button{Restart} to get back to the situation shown in \figref{RestartDetectIfNone}.}
+\dothis{Click \button{Over}, and then click \button{Restart} to get back to the situation shown in \figref{RestartDetect}.}
 
 \dothis{Click \button{Into}; \sq will go into the method corresponding to the highlighted message-send, in this case, \ct{Collection>>>do:}.}
 
@@ -1013,7 +1239,7 @@ The way to avoid this sort of problem is to write an \ind{SUnit} test that defin
 
 \begin{method}[testSuffix]{A simple test for the \ct{suffix} method}
 testSuffixFound
-	self assert: 'readme.txt' suffix = 'txt'
+	self assert: 'txt' equals: 'readme.txt' suffix
 \end{method}
 
 The effort required to do that was little more than to run the same test in the workspace, but using \sunit saves the test as executable documentation, and makes it easy for others to run.
@@ -1025,13 +1251,54 @@ Here is a better test:
 
 \begin{method}[testSuffix2]{A better test for the \ct{suffix} method}
 testSuffixFound
-	self assert: 'readme.txt' suffix = 'txt'.
-	self assert: 'read.me.txt' suffix = 'txt'
+	self assert: 'txt' equals: 'readme.txt' suffix.
+	self assert: 'txt' equals: 'read.me.txt' suffix
 \end{method}
 \noindent
 Why is this test better?  Because it tells the reader what the method should do if there is more than one dot in the target String.
 
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/fixOffByOne.png' building: [:helper |
+	| testRunner |
+	thisContext wrap: [:block | helper restoreMethods: {
+			String >> #suffix.
+			StringTest >> #testSuffixFound.
+			StringTest >> #testSuffixNotFound }
+		after: block].
+	String compile: 'suffix
+"assumes that I''m a file name, and answers my suffix, the part after the last dot"
+| dot dotPosition |
+dot := FileDirectory dot asCharacter.
+dotPosition := (self size to: 1 by: -1) detect: [ :i | (self at: i) = dot ].
+^ self copyFrom: dotPosition to: self size'
+.
+	StringTest compile: 'testSuffixFound
+self assert: ''txt'' equals: ''readme.txt'' suffix'
+.
+	StringTest removeSelector: #testSuffixNotFound.
+	testRunner := TestRunner newForSuite: StringTest suite.
+	testRunner runAll.
+	ToolBuilder open: testRunner.
+	helper
+		runModal: [ testRunner debugSuite: testRunner suiteAll ]
+		then: [
+			| debugger codePane |
+			thisContext wrap: [:block | helper hideProgressMorphDuring: block].
+			helper click: (helper buttonLabeled: 'debug*' in: helper foregroundWindow).
+			debugger := helper foregroundWindow.
+			helper scaleWindow: debugger.
+			helper selectAnyListIn: debugger at: '*testSuffixFound'.
+			codePane := helper textMorphIn: debugger withTextMatching: 'testSuffixFound*'.
+			debugger model restart; stepInto.
+			helper focus: codePane.
+			codePane setSelection: (1 to: 0).
+			[codePane find]
+				valueSupplyingAnswer: 'dotPosition to:'.
+			helper type: 'dotPosition + 1 to:' into: codePane.
+			helper takeScreenshot].
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
 	\begin{center}
 		\includegraphics[width=\textwidth]{fixOffByOne}
@@ -1041,7 +1308,7 @@ Why is this test better?  Because it tells the reader what the method should do 
 \end{figure}
 
 There are a few other ways to get into the debugger in addition to catching errors and assertion failures.
-If you execute code that goes into an infinite loop, you can interrupt it and open a debugger on the computation by typing \short{.} (that's a full stop or a period, depending  on where you learned English).\footnote{It is also useful to know that you can bring up an emergency debugger at any time by typing \short{{\sc shift--}.}}
+If you execute code that goes into an infinite loop, you can interrupt it and open a debugger on the computation by typing \short{.} (that's a full stop or a period, depending  on where you learned English).
 You can also just edit the suspect code to insert \ct{self halt}.
 So, for example, we might edit the \ct{suffix} method to read as follows:
 \index{process!interrupting}
@@ -1085,6 +1352,16 @@ We will learn more about SUnit in \charef{SUnit}.
 \st is a multi-threaded system: there are many lightweight processes (also known as threads) running concurrently in your image. 
 In the future the \sq virtual machine may take advantage of multiprocessors when they are available, but at present concurrency is implemented by time-slicing.
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/processBrowser.png' building: [:helper |
+	| processList stackList |
+	ProcessBrowser open.
+	helper scaleWindow: helper foregroundWindow.
+	processList := helper selectAnyListIn: helper foregroundWindow at: '*the UI process*'.
+	stackList := helper foregroundWindow findDeepSubmorphThat: [:m | m isPluggableListMorph and: [m ~= processList]] ifAbsent: [NotFound signal].
+	stackList changeModelSelection: 1.
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
 	\begin{center}
 	\ifluluelse
@@ -1120,6 +1397,16 @@ The \emph{method finder} was described at some length in \secref{quick:methodFin
 However, to look at the body of a method, the method finder opens a new browser.
 This can quickly become overwhelming.
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/methodNamesRandom.png' building: [:helper |
+	| methodList |
+	(MessageNames methodBrowserSearchingFor: 'random') openInWorld.
+	helper scaleWindow: helper foregroundWindow.
+	helper
+		selectAnyListIn: helper foregroundWindow at: 'atRandom:';
+		selectAnyListIn: helper foregroundWindow at: 'Integer*'.
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
 	\begin{center}
 	\ifluluelse
@@ -1148,6 +1435,49 @@ This includes creating new classes, re-naming classes, changing categories, addi
 However, arbitrary \emph{doits} are not included, so if, for example, you create a new global variable by assigning to it in a workspace, the variable creation will not make it into a \subind{file}{change set}.
 \index{change set browser}
 
+\begin{ExecuteSmalltalkScript}"changeSetBrowsers"
+| buildChangeSet buildChangeSorter |
+buildChangeSet := [:helper :outerBlock |
+	| methods |
+	thisContext wrap: [:block | ChangeSet newChangesNamed: 'My cool changeset' during: block].
+	methods := {
+		String >> #suffix.
+		StringTest >> #testSuffixFound }.
+	thisContext wrap: [:block | helper restoreMethods: methods after: block].
+helper touchMethods: methods.
+	outerBlock value].
+
+buildChangeSorter := [:helper |
+	| classList |
+	classList := helper selectAnyListIn: helper foregroundWindow at: 'String {*}'.
+	helper selectAnyListIn: helper foregroundWindow at: 'suffix*'.
+	helper hand newKeyboardFocus: nil.
+	classList].
+
+SBEScreenshotRecorder writeTo: './figures/changeSetBrowser.png' building: [:helper |
+	thisContext wrap: [:block | buildChangeSet value: helper value: block].
+	ChangeSorter open.
+	helper scaleWindow: helper foregroundWindow.
+	buildChangeSorter value: helper.
+].
+
+SBEScreenshotRecorder writeTo: './figures/changeSorter.png' building: [:helper |
+	| sorter leftChangeSetMatch leftChangeList rightClassList |
+	thisContext wrap: [:block | buildChangeSet value: helper value: block].
+	thisContext wrap: [:block | ChangeSet newChangesNamed: 'String enhancements' during: block].
+	sorter := DualChangeSorter new.
+	sorter open.
+	helper scaleWindow: helper foregroundWindow.
+	leftChangeSetMatch := ChangeSet secondaryChangeSet name.
+	leftChangeList := helper foregroundWindow
+		findDeepSubmorphThat: [:m | m isPluggableListMorph and: [sorter isLeftSide: m model] and: [m getList anySatisfy: [:ea | leftChangeSetMatch match: ea]]]
+		ifAbsent: [NotFound signal].
+	helper select: leftChangeList at: leftChangeSetMatch asString.
+	rightClassList := buildChangeSorter value: helper.
+	helper click: rightClassList at: (helper boundsOfItemMatching: 'String*' in: rightClassList) center buttons: #(right).
+	helper select: helper menu at: 'move*to other*'.
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
 	\begin{center}
 	\ifluluelse
@@ -1216,6 +1546,28 @@ This requires the use of another tool, the file list browser.
 %=========================================================
 \section{The File List Browser}
 
+\begin{ExecuteSmalltalkScript}"fileListBrowser"
+SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
+	recorder writeTo: 'fileList.png' building: [:helper |
+		| csName |
+		csName := 'my cool changeset'.
+		thisContext wrap: [:block | ChangeSet newChangesNamed: csName during: block].
+		thisContext wrap: [:block | helper restoreMethods: {SearchBar >> #buildWith:. TheWorldMainDockingBar >> #createDockingBar} after: block].
+		SearchBar compile: ((SearchBar sourceCodeAt: #buildWith:)
+			copyReplaceAll: 'Search or evaluate...' with: 'Carpe Squeak!').
+		TheWorldMainDockingBar compile: ((TheWorldMainDockingBar sourceCodeAt: #createDockingBar)
+			copyReplaceAll: #adhereToTop with: #adhereToBottom).
+		ChangeSet current fileOut.
+		FileList open.
+		helper selectAnyListIn: helper foregroundWindow at: ('*{1}*.cs' format: {csName})].
+	recorder writeTo: 'fileContentsBrowser.png' building: [:helper |
+		helper click: (helper buttonLabeled: 'Code' in: helper foregroundWindow).
+		helper foregroundWindow model
+			selectClassNamed: #SearchBar;
+			selectMessageNamed: #buildWith:.
+		helper takeScreenshotOf: helper foregroundWindow].
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
 	\begin{center}
 	\ifluluelse
@@ -1328,7 +1680,7 @@ In order to develop effectively with Squeak, it is important to invest some effo
 \begin{itemize}
   \item The standard \emph{system browser} is your main interface for browsing existing class categories, classes, method protocols and methods, and for defining new ones.
   The system browser offers several useful buttons to directly jump to senders or implementors of a message, versions of a method, and so on.
-  \item There exist several different class browsers (such as the OmniBrowser and the Refactoring Browser), and several specialized browsers (such as the hierarchy browser) which provide different views of classes and methods.
+  \item There exist several different class browsers (such as the System Browser and the Snapshot Browser from Monticello), and several specialized browsers (such as the hierarchy browser) which provide different views of classes and methods.
   \item From any of the tools, you can highlight the name of a class or a method and immediately jump to a browser by using the keyboard shortcut \short{b}.
   \item You can also browse the \st system programmatically by sending messages to \ct{SystemNavigation default}.
   \item \emph{Monticello} is a tool for exporting, importing, versioning and sharing packages of classes and methods.

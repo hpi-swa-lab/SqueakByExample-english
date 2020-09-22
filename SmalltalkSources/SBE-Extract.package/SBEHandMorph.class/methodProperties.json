@@ -2,5 +2,13 @@
 	"class" : {
 		 },
 	"instance" : {
-		"owner:" : "TB 3/7/2017 10:11",
-		"sendFocusEvent:to:clear:" : "TB 3/7/2017 10:11" } }
+		"activateWithEvent:during:" : "ct 12/4/2019 12:06",
+		"dequeueEvent" : "ct 1/15/2020 10:44",
+		"hasQueuedEvents" : "ct 1/15/2020 10:43",
+		"initialize" : "ct 1/15/2020 10:44",
+		"owner:" : "ct 11/23/2019 17:50",
+		"processEvent:in:" : "ct 12/4/2019 12:07",
+		"processEvents" : "ct 1/17/2020 19:30",
+		"processNewEvent:" : "ct 1/15/2020 12:13",
+		"queueEvent:" : "ct 1/15/2020 10:43",
+		"sendFocusEvent:to:clear:" : "ct 1/17/2020 19:31" } }

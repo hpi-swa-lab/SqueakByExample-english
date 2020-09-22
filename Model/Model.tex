@@ -179,6 +179,15 @@ class instance variables are just instance variables defined by a metaclass, and
 A class and its \ind{metaclass} are two separate classes, even though the former is an instance of the latter. 
 However, this is largely irrelevant to you as a programmer: you are concerned with defining the behavior of your objects and the classes that create them.
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder
+	writeTo: './figures/Color-Buttons_browseInstance.png' building: [:helper |
+		ToolSet browse: Color selector: #hue.
+		helper scaleWindow: helper foregroundWindow];
+	writeTo: './figures/Color-Buttons_browseClass.png' building: [:helper |
+		ToolSet browse: Color class selector: #wheel:.
+		helper scaleWindow: helper foregroundWindow].
+\end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[width=\textwidth]{Color-Buttons}
@@ -774,6 +783,13 @@ First the normal method lookup would go through the inheritance chain all the wa
 When this method is not found, the \ind{virtual machine} will cause the object to send \ct{self doesNotUnderstand: #foo}.
 (See \figref{fooNotFound}.)
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/fooNotFound_debugger.png' building: [:helper |
+	helper
+		runModal: [Compiler evaluate: 'EllipseMorph new foo']
+		then: [helper scaleWindow: helper foregroundWindow].
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
 \begin{center}
 \ifluluelse

@@ -128,11 +128,27 @@ EllipseMorph new color: (Color blue alpha: 0.4); openInWorld
 \noindent
 You can see the effect in \figref{translucentEllipse}.
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: 'figures/TranslucentEllipse.png' building: [:helper |
+	| workspace |
+	workspace := Workspace open.
+	helper
+		type: [EllipseMorph new
+			color: (Color blue alpha: 0.4);
+			openInWorld]
+				sourceString allButFirst allButLast
+		into: workspace.
+	#($a $d) do: [:c | helper keyStroke: workspace key: c modifiers: #(cmd)].
+	helper foregroundMorph
+		extent: (workspace extent * (0.7 @ 0.8));
+		center: (workspace bounds @* (0.73 @ 0.78)).
+]
+\end{ExecuteSmalltalkScript}
 \begin{center}
 \begin{figure}[!ht]
 \ifluluelse
-	{\centerline {\includegraphics[scale=0.7]{TranslucentEllipse}}}
-	{\centerline {\includegraphics[width=8cm]{TranslucentEllipse}}}
+	{\centerline {\includegraphics[scale=0.5]{TranslucentEllipse}}}
+	{\centerline {\includegraphics[width=6cm]{TranslucentEllipse}}}
 \caption{A translucent ellipse\label{fig:translucentEllipse}}
 \end{figure}
 \end{center}
@@ -283,6 +299,19 @@ This can be a bit confusing, because the title bar of the inspector names the \e
 
 The inspector on \ct{Color} allows you to see the superclass, instance variables, method \subind{method}{dictionary}, and so on, of the \ct{Color} class, as shown in \figref{inspectingColor}.
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: 'figures/InspectingColor.png' building: [:helper |
+	| leftInspector codePane rightInspector |
+	Color blue inspect.
+	leftInspector := helper foregroundWindow.
+	codePane := helper morphWithBalloonText: '*evaluate*' in: helper foregroundWindow.
+	helper type: 'self class inspect' into: codePane.
+	helper keyStroke: codePane key: $d modifiers: #(cmd).
+	rightInspector := helper foregroundWindow.
+	rightInspector topLeft: leftInspector topRight + (42 @ 0).
+	SystemWindow new beKeyWindow "fast hack to display none of the windows as a key window"
+]
+\end{ExecuteSmalltalkScript}
 \begin{center}
 \begin{figure}[!ht]
 \ifluluelse

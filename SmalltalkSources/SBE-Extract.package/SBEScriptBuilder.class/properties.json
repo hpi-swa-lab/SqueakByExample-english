@@ -1,0 +1,14 @@
+{
+	"category" : "SBE-Extract",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ct 11/18/2019 14:02",
+	"instvars" : [
+		 ],
+	"name" : "SBEScriptBuilder",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"type" : "normal" }

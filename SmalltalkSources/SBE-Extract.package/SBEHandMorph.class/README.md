@@ -1,0 +1,1 @@
+I am a HandMorph that supports simply simulated control.

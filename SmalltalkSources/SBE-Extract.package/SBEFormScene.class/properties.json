@@ -1,0 +1,14 @@
+{
+	"category" : "SBE-Extract",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ct 11/24/2019 13:57",
+	"instvars" : [
+		 ],
+	"name" : "SBEFormScene",
+	"pools" : [
+		 ],
+	"super" : "SBEScreenshotScene",
+	"type" : "normal" }

@@ -4,11 +4,11 @@
 		"fileReference" ],
 	"classvars" : [
 		"ResourceDirectory" ],
-	"commentStamp" : "ct 11/1/2019 16:10",
+	"commentStamp" : "ct 11/18/2019 14:03",
 	"instvars" : [
 		 ],
 	"name" : "SBEFigureBuilder",
 	"pools" : [
 		 ],
-	"super" : "TestCase",
+	"super" : "SBEScriptBuilder",
 	"type" : "normal" }

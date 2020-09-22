@@ -1,0 +1,25 @@
+{
+	"class" : {
+		"buildingSelectorPattern" : "ct 11/23/2019 19:14",
+		"debugging" : "ct 11/20/2019 12:38",
+		"doesNotUnderstand:" : "ct 11/23/2019 19:05",
+		"newAtDirectory:" : "ct 11/20/2019 12:18",
+		"record:" : "ct 11/20/2019 11:52",
+		"recordSeries:" : "ct 11/23/2019 18:09",
+		"writeInto:recordSeries:" : "ct 11/20/2019 12:17" },
+	"instance" : {
+		"debugging" : "ct 11/23/2019 18:52",
+		"defaultFileDirectory" : "ct 11/20/2019 12:21",
+		"fileDirectory" : "ct 11/20/2019 12:21",
+		"fileDirectory:" : "ct 11/20/2019 12:14",
+		"initialize" : "ct 11/20/2019 11:56",
+		"paperColor" : "ct 11/22/2019 20:57",
+		"record:" : "ct 11/23/2019 19:31",
+		"setFileDirectoryFrom:" : "ct 11/20/2019 12:22",
+		"setUpWorld" : "ct 11/23/2019 18:02",
+		"useHelper:during:" : "ct 11/20/2019 11:01",
+		"worldSize" : "ct 11/22/2019 20:57",
+		"writeScene:to:" : "ct 11/23/2019 17:48",
+		"writeTo:building:" : "ct 11/20/2019 12:03",
+		"writeTo:buildingForm:" : "ct 11/20/2019 12:02",
+		"writeTo:frame:building:" : "ct 11/20/2019 12:29" } }

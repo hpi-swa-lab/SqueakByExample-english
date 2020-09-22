@@ -1,13 +1,7 @@
-as yet unclassified
+private
 sendFocusEvent: anEvent to: focusHolder clear: aBlock
 	"Send the event to the morph currently holding the focus"
 
-	| result w |	
-	w := ActiveWorld.
-	w becomeActiveDuring:[
-		ActiveHand := self.
-		ActiveEvent := anEvent.
-		result := focusHolder handleFocusEvent: 
-			(anEvent transformedBy: (focusHolder transformedFrom: self))].
-		
-	^ result
+	self activateWithEvent: anEvent during: [
+		^ focusHolder processFocusEvent:
+			(anEvent transformedBy: (focusHolder transformedFrom: self))]

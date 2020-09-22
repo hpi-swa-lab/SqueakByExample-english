@@ -1,0 +1,1 @@
+I am a specialization of SBEScreenshotRecorder for the purpose of debugging. Instead of saving any scene, I will open it in the hand of the user.

@@ -9,8 +9,8 @@
 		"world",
 		"hand",
 		"worldSize",
-		"frameSpecifier",
-		"picture",
+		"worldColor",
+		"scene",
 		"hiddenMorphs" ],
 	"name" : "SBEWorldHelper",
 	"pools" : [

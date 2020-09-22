@@ -1,0 +1,15 @@
+{
+	"class" : {
+		"building:" : "ct 11/20/2019 12:04",
+		"frame:building:" : "ct 11/20/2019 12:29" },
+	"instance" : {
+		"basicBuildWith:" : "ct 11/23/2019 18:12",
+		"buildWith:" : "ct 11/23/2019 16:18",
+		"cutFrame:fullFrame:" : "ct 11/23/2019 16:22",
+		"frameSpecifier" : "ct 11/23/2019 17:48",
+		"frameSpecifier:" : "ct 11/20/2019 12:29",
+		"initializeBuildBlock:" : "ct 11/20/2019 12:04",
+		"open" : "ct 11/24/2019 19:08",
+		"picture" : "ct 11/23/2019 17:54",
+		"picture:" : "ct 11/23/2019 17:54",
+		"saveAs:" : "ct 11/23/2019 17:58" } }

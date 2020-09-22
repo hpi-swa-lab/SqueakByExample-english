@@ -44,7 +44,7 @@ What distinguishes Morphic from most other user interface toolkits is that it do
 %=================================================================
 \section{The history of Morphic}
 
-Morphic was developed by John Maloney and Randy Smith for the \ind{Self} programming language, staring around 1993. 
+Morphic was developed by John Maloney and Randy Smith for the \ind{Self} programming language, starting around 1993. 
 Maloney later wrote a new version of Morphic for \sq, but the basic ideas behind the Self version are still alive and well in \sq Morphic: \emph{directness} and \emph{liveness}.
 Directness means that the shapes on the screen are objects that can be examined or changed directly, that is, by pointing at them using the mouse.
 Liveness means that the user interface is always able to respond to user actions: information on the screen is continuously updated as the world that it describes changes.
@@ -54,6 +54,23 @@ A simple example of this is that you can detach a menu item and keep it as a but
 \index{Morphic!halo}
 \index{blue button}
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: 'figures/detachingMenu.png' frame: [:bounds | bounds * ((0 to: 1) rect: (0.457 to: 0.748))] building: [:helper |
+	| item halo handle |
+	helper click: helper world.
+	helper closeBalloons.
+	item := helper menuItemMorphLabeled: 'new morph*' in: helper menu.
+	helper select: helper menu at: item contents.
+	halo := helper mouseOpenHaloFor: item.
+	handle := halo handles at: #doGrab:with:.
+	helper
+		mouseDrag: handle
+			from: handle center
+			to: handle center + (-100 @ 15)
+			buttons: #(left);
+		spawnHand
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[ht]
 	\ifluluelse
 		{\centerline{\includegraphics[width=0.6\textwidth]{detachingMenu}}}
@@ -111,16 +128,16 @@ bill openInWorld.
 \end{code}
 \noindent
 Then type \ct{joe position} and \menu{print it}.
-To move joe, execute \ct{joe position: (joe position + (10@3))} repeatedly.
+To move joe, execute \ct{joe position: joe position + (10@3)} repeatedly.
 
 It is possible to do a similar thing with size.
-\ct{joe} \mthind{Morph}{extent} answers joe's size; to have joe grow, execute \ct{joe extent: (joe extent * 1.1)}.
+\ct{joe} \mthind{Morph}{extent} answers joe's size; to have joe grow, execute \ct{joe extent: joe extent * 1.1}.
 To change the color of a morph, send it the \mthind{Morph}{color:} message with the desired \ct{Color} object as argument, for instance, \ct{joe color: Color orange}.
 To add transparency, try \ct{joe color: (Color orange alpha: 0.5)}.
 
 \dothis{To make bill follow joe, you can repeatedly execute this code:}
 \begin{code}{}
-bill position: (joe position + (100@0))
+bill position: joe position + (100@0)
 \end{code}
 \noindent
 If you move joe using the mouse and then execute this code, bill will move so that it is 100 pixels to the right of joe.
@@ -155,6 +172,21 @@ There are many  methods available to position a morph; browse the \protind{geome
 For example, 
 to center the star inside joe, execute \ct{star} \mthind{Morph}{center:} \ct{joe center}.
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: 'figures/joeStar.png' building: [:helper |
+	| bill joe star |
+	bill := Morph new color: Color red .
+	bill openInWorld.
+	joe := Morph new color: (Color blue alpha: 0.5).
+	joe extent: 55 @ 60.
+	joe openInWorld.
+	bill position: joe position - (27 @ 20).
+	star := StarMorph new color: Color yellow.
+	joe addMorph: star.
+	star center: joe center.
+	helper centerAllMorphs.
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[ht]
 	\centerline{\includegraphics{joeStar}}
 	\caption{The star is contained inside joe, the translucent blue morph.
@@ -212,6 +244,43 @@ drawOn: aCanvas
 \end{method}
 
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeInto: 'figures' recordSeries: [:recorder :helper |
+	thisContext wrap: [:block | helper restoreMethods: SBECrossMorph methodDict values after: block].
+	SBECrossMorph removeSelector: #step.
+	recorder writeTo: 'NewCross.png' building: [
+		| cross |
+		cross := SBECrossMorph new
+			extent: 123 asPoint;
+			openInWorld.
+		helper centerAllMorphs.
+		cross addHalo
+	].
+	helper world removeAllMorphs.
+	recorder writeTo: 'overdrawBug.png' building: [
+		| cross |
+		SBECrossMorph compile: 'drawOn: aCanvas
+	aCanvas fillRectangle: self horizontalBar color: self color.
+	aCanvas fillRectangle: self verticalBar color: self color'
+		.
+		cross := SBECrossMorph newBounds: (0 @ 0 corner: 160 @ 160).
+		cross openInWorld.
+		cross color: (Color blue alpha: 0.3).
+		helper centerAllMorphs.
+	].
+	recorder writeTo: 'hairlineBug.png' building: [
+		SBECrossMorph
+			compile: 'drawOn: aCanvas
+	| topAndBottom |
+	aCanvas fillRectangle: self horizontalBar color: self color.
+	topAndBottom := self verticalBar areasOutside: (self horizontalBar in: [:bar |
+		self flag: #hacked.
+		bar withHeight: bar height + 1]).
+	topAndBottom do: [ :each | aCanvas fillRectangle: each color: self color]'
+			.
+	]
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[hbt]
 	\ifluluelse
 		{\centerline{\includegraphics[width=0.3\textwidth]{NewCross}}}
@@ -312,7 +381,7 @@ This doesn't matter when we fill the cross with an opaque colour, but the bug be
 \dothis{Execute the following code in  a workspace, line by line:}
 
 \begin{code}{}
-m := CrossMorph new bounds: (0@0 corner: 300@300).
+m := CrossMorph newBounds: (0@0 corner: 300@300).
 m openInWorld.
 m color: (Color blue alpha: 0.3).
 
@@ -529,6 +598,14 @@ Alternatively, you can modify the \ct{handleKeystroke:} method so that you can u
 To prompt the user for input, the \clsind{FillInTheBlank} class provides a few ready-to-use dialog boxes.
 For instance, the \mthind{FillInTheBlank}{request:initialAnswer:} method returns the string entered by the user (\figref{dialogName}).
 
+\begin{ExecuteSmalltalkScript}
+	SBEScreenshotRecorder writeTo: 'figures/dialog.png' building: [:helper |
+		helper runModal: [
+			FillInTheBlank
+				request: 'What''s your name?'
+				initialAnswer: 'no name'].
+	]
+	\end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
 \begin{minipage}{0.55\textwidth}
 	\ifluluelse
@@ -538,6 +615,17 @@ For instance, the \mthind{FillInTheBlank}{request:initialAnswer:} method returns
 		\label{fig:dialogName}}
 \end{minipage}
 \hfill
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: 'figures/popup.png' building: [:helper |
+	| menu |
+	menu := PopUpMenu
+		labelArray: #('circle' 'oval' 'square' 'rectangle' 'triangle')
+		lines: #(2 4).
+	helper
+		runModal: [menu startUpWithCaption: 'Choose a shape']
+		then: [helper closeBalloons].
+]
+\end{ExecuteSmalltalkScript}
 \begin{minipage}{0.38\textwidth}
 	\vfill
 	\ifluluelse
@@ -666,6 +754,15 @@ The green morph is rejected and therefore stays attached to the mouse pointer.
 
 Let's design a morph to roll a die\footnote{NB: One die, two dice.}. Clicking on it will display the values of all sides of the die in a quick loop, and another click will stop the animation.
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: 'figures/die.png' building: [:helper |
+	SBEDieMorph new
+		openCenteredInWorld;
+		stopStepping;
+		dieValue: 5;
+		addHalo
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[ht]
 	\centerline{\includegraphics[scale=0.65]{die}}
 	\caption{The die in Morphic.
@@ -849,6 +946,28 @@ That's all you need to do!
 If you're curious, have a look at the \mthind{Canvas}{asAlphaBlendingCanvas:} method.
 You can also get antialiasing by using \clsind{BalloonCanvas} and transforming the die drawing methods as shown in \mthsref{aadie}.
 
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: 'figures/multiMorphs.png' building: [:helper |
+	thisContext wrap: [:block | helper restoreMethods: {SBEDieMorph >> #drawOn:} after: block].
+	SBEDieMorph compile: 'drawOn: aCanvas
+	| theCanvas |
+	theCanvas := aCanvas asAlphaBlendingCanvas: 0.5.
+	super drawOn: theCanvas.
+	(self perform: (''face'' , dieValue asString) asSymbol)
+		do: [:aPoint | self drawDotOn: theCanvas at: aPoint]'
+	.
+	{ Morph new
+		position: 30 @ 0;
+		color: Color red.
+	Morph new
+		position: 0 @ 20;
+		color: Color blue.
+	SBEDieMorph new
+		position: 25 @ 18;
+		extent: 75 @ 75 } do: #openInWorld.
+	helper takeScreenshot. "before the drawing method is reverted"
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[ht]
 	\centerline{\includegraphics[scale=0.7]{multiMorphs}}
 	\caption{The die displayed with alpha-transparency.

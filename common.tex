@@ -7,6 +7,7 @@
 %=============================================================
 %:Packages
 \usepackage[T1]{fontenc}  %%%%%% really important to get the code directly in the text!
+\usepackage{SmalltalkInTex}
 \usepackage{lmodern}
 %\usepackage[scaled=0.85]{bookmanx} % needs another scale factor if used with \renewcommand{\sfdefault}{cmbr}
 \usepackage{palatino}
@@ -214,9 +215,19 @@
 \newcommand{\hint}[1]{\vspace{1ex}\noindent\fbox{\textsc{Hint}} \emph{#1}}
 %=================================================================
 % graphics for Morphic handles
+\begin{ExecuteSmalltalkScript}
+"MorphicHandles"
+#(('blackHandle' 'Halo-Grab') ('moveHandle' 'Halo-Drag') ('debugHandle' 'Halo-Debug') ('rotateHandle' 'Halo-Rot'))
+	do: [ :each |
+		SBEScreenshotRecorder
+			writeTo: ('./figures/{1}.png' format: {each first})
+			buildingForm: [ :helper |
+				helper haloHandleFormFor: each second ] ]
+\end{ExecuteSmalltalkScript}
 \newcommand{\grabHandle}{\raisebox{-0.2ex}{\includegraphics[width=1em]{blackHandle}}}
 \newcommand{\moveHandle}{\raisebox{-0.2ex}{\includegraphics[width=1em]{moveHandle}}}
 \newcommand{\debugHandle}{\raisebox{-0.2ex}{\includegraphics[width=1em]{debugHandle}}}
+\newcommand{\rotateHandle}{\raisebox{-0.2ex}{\includegraphics[width=1em]{rotateHandle}}}
 %=============================================================
 %:Highlighting Important stuff (doublebox)
 %
