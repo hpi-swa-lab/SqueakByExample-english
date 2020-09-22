@@ -609,9 +609,10 @@ The other important subclass of \ct{String} is \clsindmain{Symbol}.  The key dif
 
 \noindent
 Another important difference is that a \ct{String} is mutable, whereas a \ct{Symbol} is immutable.
+Still, we need to copy a string constant before altering it because constants are stored as literals in the compiled method and code literals are read-only:
 
 \begin{code}{@TEST}
-'hello' at: 2 put: $u; yourself --> 'hullo'
+'hello' copy at: 2 put: $u; yourself --> 'hullo'
 \end{code}
 
 \begin{code}{NB: CANNOT TEST}
