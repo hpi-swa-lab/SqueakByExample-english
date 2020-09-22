@@ -3,7 +3,8 @@ openChapterStream
 	"Open the chapter file so we can find the tests."
 	| subdir |
 	
-	subdir := FileDirectory default directoryNamed: self dir.
+	subdir := (FileDirectory on: SBEScriptBuilder resourceDirectory asString)
+		directoryNamed: self dir.
 	
 	self
 		assert: [ subdir exists ]
