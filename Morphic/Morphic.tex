@@ -593,68 +593,60 @@ Alternatively, you can modify the \ct{handleKeystroke:} method so that you can u
 % \on{You can also \menu{debug \go inspect morph} and evaluate: \ct{self currentWorld startStepping: self}.}
 
 %=================================================================
-\section{Interactors}
-
-To prompt the user for input, the \clsind{FillInTheBlank} class provides a few ready-to-use dialog boxes.
-For instance, the \mthind{FillInTheBlank}{request:initialAnswer:} method returns the string entered by the user (\figref{dialogName}).
+\section{Dialog Windows}
 
 \begin{ExecuteSmalltalkScript}
-	SBEScreenshotRecorder writeTo: 'figures/dialog.png' building: [:helper |
-		helper runModal: [
-			FillInTheBlank
-				request: 'What''s your name?'
-				initialAnswer: 'no name'].
-	]
-	\end{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: 'figures/dialog.png' building: [:helper |
+	helper runModal: [
+		Project uiManager
+			request: 'What''s your name?'
+			initialAnswer: 'no name'].
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
-\begin{minipage}{0.55\textwidth}
+\begin{minipage}{0.45\textwidth}
 	\ifluluelse
 		{\centerline{\includegraphics[scale=0.65]{dialog}}}
-		{\centerline{\includegraphics[width=5cm]{dialog}}}
-	\caption{Dialog displayed by \ct{FillInTheBlank request: 'What''s your name?' initialAnswer: 'no name'}.
+		{\centerline{\includegraphics[width=\textwidth]{dialog}}}
+	\caption{Dialog displayed by \ct{UIManager>>>request:initialAnswer:}.
 		\label{fig:dialogName}}
 \end{minipage}
 \hfill
 \begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder writeTo: 'figures/popup.png' building: [:helper |
-	| menu |
-	menu := PopUpMenu
-		labelArray: #('circle' 'oval' 'square' 'rectangle' 'triangle')
-		lines: #(2 4).
-	helper
-		runModal: [menu startUpWithCaption: 'Choose a shape']
-		then: [helper closeBalloons].
+SBEScreenshotRecorder debugging writeTo: 'figures/popup.png' building: [:helper |
+	helper runModal: [
+		Project uiManager
+			chooseFrom: #('circle' 'oval' 'square' 'rectangle' 'triangle')]
 ]
 \end{ExecuteSmalltalkScript}
-\begin{minipage}{0.38\textwidth}
+\begin{minipage}{0.45\textwidth}
 	\vfill
 	\ifluluelse
 		{\centerline{\includegraphics [scale=0.65]{popup}}}
-		{\centerline{\includegraphics[width=3cm]{popup}}}
+		{\centerline{\includegraphics[width=\textwidth]{popup}}}
 	\vfill
 	\vspace{4ex}
-	\caption{Pop-up menu displayed by \ct{PopUpMenu>>>startUpWithCaption:}.}
+	\caption{Dialog displayed by \ct{Project uiManager chooseFrom: \#('circle' 'oval' 'square' 'rectangle' 'triangle')}.}
 \end{minipage}
 \end{figure}
 
-%\begin{figure}[ht]
-%	\centerline{\includegraphics[width=5cm]{dialog}}
-%	\caption{Dialog displayed by \ct{FillInTheBlank request: 'What''s your name?' initialAnswer: 'no name'}.
-%		\label{fig:dialogName}}
-%\end{figure}
+To prompt the user for input, the \clsind{UIManager} class provides a few ready-to-use dialog boxes.
+For instance, the \mthind{UIManager}{request:initialAnswer:} method returns the string entered by the user (\figref{dialogName}).
+However, \clsind{UIManager} is an abstract class that has several subclasses such as \clsind{MorphicUIManager}, \clsind{MVCUIManager}, and others.
+What's the reason for this?
 
-To display a pop-up menu, use the \clsind{PopupMenu} class:
+\sq supports a wide range of different UI systems of which Morphic is only one of many.
+For instance, another UI system in \sq is \emph{MVC} (named after its tripartite Model View Controller architecture) which was the only available UI system in classic Smalltalk-80.
+To allow developers to write dialogs that work for any UI system, \sq provides the \clsind{UIManager} facade that defines a consistent interface to invoke user dialogs for any UI system.
+Every UI system then is represented by a subinstance of the class \clsind{Project} which instantiates a customized subclass of the \clsind{UIManager}.
+For this reason, the most idiomatic and thus recommended way to retrieve a \clsind{UIManager} instance is the method \mthind{Project class}{uiManager}.
+
+For example, to display a request dialog, send a \ct{request:initialAnswer:} message:
 \begin{code}{}
-menu := PopUpMenu
-	labelArray: #('circle' 'oval' 'square' 'rectangle' 'triangle')
-	lines: #(2 4).
-menu startUpWithCaption: 'Choose a shape'
+Project uiManager
+	request: 'What''s your name?'
+	initialAnswer: 'no name'
 \end{code}
-
-%\begin{figure}[ht]
-%	\centerline{\includegraphics[width=3cm]{popup}}
-%	\caption{PopUp displayed by \ct{PopUpMenu>>>startUpWithCaption:}.}
-%\end{figure}
 
 %=================================================================
 \section{Drag-and-drop}
