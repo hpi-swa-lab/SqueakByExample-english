@@ -605,9 +605,7 @@ SBEScreenshotRecorder writeTo: 'figures/dialog.png' building: [:helper |
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
 \begin{minipage}{0.45\textwidth}
-	\ifluluelse
-		{\centerline{\includegraphics[scale=0.65]{dialog}}}
-		{\centerline{\includegraphics[width=\textwidth]{dialog}}}
+	\centerline{\includegraphics[width=\textwidth]{dialog}}
 	\caption{Dialog displayed by \ct{UIManager>>>request:initialAnswer:}.
 		\label{fig:dialogName}}
 \end{minipage}
@@ -621,9 +619,7 @@ SBEScreenshotRecorder writeTo: 'figures/popup.png' building: [:helper |
 \end{ExecuteSmalltalkScript}
 \begin{minipage}{0.45\textwidth}
 	\vfill
-	\ifluluelse
-		{\centerline{\includegraphics [scale=0.65]{popup}}}
-		{\centerline{\includegraphics[width=\textwidth]{popup}}}
+	\centerline{\includegraphics[width=\textwidth]{popup}}
 	\vfill
 	\vspace{4ex}
 	\caption{Dialog displayed by \ct{Project uiManager chooseFrom: \#('circle' 'oval' 'square' 'rectangle' 'triangle')}.}
