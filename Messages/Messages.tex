@@ -148,7 +148,7 @@ For example in \ct{anArray at: 1 put: 10}, the keyword \ct{at:} takes the argume
 Unary messages are messages that do not require any argument. They follow the syntactic template: \ct{receiver messageName}. The selector is simply made up of a succession of characters not containing \ct{:} (\eg \ct{factorial}, \ct{open}, \ct{class}).
 \needlines{4}
 \begin{code}{@TEST}
-89 sin           --> 0.860069405812453
+89 sin           --> 0.8600694058124533
 3 sqrt           --> 1.732050807568877
 Float pi         --> 3.141592653589793
 'blop' size     --> 4
@@ -244,11 +244,11 @@ Unfortunately the rules are a bit too simplistic for arithmetic message sends, s
 
 The following example, which is a bit more complex (!), offers a nice illustration that even complicated \st expressions can be read in a natural way:
 \begin{code}{@TEST}
-[:aClass | aClass methodDict keys select: [:aMethod | (aClass>>aMethod) isAbstract ]] value: Boolean --> an IdentitySet(#or: #| #and: #& #ifTrue: #ifTrue:ifFalse: #ifFalse: #not #ifFalse:ifTrue:)
+[:aClass | aClass methodDict keys sorted select: [:aMethod | (aClass>>aMethod) isAbstract ]] value: Boolean --> #(#& #==> #and: #asBit #ifFalse: #ifFalse:ifTrue: #ifTrue: #ifTrue:ifFalse: #not #or: #|)
 \end{code}
 \noindent
 Here we want to know which methods of the \ct{Boolean} class are abstract\footnote{In fact, we could also have written the equivalent but simpler expression: \ct{Boolean methodDict select: #isAbstract thenCollect: #selector}}\damien{I've added this footnote, just remove it if you don't like it :-)}.
-We ask some argument class, \ct{aClass}, for the keys of its method dictionary, and select those methods of that class that are abstract.
+We ask some argument class, \ct{aClass}, for the keys of its method dictionary, sort them, and select those methods of that class that are abstract.
 Then we bind the argument \ct{aClass} to the concrete value \ct{Boolean}.
 We need parentheses only to send the binary message \ct{>>}, which selects a method from a class, before sending the unary message \mbox{\ct{isAbstract}} to that method. The result shows us which methods must be implemented by \ct{Boolean}'s concrete subclasses \ct{True} and \ct{False}.
 
