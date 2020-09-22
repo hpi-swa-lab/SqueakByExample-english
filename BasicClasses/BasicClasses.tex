@@ -577,18 +577,7 @@ $a                  --> $a
 $a printString --> '$a'
 \end{code}
 
-Every ascii \ct{Character} is a unique instance, stored in the class variable \cvind{CharacterTable}:
-
-\begin{code}{@TEST}
-(Character value: 97) == $a --> true
-\end{code}
-
-\ct{Characters} outside the range 0 to 255 are not unique, however: 
-
-\begin{code}{@TEST}
-Character characterTable size                               --> 256
-(Character value: 500) == (Character value: 500) --> false
-\end{code}
+Every ASCII \ct{Character} is an immediate object, meaning that they are managed by the VM via special pointers. As a consequence, characters are unique, immutable instances.
 
 %=================================================================
 \section{Strings}
