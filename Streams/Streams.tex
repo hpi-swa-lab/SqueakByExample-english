@@ -382,7 +382,7 @@ String streamContents: [ :tempStream |
 
 It's possible to use a stream to access a collection for reading and
 writing at the same time.
-Imagine you want to create an \ct{History} class which will manage
+Imagine you want to create an \ct{SBEHistory} class which will manage
 backward and forward buttons in a web browser.
 A history would react as in figures from \ref{fig:emptyStream} to
 \ref{fig:page4}.
@@ -440,13 +440,13 @@ This behaviour can be implemented using a \clsind{ReadWriteStream}.
 
 \needlines{6}
 \begin{code}{}
-Object subclass: #History
+Object subclass: #SBEHistory
   instanceVariableNames: 'stream'
   classVariableNames: ''
   poolDictionaries: ''
   category: 'SBE-Streams'
 
-History>>initialize
+SBEHistory>>initialize
     super initialize.
     stream := ReadWriteStream on: Array new.
 \end{code}
@@ -457,12 +457,12 @@ stream. The stream is created during the \ct{initialize} method.
 We need methods to go backward and forward:
 
 \begin{code}{}
-History>>goBackward
+SBEHistory>>goBackward
   self canGoBackward ifFalse: [self error: 'Already on the first element'].
   stream skip: -2.
   ^ self next.
 
-History>>goForward
+SBEHistory>>goForward
   self canGoForward ifFalse: [self error: 'Already on the last element'].
   ^ stream next
 \end{code}
@@ -472,7 +472,7 @@ with the \ct{goTo:} method which should be activated when the user
 clicks on a link. A possible solution is:
 
 \begin{code}{}
-History>>goTo: aPage
+SBEHistory>>goTo: aPage
     stream nextPut: aPage.
 \end{code}
 
@@ -482,7 +482,7 @@ clicks on the link, there should be no more future pages to go to,
 solution is to write \ct{nil} just after to indicate the history end:
 
 \begin{code}{}
-History>>goTo: anObject
+SBEHistory>>goTo: anObject
   stream nextPut: anObject.
   stream nextPut: nil.
   stream back.
@@ -496,22 +496,22 @@ there must be two pages before the current position: one page is the
 current page, and the other one is the page we want to go to.
 
 \begin{code}{}
-History>>canGoBackward
+SBEHistory>>canGoBackward
   ^ stream position > 1
 
-History>>canGoForward
+SBEHistory>>canGoForward
   ^ stream atEnd not and: [stream peek notNil]
 \end{code}
 
 Let us add a method to peek at the contents of the stream:
 \begin{code}{}
-History>>contents
+SBEHistory>>contents
   ^ stream contents
 \end{code}
 
 And the history works as advertised:
 \begin{code}{}
-History new
+SBEHistory new
 	goTo: #page1;
 	goTo: #page2;
 	goTo: #page3;
@@ -650,48 +650,22 @@ FileStream
           stream binary.
           stream size.         --> 4
           stream next.         --> 145
-          stream upToEnd. --> a ByteArray(250 139 98)
+          stream upToEnd. --> #[250 139 98]
       ].
 \end{code}
 
 Here is another example which creates a picture in a file named
 ``test.pgm'' (portable graymap file format). You can open this file with your favorite drawing program.
 
-% The following does not assert anything, but @TEST is used to ensure
-% that no error is thrown.
-\begin{code}{@TEST}
-FileStream
-  forceNewFileNamed: 'test.pgm' 
-  do: [:stream |
-	stream
-		nextPutAll: 'P5'; cr;
-		nextPutAll: '4 4'; cr;
-		nextPutAll: '255'; cr;
-		binary;
-		nextPutAll: #[255 0 255 0];
-		nextPutAll: #[0 255 0 255];
-		nextPutAll: #[255 0 255 0];
-		nextPutAll: #[0 255 0 255]
-	]
-\end{code}
+\numFiletreeMethodInput[sbefilestreamsexamplecheckerboard]%
+{A test for a shout method}%
+{ListingSources/SBE-Streams.package/SBEFileStreams.class/class/exampleCheckerboard.st}
 
 This creates a 4x4 checkerboard as shown in \figref{checkerboard4x4}.
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: 'figures/checkerboard4x4.png' buildingForm: [
-	FileStream
-		forceNewFileNamed: 'test.pgm'
-		do: [:stream |
-			stream
-				nextPutAll: 'P5'; cr;
-				nextPutAll: '4 4'; cr;
-				nextPutAll: '255'; cr;
-				binary;
-				nextPutAll: #[255 0 255 0];
-				nextPutAll: #[0 255 0 255];
-				nextPutAll: #[255 0 255 0];
-				nextPutAll: #[0 255 0 255]
-	].
+	SBEFileStreams exampleCheckerboard.
 	(Form fromFileNamed: 'test.pgm') scaledToSize: 112 asPoint.
 ]
 \end{ExecuteSmalltalkScript}
