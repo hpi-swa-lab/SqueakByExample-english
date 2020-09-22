@@ -13,6 +13,7 @@ SBE.url
 ListingSources/
 warnings.txt
 bin/gdrive
+**/figures/*.png
 
 # Editors
 .vscode/
