@@ -27,12 +27,14 @@ ETC=SBE-etc
 TEXINPUT=$(shell TEXINPUT='\\\\input{${BOOK}}' && [ "$$DEBUG_FIGURES" = true ] && TEXINPUT='\\\\AtBeginDocument{\\\\include{robustize-figures}}'"$$TEXINPUT" ;echo $$TEXINPUT)
 
 # --------------------------------------------------------------------------------
-all : clean listings book
+all : book
 
 # NB: be sure to use texlive and to set the TEXINPUTS variable accordingly
 # See README.txt
 
-book-only :
+book: clean listings book-pages
+
+book-pages :
 	time ${PDFLATEX} ${TEXINPUT}
 	time ${BIBTEX} ${BOOK}
 	time ${PDFLATEX} ${TEXINPUT}
