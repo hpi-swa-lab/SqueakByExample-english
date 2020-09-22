@@ -613,7 +613,7 @@ SBEScreenshotRecorder writeTo: 'figures/dialog.png' building: [:helper |
 \end{minipage}
 \hfill
 \begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder debugging writeTo: 'figures/popup.png' building: [:helper |
+SBEScreenshotRecorder writeTo: 'figures/popup.png' building: [:helper |
 	helper runModal: [
 		Project uiManager
 			chooseFrom: #('circle' 'oval' 'square' 'rectangle' 'triangle')]
