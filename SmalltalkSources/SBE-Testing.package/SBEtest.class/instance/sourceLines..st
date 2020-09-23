@@ -1,9 +1,9 @@
 initialize-release
 sourceLines: anObject
-	"Here we translate special characters in the LaTeX source.
-	For now we only have to worry about BANG = !"
+	"Here we translate special characters in the LaTeX source. See comment in #escapeSequences."
 	sourceLines := anObject collect: [:line |
-			line copyWithRegex: 'BANG' matchesReplacedWith: '!'.
-			line copyWithRegex: 'CARET' matchesReplacedWith: '^'.
-			].
-	self chapter generateTestMethod: self testSource
+		self escapeSequences
+			inject: line
+			into: [:result :escape |
+				result copyWithRegex: escape key matchesReplacedWith: escape value]].
+	self chapter generateTestMethod: self testSource.

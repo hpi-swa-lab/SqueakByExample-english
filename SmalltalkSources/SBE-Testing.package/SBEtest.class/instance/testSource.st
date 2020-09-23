@@ -17,7 +17,7 @@ testSource
 			nextPutAll: ((re matches: line)
 				ifTrue: [ ('self assert: {1} equals: [ {2} ] value printString.' format: {
 					(self removeTrailingComments: (re subexpression: 3)) printString.
-					re subexpression: 2}) ]
+					(re subexpression: 2) withBlanksTrimmed}) ]
 				ifFalse: [ line ]) ].
 	
 	^ sourceStream contents
