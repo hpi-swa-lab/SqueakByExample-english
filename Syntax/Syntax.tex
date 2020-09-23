@@ -346,6 +346,10 @@ Arguments and local variables should always start with lower case letters.
 Names starting with upper-case letters are assumed to be global variables.
 Class names, like \ct{Character}, for example, are simply global variables referring to the object representing that class.
 
+However, you are discouraged to define your own global variables since they introduce \emph{global state} which is often considered a code smell because it is hard to keep the overview of all global variables.
+In most cases, best practice is to define a class variable and implement accessor methods on its class-side instead.
+\seeindex{global variable}{variable, global}
+
 %=================================================================
 \section{Block syntax}
 
