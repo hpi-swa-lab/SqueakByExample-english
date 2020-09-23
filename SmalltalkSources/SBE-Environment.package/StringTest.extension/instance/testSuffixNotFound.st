@@ -1,3 +1,3 @@
 *SBE-Environment
 testSuffixNotFound 
-	self assert: 'readme' suffix = ''
+	self assert: '' equals: 'readme' suffix.
