@@ -1,4 +1,4 @@
 *SBE-Environment
 testSuffixFound 
-	self assert: 'readme.txt' suffix = 'txt'.
-	self assert: 'read.me.txt' suffix = 'txt'
+	self assert: 'txt' equals: 'readme.txt' suffix.
+	self assert: 'txt' equals: 'read.me.txt' suffix.
