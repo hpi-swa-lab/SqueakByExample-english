@@ -822,7 +822,7 @@ Now we will look at an aspect of \st that is not so easily covered by our five r
 
 %---------------------------------------------------------
 \subsection{Global variables}
-In \squeak, all global variables are stored in a namespace called \glbind{Smalltalk}, which is implemented as an instance of the class \clsind{SystemDictionary}.
+In \squeak, all global variables are stored in a namespace called \glbind{Smalltalk} which is an instance of the class \clsind{SmalltalkImage}.
 Global variables are accessible everywhere. 
 Every class is named by a global variable; in addition, a few globals are used to name special or commonly useful objects.
 
@@ -843,16 +843,21 @@ So, if you experience some sluggishness and are writing to the Transcript, think
 
 \begin{itemize}
 \item
-\ct{Smalltalk} is the instance of \ct{SystemDictionary} that defines all of the globals\,---\,including \ct{Smalltalk} itself.   
-The keys to this dictionary are the symbols that name the global objects in \st code.
+\ct{Smalltalk} is the single instance of \ct{SmalltalkImage} that, inter alia, provides access to all globals\,---\,including \ct{Smalltalk} itself.
+\ct{Smalltalk globals} answers an \clsind{Environment} instance which defines all of the global bindings and provides a \clsind{Dictionary}-like interface.
+The keys of these bindings are the symbols that name the global objects in \st code.
 So, for example,
+\begin{code}{@TEST}
+Smalltalk globals at: #Boolean --> Boolean
+\end{code}
+Or even shorter, using a convenience method defined on \clsind{SmalltalkImage}:
 \begin{code}{@TEST}
 Smalltalk at: #Boolean --> Boolean
 \end{code}
 Since \ct{Smalltalk} is itself a global variable,
-\begin{code}{}
-Smalltalk at: #Smalltalk-->a SystemDictionary(lots of globals)}
-\end{code} 
+\begin{code}{@TEST}
+Smalltalk at: #Smalltalk --> Smalltalk
+\end{code}
 and
 \begin{code}{@TEST}
 (Smalltalk at: #Smalltalk) == Smalltalk --> true
