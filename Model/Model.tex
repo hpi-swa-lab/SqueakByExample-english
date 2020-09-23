@@ -858,16 +858,9 @@ and
 (Smalltalk at: #Smalltalk) == Smalltalk --> true
 \end{code}
 
+% ct: TODO DISCUSS: Shall we really recommend the usage of \ct{Sensor} any longer?}
 \item \clsind{Sensor} is an instance of \clsind{EventSensor}, and represents input to \squeak.
 For example, \lct{Sensor keyboard} answers the next character input on the keyboard, and \ct{Sensor leftShiftDown} answers \ct{true} if the left shift key is being held down, while \ct{Sensor mousePoint} answers a \ct{Point} indicating the current mouse location.
-
-\item \glbind{World} is an instance of \clsind{PasteUpMorph} that represents the screen.
-\ct{World bounds} answers a rectangle that defines the whole screen space; all Morphs on the screen are submorphs of \ct{World}.
-\index{Morphic}
-
-\item 
-\glbind{ActiveHand} is the current instance of \clsind{HandMorph}, the graphical representation of the cursor.  \ct{ActiveHand}'s submorphs hold anything being dragged by the mouse.
-\ab{I have never used this, and had to browse the image to see what it is!  What do you use it for?}
 
 \item
 \glbind{Undeclared} is another dictionary\,---\,it contains all the undeclared variables.
