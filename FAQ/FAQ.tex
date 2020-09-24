@@ -136,7 +136,7 @@ How do I tell which methods of a class are abstract?
 abstractMethods :=
 	[:aClass | aClass methodDict keys select:
 		[:aMethod | (aClass>>aMethod) isAbstract ]].
-abstractMethods value: Collection --> #(#remove:ifAbsent: #add: #do:)
+abstractMethods value: Collection --> #(#add: #remove:ifAbsent: #do:)
 \end{code}
 
 \begin{faq}
