@@ -7,7 +7,7 @@ env:
   - SQUEAK_VERSION=Trunk
   - SQUEAK_VERSION=5.3
 
-smalltalk: "Squeak-${SQUEAK_VERSION}"
+smalltalk: "Squeak64-${SQUEAK_VERSION}"
 
 before_script:
 - chmod +x travis_fold
