@@ -23,7 +23,10 @@ script:
 
 after_script:
 - | # Upload PDF file to Google Drive
-  [ -f "SBE_${SQUEAK_VERSION}.pdf" ] && bash -e deploy-debug.sh "SBE_${SQUEAK_VERSION}.pdf"
+  if [ -f "SBE_${SQUEAK_VERSION}.pdf" ] && [ $TRAVIS_PULL_REQUEST=false ]
+  then
+    bash -e deploy-debug.sh "SBE_${SQUEAK_VERSION}.pdf"
+  fi
 
 deploy:
   - # Create GitHub release
