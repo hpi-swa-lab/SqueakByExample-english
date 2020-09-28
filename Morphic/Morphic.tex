@@ -562,15 +562,15 @@ The \ct{anEvent} argument of \ct{handleKeystroke:} is an instance of \clsind{Key
 \subsection{Global accessors}
 
 In complex applications, one may need to refer to the currently processed event without having it available in the current method.
-While we should avoid such situations in general, there is an accessor message, \ct{#currentEvent}, that allows us to retrieve the currently handled event again from every method in every object.
-To do so, we can simply write \ct{self currentEvent} in any method.
+While we should avoid such situations in general, there is an accessor message, \ct{#currentEvent}, that allows us to retrieve the event currently being handled again from any method in any object.
+To do so, we can simply write \ct{self currentEvent} in an arbitrary method.
 Analogously, there are \ct{#currentHand} and \ct{#currentWorld} to retrieve the current \clsind{HandMorph} (which represents your cursor) or \clsind{PasteUpMorph} (which contains all other morphs displayed at your screen).
 
 In some cases, one also may want to directly control the user interaction without following the usual event handling control flow.
 As an example, we want to track the mouse cursor and find out which point the user clicks next.
-Implementing this via the usual handle protocol would be complicated because we want to handle clicks that are not made to a morph controlled by ourselves.%
+Implementing this via the usual event-handling protocol would be complicated because we want to handle clicks that are not made to a morph controlled by ourselves.%
 \footnote{Actually, there is an advanced mechanism called \emph{event-bubbling and -capturing filters} that would be applicable to this problem.
-	However, this approach requires a bit more code and is not optimally suited for our simple use case.}
+	However, this approach requires a bit more code and thus is not optimally suited for our simple use case.}
 For cases like this, there is the class \clsind{EventSensor} an instance of which you can retrieve by evaluating \ct{EventSensor} default.
 To implement our example, we can do the following:
 \begin{method}{Retrieving information about the cursor from \ct{EventSensor} without using events.}

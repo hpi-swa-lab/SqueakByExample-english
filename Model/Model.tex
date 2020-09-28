@@ -826,7 +826,7 @@ In \squeak, all global variables are stored in a namespace called \glbind{Smallt
 Global variables are accessible everywhere. 
 Every class is named by a global variable; in addition, a few globals are used to name special or commonly useful objects.
 
-However, what may sound so handy and convenient at the first glance, has turned out as bad practice during the evolution of \sq.
+However, what may sound so handy and convenient at the first glance has turned out as bad practice during the evolution of \sq.
 While we state in rule 4 that ``everything happens by message sends'', the concept of globals is a violation of this rule.
 Accessing a global allows you to exchange information between two objects\,---\,\emph{without} sending any message.
 As a consequence, when using globals, we loose one of the main advantages of the \st object model, which is the total encapsulation of every object's state.
@@ -850,7 +850,7 @@ Before you \menu{do it}, open a transcript by dragging one from the \emph{Tools}
 So, if you experience some sluggishness and are writing to the Transcript, think about collapsing it.}
 
 Transcript outputs are mostly used for debugging and experimenting purposes where code quality is not the most important thing.
-If you want to use a transcript in a real application, you should use \ct{Project current transcript} instead, which makes sure that the transcript you are using actually matches the current \sq context.
+If you want to use a transcript in a real application, you should use \ct{Project current transcript} instead, which makes sure that the transcript you are using actually matches your current \sq environment.
 
 Another useful global variable is \ct{Smalltalk}, which holds the instance of \ct{SystemDictionary} that defines all of the globals\,---\,including \ct{Smalltalk} itself.
 \glbindex{Smalltalk}
