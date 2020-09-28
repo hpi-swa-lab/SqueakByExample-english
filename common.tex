@@ -45,7 +45,7 @@
 %\usepackage{colortbl}
 \usepackage[hang]{subfigure}\makeatletter\def\p@subfigure{\thefigure\,}\makeatother
 \usepackage{rotating}
-\usepackage{enumitem}	% apb: allows more control over tags in enumerations
+\usepackage[inline]{enumitem}	% apb: allows more control over tags in enumerations
 \usepackage{verbatim}     % for comment environment
 \usepackage{varioref}	% for page references that work
 \labelformat{footnote}{\thechapter--#1} % to distinguish citations from jurabib
@@ -326,7 +326,7 @@ Damien Pollet},
 \definecolor{source}{gray}{0.95}
 \usepackage{listings}
 \lstdefinelanguage{Smalltalk}{
-%  morekeywords={self,super,true,false,nil,thisContext}, % This is overkill
+  morekeywords={self,super,true,false,nil,thisContext},
   morestring=[d]',
   morecomment=[s]{"}{"},
   alsoletter={\#:},

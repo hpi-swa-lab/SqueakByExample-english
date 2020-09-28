@@ -34,7 +34,7 @@
 \chapter{A quick tour of \sq}
 \label{cha:quick}
 
-In this chapter we will give you a high-level tour of \sq to help you get comfortable with the environment.
+In this chapter, we will give you a high-level tour of \sq to help you get comfortable with the environment.
 There will be plenty of opportunities to try things out, so it would be a good idea if you have a computer handy when you read this chapter.
 
 We will use this icon: \dothisicon{} to mark places in the text where you should try something out in \sq.
@@ -45,7 +45,8 @@ You will also learn how to define a new method, create an object, and send it me
 \section{Getting started}
 
 \sq is available as a free \ind{download} from \url{www.squeak.org}.
-Your download will be an archive file that contents vary from platform to platform. However, there are two important components common to all versions (see \figref{download}).
+Your download will be an archive file that contents vary from platform to platform.
+However, there are two important components common to all versions (see \figref{download}).
 
 \begin{figure}[hbt]
 \centerline{
@@ -68,9 +69,11 @@ Your download will be an archive file that contents vary from platform to platfo
 
 \begin{enumerate}
 
-  \item The \emphind{virtual machine} (VM) is the only part of the system that is different for each operating system and processor.  Pre-compiled virtual machines are available for all the major computing environments.  In \figref{download} we see the VM for the Windows is called \textit{\sq.exe}.
+  \item The \emphind{virtual machine} (VM) is the only part of the system that is different for each operating system and processor.  Pre-compiled virtual machines are available for all the major computing environments.
+  In \figref{download} we see the VM for the Windows is called \textit{\sq.exe}.
 
-  \item The current \emph{system \ind{image}} is a snapshot of a running \sq system, frozen in time.  It consists of two files: an \emph{.}\emphind{image} file, which contains the state of all of the objects in the system (including classes and methods, since they are objects too), and a \emph{.}\emphind{changes} file, which contains a log of all of the changes to the source code of the system.
+  \item The current \emph{system \ind{image}} is a snapshot of a running \sq system, frozen in time.
+  It consists of two files: an \emph{.}\emphind{image} file, which contains the state of all of the objects in the system (including classes and methods, since they are objects too), and a \emph{.}\emphind{changes} file, which contains a log of all of the changes to the source code of the system.
 In \figref{download}, we see that we have grabbed the \textit{{\sq}5.2-18231} image and changes files.
 Actually, we will use a slightly different image in this book.
 \end{enumerate}
@@ -108,7 +111,7 @@ Do whatever works best for your style of working and your operating system.
 %%		height: helper world height * 0.75;
 %%		center: helper world center.
 %%	PreferenceWizardMorph open.
-%%	self flag: #ct "After Objectland has been merged into Trunk, simplify this call and don't ask PreferenceWizardMorph".
+%%	self flag: #sq60 "ct: After Objectland has been merged into Trunk, simplify this call and don't ask PreferenceWizardMorph".
 %%]}
 \begin{figure}[htb]
 % \centerline {\includegraphics[width=0.6\textwidth]{download}}
@@ -117,11 +120,16 @@ Do whatever works best for your style of working and your operating system.
 \end{figure}
 
 \index{launching Squeak}
-\paragraph{Launching.} To start \sq, do whatever your operating system expects: drag the \emph{.}\emphind{image} file onto the icon of the virtual machine, or double-click the \emph{.image} file, or  at the command line type the name of the virtual machine followed by the path to the \emph{.image} file. (When you have multiple VMs installed on your machine the operating system may not automatically pick the right one; in this case it is safer to drag and drop the image onto the virtual machine, or to use the command line.)
+\paragraph{Launching.} To start \sq, do whatever your operating system expects: drag the \emph{.}\emphind{image} file onto the icon of the virtual machine, or double-click the \emph{.image} file, or at the command line type the name of the virtual machine followed by the path to the \emph{.image} file.
+(When you have multiple VMs installed on your machine the operating system may not automatically pick the right one; in this case, it is safer to drag and drop the image onto the virtual machine, or to use the command line.)
 
-Once \sq is running, you should see a single large window, possibly containing some open workspace windows (see \figref{startup}). You will also notice that there is a small menu bar at the top. Beyond this one global menu, \sq makes heavy use of context-dependent pop-up menus.
+Once \sq is running, you should see a single large window, possibly containing some open workspace windows (see \figref{startup}).
+You will also notice that there is a small menu bar at the top.
+Beyond this one global menu, \sq makes heavy use of context-dependent pop-up menus.
 
-\dothis{Start \sq. You can dismiss any open workspaces by clicking on the {\sf X} in the top left corner of the workspace window.  You can collapse the windows (so that they can be expanded again later) by clicking on the \raisebox{-0.2ex}{{\Large $-$}} in the top-right corner.}
+\dothis{Start \sq.
+You can dismiss any open workspaces by clicking on the {\sf X} in the top left corner of the workspace window.
+You can collapse the windows (so that they can be expanded again later) by clicking on the \raisebox{-0.2ex}{{\Large $-$}} in the top-right corner.}
 
 %-----------------------------------------------------------------
 \paragraph{First Interaction.}
@@ -181,10 +189,14 @@ SBESqueakPicture writeTo: './figures/worldMenu.png' frame: #morphs using: [:help
 \index{blue button}
 \seeindex{morphic halo}{Morphic}
 
-\sq was originally designed for a computer with a \ind{three button mouse}.  If your mouse has fewer than three buttons, you will have to press extra keys while clicking the mouse to simulate the extra buttons.
+\sq was originally designed for a computer with a \ind{three button mouse}.
+If your mouse has fewer than three buttons, you will have to press extra keys while clicking the mouse to simulate the extra buttons.
 
-\sq avoids terms like ``left mouse click'' because different computers, mice, keyboards and personal configurations mean that different users will need to press different physical buttons to achieve the same effect.  Instead, the mouse buttons are labeled with colors.  The mouse button that you pressed to get the ``World'' menu is called the \emphind{red button}; it is most often used for selecting items in lists, selecting text, and selecting menu items.
-When you start using \sq, it can be surprisingly helpful to actually label your mouse, as shown in \figref{colouredMouse}.\footnote{We will avoid the term ``red-click'' and use ``click'' instead, since this is the default.}
+\sq avoids terms like ``left mouse click'' because different computers, mice, keyboards, and personal configurations mean that different users will need to press different physical buttons to achieve the same effect.
+Instead, the mouse buttons are labeled with colors.
+The mouse button that you pressed to get the ``World'' menu is called the \emphind{red button}; it is most often used for selecting items in lists, selecting text, and selecting menu items.
+When you start using \sq, it can be surprisingly helpful to actually label your mouse, as shown in \figref{colouredMouse}.%
+\footnote{We will avoid the term ``red-click'' and use ``click'' instead since this is the default.}
 
 \begin{wrapfigure}[19]{R}{0.25\linewidth}
 % The parameters are the number of narrow lines to the right of the figure [19],
@@ -207,11 +219,15 @@ If you let the mouse linger over a handle, a help balloon will explain its funct
 \dothis{Click the blue button on the workspace.
 Grab the \rotateHandle handle near the bottom left corner and drag it to rotate the workspace.}
 
-We recommend that right-handed people configure their mouse to put the \ind{red button} on the left side of their mouse, the \ind{yellow button} on the right, and use a clickable scroll wheel, if one is available, for the blue button.  If you don't have a clickable scroll wheel, then you can get the Morphic halo by holding down the \ct{alt} or \ct{option} key while clicking the \ind{red button}.  If you use a Mac without a second mouse button, you can simulate one by holding down the \clover{} key while clicking the mouse.
+We recommend that right-handed people configure their mouse to put the \ind{red button} on the left side of their mouse, the \ind{yellow button} on the right, and use a clickable scroll wheel, if one is available, for the blue button.
+If you don't have a clickable scroll wheel, then you can get the Morphic halo by holding down the \ct{alt} or \ct{option} key while clicking the \ind{red button}.
+If you use a Mac without a second mouse button, you can simulate one by holding down the \clover{} key while clicking the mouse.
 
 You can configure your mouse to work the way you want by using the preferences of your operating system and mouse driver.
-\sq has some preferences for customising the mouse and the meta keys on your keyboard. You can find the \ind{preference browser} in the \menu{open} item of the \menu{World} menu. 
-In the preference browser, the \menu{general} category contains an option \menu{Swap mouse buttons} that switches the yellow and blue functions (see \figref{prefBrowser}).  The \menu{keyboard} category has options to duplicate the various command keys.   
+\sq has some preferences for customizing the mouse and the meta keys on your keyboard.
+You can find the \ind{preference browser} in the \menu{open} item of the \menu{World} menu. 
+In the preference browser, the \menu{general} category contains an option \menu{Swap mouse buttons} that switches the yellow and blue functions (see \figref{prefBrowser}).
+The \menu{keyboard} category has options to duplicate the various command keys.   
 
 \dothis{Open the preference browser and find the \menu{Swap mouse buttons} option using the search box.}
 
@@ -239,7 +255,10 @@ In the preference browser, the \menu{general} category contains an option \menu{
 
 \dothis{Click again on the \sq background.}
 You will see the \menu{World} menu again.
-Most \sq menus are not modal; you can leave them on the screen for as long as you wish by clicking the push pin icon in the top-right corner. Do this. Also, notice that menus appear when you click the mouse, but do not disappear when you release it; they stay visible until you make a selection, or until you click outside of the menu. You can even move the menu around by grabbing its title bar.
+Most \sq menus are not modal; you can leave them on the screen for as long as you wish by clicking the thumbtack icon in the top-right corner.
+Do this.
+Also, notice that menus appear when you click the mouse, but do not disappear when you release it; they stay visible until you make a selection, or until you click outside of the menu.
+You can even move the menu around by grabbing its title bar.
 
 The world menu provides you a simple means to access many of the tools that \sq offers.
 
@@ -302,24 +321,31 @@ Put the atoms morph down (by clicking) somewhere.}
 \end{figure}
 
 \dothis{Select \menu{World\go{}save as \ldots}, and enter the name ``SBE''.
-Now click on the \menu{Accept(s)} button.
-Now select \menu{World\go{}save and quit}.}
+	Now click on the \menu{Accept(s)} button.
+	Now select \menu{World\go{}save and quit}.}
 
-Now if you go to the location where the original image and changes files were, you will find two new files called ``SBE.\ind{image}'' and ``SBE.\ind{changes}''\footnote{} that represent the working state of the \sq image at the moment before you told \sq to \menu{save and quit}.
+Now if you go to the location where the original image and changes files were, you will find two new files called ``SBE.\ind{image}'' and ``SBE.\ind{changes}''\footnote{%
+% ct TODO: Here is probably missing some annotation text?
+} that represent the working state of the \sq image at the moment before you told \sq to \menu{save and quit}.
 If you wish, you can move these two files anywhere that you like on your disk, but if you do so you may (depending on your operating system) need to also move, copy or link to the virtual machine and the \emph{.source} file.
 
 \dothis{Start up \sq from the newly created ``SBE.image'' file.}
 
-Now you should find yourself in precisely the state you were when you quit \sq. The bouncing atoms morph is there again and the atoms continue to move from where they where when you left it.
+Now you should find yourself in precisely the state you were when you quit \sq.
+The bouncing atoms morph is there again and the atoms continue to move from where they were when you left it.
 
-When you start \sq for the first time, the \sq \ind{virtual machine} loads the image file that you provide. This file contains a snapshot of a large number of objects, including a vast amount of pre-existing code and a large number of programming tools (all of which are objects). As you work with \sq, you will send messages to these objects, you will create new objects, and some of these objects will die and their memory will be reclaimed (\ie garbage-collected).
+When you start \sq for the first time, the \sq \ind{virtual machine} loads the image file that you provide.
+This file contains a snapshot of a large number of objects, including a vast amount of pre-existing code and a large number of programming tools (all of which are objects).
+As you work with \sq, you will send messages to these objects, you will create new objects, and some of these objects will die and their memory will be reclaimed (\ie garbage-collected).
 
-When you quit \sq, you will normally save a snapshot that contains all of your objects.  If you save normally, you will overwrite your old image file with the new snapshot. Alternatively you may save the image under a new name, as we just did.
+When you quit \sq, you will normally save a snapshot that contains all of your objects.
+If you save normally, you will overwrite your old image file with the new snapshot.
+Alternatively, you may save the image under a new name, as we just did.
 
 In addition to the \emph{.image} file, there is also a \emph{.changes} file.
 This file contains a log of all the changes to the source code that you have made using the standard tools.
 Most of the time you do not need to worry about this file at all.
-As we shall see, however, the \emph{.changes} file can be very useful for recovering from errors, or replaying lost changes.
+As we shall see, however, the \emph{.changes} file can be very useful for recovering from errors or replaying lost changes.
 More about this later!
 
 The image that you have been working with is a descendant of the original \st-80 image created in the late 1970s.
@@ -327,7 +353,7 @@ Some of these objects have been around for decades!
 
 The image can be used as a mechanism for storing and managing software projects you are working on.
 However, as we shall see later on, there are also tools for managing code and sharing software developed by teams.
-For now we will continue by cleaning up the image before we take a look at tools \sq provides.
+For now, we will continue by cleaning up the image before we take a look at the tools \sq provides.
 
 %%{SBESqueakPicture writeTo: './figures/Tools.png' frame: #morphs using: [:helper |
 %%	| dockingBar appsItem |
@@ -348,7 +374,8 @@ For now we will continue by cleaning up the image before we take a look at tools
 \section{Workspaces and Transcripts}
 \label{sec:transcript}
 
-\dothis{Close all open windows. In the menu bar at the top of the \sq environment select \menu{Tools}.}
+\dothis{Close all open windows.
+	In the menu bar at the top of the \sq environment select \menu{Tools}.}
 You will see entries for some of the key tools in \sq (\figref{tools}).
 Open a \ind{transcript} and a \ind{workspace}.
 
@@ -360,7 +387,8 @@ At any time only one window is active; it is in front and has its label highligh
 The transcript is an object that is often used for logging system messages.
 It is a kind of ``system console''.
 Note that the transcript is terribly slow, so if you keep it open and write to it certain operations can become 10 times slower.
-In addition the transcript is not thread-safe so you may experience strange problems if multiple objects write concurrently to the transcript.
+(You can speed up it by disabling the preference ``Force transcript updates to screen'' in the Preference Browser.)
+In addition, the transcript is not thread-safe so you may experience strange problems if multiple objects write concurrently to the transcript.
 
 Workspaces are useful for typing snippets of \st code that you would like to experiment with.
 You can also use workspaces simply for typing arbitrary text that you would like to remember, such as to-do lists or instructions for anyone who will use your image.
@@ -379,7 +407,8 @@ Select \menu{do it (d)}.}
 Notice how the text ``hello world'' appears in the transcript window
 (\figref{doit}).
 Do it again.
-(The \menu{(d)} in the menu item \menu{do it (d)} tells you that the keyboard shortcut to \emph{do it} is \short{d}. More on this in the next section!)
+(The \menu{(d)} in the menu item \menu{do it (d)} tells you that the keyboard shortcut to \emph{do it} is \short{d}.
+More on this in the next section!)
 
 %%{SBESqueakPicture writeTo: './figures/Doit.png' frame: [:morphsRect | morphsRect withBottom: morphsRect bottom - 150] using: [:helper |
 %%  | workspace |
@@ -411,24 +440,32 @@ The \ct{Transcript} then decided what to do with this message, that is, it looke
 
 If you talk to Smalltalkers for a while, you will quickly notice that they generally do not use expressions like ``call an operation'' or ``invoke a method'', but instead they will say ``send a message''.
 This reflects the idea that objects are responsible for their own actions. 
-You never \emph{tell} an object what to do\,---\,instead you politely \emph{ask} it to do something by sending it a message. 
+You never \emph{tell} an object what to do\,---\,instead, you politely \emph{ask} it to do something by sending it a message. 
 The object, not you, selects the appropriate method for responding to your message (more about this in \charef{understanding}).
 
 
 %=================================================================
 \section{Keyboard shortcuts}
 
-If you want  to evaluate an expression, you do not always have to bring up the yellow-button menu. Instead, you can use \ind{keyboard shortcuts}. These are the parenthesized expressions in the menu.  Depending on your platform, you may have to press one of the modifier keys (control, alt, command, or meta).
+If you want  to evaluate an expression, you do not always have to bring up the yellow-button menu.
+Instead, you can use \ind{keyboard shortcuts}.
+These are the parenthesized expressions in the menu.
+Depending on your platform, you may have to press one of the modifier keys (control, alt, command, or meta).
 (We will indicate these generically as \short{\emph{key}}.)
 
 \dothis{Evaluate the expression in the workspace again, but using the keyboard shortcut: \short{d}.}
 \index{keyboard shortcut!do it}
 
-In addition to \menu{do it}, you will have noticed \menu{print it}, \menu{inspect it} and \menu{explore it}. Let's have a quick look at each of these.
+In addition to \menu{do it}, you will have noticed \menu{print it}, \menu{inspect it} and \menu{explore it}.
+Let's have a quick look at each of these.
 
 \dothis{Type the expression \ct{3 + 4} into the workspace. Now \menu{do it} with the keyboard shortcut.}
 
-Do not be surprised if you saw nothing happen! What you just did is send the message \ct{+} with argument \ct{4} to the number \ct{3}. Normally the result \ct{7} will have been computed and returned to you, but since the workspace did not know what to do with this answer, it simply threw the answer away.  If you want to see the result, you should \menu{print it} instead. \menu{print it} actually compiles the expression, executes it, sends the message \ct{printString} to the result, and displays the resulting string.
+Do not be surprised if you saw nothing happen!
+What you just did is send the message \ct{+} with argument \ct{4} to the number \ct{3}.
+Normally the result \ct{7} will have been computed and returned to you, but since the workspace did not know what to do with this answer, it simply threw the answer away.
+If you want to see the result, you should \menu{print it} instead.
+\menu{print it} actually compiles the expression, executes it, sends the message \ct{printString} to the result, and displays the resulting string.
 
 \dothis{Select \ct{3+4} and \menu{print it} (\short{p}).}
 This time we see the result we expect (\figref{printit}).
@@ -442,7 +479,6 @@ This time we see the result we expect (\figref{printit}).
 %%  helper keyStroke: workspace key: $p modifiers: #(cmd).
 %%]}
 \begin{figure}[htb]
-% \centerline {\includegraphics[width=0.4\textwidth]{PrintIt}}
 \centerline {\includegraphics[scale=0.65]{PrintIt}}
 \caption{``Print it'' rather than ``do it''. \label{fig:printit}}
 \end{figure}
@@ -454,7 +490,8 @@ This time we see the result we expect (\figref{printit}).
 \noindent
 We use the notation \ct{-->} as a convention in this book to indicate that a particular \sq expression yields a given result when you \menu{print it}.
 
-\dothis{Delete the highlighted text ``\ct{7}'' (\sq should have selected it for you, so you can just press the delete key). Select \ct{3+4} again and this time \menu{inspect it} (\short{i}).}
+\dothis{Delete the highlighted text ``\ct{7}'' (\sq should have selected it for you, so you can just press the delete key).
+Select \ct{3+4} again and this time \menu{inspect it} (\short{i}).}
 \noindent
 Now you should see a new window, called an \emphind{inspector}, with the heading \ct{SmallInteger: 7} (\figref{inspectit}).
 The inspector is an extremely useful tool that will allow you to browse and interact with any object in the system.
@@ -480,7 +517,8 @@ The bottom panel can be used to write expressions to send messages to the object
 \dothis{Type \ct{self squared} in the bottom panel of the inspector on \ct{7} and \menu{print it}.}
 
 \needlines{2}
-\dothis{Close the inspector. Type the expression \ct{Object} in a workspace and this time \menu{explore it} (\short{I}, uppercased i).}
+\dothis{Close the inspector.
+	Type the expression \ct{Object} in a workspace and this time \menu{explore it} (\short{I}, uppercased i).}
 \index{keyboard shortcut!explore it}
 \index{explorer}
 
@@ -497,8 +535,8 @@ Click on the triangle to open it up (\figref{exploreit}).
 \end{figure}
 
 The explorer is similar to the inspector, but it offers a tree view of a complex object.
-In this case the object we are looking at is the \ct{Object} class.
-We can see directly all the information stored in this class, and we can easily navigate to all its parts, e.g. its super class which is stored in \ct{superclass}.
+In this case, the object we are looking at is the \ct{Object} class.
+We can see directly all the information stored in this class, and we can easily navigate to all its parts, e.g. its superclass which is stored in \ct{superclass}.
 
 %=================================================================
 \section{The System Browser}
@@ -571,18 +609,18 @@ Now we see in the bottom pane the source code of the \ct{printString} method, sh
 %=================================================================
 \section{Finding classes}
 
-There are several ways to find a class in \sq.  The first, as we have just seen above, is to know (or guess) what category it is in, and to navigate to it using the browser.
+There are several ways to find a class in \sq.
+The first, as we have just seen above, is to know (or guess) what category it is in, and to navigate to it using the browser.
 \index{system browser}
 \seeindex{system browser!finding classes}{class, finding}
 \index{class!finding}
 
-A second way is to send the \ct{browse} message to the class, asking it to open a browser on itself.  Suppose we want to browse the class \clsind{Boolean}.
+A second way is to send the \ct{browse} message to the class, asking it to open a browser on itself.
+Suppose we want to browse the class \clsind{Boolean}.
  
 \dothis{Type \ct{Boolean browse} into a workspace and \menu{do it}.}
 A browser will open on the Boolean class (\figref{browseBoolean}).
-There is also a \ind{keyboard shortcut} \short{b} (browse) that you can use in any tool where you find a class name;
-\index{keyboard shortcut!browse it}
-select the name and type \short{b}.
+There is also a \ind{keyboard shortcut} \short{b} (browse) that you can use in any tool where you find a class name; \index{keyboard shortcut!browse it}, select the name and type \short{b}.
 
 \dothis{Use the keyboard shortcut to browse the class \ct{Boolean}.}
 
@@ -602,7 +640,8 @@ Notice that when the \ct{Boolean} class is selected but no method category or me
 This is nothing more than an ordinary \st message that is sent to the parent class, asking it to create a subclass.
 Here we see that the class \ct{Object} is being asked to create a subclass named \ct{Boolean} with no instance variables, class variables or ``pool dictionaries'', and to put the class \ct{Boolean} in the \scatind{Kernel-Objects} category.
 
-If you want to see further information on the class, you can click on the \button{?} at the bottom of the class pane. This opens the \subind{class}{comment} in a dedicated pane.
+If you want to see further information on the class, you can click on the \button{?} at the bottom of the class pane.
+This opens the \subind{class}{comment} in a dedicated pane.
 
 \ab{I thought that this was supposed to be a \emph{Quick} tour!  And here we are describing a tool that I have used maybe twice in 10 years!   In any case, this description should be deferred to the \textbf{Environment} chapter}
 \on{I don't see why.  I use the hierarchy browser a lot!  I think it is really useful to know from the beginning, to help you find your through the hierarchy.}
@@ -626,11 +665,14 @@ This will open a hierarchy browser showing the superclasses and subclasses of \c
 
 Navigate to the immediate superclass and subclasses of \ct{Boolean}.
 
-Often, the fastest way to find a class is to search for it by name.  For example, suppose that you are looking for some unknown class that represents dates and times.
+Often, the fastest way to find a class is to search for it by name.
+For example, suppose that you are looking for some unknown class that represents dates and times.
 
-\dothis{Put the mouse in the system category pane of the system browser and type \short{f}, or select \menu{find class \ldots (f)} from the yellow-button menu.  Type ``time'' in the dialog box.} 
+\dothis{Put the mouse in the system category pane of the system browser and type \short{f}, or select \menu{find class \ldots (f)} from the yellow-button menu.
+	Type ``time'' in the dialog box.} 
 \noindent
-You will be presented with a list of classes whose names contain ``time'' (see \figref{findit}).  Choose one, say, \ct{Time}, and the browser will show it.
+You will be presented with a list of classes whose names contain ``time'' (see \figref{findit}).
+Choose one, say, \ct{Time}, and the browser will show it.
 \index{keyboard shortcut!find ...}
 
 %%{SBESqueakPicture writeTo: './figures/FindIt.png' frame: #morphs using: [:helper | | browser |
@@ -676,7 +718,9 @@ You will be presented with a list of classes whose names contain ``time'' (see \
 \section{Finding methods}
 \label{sec:quick:methodFinder}
 
-Sometimes you can guess the name of a method, or at least part of the name of a method, more easily than the name of a class.  For example, if you are interested in the current time, you might expect that there would be a method called ``now'', or containing ``now'' as a substring.   But where might it be?
+Sometimes you can guess the name of a method, or at least part of the name of a method, more easily than the name of a class.
+For example, if you are interested in the current time, you might expect that there would be a method called ``now'', or containing ``now'' as a substring.
+But where might it be?
 The \emphind{method finder} can help you.
 \seeindex{system browser!finding methods}{method, finding}
 \index{method!finding}
@@ -684,7 +728,8 @@ The \emphind{method finder} can help you.
 \dothis{Select \menu{Tools \go Method Finder} in the menu bar at the top or open the world menu and select \menu{open\ldots \go method finder}.
 Type ``now'' in the top left pane, and \menu{accept} it (or just press the \textsc{return} key).}
 The method finder will display a list of all the method names that contain the substring ``now''.  
-To scroll to \ct{now} itself, move the cursor to the list and type ``\ct{n}''; this trick works in all scrolling windows.  Select ``now'' and the right-hand pane shows you the three classes that define a method with this name, as shown in \figref{MethodFinder}.  Selecting any one of them will open a browser on it.
+To scroll to \ct{now} itself, move the cursor to the list and type ``\ct{n}''; this trick works in all scrolling windows.
+Select ``now'' and the right-hand pane shows you the three classes that define a method with this name, as shown in \figref{MethodFinder}.  Selecting any one of them will open a browser on it.
 
 %%{SBESqueakPicture writeTo: './figures/methodFinder-now.png' frame: #morphs using: [:helper |
 %%	| window inputField hitList |
@@ -705,16 +750,17 @@ To scroll to \ct{now} itself, move the cursor to the list and type ``\ct{n}''; t
 \end{figure}
 
 At other times you may have a good idea that a method exists, but will have no idea what it might be called.
-The method finder can still help!  For example, suppose that you would like to find a method that turns a string into upper case, for example, it would translate \ct{'eureka'} into \ct{'EUREKA'}.
+The method finder can still help!
+For example, suppose that you would like to find a method that turns a string into upper case, for example, it would translate \ct{'eureka'} into \ct{'EUREKA'}.
 
-\dothis{Type \ct{'eureka' . 'EUREKA'} into the method finder and press
-  the \textsc{return} key, as shown in
-  \figref{methodFinder-example1}.}
+\dothis{Type \ct{'eureka' . 'EUREKA'} into the method finder and press the \textsc{return} key, as shown in \figref{methodFinder-example1}.}
 \noindent
 The method finder will suggest a method that does what you want.
 
 An asterisk at the beginning of a line in the right pane of the method finder indicates that this method is the one that was actually used to obtain the requested result. 
-So, the asterisk in front of \ct{String asUppercase} lets us know that the method \mthind{String}{asUppercase} defined on the class \clsind{String} was executed and returned the result we wanted. The methods that do not have an asterisk are just the other methods that have the same name as the ones that returned the expected result. So \cmind{Character}{asUppercase} was not executed on our example, because \ct{'eureka'} is not a \clsind{Character} object.
+So, the asterisk in front of \ct{String asUppercase} lets us know that the method \mthind{String}{asUppercase} defined on the class \clsind{String} was executed and returned the result we wanted.
+The methods that do not have an asterisk are just the other methods that have the same name as the ones that returned the expected result.
+So \cmind{Character}{asUppercase} was not executed on our example, because \ct{'eureka'} is not a \clsind{Character} object.
 
 %%{SBESqueakPicture writeTo: './figures/MethodFinder-example1.png' frame: #morphs using: [:helper |
 %%	| window inputField hitList |
@@ -733,21 +779,30 @@ So, the asterisk in front of \ct{String asUppercase} lets us know that the metho
 \label{fig:methodFinder-example1}}
 \end{figure}
 
-You can also use the method finder for methods with arguments; for example, if you are looking for a method that will find the greatest common factor of two integers, you might try \ct{25. 35. 5} as an example.  You can also give the method finder multiple examples to narrow the search space; the help text in the bottom pane explains more.
+You can also use the method finder for methods with arguments; for example, if you are looking for a method that will find the greatest common factor of two integers, you might try \ct{25. 35. 5} as an example.
+You can also give the method finder multiple examples to narrow the search space; the help text in the bottom pane explains more.
 
-There is yet another way to find both, methods and classes. In the top right corner of the menu bar at the top you can find a pane saying ``Search or evaluate\ldots''. This pane provides you a global search; you can activate it from everywhere via \short{0}. When you try previous searches for the class \ct{Time} or the method \ct{now} you will see that the search directly opens a browser for the class or the methods.
+There is yet another way to find both, methods, and classes.
+In the top right corner of the menu bar at the top you can find a pane saying ``Search or evaluate\ldots''.
+This pane provides you a global search; you can activate it from everywhere via \short{0}.
+When you try previous searches for the class \ct{Time} or the method \ct{now} you will see that the search directly opens a browser for the class or the methods.
 
 %=================================================================
 \section{Defining a new method}
 
-\sq provides many more interesting tools, such as the test runner and the debugger. In order to illustrate you how these are typically used while programming in \sq, we will show you how you can make use of them while defining a new method.
+\sq provides many more interesting tools, such as the test runner and the debugger.
+In order to illustrate you how these are typically used while programming in \sq, we will show you how you can make use of them while defining a new method.
 
 The advent of \ind{Test Driven Development}\cite{Beck03a} has changed the way that we write code.  
 The idea behind Test Driven Development, also called TDD or Behavior Driven Development, is that we write a test that defines the desired behavior of our code \emph{before} we write the code itself.
 Only then do we write the code that satisfies the test.
 \seeindex{Behavior Driven Development}{Test Driven Development}
 
-Suppose that our assignment is to write a method that ``says something loudly and with emphasis''.  What exactly could that mean?  What would be a good name for such a method?  How can we make sure  that programmers who may have to maintain our method in the future have an unambiguous description of what it should do?   We can answer all of these questions by giving an example:
+Suppose that our assignment is to write a method that ``says something loudly and with emphasis''.
+What exactly could that mean?
+What would be a good name for such a method?
+How can we make sure that programmers who may have to maintain our method in the future have an unambiguous description of what it should do?
+We can answer all of these questions by giving an example:
 
 \begin{quote}
 When we send the message \ct{shout} to the string ``Don't panic'' the result should be ``DON'T PANIC!''.
@@ -764,7 +819,8 @@ testShout
 	self assert: 'DON''T PANICBANG' equals: 'Don''t panic' shout.
 \end{method} % BANG is the escape for !
 
-How do we create a new method in \sq?   First, we have to decide which class the method should belong to.
+How do we create a new method in \sq?
+First, we have to decide which class the method should belong to.
 In this case, the \ct{shout} method that we are testing will go in class \clsind{String}, so the corresponding test will, by convention, go in a class called \clsind{StringTest}.
 
 %%{SBESqueakPicture writeTo: './figures/StringTest-newMethodTemplate.png' frame: #morphs using: [:helper |
@@ -782,9 +838,10 @@ In this case, the \ct{shout} method that we are testing will go in class \clsind
 \end{figure}
 
 \dothis{Open a browser on the class \ct{StringTest}, and select an appropriate message category for our method, in this case \menu{tests - converting}, as shown in \figref{newMethodTemplate}.
-The highlighted text in the bottom pane is a template that reminds you what a \st method looks like.
+The highlighted text in the bottom pane is a template that reminds you of what a \st method looks like.
 Delete this and enter the code from  \mthref{testShout}.}
-Once you have typed the text into the browser, notice that the bottom pane is outlined in red.  This is a reminder that the pane contains unsaved changes.
+Once you have typed the text into the browser, notice that the bottom pane is outlined in red.
+This is a reminder that the pane contains unsaved changes.
 So select \menu{accept (s)} from the yellow-button menu in the bottom pane, or just type \short{s}, to compile and save your method.
 \index{keyboard shortcuts}
 \index{keyboard shortcut!accept}
@@ -816,9 +873,11 @@ This can be quite useful if you have merely made a typing mistake, but in this c
 
 \dothis{Run your newly created test: open the \ind{SUnit} \emphind{TestRunner}, either by dragging it from the \toolsflapind, or by selecting \menu{World \go open... \go Test Runner}.}
 
-The leftmost two panes are a bit like the top panes in the system browser.  The left pane contains a list of system categories, but it's restricted to those categories that contain test classes.
+The leftmost two panes are a bit like the top panes in the system browser.
+The left pane contains a list of system categories, but it's restricted to those categories that contain test classes.
 
-\dothis{Select \scat{CollectionsTests-Text} and the pane to the right will show all of the test classes in that category, which includes the class \ct{StringTest}.  The names of the classes are already selected, so click \menu{Run Selected} to run all these tests.}
+\dothis{Select \scat{CollectionsTests-Text} and the pane to the right will show all of the test classes in that category, which includes the class \ct{StringTest}.
+The names of the classes are already selected, so click \menu{Run Selected} to run all these tests.}
 
 %%{SBESqueakPicture writeTo: './figures/testRunnerOnStringTest.png' frame: #morphs using: [:helper |
 %%	| testRunner categoryIndex |
@@ -843,7 +902,8 @@ The leftmost two panes are a bit like the top panes in the system browser.  The 
 \label{fig:testRunnerTestShout}}
 \end{figure}
 
-You should see a message like that shown in \figref{testRunnerTestShout}, which indicates that there was an error in running the tests.  The list of tests that gave rise to errors is shown in the bottom right pane; as you can see, \ct{StringTest>>>#testShout} is the culprit.
+You should see a message like that shown in \figref{testRunnerTestShout}, which indicates that there was an error in running the tests.
+The list of tests that gave rise to errors is shown in the bottom right pane; as you can see, \ct{StringTest>>>#testShout} is the culprit.
 (Note that \ct{StringTest>>#testShout} is the Smalltalk way of identifying the \mthind{StringTest}{testShout} method of the \ct{StringTest} class.)
 If you click on that line of text, the erroneous test will run again, this time in such a way that you see the error happen: ``\ct{MessageNotUnderstood: ByteString>>>shout}''.
 \seeindex{\ct{>>}}{Behavior, \ct{>>}}
@@ -867,7 +927,8 @@ We will look at the \ind{debugger} and how to use it in \charef{env}.
 \label{fig:predebugger}
 \end{figure}
 
-The error is, of course, exactly what we expected:  running the test generates an error because we haven't yet written a method that tells strings how to \ct{shout}.  
+The error is, of course, exactly what we expected:
+Running the test generates an error because we haven't yet written a method that tells strings how to \ct{shout}.  
 Nevertheless, it's good practice to make sure that the test fails because this confirms that we have set up the testing machinery correctly and that the new test is actually being run.
 Once you have seen the error, you can \button{Abandon} the running test, which will close the debugger window.
 Note that often with Smalltalk you can define the missing method using the \button{Create} button, edit the newly-created method in the debugger, and then \button{Proceed} with the test.
@@ -881,16 +942,17 @@ shout
 \end{method}
 
 The comma is the string concatenation operation, so the body of this method appends an exclamation mark to an upper-case version of whatever \ct{String} object the \ct{shout} message was sent to.
-The \ct{^} tells \sq that the expression that follows is the answer to be returned from the method, in this case the new concatenated string.
+The \ct{^} tells \sq that the expression that follows is the answer to be returned from the method, in this case, the new concatenated string.
 \seeindex{comma}{Collection, comma operator}
 \index{Collection!comma operator}
 
-Does this method work?  Let's run the tests and see.
+Does this method work?
+Let's run the tests and see.
 
 \dothis{Click on \menu{Run Selected} again in the test runner, and this time you should see a green bar and text indicating that all of the tests ran with no failures and no errors.}
 When you get to a green bar\footnotemark, it's a good idea to save your work and take a break.  
 So do that right now!
-\footnotetext{Actually, you might not get a green bar since some images contains tests for bugs that still need to be fixed.
+\footnotetext{Actually, you might not get a green bar since some images contain tests for bugs that still need to be fixed.
 Don't worry about this.
 \Squeak is constantly evolving.}
 
@@ -909,17 +971,24 @@ Don't worry about this.
 
 %=================================================================
 \section{Chapter summary}
-This chapter has introduced you to the \sq environment and shown you how to use some of the major tools, such as the system browser, the method finder, and the test runner.   You have also seen a little of \sq's syntax, even though you may not understand it all yet.
+This chapter has introduced you to the \sq environment and shown you how to use some of the major tools, such as the system browser, the method finder, and the test runner.
+You have also seen a little of \sq's syntax, even though you may not understand it all yet.
 
 \begin{itemize}
-  \item A running \sq system consists of a \emph{virtual machine}, a \emph{sources} file, and \emph{image} and \emph{changes} files. Only these last two change, as they record a snapshot of the running system.
+  \item A running \sq system consists of a \emph{virtual machine}, a \emph{sources} file, and \emph{image} and \emph{changes} files.
+  Only these last two change, as they record a snapshot of the running system.
   \item When you start a \sq image, you will find yourself in exactly the same state\,---\,with the same running objects\,---\,that you had when you last saved that image.
-  \item \sq is designed to work with a three-button mouse. The buttons are known as the \emph{red}, the \emph{yellow} and the \emph{blue} buttons. If you don't have a three-button mouse, you can use modifier keys to obtain the same effect.
-  \item You use the \ind{red button} on the \sq background to bring up the \emph{World menu} and launch various tools. You can also launch tools from the \toolsflapind at the right of the \sq screen.
-  \item A \emph{workspace} is a tool for writing and evaluating snippets of code. You can also use it to store arbitrary text.
-  \item You can use \ind{keyboard shortcuts} on text in the workspace, or any other tool, to evaluate code. The most important of these are \menu{do it} (\short{d}), \menu{print it} (\short{p}), \menu{inspect it} (\short{i}), \menu{explore it} (\short{I}) and \menu{browse it} (\short{b}).
+  \item \sq is designed to work with a three-button mouse.
+  The buttons are known as the \emph{red}, the \emph{yellow} and the \emph{blue} buttons. If you don't have a three-button mouse, you can use modifier keys to obtain the same effect.
+  \item You use the \ind{red button} on the \sq background to bring up the \emph{World menu} and launch various tools.
+  You can also launch tools from the \toolsflapind at the right of the \sq screen.
+  \item A \emph{workspace} is a tool for writing and evaluating snippets of code.
+  You can also use it to store arbitrary text.
+  \item You can use \ind{keyboard shortcuts} on text in the workspace, or any other tool, to evaluate code.
+  The most important of these are \menu{do it} (\short{d}), \menu{print it} (\short{p}), \menu{inspect it} (\short{i}), \menu{explore it} (\short{I}) and \menu{browse it} (\short{b}).
   \item The \emph{system browser} is the main tool for browsing \sq code, and for developing new code.
-  \item The \emph{test runner} is a tool for running unit tests. It also supports Test Driven Development.
+  \item The \emph{test runner} is a tool for running unit tests.
+  It also supports Test Driven Development.
 \end{itemize}
 
 %=================================================================
