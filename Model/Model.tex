@@ -844,8 +844,8 @@ So, if you experience some sluggishness and are writing to the Transcript, think
 \begin{itemize}
 \item
 \ct{Smalltalk} is the single instance of \ct{SmalltalkImage} that, inter alia, provides access to all globals\,---\,including \ct{Smalltalk} itself.
-\ct{Smalltalk globals} answers an \clsind{Environment} instance which defines all of the global bindings and provides a \clsind{Dictionary}-like interface.
-The keys of these bindings are the symbols that name the global objects in \st code.
+\ct{Smalltalk globals} answers an \clsind{Environment} instance which defines all of the globals and provides a \clsind{Dictionary}-like interface.
+The keys for these declarations are the symbols that name the global objects in \st code.
 So, for example,
 \begin{code}{@TEST}
 Smalltalk globals at: #Boolean --> Boolean
