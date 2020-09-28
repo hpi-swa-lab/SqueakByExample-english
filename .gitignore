@@ -17,3 +17,4 @@ bin/gdrive
 
 # Editors
 .vscode/
+SqueakDebug.log
