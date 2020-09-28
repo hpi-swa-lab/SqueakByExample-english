@@ -84,7 +84,7 @@ to verify that you have added all the dependent files (e.g., figures).
 The PDF of the book is built automatically via TravisCI on each commit, which includes generation of all screenshots, that are codified, for the latest Squeak version. The usual workflow how to codify a screenshot is documented [here](https://github.com/codeZeilen/SqueakByExample-english/issues/21#issue-516598115). If the build process completed, you can watch the results [here](https://drive.google.com/drive/folders/1tNIvN-9Vx8djNZYfSYuqhjheb-EgJuTc).
 To build the PDF manually, do the following:
 ### I. Installation
-1. Get the latest Trunk image for Squeak
+1. Get a support Squeak image (any release since 5.3 or the latest Trunk image)
 2. Install [Squot](https://github.com/hpi-swa/Squot)
 3. Open the Git Browser and clone this repository
 4. Make sure to set the resource directory to the path of your working copy:
