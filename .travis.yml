@@ -21,13 +21,11 @@ script:
 - "make | ./travis_fold Compiling PDF ..."
 - mv SBE.pdf "SBE_${SQUEAK_VERSION}.pdf"
 
+after_script:
+- | # Upload PDF file to Google Drive
+  [ -f "SBE_${SQUEAK_VERSION}.pdf" ] && bash -e deploy-debug.sh "SBE_${SQUEAK_VERSION}.pdf"
+
 deploy:
-  - # Upload PDF file to Google Drive
-    provider: script
-    on:
-      all_branches: true
-    cleanup: false
-    script: bash -e deploy-debug.sh "SBE_${SQUEAK_VERSION}.pdf"
   - # Create GitHub release
     provider: releases
     on:
