@@ -24,7 +24,7 @@ script:
 after_script:
 - echo $TRAVIS_PULL_REQUEST # DEBUG!!!
 - | # Upload PDF file to Google Drive
-  if [ -f "SBE_${SQUEAK_VERSION}.pdf" ] && [ $TRAVIS_PULL_REQUEST=false ]
+  if [ -f "SBE_${SQUEAK_VERSION}.pdf" ] && [ "$TRAVIS_PULL_REQUEST" = false ]
   then
     bash -e deploy-debug.sh "SBE_${SQUEAK_VERSION}.pdf"
   fi
