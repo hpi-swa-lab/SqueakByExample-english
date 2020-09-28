@@ -1,0 +1,14 @@
+{
+	"category" : "SBE-Streams",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"stream" ],
+	"name" : "SBEFileStreams",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }
