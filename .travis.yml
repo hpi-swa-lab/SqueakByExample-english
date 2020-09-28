@@ -12,6 +12,7 @@ smalltalk: "Squeak64-${SQUEAK_VERSION}"
 before_script:
 - chmod +x travis_fold
 - |
+  # DEBUG_FIGURES allows PDF builds despite of missing figures
   export DEBUG_FIGURES=true && [ "$TRAVIS_BRANCH" = "master" ] && export DEBUG_FIGURES=false ; :
 - set -o pipefail
 
@@ -21,8 +22,9 @@ script:
 - mv SBE.pdf "SBE_${SQUEAK_VERSION}.pdf"
 
 deploy:
-  - provider: script
+  - # Upload PDF file to Google Drive
     script: bash -e deploy-debug.sh "SBE_${SQUEAK_VERSION}.pdf"
+  - # Create GitHub release
     on:
       all_branches: true
   - provider: releases
