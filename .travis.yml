@@ -12,7 +12,7 @@ smalltalk: "Squeak64-${SQUEAK_VERSION}"
 before_script:
 - chmod +x travis_fold
 - |
-  # DEBUG_FIGURES allows PDF builds despite of missing figures
+  # DEBUG_FIGURES allows PDF builds despite missing figures
   export DEBUG_FIGURES=true && [ "$TRAVIS_BRANCH" = "master" ] && export DEBUG_FIGURES=false ; :
 - set -o pipefail
 
@@ -22,7 +22,6 @@ script:
 - mv SBE.pdf "SBE_${SQUEAK_VERSION}.pdf"
 
 after_script:
-- echo $TRAVIS_PULL_REQUEST # DEBUG!!!
 - | # Upload PDF file to Google Drive
   if [ -f "SBE_${SQUEAK_VERSION}.pdf" ] && [ "$TRAVIS_PULL_REQUEST" = false ]
   then
