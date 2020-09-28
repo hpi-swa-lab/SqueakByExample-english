@@ -829,7 +829,7 @@ Every class is named by a global variable; in addition, a few globals are used t
 However, what may sound so handy and convenient at the first glance has turned out as bad practice during the evolution of \sq.
 While we state in rule 4 that ``everything happens by message sends'', the concept of globals is a violation of this rule.
 Accessing a global allows you to exchange information between two objects\,---\,\emph{without} sending any message.
-As a consequence, when using globals, we loose one of the main advantages of the \st object model, which is the total encapsulation of every object's state.
+As a consequence, when using globals, we loose an important advantage of the \st object model, which is the total encapsulation of every object's state.
 Also, global variables introduce \emph{global state} as mentioned earlier which impedes the modularity of \st objects.
 
 For these reasons, current practice is to strictly limit the use of global variables; it is usually better to use class instance variables or class variables and to provide class methods to access them.
@@ -852,7 +852,7 @@ So, if you experience some sluggishness and are writing to the Transcript, think
 Transcript outputs are mostly used for debugging and experimenting purposes where code quality is not the most important thing.
 If you want to use a transcript in a real application, you should use \ct{Project current transcript} instead, which makes sure that the transcript you are using actually matches your current \sq environment.
 
-Another useful global variable is \ct{Smalltalk}, which holds the instance of \ct{SystemDictionary} that defines all of the globals\,---\,including \ct{Smalltalk} itself.
+Another useful global variable is \ct{Smalltalk} which holds the instance of \ct{SystemDictionary} that defines all of the globals\,---\,including \ct{Smalltalk} itself.
 \glbindex{Smalltalk}
 The keys to this dictionary are the symbols that name the global objects in \st code.
 So, for example,
