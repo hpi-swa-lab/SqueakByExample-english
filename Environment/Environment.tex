@@ -516,6 +516,13 @@ SystemNavigation default browseAllImplementorsOf: #checkExtent: .
 To learn more about what is available, explore the class \ct{SystemNavigation} with the browser.
 Further navigation examples can be found in the FAQ (\appref{faq}).
 
+Beside \ct{SystemNavigation}, there are also several subclasses of \clsind{Categorizer} that manage the categories in which classes or methods are organized.
+Concretely, a \clsind{ClassOrganizer} records the organization of methods in a class, and analogously, a \clsind{SystemOrganizer} records the organization of classes into system categories.
+For example, you can retrieve all classes that are in the system category \ct{Collections-Strings} by sending \mthind{SystemOrganizer}{allClassesIn:} to the default \ct{SystemOrganizer} instance:
+\begin{code}{@TEST}
+SystemOrganizer default classesIn: 'Collections-Strings' --> an OrderedCollection(ByteString ByteSymbol Character String Symbol WideString WideSymbol)
+\end{code}
+
 \lr{Maybe mention how to change the default browser? SystemBrowser askForDefault (p. 141)}
 
 %---------------------------------------------------------

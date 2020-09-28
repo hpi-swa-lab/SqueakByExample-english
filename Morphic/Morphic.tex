@@ -559,6 +559,31 @@ Note that when the mouse is no longer over the morph, the \mthind{Morph}{handleK
 To discover the key values, you can open a Transcript window and add \glbind{Transcript} \ct{show: anEvent keyValue} to \mthref{handleKeystroke}.
 The \ct{anEvent} argument of \ct{handleKeystroke:} is an instance of \clsind{KeyboardEvent}, another subclass of \clsind{MorphicEvent}. Browse this class to learn more about keyboard events.
 
+\subsection{Global accessors}
+
+In complex applications, one may need to refer to the currently processed event without having it available in the current method.
+While we should avoid such situations in general, there is an accessor message, \ct{#currentEvent}, that allows us to retrieve the currently handled event again from every method in every object.
+To do so, we can simply write \ct{self currentEvent} in any method.
+Analogously, there are \ct{#currentHand} and \ct{#currentWorld} to retrieve the current \clsind{HandMorph} (which represents your cursor) or \clsind{PasteUpMorph} (which contains all other morphs displayed at your screen).
+
+In some cases, one also may want to directly control the user interaction without following the usual event handling control flow.
+As an example, we want to track the mouse cursor and find out which point the user clicks next.
+Implementing this via the usual handle protocol would be complicated because we want to handle clicks that are not made to a morph controlled by ourselves.%
+\footnote{Actually, there is an advanced mechanism called \emph{event-bubbling and -capturing filters} that would be applicable to this problem.
+	However, this approach requires a bit more code and is not optimally suited for our simple use case.}
+For cases like this, there is the class \clsind{EventSensor} an instance of which you can retrieve by evaluating \ct{EventSensor} default.
+To implement our example, we can do the following:
+\begin{method}{Retrieving information about the cursor from \ct{EventSensor} without using events.}
+getPositionFromClick
+	| position |
+	[EventSensor default anyButtonPressed] whileFalse: [
+		position := EventSensor default cursorPoint].
+	^ position
+\end{method}
+
+However, keep in mind that all these approaches use global state which can lead to problems in particular situations (just imagine a \sq image that deals with multiple cursors\footnote{This is actually the case in some multi-touch implementations for \sq{}.}, which cursor's position are we retrieving now?).
+So whenever possible, try to avoid these accessors and stick with the usual event-handling protocol instead.
+
 \subsection{Morphic animations}
 
 Morphic provides a simple animation system with two main methods: \mthind{Morphic}{step} is sent to a morph at regular intervals of time, while \mthind{Morphic}{stepTime} specifies the time in milliseconds between \ct{step}s.\footnote{\ct{stepTime} is actually the \emph{minimum} time between \ct{step}s.   If you ask for a \ct{stepTime} of 1\,ms, don't be surprised if \sq is too busy to step your morph that often.}

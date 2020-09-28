@@ -826,11 +826,21 @@ In \squeak, all global variables are stored in a namespace called \glbind{Smallt
 Global variables are accessible everywhere. 
 Every class is named by a global variable; in addition, a few globals are used to name special or commonly useful objects.
 
-The variable \glbind{Transcript} names an instance of \clsind{TranscriptStream}, a stream that writes to a scrolling window.
-The following code displays some information and then goes to the next line in the \ct{Transcript}.
+However, what may sound so handy and convenient at the first glance, has turned out as bad practice during the evolution of \sq.
+While we state in rule 4 that ``everything happens by message sends'', the concept of globals is a violation of this rule.
+Accessing a global allows you to exchange information between two objects\,---\,\emph{without} sending any message.
+As a consequence, when using globals, we loose one of the main advantages of the \st object model, which is the total encapsulation of every object's state.
+Also, global variables introduce \emph{global state} as mentioned earlier which impedes the modularity of \st objects.
+
+For these reasons, current practice is to strictly limit the use of global variables; it is usually better to use class instance variables or class variables and to provide class methods to access them.
+Indeed, if \squeak were to be implemented from scratch today, most of the global variables that are not classes would be replaced by singletons.
+Still, there are a number of globals defined in \sq, but for most of them, there exists a preferred alternative too, which is a message that usually can be sent to a particular class.
+
+For example, the variable \glbind{Transcript} names an instance of \clsind{TranscriptStream}, a stream that writes to a scrolling window.
+The following code displays some information in a new of the \ct{Transcript}.
 
 \begin{code}{}
-Transcript show: 'Squeak is fun and powerful' ; cr
+Transcript showln: 'Squeak is fun and powerful'
 \end{code}
 
 \noindent
@@ -839,11 +849,11 @@ Before you \menu{do it}, open a transcript by dragging one from the \emph{Tools}
 \hint{Writing to the Transcript is slow, especially when the transcript window is open. 
 So, if you experience some sluggishness and are writing to the Transcript, think about collapsing it.}
 
-\subsubsection{Other useful global variables}
+Transcript outputs are mostly used for debugging and experimenting purposes where code quality is not the most important thing.
+If you want to use a transcript in a real application, you should use \ct{Project current transcript} instead, which makes sure that the transcript you are using actually matches the current \sq context.
 
-\begin{itemize}
-\item
-\ct{Smalltalk} is the instance of \ct{SystemDictionary} that defines all of the globals\,---\,including \ct{Smalltalk} itself.   
+Another useful global variable is \ct{Smalltalk}, which holds the instance of \ct{SystemDictionary} that defines all of the globals\,---\,including \ct{Smalltalk} itself.
+\glbindex{Smalltalk}
 The keys to this dictionary are the symbols that name the global objects in \st code.
 So, for example,
 \begin{code}{@TEST}
@@ -858,29 +868,15 @@ and
 (Smalltalk at: #Smalltalk) == Smalltalk --> true
 \end{code}
 
-% ct: TODO DISCUSS: Shall we really recommend the usage of \ct{Sensor} any longer?}
-\item \clsind{Sensor} is an instance of \clsind{EventSensor}, and represents input to \squeak.
-For example, \lct{Sensor keyboard} answers the next character input on the keyboard, and \ct{Sensor leftShiftDown} answers \ct{true} if the left shift key is being held down, while \ct{Sensor mousePoint} answers a \ct{Point} indicating the current mouse location.
-
-\item
-\glbind{Undeclared} is another dictionary\,---\,it contains all the undeclared variables.
-If you write a method that references an undeclared variable, the browser will normally
-prompt you to declare it, for example, as a global or as an instance variable of the class.
+There is also a dictionary that contains all the undeclared variables, which can be retrieved via \ct{Smalltalk globals undeclared}.
+If you write a method that references an undeclared variable, the browser will normally prompt you to declare it, for example, as a global or as an instance variable of the class.
 However, if you later delete the declaration, the code will then reference an undeclared variable.
-Inspecting \ct{Undeclared} can sometimes help explain strange behaviour!
+Inspecting the undeclared dictionary can sometimes help explain strange behavior!
 
-\item
-\glbind{SystemOrganization} is an instance of \clsind{SystemOrganizer}: it records the organization of classes into packages.  More precisely, it categorizes the \emph{names} of classes, so
-\begin{code}{@TEST}
-SystemOrganization categoryOfElement: #Magnitude --> #'Kernel-Numbers'
-\end{code}
-
-\end{itemize}
-
-Current practice is to strictly limit the use of global variables; it is usually better to use class instance variables or class variables and to provide class methods to access them.  Indeed, if \squeak were to be implemented from scratch today, most of the global variables that are not classes would be replaced by singletons.
-
-The usual way to define a global is just to \menu{do it} on an assignment to a capitalized but undeclared identifier.  The parser will then offer to declare the global for you.  If you want to define a global programmatically, just execute \ct{Smalltalk at: #AGlobalName put: nil}.  To remove it, execute \ct{Smalltalk removeKey: #AGlobalName}.
-\glbindex{Smalltalk}
+In case you really need to define a new global, the usual way to do so is just to \menu{do it} on an assignment to a capitalized but undeclared identifier.
+The parser will then offer to declare the global for you.
+If you want to define a global programmatically, just execute \ct{Smalltalk at: #AGlobalName put: nil}.
+To remove it, execute \ct{Smalltalk removeKey: #AGlobalName}.
 
 %---------------------------------------------------------
 \subsection{Class variables}
