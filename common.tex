@@ -549,18 +549,20 @@ Damien Pollet},
 \usepackage{pdftexcmds}
 \makeatletter
 \newcommand\compareStringsDo[4]{%
-	\lowercase{\ifcase\pdf@strcmp{#1}{#2}}%
-		#4\or
-		#4\else
-		#3\fi
+	\lowercase{\ifcase\pdf@strcmp{#1}{#2}}
+		#3\or
+		#3\else
+		#4\fi
 }
 \makeatother
 % Usage: \SqVersionSwitch{6.0}{We are Squeak 6.0 or later!}{We are before Squeak 6.0}
 \newcommand{\SqVersionSwitch}[3]{%
 	\ifdefined\SQUEAKVERSION%
-	\compareStringsDo{\SQUEAKVERSION}{#1}{#2}{#3}%
+	\ifthenelse{\equal{Trunk}{\SQUEAKVERSION}}%
+	{#2}%
+	{\compareStringsDo{\SQUEAKVERSION}{#1}{#2}{#3}}%
 	\else%
-	#1%
+	#2%
 	\fi%
 }
 %=============================================================
