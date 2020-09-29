@@ -13,8 +13,8 @@ sourceLines: anObject
 				into: [:result :escape |
 					result copyWithRegex: escape key matchesReplacedWith: escape value])
 			translatingMatchesUsing: [:match |
-				(matcher subexpression: 1) >= self systemVersionString
-					ifTrue: [matcher subexpression: 2]
-					ifFalse: [matcher subexpression: 4]]].
+				self systemVersionString >= (matcher subexpression: 2)
+					ifTrue: [matcher subexpression: 3]
+					ifFalse: [matcher subexpression: 5]]].
 	
 	self chapter generateTestMethod: self testSource.
