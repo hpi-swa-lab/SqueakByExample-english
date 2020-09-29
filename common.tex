@@ -543,8 +543,26 @@ Damien Pollet},
 \setcounter{totalnumber}{20}
 \setcounter{dbltopnumber}{9}
 %=============================================================
-% apb doesn't like paragraphs to run in to each other without a break
+% apb doesn't like paragraphs to run into each other without a break
 \parskip 1ex
+%=============================================================
+\usepackage{pdftexcmds}
+\makeatletter
+\newcommand\compareStringsDo[4]{%
+	\lowercase{\ifcase\pdf@strcmp{#1}{#2}}%
+		#4\or
+		#4\else
+		#3\fi
+}
+\makeatother
+% Usage: \SqVersionSwitch{6.0}{We are Squeak 6.0 or later!}{We are before Squeak 6.0}
+\newcommand{\SqVersionSwitch}[3]{%
+	\ifdefined\SQUEAKVERSION%
+	\compareStringsDo{\SQUEAKVERSION}{#1}{#2}{#3}%
+	\else%
+	#1%
+	\fi%
+}
 %=============================================================
 %:Stuff to check, merge or deprecate
 %\setlength{\marginparsep}{2mm}
