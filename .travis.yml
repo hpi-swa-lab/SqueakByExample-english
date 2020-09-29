@@ -1,26 +1,43 @@
 language: smalltalk
-sudo: true
 services:
 - docker
-smalltalk:
-- Squeak-Trunk
+    
+env:
+  jobs:
+  - SQUEAK_VERSION=Trunk
+  - SQUEAK_VERSION=5.3
+
+smalltalk: "Squeak64-${SQUEAK_VERSION}"
 
 before_script:
 - chmod +x travis_fold
 - |
+  # DEBUG_FIGURES allows PDF builds despite missing figures
   export DEBUG_FIGURES=true && [ "$TRAVIS_BRANCH" = "master" ] && export DEBUG_FIGURES=false ; :
 - set -o pipefail
 
 script:
 - smalltalkci .smalltalk.ston
 - "make | ./travis_fold Compiling PDF ..."
-- "[ -f SBE.pdf ] && bash -e deploy-debug.sh SBE.pdf ; :"
+- mv SBE.pdf "SBE_${SQUEAK_VERSION}.pdf"
+
+after_script:
+- | # Upload PDF file to Google Drive
+  if [ -f "SBE_${SQUEAK_VERSION}.pdf" ] && [ "$TRAVIS_PULL_REQUEST" = false ]
+  then
+    bash -e deploy-debug.sh "SBE_${SQUEAK_VERSION}.pdf"
+  fi
 
 deploy:
-  provider: releases
-  api_key:
-    secure: KcvH99B3Ab567MgJxsMOfvvxs0Q7qQw3WHlmyESkF5/B+wOBX3XJkFKF+3HeRejqUiZCIjsHEfgamufPGp/a9vdrEgOnLsjnlrsheje9/hHIC+fmQp0g6BpeIfF/eHlyE2W4Lx+mwQASzYjEvGIERlnrXUAWG+0k1BbB31JhF1kznjFe1gEwlfltIqxL7Bxm6dFyucn8PV1N8liq2B9iKsUapXBC7Qfen2L/tTuVljhdWb1GsIX8FzeIFXdJbmlBjaiUNb8uCFYyWqaqcq2+N+nmUos/flqaQZor0bz1WtrKvwdpoenWrLmh7FDjSRdpTCXWaaH62Rw2p+bcWxdjz9sGEu/NAEPvdpFirNRPX2k8bhA7QbdqrLPrznu9vs6Ygo6pBeapUSIU6KwK5LazoWn61HIh8Ib6s3sZeu7w/N3u7jGMhhbGNRGcISCHKTYw0oYIdT0+F6nRUpV0ov2h/u9qslVPtksxbdjFeuy/BAKmTiCseiaVBol5TWG++SY7Uo5sQT6/2jpjAV2bOUV35VU4/zObftCo21WzZXzWV+Q9XruOPBs0XRRTFJxrKm35ECS/5FputYtD7EJ3+xtPAEHp/JZxHTydN20XDxM0iDS19tk7t+L6bYpWDjuul2GLJOjUp5kVfzSt0cEjuNX1E6YH7SmNJFvF5snwlYrHESs=
-  file: ${TRAVIS_BUILD_DIR}/SBE.pdf
-  skip_cleanup: true
-  on:
-    branch: master
+  - # Create GitHub release
+    provider: releases
+    on:
+      branch: master
+    cleanup: false
+    file: "${TRAVIS_BUILD_DIR}/SBE_{SQUEAK_VERSION}.pdf"
+    api_key:
+      secure: KcvH99B3Ab567MgJxsMOfvvxs0Q7qQw3WHlmyESkF5/B+wOBX3XJkFKF+3HeRejqUiZCIjsHEfgamufPGp/a9vdrEgOnLsjnlrsheje9/hHIC+fmQp0g6BpeIfF/eHlyE2W4Lx+mwQASzYjEvGIERlnrXUAWG+0k1BbB31JhF1kznjFe1gEwlfltIqxL7Bxm6dFyucn8PV1N8liq2B9iKsUapXBC7Qfen2L/tTuVljhdWb1GsIX8FzeIFXdJbmlBjaiUNb8uCFYyWqaqcq2+N+nmUos/flqaQZor0bz1WtrKvwdpoenWrLmh7FDjSRdpTCXWaaH62Rw2p+bcWxdjz9sGEu/NAEPvdpFirNRPX2k8bhA7QbdqrLPrznu9vs6Ygo6pBeapUSIU6KwK5LazoWn61HIh8Ib6s3sZeu7w/N3u7jGMhhbGNRGcISCHKTYw0oYIdT0+F6nRUpV0ov2h/u9qslVPtksxbdjFeuy/BAKmTiCseiaVBol5TWG++SY7Uo5sQT6/2jpjAV2bOUV35VU4/zObftCo21WzZXzWV+Q9XruOPBs0XRRTFJxrKm35ECS/5FputYtD7EJ3+xtPAEHp/JZxHTydN20XDxM0iDS19tk7t+L6bYpWDjuul2GLJOjUp5kVfzSt0cEjuNX1E6YH7SmNJFvF5snwlYrHESs=
+
+notifications:
+  email:
+    if: type = cron

@@ -33,7 +33,7 @@ if [ ! -f $GDRIVE ]; then install_gdrive; fi
 
 FIXED_BRANCH=$(echo $TRAVIS_BRANCH | sed 's/\//-/g')
 FIXED_REPO=$(echo $TRAVIS_REPO_SLUG | sed 's/\//-/g')
-FILE_NAME="SBE-$FIXED_REPO-$FIXED_BRANCH.pdf"
+FILE_NAME="${SOURCE%.*}-$FIXED_REPO-$FIXED_BRANCH.pdf"
 GDRIVE_FILE=$(find_file $FILE_NAME)
 if [[ $GDRIVE_FILE ]]; then
 	echo "Uploading new version of ${FILE_NAME} ..."

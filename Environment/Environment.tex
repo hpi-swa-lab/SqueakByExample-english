@@ -807,7 +807,7 @@ SBEScreenshotRecorder writeTo: './figures/MCaddToPackage.png' building: [:helper
 	| repositoryMatch repositoryList |
 	thisContext wrap: [:block | helper mcIgnoreAllModificationsDuring: block].
 	MCWorkingCopyBrowser open.
-	repositoryMatch := MCRepository trunk description.
+	repositoryMatch := MCRepository packageCache description.
 	repositoryList := helper listMorphIncludingMatch: repositoryMatch in: helper foregroundWindow.
 	helper select: repositoryList at: repositoryMatch.
 	helper keyStroke: repositoryList key: Character escape.
