@@ -1,4 +1,4 @@
-# Squeak by Example
+# Squeak by Example [![Build Status](https://travis-ci.com/hpi-swa-lab/SqueakByExample-english.svg?branch=master)](https://travis-ci.com/hpi-swa-lab/SqueakByExample-english)
 
 This is the LaTeX source repository of the _Squeak by Example_ book.
 
