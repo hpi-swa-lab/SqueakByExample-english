@@ -1,7 +1,7 @@
 initialize-release
 getNextTestWithInit: initLine
 	| re lines line start end |
-	re := '\\end{(\w+)}.*' asRegex.
+	re := '\\end\{(\w+)\}.*' asRegex.
 	lines := OrderedCollection new.
 	lines addLast: initLine.
 	start := self lineNumber + 1.

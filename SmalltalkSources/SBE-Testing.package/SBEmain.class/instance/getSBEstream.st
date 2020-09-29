@@ -1,7 +1,8 @@
 initialize-release
 getSBEstream
 	| stream |
-	stream := FileDirectory default oldFileOrNoneNamed: self sbeFileName.	
+	stream := (FileDirectory on: SBEScriptBuilder resourceDirectory asString)
+		oldFileOrNoneNamed: self sbeFileName.	
 	self
 		assert: [ stream notNil ]
 		descriptionBlock: [

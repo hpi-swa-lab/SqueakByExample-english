@@ -1,5 +1,6 @@
 initialize-release
-initialize
+setUp
+
 	self class removeOldTestCategory.
 	chapters := OrderedCollection new.
-	self getChapters
+	self getChapters.

@@ -1,3 +1,3 @@
 constants
 testCategory
-	^ 'SBE-GeneratedTests'
+	^ 'SBEGenerated-Tests'

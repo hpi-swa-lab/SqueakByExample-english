@@ -1,7 +1,7 @@
 initialize-release
 findTests
 	| re |
-	re := '\\begin{(\w+)}.*{@TEST\s*(.*)}' asRegex.
+	re := '\\begin\{(\w+)\}.*\{@TEST\s*(.*)\}' asRegex.
 	[ self atEnd] whileFalse:
 		[ (re matches: self nextLine)
 			ifTrue:
