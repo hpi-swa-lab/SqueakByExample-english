@@ -523,8 +523,8 @@ Multiplying a \ct{Fraction} by an \ct{Integer} or another \ct{Fraction} may yiel
 The class methods \mthind{SmallInteger}{minVal} and \mthind{SmallInteger}{maxVal} tell us the range of a \ct{SmallInteger}:
 
 \begin{code}{@TEST}
-SmallInteger maxVal = ((2 raisedTo: 30) - 1)      --> true
-SmallInteger minVal = (2 raisedTo: 30) negated --> true
+SmallInteger maxVal = ((2 raisedTo: 60) - 1)      --> true
+SmallInteger minVal = (2 raisedTo: 60) negated --> true
 \end{code}
 
 When a \ct{SmallInteger} goes out of this range, it is automatically converted to a \clsind{LargePositiveInteger} or a \clsind{LargeNegativeInteger}, as needed:
