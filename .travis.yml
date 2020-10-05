@@ -33,7 +33,7 @@ jobs:
       env: SQUEAK_VERSION=
       language: minimal
       install: skip
-      script:
+      script: true
       deploy: # Create GitHub release
         provider: releases
         file: "SBE_*.pdf"
