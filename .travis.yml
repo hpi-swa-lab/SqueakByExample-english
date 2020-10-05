@@ -15,7 +15,7 @@ script:
 - #smalltalkci .smalltalk.ston DEBUG
 - make | ./travis_fold Compiling PDF ...
 - mv SBE.pdf "SBE_${SQUEAK_VERSION}.pdf"
-after_script: test -f "SBE_${SQUEAK_VERSION}.pdf" && SBE_gdrive_upload.sh "SBE_${SQUEAK_VERSION}.pdf"
+after_script: test "$TRAVIS_BRANCH" = "master" && gdrive_upload.sh "SBE_${SQUEAK_VERSION}.pdf"
 
 jobs:
   include:
