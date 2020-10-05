@@ -35,12 +35,14 @@ FIXED_REPO=$(echo $TRAVIS_REPO_SLUG | sed 's/\//-/g')
 
 case $OPERATION in
 	download)
+		echo "Downloading build artifacts ..."
 		FILE_NAME="-$FIXED_REPO-$FIXED_BRANCH.pdf"
 		GDRIVE_FILES=$(find_files "$FILE_NAME")
 		for GDRIVE_FILE in $GDRIVE_FILES; do
 			$GDRIVE download $GDRIVE_ARGS --force $GDRIVE_FILE
 		done
 		rename "s/${FILE_NAME%.*}//" *$FILE_NAME
+		echo "Finished download from Google Drive."
 		;;
 	upload)
 		SOURCE=$2
