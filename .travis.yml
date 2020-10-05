@@ -3,13 +3,14 @@ env:
     - SQUEAK_VERSION=Trunk
     - SQUEAK_VERSION=5.3
 
+language: smalltalk
+services:
+- docker
+smalltalk: "Squeak64-${SQUEAK_VERSION}"
+
 jobs:
   include:
     - stage: build
-      language: smalltalk
-      services:
-      - docker
-      smalltalk: "Squeak64-${SQUEAK_VERSION}"
       
       workspaces:
         create:
