@@ -17,6 +17,7 @@ script:
 #- smalltalkci .smalltalk.ston
 #- make | ./travis_fold Compiling PDF ...
 #- mv SBE.pdf "SBE_${SQUEAK_VERSION}.pdf"
+after_script: test -f "SBE_${SQUEAK_VERSION}.pdf" && SBE_gdrive_upload.sh "SBE_${SQUEAK_VERSION}.pdf"
 
 jobs:
   include:
@@ -33,9 +34,6 @@ jobs:
         cleanup: false
       on:
         branch: master
-    - name: Google Drive Upload
-      language: minimal
-      script: bash gdrive_upload.sh "SBE_${SQUEAK_VERSION}.pdf"
 
 notifications:
   email:
