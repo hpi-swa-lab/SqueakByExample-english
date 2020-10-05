@@ -33,7 +33,7 @@ jobs:
         use:
           - builds
       install: skip
-      script: ls "SBE_*.pdf" # DEBUG
+      script: ls # DEBUG
       deploy:
         provider: releases
         file: "SBE_*.pdf"
