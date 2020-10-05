@@ -1,5 +1,6 @@
 #!/bin/sh 
 # Inspired by https://joeyrobert.org/2016/07/13/artifact-deployment-via-google-drive/
+set -e
 
 if [ -z "$1" ]; then
 	read -p "File to export? " SOURCE
