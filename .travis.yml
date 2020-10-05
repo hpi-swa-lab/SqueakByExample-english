@@ -31,10 +31,7 @@ jobs:
     - stage: deploy
       env: SQUEAK_VERSION=
       language: minimal
-      workspaces:
-        use:
-          - build-Trunk
-          - build-5.3
+      install: skip
       deploy: # Create GitHub release
         provider: releases
         on:
