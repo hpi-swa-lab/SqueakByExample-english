@@ -36,9 +36,12 @@
 %=============================================================
 \section{Introduction}
 
-The collection classes form a loosely-defined group of general-purpose subclasses of \clsindmain{Collection} and \clsind{Stream}. The group of classes that appears in the ``\ind{Blue Book}''~\cite{Gold83a} contains 17 subclasses of \ct{Collection} and 9 subclasses of \ct{Stream}, for a total of 28 classes, and had already been redesigned several times before the \st-80 system was released. This group of classes is often considered to be a paradigmatic example of object-oriented design.
+The collection classes form a loosely-defined group of general-purpose subclasses of \clsindmain{Collection} and \clsind{Stream}.
+The group of classes that appears in the ``\ind{Blue Book}''~\cite{Gold83a} contains 17 subclasses of \ct{Collection} and 9 subclasses of \ct{Stream}, for a total of 28 classes, and had already been redesigned several times before the \st-80 system was released.
+This group of classes is often considered to be a paradigmatic example of object-oriented design.
 
-In \squeak, the abstract class \ct{Collection} has 98 subclasses, and the abstract class \ct{Stream} has 39 subclasses, but many of these (like \mbox{\clsind{Bitmap},} \clsind{FileStream} and \clsind{CompiledMethod}) are special-purpose classes crafted for use in other parts of the system or in applications, and hence not categorized as ``Collections'' by the system organization. For the purposes of this chapter, we use the term ``Collection Hierarchy'' to mean \ct{Collection} and its 37 subclasses that are \emph{also} in the system categories labelled \scat{Collections-*}.
+In \squeak, the abstract class \ct{Collection} has 98 subclasses, and the abstract class \ct{Stream} has 39 subclasses, but many of these (like \mbox{\clsind{Bitmap},} \clsind{FileStream}, and \clsind{CompiledMethod}) are special-purpose classes crafted for use in other parts of the system or in applications, and hence not categorized as ``Collections'' by the system organization.
+For the purposes of this chapter, we use the term ``Collection Hierarchy'' to mean \ct{Collection} and its 37 subclasses that are \emph{also} in the system categories labeled \scat{Collections-*}.
 We use the term ``Stream Hierarchy'' to mean \ct{Stream} and its 10 subclasses that are \emph{also} in the \scatind{Collections-Streams} system categories.
 The full list is shown in \figref{CollClassesList}.
 These 49 classes respond to 794 messages and define a total of 1236 methods!
@@ -55,7 +58,7 @@ These 49 classes respond to 794 messages and define a total of 1236 methods!
 \end{center}
 \end{figure}
 
-In this chapter we focus mainly on the subset of collection classes shown in \figref{CollClassesTree}.
+In this chapter, we focus mainly on the subset of collection classes shown in \figref{CollClassesTree}.
 Streams will be discussed separately in \charef{streams}.
 
 % \sd{should put stream related text in Stream chapter}.
@@ -81,10 +84,13 @@ Streams will be discussed separately in \charef{streams}.
 To make good use of the collection classes, the reader needs at least a superficial knowledge of the wide variety of collections that they implement, and their commonalities and differences.
 
 Programming with collections rather than individual elements is an important way to raise the level of abstraction of a program. 
-The \ind{Lisp} function \ct{map}, which applies an argument function to every element of a list and returns a new list containing the results is an early example of this style, but \st-80 adopted collection-based programming as a central tenet.  Modern functional programming languages such as \ind{ML} and \ind{Haskell} have followed \st's lead.
+The \ind{Lisp} function \ct{map}, which applies an argument function to every element of a list and returns a new list containing the results is an early example of this style, but \st-80 adopted collection-based programming as a central tenet.
+Modern functional programming languages such as \ind{ML} and \ind{Haskell} have followed \st's lead.
 
 Why is this a good idea?
-Suppose you have a data structure containing a collection of student records, and wish to perform some action on all of the students that meet some criterion.  Programmers raised to use an imperative language will immediately reach for a loop.  But the \st programmer will write:
+Suppose you have a data structure containing a collection of student records and wish to perform some action on all of the students that meet a particular criterion.
+Programmers raised to use an imperative language will immediately reach for a loop.
+But the \st programmer will write:
 \begin{code}{}
 students select: [ :each | each gpa < threshold ]
 \end{code}
@@ -93,13 +99,18 @@ which evaluates to a new collection containing precisely those elements of \ct{s
 \index{lambda expression}}.
 The \st code has the simplicity and elegance of a domain-specific query language.
 
-The message \ct{select:} is understood by \emph{all} collections in \st.  There is no need to find out if the student data structure is an array or a linked list: the \ct{select:} message is understood by both.  Note that this is quite different from using a loop, where one must know whether \ct{students} is an array or a linked list before the loop can be set up.
+The message \ct{select:} is understood by \emph{all} collections in \st.
+There is no need to find out if the student data structure is an array or a linked list:
+The \ct{select:} message is understood by both.
+Note that this is quite different from using a loop, where one must know whether \ct{students} is an array or a linked list before the loop can be set up.
 
-In \st, when one speaks of a collection without being more specific about the kind of collection, one means an object that supports well-defined protocols for testing membership and enumerating the elements.  \emph{All} collections understand the \protind{testing} messages \mbox{\mthind{Collection}{includes:},} \mthind{Collection}{isEmpty} and \mbox{\mthind{Collection}{occurrencesOf:}.}  \emph{All} collections understand the \prot{enumeration} messages \mthind{Collection}{do:}, \mthind{Collection}{select:}, \mthind{Collection}{reject:} (which is the opposite of \ct{select:}), \mthind{Collection}{collect:} (which is like lisp's \ct{map}), \mthind{Collection}{detect:ifNone:}, \mthind{Collection}{inject:into:} (which performs a left fold) and many more.
+In \st, when one speaks of a collection without being more specific about the kind of collection, one means an object that supports well-defined protocols for testing membership and enumerating the elements.
+\emph{All} collections understand the \protind{testing} messages \mbox{\mthind{Collection}{includes:},} \mthind{Collection}{isEmpty}, and \mbox{\mthind{Collection}{occurrencesOf:}.}
+\emph{All} collections understand the \prot{enumeration} messages \mthind{Collection}{do:}, \mthind{Collection}{select:}, \mthind{Collection}{reject:} (which is the opposite of \ct{select:}), \mthind{Collection}{collect:} (which is like lisp's \ct{map}), \mthind{Collection}{detect:ifNone:}, \mthind{Collection}{inject:into:} (which performs a left fold), and many more.
 It is the ubiquity of this protocol, as well as its variety, that makes it so powerful.
 
 \figref{protocols} summarizes the standard protocols supported by most of the classes in the collection hierarchy.
-These methods are defined, redefined, optimized or occasionally even forbidden by subclasses of \ct{Collection}.
+These methods are defined, redefined, optimized, or occasionally even forbidden by subclasses of \ct{Collection}.
 
 %:FIGURE -- Standard collection protocols
 \begin{figure*}
@@ -141,21 +152,21 @@ These methods are defined, redefined, optimized or occasionally even forbidden b
 %\end{figure*}
 %\on{A useless diagram -- refer to the class hierarchy instead!}
 
-Beyond this basic uniformity, there are many different kinds of collection either supporting different protocols, or providing different behaviour for the same requests.
+Beyond this basic uniformity, there are many different kinds of collections either supporting different protocols or providing different behavior for the same requests.
 Let us briefly survey some of the key differences:
 
 \begin{itemize}
   \item {\bf Sequenceable:}
   Instances of all subclasses of \clsind{SequenceableCollection} start from a \mthind{SequenceableCollection}{first} element and proceed in a well-defined order to a \mthind{SequenceableCollection}{last} element.
-  Instances of \clsind{Set}, \clsind{Bag} and \clsind{Dictionary}, on the other hand, are not sequenceable.
+  Instances of \clsind{Set}, \clsind{Bag}, and \clsind{Dictionary}, on the other hand, are not sequenceable.
 
   \item {\bf Sortable:}
   A \clsind{SortedCollection} maintains its elements in sort order.
 
   \item {\bf Indexable:}
 	Most sequenceable collections are also indexable, that is, elements can be retrieved with \ct{at:}.
-	\clsind{Array} is the familiar indexable data structure with a fixed size;  \ct{anArray at: n} retrieves the $\mbox{\ct{n}}^{th}$ element of \ct{anArray}, and \ct{anArray at: n put: v} changes the $\mbox{\ct{n}}^{th}$ element to \ct{v}.
-	\ct{LinkedList}s and \ct{SkipList}s are sequenceable but not indexable, that is, they understand \ct{first} and \ct{last}, but not \ct{at:}.
+	\clsind{Array} is the familiar indexable data structure with a fixed size; \ct{anArray at: n} retrieves the $\mbox{\ct{n}}^{th}$ element of \ct{anArray}, and \ct{anArray at: n put: v} changes the $\mbox{\ct{n}}^{th}$ element to \ct{v}.
+	\ct{LinkedList}s and \ct{SkipList}s are sequenceable but not indexable, that is, they understand \ct{first} and \ct{last} but not \ct{at:}.
 	\clsindex{LinkedList}
 	\clsindex{SkipList}
 
@@ -164,17 +175,20 @@ Let us briefly survey some of the key differences:
 
   \item {\bf Mutable:}
   	Most collections are mutable, but \ct{Interval}s and \ct{Symbol}s are not.
-	An \clsind{Interval} is an immutable collection representing a range of \ct{Integer}s.  For example, \ct{5 to: 16 by: 2} is an interval that contains the elements 5, 7, 9, 11, 13 and 15.  It is indexable with \mthind{Interval}{at:}, but cannot be changed with \ct{at:put:}.
+  An \clsind{Interval} is an immutable collection representing a range of \ct{Integer}s.
+  For example, \ct{5 to: 16 by: 2} is an interval that contains the elements 5, 7, 9, 11, 13, and 15.
+  It is indexable with \mthind{Interval}{at:}, but cannot be changed with \ct{at:put:}.
 	\clsindex{Symbol}
 
   \item {\bf Growable:}
-  	Instances of \ct{Interval} and \clsind{Array} are always of a fixed size. Other kinds of collections (sorted collections, ordered collections, and linked lists) can grow after creation.
+    Instances of \ct{Interval} and \clsind{Array} are always of a fixed size.
+    Other kinds of collections (sorted collections, ordered collections, and linked lists) can grow after creation.
 	
 	The class \clsind{OrderedCollection} is more general than \ct{Array}; the size of an \ct{OrderedCollection} grows on demand, and it has methods for \mthind{OrderedCollection}{addFirst:} and \mthind{OrderedCollection}{addLast:} as well as \mthind{OrderedCollection}{at:} and \mthind{OrderedCollection}{at:put:}.
   
   \item {\bf Accepts duplicates:}
   	A \clsind{Set} will filter out duplicates, but a \clsind{Bag} will not.
-	\clsind{Dictionary}, \ct{Set} and \ct{Bag} use the \ct{=} method provided by the elements; the \ct{Identity} variants of these classes use the \ct{==} method, which tests whether the arguments are the same object, and the \ct{Pluggable} variants use an arbitrary equivalence relation supplied by the creator of the collection.
+	\clsind{Dictionary}, \ct{Set}, and \ct{Bag} use the \ct{=} method provided by the elements; the \ct{Identity} variants of these classes use the \ct{==} method, which tests whether the arguments are the same object, and the \ct{Pluggable} variants use an arbitrary equivalence relation supplied by the creator of the collection.
 	\index{Pluggable collections}
 
   \item {\bf Heterogeneous:}
