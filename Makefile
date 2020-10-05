@@ -35,7 +35,6 @@ all : book
 book: clean listings book-pages
 
 book-pages :
-	bash -c "if [ $${TRAVIS+x} ]; then docker pull --cache-from tom95/texlive-docker-swa; fi"
 	time ${PDFLATEX} '${TEXINPUT}'
 	time ${BIBTEX} ${BOOK}
 	time ${PDFLATEX} '${TEXINPUT}'
