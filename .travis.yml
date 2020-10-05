@@ -1,6 +1,3 @@
-language: smalltalk
-services:
-- docker
 env:
   jobs:
   - SQUEAK_VERSION=Trunk
@@ -9,6 +6,9 @@ env:
 jobs:
   include:
     - stage: build
+      language: smalltalk
+      services:
+      - docker
       smalltalk: "Squeak64-${SQUEAK_VERSION}"
       before_script:
       - chmod +x travis_fold
