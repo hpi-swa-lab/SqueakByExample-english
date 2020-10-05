@@ -10,6 +10,7 @@ smalltalk: "Squeak64-${SQUEAK_VERSION}"
 workspaces:
   create:
     name: builds
+    paths: "SBE_${SQUEAK_VERSION}.pdf"
 
 before_script:
 - | # Ignore missing figures during PDF build
