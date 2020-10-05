@@ -48,7 +48,7 @@ case $OPERATION in
 		SOURCE=$2
 		FILE_NAME="${SOURCE%.*}-$FIXED_REPO-$FIXED_BRANCH.pdf"
 		GDRIVE_FILE=$(find_file $FILE_NAME)
-		if [[ -z $GDRIVE_FILE ]]; then
+		if [ -z $GDRIVE_FILE ]; then
 			echo "Uploading ${FILE_NAME} ..."
 			$GDRIVE upload $GDRIVE_ARGS --name $FILE_NAME $SOURCE -p $GDRIVE_FOLDER
 			GDRIVE_FILE=$(find_file $FILE_NAME)
