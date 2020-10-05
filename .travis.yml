@@ -12,7 +12,7 @@ before_script:
   test $TRAVIS_BRANCH = master || export DEBUG_FIGURES=true
 - set -o pipefail
 script:
-- #smalltalkci .smalltalk.ston DEBUG
+- smalltalkci .smalltalk.ston DEBUG
 - make | ./travis_fold Compiling PDF ...
 - mv SBE.pdf "SBE_${SQUEAK_VERSION}.pdf"
 - test "$TRAVIS_PULL_REQUEST" = false && ./gdrive.sh upload "SBE_${SQUEAK_VERSION}.pdf"
