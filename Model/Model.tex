@@ -829,12 +829,11 @@ Every class is named by a global variable; in addition, a few globals are used t
 However, what may sound so handy and convenient at the first glance has turned out as bad practice during the evolution of \sq.
 While we state in rule 4 that ``everything happens by message sends'', the concept of globals is a violation of this rule.
 Accessing a global allows you to exchange information between two objects\,---\,\emph{without} sending any message.
-As a consequence, when using globals, we loose an important advantage of the \st object model, which is the total encapsulation of every object's state.
-Also, global variables introduce \emph{global state} as mentioned earlier which impedes the modularity of \st objects.
+As a consequence, when using globals, we lose an important advantage of the \st object model, which is the encapsulation of every object's state.
+Also, global variables introduce \emph{global state} as mentioned earlier which impedes the modularity of \st objects and hinders us to use a \st object directly without taking care of its environment.
 
 For these reasons, current practice is to strictly limit the use of global variables; it is usually better to use class instance variables or class variables and to provide class methods to access them.
-Indeed, if \squeak were to be implemented from scratch today, most of the global variables that are not classes would be replaced by singletons.
-Still, there are a number of globals defined in \sq, but for most of them, there exists a preferred alternative too, which is a message that usually can be sent to a particular class.
+Still, there are a number of globals defined in \sq, but for most of them, there is a preferred alternative too, which is a message that usually can be sent to a particular class.
 
 For example, the variable \glbind{Transcript} names an instance of \clsind{TranscriptStream}, a stream that writes to a scrolling window.
 The following code displays some information in a new of the \ct{Transcript}.
