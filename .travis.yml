@@ -1,6 +1,7 @@
 env:
-  - SQUEAK_VERSION=Trunk
-  - SQUEAK_VERSION=5.3
+  jobs:
+    - SQUEAK_VERSION=Trunk
+    - SQUEAK_VERSION=5.3
 
 jobs:
   include:
@@ -35,6 +36,7 @@ jobs:
         fi
     - stage: deploy
       env: SQUEAK_VERSION=
+      language: minimal
       workspaces:
         use:
           - build-Trunk
