@@ -15,7 +15,7 @@ script:
 - #smalltalkci .smalltalk.ston DEBUG
 - make | ./travis_fold Compiling PDF ...
 - mv SBE.pdf "SBE_${SQUEAK_VERSION}.pdf"
-after_script: test "$TRAVIS_PULL_REQUEST" = false && ./gdrive.sh upload "SBE_${SQUEAK_VERSION}.pdf"
+- test "$TRAVIS_PULL_REQUEST" = false && ./gdrive.sh upload "SBE_${SQUEAK_VERSION}.pdf"
 
 jobs:
   include:
