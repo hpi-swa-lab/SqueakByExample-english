@@ -28,6 +28,7 @@ jobs:
       script: ./gdrive.sh download
       deploy:
         provider: releases
+        file_glob: true
         file: SBE_*.pdf
         api_key: $GH_OAUTH_TOKEN
         skip_cleanup: true
