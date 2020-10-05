@@ -20,7 +20,7 @@ after_script: test -f "SBE_${SQUEAK_VERSION}.pdf" && SBE_gdrive_upload.sh "SBE_$
 jobs:
   include:
     - stage: deploy
-      if: branch = master AND type = push
+      #if: branch = master AND type = push # DEBUG
       name: GitHub Release
       env: SQUEAK_VERSION=
       language: minimal
