@@ -12,10 +12,9 @@ before_script:
   test $TRAVIS_BRANCH = master || DEBUG_FIGURES=true
 - set -o pipefail
 script:
-- echo "<build>" # DEBUG!
-#- smalltalkci .smalltalk.ston
-#- make | ./travis_fold Compiling PDF ...
-#- mv SBE.pdf "SBE_${SQUEAK_VERSION}.pdf"
+- smalltalkci .smalltalk.ston
+- make | ./travis_fold Compiling PDF ...
+- mv SBE.pdf "SBE_${SQUEAK_VERSION}.pdf"
 after_script: test -f "SBE_${SQUEAK_VERSION}.pdf" && SBE_gdrive_upload.sh "SBE_${SQUEAK_VERSION}.pdf"
 
 jobs:
