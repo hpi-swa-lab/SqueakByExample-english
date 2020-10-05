@@ -6,12 +6,11 @@ OPERATION=$1
 
 ./travis_fold -start
 
-GDRIVE=./bin/gdrive
-# Note: This token may expire after some time. Just create a fake account and update the token below to reactive it :P
-GDRIVE_REFRESH_TOKEN="1//09E6QalRd0WHbCgYIARAAGAkSNwF-L9IrA4CQiIhYB_RUnaJYYy9h76ShYfqYLioZdIyZMpD9x4replF0JYuRZRLfwHL1PybqdpI"
-GDRIVE_ARGS="--refresh-token ${GDRIVE_REFRESH_TOKEN}"
-GDRIVE_FOLDER="1tNIvN-9Vx8djNZYfSYuqhjheb-EgJuTc"
 GDRIVE_URL="https://drive.google.com/drive/folders/1tNIvN-9Vx8djNZYfSYuqhjheb-EgJuTc?usp=sharing"
+GDRIVE=./bin/gdrive
+# Note: Requires $GDRIVE_REFRESH_TOKEN and $GDRIVE_FOLDER environment variables to be set.
+# If these tokens are lost or expired, just create a new fake account and recreate these values. :P
+GDRIVE_ARGS="--refresh-token ${GDRIVE_REFRESH_TOKEN}"
 
 install_gdrive() {
 	echo "Downloading gdrive ..."
