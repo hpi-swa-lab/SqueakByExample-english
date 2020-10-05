@@ -1,37 +1,38 @@
-language: smalltalk
-services:
-- docker
-smalltalk: "Squeak64-${SQUEAK_VERSION}"
-
-workspaces:
-  create:
-    name: build-${SQUEAK_VERSION}
-
-before_script:
-- chmod +x travis_fold
-- |
-  # DEBUG_FIGURES allows PDF builds despite missing figures
-  export DEBUG_FIGURES=true && [ "$TRAVIS_BRANCH" = "master" ] && export DEBUG_FIGURES=false ; :
-- set -o pipefail
-script:
-- smalltalkci .smalltalk.ston
-- make | ./travis_fold Compiling PDF ...
-- mv SBE.pdf "SBE_${SQUEAK_VERSION}.pdf"
-after_script:
-- | # Upload PDF file to Google Drive
-  # It would be nicer to have a deploy job for this, but Travis seems
-  # not to support this ATM. See also:
-  # 46e4347fea190aeb9abab05f27764bee7c8ae871
-  if [ -f "SBE_${SQUEAK_VERSION}.pdf" ] && [ "$TRAVIS_PULL_REQUEST" = false ]
-  then
-    bash -e deploy-debug.sh "SBE_${SQUEAK_VERSION}.pdf"
-  fi
+env:
+  - SQUEAK_VERSION=Trunk
+  - SQUEAK_VERSION=5.3
 
 jobs:
   include:
     - stage: build
-      env: SQUEAK_VERSION=Trunk
-    - env: SQUEAK_VERSION=5.3
+      language: smalltalk
+      services:
+      - docker
+      smalltalk: "Squeak64-${SQUEAK_VERSION}"
+      
+      workspaces:
+        create:
+          name: build-${SQUEAK_VERSION}
+      
+      before_script:
+      - chmod +x travis_fold
+      - |
+        # DEBUG_FIGURES allows PDF builds despite missing figures
+        export DEBUG_FIGURES=true && [ "$TRAVIS_BRANCH" = "master" ] && export DEBUG_FIGURES=false ; :
+      - set -o pipefail
+      script:
+      - smalltalkci .smalltalk.ston
+      - make | ./travis_fold Compiling PDF ...
+      - mv SBE.pdf "SBE_${SQUEAK_VERSION}.pdf"
+      after_script:
+      - | # Upload PDF file to Google Drive
+        # It would be nicer to have a deploy job for this, but Travis seems
+        # not to support this ATM. See also:
+        # 46e4347fea190aeb9abab05f27764bee7c8ae871
+        if [ -f "SBE_${SQUEAK_VERSION}.pdf" ] && [ "$TRAVIS_PULL_REQUEST" = false ]
+        then
+          bash -e deploy-debug.sh "SBE_${SQUEAK_VERSION}.pdf"
+        fi
     - stage: deploy
       env: SQUEAK_VERSION=
       workspaces:
