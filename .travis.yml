@@ -13,9 +13,10 @@ before_script:
   export DEBUG_FIGURES=true && [ "$TRAVIS_BRANCH" = "master" ] && export DEBUG_FIGURES=false ; :
 - set -o pipefail
 script:
-- smalltalkci .smalltalk.ston
-- make | ./travis_fold Compiling PDF ...
-- mv SBE.pdf "SBE_${SQUEAK_VERSION}.pdf"
+- echo "<build>" # DEBUG!
+#- smalltalkci .smalltalk.ston
+#- make | ./travis_fold Compiling PDF ...
+#- mv SBE.pdf "SBE_${SQUEAK_VERSION}.pdf"
 after_script:
 - | # Upload PDF file to Google Drive
   # It would be nicer to have a deploy job for this, but Travis seems
