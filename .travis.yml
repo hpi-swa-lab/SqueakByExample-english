@@ -32,9 +32,11 @@ jobs:
       on:
         branch: master
     - language: minimal
+      script: true
       deploy: # Upload to Google Drive
         provider: script
-        script: deploy-debug.sh "SBE_${SQUEAK_VERSION}.pdf"
+        script: bash deploy-debug.sh "SBE_${SQUEAK_VERSION}.pdf"
+        cleanup: false
         on:
           all_branches: true
 
