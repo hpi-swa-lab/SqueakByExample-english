@@ -12,12 +12,12 @@ testSource
 	sourceStream nextPutAll: self testName.
 	
 	self sourceLines do: [ :line |
-			sourceStream nextPut: Character cr.
-			(re matches: line)
-				ifTrue: [ sourceStream nextPutAll:
-						'	self assert: [ ', (re subexpression: 2), ' ] value printString = ',
-							(self removeTrailingComments: (re subexpression: 3)) printString, '.' ]
-				ifFalse: [ sourceStream nextPutAll: '	', line ]
-			].
-
+		sourceStream
+			crtab;
+			nextPutAll: ((re matches: line)
+				ifTrue: [ ('self assert: {1} equals: [ {2} ] value printString.' format: {
+					(self removeTrailingComments: (re subexpression: 3)) printString.
+					(re subexpression: 2) withBlanksTrimmed}) ]
+				ifFalse: [ line ]) ].
+	
 	^ sourceStream contents

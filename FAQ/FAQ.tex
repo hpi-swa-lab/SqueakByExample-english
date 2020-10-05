@@ -77,7 +77,7 @@ How do I convert a collection of characters to a \clsind{String}?
 \end{faq}
 \answer
 \begin{code}{@TEST}
-String streamContents: [:str | str nextPutAll: 'hello' asSet] --> 'hleo'
+String streamContents: [:str | str nextPutAll: 'hello' asSet] --> 'oelh'
 \end{code}
 
 %=================================================================
@@ -121,11 +121,11 @@ browseSuperSends value: OrderedCollection.
 How do I find out which new methods are introduced by a class?  (I.e., not including overridden methods.)
 \end{faq}
 \answer
-Here we ask which methods are introduced by \ct{True}:
+Here we ask which methods are introduced by \ct{TranslucentColor}:
 \begin{code}{@TEST | newMethods |}
 newMethods := [:aClass| aClass methodDict keys select:
 	[:aMethod | (aClass superclass canUnderstand: aMethod) not ]].
-newMethods value: True --> an IdentitySet(#asBit)
+newMethods value: TranslucentColor --> #(#setRgb:alpha:)
 \end{code}
 
 \begin{faq}
@@ -136,7 +136,7 @@ How do I tell which methods of a class are abstract?
 abstractMethods :=
 	[:aClass | aClass methodDict keys select:
 		[:aMethod | (aClass>>aMethod) isAbstract ]].
-abstractMethods value: Collection --> an IdentitySet(#remove:ifAbsent: #add: #do:)
+abstractMethods value: Collection --> #(#add: #remove:ifAbsent: #do:)
 \end{code}
 
 \begin{faq}

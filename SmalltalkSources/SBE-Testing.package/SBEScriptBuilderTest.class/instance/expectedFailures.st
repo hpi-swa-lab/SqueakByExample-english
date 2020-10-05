@@ -2,4 +2,4 @@ failures
 expectedFailures
 
 	^ super expectedFailures ,
-		#(testTerminate)
+		#(testInform testTerminate)

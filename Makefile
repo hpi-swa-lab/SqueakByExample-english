@@ -13,7 +13,7 @@ ifndef TRAVIS
 	ifdef NO_WSL
 		PREFIX = cmd.exe /c
 	else
-		PREFIX = ""
+		PREFIX = 
 	endif
 	PDFLATEX = ${PREFIX} pdflatex -file-line-error -interaction=nonstopmode
 	BIBTEX = ${PREFIX} bibtex
@@ -24,7 +24,7 @@ endif
 
 BOOK=SBE
 ETC=SBE-etc
-TEXINPUT=$(shell TEXINPUT='\\\\input{${BOOK}}' && [ "$$DEBUG_FIGURES" = true ] && TEXINPUT='\\\\AtBeginDocument{\\\\include{robustize-figures}}'"$$TEXINPUT" ;echo $$TEXINPUT)
+TEXINPUT=$(shell echo "$$([ "$$DEBUG_FIGURES" = true ] && echo '\\\\AtBeginDocument{\\\\include{robustize-figures}}')$$([ -z "$$SQUEAK_VERSION" ] || echo '\\\\newcommand{\\\\SQUEAKVERSION}{${SQUEAK_VERSION}}')\\\\input{${BOOK}}")
 
 # --------------------------------------------------------------------------------
 all : book
@@ -35,10 +35,10 @@ all : book
 book: clean listings book-pages
 
 book-pages :
-	time ${PDFLATEX} ${TEXINPUT}
+	time ${PDFLATEX} '${TEXINPUT}'
 	time ${BIBTEX} ${BOOK}
-	time ${PDFLATEX} ${TEXINPUT}
-	time ${PDFLATEX} ${TEXINPUT} | tee warnings.txt
+	time ${PDFLATEX} '${TEXINPUT}'
+	time ${PDFLATEX} '${TEXINPUT}' | tee warnings.txt
 	# Filter out blank lines and bogus warnings
 	perl -pi \
 		-e '$$/ = "";' \

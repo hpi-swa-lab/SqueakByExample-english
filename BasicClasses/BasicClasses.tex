@@ -107,7 +107,7 @@ $a         --> $a
 Note that some objects such as arrays are self-evaluating or not depending on the objects they contain. For example, an array of booleans is self-evaluating whereas an array of persons is not. In Squeak 3.9, a mechanism was introduced (via the message \mthind{Object}{isSelfEvaluating}) to print collections in their self-evaluating forms as much as possible and this is especially true for brace arrays. The following example shows that a \subind{Array}{dynamic} array is self-evaluating only if its elements are:
 \begin{code}{@TEST}
 {10@10 . 100@100}          --> {10@10 . 100@100}
-{Browser new . 100@100} --> an Array(a Browser 100@100)
+{Browser new . 100@100} --> {a Browser . 100@100}
 \end{code}
 
 Remember that \subind{Array}{literal} arrays can only contain literals. Hence the following array does not contain two points but rather six literal elements.
@@ -463,7 +463,7 @@ Testing methods include \mthind{Number}{even}, \mthind{Number}{odd}, \mthind{Num
 1 + 2.5     --> 3.5             "Addition of two numbers"
 3.4 * 5      --> 17.0           "Multiplication of two numbers"
 8 / 2         --> 4                 "Division of two numbers"
-10 - 8.3   --> 1.7              "Subtraction of two numbers"
+10 - 8.5   --> 1.5              "Subtraction of two numbers"
 12 = 11    --> false           "Equality between two numbers"
 12 ~= 11 --> true            "Test if two numbers are different"
 12 > 9      --> true            "Greater than"
@@ -523,8 +523,8 @@ Multiplying a \ct{Fraction} by an \ct{Integer} or another \ct{Fraction} may yiel
 The class methods \mthind{SmallInteger}{minVal} and \mthind{SmallInteger}{maxVal} tell us the range of a \ct{SmallInteger}:
 
 \begin{code}{@TEST}
-SmallInteger maxVal = ((2 raisedTo: 30) - 1)      --> true
-SmallInteger minVal = (2 raisedTo: 30) negated --> true
+SmallInteger maxVal = ((2 raisedTo: 60) - 1)      --> true
+SmallInteger minVal = (2 raisedTo: 60) negated --> true
 \end{code}
 
 When a \ct{SmallInteger} goes out of this range, it is automatically converted to a \clsind{LargePositiveInteger} or a \clsind{LargeNegativeInteger}, as needed:
@@ -577,18 +577,7 @@ $a                  --> $a
 $a printString --> '$a'
 \end{code}
 
-Every ascii \ct{Character} is a unique instance, stored in the class variable \cvind{CharacterTable}:
-
-\begin{code}{@TEST}
-(Character value: 97) == $a --> true
-\end{code}
-
-\ct{Characters} outside the range 0 to 255 are not unique, however: 
-
-\begin{code}{@TEST}
-Character characterTable size                               --> 256
-(Character value: 500) == (Character value: 500) --> false
-\end{code}
+Every ASCII \ct{Character} is an immediate object, meaning that they are managed by the VM via special pointers. As a consequence, characters are unique, immutable instances.
 
 %=================================================================
 \section{Strings}
@@ -620,9 +609,10 @@ The other important subclass of \ct{String} is \clsindmain{Symbol}.  The key dif
 
 \noindent
 Another important difference is that a \ct{String} is mutable, whereas a \ct{Symbol} is immutable.
+Still, strings that are part of a method need to be copied before altering them because they are constants:
 
 \begin{code}{@TEST}
-'hello' at: 2 put: $u; yourself --> 'hullo'
+'hello' copy at: 2 put: $u; yourself --> 'hullo'
 \end{code}
 
 \begin{code}{NB: CANNOT TEST}

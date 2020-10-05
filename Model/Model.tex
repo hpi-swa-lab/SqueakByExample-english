@@ -147,7 +147,7 @@ Point>>>dist: aPoint
 \end{method}
 
 \begin{code}{@TEST}
-1@1 dist: 4@5 --> 5.0
+1@1 dist: 4@5 --> 5
 \end{code}
 
 The key reason to prefer instance-based encapsulation to class-based encapsulation is that it enables different implementations of the same abstraction to coexist.
@@ -822,7 +822,7 @@ Now we will look at an aspect of \st that is not so easily covered by our five r
 
 %---------------------------------------------------------
 \subsection{Global variables}
-In \squeak, all global variables are stored in a namespace called \glbind{Smalltalk}, which is implemented as an instance of the class \clsind{SystemDictionary}.
+In \squeak, all global variables are stored in a namespace called \glbind{Smalltalk} which is an instance of the class \clsind{SmalltalkImage}.
 Global variables are accessible everywhere. 
 Every class is named by a global variable; in addition, a few globals are used to name special or commonly useful objects.
 
@@ -851,17 +851,22 @@ So, if you experience some sluggishness and are writing to the Transcript, think
 Transcript outputs are mostly used for debugging and experimenting purposes where code quality is not the most important thing.
 If you want to use a transcript in a real application, you should use \ct{Project current transcript} instead, which makes sure that the transcript you are using actually matches your current \sq environment.
 
-Another useful global variable is \ct{Smalltalk} which holds the instance of \ct{SystemDictionary} that defines all of the globals\,---\,including \ct{Smalltalk} itself.
+Another useful global variable is \ct{Smalltalk} which is the single instance of \ct{SmalltalkImage} that, inter alia, provides access to all globals\,---\,including \ct{Smalltalk} itself.
 \glbindex{Smalltalk}
-The keys to this dictionary are the symbols that name the global objects in \st code.
+\ct{Smalltalk globals} answers an \clsind{Environment} instance which defines all of the globals and provides a \clsind{Dictionary}-like interface.
+The keys for these declarations are the symbols that name the global objects in \st code.
 So, for example,
+\begin{code}{@TEST}
+Smalltalk globals at: #Boolean --> Boolean
+\end{code}
+Or even shorter, using a convenience method defined on \clsind{SmalltalkImage}:
 \begin{code}{@TEST}
 Smalltalk at: #Boolean --> Boolean
 \end{code}
 Since \ct{Smalltalk} is itself a global variable,
-\begin{code}{}
-Smalltalk at: #Smalltalk-->a SystemDictionary(lots of globals)}
-\end{code} 
+\begin{code}{@TEST}
+Smalltalk at: #Smalltalk --> Smalltalk
+\end{code}
 and
 \begin{code}{@TEST}
 (Smalltalk at: #Smalltalk) == Smalltalk --> true
