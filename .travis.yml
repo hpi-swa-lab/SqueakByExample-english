@@ -7,6 +7,10 @@ services:
 - docker
 smalltalk: "Squeak64-${SQUEAK_VERSION}"
 
+workspaces:
+  create:
+    name: builds
+
 before_script:
 - | # Ignore missing figures during PDF build
   test $TRAVIS_BRANCH = master || export DEBUG_FIGURES=true
@@ -24,6 +28,9 @@ jobs:
       name: GitHub Release
       env: SQUEAK_VERSION=
       language: minimal
+      workspaces:
+        use:
+          - builds
       install: skip
       script: ls "SBE_*.pdf" # DEBUG
       deploy:
