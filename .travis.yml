@@ -9,7 +9,7 @@ smalltalk: "Squeak64-${SQUEAK_VERSION}"
 
 before_script:
 - | # Ignore missing figures during PDF build
-  test $TRAVIS_BRANCH = master || DEBUG_FIGURES=true
+  test $TRAVIS_BRANCH = master || export DEBUG_FIGURES=true
 - set -o pipefail
 script:
 - #smalltalkci .smalltalk.ston DEBUG
