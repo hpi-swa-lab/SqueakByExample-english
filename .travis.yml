@@ -20,22 +20,24 @@ script:
 jobs:
   include:
     - stage: deploy
+      name: GitHub Release
       env: SQUEAK_VERSION=
       language: minimal
       install: skip
       script: true
-      deploy: # Create GitHub release
+      deploy:
         provider: releases
         file: "SBE_*.pdf"
         api_key: $GH_OAUTH_TOKEN
         cleanup: false
       on:
         branch: master
-    - language: minimal
+    - name: Google Drive Upload
+      language: minimal
       script: true
-      deploy: # Upload to Google Drive
+      deploy:
         provider: script
-        script: bash deploy-debug.sh "SBE_${SQUEAK_VERSION}.pdf"
+        script: bash gdrive_upload.sh "SBE_${SQUEAK_VERSION}.pdf"
         cleanup: false
         on:
           all_branches: true
