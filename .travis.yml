@@ -1,7 +1,6 @@
 env:
-  jobs:
-    - SQUEAK_VERSION=Trunk
-    - SQUEAK_VERSION=5.3
+  - SQUEAK_VERSION=Trunk
+  - SQUEAK_VERSION=5.3
 
 language: smalltalk
 services:
