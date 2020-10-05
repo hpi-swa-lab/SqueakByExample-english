@@ -25,7 +25,7 @@ jobs:
       env: SQUEAK_VERSION=
       language: minimal
       install: skip
-      script: true
+      script: ls "SBE_*.pdf" # DEBUG
       deploy:
         provider: releases
         file: "SBE_*.pdf"
