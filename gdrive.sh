@@ -39,7 +39,7 @@ case $OPERATION in
 		FILE_NAME="-$FIXED_REPO-$FIXED_BRANCH.pdf"
 		GDRIVE_FILES=$(find_files "$FILE_NAME")
 		for GDRIVE_FILE in $GDRIVE_FILES; do
-			$GDRIVE download $GDRIVE_ARGS $GDRIVE_FILE
+			$GDRIVE download $GDRIVE_ARGS --force $GDRIVE_FILE
 		done
 		rename "s/${FILE_NAME%.*}//" *$FILE_NAME
 		;;
