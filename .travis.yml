@@ -16,7 +16,7 @@ script:
 - make | ./travis_fold Compiling PDF ...
 - mv SBE.pdf "SBE_${SQUEAK_VERSION}.pdf"
 - | # Upload PDF file to Google Drive
-  if [ "$TRAVIS_PULL_REQUEST" = false]
+  if [ "$TRAVIS_PULL_REQUEST" = false ]
   then
     ./gdrive.sh upload "SBE_${SQUEAK_VERSION}.pdf"
   fi
