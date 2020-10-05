@@ -18,8 +18,9 @@ ifndef TRAVIS
 	PDFLATEX = ${PREFIX} pdflatex -file-line-error -interaction=nonstopmode
 	BIBTEX = ${PREFIX} bibtex
 else
-	PDFLATEX = docker run -v $(CURDIR):/src --cache-from tom95/texlive-docker-swa pdflatex -interaction=nonstopmode
-	BIBTEX = docker run -v $(CURDIR):/src --cache-from tom95/texlive-docker-swa bibtex
+	docker pull --from-cache tom95/texlive-docker-swa
+	PDFLATEX = docker run -v $(CURDIR):/src tom95/texlive-docker-swa pdflatex -interaction=nonstopmode
+	BIBTEX = docker run -v $(CURDIR):/src tom95/texlive-docker-swa bibtex
 endif
 
 BOOK=SBE
