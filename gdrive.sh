@@ -2,14 +2,9 @@
 # Inspired by https://joeyrobert.org/2016/07/13/artifact-deployment-via-google-drive/
 set -e
 
-if [ -z "$1" ]; then
-	read -p "File to export? " SOURCE
-else
-	SOURCE=$1
-fi
+OPERATION=$1
 
 ./travis_fold -start
-echo -e "\e[96mUpload of ${SOURCE} to Google Drive started."
 
 GDRIVE=./bin/gdrive
 # Note: This token may expire after some time. Just create a fake account and update the token below to reactive it :P
@@ -26,26 +21,48 @@ install_gdrive() {
 	chmod +x $GDRIVE
 }
 
-function find_file {
+find_file() {
 	$GDRIVE list $GDRIVE_ARGS -q "'${GDRIVE_FOLDER}' in parents and name = '$1' and trashed = false" --no-header | awk '{print $1}'
+}
+
+find_files() {
+	$GDRIVE list $GDRIVE_ARGS -q "'${GDRIVE_FOLDER}' in parents and name contains '$1' and trashed = false" --no-header | awk '{print $1}'
 }
 
 if [ ! -f $GDRIVE ]; then install_gdrive; fi
 
 FIXED_BRANCH=$(echo $TRAVIS_BRANCH | sed 's/\//-/g')
 FIXED_REPO=$(echo $TRAVIS_REPO_SLUG | sed 's/\//-/g')
-FILE_NAME="${SOURCE%.*}-$FIXED_REPO-$FIXED_BRANCH.pdf"
-GDRIVE_FILE=$(find_file $FILE_NAME)
-if [[ $GDRIVE_FILE ]]; then
-	echo "Uploading new version of ${FILE_NAME} ..."
-	$GDRIVE update $GDRIVE_ARGS --name $FILE_NAME $GDRIVE_FILE $SOURCE
-else
-	echo "Uploading ${FILE_NAME} ..."
-	$GDRIVE upload $GDRIVE_ARGS --name $FILE_NAME $SOURCE -p $GDRIVE_FOLDER
-	GDRIVE_FILE=$(find_file $FILE_NAME)
-fi
+
+case $OPERATION in
+	download)
+		FILE_NAME="-$FIXED_REPO-$FIXED_BRANCH.pdf"
+		GDRIVE_FILES=$(find_files "$FILE_NAME")
+		for GDRIVE_FILE in $GDRIVE_FILES; do
+			$GDRIVE download $GDRIVE_ARGS $GDRIVE_FILE
+		done
+		rename "s/${FILE_NAME%.*}//" *$FILE_NAME
+		;;
+	upload)
+		SOURCE=$2
+		FILE_NAME="${SOURCE%.*}-$FIXED_REPO-$FIXED_BRANCH.pdf"
+		GDRIVE_FILE=$(find_file $FILE_NAME)
+		if [[ $GDRIVE_FILE ]]; then
+			echo "Uploading new version of ${FILE_NAME} ..."
+			$GDRIVE update $GDRIVE_ARGS --name $FILE_NAME $GDRIVE_FILE $SOURCE
+		else
+			echo "Uploading ${FILE_NAME} ..."
+			$GDRIVE upload $GDRIVE_ARGS --name $FILE_NAME $SOURCE -p $GDRIVE_FOLDER
+			GDRIVE_FILE=$(find_file $FILE_NAME)
+		fi
+
+		echo -e "\e[96mFinished Google Drive upload."
+		echo -e "\e[96mYou can download the PDF here: \e[94mhttps://drive.google.com/open?id=$GDRIVE_FILE"
+		;;
+	*)
+		echo "Unknown operation!"
+		exit 1
+esac
 
 ./travis_fold -end
 
-echo -e "\e[96mFinished Google Drive upload."
-echo -e "\e[96mYou can download the PDF here: \e[94mhttps://drive.google.com/open?id=$GDRIVE_FILE"

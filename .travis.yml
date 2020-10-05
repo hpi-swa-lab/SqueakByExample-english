@@ -7,11 +7,6 @@ services:
 - docker
 smalltalk: "Squeak64-${SQUEAK_VERSION}"
 
-workspaces:
-  create:
-    name: builds
-    paths: "SBE_${SQUEAK_VERSION}.pdf"
-
 before_script:
 - | # Ignore missing figures during PDF build
   test $TRAVIS_BRANCH = master || export DEBUG_FIGURES=true
@@ -20,7 +15,7 @@ script:
 - #smalltalkci .smalltalk.ston DEBUG
 - make | ./travis_fold Compiling PDF ...
 - mv SBE.pdf "SBE_${SQUEAK_VERSION}.pdf"
-after_script: test "$TRAVIS_PULL_REQUEST" = false && ./gdrive_upload.sh "SBE_${SQUEAK_VERSION}.pdf"
+after_script: test "$TRAVIS_PULL_REQUEST" = false && ./gdrive.sh upload "SBE_${SQUEAK_VERSION}.pdf"
 
 jobs:
   include:
@@ -29,14 +24,11 @@ jobs:
       name: GitHub Release
       env: SQUEAK_VERSION=
       language: minimal
-      workspaces:
-        use:
-          - builds
       install: skip
-      script: ls # DEBUG
+      script: ./gdrive.sh download
       deploy:
         provider: releases
-        file: "SBE_*.pdf"
+        file: SBE_*.pdf
         api_key: $GH_OAUTH_TOKEN
         cleanup: false
         on:
