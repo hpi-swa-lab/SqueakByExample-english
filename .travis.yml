@@ -32,6 +32,7 @@ jobs:
       env: SQUEAK_VERSION=
       language: minimal
       install: skip
+      script:
       deploy: # Create GitHub release
         provider: releases
         on:
