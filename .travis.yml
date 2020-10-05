@@ -36,8 +36,7 @@ jobs:
       deploy: # Create GitHub release
         provider: releases
         file: "SBE_*.pdf"
-        api_key:
-          secure: E1hGhzyqbVZ5oHOYfOUlyrFY6GQ87+QI4Ow7d70bNMcJozTgeHw08Fq9i0Xx1uXKi7eR5UwyAiHzbBqw/nAqiJZqJyVm9DgYtdMwgjx8zx0eb3tUS7ADlM5mloKCyIMyxo7SyeEkWMGC9gpsiQ8o2nACV81r/nnWm8+ZCu+H8fEJctaPx7DtyP4l3Mg5THGJs5ioYfGDRuxdg2Ct7BXb76+59sHN5Wxw56GKJ88xU5JsAuV8lud5gKaxNzsjTo+l6zF9VmxM3rhvVmagg2o6pM5Hi7Dj66qJcg/klyMa0UaK6mjL5iVQuw6cP+izM78z5/CJY/PGu1WXQ0GqU3NMqJA52CgF4YwEItlHZAa/PDpHV7pCAyiJpSNbnkeUOV3W4vgBAXlLIdl5WISoW1GDH3hcxNY2ZIxqW8YwYBcFKG+GI/eUI9d3z8AHYch08QrmRkl2WAMx2BMXWn47mYgm0+720dqaE/TbTQPzJgAHTVKP39qhlonW24ABU14U6koaRk2PD5TeKRym8jxgJzH/BfQzCQ5pMGwuLgEJP6ckWQLFTCqeCjKhjIFUxFIhyY3EUjKDHN5N+PwCslEZRkPpR8nN3w3uW18qJIWfSOtPbCmS+dbGXdvHtWQaSuVYy4bVyRqQkNfyPpvRCiJtyQZTTegARGrTNBtbtnN3V9vzZyQ=
+        api_key: $GH_OAUTH_TOKEN
         cleanup: false
       on:
         branch: master
