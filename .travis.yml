@@ -30,8 +30,9 @@ jobs:
         file: "SBE_*.pdf"
         api_key: $GH_OAUTH_TOKEN
         cleanup: false
-      on:
-        branch: master
+      #on:
+      #  branch: master
+      # DEBUG
 
 notifications:
   email:
