@@ -34,13 +34,7 @@ jobs:
         branch: master
     - name: Google Drive Upload
       language: minimal
-      script: true
-      deploy:
-        provider: script
-        script: bash gdrive_upload.sh "SBE_${SQUEAK_VERSION}.pdf"
-        cleanup: false
-        on:
-          all_branches: true
+      script: bash gdrive_upload.sh "SBE_${SQUEAK_VERSION}.pdf"
 
 notifications:
   email:
