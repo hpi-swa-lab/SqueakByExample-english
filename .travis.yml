@@ -8,9 +8,8 @@ services:
 smalltalk: "Squeak64-${SQUEAK_VERSION}"
 
 before_script:
-- |
-  # DEBUG_FIGURES allows PDF builds despite missing figures
-  export DEBUG_FIGURES=true && [ "$TRAVIS_BRANCH" = "master" ] && export DEBUG_FIGURES=false ; :
+- | # Ignore missing figures during PDF build
+  test $TRAVIS_BRANCH = master || DEBUG_FIGURES=true
 - set -o pipefail
 script:
 - echo "<build>" # DEBUG!
