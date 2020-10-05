@@ -18,7 +18,6 @@ ifndef TRAVIS
 	PDFLATEX = ${PREFIX} pdflatex -file-line-error -interaction=nonstopmode
 	BIBTEX = ${PREFIX} bibtex
 else
-	docker pull --from-cache tom95/texlive-docker-swa
 	PDFLATEX = docker run -v $(CURDIR):/src tom95/texlive-docker-swa pdflatex -interaction=nonstopmode
 	BIBTEX = docker run -v $(CURDIR):/src tom95/texlive-docker-swa bibtex
 endif
@@ -36,6 +35,7 @@ all : book
 book: clean listings book-pages
 
 book-pages :
+	bash -c "if [ ${TRAVIS+x} ]; then docker pull --from-cache tom95/texlive-docker-swa; fi"
 	time ${PDFLATEX} '${TEXINPUT}'
 	time ${BIBTEX} ${BOOK}
 	time ${PDFLATEX} '${TEXINPUT}'
