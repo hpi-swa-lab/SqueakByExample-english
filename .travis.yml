@@ -10,9 +10,7 @@ smalltalk: "Squeak64-${SQUEAK_VERSION}"
 
 jobs:
   include:
-    - stage: build
-      
-      workspaces:
+    - workspaces:
         create:
           name: build-${SQUEAK_VERSION}
       
