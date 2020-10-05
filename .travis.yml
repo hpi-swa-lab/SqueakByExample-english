@@ -30,7 +30,7 @@ jobs:
         provider: releases
         file: SBE_*.pdf
         api_key: $GH_OAUTH_TOKEN
-        cleanup: false
+        skip_cleanup: true
         on:
           all_branches: true
 
