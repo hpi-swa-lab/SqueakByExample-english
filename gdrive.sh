@@ -47,6 +47,8 @@ case $OPERATION in
 	upload)
 		SOURCE=$2
 		FILE_NAME="${SOURCE%.*}-$FIXED_REPO-$FIXED_BRANCH.pdf"
+		# DEBUG
+		echo list "${GDRIVE_ARGS[@]}" -q "'${GDRIVE_FOLDER}' in parents and name = '$FILE_NAME' and trashed = false" --no-header
 		GDRIVE_FILE=$(find_file "$FILE_NAME")
 		if [ -z "$GDRIVE_FILE" ]; then
 			echo "Uploading ${FILE_NAME} ..."
@@ -54,6 +56,7 @@ case $OPERATION in
 			GDRIVE_FILE=$(find_file "$FILE_NAME")
 		else
 			echo "Uploading new version of ${FILE_NAME} ..."
+			echo "$GDRIVE_FILE" # DEBUG
 			$GDRIVE update "${GDRIVE_ARGS[@]}" --name "$FILE_NAME" "$GDRIVE_FILE" "$SOURCE"
 		fi
 
