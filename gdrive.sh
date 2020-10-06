@@ -51,12 +51,11 @@ case $OPERATION in
 		echo list "${GDRIVE_ARGS[@]}" -q "'${GDRIVE_FOLDER}' in parents and name = '$FILE_NAME' and trashed = false" --no-header
 		GDRIVE_FILE=$(find_file "$FILE_NAME")
 		if [ -z "$GDRIVE_FILE" ]; then
-			GDRIVE_FILE=$(echo "$GDRIVE_FILE" | { read -r first rest ; echo "$first" ;})
 			echo "Uploading ${FILE_NAME} ..."
 			$GDRIVE upload "${GDRIVE_ARGS[@]}" --name "$FILE_NAME" "$SOURCE" -p "$GDRIVE_FOLDER"
 			GDRIVE_FILE=$(find_file "$FILE_NAME")
 		else
-			GDRIVE_FILE=
+			GDRIVE_FILE=$(echo "$GDRIVE_FILE" | { read -r first rest ; echo "$first" ;})
 			echo "Uploading new version of ${FILE_NAME} ..."
 			echo "$GDRIVE_FILE" # DEBUG
 			$GDRIVE update "${GDRIVE_ARGS[@]}" --name "$FILE_NAME" "$GDRIVE_FILE" "$SOURCE"
