@@ -4,7 +4,8 @@ SBE.glo
 SBE.idx
 SBE.log
 SBE.out
-*.pdf
+SBE.pdf
+SBE_*.pdf
 SBE.toc
 SBE.url
 *.bbl
