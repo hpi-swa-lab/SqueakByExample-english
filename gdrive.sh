@@ -1,4 +1,4 @@
-#!/bin/sh 
+#!/bin/bash
 # Inspired by https://joeyrobert.org/2016/07/13/artifact-deployment-via-google-drive/
 set -e
 
