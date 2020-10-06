@@ -1,10 +1,11 @@
+language: smalltalk
+services:
+- docker
+
 env:
   - SQUEAK_VERSION=Trunk
   - SQUEAK_VERSION=5.3
 
-language: smalltalk
-services:
-- docker
 smalltalk: "Squeak64-${SQUEAK_VERSION}"
 
 before_script:
