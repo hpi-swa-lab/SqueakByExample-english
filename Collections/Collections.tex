@@ -283,7 +283,6 @@ OrderedCollection withAll: #(7 3 1 3) --> an OrderedCollection(7 3 1 3)
 SortedCollection withAll: #(7 3 1 3)    --> a SortedCollection(1 3 3 7)
 Set withAll: #(7 3 1 3)                         --> a Set(7 1 3)
 Bag withAll: #(7 3 1 3)                        --> a Bag(7 1 3 3)
-Dictionary withAll: #(7 3 1 3)               --> a Dictionary(1->7 2->3 3->1 4->3 )
 \end{code}
 
 \begin{code}{@TEST}
@@ -474,8 +473,8 @@ colors at: #yellow put: Color yellow.
 colors at: #blue put: Color blue.
 colors at: #red put: Color red.
 colors at: #yellow --> Color yellow
-colors keys          --> a Set(#blue #yellow #red)
-colors values       --> {Color blue . Color yellow . Color red}
+colors keys          --> #(#red #yellow #blue)
+colors values       -->  {Color red . Color yellow . Color blue}
 \end{code}
 
 Dictionaries compare keys by equality.
@@ -484,9 +483,8 @@ A common and difficult to spot bug is to use as key an object whose \ct{=} metho
 Both methods are used in the implementation of \ct{Dictionary} and when comparing objects.
 \index{Dictionary!overriding \ct{=} and \ct{hash}}
 
-The class \clsindmain{Dictionary} clearly illustrates that the collection hierarchy is based on subclassing and not subtyping.
-Even though \ct{Dictionary} is a subclass of \clsind{Set}, we would normally not want to use a \ct{Dictionary} where a \ct{Set} is expected. % ct TODO: Update class hierarchy description!
-In its implementation, however, a \ct{Dictionary} can clearly be seen as consisting of a set of associations (key-value pairs) created using the message \mthind{Object}{->}.
+Even though \ct{Dictionary} eventually is a subclass of \clsind{Collection}, we would normally not want to use a \ct{Dictionary} where a \ct{Collection} is expected.
+In its implementation, however, a \ct{Dictionary} can be seen as consisting of an unordered collection of associations (key-value pairs) created using the message \mthind{Object}{->}.
 We can create a \ct{Dictionary} from a collection of associations, or we may convert a dictionary to an array of associations.
 \seeindex{association}{Object, \ct{->}}
 
@@ -494,7 +492,7 @@ We can create a \ct{Dictionary} from a collection of associations, or we may con
 \begin{code}{@TEST | colors |}
 colors := Dictionary newFrom: { #blue->Color blue. #red->Color red. #yellow->Color yellow }.
 colors removeKey: #blue.
-colors associations --> {#yellow->Color yellow . #red->Color red}
+colors associations --> {#red->Color red . #yellow->Color yellow}
 \end{code}
 
 \paragraph{IdentityDictionary.}
@@ -522,14 +520,6 @@ A plain \ct{Dictionary} would give the same value for any key equal to \ct{'foob
 Use only globally unique objects (like \ct{Symbol}s or \ct{SmallInteger}s) as keys for a \ct{IdentityDictionary}, and \ct{String}s (or other objects) as keys for a plain \ct{Dictionary}.
 
 
-Note that the global \glbind{Smalltalk} is an instance of \clsind{SystemDictionary}, a subclass of \ct{IdentityDictionary}, hence all its keys are \ct{Symbol}s (actually, \ct{ByteSymbol}s, which contain only 8-bit characters).
-
-\begin{code}{@TEST}
-Smalltalk keys collect: [ :each | each class ] --> a Set(ByteSymbol)
-\end{code}
-\noindent
-Sending \ct{keys} or \ct{values} to a \ct{Dictionary} results in a \ct{Set}, which we look at next.
-% Since every key has the same class, the set of classes of keys contains only a single element, \ct{ByteSymbol}.
 
 %---------------------------------------------------------
 \subsection{Set}
@@ -946,7 +936,7 @@ The message \ct{count:} returns the number of elements satisfying a condition.
 The condition is represented as a boolean block.
 
 \begin{code}{@TEST}
-Smalltalk allClasses count: [:each | 'Collection*' match: each asString ] --> 2
+Smalltalk allClasses count: [:each | 'Collection*' match: each asString ] --> !\SqVersionSwitch{6.0}{4}{2}!
 \end{code}
 
 \paragraph{\mthind{Collection}{includes:}}

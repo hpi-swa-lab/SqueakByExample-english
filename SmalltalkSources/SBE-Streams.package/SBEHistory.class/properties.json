@@ -1,14 +1,14 @@
 {
-	"category" : "SBE-Morphic",
+	"category" : "SBE-Streams",
 	"classinstvars" : [
 		 ],
 	"classvars" : [
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		 ],
-	"name" : "MorphicDemo",
+		"stream" ],
+	"name" : "SBEHistory",
 	"pools" : [
 		 ],
-	"super" : "Morph",
+	"super" : "Object",
 	"type" : "normal" }

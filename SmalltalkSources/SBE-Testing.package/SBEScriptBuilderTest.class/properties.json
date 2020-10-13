@@ -4,7 +4,7 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "",
+	"commentStamp" : "ct 9/22/2020 19:21",
 	"instvars" : [
 		"builder" ],
 	"name" : "SBEScriptBuilderTest",

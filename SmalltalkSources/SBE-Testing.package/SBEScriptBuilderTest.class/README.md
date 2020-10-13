@@ -1,0 +1,1 @@
+Tests isolation mechanism of SBEScriptBuilder.

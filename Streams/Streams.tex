@@ -21,7 +21,7 @@
 %	\input{../common.tex}
 %	\usepackage{a4wide}
 % --------------------------------------------
-    \graphicspath{{figures/} {../figures/}}
+		\graphicspath{{figures/} {../figures/}}
 	\begin{document}
 	\renewcommand{\nnbb}[2]{} % Disable editorial comments
 	\sloppy
@@ -247,15 +247,15 @@ stream2 := #(1 2 3 4 5 10 13 14 15) readStream.
 "The variable result will contain the sorted collection."
 result := OrderedCollection new.
 [stream1 atEnd not & stream2 atEnd not]
-  whileTrue: [stream1 peek < stream2 peek
-    "Remove the smallest element from either stream and add it to the result."
-    ifTrue: [result add: stream1 next]
-    ifFalse: [result add: stream2 next]].
+	whileTrue: [stream1 peek < stream2 peek
+		"Remove the smallest element from either stream and add it to the result."
+		ifTrue: [result add: stream1 next]
+		ifFalse: [result add: stream2 next]].
 
 "One of the two streams might not be at its end. Copy whatever remains."
 result
-  addAll: stream1 upToEnd;
-  addAll: stream2 upToEnd.
+	addAll: stream1 upToEnd;
+	addAll: stream2 upToEnd.
 
 result. -->   an OrderedCollection(1 1 2 3 4 4 5 9 10 11 12 13 13 14 15)
 \end{code}
@@ -272,11 +272,11 @@ They are often used to construct strings that are based on static and dynamic pa
 \begin{code}{NB: can't be tested due to the changing number of classes}
 stream := String new writeStream.
 stream
-  nextPutAll: 'This Smalltalk image contains: ';
-  print: Smalltalk allClasses size;
-  nextPutAll: ' classes.';
-  cr;
-  nextPutAll: 'This is really a lot.'.
+	nextPutAll: 'This Smalltalk image contains: ';
+	print: Smalltalk allClasses size;
+	nextPutAll: ' classes.';
+	cr;
+	nextPutAll: 'This is really a lot.'.
 
 stream contents. --> 'This Smalltalk image contains: 2322 classes.
 This is really a lot.'
@@ -353,7 +353,7 @@ String streamContents: [ :tempStream |
 \subsection{Reading and writing at the same time}
 
 It's possible to use a stream to access a collection for reading and writing at the same time.
-Imagine you want to create a \ct{History} class which will manage backward and forward buttons in a web browser.
+Imagine you want to create a \ct{SBEHistory} class which will manage backward and forward buttons in a web browser.
 A history would react as in figures from \ref{fig:emptyStream} to \ref{fig:page4}.
 
 \begin{figure}[!ht]
@@ -408,53 +408,47 @@ A history would react as in figures from \ref{fig:emptyStream} to \ref{fig:page4
 This behavior can be implemented using a \clsind{ReadWriteStream}.
 
 \needlines{6}
+% todo: would be nice to use numFiletreeMethodInput here again ...
 \begin{code}{}
-Object subclass: #History
-  instanceVariableNames: 'stream'
-  classVariableNames: ''
-  poolDictionaries: ''
-  category: 'SBE-Streams'
-
-History>>initialize
-    super initialize.
-    stream := ReadWriteStream on: Array new.
+Object subclass: #SBEHistory
+	instanceVariableNames: 'stream'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'SBE-Streams'
 \end{code}
+
+\numFiletreeMethodInput[sbehistoryinitialize]%
+{}%
+{ListingSources/SBE-Streams.package/SBEHistory.class/instance/initialize.st}
 
 Nothing really difficult here, we define a new class which contains a stream.
 The stream is created during the \ct{initialize} method.
 
 We need methods to go backward and forward:
 
-\begin{code}{}
-History>>goBackward
-  self canGoBackward ifFalse: [self error: 'Already on the first element'].
-  stream skip: -2.
-  ^ self next.
-
-History>>goForward
-  self canGoForward ifFalse: [self error: 'Already on the last element'].
-  ^ stream next
-\end{code}
+\numFiletreeMethodInput[sbehistorygobackward]%
+{}%
+{ListingSources/SBE-Streams.package/SBEHistory.class/instance/goBackward.st}
+\numFiletreeMethodInput[sbehistorygoforward]%
+{}%
+{ListingSources/SBE-Streams.package/SBEHistory.class/instance/goForward.st}
 
 Until then, the code was pretty straightforward.
 Now, we have to deal with the \ct{goTo:} method which should be activated when the user clicks on a link.
 A possible solution is:
 
 \begin{code}{}
-History>>goTo: aPage
-    stream nextPut: aPage.
+SBEHistory>>goTo: aPage
+		stream nextPut: aPage.
 \end{code}
 
 This version is incomplete however.
 This is because when the user clicks on the link, there should be no more future pages to go to, \ie the forward button must be deactivated.
 To do this, the simplest solution is to write \ct{nil} just after to indicate the history end:
 
-\begin{code}{}
-History>>goTo: anObject
-  stream nextPut: anObject.
-  stream nextPut: nil.
-  stream back.
-\end{code}
+\numFiletreeMethodInput[sbehistorygoto]%
+{}%
+{ListingSources/SBE-Streams.package/SBEHistory.class/instance/goTo..st}
 
 Now, only methods \ct{canGoBackward} and \ct{canGoForward} have to be implemented.
 
@@ -462,24 +456,24 @@ A stream is always positioned between two elements.
 To go backward, there must be two pages before the current position:
 One page is the current page, and the other one is the page we want to go to.
 
-\begin{code}{}
-History>>canGoBackward
-  ^ stream position > 1
+\numFiletreeMethodInput[sbehistorycangobackward]%
+{}%
+{ListingSources/SBE-Streams.package/SBEHistory.class/instance/canGoBackward.st}
 
-History>>canGoForward
-  ^ stream atEnd not and: [stream peek notNil]
-\end{code}
+\numFiletreeMethodInput[sbehistorycangoforward]%
+{}%
+{ListingSources/SBE-Streams.package/SBEHistory.class/instance/canGoForward.st}
 
 Let us add a method to peek at the contents of the stream:
 \begin{code}{}
-History>>contents
-  ^ stream contents
+SBEHistory>>contents
+	^ stream contents
 \end{code}
 % ct TODO: Reuse SmalltalkSources here!
 
 And the history works as advertised:
 \begin{code}{}
-History new
+SBEHistory new
 	goTo: #page1;
 	goTo: #page2;
 	goTo: #page3;
@@ -511,27 +505,27 @@ To create file streams, you will have to use one of the following instance creat
   Open a file with the given name for reading and writing.
   If the file already exists, its prior contents may be modified or replaced, but the file will not be truncated on close.
   If the name has no directory part, then the file will be created in the default directory.
-  \cmindex{FileStream class}{fileNamed:}
-  
+	\cmindex{FileStream class}{fileNamed:}
+	
 \item[\lct{newFileNamed:}]
-  Create a new file with the given name, and answer a stream opened for writing on that file.
+  Create a new file with the given name and answer a stream opened for writing on that file.
   If the file already exists, ask the user what to do.
-  \cmindex{FileStream class}{newFileNamed:}
-  
+	\cmindex{FileStream class}{newFileNamed:}
+	
 \item[\lct{forceNewFileNamed:}]
-  Create a new file with the given name, and answer a stream opened for writing on that file.
+  Create a new file with the given name and answer a stream opened for writing on that file.
   If the file already exists, delete it without asking before creating the new file.
-  \cmindex{FileStream class}{forceNewFileNamed:}
+	\cmindex{FileStream class}{forceNewFileNamed:}
 
 \item[\lct{oldFileNamed:}]
   Open an existing file with the given name for reading and writing.
   If the file already exists, its prior contents may be modified or replaced, but the file will not be truncated on close.
   If the name has no directory part, then the file will be created in the default directory.
-  \cmindex{FileStream class}{oldFileNamed:}
+	\cmindex{FileStream class}{oldFileNamed:}
 
-\item[\lct{readOnlyFileNamed:}]
-  Open an existing file with the given name for reading.
-  \cmindex{FileStream class}{readOnlyFileNamed:}
+\item[\lct{readOnlyFileNamed:}] Open an existing file with the
+	given name for reading.
+	\cmindex{FileStream class}{readOnlyFileNamed:}
 
 \end{description}
 
@@ -639,11 +633,12 @@ Streams offer a better way than collections to incrementally read and write a se
 There are easy ways to convert back and forth between streams and collections.
 
 \begin{itemize}
-  \item Streams may be either readable, writeable, or both readable and writeable.
-  \item To convert a collection to a stream, define a stream ``on'' a collection, \eg \ct{ReadStream on: (1 to: 1000)}, or send the messages \ct{readStream}, \etc to the collection.
-  \item To convert a stream to a collection, send the message \ct{contents}.
-  \item To concatenate large collections, instead of using the comma operator, it is more efficient to create a stream, append the collections to the stream with \ct{nextPutAll:}, and extract the result by sending \ct{contents}.
-  \item File streams are by default character-based. Send \ct{binary} to explicitly make them binary.
+	\item Streams may be either readable, writeable, or both readable and writeable.
+	\item To convert a collection to a stream, define a stream ``on'' a collection, \eg \ct{ReadStream on: (1 to: 1000)}, or send the messages \ct{readStream} \etc to the collection.
+	\item To convert a stream to a collection, send the message \ct{contents}.
+	\item To concatenate large collections, instead of using the comma operator, it is more efficient to create a stream, append the collections to the stream with \ct{nextPutAll:}, and extract the result by sending \ct{contents}.
+  \item File streams are by default character-based.
+  Send \ct{binary} to explicitly make them binary.
 \end{itemize}
 
 %=================================================================

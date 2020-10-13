@@ -2,4 +2,5 @@ private
 performTest
 
 	^ self shouldntMessUpProcesses: [
-		super performTest]
+		ToolSet setDefault: StandardToolSet during: [
+			super performTest]]

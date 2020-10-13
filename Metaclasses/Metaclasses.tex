@@ -231,7 +231,7 @@ TranslucentColor subclasses         --> #()
 TranslucentColor allSuperclasses  --> an OrderedCollection(Color Object ProtoObject)
 TranslucentColor instVarNames     --> #('alpha')
 TranslucentColor allInstVarNames --> #('rgb' 'cachedDepth' 'cachedBitPattern' 'alpha')
-TranslucentColor selectors             --> an IdentitySet(#alpha: #asNontranslucentColor #privateAlpha #pixelValueForDepth: #isOpaque #isTranslucentColor #storeOn: #pixelWordForDepth: #scaledPixelValue32 #alpha #bitPatternForDepth: #hash #convertToCurrentVersion:refStream: #isTransparent #isTranslucent #setRgb:alpha: #balancedPatternForDepth: #storeArrayValuesOn:)
+TranslucentColor selectors sorted --> #(#addName: #alpha #alpha: #asHTMLColor #asNontranslucentColor #balancedPatternForDepth: #bitPatternForDepth: #convertToCurrentVersion:refStream: #hash #isOpaque #isTranslucent #isTranslucentColor #isTransparent #name #pixelValueForDepth: #pixelWordForDepth: #privateAlpha #scaledPixelValue32 #setRgb:alpha: #storeArrayValuesOn: #storeOn:)
 \end{code}
 \cmindex{Class}{subclasses}
 \cmindex{Behavior}{allSuperclasses}
@@ -517,4 +517,6 @@ If the method is not found in the class of the receiver, it is looked up in its 
 %=================================================================
 
 %-----------------------------------------------------------------
+
+%Maybe use here some day: \footnote{Well, almost all.  In \squeak, methods whose selectors start with the string \ct{pvt} are private: a \ct{pvt} message can be sent \emph{only} to \self.  However, \ct{pvt} methods are not used very much.}
 
