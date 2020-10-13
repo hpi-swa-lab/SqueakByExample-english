@@ -76,7 +76,7 @@ Integers, for example, are truly objects, so you can send messages to them, just
 20 factorial  --> 2432902008176640000   "send factorial, yielding a big number"
 \end{code}
 
-The representation of \ct{20 factorial} is certainly different from the representation of \ct{7}, but because they are both objects, none of the code\,---\,not even the implementation of \ct{factorial}\,---\,needs to now about this.
+The representation of a number as large as \ct{20 factorial} is different from the representation of a number as small as \ct{7}, but because they are both objects, none of the code\,---\,not even the implementation of \ct{factorial}\,---\,needs to now about this.
 
 \needlines{3}
 Perhaps the most fundamental consequence of this rule is the following:
@@ -110,7 +110,7 @@ Since \emph{classes are objects}, and \emph{every object is an instance of a cla
 A class whose instances are classes is called a \emphind{metaclass}.
 Whenever you create a class, the system automatically creates a metaclass for you.
 The metaclass defines the structure and behavior of the class that is its instance.
-99\% \damien{Did any of you verify it is 99\%? Maybe 'Most' would have been better than '99\%'} of the time you will not need to think about metaclasses, and may happily ignore them.
+Most of the time you will not need to think about metaclasses, and may happily ignore them.
 (We will have a closer look at metaclasses in \charef{metaclasses}.)
 
 %---------------------------------------------------------
@@ -156,9 +156,9 @@ For example, method \ct{point>>>dist:}, need not know or care whether the argume
 %---------------------------------------------------------
 \subsection{Methods}
 
-All methods are \subind{method}{public}.\footnote{Well, almost all.  In \squeak, methods whose selectors start with the string \ct{pvt} are private: a \ct{pvt} message can be sent \emph{only} to \self.  However, \ct{pvt} methods are not used very much.}
-Methods are grouped into protocols that indicate their intent.
-Some common protocol names have been established by convention, for example, \protind{accessing} for all accessor methods, and \protind{initialization} for establishing a consistent initial state for the object.
+All methods are \subind{method}{public}.
+Methods are grouped into categories that indicate their intent.
+Some common category names have been established by convention, for example, \protind{accessing} for all accessor methods, and \protind{initialization} for establishing a consistent initial state for the object.
 The protocol \protind{private} is sometimes used to group methods that should not be seen from outside.
 Nothing, however, prevents you from sending a message that is implemented by such a ``private'' method.
 
@@ -235,7 +235,7 @@ It is convenient to place utility methods on the \subind{system browser}{class s
 Indeed, many of them will contain a comment designed to make it easy to execute them.
 
 \dothis{Browse method \ct{Color class>>>showColorCube}, double-click just inside the quotes on the comment \ct{"Color showColorCube"} and type \short{d}.}
-You will see the effect of executing this method.  (Select \menu{World \go \ind{restore display}~(r)} to undo the effects.)
+You will see the effect of executing this method directly within the world. (Select \menu{World \go \ind{restore display}~(r)} to undo the effects.)
 
 For those familiar with \ind{Java} and \ind{C++},  class methods may seem similar to static methods. 
 However, the uniformity of \st means that they are somewhat different: whereas Java static methods are really just statically-resolved procedures, \st class methods are dynamically-dispatched methods.  This means that inheritance, overriding and super-sends work for class methods in \st, whereas they don't work for static methods in Java.  
@@ -314,12 +314,12 @@ Java and \ind{C++} static variables are more like \st class variables, which we 
 
 \paragraph{Example: Defining a Singleton.}
 The \ind{Singleton pattern}~\cite{Alpe98a} provides a typical example of the use of class instance variables and class methods.
-Imagine that we would like to implement a class \ct{WebServer} and use the Singleton pattern to ensure that it has only one instance.
+Imagine that we would like to implement a class \ct{SBEWebServer} and use the Singleton pattern to ensure that it has only one instance.
 
-Clicking on the \button{instance} button in the browser, we define the class \clsind{WebServer} as follows (\clsref{singleton}).
+Clicking on the \button{instance} button in the browser, we define the class \clsind{SBEWebServer} as follows (\clsref{singleton}).
 
 \begin{classdef}[singleton]{A singleton class}
-Object subclass: #WebServer
+Object subclass: #SBEWebServer
 	instanceVariableNames: 'sessions' 	
 	classVariableNames: '' 	
 	poolDictionaries: '' 	
@@ -328,12 +328,12 @@ Object subclass: #WebServer
 
 Then, clicking on the \button{class} button, we add the instance variable \ct{uniqueInstance} to the \subind{system browser}{class side}.
 
-\begin{classdef}[webserver]{The class side of the singleton class}
-WebServer class 	
+\begin{classdef}[sebwebserver]{The class side of the singleton class}
+SBEWebServer class 	
 	instanceVariableNames: 'uniqueInstance'
 \end{classdef}
 
-The consequence of this is that the class \ct{WebServer} now has another instance variable,
+The consequence of this is that the class \ct{SBEWebServer} now has another instance variable,
 in addition to the variables that it inherits, such as \ct{superclass} and \ct{methodDict}.
 
 We can now define a class \subind{class}{method} named \ct{uniqueInstance} as shown in \mthref{uniqueInstance}. 
@@ -343,17 +343,17 @@ Finally the value of \ct{uniqueInstance} is returned.
 Since \ct{uniqueInstance} is a class instance variable, this method can directly access it.
     
 \begin{method}[uniqueInstance]{uniqueInstance (on the class side)}
-WebServer class>>>uniqueInstance
+SBEWebServer class>>>uniqueInstance
      uniqueInstance ifNil: [uniqueInstance := self new].
      ^ uniqueInstance
 \end{method}
 
-The first time that \ct{WebServer uniqueInstance} is executed, an instance of the class \ct{WebServer} will be created and assigned to the \ct{uniqueInstance} variable. 
+The first time that \ct{SBEWebServer uniqueInstance} is executed, an instance of the class \ct{SBEWebServer} will be created and assigned to the \ct{uniqueInstance} variable. 
 The next time, the previously created instance will be returned instead of creating a new one. 
 
-Note that the instance creation code inside the conditional in \mthref{uniqueInstance} is written as \ct{self new} and not as \ct{WebServer new}.
-What is the difference?   Since the \ct{uniqueInstance} method is defined in \ct{WebServer class}, you might think that they were the same.    And indeed, until someone creates a subclass of \ct{WebServer}, they are the same.  But suppose that \ct{ReliableWebServer} is a subclass of \ct{WebServer}, and inherits the \ct{uniqueInstance} method.  We would clearly expect \ct{ReliableWebServer uniqueInstance} to answer a \lct{ReliableWebServer}:. Using \self ensures that this will happen, since it will be bound to the respective class.
-Note also that \ct{WebServer} and \ct{ReliableWebServer} will each have their own class instance variable called \ct{uniqueInstance}.  These two variables will of course have different values.
+Note that the instance creation code inside the conditional in \mthref{uniqueInstance} is written as \ct{self new} and not as \ct{SBEWebServer new}.
+What is the difference?   Since the \ct{uniqueInstance} method is defined in \ct{SBEWebServer class}, you might think that they were the same.    And indeed, until someone creates a subclass of \ct{SBEWebServer}, they are the same.  But suppose that \ct{SEBReliableWebServer} is a subclass of \ct{SBEWebServer}, and inherits the \ct{uniqueInstance} method.  We would clearly expect \ct{SEBReliableWebServer uniqueInstance} to answer a \lct{SEBReliableWebServer}. Using \self ensures that this will happen, since it will be bound to the respective class.
+Note also that \ct{SBEWebServer} and \ct{SEBReliableWebServer} will each have their own class instance variable called \ct{uniqueInstance}. These two variables will of course have different values.
 
 %=========================================================
 \section{Every class has a superclass}
@@ -390,7 +390,7 @@ Have a look at the protocol \prot{Kernel-Classes \go Class \go subclass creation
 %An abstract class is an ordinary class in which the implementation of some methods is deferred to a subclass.
 %This is repeated in the next section
 
-Although \squeak does not provide multiple inheritance, since version 3.9 it has incorporated a mechanism called \emphind{trait}{}s for sharing behaviour across unrelated classes.
+Although \squeak does not provide multiple inheritance, it incorporates a mechanism called \emphind{trait}{}s for sharing behaviour across unrelated classes.
 Traits are collections of methods that can be reused by multiple classes that are not related by inheritance. Using traits allows one to share code between different classes without duplicating code.
 
 %---------------------------------------------------------
@@ -454,9 +454,9 @@ Trait named: #TAuthor
 \end{classdef}
 
 \noindent
-Here we define the trait \ct{TAuthor} in the category \scat{SBE-Quinto}.
+Here, we define the trait \ct{TAuthor} in the category \scat{SBE-Quinto}.
 This trait does not \emph{use} any other existing traits.
-In general we can specify a \emph{trait composition expression} of other traits to use as part of the \ct{uses:} keyword argument.
+In general, we can specify a \emph{trait composition expression} of other traits to use as part of the \ct{uses:} keyword argument.
 Here we simply provide an empty array.
 
 Traits may contain methods, but no instance variables.
@@ -492,21 +492,6 @@ Trait composition expressions may combine multiple traits using the \ct{+} opera
 In case of conflicts (\ie if multiple traits define methods with the same name), these conflicts can be resolved by explicitly removing these methods (with \ct{-}), or by redefining these methods in the class or trait that you are defining.
 It is also possible to \emph{alias} methods (with \ct{@}), providing a new name for them.
 
-Traits are used in the system kernel.
-One good example is the class \clsind{Behavior}.
-
-\needlines{8}
-\begin{classdef}[behaviorwithtraits]{\ct{Behavior} defined using traits}
-Object subclass: #Behavior
-	uses: TPureBehavior @ {#basicAddTraitSelector:withMethod:->#addTraitSelector:withMethod:}
-	instanceVariableNames: 'superclass methodDict format'
-	classVariableNames: 'ObsoleteSubclasses'
-	poolDictionaries: ''
-	category: 'Kernel-Classes'
-\end{classdef}
-\noindent
-Here we see that the method \ct{addTraitSelector:withMethod:} defined in the trait \ct{TPureBehavior} has been aliased to \ct{basicAddTraitSelector:withMethod:}.
-Support for traits is currently being added to the browsers.
 
 %=========================================================
 \section{Everything happens by message sending}
@@ -536,17 +521,16 @@ We do not tell the \ct{SmallInteger} \ct{3} or the \ct{Point} \ct{1@2} how to re
 Each has its own method for \ct{+}, and responds to \ct{+ 4} accordingly.
 
 One of the consequences of \st's model of message sending is that it encourages a style in which objects tend to have very small methods and delegate tasks to other objects, rather than implementing huge, procedural methods that assume too much responsibility.
-Joseph Pelrine
-\ab{Citation?}
-\on{sorry, just personal communication and my own lecture notes!}
-expresses this principle succinctly as follows:
+Joseph Pelrine expresses this principle succinctly as follows:
 \important{Don't do anything that you can push off onto someone else.}
 \index{Pelrine, Joseph}
+\ab{Citation?}
+\on{sorry, just personal communication and my own lecture notes!}
 
 Many object-oriented languages provide both static and dynamic operations for objects; in \st there are only dynamic message sends. Instead of providing static class operations, for instance, classes are objects and we simply send messages to classes.
 
 \emph{Nearly} everything in \st happens by message sends.
-At some point action must take place:
+At some point, action must take place:
 \begin{itemize}
   \item \emph{Variable declarations} are not message sends.
   		In fact, variable \subind{variable}{declaration}{}s are not even executable.
@@ -620,10 +604,8 @@ The search therefore continues in the superclass, \lct{BorderedMorph}, and so on
 
 \begin{method}[openInWorld]{An inherited method}
 Morph>>>openInWorld
-	"Add this morph to the world.  If in MVC, then provide a Morphic window for it."
-	self couldOpenInMorphic
-		ifTrue: [self openInWorld: self currentWorld]
-		ifFalse: [self openInMVC]
+	"Add this morph to the world."
+	self openInWorld: self currentWorld.
 \end{method}
 \cmindex{Morph}{openInWorld}
 
@@ -653,11 +635,8 @@ This suggests that \mthref{openInWorld} is equivalent to \mthref{openInWorldRetu
 \needlines{5}
 \begin{method}[openInWorldReturnSelf]{Explicitly returning self}
 Morph>>>openInWorld
-	"Add this morph to the world.  If in MVC,
-	then provide a Morphic window for it."
-	self couldOpenInMorphic
-		ifTrue: [self openInWorld: self currentWorld]
-		ifFalse: [self openInMVC].
+	"Add this morph to the world."
+	self openInWorld: self currentWorld.
 	^ self		"Don't do this unless you mean it!"
 \end{method}
 
@@ -756,8 +735,8 @@ What is critical to notice is that the \self send causes the method lookup to st
 BorderedMorph>>>fullPrintOn: aStream
 	aStream nextPutAll: '('.
 	!\textbf{super fullPrintOn: aStream.}!
-	aStream nextPutAll: ') setBorderWidth: '; print: borderWidth;
-		nextPutAll: ' borderColor: ' , (self colorString: borderColor)
+	aStream nextPutAll: ') setBorderWidth: '; print: self borderWidth;
+		nextPutAll: ' borderColor: ' , (self colorString: self borderColor)
 \end{method}
 At this point, \ct{BorderedMorph>>>fullPrintOn:} does a \super send to extend the 
 \ct{fullPrintOn:} behaviour it inherits from its superclass.
@@ -769,7 +748,7 @@ This would have caused lookup to start from \ct{BorderedMorph}, resulting in an 
 
 \important{A \super send triggers a \emph{static} method lookup starting in the superclass of the class of the method performing the \super send.}
 
-If you think carefully about \super send and \figref{initStringLookup}, you will realize that \super bindings are static: all that matters is the class in which the text of the \super send is found.
+If you think carefully about \super sends and \figref{initStringLookup}, you will realize that \super bindings are static: all that matters is the class in which the text of the \super send is found.
 By contrast, the meaning of \self is dynamic: it always represents the receiver of the currently executing message. This means that  \emph{all}  messages sent to \self are looked-up by starting in the receiver's class.
 
 %---------------------------------------------------------
@@ -826,7 +805,7 @@ In \squeak, all global variables are stored in a namespace called \glbind{Smallt
 Global variables are accessible everywhere. 
 Every class is named by a global variable; in addition, a few globals are used to name special or commonly useful objects.
 
-The variable \glbind{Transcript} names an instance of \clsind{TranscriptStream}, a stream that writes to a scrolling window.
+For example, the variable \glbind{Transcript} names an instance of \clsind{TranscriptStream}, a stream that writes to a scrolling window.
 The following code displays some information and then goes to the next line in the \ct{Transcript}.
 
 \begin{code}{}
@@ -834,7 +813,7 @@ Transcript show: 'Squeak is fun and powerful' ; cr
 \end{code}
 
 \noindent
-Before you \menu{do it}, open a transcript by dragging one from the \emph{Tools} flap.
+Before you \menu{do it}, open a transcript from the world menu.
 
 \hint{Writing to the Transcript is slow, especially when the transcript window is open. 
 So, if you experience some sluggishness and are writing to the Transcript, think about collapsing it.}
