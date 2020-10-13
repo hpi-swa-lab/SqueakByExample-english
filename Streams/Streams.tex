@@ -115,14 +115,12 @@ StandardFileStream
   fileNamed: 'test.txt'
   do: [:stream | stream
     nextPutAll: '123';
-    cr;
+    space;
     nextPutAll: 'abcd'].
 
-StandardFileStream
-  readOnlyFileNamed: 'test.txt'
-  do: [:stream | stream contents]. --> '123
-abcd'
+StandardFileStream readOnlyFileNamed: 'test.txt' do: [:stream | stream contents]. --> '123 abcd'
 \end{code}
+% ct TODO: Line breaks in the previous example would be nice but would require a redesign of SBEtests.
 \cmindex{FileStream class}{fileNamed:do:}
 
 The following sections present the protocols in more depth.
