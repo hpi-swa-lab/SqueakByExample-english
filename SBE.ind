@@ -1151,7 +1151,7 @@
     \subitem (class), \hyperpage{102}
   \item SequenceableCollection
     \subitem (class), \hyperpage{197}
-    \subitem \lstinline [mathescape=false,backgroundcolor=\color  {white},basicstyle={\sffamily  \upshape  }]{doWithIndex:}, 
+    \subitem \lstinline [mathescape=false,backgroundcolor=\color  {white},basicstyle={\sffamily  \upshape  }]{withIndexDo:}, 
 		\hyperpage{210}
     \subitem \lstinline [mathescape=false,backgroundcolor=\color  {white},basicstyle={\sffamily  \upshape  }]{first}, 
 		\hyperpage{197}

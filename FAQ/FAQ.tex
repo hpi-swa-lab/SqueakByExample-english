@@ -51,6 +51,7 @@ Which \sq image should I use with this book?
 We recommend that you use the image provided on the Squeak by Example web page.
 Visit \url{http://SqueakByExample.org} and look for ``Download Squeak'' in the sidebar.
 You should also be able to use most other images, but you may find that the hands-on exercises behave differently in surprising ways.
+% ct TODO: Broken link!
 
 %\begin{faq}
 %Where is the Squeak ``Development Image''?
@@ -118,7 +119,8 @@ browseSuperSends value: OrderedCollection.
 \end{code}
 
 \begin{faq}
-How do I find out which new methods are introduced by a class?  (I.e., not including overridden methods.)
+How do I find out which new methods are introduced by a class?
+(I.e., not including overridden methods.)
 \end{faq}
 \answer
 Here we ask which methods are introduced by \ct{True}:
@@ -238,18 +240,6 @@ Click the menu icon in the top left of the Browser window.
 \section{Regular expressions and parsing}
 
 \begin{faq}
-How can I work with regular expressions?
-\index{regular expression package}
-\end{faq}
-\answer
-\ifluluelse
-	{Load Vassili Bykov's RegEx package from: \\
-	\url{www.squeaksource.com/Regex.html}}
-	{Load Vassili Bykov's RegEx package from:
-	\url{www.squeaksource.com/Regex.html}}
-\index{Bykov, Vassili}
-
-\begin{faq}
 Where is the documentation for the RegEx package?
 \end{faq}
 \answer
@@ -260,7 +250,7 @@ Are there tools for writing parsers?
 \end{faq}
 \answer
 Use \ind{SmaCC}\,---\,the Smalltalk Compiler Compiler.
-You should install at least SmaCC-lr.13.
+You should install at least \ct{SmaCC-lr.13}.
 Load it from \url{www.squeaksource.com/SmaccDevelopment.html}.
 There is a nice tutorial online:
 \url{www.refactory.com/Software/SmaCC/Tutorial.html}
