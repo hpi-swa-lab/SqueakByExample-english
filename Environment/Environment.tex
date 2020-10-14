@@ -731,6 +731,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 		[| relevantOperations |
 		relevantOperations := ((MCWorkingCopy forPackageNamed: 'SBE-Monticello') package snapshot
 			patchRelativeToBase: MCSnapshot empty) operations.
+		helper hideProgressMorph.
 		[[helper click: (helper buttonLabeled: 'Save' in: helper foregroundWindow)]
 			on: MCVersionNameAndMessageRequest
 			do: [:ex | ex resumeExcluding: relevantOperations]]
