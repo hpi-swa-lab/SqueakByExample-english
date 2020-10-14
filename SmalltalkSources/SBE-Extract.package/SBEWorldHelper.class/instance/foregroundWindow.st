@@ -3,7 +3,6 @@ foregroundWindow
 
 	^ self foregroundMorph
 		in: [:morph |
-			self flag: #debug. "Do not merge!"
-			Transcript showln: morph.
-			self assert: [morph isSystemWindow]];
+			self assert: [morph isSystemWindow] descriptionBlock: [
+				'Foreground morph should be a system window but is {1}' format: {morph}]];
 		yourself
