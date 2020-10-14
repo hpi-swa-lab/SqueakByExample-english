@@ -33,7 +33,7 @@
 The goal of this chapter is to show you how to develop programs in the \Squeak programming environment.
 You have already seen how to define methods and classes using the system browser; this chapter will show you more of the features of the system browser, and introduce you to some of the other browsers.
 
-Of course, very occasionally you may find that your program does not work as you expect.
+Sometimes your program does not work as you expect.
 Squeak has an excellent debugger, but like most powerful tools, it can be confusing on first use.
 We will walk you through a debugging session and demonstrate some of the features of the debugger. 
 
@@ -57,8 +57,7 @@ This is done using a tool called \ind{Monticello}, and is a much more powerful a
 
 Smalltalk and modern graphical interfaces were developed together.
 Even before the first public release of Smalltalk in 1983, Smalltalk had a self-hosting graphical development environment, and all Smalltalk development was taking place in it.
-Let's start by looking at the main tools in \Squeak, all of which can be dragged out of the \toolsflapind in the \sbe image (see \secref{sbeImage}).
-Depending on your personal settings, the \toolsflap{} can be opened by mousing over or clicking on the orange tab on the right-hand edge of \Squeak's main window.
+Let's start by looking at the main tools in \Squeak, all of which can be opened through the \emph{Tools} menu in the world docking bar at the top of the screen. Some of the tools can also be opened directly from the world menu.
 
 \begin{itemize}
 	\item {The \menu{Browser}} is the central development tool.
@@ -67,26 +66,26 @@ Depending on your personal settings, the \toolsflap{} can be opened by mousing o
 		Unlike other environments where the source code is stored in separate files, in Smalltalk, all classes and methods are contained in the image.
 		\index{system browser}
 
-	\item{The \menu{Message Names}} tool is used to look at all of the methods with a particular selector, or with a selector containing a substring.
-		\index{message name finder}
-	
+	\item{The \menu{Workspace}} is a window into which you can type input.  
+		It can be used for any purpose, but is most often used for typing Smalltalk expressions and executing them as \menu{do it}s.
+		The use of the \ind{workspace} was also illustrated in \secref{transcript}.
+
+	\item{The \menu{Transcript}} is a window on the \glbind{Transcript} output stream, which is useful for writing log messages and has already been described in \secref{transcript}.
+
+	\item{The \menu{Test Runner}} lets you run and debug \SUnit tests, and is described in \charef{SUnit}.
+		\index{Test Runner}
+		\index{SUnit}
+
 	\item{The \menu{Method Finder}} tool will also let you find methods, but according to what they \emph{do} as well as what they are called.
-		\index{method finder}
+	\index{method finder}
+
+	\item{The \menu{Message Names}} tool is used to look at all of the methods with a particular selector, or with a selector containing a substring.
+	\index{message name finder}
 	
 	\item{The \menu{Monticello Browser}} is the starting point for loading code from, and saving code in, \ind{Monticello} packages.
 	
 	\item{The \menu{Process Browser} provides a view on all of the processes (threads) executing in Smalltalk.}
-		\index{process browser}
-	
-	\item{The \menu{Test Runner}} lets you run and debug \SUnit tests, and is described in \charef{SUnit}.
-		\index{Test Runner}
-		\index{SUnit}
-	
-	\item{The \menu{Transcript}} is a window on the \glbind{Transcript} output stream, which is useful for writing log messages and has already been described in \secref{transcript}.
-	
-	\item{The \menu{Workspace}} is a window into which you can type input.  
-		It can be used for any purpose, but is most often used for typing Smalltalk expressions and executing them as \menu{do it}s.
-		The use of the \ind{workspace} was also illustrated in \secref{transcript}.
+	\index{process browser}
 \end{itemize}
 
 The \menu{Debugger} has an obvious role but you will discover that it has a more central place compared to debuggers for other programming languages, because in Smalltalk you can \emph{program} in the \ind{debugger}.
@@ -95,29 +94,13 @@ The debugger is not launched from a menu or from the \toolsflap; it is normally 
 
 %\ab{somewhere: Using the \menu{Change Sorter}, you can isolate new and modified source code and write it to a file.}
 
-% Les outils que nous n'aborderons pas dans cet article, mais dans un prochain,
-% sont pour l'essentiel :le Refactoring Browser, pour refactoriser son code ;
-% Sunit, un outil pour écrire et lancer des tests unitaires ; Monticello et
-% SqueakSource (équivalent SourceForge) des outils de développement collaboratif.
-% Ces outils sont importants mais s'utilisent à partir d'une certaine maturité
-% dans la programmation Smalltalk. Mais pas d'inquiétude, dans cet article nous
-% allons nous intéresser à des outils dont la maîtrise est toute aussi
-% essentielle. Les outils comme le Workspace et le Transcript ont été abordés
-% dans nos articles précédents. Leur utilisation est simple. Le premier est une
-% sorte de terminal de commandes pour expérimenter des bouts de code. Le
-% deuxième, le Transcript, reçoit les sorties textes.
-
-
-% section overview (end)
-
 %=========================================================
 \section{The System Browser}
 \label{sec:browser} % (fold)
-%apb: what does the fold comment mean?
 
 There are actually several browsers in \sq: the standard system browser, the package browser, and the Monticello snapshot browser. 
 We will take a look at the standard \ind{system browser} first since the others are variations on it.
-\figref{SystemBrowser0} shows the browser as it appears when you first drag it out of the \toolsflapind.
+\figref{SystemBrowser0} shows the browser as it appears when you first open it from the world menu.
 
 %%{SBESqueakPicture writeTo: './figures/SystemBrowser0.png' frame: #morphs using: [:helper |
 %%	Browser open.
@@ -132,7 +115,7 @@ We will take a look at the standard \ind{system browser} first since the others 
    \label{fig:SystemBrowser0}
 \end{figure}
 
-The four small panes at the top of the browser represent a hierarchic view of the methods in the system, much in the same way as the \ind{NeXTstep} \textit{File Viewer} and the Mac OS X \textit{Finder} in column mode provide a view of the files on the disk.
+The four small panes at the top of the browser represent a hierarchic view of the methods in the system, much in the same way as the Mac OS X \textit{Finder} in column mode provide a view of the files on the disk (or the original \ind{NeXTstep} \textit{File Viewer}).
 The leftmost pane lists \emph{categories} of classes; select one (say \scat{Kernel-Objects}) and the pane immediately to the right will then show all of the classes in that category.
 \on{I adopted the spelling of NeXTstep recommended by wikipedia}
 
@@ -149,11 +132,11 @@ The leftmost pane lists \emph{categories} of classes; select one (say \scat{Kern
    \label{fig:SystemBrowserModel}}
 \end{figure}
 
-Similarly, if you select one of the classes in the second pane, say, \menu{Model} (see  \figref{SystemBrowserModel}), the third pane will show all of the \emph{protocols} defined for that class, as well as a virtual protocol \prot{-{}-all-{}-}, which is selected by default. 
-Protocols are a way of categorizing methods; they make it easier to find and think about the behavior of a class by breaking it up into smaller, conceptually coherent pieces.
+Similarly, if you select one of the classes in the second pane, say, \menu{Model} (see \figref{SystemBrowserModel}), the third pane will show all of the \emph{protocols} defined for that class, as well as a virtual protocol \prot{-{}-all-{}-}, which is selected by default (the browser sometimes refers to protocols as ``message categories''). 
+Protocols help organizing methods; they make it easier to find and think about the behavior of a class by breaking it up into smaller, conceptually coherent pieces.
 The fourth pane shows the names of all of the methods defined in the selected protocol.
 If you then select a method name, the source code of the corresponding method appears in the large pane at the bottom of the browser, where you can view it, edit it, and save the edited version.
-If you select class \menu{Model},  protocol \protind{dependents} and the method \menu{myDependents}, the browser should look like \figref{SystemBrowserMyDependents}.
+If you select the class \menu{Model}, the protocol \protind{dependents}, and the method \menu{myDependents}, the browser should look like \figref{SystemBrowserMyDependents}.
 \protindex{all}
 \cmindex{Model}{myDependents}
 
@@ -171,15 +154,16 @@ If you select class \menu{Model},  protocol \protind{dependents} and the method 
 \end{figure}
 
 Unlike directories in the Mac OS X \emph{Finder}, the four top panes of the browser are not quite equal.  
-Whereas classes and methods are part of the Smalltalk language, system categories and message protocols are not:
-They are a convenience introduced by the browser to limit the amount of information that needs to be shown in each pane.
-For example, if there were no protocols, the browser would have to show a list of all of the methods in the selected class; for many classes, this list would be too large to navigate conveniently.  
+Whereas classes and methods are part of the Smalltalk language, system and message categories are not:
+They are a convenience introduced by the programming tools to limit the amount of information that needs to be shown in each pane.
+For example, if there were no categories, the browser would have to show a list of all of the methods in the selected class; for many classes, this list would be too large to navigate conveniently.  
 \index{Mac OS X Finder}
 
-Because of this, the way that you create a new category or a new protocol is different from the way that you create a new class or a new method.
-To create a new category, select \menu{new category} from the \ind{yellow button} menu in the category pane; to create a new protocol, select \menu{new protocol} from the yellow button menu in the protocol pane.
-Enter the name of the new thing in the dialog, and you are done: there is nothing more to a category or a protocol than its name and its contents.
+Because of this, the way that you create a new class category or protocol is different from the way that you create a new class or a new method.
+To create a new class category, select \menu{new category} from the \ind{yellow button} menu in the class category pane; to create a new protocol, select \menu{new category} from the yellow button menu in the protocol pane.
+Enter the name of the new thing in the dialog, and you are done: there is nothing more to a class category or a protocol than its name and its contents.
 \index{category!creating}
+\index{protocol!creating}
 
 %%{SBESqueakPicture writeTo: './figures/SystemBrowserClassCreation.png' frame: #morphs using: [:helper |
 %%	Browser fullOnCategory: 'Kernel-Objects'.
@@ -196,7 +180,8 @@ Enter the name of the new thing in the dialog, and you are done: there is nothin
 
 In contrast, to create a new class or a new method, you will actually have to write some Smalltalk code.
 If you deselect the currently selected category (most left pane) and then reselect it again, the main browser pane will display a class creation template (\figref{SystemBrowserClassCreation}).
-You create a new class by editing this template: replace \ct{Object} by the name of the existing class of which you wish to create a subclass, replace \ct{NameOfSubclass} by the name that you would like to give to your new subclass, and fill in the instance variable names if you know them.
+
+You create a new class by editing this template: replace \ct{Object} by the name of the existing class of which you wish to create a subclass, replace \ct{NameOfSubclass} by the name that you would like to give to your new subclass, and fill in the instance variable names if you want some.
 The category for the new class is by default the currently selected category, but you can change this too if you like.
 If you already have the browser focussed on the class that you wish to subclass, you can get the same template with slightly different
 initialization by using the yellow button menu in the class pane, and selecting \menu{more \ldots \go subclass template}.
@@ -207,7 +192,8 @@ Creating a class also creates a global variable that references the class, which
 \index{class!creation}
 \index{system browser!defining a class}
 
-Can you see why the name of the new class has to appear as a \clsind{Symbol} (\ie prefixed with \ct{#}) in the class creation template, but after the class is created, code can refer to the class by using the name as an identifier (\ie without the \ct{#})?
+%I don't think this belongs here in the introduction of tools, also this style has not been used anywhere else in the book
+%Can you see why the name of the new class has to appear as a \clsind{Symbol} (\ie prefixed with \ct{#}) in the class creation template, but after the class is created, code can refer to the class by using the name as an identifier (\ie without the \ct{#})?
 
 The process of creating a new method is similar.
 First select the class in which you want the method to live, and then select a protocol.
@@ -257,7 +243,8 @@ You can also open a browser on a class named by any selected text using the \sho
 The \button{senders} button will give you a list of all methods that may use the selected method.
 With the browser open on \ct{ScaleMorph}, click on the \mthind{ScaleMorph}{checkExtent:} method in the method pane near the top right corner of the browser; the body of \ct{checkExtent:} displays in the bottom part of the browser.
 If you now press the \button{senders} button, a menu will appear with \ct{checkExtent:} as the topmost item, and below it, all the messages that \ct{checkExtent:} sends (see \figref{SendersOfCheckEvent}).
-Selecting an item in this menu will open a browser with the list of all methods in the image that send the selected message. 
+Selecting an item in this menu will open a browser with the list of all methods in the image that send the selected message.
+You can also quickly access the senders of messages by typing \short{n} (for {se\textbf{n}ders}).
 
 %%{SBESqueakPicture writeTo: './figures/SendersOfCheckEvent.png' frame: #morphs using: [:helper |
 %%	| window sendersButton |
@@ -282,7 +269,7 @@ Selecting an item in this menu will open a browser with the list of all methods 
 \index{system browser!implementors button}
 The \button{implementors} button works similarly, but instead of listing the senders of a message, it lists all of the classes that implement a method with the same selector.
 To see this, select \lct{drawOn:} in the message pane and then bring up the ``implementors of drawOn:'' browser, either using the \button{implementors} button, or the \ind{yellow button} menu on the method pane, or just by typing \short{m} (for {i\textbf{m}ple\textbf{m}entors}) in the method pane with \menu{drawOn:} selected.
-You should get a method list window showing a scrolling list of 96 classes that implement a \ct{drawOn:} method.
+You should get a method list window showing a scrolling list of 108 classes that implement a \ct{drawOn:} method.
 It shouldn't be all that surprising that so many classes implement this method:
 \ct{drawOn:} is the message that is understood by every object that is capable of drawing itself on the screen.
 While viewing any one of these methods, try browsing the senders of the \ct{drawOn:} message:
