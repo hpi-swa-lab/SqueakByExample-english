@@ -30,7 +30,7 @@
 \chapter{Understanding message syntax}
 \label{cha:understanding}
 
-Although \st's message syntax is extremely simple, it is unconventional and can take some time getting used to.
+Although \st's message syntax is extremely simple, it is unconventional and it can take some time to get used to it.
 This chapter offers some guidance to help you get acclimatized to this special syntax for sending messages.
 If you already feel comfortable with the syntax, you may choose to skip this chapter, or come back to it later.
 
@@ -78,7 +78,7 @@ As most computation in \st is done by message passing, correctly identifying mes
 \important{A message is always sent to a receiver, which can be a single literal, a block or a variable or the result of evaluating another message.}
 %sd-this is not totally right because we do not cover assignment but ok for now
 
-To help you identify the receiver of a message, we will underline it for you.
+To help you identify the receiver of a message, we will underline it for you in the following examples.
 We will also surround each message send with an ellipse and number message sends starting from the first one that will be sent to help you see the order in which messages are sent.
 
 %\begin{figure}[!ht]
@@ -244,10 +244,11 @@ Unfortunately the rules are a bit too simplistic for arithmetic message sends, s
 
 The following example, which is a bit more complex (!), offers a nice illustration that even complicated \st expressions can be read in a natural way:
 \begin{code}{@TEST}
-[:aClass | aClass methodDict keys sorted select: [:aMethod | (aClass>>aMethod) isAbstract ]] value: Boolean --> #(#& #==> #and: #asBit #ifFalse: #ifFalse:ifTrue: #ifTrue: #ifTrue:ifFalse: #not #or: #|)
+[:aClass | aClass methodDict keys sorted select: [:aMethod | (aClass>>aMethod) isAbstract ]] value: Boolean 
+--> #(#& #==> #and: #asBit #ifFalse: #ifFalse:ifTrue: #ifTrue: #ifTrue:ifFalse: #not #or: #|)
 \end{code}
 \noindent
-Here we want to know which methods of the \ct{Boolean} class are abstract\footnote{In fact, we could also have written the equivalent but simpler expression: \ct{Boolean methodDict select: #isAbstract thenCollect: #selector}}\damien{I've added this footnote, just remove it if you don't like it :-)}.
+Here we want to know which methods of the \ct{Boolean} class are abstract.
 We ask some argument class, \ct{aClass}, for the keys of its method dictionary, sort them, and select those methods of that class that are abstract.
 Then we bind the argument \ct{aClass} to the concrete value \ct{Boolean}.
 We need parentheses only to send the binary message \ct{>>}, which selects a method from a class, before sending the unary message \mbox{\ct{isAbstract}} to that method. The result shows us which methods must be implemented by \ct{Boolean}'s concrete subclasses \ct{True} and \ct{False}.
@@ -345,11 +346,11 @@ In the message \ct{aPen color: Color yellow}, there is one \emph{unary} message 
 
 \begin{code}{@TEST}
 1.5 tan rounded asString = (((1.5 tan) rounded) asString) --> true    "parentheses not needed here"
-3 + 4 factorial   --> 27    "(not 5040)"
+3 + 4 factorial   --> 27    "not 5040"
 (3 + 4) factorial --> 5040
 \end{code}
 
-Here we need the \ind{parentheses} to force sending \ct{lowMajorScaleOn:} before \ct{play}.
+In the following example, we need the \ind{parentheses} to force sending \ct{lowMajorScaleOn:} before \ct{play}.
 \begin{code}{}
 (FMSound lowMajorScaleOn: FMSound clarinet) play 
 "(1) send the message clarinet to the FMSound class to create a clarinet sound.
@@ -370,7 +371,7 @@ The message \ct{(65@325 extent: 134 @ 100) center} returns the center of a recta
 Evaluating the message without parentheses would lead to an error because the object \ct{100} does not understand the message \ct{center}.
 
 \begin{example}[decExtent]{Example of Parentheses.}{}
-      (65 @ 325 extent: 134 @ 100) center
+      (65@325 extent: 134@100) center
 (1)   65@325                                                    "binary"
     --> aPoint
 (2)                                134@100                     "binary"
@@ -490,11 +491,16 @@ Often beginners have problems understanding when they need to add parentheses. L
 
 %-------------------------------------------------------------
 \subsection{Parentheses or not?}
-The characters \ct{[}, \ct{]}, \ct{(} and \ct{)} 
-delimit distinct areas. Within such an area, a keyword message is the longest sequence of words terminated  by \ct{:} that is not cut by the characters \ct{.},  or \ct{;}. 
-When the characters \ct{[}, \ct{]}, \ct{(} and \ct{)} surround some words with colons, these words participate in the keyword message \emph{local} to the area defined.
+The characters \ct{[}, \ct{]}, \ct{(} and \ct{)} delimit distinct areas. Whatever is in these areas is evaluated before the result is used in any other evaluation, as you have seen in examples of arithmetic messages. Further, parentheses are also necessary to keep the parts of nested keyword messages apart.
 
-In this example, there are two distinct keyword messages:  \ct{rotatedBy:magnify:smoothing:} and \ct{at:put:}.
+In the following example, there are two distinct keyword messages: \ct{includes:} and \ct{ifTrue:}. Without the parenthesis we would actually send the unknown message \ct{includes:ifTrue:} to the collection. By adding parenthesis we make it clear where one keyword message ends and where another one starts.
+
+\begin{code}{}
+ord := OrderedCollection new.
+(ord includes: $a) ifTrue:[...]
+\end{code}
+
+The same applies to the following example, in which we use the result of the keyword message send \ct{rotateBy:magnify:smoothing:} as an argument in the keyword message send \ct{at:put:}.
 
 \begin{code}{}
 aDict
@@ -505,37 +511,22 @@ aDict
    put: 3
 \end{code}
 
-\important{
-The characters \lct{[}, \lct{]}, \lct{(} and \lct{)} delimit distinct areas. Within such an area, 
-a keyword message is the longest sequence  of words terminated by \lct{:} that is not cut by the characters \lct{.},  or \lct{;}. 
-When the characters \lct{[}, \lct{]}, \lct{(} and \lct{)} surround some words with colons, these words participate in the keyword message local to the area defined.}
+\paragraph{Hints.} If you have problems with these precedence rules, you may start simply by putting parentheses whenever you want to distinguish two messages having the same precedence. To keep your code short and clear you should however try to use them less often when you become more experienced.
 
-\on{Sounds terribly complicated.}
-
-\paragraph{Hints.} If you have problems with these precedence rules, you may start simply by putting parentheses whenever you want to distinguish two messages having the same precedence.
-
-The following piece of code does not require parentheses because the message send  \ct{x isNil} is unary hence is sent prior to the keyword message \ct{ifTrue:}.
+When messages have different precedence, you do not have to use parentheses. For example, the following piece of code does not require parentheses because the message send  \ct{x isNil} is unary, hence it is always sent prior to the keyword message \ct{ifTrue:}.
 \begin{code}{}
-(x isNil)
-   ifTrue:[...]
+x isNil ifTrue:[...]
 \end{code}
 
-The following piece of code requires parentheses because the messages \ct{includes:} and \ct{ifTrue:} are both keyword messages. 
-\begin{code}{}
-ord := OrderedCollection new.
-(ord includes: $a)
-   ifTrue:[...]
-\end{code}
-\noindent
-Without parentheses the unknown message \ct{includes:ifTrue:} would be sent to the collection!
+
 
 %-------------------------------------------------------------
 \subsection{When to use \lct{[ ]} or \lct{( )}}
 You may also have problems understanding when to use square brackets rather than parentheses.
 The basic principle is that you should use \ct{[ ]} when you do not know how many times, potentially zero, an expression should be evaluated.
-\lct{[\emph{expression}]} will create a \ind{block} closure (\ie an object) from \lct{\emph{expression}}, which may be evaluated any number of times (possibly zero), depending on the context. Here note that an expression can either be a message send, a variable, a literal, an assignment or a block.
+\lct{[\emph{expression}]} will create a \ind{block} closure (\ie an object) from \lct{\emph{expression}}, which may be evaluated any number of times (possibly zero), depending on the context. The expression can be any other code.
 
-Hence the conditional branches of \ct{ifTrue:} or \ct{ifTrue:ifFalse:} require blocks. Following the same principle both the receiver and the argument of a \ct{whileTrue:} message require the use of square brackets since we do not know how many times either the receiver or the argument should be evaluated.
+Hence the conditional branches of \ct{ifTrue:} or \ct{ifTrue:ifFalse:} require blocks, as depending on the condition, the code after the \ct{ifTrue:} or after the \ct{ifFalse:} might be executed. Following the same principle both the receiver and the argument of a \ct{whileTrue:} message require the use of square brackets since we do not know how many times either the receiver or the argument should be evaluated.
 
 Parentheses, on the other hand, only affect the order of sending messages.
 So in \lct{(\emph{expression})}, the \lct{\emph{expression}} will \emph{always} be evaluated exactly once.
