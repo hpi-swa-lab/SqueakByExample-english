@@ -1559,6 +1559,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 			copyReplaceAll: #adhereToTop with: #adhereToBottom).
 		ChangeSet current fileOut.
 		FileList open.
+		helper hideProgressMorph.
 		helper selectAnyListIn: helper foregroundWindow at: ('*{1}*.cs' format: {csName})].
 	recorder writeTo: 'fileContentsBrowser.png' building: [:helper |
 		helper click: (helper buttonLabeled: 'Code' in: helper foregroundWindow).
