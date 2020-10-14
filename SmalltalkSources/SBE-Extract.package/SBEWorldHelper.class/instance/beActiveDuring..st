@@ -5,4 +5,4 @@ beActiveDuring: aBlock
 	^ [self useScreenshotSettingsDuring: aBlock]
 		ensure: [
 			hand showHardwareCursor: true. "Nasty side-effect"
-			hiddenMorphs do: #openInWorld]
+			hiddenMorphs do: #show]

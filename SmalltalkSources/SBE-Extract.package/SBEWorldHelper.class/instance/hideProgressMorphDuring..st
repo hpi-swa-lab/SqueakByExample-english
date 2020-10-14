@@ -3,8 +3,8 @@ hideProgressMorphDuring: aBlock
 
 	| progressMorph |
 	progressMorph := SystemProgressMorph uniqueInstance.
-	progressMorph isInWorld
+	progressMorph visible
 		ifFalse: [^ aBlock value].
-	progressMorph delete.
+	progressMorph hide.
 	^ aBlock ensure: [
-		progressMorph openInWorld]
+		progressMorph show]
