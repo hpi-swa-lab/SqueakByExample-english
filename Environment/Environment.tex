@@ -1548,9 +1548,9 @@ This requires the use of another tool, the file list browser.
 \section{The File List Browser}
 
 \begin{ExecuteSmalltalkScript}"fileListBrowser"
-SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
+SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder :helper |
 	helper hideProgressMorph.
-	recorder writeTo: 'fileList.png' building: [:helper |
+	recorder writeTo: 'fileList.png' building: [
 		| csName |
 		csName := 'my cool changeset'.
 		thisContext wrap: [:block | ChangeSet newChangesNamed: csName during: block].
@@ -1562,7 +1562,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 		ChangeSet current fileOut.
 		FileList open.
 		helper selectAnyListIn: helper foregroundWindow at: ('*{1}*.cs' format: {csName})].
-	recorder writeTo: 'fileContentsBrowser.png' building: [:helper |
+	recorder writeTo: 'fileContentsBrowser.png' building: [
 		helper click: (helper buttonLabeled: 'Code' in: helper foregroundWindow).
 		helper foregroundWindow model
 			selectClassNamed: #SearchBar;
