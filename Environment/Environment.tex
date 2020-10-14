@@ -1548,6 +1548,7 @@ This requires the use of another tool, the file list browser.
 
 \begin{ExecuteSmalltalkScript}"fileListBrowser"
 SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
+	helper hideProgressMorph.
 	recorder writeTo: 'fileList.png' building: [:helper |
 		| csName |
 		csName := 'my cool changeset'.
@@ -1559,7 +1560,6 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 			copyReplaceAll: #adhereToTop with: #adhereToBottom).
 		ChangeSet current fileOut.
 		FileList open.
-		helper hideProgressMorph.
 		helper selectAnyListIn: helper foregroundWindow at: ('*{1}*.cs' format: {csName})].
 	recorder writeTo: 'fileContentsBrowser.png' building: [:helper |
 		helper click: (helper buttonLabeled: 'Code' in: helper foregroundWindow).
