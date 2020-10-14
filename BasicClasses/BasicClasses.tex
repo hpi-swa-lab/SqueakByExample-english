@@ -61,12 +61,15 @@ Note that some of the methods should be removed and new versions of Squeak may r
 The class comment for the \ct{Object} states:
 
 \needlines{4}
-\begin{quote}
-\textit{\ct{Object} is the root class for almost all of the other classes in the class hierarchy. The exceptions are \ct{ProtoObject} (the superclass of \ct{Object}) and its subclasses.
-
-Class \ct{Object} provides default behavior common to all normal objects, such as access, copying, comparison, error handling, message sending, and \ind{reflection}. Also, utility messages that all objects should respond to are defined here.
-
-\ct{Object} has no instance variables, nor should any be added. This is due to several classes of objects that inherit from \ct{Object} that have special implementations (\ct{SmallInteger} and \ct{UndefinedObject} for example) or the VM knows about and depends on the structure and layout of certain standard classes.}
+\begin{quote}\itshape
+    \ct{Object} is the root class for almost all of the other classes in the class hierarchy.
+    The exceptions are \ct{ProtoObject} (the superclass of \ct{Object}) and its subclasses.
+    
+    Class \ct{Object} provides default behavior common to all normal objects, such as access, copying, comparison, error handling, message sending, and \ind{reflection}.
+    Also, utility messages that all objects should respond to are defined here.
+    
+    \ct{Object} has no instance variables, nor should any be added.
+    This is due to several classes of objects that inherit from \ct{Object} that have special implementations (\ct{SmallInteger} and \ct{UndefinedObject} for example) or the VM knows about and depends on the structure and layout of certain standard classes.
 \end{quote}
 
 If we begin to browse the method categories on the instance side of \ct{Object} we start to see some of the key behavior it provides.
