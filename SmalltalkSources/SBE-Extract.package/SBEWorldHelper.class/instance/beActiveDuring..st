@@ -8,4 +8,4 @@ beActiveDuring: aBlock
 		ensure: [
 			hand showHardwareCursor: true. "Nasty side-effect"
 			hiddenMorphs do: #show.
-			previousHiddenMorphs do: #hide]
+			(hiddenMorphs := previousHiddenMorphs) do: #hide]
