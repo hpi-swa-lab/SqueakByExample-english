@@ -244,8 +244,7 @@ Unfortunately the rules are a bit too simplistic for arithmetic message sends, s
 
 The following example, which is a bit more complex (!), offers a nice illustration that even complicated \st expressions can be read in a natural way:
 \begin{code}{@TEST}
-[:aClass | aClass methodDict keys sorted select: [:aMethod | (aClass>>aMethod) isAbstract ]] value: Boolean 
---> #(#& #==> #and: #asBit #ifFalse: #ifFalse:ifTrue: #ifTrue: #ifTrue:ifFalse: #not #or: #|)
+[:aClass | aClass methodDict keys sorted select: [:aMethod | (aClass>>aMethod) isAbstract ]] value: Boolean --> #(#& #==> #and: #asBit #ifFalse: #ifFalse:ifTrue: #ifTrue: #ifTrue:ifFalse: #not #or: #|)
 \end{code}
 \noindent
 Here we want to know which methods of the \ct{Boolean} class are abstract.
