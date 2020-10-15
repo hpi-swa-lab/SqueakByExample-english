@@ -2,6 +2,8 @@ utils
 runModal: aBlock then: anotherBlock
 
 	| semaphore modalProcess result |
+	self flag: #todo. "ct: This might be rewritten nicer using defered UI messages..."
+	
 	semaphore := Semaphore new.
 	[
 		modalProcess := aBlock newProcess
