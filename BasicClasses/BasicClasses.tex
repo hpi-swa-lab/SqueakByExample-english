@@ -30,32 +30,29 @@
 \chapter{Basic Classes}
 \label{cha:basic}
 
-Most of the magic of Smalltalk is not in the language but the class libraries.
+Most of the power of Smalltalk is not in the language but the class libraries.
 To program effectively with Smalltalk, you need to learn how the class libraries support the language and environment.
-The class libraries are entirely written in Smalltalk and can easily be extended since a package may add new functionality to a class even if it does not define this class. 
+The class libraries are entirely written in Smalltalk and we can easily extend them since a package may add new functionality to a class even if it does not define this class. 
 
 Our goal here is not to present in tedious detail the whole of the Squeak class library, but rather to point out the key classes and methods that you will need to use or override to program effectively.
-In this chapter we cover the basic classes that you will need for nearly every application: \ct{Object}, \ct{Number} and its subclasses, \ct{Character}, \ct{String}, \ct{Symbol}, and \ct{Boolean}.
+In this chapter we cover the basic classes that you will need for nearly every application: \ct{Object}, \ct{Number} and its subclasses, \ct{Character}, \ct{String}, \ct{Symbol}, and \ct{Boolean}. 
+In the following chapter \charef{cha:collections}, we will discuss the equally important \ct{Collection} subclasses.
 
 \md{Here are some comments:\\
 - copying: Good question... the copying in Squeak is much too complicated... there is for one the "old" smalltalk way of
   overrifing postCopy, and then the "automatic" deepCopy... which is quite complex and (I think) was no good idea...
  (see class comment in  DeepCopier)\\
 - Debugging: Yes, needs its own chapter. We should talk about haltIf, haltOnce...\\
-- assert: Object>>>assert: can take both a block and a boolean, because boleen implements \#value.
-  (I will fix SUnit to allow both, too).\\
 - Characters and Strings: we should talk about Unicode stuff... but I don't know too much myself.}
 
 %=================================================================
 \section{Object}
 \clsindmain{Object} is the root of the inheritance hierarchy.
 Actually, in Squeak the true root of the hierarchy is \clsind{ProtoObject}, which is used to define minimal entities that masquerade as objects, but we can ignore this point for the time being.
-% (more on this later in the chapter on reflection).
 
 \ct{Object} can be found in the \scatind{Kernel-Objects} category.
-Astonishingly, there are some 400 methods to be found here (including extensions).
-In other words, every class that you define will automatically provide these 400 methods, whether you know what they do or not.
-Note that some of the methods should be removed and new versions of Squeak may remove some of the superfluous methods. 
+Astonishingly, there are almost 500 methods to be found here (including extensions).
+In other words, every class that you define will automatically provide these methods, whether you know what they do or not.
 
 \sd{I do not like to quote something that can change and that people can find simply in the image but let us keep it for now.}
 The class comment for the \ct{Object} states:
@@ -77,23 +74,23 @@ If we begin to browse the method categories on the instance side of \ct{Object} 
 %-----------------------------------------------------------------
 \subsection{Printing}
 Every object in Smalltalk can return a printed form of itself.
-You can select any expression in a workspace and select the \menu{print it} menu:
+You can select any expression in a workspace and select the \menu{print it} menu item:
 This executes the expression and asks the returned object to print itself.
 In fact, this sends the message \ct{printString} to the returned object.
 The method \mthind{Object}{printString}, which is a \ind{template method}, at its core sends the message \mthind{Object}{printOn:} to its receiver.
 The message \ct{printOn:} is a hook that can be specialized. 
 
 \ct{Object>>>printOn:} is very likely one of the methods that you will most frequently override.
-This method takes as its argument a \clsind{Stream} on which a \clsind{String} representation of the object will be written.
+This method takes as its argument a \clsind{Stream} (for more on streams see \charef{cha:streams}) on which a \clsind{String} representation of the object will be written.
 The default implementation simply writes the class name preceded by ``\ct{a}'' or ``\ct{an}''.
 \ct{Object>>>printString} returns the \ct{String} that is written.
 
-For example, the class \clsind{Browser} does not redefine the method \ct{printOn:} and sending the message \ct{printString} to an instance executes the methods defined in \ct{Object}. 
+For example, the class \clsind{Browser} does not redefine the method \ct{printOn:} and sending the message \ct{printString} to a \ct{Browser} instance executes the method defined in \ct{Object}. 
 \begin{code}{@TEST}
 Browser new printString --> 'a Browser'
 \end{code}
 
-The class \ct{TTCFont} shows an example of \mthind{TTCFont}{printOn:} specialization.
+In contrast, the class \ct{TTCFont} shows an example of \mthind{TTCFont}{printOn:} specialization.
 It prints the name of the class followed by the family name, the size, and the subfamily name of the font as shown by the code below which prints an instance of the class.
 
 \needlines{7}
@@ -111,7 +108,7 @@ TTCFont allInstances anyOne printString --> 'TTCFont(BitstreamVeraSans 6 Bold)'
 \end{code}
 
 Note that the message \ct{printOn:} is not the same as \mthind{Object}{storeOn:}.
-The message \ct{storeOn:} puts on its argument stream an expression that can be used to recreate the receiver.
+The message \ct{storeOn:} puts an expression that can be used to recreate the receiver on its argument stream .
 This expression is evaluated when the stream is read using the message \ct{readFrom:}.
 \ct{printOn:} just returns a textual version of the receiver that may or may not be a self-evaluating expression.
 
@@ -131,7 +128,7 @@ $a         --> $a
 #(1 2 3) --> #(1 2 3)
 \end{code}
 
-Note that some objects such as arrays are self-evaluating or not depending on the objects they contain.
+Note that some objects, such as arrays, are self-evaluating or not depending on the objects they contain.
 For example, an array of booleans is self-evaluating whereas an array of persons is not.
 The following example shows that a \subind{Array}{dynamic} array is self-evaluating only if its elements are:
 \begin{code}{@TEST}
@@ -148,16 +145,16 @@ Hence the following array does not contain two points but rather six literal ele
 Lots of \ct{printOn:} method specializations implement self-evaluating behavior.
 The implementations of \cmind{Point}{printOn:} and \cmind{Interval}{printOn:} are self-evaluating.
 
-% CT TODO: This method version is outdated! Shall we use the current version (including ambiguous @- handling) or this simplified, didactic version?
-\begin{method}[Self-evaluating points]{Self-evaluation of \ct{Point}}
+\begin{method}[Self-evaluating points]{\ct{Point} print string definition that enables self-evaluation}
 Point>>>printOn: aStream 
     "The receiver prints on aStream in terms of infix notation."
     x printOn: aStream.
     aStream nextPut: $@.
+	...
     y printOn: aStream
 \end{method}
 
-\begin{method}[Self-evaluating intervals]{Self-evaluation of \ct{Interval}}
+\begin{method}[Self-evaluating intervals]{\ct{Interval} print string definition that enables self-evaluation}
 Interval>>>printOn: aStream
     aStream nextPut: $(;
         print: start;
@@ -202,9 +199,10 @@ This works because \ct{Complex} overrides \ct{=} as follows:
 \needlines{5}
 \begin{method}{Equality for complex numbers}
 Complex>>>= anObject
-    anObject isComplex
-        ifTrue: [^ (real = anObject real) & (imaginary = anObject imaginary)]
-        ifFalse: [^ anObject adaptToComplex: self andSend: #=]
+	anObject isNumber ifFalse: [^ false].
+	anObject isComplex
+		ifTrue: [^ (real = anObject real) & (imaginary = anObject imaginary)]
+		ifFalse: [^ anObject adaptToComplex: self andSend: #=]
 \end{method}
 
 The default implementation of \ct{Object>>>~=} simply negates \ct{Object>>>=}, and should not normally need to be changed.
@@ -215,8 +213,8 @@ The default implementation of \ct{Object>>>~=} simply negates \ct{Object>>>=}, a
 (1 + 2 i) ~= (1 + 4 i) --> true
 \end{code}
 
-If you override \ct{=}, you should consider overriding \mthind{Object}{hash}.
-If instances of your class are ever used as keys in a \clsind{Dictionary}, then you should make sure that instances that are considered to be equal have the same hash value:
+If you override \ct{=}, you should override \mthind{Object}{hash}.
+If instances of your class are ever used as keys in a \clsind{Dictionary}, then you should make sure that instances that are considered to be equal have the same hash value. This is because the implementation of \clsind{Dictionary} will only use the \ct{hash} to determine whether it includes an object as a key:
 \cmindex{Complex}{hash}
 \begin{method}{Hash must be reimplemented for complex numbers}
 Complex>>>hash
@@ -227,16 +225,6 @@ Complex>>>hash
 Although you should override \ct{=} and \ct{hash} together, you should \emph{never} override \ct{==}.
 (The semantics of object identity is the same for all classes.)
 \ct{==} is a primitive method of \clsind{ProtoObject}.
-
-Note that Squeak has some strange behavior compared to other Smalltalks:
-For example, a symbol and a string can be equal.
-(We consider this be a bug, not a feature.)
-% ct TODO DISCUSS: Is this still up to date? I doubt we could change this, so we could also treat this as a feature not as a bug
-
-\begin{code}{@TEST}
-#'lulu' = 'lulu' --> true
-'lulu' = #'lulu' --> true
-\end{code}
 
 
 %-----------------------------------------------------------------
@@ -283,13 +271,16 @@ Since Smalltalk is written in itself, you can really navigate through its struct
 1 respondsTo: #, --> false
 \end{code}
 
-Normally it is a bad idea to query an object for its class, or to ask it which messages it understands.
+Normally, it is a \emph{bad idea} to query an object for its class, or to ask it which messages it understands.
 Instead of making decisions based on the class of object, you should simply send a message to the object and let it decide (\ie based on its class) how it should behave.
 
 %-----------------------------------------------------------------
 \subsection{Copying}
 
-Copying objects introduces some subtle issues.
+There are several ways to copy objects in \sq, depending on what you want to copy. For example, when you copy a collection, you might want to or might not want to copy all its elements. If you are not sure what the right way to copy an object is, the first message to send is \ct{copy}, as it takes care of copying the right instance variables for you.
+
+To understand the other messages for copying, we will discuss different ways at looking at copying one after another. 
+In general, copying objects introduces some subtle issues.
 Since instance variables are accessed by reference, a \emphsubind{Object}{shallow copy} of an object would share its references to instance variables with the original object:
 \seeindex{copy}{Object, \ct{copy}}
 \seeindex{shallow copy}{Object, \ct{shallowCopy}}
@@ -305,13 +296,12 @@ a1 --> #(#('sally'))
 a2 --> #(#('sally'))    "the subarray is shared!"
 \end{code}
 
-\cmind{Object}{shallowCopy} is a primitive method that creates a shallow copy of an object.
+\cmind{Object}{shallowCopy} creates a shallow copy of an object, which means that the content of the object is not copied.
 Since \ct{a2} is only a shallow copy of \ct{a1}, the two arrays share a reference to the nested \ct{Array} that they contain.
 
-\ct{Object>>>shallowCopy} is the ``public interface'' to \cmind{Object}{copy} and should be overridden if instances are unique.
-This is the case, for example, with the classes \clsind{Boolean}, \clsind{Character}, \clsind{SmallInteger}, \clsind{Symbol} and \clsind{UndefinedObject}.
+For some classes even a shallow copy does not make sense if instances are unique, for example for the classes \clsind{Boolean}, \clsind{Character}, \clsind{SmallInteger}, \clsind{Symbol} and \clsind{UndefinedObject}. These classes override \cmind{Object}{shallowCopy} and instances simply return themselves.
 
-\cmind{Object}{copyTwoLevel} does the obvious thing when a simple shallow copy does not suffice:
+\cmind{Object}{copyTwoLevel} can be used when a simple shallow copy does not suffice. It copies the object and its contents, but not deeper.
 
 \begin{code}{@TEST | a1 a2 |}
 a1 := { { 'harry' } } .
@@ -331,16 +321,39 @@ a1 --> #(#('sally'))
 a2 --> #(#(#('harry')))
 \end{code}
 
-The problem with \ct{deepCopy} is that it will not terminate when applied to a mutually recursive structure:
+However, \ct{deepCopy} does not keep track of previously copied objects. This means that it does not preserve the identity of re-occurring objects. When the object to be copied contains another object twice in its contents, there will be two new objects. 
 
-\begin{code}{NB: CANNOT TEST}
-a1 := { 'harry' }.
-a2 := { a1 }.
-a1 at: 1 put: a2.
-a1 deepCopy --> !\emph{... does not terminate!}!
+\begin{code}{@TEST | object array copiedArray |}
+object := { 'harry' }.
+array := { a1 . a1 }.
+array first == array second. --> true
+copiedArray := array deepCopy.
+copiedArray first == copiedArray second. --> false
 \end{code}
 
-Although it is possible to override \ct{deepCopy} to do the right thing, \cmind{Object}{copy} offers a better solution:
+Also, not keeping track of previously copied objects, means that \ct{deepCopy} will not terminate when applied to a \mutually recursive structure.
+
+\begin{code}{NB: CANNOT TEST}
+array1 := { 'harry' }.
+array2 := { array1 }.
+array1 at: 1 put: array2.
+array1 deepCopy --> !\emph{... does not terminate!}!
+\end{code}
+
+Another way to copy an object is provided by \cmind{Object}{deepCopy}: 
+It creates arbitrarily deep copies of objects but preserves object identities and cycles. 
+
+\begin{code}{@TEST | array1 array2 copiedArray |}
+array1 := { 'harry' }.
+array2 := { array1 }.
+array1 at: 1 put: array2.
+copiedArray := array1 veryDeepCopy.
+copiedArray first first = copiedArray --> true
+\end{code}
+
+Whether any of these four copy methods is the right one depends on the meaning of the object and its instance variables. 
+As this can not be decided in general for all objects and all use cases, \cmind{Object}{copy} delegates this decision to specific subclasses. 
+\cmind{Object}{copy} first creates a shallow copy, and then asks this shallow copy to copy any instance variables that should be copied by sending \ct{postCopy} to it.
 
 \begin{method}{Copying objects as a template method}
 Object>>>copy
@@ -349,9 +362,17 @@ Object>>>copy
 \end{method}
 
 You should override \mthind{Object}{postCopy} to copy any instance variables that should not be shared.
-\ct{postCopy} should always do a \ct{super postCopy}.
+\ct{postCopy} should always do a \ct{super postCopy}. 
+For example, a \clsind{Form} object has instance variables for width, height, bit depth, an offset, and the actual bits. 
+As the first four instance variables are all described by numbers, there is no need to copy them as you can see in \mthind{Form}{postCopy}.
 
-\on{I looked, but did not finda good example in the system.}
+\begin{method}{Copying objects as a template method}
+Form>>>postCopy
+    super postCopy.
+    bits := bits copy
+\end{method}
+
+
 
 %-----------------------------------------------------------------
 \subsection{Debugging}
