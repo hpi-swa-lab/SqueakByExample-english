@@ -3,6 +3,6 @@ hideProgressMorph
 
 	| progressMorph |
 	progressMorph := SystemProgressMorph uniqueInstance.
-	progressMorph isInWorld ifFalse: [^ self].
-	progressMorph delete.
+	progressMorph visible ifFalse: [^ self].
+	progressMorph hide.
 	hiddenMorphs add: progressMorph.

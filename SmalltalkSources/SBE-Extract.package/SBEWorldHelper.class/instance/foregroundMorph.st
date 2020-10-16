@@ -1,4 +1,4 @@
 matching
 foregroundMorph
 
-	^ world submorphs first
+	^ world submorphThat: #visible ifNone: [self error: 'World is empty']
