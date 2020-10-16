@@ -39,9 +39,6 @@ In this chapter we cover the basic classes that you will need for nearly every a
 In the following chapter \charef{cha:collections}, we will discuss the equally important \ct{Collection} subclasses.
 
 \md{Here are some comments:\\
-- copying: Good question... the copying in Squeak is much too complicated... there is for one the "old" smalltalk way of
-  overrifing postCopy, and then the "automatic" deepCopy... which is quite complex and (I think) was no good idea...
- (see class comment in  DeepCopier)\\
 - Debugging: Yes, needs its own chapter. We should talk about haltIf, haltOnce...\\
 - Characters and Strings: we should talk about Unicode stuff... but I don't know too much myself.}
 
@@ -286,14 +283,14 @@ Since instance variables are accessed by reference, a \emphsubind{Object}{shallo
 \seeindex{shallow copy}{Object, \ct{shallowCopy}}
 \seeindex{deep copy}{Object, \ct{deepCopy}}
 
-\begin{code}{@TEST | a1 a2 |}
-a1 := { { 'harry' } }.
-a1 --> #(#('harry'))
-a2 := a1 shallowCopy.
-a2 --> #(#('harry'))
-(a1 at: 1) at: 1 put: 'sally'.
-a1 --> #(#('sally'))
-a2 --> #(#('sally'))    "the subarray is shared!"
+\begin{code}{@TEST | array1 array2 |}
+array1 := { { 'harry' } }.
+array1 --> #(#('harry'))
+array2 := array1 shallowCopy.
+array2 --> #(#('harry'))
+(array1 at: 1) at: 1 put: 'sally'.
+array1 --> #(#('sally'))
+array2 --> #(#('sally'))    "the subarray is shared!"
 \end{code}
 
 \cmind{Object}{shallowCopy} creates a shallow copy of an object, which means that the content of the object is not copied.
@@ -303,29 +300,29 @@ For some classes even a shallow copy does not make sense if instances are unique
 
 \cmind{Object}{copyTwoLevel} can be used when a simple shallow copy does not suffice. It copies the object and its contents, but not deeper.
 
-\begin{code}{@TEST | a1 a2 |}
-a1 := { { 'harry' } } .
-a2 := a1 copyTwoLevel.
-(a1 at: 1) at: 1 put: 'sally'.
-a1 --> #(#('sally'))
-a2 --> #(#('harry'))    "fully independent state"
+\begin{code}{@TEST | array1 array2 |}
+array1 := { { 'harry' } } .
+array2 := array1 copyTwoLevel.
+(array1 at: 1) at: 1 put: 'sally'.
+array1 --> #(#('sally'))
+array2 --> #(#('harry'))    "fully independent state"
 \end{code}
 
 \cmind{Object}{deepCopy} makes an arbitrarily deep copy of an object.
 
-\begin{code}{@TEST | a1 a2 |}
-a1 := { { { 'harry' } } } .
-a2 := a1 deepCopy.
-(a1 at: 1) at: 1 put: 'sally'.
-a1 --> #(#('sally'))
-a2 --> #(#(#('harry')))
+\begin{code}{@TEST | array1 array2 |}
+array1 := { { { 'harry' } } } .
+array2 := array1 deepCopy.
+(array1 at: 1) at: 1 put: 'sally'.
+array1 --> #(#('sally'))
+array2 --> #(#(#('harry')))
 \end{code}
 
 However, \ct{deepCopy} does not keep track of previously copied objects. This means that it does not preserve the identity of re-occurring objects. When the object to be copied contains another object twice in its contents, there will be two new objects. 
 
 \begin{code}{@TEST | object array copiedArray |}
 object := { 'harry' }.
-array := { a1 . a1 }.
+array := { object . object }.
 array first == array second. --> true
 copiedArray := array deepCopy.
 copiedArray first == copiedArray second. --> false
@@ -414,8 +411,7 @@ The \ct{String} argument should offer an alternative.
 \index{deprecation}
 
 \begin{code}{NB: CANNOT TEST}
-1 doIfNotNil: [ :arg | arg printString, ' is not nil' ]
-	--> !\emph{SmallInteger(Object)>>doIfNotNil: has been deprecated. use ifNotNilDo:}!
+Object new exploreAndYourself --> !\emph{Object>>#exploreAndYourself has been deprecated. Use #explore because it does not return the tool window anymore. Only calls via ToolSet do so.}!
 \end{code}
 
 \ct{doesNotUnderstand:} is sent whenever a message lookup fails.
@@ -450,15 +446,9 @@ This is generally a sign that something is not quite right with the design of th
 Due to the limitations of single inheritance, however, sometimes it is very hard to avoid such workarounds. 
 \cmindex{Object}{shouldNotImplement}
 \index{inheritance!canceling}
-
 A typical example is \cmind{Collection}{remove:} which is inherited by \clsind{Dictionary} but flagged as not implemented.
 (A \ct{Dictionary} provides \mthind{Dictionary}{removeKey:} instead.)
 
-%-----------------------------------------------------------------
-\sd{ subsection{Deprecation} }
-\sd{to be done}
-
-\on{There already is some text above!  See second paragraph on Error handling.}
 
 %-----------------------------------------------------------------
 \subsection{Testing}
@@ -559,9 +549,10 @@ More interesting, \mthind{Number}{isInfinite} is defined to return \ct{false}.
 
 \begin{code}{@TEST}
 1 + 2.5     --> 3.5             "Addition of two numbers"
+10 - 8.5   --> 1.5              "Subtraction of two numbers"
 3.4 * 5      --> 17.0           "Multiplication of two numbers"
 8 / 2         --> 4                 "Division of two numbers"
-10 - 8.5   --> 1.5              "Subtraction of two numbers"
+2 ** 3         --> 8                 "Exponentiation of a number"
 12 = 11    --> false           "Equality between two numbers"
 12 ~= 11 --> true            "Test if two numbers are different"
 12 > 9      --> true            "Greater than"
@@ -571,7 +562,7 @@ More interesting, \mthind{Number}{isInfinite} is defined to return \ct{false}.
 \end{code}
 \on{Should check how tabbing works in the listings package ...}
 
-The following example works surprisingly well in \st:
+The following example works very well in \st:
 \begin{code}{@TEST}
 1000 factorial / 999 factorial --> 1000
 \end{code}
@@ -623,12 +614,7 @@ In addition to providing concrete implementations of many abstract \ct{Number} m
 \clsindmain{SmallInteger} is special in that its instances are represented compactly --- instead of being stored as a reference, a \ct{SmallInteger} is represented directly using the bits that would otherwise be used to hold a reference.
 The first bit of an object reference indicates whether the object is a \ct{SmallInteger} or not.
 
-The class methods \mthind{SmallInteger}{minVal} and \mthind{SmallInteger}{maxVal} tell us the range of a \ct{SmallInteger}:
-
-\begin{code}{@TEST}
-SmallInteger maxVal = ((2 raisedTo: 60) - 1)      --> true
-SmallInteger minVal = (2 raisedTo: 60) negated --> true
-\end{code}
+The class methods \mthind{SmallInteger}{minVal} and \mthind{SmallInteger}{maxVal} tell us the range of a \ct{SmallInteger}, which depends on the bit-width of your processor.
 
 When a \ct{SmallInteger} goes out of this range, it is automatically converted to a \clsind{LargePositiveInteger} or a \clsind{LargeNegativeInteger}, as needed:
 
@@ -686,7 +672,7 @@ $a                  --> $a
 $a printString --> '$a'
 \end{code}
 
-Every ASCII \ct{Character} is an immediate object, meaning that they are managed by the VM via special pointers. As a consequence, characters are unique, immutable instances.
+Every \ct{Character} is an immediate object, meaning that they are managed by the VM via special pointers. As a consequence, characters are unique, immutable instances.
 
 %=================================================================
 \section{Strings}
@@ -701,7 +687,7 @@ A \ct{String} is an indexed \ct{Collection} that holds only \ct{Characters}.
 \caption{The String Hierarchy \label{fig:strings}}
 \end{figure}
 
-In fact, \ct{String} is abstract, and Squeak \ct{Strings} are usually instances of the concrete class \clsindmain{ByteString}, or of the class \clsindmain{WideString} if they contain any special character that cannot be represented by a single byte.
+In fact, \ct{String} is abstract, and Squeak \ct{Strings} are usually instances of the concrete class \clsindmain{ByteString}, or \clsindmain{WideString} if they contain any special character that cannot be represented by a single byte. The distinction between the two does not concern you most of the time, as the two classes convert their instances between each other automatically.
 
 \begin{code}{@TEST}
 'hello world' class --> ByteString
@@ -781,7 +767,7 @@ The class \clsindmain{Boolean} offers a fascinating insight into how much of the
 Most of the behavior of \ct{Boolean}s can be understood by considering the method \mthind{Boolean}{ifTrue:ifFalse:}, which takes two \ct{Blocks} as arguments.
 
 \begin{code}{@TEST}
-(4 factorial > 20) ifTrue: [ 'bigger' ] ifFalse: [ 'smaller' ] --> 'bigger'
+4 factorial > 20 ifTrue: [ 'bigger' ] ifFalse: [ 'smaller' ] --> 'bigger'
 \end{code}
 
 The method is abstract in \ct{Boolean}.
@@ -822,8 +808,9 @@ You also have a choice between eager and lazy conjunctions and disjunctions.
 In the first example, both \ct{Boolean} subexpressions are evaluated, since \mthind{Boolean}{&} takes a \ct{Boolean} argument.
 In the second and third examples, only the first is evaluated, since \mthind{Boolean}{and:} expects a \ct{Block} as its argument.
 The \ct{Block} is evaluated only if the first argument is \pvind{true}.
+While you have the choice, by default you should always use the lazy conjunction (\ct{and:}) and disjunction (\ct{or:}).
 
-\dothis{Try to imagine how \ct{and:} and \ct{or:} are implemented.
+\dothis{Try to imagine how \ct{and:} as well as \ct{or:} are implemented.
     Check the implementations in \ct{Boolean}, \ct{True}, and \ct{False}.}
 
 %=================================================================
