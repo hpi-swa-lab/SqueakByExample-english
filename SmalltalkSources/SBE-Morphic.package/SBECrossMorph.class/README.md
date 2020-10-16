@@ -1,1 +1,2 @@
-CrossMorph new openInWorld
+Usage:
+	SBECrossMorph new openInWorld
