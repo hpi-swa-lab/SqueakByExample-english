@@ -887,8 +887,8 @@ SBEDieMorph>>>drawOn: aCanvas
 The second part of this method uses the reflective capacities of \st.
 Drawing the dots of a face is a simple matter of iterating over the collection given by the \ct{faceX} method for that face, sending the \ct{drawDotOn:at:} message for each coordinate.
 To call the correct \ct{faceX} method, we use the \mthind{Object}{perform:} method which sends a message built from a string, here \ct{('face', dieValue asString) asSymbol}.
-You will encounter this use of \ct{perform:} quite regularly.
 \index{reflection}
+
 \begin{method}{Drawing a single dot on a face.}
 SBEDieMorph>>>drawDotOn: aCanvas at: aPoint
 	aCanvas
