@@ -2,4 +2,6 @@
 	"class" : {
 		 },
 	"instance" : {
-		"activeError" : "ct 10/25/2019 15:01" } }
+		"activeError" : "ct 10/25/2019 15:01",
+		"copyEnvironmentFrom:" : "ct 10/14/2020 14:56",
+		"environmentDictionary" : "ct 10/14/2020 14:55" } }

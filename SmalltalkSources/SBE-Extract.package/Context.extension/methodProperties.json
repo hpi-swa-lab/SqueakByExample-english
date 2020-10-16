@@ -1,6 +1,6 @@
 {
 	"class" : {
-		"contextWrap:" : "ct 1/13/2020 15:04" },
+		"contextWrap:" : "ct 10/14/2020 14:42" },
 	"instance" : {
 		"findCalleeOf:" : "ct 12/4/2019 11:40",
 		"insertEnsure:" : "ct 10/25/2019 14:19",
@@ -8,6 +8,4 @@
 		"preponeSender:" : "ct 12/4/2019 11:56",
 		"removeSender:" : "ct 12/4/2019 11:54",
 		"tempNamed:" : "ct 12/4/2019 13:01",
-		"wrap:" : "ct 10/25/2019 14:33",
-		"wrapStrictlyToggleOn:toggleOff:" : "ct 11/23/2019 19:41",
-		"wrapToggleOn:toggleOff:" : "ct 11/18/2019 18:21" } }
+		"wrap:" : "ct 10/14/2020 14:42" } }
