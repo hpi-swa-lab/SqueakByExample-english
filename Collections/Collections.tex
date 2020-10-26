@@ -297,18 +297,10 @@ Let us briefly survey some of the key differences:
 
 \begin{figure*}
 \begin{center}
-\begin{figure*}
-\begin{center}
-\ifluluelse
-	{\begin{tabular}{|l|p{8cm}|}}
-	{\begin{tabular}{|l|p{12cm}|}}
+\begin{tabular}{|l|l|l|l|l|}
 \hline
 {\bf Arrayed implementation} & {\bf Ordered Implementation} & {\bf Hashed Implementation} & {\bf Linked Implementation} & {\bf Interval Implementation}\\
-Array, String, Symbol & %
-OrderedCollection, SortedCollection, Heap, Text & %
-Set, IdentitySet, PluggableSet, Bag, IdentityBag, Dictionary, IdentityDictionary, PluggableDictionary & %
-LinkedList & %
-Interval
+Array, String, Symbol & OrderedCollection, SortedCollection, Heap, Text & Set, IdentitySet, PluggableSet, Bag, IdentityBag, Dictionary, IdentityDictionary, PluggableDictionary & LinkedList & Interval
 \end{tabular}
 \caption{Some collection classes categorized by implementation technique.
     \label{fig:collsByImpl}}
