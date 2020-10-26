@@ -296,11 +296,14 @@ Let us briefly survey some of the key differences:
 \label{sec:implementation}
 
 \begin{figure*}
+\small
 \begin{center}
-\begin{tabular}{|l|l|l|l|l|}
+\begin{tabular}{|p{0.10\textwidth}|p{0.19\textwidth}|p{0.21\textwidth}|p{0.15\textwidth}|p{0.10\textwidth}|}
 \hline
-{\bf Arrayed implementation} & {\bf Ordered Implementation} & {\bf Hashed Implementation} & {\bf Linked Implementation} & {\bf Interval Implementation}\\
-Array, String, Symbol & OrderedCollection, SortedCollection, Heap, Text & Set, IdentitySet, PluggableSet, Bag, IdentityBag, Dictionary, IdentityDictionary, PluggableDictionary & LinkedList & Interval
+\textbf{Arrayed} & \textbf{Ordered} & \textbf{Hashed} & \textbf{Linked} & \textbf{Interval}\\
+\hline
+\footnotesize Array\newline String\newline Symbol & \footnotesize OrderedCollection\newline SortedCollection\newline Heap\newline Text & \footnotesize Set\newline IdentitySet\newline PluggableSet\newline Bag\newline IdentityBag\newline Dictionary\newline IdentityDictionary\newline PluggableDictionary & \footnotesize LinkedList & Interval\\
+\hline
 \end{tabular}
 \caption{Some collection classes categorized by implementation technique.
     \label{fig:collsByImpl}}
@@ -577,7 +580,7 @@ A common and difficult to spot bug is to use as key an object whose \ct{=} metho
 Both methods are used in the implementation of \ct{Dictionary} and when comparing objects.
 \index{Dictionary!overriding \ct{=} and \ct{hash}}
 
-Even though \ct{Dictionary} eventually is a subclass of \clsind{Collection}, we would normally not want to use a \ct{Dictionary} where a \ct{Collection} is expected.
+Even though \ct{Dictionary} is a subclass of \clsind{Collection}, we would normally not want to use a \ct{Dictionary} where a \ct{Collection} is expected.
 In its implementation, however, a \ct{Dictionary} can be seen as consisting of an unordered collection of associations (key-value pairs) created using the message \mthind{Object}{->}.
 We can create a \ct{Dictionary} from a collection of associations, or we may convert a dictionary to an array of associations.
 \seeindex{association}{Object, \ct{->}}
@@ -639,7 +642,7 @@ You can also create sets using \cmind{Set class}{newFrom:} or the conversion mes
 \end{code}
 
 \noindent
-The result of the example is 2 because, the color white was included twice in the collection. Once as the result of \ct{Color white}, and once as the result of the combination of red, blue, and green.
+The result of the example is 2, as the color white was included twice in the collection. Once as the result of \ct{Color white}, and once as the result of the combination of red, blue, and green.
 
 A \clsindmain{Bag} is much like a \ct{Set} except that it does allow duplicates:
 \begin{code}{@TEST}
