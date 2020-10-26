@@ -324,13 +324,13 @@ Using the comma concatenation operator (\ct{,}) is far less efficient:
 \begin{code}{}
 [| temp |
   temp := String new.
-  (1 to: 100000)
-    do: [:i | temp := temp, i asString, ' ']] timeToRun --> 386381 "(milliseconds)"
+  (1 to: 100000) do: [:i | 
+    temp := temp, i asString, ' ']] timeToRun --> 386381 "(milliseconds)"
 
 [| temp |
   temp := WriteStream on: String new.
-  (1 to: 100000)
-    do: [:i | temp nextPutAll: i asString; space].
+  (1 to: 100000) do: [:i | 
+    temp nextPutAll: i asString; space].
   temp contents] timeToRun --> 25 "(milliseconds)"
 \end{code}
 
@@ -342,9 +342,9 @@ Using a stream instead of string concatenation is a well-known optimization.
 In fact, you can use \mthind{SequenceableCollection class}{streamContents:} (mentioned on page \pageref{sec:streamContents}) to help you do this:
 
 \begin{code}{}
-String streamContents: [ :tempStream |
-  (1 to: 100000)
-       do: [:i | tempStream nextPutAll: i asString; space]] 
+String streamContents: [:tempStream |
+  (1 to: 100000) do: [:i | 
+    tempStream nextPutAll: i asString; space]] 
 \end{code}
 
 %-----------------------------------------------------------------
