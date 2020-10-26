@@ -41,7 +41,7 @@ To make good use of the collection classes, \st programmers needs at least an ov
 
 Programming with collections rather than individual elements is an important way to raise the level of abstraction of a program. 
 The \ind{Lisp} function \ct{map}, which applies an argument function to every element of a list and returns a new list containing the results is an early example of this style. \st-80 adopted collection-based programming as a central tenet.
-Modern functional programming languages such as \ind{ML} and \ind{Haskell} have followed \st's lead.
+
 
 Why is this a good idea?
 Suppose you have a data structure containing a collection of student records and wish to perform some action on all of the students that meet a particular criterion.
@@ -59,9 +59,6 @@ The message \ct{select:} is understood by \emph{all} collections in \st.
 There is no need to find out if the student data structure is an array or a linked list:
 The \ct{select:} message is understood by both.
 Note that this is quite different from using a loop, where one must know whether \ct{students} is an array or a linked list before the loop can be set up.
-
-\st provides a number of different kinds of collections, that all are represented as subclasses of \clsindmain{Collection}. In \squeak, the abstract class \ct{Collection} has 98 subclasses, but many of these (like \mbox{\clsind{Bitmap},} or \clsind{CompiledMethod}) are special-purpose classes crafted for use in other parts of the system or in applications, and hence not categorized as ``Collections'' by the system organization. For the purposes of this chapter, we use the term ``Collection Hierarchy'' to mean \ct{Collection} and its 37 subclasses that are \emph{also} in the system categories labeled \scat{Collections-*}. The full list is shown in \figref{CollClassesList}\footnote{The group of classes that appears in the ``\ind{Blue Book}''~\cite{Gold83a} contains 17 subclasses of \ct{Collection}, and had already been redesigned several times before the \st-80 system was released.
-This group of classes is often considered to be a paradigmatic example of object-oriented design.}. In this chapter, we focus mainly on the subset of collection classes shown in \figref{CollClassesTree}.
 
 
 
@@ -189,6 +186,11 @@ If the class name is followed by ... than some or all subclasses have been omitt
 \label{fig:CollClassesList}
 \end{center}
 \end{figure}
+
+
+\st provides a number of different kinds of collections, that all are represented as subclasses of \clsindmain{Collection}. In \squeak, the abstract class \ct{Collection} has 99 subclasses, but many of these (like \mbox{\clsind{Bitmap},} or \clsind{CompiledMethod}) are special-purpose classes crafted for use in other parts of the system or in applications, and hence not categorized as ``Collections'' by the system organization. For the purposes of this chapter, we use the term ``Collection Hierarchy'' to mean \ct{Collection} and its 64 subclasses that are \emph{also} in the system categories labeled \scat{Collections-*}. The full list is shown in \figref{CollClassesList}\footnote{The group of classes that appears in the ``\ind{Blue Book}''~\cite{Gold83a} contains 17 subclasses of \ct{Collection}, and had already been redesigned several times before the \st-80 system was released.
+This group of classes is often considered to be a paradigmatic example of object-oriented design.}. In this chapter, we focus mainly on the subset of collection classes shown in \figref{CollClassesTree}.
+
 
 %:FIGURE -- Key collection classes
 \begin{figure}
