@@ -1014,7 +1014,7 @@ Smalltalk allClasses detect: [:each | '*java*' match: each asString] ifNone: [ni
 Correspondingly, there is also the variant \mthind{Collection}{detect:ifFound:} that let's you handle the case when an element is found or otherwise returns \ct{nil}:
 
 \begin{code}{@TEST}
-'Smalltalk' detect: [:each | each isVowel] ifFound: [:char | char capitalized , '!'] --> 'A!'
+'Smalltalk' detect: [:each | each isVowel] ifFound: [:char | char asString capitalized , '!'] --> 'A!'
 \end{code}
 
 %---------------------------------------------------------
