@@ -63,6 +63,43 @@ Note that this is quite different from using a loop, where one must know whether
 \st provides a number of different kinds of collections, that all are represented as subclasses of \clsindmain{Collection}. In \squeak, the abstract class \ct{Collection} has 98 subclasses, but many of these (like \mbox{\clsind{Bitmap},} or \clsind{CompiledMethod}) are special-purpose classes crafted for use in other parts of the system or in applications, and hence not categorized as ``Collections'' by the system organization. For the purposes of this chapter, we use the term ``Collection Hierarchy'' to mean \ct{Collection} and its 37 subclasses that are \emph{also} in the system categories labeled \scat{Collections-*}. The full list is shown in \figref{CollClassesList}\footnote{The group of classes that appears in the ``\ind{Blue Book}''~\cite{Gold83a} contains 17 subclasses of \ct{Collection}, and had already been redesigned several times before the \st-80 system was released.
 This group of classes is often considered to be a paradigmatic example of object-oriented design.}. In this chapter, we focus mainly on the subset of collection classes shown in \figref{CollClassesTree}.
 
+
+
+%"The following figure is created with the following script"
+%| coreCollectionClasses collectionPackageClasses collectionHierarchy printHierarchy resultText blueBookClasses ignoredClasses |
+%blueBookClasses := {Bag . IdentityBag . Array . WeakArray . Text . String . Heap . Interval . LinkedList . OrderedCollection . SortedCollection . Dictionary . IdentityDictionary . PluggableDictionary . WeakKeyDictionary . WeakIdentityKeyDictionary . WeakValueDictionary . IdentitySet . PluggableSet . WeakSet }.
+%ignoredClasses := {WordArrayForSegment . WeakKeyToCollectionDictionary . RawBitsArray . Float32Array . Float64Array . SignedIntegerArray . SignedByteArray . SignedDoubleByteArray . SignedDoubleWordArray . SignedWordArray . UnsignedIntegerArray . DoubleByteArray . DoubleWordArray . SparseLargeTable . NonPointersOrderedCollection } , CharacterSet allSubclasses.
+%collectionPackageClasses := (PackageInfo named: #Collections) classes.
+%coreCollectionClasses := Collection allSubclasses intersection: collectionPackageClasses.
+%collectionHierarchy := Browser basicNew createHierarchyTreeOf: coreCollectionClasses.
+%printHierarchy := [:actualHierarchy :stream :indentationLevel | | indentationString hierarchy |
+%		indentationString := String newFrom: ((1 to: indentationLevel * 4) collect: [:i | Character space]).
+%		hierarchy := actualHierarchy reject: [:classToSubclasses | ignoredClasses includes: classToSubclasses key ].
+%		hierarchy ifNotEmpty: [
+%			stream 
+%				<< indentationString;
+%				<< '\begin{itemize}'; 
+%				cr.
+%			(hierarchy sorted: [:assoc1 :assoc2 | assoc1 key name < assoc2 key name]) 
+%				do: [:classToSubclasses | | classNameText |
+%					classNameText := classToSubclasses key name asText.
+%					(classToSubclasses value anySatisfy: [:subclassToSubsub | ignoredClasses includes: subclassToSubsub key]) ifTrue: [
+%						classNameText := classNameText , ' ...'].
+%					classToSubclasses key isAbstract ifTrue: [
+%						classNameText := '\emph{' , classNameText , '}'].
+%					(blueBookClasses includes: classToSubclasses key) ifTrue: [
+%						classNameText := '\textbf{' , classNameText , '}'].
+%					stream 
+%						<< indentationString
+%						<< ('\item{' , classNameText , '}');
+%						cr.
+%					printHierarchy value: classToSubclasses value value: stream value: indentationLevel + 1].
+%			stream 
+%				<< indentationString;
+%				<< '\end{itemize}'; 
+%				cr]].
+%resultText := String streamContents: [:stream |
+%	printHierarchy value: {Collection -> collectionHierarchy} value: stream value: 0].
 \begin{figure}
 \begin{center}
 \setlist{nosep, leftmargin=1cm,label=  }
