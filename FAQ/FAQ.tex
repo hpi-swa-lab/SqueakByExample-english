@@ -227,7 +227,7 @@ How do I add formatting to text?
 \end{faq}
 \answer
 The relevant classes are \clsind{Text} and \clsind{TextAttribute}. 
-You can add \ct{TextAttribute}s to section of text by using the messages in the \prot{emphasis} protocol of \cls{Text}, for example:
+You can add \ct{TextAttribute}s to section of text by using the messages in the \ct{emphasis} protocol of \cls{Text}, for example:
 \begin{code}{}
 text := 'yellow and green' asText.
 text 
@@ -245,7 +245,7 @@ text asMorph openInHand.
 How can I achieve concurrency?
 \end{faq}
 \answer
-There are a number of classes to create and control concurrency.
+There are a number of classes to create and control \ind{concurrency}.
 You can find most of them, such as \clsind{Process}, \clsind{Mutex}, or \clsind{Promise} in the system category \ct{Kernel-Processes}.
 Starting new processes is done via the messages in the \ct{scheduling} protocol of \clsind{BlockClosure}.
 Note, that, like most interpreter-based languages to date, the \sq environment runs in a single operating system process, so you will not benefit from parallel hardware.
@@ -256,8 +256,8 @@ I have created concurrent behavior, but lost track of some of the processes I st
 What can I do?
 \end{faq}
 \answer
-There is a tool called \ct{ProcessBrowser} which you can either open from \menu{World menu \go open} or \menu{World docking bar \go Tools}. 
-The \ind{ProcessBrowser} lists all processes and the yellow button menu allows you to control the process, \eg terminate it.
+There is a tool called \ind{Process Browser} which you can either open from \menu{World menu \go open} or \menu{World docking bar \go Tools}. 
+The process browser lists all processes and the yellow button menu allows you to control the process, \eg terminate it.
 
 \begin{faq}
 How do I express OS-independent file paths?
@@ -376,7 +376,7 @@ Are there tools for writing parsers?
 \end{faq}
 \answer
 You can use \ind{SmaCC}\,---\,the Smalltalk Compiler Compiler (load it from \url{https://www.squeaksource.com/SmaccDevelopment.html}).
-Or you can use \ind{Ohm/s}, a \st implementation of Ohm/JS (load it from \url{https://www.github.com/hpi-swa/Ohm-S}).
+Or you can use \ind{Ohm/S}, a \st implementation of Ohm/JS (load it from \url{https://www.github.com/hpi-swa/Ohm-S}).
 
 %=================================================================
 \ifx\wholebook\relax\else\end{document}\fi
