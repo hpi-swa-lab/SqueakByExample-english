@@ -41,36 +41,52 @@ We should also try to mine more from newbies.}
 Where do I get the latest Squeak?
 \end{faq}
 \answer
-\url{ftp.squeak.org/current_development}
+\url{https://squeak.org/downloads/}
 \index{download}
 
 \begin{faq}
 Which \sq image should I use with this book?
 \end{faq}
 \answer
-We recommend that you use the image provided on the Squeak by Example web page.
-Visit \url{http://SqueakByExample.org} and look for ``Download Squeak'' in the sidebar.
+We recommend that you use the standard image provided on \url{https://squeak.org/downloads/}.
 You should also be able to use most other images, but you may find that the hands-on exercises behave differently in surprising ways.
-% ct TODO: Broken link!
 
-%\begin{faq}
-%Where is the Squeak ``Development Image''?
-%\end{faq}
-%\answer
-%\url{www.squeaksource.com/ImageForDevelopers}
-%This is a specially-prepared image including lots of useful packages pre-installed for developers.
+\begin{faq}
+I have destroyed my world docking bar at the top of the world in some way.
+How do I get it back?
+\end{faq}
+\answer
+Open the yellow button menu of the world (by clicking the yellow button in the world). 
+There you find the menu item \menu{show main docking bar}.
+Click it once to deactivate it completely, and then click it a second time to re-activate it.
+
+\begin{faq}
+Some code triggered a lot of debuggers and my whole screen is filled with them. 
+How can I get rid of them?
+\end{faq}
+\answer
+You can close all windows that look similar at once by selecting \menu{World docking bar \go Windows \go Bad Window \go Close all like this}.
 
 %=================================================================
 \section{Collections}
 
 \begin{faq}
-How do I sort an \clsind{OrderedCollection}?
+How do I sort a \clsind{Collection}?
 \end{faq}
 \answer
-Send it the message \mthind{Collection}{asSortedCollection}.
+If you want a sorted copy, you can use \mthind{Collection}{sorted}. 
+If you want to have a collection that keeps the elements sorted, even when you add or remove elements, send the message \mthind{Collection}{asSortedCollection}.
+Finally, some collections can be sorted in-place as they understand \ct{sort}, which will not return a copy, but re-order the collection.
 
 \begin{code}{@TEST}
-#(7 2 6 1) asSortedCollection --> a SortedCollection(1 2 6 7)
+collection := {7 . 2 . 6 . 1}.
+collection sorted --> #(1 2 6 7).
+collection sorted == collection --> false.
+
+collection asSortedCollection --> a SortedCollection(1 2 6 7).
+
+collection sort --> #(1 2 6 7).
+collection sort == collection --> true.
 \end{code}
 
 \begin{faq}
@@ -78,7 +94,8 @@ How do I convert a collection of characters to a \clsind{String}?
 \end{faq}
 \answer
 \begin{code}{@TEST}
-String streamContents: [:str | str nextPutAll: 'hello' asSet] --> 'oelh'
+collection := 'hello' asSet.
+String newFrom: collection asArray.
 \end{code}
 
 %=================================================================
@@ -88,9 +105,15 @@ String streamContents: [:str | str nextPutAll: 'hello' asSet] --> 'oelh'
 How do I search for a class?
 \end{faq}
 \answer
-\short{b} (browse) on the class name, or \short{f} in the category pane of the class browser.
+\short{b} (browse) on the class name, \short{f} in the category pane of the class browser, or the global search on the top right of the world.
 \index{keyboard shortcut!browse it}
 \index{keyboard shortcut!find ...}
+
+\begin{faq}
+How do I browse all references to a given class?
+\end{faq}
+\answer
+Select the class name and press \short{N}, or open the yellow button menu and select \menu{more \go references to it}.
 
 \begin{faq}
 How do I find/browse all sends to super?
@@ -120,7 +143,7 @@ browseSuperSends value: OrderedCollection.
 
 \begin{faq}
 How do I find out which new methods are introduced by a class?
-(I.e., not including overridden methods.)
+(\ie, not including overridden methods.)
 \end{faq}
 \answer
 Here we ask which methods are introduced by \ct{TranslucentColor}:
@@ -149,7 +172,7 @@ Load AST from squeaksource.com. Then evaluate:
 \begin{code}{}
 (RBParser parseExpression: '3+4') explore
 \end{code}
-(Alternatively \emph{explore it}.)
+Alternatively you can also directly \emph{explore it}.
 \clsindex{RBParser}
 
 \begin{faq}
@@ -165,11 +188,87 @@ How do I find which classes use traits?
 \end{faq}
 \answer
 \begin{code}{}
-Smalltalk allClasses select: [:each | each hasTraitComposition and: [each traitComposition notEmpty ]]
+Smalltalk allClasses select: [:each | each hasTraitComposition]
 \end{code}
-% Should be:
-% Smalltalk allClasses select: [:each | each hasTraitComposition ]
-% But this is broken for some reason!
+
+%=================================================================
+\section{Morphic}
+\begin{faq}
+How can I show images in Morphic?
+\end{faq}
+\answer
+An first and easy way to get an image into \sq is by dragging the image file into the environment and dropping it directly within the world and selecting \menu{open graphic in a window}.
+This will create an \clsind{ImageMorph} in the world.
+
+\noindent Alternatively you can also create an \ct{ImageMorph} through code, for example using the following expression, if the image file is in the default folder:
+\begin{code}{}
+ImageMorph new
+    image: (Form fromFileNamed: 'anImage.jpg');
+    openInHand.
+\end{code}  
+
+\begin{faq}
+How do I center text in a \clsind{TextMorph}?
+\end{faq}
+\answer
+The following expression will do this:
+\begin{code}{}
+TextMorph new
+    contents: 'Hello';
+    hResizing: #rigid; "States that the morph should not change 
+                        its width to match the width of the content"
+    width: 300;
+    centered;
+    openInWorld.
+\end{code}  
+
+\begin{faq}
+How do I add formatting to text?
+\end{faq}
+\answer
+The relevant classes are \clsind{Text} and \clsind{TextAttribute}. 
+You can add \ct{TextAttribute}s to section of text by using the messages in the \prot{emphasis} protocol of \cls{Text}, for example:
+\begin{code}{}
+text := 'yellow and green' asText.
+text 
+	addAttribute: TextColor yellow from: 1 to: 6;
+	addAttribute: TextEmphasis italic from: 1 to: 6;
+	addAttribute: TextColor green from: 12 to: 16;
+	addAttribute: TextEmphasis bold from: 12 to: 16.
+text asMorph openInHand.
+\end{code}  
+
+%=================================================================
+\section{System}
+
+\begin{faq}
+How can I achieve concurrency?
+\end{faq}
+\answer
+There are a number of classes to create and control concurrency.
+You can find most of them, such as \clsind{Process}, \clsind{Mutex}, or \clsind{Promise} in the system category \ct{Kernel-Processes}.
+Starting new processes is done via the messages in the \ct{scheduling} protocol of \clsind{BlockClosure}.
+Note, that, like most interpreter-based languages to date, the \sq environment runs in a single operating system process, so you will not benefit from parallel hardware.
+Writing concurrent code might still be useful for background processing of long computations or I/O.
+
+\begin{faq}
+I have created concurrent behavior, but lost track of some of the processes I started. 
+What can I do?
+\end{faq}
+\answer
+There is a tool called \ct{ProcessBrowser} which you can either open from \menu{World menu \go open} or \menu{World docking bar \go Tools}. 
+The \ind{ProcessBrowser} lists all processes and the yellow button menu allows you to control the process, \eg terminate it.
+
+\begin{faq}
+How do I express OS-independent file paths?
+\end{faq}
+\answer
+A very manual way to achieve this is to construct paths using OS-specific path delimiters by using \mthind{FileDirectory}{slash}.
+\ct{FileDirectory} instances can be created with any kind of path by sending the message \ct{uri:}.
+Finally, if you already have a \ct{FileDirectory} instance you can send the message \ct{\} to navigate it, for example:
+\begin{code}{}
+(FileDirectory default / 'release-notes' / '5.0') readStream contents lines first.
+\end{code}
 
 %=================================================================
 \section{Using Monticello and SqueakSource}
@@ -182,7 +281,7 @@ How do I load a \ind{Squeaksource} project?
 \begin{enumerate}
   \item Find the project you want in \url{squeaksource.com}
   \item Copy the registration code snippet
-  \item Select \menu{open \go Monticello browser}
+  \item Select \menu{World docking bar \go Tools \go Monticello browser}
   \item Select \menu{+Repository \go HTTP}
   \item Paste and accept the Registration code snippet; enter your password
   \item Select the new repository and \menu{Open} it
@@ -217,6 +316,33 @@ Monticello gathers all methods that are in other categories named like *package 
 \section{Tools}
 
 \begin{faq}
+Doing everything with the mouse take so much time. 
+Which keyboard shortcuts are there?
+\end{faq}
+\answer
+You can find a list of available keyboard shortcuts directly in the environment at \menu{World docking bar \go Help \go Keyboard Shortcuts}.
+
+\begin{faq}
+Some menus are quite large and I struggle to find what I am looking for.
+\end{faq}
+\answer
+Menus, like all panes, can be filtered by simply typing on your keyboard. 
+If you type the complete string of the menu item you can also directly activate it by pressing return.
+
+\begin{faq}
+Some message sends seem slow to me.
+How do I find out what makes them slow?
+\end{faq}
+\answer
+You can use the \ct{MessageTally} tool that allows you to profile your code. 
+To profile all processes currently running in the process, you can open the tool from \menu{World docking bar \go Extras \go Start Profiler}\index{Profiler}.
+If you only want to profile a specific message send, you can use \mthind{MessageTally class}{spyOn:}, for example:
+\begin{code}{}
+MessageTally spyOn: [10000 timesRepeat: [1.23 printString]]
+\end{code}
+You can achieve the same by selecting an expression and select \menu{spy on it} from the yellow button menu.
+
+\begin{faq}
 How do I programmatically open the \ind{SUnit} \ind{TestRunner}?
 \end{faq}
 \answer
@@ -243,49 +369,16 @@ Click the menu icon in the top left of the Browser window.
 Where is the documentation for the RegEx package?
 \end{faq}
 \answer
-Look at the \menu{DOCUMENTATION} protocol of \ct{RxParser class} in the \menu{VB-Regex} category.
+Look at the \menu{DOCUMENTATION} protocol of \ct{RxParser class} in the \menu{Regex-Core} category.
 
 \begin{faq}
 Are there tools for writing parsers?
 \end{faq}
 \answer
-Use \ind{SmaCC}\,---\,the Smalltalk Compiler Compiler.
-You should install at least \ct{SmaCC-lr.13}.
-Load it from \url{www.squeaksource.com/SmaccDevelopment.html}.
-There is a nice tutorial online:
-\url{www.refactory.com/Software/SmaCC/Tutorial.html}
-
-\begin{faq}
-Which packages should I load from SqueakSource SmaccDevelopment to write parsers?
-\end{faq}
-\answer
-Load the latest version of \ind{SmaCCDev}{}\,---\,the runtime is already there.
-(SmaCC-Development is for \sq 3.8)
+You can use \ind{SmaCC}\,---\,the Smalltalk Compiler Compiler (load it from \url{https://www.squeaksource.com/SmaccDevelopment.html}).
+Or you can use \ind{Ohm/s}, a \st implementation of Ohm/JS (load it from \url{https://www.github.com/hpi-swa/Ohm-S}).
 
 %=================================================================
 \ifx\wholebook\relax\else\end{document}\fi
 %=================================================================
 
-%\begin{faq}
-%How do I run a headless image with a file argument?
-%\end{faq}
-%\answer
-%Right now you can't do it with the MacOSX VM.
-
-%\begin{faq}
-%How do I find out which methods access the Smalltalk dictionary?
-%\end{faq}
-%\answer
-%???
-
-%\begin{faq}
-%How do I get the tree view of an AST?
-%\end{faq}
-%\answer
-%???
-
-%\begin{faq}
-%How do I browse all references to a given class?
-%\end{faq}
-%\answer
-%???
