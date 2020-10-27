@@ -88,7 +88,7 @@ To properly explain classes and metaclasses, we need to extend the rules from \c
 	The metaclass \subind{metaclass}{hierarchy} parallels the class hierarchy.
 
 \item{} \label{rule:behavior}
-	Every metaclass inherits from \clsind{Class} and \clsind{Behavior}.
+	Every metaclass inherits from \clsind{Class} and therefore from \clsind{Behavior}.
 
 \item{} \label{rule:metaclassclass}
 	Every metaclass is an instance of \clsind{Metaclass}.
@@ -276,7 +276,7 @@ In both cases, the search for the corresponding method starts in the class of th
 Thus, messages sent to classes must follow the metaclass inheritance chain.
 Consider, for example, the method \mthind{Color class}{blue}, which is implemented on the \subind{system browser}{class side} of \ct{Color}.
 If we send the message \ct{blue} to \ct{TranslucentColor}, then it will be looked-up the same way as any other message.
-The lookup starts in \ct{TranslucentColor class}, and proceeds up the metaclass hierarchy until it is found in \ct{Color class} (see \figref{metaclasslookup}).
+The lookup starts in the class of the object named \ct{TranslucentColor}, which is \ct{TranslucentColor class}, and proceeds up the metaclass hierarchy until it is found in \ct{Color class} (see \figref{metaclasslookup}).
 
 \begin{code}{@TEST}
 TranslucentColor blue --> Color blue
@@ -381,7 +381,7 @@ Instead, you should look in \ct{Array class} and its superclasses since that is 
 
 \on{The text below needs more details and convincing examples ...}
 
-\paragraph{Responsibilities of \lct{Behavior}, \lct{ClassDescription} and \lct{Class}.}
+\paragraph{Responsibilities of \lct{Behavior}, \lct{ClassDescription}, and \lct{Class}.}
 \clsind{Behavior} provides the minimum state necessary for objects that have instances: this includes a superclass link, a method dictionary, and a description of the instances (\ie representation and number).
 \on{not sure I understand the last point}
 \ct{Behavior} inherits from \ct{Object}, so it, and all of its subclasses, can behave like objects. 
