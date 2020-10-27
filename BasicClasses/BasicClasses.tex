@@ -328,7 +328,7 @@ copiedArray := array deepCopy.
 copiedArray first == copiedArray second. --> false
 \end{code}
 
-Also, not keeping track of previously copied objects, means that \ct{deepCopy} will not terminate when applied to a \mutually recursive structure.
+Also, not keeping track of previously copied objects, means that \ct{deepCopy} will not terminate when applied to a mutually recursive structure.
 
 \begin{code}{NB: CANNOT TEST}
 array1 := { 'harry' }.
