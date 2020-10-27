@@ -45,11 +45,7 @@ but in fact it can be used for integration tests and functional tests as well.
 
 The interest in testing and \ind{Test Driven Development} is not limited to \squeak or \st.
 Automated testing has become a hallmark of the \ind{Agile software development} movement, and any software developer concerned with improving software quality would do well to adopt it.
-Indeed, developers in many languages have come to appreciate the power of unit testing, and versions of \xUnit{} now exist for many languages, including \ind{Java}, \ind{Python}, \ind{Perl}, .NET, and \ind{Oracle}.
-\seeindex{Matrix!free will}{Oracle} % sorry, couldn't resist
-%  OSCAR: There was a broken citation here for the xprogramming web site
-% I could not figure out what it was supposed to refer to.
-This chapter describes \SUnit~3.3 (the current version as of this writing); the official web site of \sunit is \url{sunit.sourceforge.net}, where updates can be found.
+Indeed, developers in many languages have come to appreciate the power of unit testing, and versions of \xUnit{} now exist for many languages, including \ind{Java}, \ind{Python}, and .NET.
 \index{xUnit}
 \index{Net@.Net}
 
@@ -72,24 +68,23 @@ In less than two minutes you can write tests using \sunit, so instead of writing
 In this chapter we start by discussing why we test, and what makes a good test.
 We then present a series of small examples showing how to use \sunit.
 Finally, we look at the implementation of \sunit, so that you can understand how
-\st uses the power of \ind{reflection} in supporting its tools. 
+\st uses the power of \ind{reflection} for its tools. 
 
 %=================================================================
 \section{Why testing is important}
 \label{sec:why}
 
-Unfortunately, many developers believe that tests are a waste of their time.  
+Unfortunately, many developers believe that tests require to much of their time.  
 After all, \emph{they} do not write bugs\,---\,only \emph{other} programmers do that.
 Most of us have said, at some time or other:
 ``I would write tests if I had more time.''
-If you never write a bug, and if your code will never be changed in the future, then indeed tests are a waste of your time.
+If you never write a bug, and if your code will never be changed in the future, then indeed you do not need tests.
 However, this most likely also means that your application is trivial, or that it is not used by you or anyone else.  
 Think of tests as an investment for the future:
 Having a suite of tests will be quite useful now, but it will be \emph{extremely} useful when your application, or the environment in which it executes, changes in the future.
 
 Tests play several roles.
-First, they provide documentation of the functionality that they cover.  
-Moreover, the documentation is active:
+First, they provide documentation of the functionality that they cover, and, moreover, the documentation is active:
 Watching the tests pass tells you that the documentation is up-to-date.
 Second, tests help developers to confirm that some changes that they have just made to a package have not broken anything else in the system\,---\,and to find the parts that break when that confidence turns out to be misplaced.
 Finally, writing tests at the same time as\,---\,or even before\,---\,programming forces you to think about the functionality that you want to design, \emph{and how it should appear to the client}, rather than about how to implement it.
@@ -219,6 +214,7 @@ ExampleSetTest>>>setUp
 In testing jargon the context is called the \emph{fixture} for the test.
 \index{SUnit!fixture}
 \seeindex{fixture}{SUnit, fixture}
+You can also clean up the fixture of the test again in the \indmain{tearDown} method.
 
 %---------------------------------------------------------
 \subsection{Step 3: write some test methods}
@@ -237,15 +233,15 @@ ExampleSetTest>>>testIncludes
 	self assert: (full includes: 6)
 \end{method}
 
-The second test, named \ct{testOccurrences}, verifies that the number of occurrences of~5 in \ct{full} set is equal to one, even if we add another element~5 to the set.
+The second test, named \ct{testOccurrences}, verifies that the number of occurrences of~5 in \ct{full} set is equal to one, even if we add another element~5 to the set. Here we make use of the specific assertion \ct{assert:equals:} that asserts whether the two arguments are equal in value.
 
 \needlines{6}
 \begin{method}[testOccurrences]{Testing occurrences}
 ExampleSetTest>>>testOccurrences
-	self assert: (empty occurrencesOf: 0) = 0.
-	self assert: (full occurrencesOf: 5) = 1.
+	self assert: 0 equals: (empty occurrencesOf: 0).
+	self assert: 1 equals: (full occurrencesOf: 5).
 	full add: 5.
-	self assert: (full occurrencesOf: 5) = 1
+	self assert: 1 equals: (full occurrencesOf: 5)
 \end{method}
 
 Finally, we test that the set no longer contains the element 5 after we have removed it.
@@ -263,7 +259,7 @@ Note the use of the method \mthind{TestCase}{deny:} to assert something that sho
 %---------------------------------------------------------
 \subsection{Step 4: run the tests}
 
-The easiest way to execute the tests is with the \sunit \emphind{Test Runner}, which you can open from the \menu{World \go open\,\ldots} menu, or by dragging the \menu{TestRunner} from the \toolsflap.
+The easiest way to execute the tests is with the \sunit \emphind{Test Runner}, which you can open from the \menu{World \go Test Runner} menu, or from \menu{World docking bar \go Tools}.
 The \emph{TestRunner}, shown in \figref{test-runner}, is designed to make it easy to execute groups of tests.
 The left-most pane lists all of the system categories that contain test classes (\ie  subclasses of \ct{TestCase}); when some of these categories are selected, the test classes that they contain appear in the pane to the right.
 Abstract classes are italicized, and the test class hierarchy is shown by indentation, so subclasses of \ct{ClassTestCase} are indented more than subclasses of \ct{TestCase}.
@@ -286,25 +282,15 @@ SBEScreenshotRecorder writeTo: 'figures/test-runner.png' building: [:helper |
 
 
 You can also run your test by executing a \menu{print it} on the following code:
-\ct{ExampleSetTest run: #testRemove}.
-We usually include an executable comment in our test methods that allows us to run them
-with a \menu{do it} from the browser, as shown in \mthref{ExampleSetTestTestRemoveii}.
-% ct TODO DISCUSS: Is this really a recommendation for every single test method? There is already a CodeHolder menu item for this purpose ... Drop that?
-
-\needlines{6}
-\begin{method}[ExampleSetTestTestRemoveii]{Executable comments in test methods}
-ExampleSetTest>>>testRemove
-	"self run: #testRemove"
-	full remove: 5.
-	self assert: (full includes: 6).
-	self deny: (full includes: 5)
-\end{method}
+\ct{ExampleSetTest run: #testRemove}. 
+Finally, you can also run a test directly from the method pane in the browser by opening the yellow button menu on the test method and selecting \menu{run test}.
 
 \dothis{Introduce a bug in \ct{ExampleSetTest>>>testRemove} and run the tests again.
 For example, change \ct{5} to \ct{4}.}
 
 The tests that did not pass (if any) are listed in the right-hand panes of the \emph{Test Runner}; if you want to debug one, to see why it failed, just click on the name.
-Alternatively, you can execute the following expression:
+Alternatively, you can also directly start debugging the test from the browser by opening the yellow button menu on the test method and selecting \menu{debug test}.
+If you prefer working with scripts, you can execute the following expression:
 \begin{code}{}
 ExampleSetTest debug: #testRemove
 \end{code}
@@ -315,14 +301,15 @@ ExampleSetTest debug: #testRemove
 The method \mthind{TestCase}{assert:}\,, which is defined in the class \ct{TestCase}, expects a boolean argument, usually the value of a tested expression.
 When the argument is true, the test passes; when the argument is false, the test fails.
 
-There are actually three possible outcomes of a test.
+There are actually three possible outcomes of a test and corresponding visualizations in the test runner.
 The outcome that we hope for is that all of the assertions in the test are true, in which case the test passes.
-In the test runner, when all of the tests pass, the bar at the top turns green.
+When all of the tests pass, the bar at the top of the test runner turns green.
 However, there are also two kinds of things that can go wrong when you run a test.
 Most obviously, one of the assertions can be false, causing the test to \emph{fail}.
+This will turn the bar at the top of the test runner yellow and the failed tests are listed at the middle pane on the right.
 However, it is also possible that some kind of error occurs during the execution of the test, such as a \emph{message not understood} error or an \emph{index out of bounds} error.
 If an error occurs, the assertions in the test method may not have been executed at all, so we can't say that the test has failed; nevertheless, something is clearly wrong!
-In the {test runner}, failing tests cause the bar at the top to turn yellow, and are listed in the middle pane on the right, whereas erroneous tests cause the bar to turn red, and are listed in the bottom pane on the right.
+Erroneous tests cause the bar at the top of the test runner to turn red and the erroneous tests are listed in the bottom pane on the right.
 
 \dothis{Modify your tests to provoke both errors and failures.}
 
@@ -370,7 +357,7 @@ ExampleSetTest>>>testIllegal
 %---------------------------------------------------------
 \subsection{Running a single test}
 Normally, you will run your tests using the Test Runner.
-If you don't want to launch the Test Runner from the \menu{open\,\ldots} menu or from the \toolsflap, you can execute \ct{TestRunner open} as a \menu{print it}.
+If you don't want to launch the Test Runner from the menus, you can execute \ct{TestRunner open} as a \menu{print it}.
 \index{Tools flap}
 
 You can run a single test as follows.
@@ -397,13 +384,12 @@ ExampleSetTest suite run --> 5 run in 0:00:00:01, 5 passes, 0 expected failures,
 In \JUnit{} you can build a \clsind{TestSuite} from an arbitrary class containing \ct{test*} methods.
 In \st you can do the same but you will then have to create a suite by hand and your class will have to implement all the essential \ct{TestCase} methods like \ct{assert:}.
 We recommend that you not try to do this.
-The framework is there:
-Use it.
+The framework is there, use it.
 %=================================================================
 \section{The SUnit framework}
 
 \sunit consists of four main classes: \clsind{TestCase}, \clsind{TestSuite}, \clsind{TestResult}, and \clsind{TestResource}, as shown in \figref{sunit-classes}.
-The notion of a \emph{test resource} was introduced in \sunit 3.1 to represent a resource that is expensive to set-up but which can be used by a whole series of tests.  A \ct{TestResource} specifies a \ct{setUp} method that is executed just once before a suite of tests; this is in distinction to the \ct{TestCase>>>setUp} method, which is executed before each test.
+The notion of a \emph{test resource} represents a resource that is expensive to set-up but which can be used by a whole series of tests.  A \ct{TestResource} specifies a \ct{setUp} method that is executed just once before a suite of tests; this is in distinction to the \ct{TestCase>>>setUp} method, which is executed before each test.
 
 \begin{figure}[htb]
   \begin{center}
@@ -479,6 +465,8 @@ MyTestCase class>>>resources
 	^{ MyTestResource }
 \end{classdef}
 
+In your tests, you can now access the test resource through \ct{MyTestCase current}.
+This message will return the test resource instance that is initialized for the current run of the test suite.
 %\needlines{10}
 %\begin{classdef}[mytestresource]{An example of a TestResource subclass}
 %TestResource subclass: #MyTestResource
@@ -511,8 +499,9 @@ Of course, this string can be constructed dynamically.
 \begin{code}{}
 | e |
 e := 42.
-self assert: e = 23
-	description: 'expected 23, got ', e printString
+self 
+  assert: e = 23
+  description: 'expected 23, got ', e printString
 \end{code}
 
 The relevant methods in \ct{TestCase} are:
@@ -539,14 +528,13 @@ This is a really powerful feature that uses the exception mechanisms offered by 
 To see what this can be used for, let's look at an example.
 Consider the following test expression:
 \begin{code}{}
-aCollection do: [ :each | self assert: each even]
+(1 to: 10) do: [:each | self assert: each even]
 \end{code}
 In this case, as soon as the test finds the first element of the collection that isn't \ct{even}, the test stops.
 However, we would usually like to continue, and see both how many elements, and which elements, aren't \ct{even}, and maybe also log this information.
 You can do this as follows:
 \begin{code}{}
-aCollection do:
-	[:each |
+(1 to: 10) do: [:each |
 	self
 		assert: each even
 		description: each printString , ' is not even'
@@ -577,7 +565,8 @@ To execute one test, we evaluate the expression \ct{(aTestClass selector: aSymbo
   \end{center}
 \end{figure}
 
-The method \cmind{TestCase}{run} creates an instance of \clsind{TestResult} that will accumulate the results of the tests, then it sends itself the message \mthind{TestCase}{run:}.
+The method \cmind{TestCase}{run} creates an instance of \clsind{TestResult} that will accumulate the results of the tests.
+Then the \ct{TestCase} instance sends itself the message \mthind{TestCase}{run:}.
 (See \figref{sunit-scenario}.)
 
 \needlines{6}
@@ -589,45 +578,45 @@ TestCase>>>run
 	^result
 \end{method}
 
-% Note that in a future release, the class of the \ct{TestResult} to
-% be created will be returned by a method so that new
-%\ct{TestResult} can be introduced. }
-
 The method \cmind{TestCase}{run:} sends the message \mthind{TestResult}{runCase:} to the test result:
 
 \begin{method}[testcaserun:]{Passing the test case to the test result}
 TestCase>>>run: aResult
 	aResult runCase: self
 \end{method}
+
 The method \ct{TestResult>>>runCase:} sends the message \mthind{TestCase}{runCase} to an individual test, to execute the test.
 \ct{TestResult>>>runCase} deals with any exceptions that may be raised during the execution of a test, runs a \ct{TestCase} by sending it the message \ct{runCase}, and counts the errors, failures, and passes.
+
 \begin{method}[testresultruncase]{Catching test case errors and failures}
 TestResult>>>runCase: aTestCase
-	| testCasePassed |
+	| testCasePassed timeToRun |
 	testCasePassed := true.
-	[[aTestCase runCase] 
-			on: self class failure
-			do:
-				[:signal | 
+
+	[timeToRun := [aTestCase runCase] timeToRunWithoutGC] 
+		on: self class failure
+		do: [:signal | 
 				failures add: aTestCase.
 				testCasePassed := false.
-				signal return: false]]
-					on: self class error
-					do:
-						[:signal |
-						errors add: aTestCase.
-						testCasePassed := false.
-						signal return: false].
-	testCasePassed ifTrue: [passed add: aTestCase]
+				signal return: false]
+		on: self class error
+		do: [:signal |
+				errors add: aTestCase.
+				testCasePassed := false.
+				signal return: false].
+			
+	testCasePassed ifTrue: [passed add: aTestCase].
+	self durations at: aTestCase put: timeToRun.
 \end{method}
 
 The method \ct{TestCase>>>runCase} sends the messages \mthind{TestCase}{setUp} and \mthind{TestCase}{tearDown} as shown below.
 \begin{method}[testcaseruncase]{Test case template method}
 TestCase>>>runCase
-	self setUp.
-	[self performTest] ensure: [self tearDown]
+	"Run this TestCase. Time out if the test takes too long."
+	[self timeout: [self setUp] after: self timeoutForSetUp.
+	self timeout: [self performTest] after: self timeoutForTest]
+			ensure: [self tearDown]
 \end{method}
-\lr{Methods 7.15 and 7.17: use \#ensure: instead of \#sunitEnsure:, this has been changed in 3.9}
 
 %---------------------------------------------------------
 \subsection{Running a \lct{TestSuite}}
@@ -637,9 +626,9 @@ To run more than one test, we send the message \ct{run} to a \ct{TestSuite} that
 The expression \ct{MyTestCase buildSuiteFromSelectors} returns a suite containing all the tests defined in the {\ct{MyTestCase} class.
 The core of this process is
 \begin{method}[testcasetestselectors]{Auto-building the test suite}
-TestCase class>>>testSelectors 
-	^self selectors asSortedCollection asOrderedCollection select: [:each | 
-		('test*' match: each) and: [each numArgs isZero]]
+TestCase class>>>testSelectors
+	^ (self selectors asArray select: [:each | 
+		(each beginsWith: 'test') and: [each numArgs isZero]]) sort
 \end{method}
 \cmindex{MyTestCase class}{buildSuiteFromSelectors}
 
@@ -648,33 +637,24 @@ All the resources are then released.
 \begin{method}[testsuiterun]{Running a test suite}
 TestSuite>>>run
 	| result |
-	result := TestResult new.
-	self areAllResourcesAvailable
-		ifFalse: [^TestResult signalErrorWith:
-				   'Resource could not be initialized'].
-	[self run: result] ensure: [self resources do:
-									 [:each | each reset]].
+ 	result := self resultClass new.
+	self resources do: [:res |
+		res isAvailable ifFalse: [^res signalInitializationError]].
+	[self run: result] ensure: [self resources do: [:each | each reset]].
 	^result
 \end{method}
-\lr{Methods 7.15 and 7.17: use \#ensure: instead of \#sunitEnsure:, this has been changed in 3.9}
 
 \begin{method}[testsuiterun:]{Passing the test suite to the test result}
 TestSuite>>>run: aResult
-	self tests do:
-			[:each |
-			self sunitChanged: each.
-			each run: aResult]
+	self tests do: [:each |
+		self sunitChanged: each.
+		each run: aResult]
 \end{method}
 The class \clsind{TestResource} and its subclasses keep track of their currently created instances (one per class) that can be accessed and created using the class method \mthind{TestResource class}{current}.
 This instance is cleared when the tests have finished running and the resources are reset.
 
-The resource availability check makes it possible for the resource to be  re-created if needed, as shown in the class method \cmind{TestResource class}{isAvailable}.
+The resource availability check makes it possible for the resource to be re-created if needed, as shown in the class method \cmind{TestResource class}{isAvailable}.
 During the \ct{TestResource} instance creation, it is initialized and the method \mthind{TestResource}{setUp} is invoked.
-
-%(Note it may happen that your version of \sunit 3.0 does
-%not correctly initialize the resource.  A version with this bug
-%circulated a lot.  Verify that \ct{TestResource}
-%\ct{class>>>new} calls the method \ct{initialize}).
 
 \needlines{4}
 \begin{method}[testresourceisavailable]{Test resource availability}
@@ -713,7 +693,7 @@ Here is some advice on how to design tests.
 
 \index{Feathers, Michael}
 \item[Feathers' Rules for Unit tests.]
-	Michael Feathers, an  agile process consultant and author, writes:\footnote{See \url{http://www.artima.com/weblogs/viewpost.jsp?thread=126923}, 2005-09-09.} 
+	Michael Feathers, an  agile process consultant and author, writes:\footnote{See \url{https://web.archive.org/web/20060212020903/http://www.artima.com/weblogs/viewpost.jsp?thread=126923}.} 
 	\begin{quotation}
 	\noindent
 	{\it
@@ -1103,7 +1083,7 @@ Here is some advice on how to design tests.
 \section{Chapter summary}
 
 This chapter explained why tests are an important investment in the future of your code.
-We explained in a step-by-step fashion how to define a few tests for the class \ct{Set}.
+We explained in a step by step fashion how to define a few tests for the class \ct{Set}.
 Then we gave an overview of the core of the \sunit framework by presenting the classes \ct{TestCase}, \ct{TestResult}, \ct{TestSuite}, and \lct{TestResources}.
 Finally, we looked deep inside \sunit by following the execution of a test and a test suite.
 
