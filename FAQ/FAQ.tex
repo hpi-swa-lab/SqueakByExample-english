@@ -80,13 +80,13 @@ Finally, some collections can be sorted in-place as they understand \ct{sort}, w
 
 \begin{code}{@TEST}
 collection := {7 . 2 . 6 . 1}.
-collection sorted --> #(1 2 6 7).
-collection sorted == collection --> false.
+collection sorted. --> #(1 2 6 7)
+collection sorted == collection. --> false
 
-collection asSortedCollection --> a SortedCollection(1 2 6 7).
+collection asSortedCollection. --> a SortedCollection(1 2 6 7)
 
 collection sort --> #(1 2 6 7).
-collection sort == collection --> true.
+collection sort == collection. --> true.
 \end{code}
 
 \begin{faq}
@@ -95,7 +95,7 @@ How do I convert a collection of characters to a \clsind{String}?
 \answer
 \begin{code}{@TEST}
 collection := 'hello' asSet.
-String newFrom: collection asArray.
+String newFrom: collection asArray. --> 'oelh'
 \end{code}
 
 %=================================================================
