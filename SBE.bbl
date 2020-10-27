@@ -97,11 +97,10 @@
          {{{Smalltalk} by Example}%
           {}{}{2}{}{}{}{}{}}%
         ]{Shar97a}
- \jburldef {Shar97a}{http://stephane.ducasse.free.fr/FreeBooks/ByExample/}%
  \jbbibargs {\bibnf {Sharp} {Alec} {A.} {} {}} {Alec Sharp} {au} {\bibtfont
-  {{Smalltalk} by Example}\bibatsep\  \apyformat {McGraw-Hill\bibbdsep {} 1997}
-  \jburluse {Shar97a}} {\bibhowcited} \jbdoitem {{Sharp}{Alec}{A.}{}{}} {} {}
-  \bibAnnoteFile {Shar97a}
+  {{Smalltalk} by Example}\bibatsep\  \apyformat {McGraw-Hill\bibbdsep {}
+  1997}} {\bibhowcited} \jbdoitem {{Sharp}{Alec}{A.}{}{}} {} {} \bibAnnoteFile
+  {Shar97a}
 
 \bibitem[{Woolf\jbdy {1998}}%
          {}%

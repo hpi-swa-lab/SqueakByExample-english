@@ -45,7 +45,7 @@
 %\usepackage{colortbl}
 \usepackage[hang]{subfigure}\makeatletter\def\p@subfigure{\thefigure\,}\makeatother
 \usepackage{rotating}
-\usepackage{enumitem}	% apb: allows more control over tags in enumerations
+\usepackage[inline]{enumitem}	% apb: allows more control over tags in enumerations
 \usepackage{verbatim}     % for comment environment
 \usepackage{varioref}	% for page references that work
 \labelformat{footnote}{\thechapter--#1} % to distinguish citations from jurabib
@@ -89,18 +89,12 @@
 \newcommand{\xUnit}{$x$Unit\xspace}
 \newcommand{\JUnit}{JUnit\xspace}
 \newcommand{\st}{Smalltalk\xspace}
-\newcommand{\Pharo}{Pharo\xspace}
-\newcommand{\pharo}{Pharo\xspace}
-\newcommand{\Squeak}{Squeak\xspace} % Please don't change this to "Pharo"! (ON)
-\newcommand{\sq}{Squeak\xspace} % Please don't change this to "Pharo"! (ON)
+\newcommand{\Squeak}{Squeak\xspace}
+\newcommand{\sq}{Squeak\xspace} 
 \newcommand{\sqmap}{SqueakMap\xspace}
 \newcommand{\squeak}{Squeak\xspace}
-%\newcommand{\sbe}{\url{scg.unibe.ch/SBE}\xspace}
-%\newcommand{\sbe}{\url{squeakbyexample.org}\xspace}
-\newcommand{\sbe}{\url{SqueakByExample.org}\xspace}
-\newcommand{\pbe}{\url{PharoByExample.org}\xspace}
+\newcommand{\sbeRepoUrl}{\url{https://github.com/hpi-swa-lab/SqueakByExample-english}\xspace}
 \newcommand{\sba}{\url{SquareBracketAssociates.org}\xspace}
-\newcommand{\sbeRepoUrl}{\url{https://github.com/codeZeilen/SqueakByExample-english}\xspace}
 %=============================================================
 %:Markup macros for proof-reading
 \usepackage[normalem]{ulem} % for \sout
@@ -326,7 +320,7 @@ Damien Pollet},
 \definecolor{source}{gray}{0.95}
 \usepackage{listings}
 \lstdefinelanguage{Smalltalk}{
-%  morekeywords={self,super,true,false,nil,thisContext}, % This is overkill
+  morekeywords={self,super,true,false,nil,thisContext},
   morestring=[d]',
   morecomment=[s]{"}{"},
   alsoletter={\#:},
