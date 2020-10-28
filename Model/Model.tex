@@ -199,7 +199,18 @@ SBEScreenshotRecorder
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
 \begin{center}
-\includegraphics[width=\textwidth]{Color-Buttons}
+	\begin{tikzpicture}[      
+		every node/.style={anchor=south west,inner sep=0pt},
+		x=1mm, y=1mm%,
+		%width=\textwidth % TODO: Support lulu
+	]
+		\node (browseInstance) at (0,5) % 20 (too high)
+		{\includegraphics[width=.4\textwidth]{Color-Buttons_browseInstance}}; % .6 (too wide)
+		\node (browseClass) at (40,-5) % 10 (too high) 40 (x) -5 (too low)
+		{\includegraphics[width=.4\textwidth]{Color-Buttons_browseClass}};
+		\node (diagram) at (0,0) % TODO: move to end of list
+		{\includegraphics[width=\textwidth]{Color-Buttons}};
+	\end{tikzpicture}
 \caption{Browsing a class and its metaclass.
 % \sd{Do we use Key everywhere in the picture as a legend indicator?}
 % \on{sure, wherever appropriate}
@@ -797,9 +808,16 @@ SBEScreenshotRecorder writeTo: './figures/fooNotFound_debugger.png' building: [:
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
 \begin{center}
-\ifluluelse
-	{\includegraphics[width=\textwidth]{fooNotFound}}
-	{\includegraphics[width=0.8\textwidth]{fooNotFound}}
+\begin{tikzpicture}[      
+	every node/.style={anchor=south west,inner sep=0pt},
+	x=1mm, y=1mm%,
+	%width=\textwidth % TODO: Support lulu
+]
+	\node (diagram) at (0,0)
+	{\includegraphics[width=\textwidth]{fooNotFound}};
+	\node (debugger) at (72,30)
+	{\includegraphics[width=.32\textwidth]{fooNotFound_debugger}};  
+\end{tikzpicture}
 \caption{Message \lct{foo} is not understood\label{fig:fooNotFound}}
 \end{center}
 \end{figure}
