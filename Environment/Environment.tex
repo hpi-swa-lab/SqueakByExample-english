@@ -178,7 +178,12 @@ Enter the name of the new thing in the dialog, and you are done: there is nothin
    \label{fig:SystemBrowserClassCreation}}
 \end{figure}
 
-In contrast, to create a new class or a new method, you will actually have to write some Smalltalk code.
+Finally, you can influence what kind of information you want to see about a class, through the three buttons below the second pane.
+By default, the \button{instance} view is selected, that shows you the ordinary methods provided by the class.
+The \button{class} button changes the view to show the methods understood by the class itself (for more details see \charef{SqueakModel} and \charef{metaclasses}).
+The \button{?} button changes the view to show the class comment of the class in the bottom pane, where you can edit and save it as you would with a method.
+
+In contrast to creating categories or protocols, to create a new class or a new method, you will actually have to write some Smalltalk code.
 If you deselect the currently selected category (most left pane) and then reselect it again, the main browser pane will display a class creation template (\figref{SystemBrowserClassCreation}).
 
 You create a new class by editing this template: replace \ct{Object} by the name of the existing class of which you wish to create a subclass, replace \ct{NameOfSubclass} by the name that you would like to give to your new subclass, and fill in the instance variable names if you want some.
@@ -191,9 +196,6 @@ the corresponding metaclass).
 Creating a class also creates a global variable that references the class, which is why you can refer to all of the existing classes by using their names.
 \index{class!creation}
 \index{system browser!defining a class}
-
-%I don't think this belongs here in the introduction of tools, also this style has not been used anywhere else in the book
-%Can you see why the name of the new class has to appear as a \clsind{Symbol} (\ie prefixed with \ct{#}) in the class creation template, but after the class is created, code can refer to the class by using the name as an identifier (\ie without the \ct{#})?
 
 The process of creating a new method is similar.
 First select the class in which you want the method to live, and then select a protocol.
