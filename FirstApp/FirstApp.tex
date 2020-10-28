@@ -443,15 +443,15 @@ The initial value of each element will depend on its coordinates.
 The {$(i,j)$}\textsuperscript{th} element will be initialized to the result of evaluating \ct{self newCellAt: i at: j}.
 
 %=================================================================
-\section{Organizing methods into Method Categories}
+\section{Organizing methods into Protocols}
 
 Before we define any more methods, let's take a quick look at the third pane at the top of the browser.
 In the same way that the first pane of the browser lets us categorize classes so we are not overwhelmed by a very long list of class names in the second pane, so the third pane lets us categorize methods so that we are not overwhelmed by a very long list of method names in the fourth pane.  
-These categories of methods are sometimes also called ``protocols''.
+These categories of methods are also called ``protocols''.
 \index{protocol}
 
-If there are only a few methods in a class, the extra level of hierarchy provided by method categories is not really necessary.
-This is why the browser also offers us the \prot{-{}-all-{}-} virtual category, which, you will not be surprised to learn, contains all of the methods in the class.
+If there are only a few methods in a class, the extra level of hierarchy provided by protocols is not really necessary.
+This is why the browser also offers us the \prot{-{}-all-{}-} virtual protocol, which, you will not be surprised to learn, contains all of the methods in the class.
 \protindex{all}
 
 \begin{ExecuteSmalltalkScript}
@@ -476,11 +476,11 @@ SBEScreenshotRecorder writeTo: './figures/Categorize.png' frame: [:bounds | boun
    \caption{Categorize all uncategorized methods.\label{fig:categorize}}
 \end{figure}
 
-If you have followed along with this example, the third pane may well contain the category \protind{as yet unclassified}.
+If you have followed along with this example, the third pane may well contain the protocol \protind{as yet unclassified}.
 
-\dothis{Select the \ind{yellow button} menu item \menu{categorize all uncategorized} to fix this, and move the \ct{initialize} methods to a new category called \protind{initialization}.}
-How does \squeak{} know that this is the right category?
-Well, in general \squeak{} can't know, but in this case, there is also an \ct{initialize} method in a superclass, and \squeak assumes that our \ct{initialize} method should go in the same category as the one that it overrides.
+\dothis{Select the \ind{yellow button} menu item \menu{categorize all uncategorized} to fix this, and move the \ct{initialize} methods to a new protocol called \protind{initialization}.}
+How does \squeak{} know that this is the right protocol?
+Well, in general \squeak{} can't know, but in this case, there is also an \ct{initialize} method in a superclass, and \squeak assumes that our \ct{initialize} method should go in the same protocol as the one that it overrides.
 \index{method!categorize}
 
 \paragraph{A typographic convention.}
@@ -491,7 +491,7 @@ From now on, when we show a method in this book, we will write the name of the m
 Of course, when you actually type the code into the browser, you don't have to type the class name or the \ct{>>>}; instead, you just make sure that the appropriate class is selected in the class pane.  
 
 Now let's define the other two methods that are used by the \ct{SBEGame>>>initialize} method.
-Both of them can go in the \prot{initialization} category.
+Both of them can go in the \prot{initialization} protocol.
 
 \numFiletreeMethodInput[sbegamecellsperside]%
 {A constant method.}%
@@ -534,9 +534,9 @@ The corresponding method also needs to be defined.
 \Mthref{toggleNeighboursOfCellAt:at:} toggles the state of the four cells to the north, south, west and east of cell $(i, j)$.
 The only complication is that the board is finite, so we have to make sure that a neighboring cell exists before we toggle its state.
 
-\dothis{Place this method in a new category called \prot{game logic}.
-	To create the category, press the yellow mouse button in the method category list, select \menu{new category\ldots}, enter ``game logic'', and submit the dialog.}
-To move the method, you can simply click on its name and drag it to the newly-created category (\figref{dragMethod}).
+\dothis{Place this method in a new protocol called \prot{game logic}.
+	To create the protocol, press the yellow mouse button in the protocol list, select \menu{new category\ldots}, enter ``game logic'', and submit the dialog.}
+To move the method, you can simply click on its name and drag it to the newly-created protocol (\figref{dragMethod}).
 
 %%{SBESqueakPicture writeTo: './figures/DragMethod.png' frame: [:rectangle | rectangle withHeight: rectangle height * 2 / 3] using: [:helper |
 %%	| window messageList categoryList |
@@ -557,7 +557,7 @@ To move the method, you can simply click on its name and drag it to the newly-cr
    \ifluluelse
 		{\includegraphics[width=\textwidth]{DragMethod} }
 		{\includegraphics[scale=0.7]{DragMethod} }
-   \caption{Drag a method to a method category.\label{fig:dragMethod}}
+   \caption{Drag a method to a protocol.\label{fig:dragMethod}}
 \end{figure}
 
 To complete the Quinto game, we need to define two more methods in class \ct{SBECell} to handle mouse events.
@@ -575,12 +575,12 @@ If you are used to getters and setters in other programming languages, you might
 The \st convention is different.
 A getter always has the same name as the variable it gets, and a setter is named similarly, but with a trailing ``\ct{:}'', hence \ct{mouseAction} and \ct{mouseAction:}.
 
-Collectively, setters and getters are called \emphind{accessor} methods, and by convention they should be placed in the \protind{accessing} category.
+Collectively, setters and getters are called \emphind{accessor} methods, and by convention they should be placed in the \protind{accessing} protocol.
 In Smalltalk, \emph{all} instance variables are private to the object that owns them, so the only way for another object to read or write those variables in the Smalltalk language is through accessor methods like this one\footnote{%
 	In fact, the instance variables can be accessed in subclasses too.%
 }.
 
-\dothis{Go to the class \ct{SBECell}, define \ct{SBECell>>>mouseAction:} and put it in the \prot{accessing} category.}
+\dothis{Go to the class \ct{SBECell}, define \ct{SBECell>>>mouseAction:} and put it in the \prot{accessing} protocol.}
 
 Finally, we need to define a method \ct{mouseUp:}; this will be called automatically by the GUI framework if the mouse button is released while the mouse is over this cell on the screen.
 
@@ -774,7 +774,7 @@ If you select a package, the list of repositories is restricted to just those re
 \seeindex{dirty package}{package, dirty}
 
 What is a package?
-For now, you can think of a package as a group of class and method categories that share the same prefix.
+For now, you can think of a package as a group of class categories and protocols that share the same prefix.
 Since we put all of the code for the Quinto game into the class category called \scat{SBE-Quinto}, we can refer to it as the \ct{SBE-Quinto} package.
 
 \dothis{Add the \ct{SBE-Quinto} package to your Monticello browser using the \button{+Package} button and type \ct{SBE-Quinto}.}
