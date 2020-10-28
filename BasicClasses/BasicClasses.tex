@@ -806,6 +806,62 @@ The \ct{Block} is evaluated only if the first argument is \pvind{true}.
     Check the implementations in \ct{Boolean}, \ct{True}, and \ct{False}.}
 
 %=================================================================
+\section{Exceptions}
+
+\ct{Exceptions}\clsindexmain{Exception} might not be the first class you will need when starting to explore \sq. 
+However, \ct{Exceptions} provide a fundamental way to influence the control flow in your application, thus we already introduce them with the other basic classes.
+
+Similar to \ct{ifTrue:} and \ct{ifFalse:}, exceptions are not part of the language, but implemented as ordinary objects in the class library. 
+Thus, we can work with them as we would work with any other object.
+
+The common superclass of all exceptions is the abstract class \ct{Exception}.
+There are numerous subclasses of \ct{Exception} representing specific exceptions, such as \ct{ZeroDivide}, \ct{MessageNotUnderstood}, or \ct{ProgressNotification}.
+In particular, subclasses of \ct{Error} represent erroneous situations, subclasses of \ct{Notification} indicate that something interesting occurred.
+
+To raise an exception you can use the method \mthind{Exception}{signal}.
+If you want to pass a message along to help users figure out what happened, you can use \ct{Exception>>>signal:}.
+When an exception is not handled by anyone, a debugger will open.
+
+\begin{code}{NB: CANNOT TEST}
+Error signal. --> "Will open a debugger"
+Error signal: 'We wanted this to happen'. --> "Will open a debugger with a message"
+\end{code}
+
+As we do not want to present users with debuggers every time something unexpected happens, we can also handle exceptions directly within our code.
+The methods for handling exceptions are associated with blocks, so you can find them in the \ct{exceptions} protocol of the class \ct{BlockClosure}.
+To catch an exception you can use the method \ct{BlockClosure>>>on: anExceptionOrExceptionSet do: aBlock}\cmindex{BlockClosure}{on:do:}.
+
+\begin{code}{NB: CANNOT TEST}
+[10 to: -10 by: -1 do: [:i | Transcript showln: (100 / i) printString]] 
+   on: ZeroDivide
+   do: [:ex | "do nothing"]
+\end{code}
+
+The code above only prints the results of the division up to 100, as the block was interrupted by the \ct{ZeroDivide} exception.
+
+Further, you might want to make sure that some code is always executed after your block, regardless of whether an exception occurs, the block returns early, or the block finishes normally.
+To achieve this you can use the method \ct{BlockClosure>>>ensure:} which will always execute the block passed to it.
+
+\begin{code}{NB: CANNOT TEST}
+[connectedSocket sendData: 'my network message'] 
+   ensure: [connectedSocket close].
+
+[(1 to: 10) pairsDo: [:number1 :number2 | | sum |
+	sum := number1 + number2.
+	sum isPrime ifTrue: [^ sum]]]
+		ensure: [Transcript showln: 'My execution is ensured.'].
+\end{code}
+
+% - Exception sets
+% - Resuming
+% - Passing along state
+% As we sometimes want to catch several kinds of exceptions, you can combine \ct{Exception}s into an \ct{ExceptionSet} by sending the message \ct{Exception>>>,}.
+
+Further, \ct{Exception}s have several rich features such as resuming, restarting, or signaling other exceptions. 
+Browse the class \lct{Exception} to learn more.
+
+
+%=================================================================
 \section{Chapter summary}
 
 \begin{itemize}
