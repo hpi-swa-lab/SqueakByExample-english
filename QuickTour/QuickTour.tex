@@ -594,11 +594,11 @@ This causes the second pane to show a list of all of the classes in the selected
 
 \dothis{Select the class \clsind{Object}.}
 Now the remaining two panes will be filled with text.
-The third pane displays the \emph{method categories} of the currently selected class.
+The third pane displays the \emph{protocols}\index{protocol} of the currently selected class (referred to as \emph{method categories}\index{method category} by the browser).
 These are convenient groupings of related methods.
-If no \ind{method category} is selected you should see all methods in the fourth pane.
+If no \ind{protocol} is selected you should see all methods in the fourth pane.
 
-\dothis{Select the \protind{printing} category.}
+\dothis{Select the \protind{printing} protocol.}
 You may have to scroll down to find it.
 Now you will see in the fourth pane only methods related to printing.
 \index{category!method}
@@ -636,7 +636,7 @@ There is also a \ind{keyboard shortcut} \short{b} (browse) that you can use in a
 \label{fig:browseBoolean}}
 \end{figure}
 
-Notice that when the \ct{Boolean} class is selected but no method category or method is selected, the bottom pane automatically shows the \emph{class definition}
+Notice that when the \ct{Boolean} class is selected but no protocol or method is selected, the bottom pane automatically shows the \emph{class definition}
 (\figref{browseBoolean}).
 This is nothing more than an ordinary \st message that is sent to the parent class, asking it to create a subclass.
 Here we see that the class \ct{Object} is being asked to create a subclass named \ct{Boolean} with no instance variables, class variables or ``pool dictionaries'', and to put the class \ct{Boolean} in the \scatind{Kernel-Objects} category.
@@ -837,7 +837,7 @@ In this case, the \ct{shout} method that we are testing will go in class \clsind
 \label{fig:newMethodTemplate}}
 \end{figure}
 
-\dothis{Open a browser on the class \ct{StringTest}, and select an appropriate message category for our method, in this case \menu{tests - converting}, as shown in \figref{newMethodTemplate}.
+\dothis{Open a browser on the class \ct{StringTest}, and select an appropriate protocol for our method, in this case \menu{tests - converting}, as shown in \figref{newMethodTemplate}.
 The highlighted text in the bottom pane is a template that reminds you of what a \st method looks like.
 Delete this and enter the code from  \mthref{testShout}.}
 Once you have typed the text into the browser, notice that the bottom pane is outlined in red.
