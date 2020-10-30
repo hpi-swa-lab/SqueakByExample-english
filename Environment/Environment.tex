@@ -1742,6 +1742,38 @@ So, if you have created any new classes, \emph{first} file-in the class creation
 % section cantLoseCode (end)
 
 %=========================================================
+\section{Other interesting tools}
+Beyond the common tools introduced in this chapter, \sq also provides a set of other interesting and rich tools.
+We introduce some of them which you might want to use after becoming more proficient in using \sq:
+
+\paragraph{Dependency Browser}
+Whenever you use a class in a method, the method from then on depends on the presence of this class.
+If the class is not in the environment, your method will result in an exception, as \sq does not who should receive the message.
+This is relevant for example whenever you use a class that is not part of the base system but stems from a project you installed.
+Using the \ind{dependency browser} you can see the dependencies of your package down to the individual methods.
+You can open the dependency browser through \menu{world main docking bar \go Apps \go Dependency Browser}.
+
+\paragraph{Git Tools}
+\ind{Git} is a common version control system.
+For sharing you projects via Git on platforms such as GitHub, GitLab, or Bitbucket, you can use the Git tools.
+However, the tools are not part of the standard environment and you will have to install them.
+You can do so by clicking \menu{world docking bar \go Tools \go Git Browser (click to install)}.
+The Git Browser allows you to manage a local git repository directly from within the image using parts of the \ind{gitless}\footnote{\url{https://gitless.com/}} semantic.
+
+\paragraph{Lexicon}
+The browser only shows the messages implemented by a class.
+Instances of that class understand many more messages, for example by messages implemented by super classes of their class.
+If you want to know all the methods an instance of a class understands you can open the \ind{lexicon}.
+You can get the lexicon from the system browser by opening the yellow button menu for the class and selecting \menu{browse protocol (p)}.
+
+\paragraph{Message Tally}
+Sometimes you might write code that is too slow.
+The \ind{Message Tally} tool, sometimes also called \ind{profiler}, can help you to determine which parts of your program are slow.
+You can either let it measure the times for all executions in the image through \menu{world main docking bar \go Extras \go Start Profiler}.
+Alternatively, you can also let it observe sections of code by selecting the code, opening the yellow button menu, and choosing \menu{spy on it}.
+Note, that the message tally is a sampling profiler, so for detailed information, you will have to let your code run for some seconds (e.g. by running it 1000 times if it only takes little time).
+
+%=========================================================
 \section{Chapter summary}
 
 In order to develop effectively with Squeak, it is important to invest some effort into learning the tools available in the environment.
