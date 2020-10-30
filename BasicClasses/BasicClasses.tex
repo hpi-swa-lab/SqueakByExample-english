@@ -829,7 +829,7 @@ Error signal: 'We wanted this to happen'. --> "Will open a debugger with a messa
 
 As we do not want to present users with debuggers every time something unexpected happens, we can also handle exceptions directly within our code.
 The methods for handling exceptions are associated with blocks, so you can find them in the \ct{exceptions} protocol of the class \ct{BlockClosure}.
-To catch an exception you can use the method \ct{BlockClosure>>>on: anExceptionOrExceptionSet do: aBlock}\cmindex{BlockClosure}{on:do:}.
+To catch an exception you can use the method \ct{BlockClosure>>>on: anExceptionOrExceptionSet do: aBlock}\cmindex{BlockClosure}{on:do:}\footnote{This is similar to \ct{try...catch} in other languages.}.
 
 \begin{code}{NB: CANNOT TEST}
 [(10 to: -10 by: -1) collect: [:i | 100 / i]] 
@@ -841,7 +841,7 @@ The code above does not return a collection, as the block was interrupted by the
 
 Sometimes you might not be interested in handling an exception. 
 Instead you might only want to ensure that some code is always executed after your block, regardless of whether an exception occurs, the block returns early, or the block finishes normally.
-To achieve this you can use the method \ct{BlockClosure>>>ensure:} which will always execute the block passed to it.
+To achieve this you can use the method \ct{BlockClosure>>>ensure:}\footnote{This is similar to \ct{finally} in other languages.} which will always execute the block passed to it.
 
 \begin{code}{NB: CANNOT TEST}
 [connectedSocket sendData: 'my network message'] 
