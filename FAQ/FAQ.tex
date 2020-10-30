@@ -61,6 +61,19 @@ There you find the menu item \menu{show main docking bar}.
 Click it once to deactivate it completely, and then click it a second time to re-activate it.
 
 \begin{faq}
+How do I install more than what is already in the image?
+\end{faq}
+\answer
+There are several ways to install additional packages. 
+First, you can always download sar- or mcz-files and simply drop them into \sq.
+Second, you can use the class \clsind{Installer}, which provides methods for installing several kinds of packages from different sources, \eg Squeaksource. 
+To start using the \ct{Installer} you can take a look at the class comment.
+Finally, you can currently find an increasing number of \sq projects on GitHub, many of them to be installed via \ind{Metacello}.
+Metacello is a configuration management project for specifying dependencies between \st projects.
+Before you can install a project via Metacello you may have to setup Metacello in your environment. 
+You can do so via \ct{Installer ensureRecentMetacello}.
+
+\begin{faq}
 Some code triggered a lot of debuggers and my whole screen is filled with them. 
 How can I get rid of them?
 \end{faq}
