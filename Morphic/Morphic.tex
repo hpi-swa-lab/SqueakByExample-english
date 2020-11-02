@@ -91,29 +91,32 @@ You can create a morph to represent any object, although how good a representati
 \dothis{To create a morph to represent a string object, execute the following code in a workspace, one line at a time.}
 \begin{code}{}
 s := 'Morph' asMorph openInWorld.
-s openViewerForArgument
+s explore.
 \end{code}
 \cmindex{Morph}{openInWorld}
 
 The first line creates a Morph to represent the string \ct{'Morph'}, and then opens it (that is, displays it) in the ``world'', which is the name that \sq gives to the screen.
 You should obtain a graphical element\,---\,a Morph\,---\,which you can manipulate by blue-clicking.
-The second line opens a ``viewer'' that shows you attributes of this Morph, such as its \ct{x} and \ct{y} coordinates on the screen.
-Clicking on one of the yellow exclamation marks sends a message to the Morph which then responds appropriately.
+The second line opens an explorer that shows you attributes of this Morph, such as its \ct{fullBounds} and \ct{color}.
+%TODO: This is currently not working, readd as soon as this is fixed
+%The second line opens a ``viewer'' that shows you attributes of this Morph, such as its \ct{x} and \ct{y} coordinates on the screen.
+%Clicking on one of the yellow exclamation marks sends a message to the Morph which then responds appropriately.
 
 Of course, it is possible to define morphs that are more interesting graphical representations than the one that you have just seen.
-The method \mthind{Object}{asMorph} has a default implementation in class \ct{Object} class that just creates a StringMorph.
-So, for example, \ct{Color tan asMorph} returns a StringMorph labeled with the result of \clsind{Color} \ct{tan printString}.
-Let's change this so that we get a colored rectangle instead.
+The method \mthind{Object}{asMorph} has a default implementation in class \ct{Object} class that just creates a \ct{StringMorph}.
+For many objects, that is not a very useful graphical representation and thus the override it with a more interesting mapping.
 
-\dothis{Open a browser on the \ct{Color} class and add the following method to it:}
+\dothis{Open a browser on the \ct{Color} class and browse the following method.}
 \begin{method}{Getting a morph for an instance of \ct{Color}.}
 Color>>>asMorph
-	^ Morph new color: self
+	^ (RectangleMorph new)
+		fillStyle: self;
+		borderWidth: 0;
+		yourself
 \end{method}
 \noindent
-Now execute \ct{Color orange asMorph} \mthind{Morph}{openInWorld} in a workspace.
-Instead of the string-like morph, you get an orange rectangle!
 
+When you try this method by executing \ct{Color orange asMorph} \mthind{Morph}{openInWorld} in a workspace, you get an orange rectangle, instead of a plain \ct{StringMorph}!
 
 %=================================================================
 \section{Manipulating morphs}
