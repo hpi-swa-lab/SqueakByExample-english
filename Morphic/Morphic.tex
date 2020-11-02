@@ -124,7 +124,7 @@ By sending messages, we can change their properties, create new subclasses of Mo
 Every morph, even if it is not currently open on the screen, has a position and a size.  
 For convenience, all morphs are considered to occupy a rectangular region of the screen; if they are irregularly shaped, their position and size are those of the smallest rectangular ``box'' that surrounds them, which is known as the morph's bounding box, or just its ``bounds''.
 The \mthind{Morph}{position} method returns a \ct{Point} that describes the location of the morph's upper left corner (or the upper left corner of its bounding box).
-The origin of the coordinate system is the screen's upper left corner, with $y$ coordinates increasing \emph{down} the screen and $x$ coordinates increasing to the right.
+The origin of the coordinate system is the screen's upper left corner, with $y$ coordinates increasing \emph{down} the screen and $x$ coordinates increasing to the \emph{right}.
 The \ct{extent} method also returns a point, but this point specifies the width and height of the morph rather than a location.
 
 \dothis{Type the following code into a workspace and \menu{do it}:}
@@ -149,7 +149,7 @@ bill position: joe position + (100@0)
 \end{code}
 \noindent
 If you move joe using the mouse and then execute this code, bill will move so that it is 100 pixels to the right of joe.
-\ab{It would seem that this would be a good place to introduce the \ct{step} method}.
+% It would seem that this would be a good place to introduce the \ct{step} method
 
 %=================================================================
 \section{Composing morphs}
@@ -239,7 +239,7 @@ Let's use this knowledge to create a cross-shaped morph.
 \index{Morph!subclassing}
 
 \dothis{Using the class browser, define a new class \clsind{SBECrossMorph} inheriting from \ct{Morph}:}
-\begin{classdef}{Defining \ct{SBECrossMorph}}
+\begin{classdef}{Defining \ct{SBECrossMorph}.}
 Morph subclass: #SBECrossMorph
 	instanceVariableNames: ''
 	classVariableNames: ''
@@ -336,12 +336,12 @@ Notice how we leverage the \mthind{Rectangle}{containsPoint:} method in class \c
 
 There are two problems with the code in \mthsref{firstDrawOn} and \ref{mth:firstContains}.
 The most obvious is that we have duplicated code.
-This is a cardinal error: if we find that we need to change the way that \ct{horizonatalBar} or \ct{verticalBar} are calculated, we are quite likely to forget to change one of the two occurrences.
+This is a cardinal error: if we find that we need to change the way that \ct{horizontalBar} or \ct{verticalBar} are calculated, we are quite likely to forget to change one of the two occurrences.
 The solution is to factor out these calculations into two new methods, which we put in the \ct{private} protocol:
 
 \needlines{4}
 \begin{method}{\ct{horizontalBar}.}
-horizontalBar
+SBECrossMorph>>>horizontalBar
 	| crossHeight |
 	crossHeight := self height / 3.0.
 	^ self bounds insetBy: 0 @ crossHeight
@@ -349,7 +349,7 @@ horizontalBar
 
 \needlines{4}
 \begin{method}{\ct{verticalBar}.}
-verticalBar
+SBECrossMorph>>>verticalBar
 	| crossWidth |
 	crossWidth := self width / 3.0.
 	^ self bounds insetBy: crossWidth @ 0
@@ -360,14 +360,14 @@ We can then define both \ct{drawOn:} and \ct{containsPoint:} using these methods
 
 \needlines{4}
 \begin{method}{Refactored \ct{SBECrossMorph>>>drawOn:}.}
-drawOn: aCanvas 
+SBECrossMorph>>>drawOn: aCanvas 
 	aCanvas fillRectangle: self horizontalBar color: self color.
 	aCanvas fillRectangle: self verticalBar color: self color
 \end{method}
 
 \needlines{4}
 \begin{method}{Refactored \ct{SBECrossMorph>>>containsPoint:}.}
-containsPoint: aPoint 
+SBECrossMorph>>>containsPoint: aPoint 
 	^ (self horizontalBar containsPoint: aPoint)
 		or: [self verticalBar containsPoint: aPoint]
 \end{method}
@@ -411,7 +411,7 @@ Once again we find a method in class \ct{Rectangle} that does the hard work for 
 Here is the revised code:
 
 \begin{method}{The revised \ct{drawOn:} method, which fills the center of the cross once.}
-drawOn: aCanvas 
+SBECrossMorph>>>drawOn: aCanvas 
 	| topAndBottom |
 	aCanvas fillRectangle: self horizontalBar color: self color.
 	topAndBottom := self verticalBar areasOutside: self horizontalBar. 
@@ -425,7 +425,7 @@ We can work around this by rounding explicitly when we calculate the sizes of th
 
 \needlines{5}
 \begin{method}{\ct{SBECrossMorph>>>horizontalBar} with explicit rounding.}
-horizontalBar
+SBECrossMorph>>>horizontalBar
 	| crossHeight |
 	crossHeight := (self height / 3.0) rounded.
 	^ self bounds insetBy: 0 @ crossHeight
@@ -433,7 +433,7 @@ horizontalBar
 
 \needlines{5}
 \begin{method}{\ct{SBECrossMorph>>>verticalBar} with explicit rounding.}
-verticalBar
+SBECrossMorph>>>verticalBar
 	| crossWidth |
 	crossWidth := (self width / 3.0) rounded.
 	^ self bounds insetBy: crossWidth @ 0
@@ -500,7 +500,7 @@ We start by ensuring that all crossMorphs answer \ct{true} to the \mthind{Morph}
 \dothis{Add this method to \ct{SBECrossMorph}:}
 \begin{method}{Declaring that \ct{SBECrossMorph} will react to mouse clicks.}
 SBECrossMorph>>>handlesMouseDown: anEvent
-	^true
+	^ true
 \end{method}
 
 Suppose that when the red mouse button is clicked, we want to change the color of the cross to red, and when the yellow button is clicked we want to change the color to yellow.
@@ -545,7 +545,7 @@ This will happen if our morph answers \ct{true} to the \mthind{Morph}{handlesMou
 \dothis{Declare that \ct{SBECrossMorph} will react when it is under the mouse pointer.}
 \begin{method}{We want to handle ``mouse over'' events.} 
 SBECrossMorph>>>handlesMouseOver: anEvent
-	^true
+	^ true
 \end{method}
 
 \noindent
@@ -671,7 +671,8 @@ SBEScreenshotRecorder writeTo: 'figures/popup.png' building: [:helper |
 	\centerline{\includegraphics[width=\textwidth]{popup}}
 	\vfill
 	\vspace{4ex}
-	\caption{Dialog displayed by \ct{Project uiManager chooseFrom: \#('circle' 'oval' 'square' 'rectangle' 'triangle')}.}
+	\caption{Dialog displayed by \ct{UIManager>>>chooseFrom:}.
+		\label{fig:dialogChoosing}}
 \end{minipage}
 \end{figure}
 
@@ -687,11 +688,17 @@ To get the \clsind{UIManager} for our UI system, we can ask the class \clsind{Pr
 The class \clsind{Project} takes care of instantiating the \clsind{UIManager} corresponding to our UI system.
 For this reason, the most idiomatic and thus recommended way to retrieve a \clsind{UIManager} instance is the method \cmind{Project class}{uiManager}.
 
-For example, to display a request dialog, send a \ct{request:initialAnswer:} message:
+For example, to display the request dialog in \figref{dialogName}, send a \ct{request:initialAnswer:} message:
 \begin{code}{}
 Project uiManager
 	request: 'What''s your name?'
 	initialAnswer: 'no name'
+\end{code}
+
+To display the request dialog in \figre{dialogChoosing}, send a \ct{chooseFrom:}:
+\begin{code}{}
+Project uiManager 
+	chooseFrom: #('circle' 'oval' 'square' 'rectangle' 'triangle')
 \end{code}
 
 %=================================================================
@@ -704,7 +711,7 @@ In our example, the morph should be blue.
 If it is rejected, the dropped morph decides what to do.
 
 \dothis{Let's first define the receiver morph:}
-\begin{classdef}{Defining a morph on which we can drop other morphs}
+\begin{classdef}{Defining a morph on which we can drop other morphs.}
 Morph subclass: #ReceiverMorph
 	instanceVariableNames: ''
 	classVariableNames: ''
@@ -738,8 +745,8 @@ This can be achieved by the receiver answering \ct{true} to the message \mthind{
 
 \needlines{4}
 \begin{method}{Changing the behavior of the dropped morph when it is rejected.}
-ReceiverMorph>>>repelsMorph: aMorph event: ev
-	^ (self wantsDroppedMorph: aMorph event: ev) not
+ReceiverMorph>>>repelsMorph: aMorph event: anEvent
+	^ (self wantsDroppedMorph: aMorph event: anEvent) not
 \end{method}
 
 That's all we need as far as the receiver is concerned.
@@ -758,7 +765,7 @@ It will be rejected and sent back to its initial position.
 
 Let's create a specific subclass of \ct{Morph}, named \ct{DroppedMorph}, so we can experiment a bit more:
 
-\begin{classdef}{Defining a morph we can drag-and-drop onto \ct{ReceiverMorph}}
+\begin{classdef}{Defining a morph we can drag-and-drop onto \ct{ReceiverMorph}.}
 Morph subclass: #DroppedMorph
 	instanceVariableNames: ''
 	classVariableNames: ''
@@ -770,8 +777,9 @@ Morph subclass: #DroppedMorph
 \begin{method}{Initializing \ct{DroppedMorph}.}
 DroppedMorph>>>initialize
 	super initialize.
-	color := Color blue.
-	self position: 250@100
+	self 
+		color: Color blue;
+		position: 250@100
 \end{method}
 
 Now we can specify what the dropped morph should do when it is rejected by the receiver; here it will stay attached to the mouse pointer:
@@ -799,9 +807,7 @@ The green morph is rejected and therefore stays attached to the mouse pointer.
 %=================================================================
 \section{A complete example}
 
-Let's design a morph to roll a die%
-%\footnote{NB: One die, two dice.}
-.
+Let's design a morph to roll a die.
 Clicking on it will display the values of all sides of the die in a quick loop, and another click will stop the animation.
 
 \begin{ExecuteSmalltalkScript}
@@ -822,7 +828,7 @@ SBEScreenshotRecorder writeTo: 'figures/die.png' building: [:helper |
 \dothis{Define the die as a subclass of \clsind{BorderedMorph} instead of \ct{Morph} because we will make use of the border.}
 
 \needlines{6}
-\begin{classdef}{Defining the die morph}
+\begin{classdef}{Defining the die morph.}
 BorderedMorph subclass: #SBEDieMorph
 	instanceVariableNames: 'faces dieValue isStopped'
 	classVariableNames: ''
@@ -877,23 +883,23 @@ For instance, if we start by evaluating \ct{SBEDieMorph faces: 9}:
 Before defining \ct{drawOn:}, we need a few methods to place the dots on the displayed face:
 \begin{methods}{Nine methods for placing points on the faces of the die.}
 SBEDieMorph>>>face1
-	^{0.5@0.5}
+	^ {0.5@0.5}
 SBEDieMorph>>>face2
-	^{0.25@0.25 . 0.75@0.75}
+	^ {0.25@0.25 . 0.75@0.75}
 SBEDieMorph>>>face3
-	^{0.25@0.25 . 0.75@0.75 . 0.5@0.5}
+	^ {0.25@0.25 . 0.75@0.75 . 0.5@0.5}
 SBEDieMorph>>>face4
-	^{0.25@0.25 . 0.75@0.25 . 0.75@0.75 . 0.25@0.75}
+	^ {0.25@0.25 . 0.75@0.25 . 0.75@0.75 . 0.25@0.75}
 SBEDieMorph>>>face5
-	^{0.25@0.25 . 0.75@0.25 . 0.75@0.75 . 0.25@0.75 . 0.5@0.5}
+	^ {0.25@0.25 . 0.75@0.25 . 0.75@0.75 . 0.25@0.75 . 0.5@0.5}
 SBEDieMorph>>>face6
-	^{0.25@0.25 . 0.75@0.25 . 0.75@0.75 . 0.25@0.75 . 0.25@0.5 . 0.75@0.5}
+	^ {0.25@0.25 . 0.75@0.25 . 0.75@0.75 . 0.25@0.75 . 0.25@0.5 . 0.75@0.5}
 SBEDieMorph>>>face7
-	^{0.25@0.25 . 0.75@0.25 . 0.75@0.75 . 0.25@0.75 . 0.25@0.5 . 0.75@0.5 . 0.5@0.5}
+	^ {0.25@0.25 . 0.75@0.25 . 0.75@0.75 . 0.25@0.75 . 0.25@0.5 . 0.75@0.5 . 0.5@0.5}
 SBEDieMorph >>>face8
-	^{0.25@0.25 . 0.75@0.25 . 0.75@0.75 . 0.25@0.75 . 0.25@0.5 . 0.75@0.5 . 0.5@0.5 . 0.5@0.25}
+	^ {0.25@0.25 . 0.75@0.25 . 0.75@0.75 . 0.25@0.75 . 0.25@0.5 . 0.75@0.5 . 0.5@0.5 . 0.5@0.25}
 SBEDieMorph >>>face9
-	^{0.25@0.25 . 0.75@0.25 . 0.75@0.75 . 0.25@0.75 . 0.25@0.5 . 0.75@0.5 . 0.5@0.5 . 0.5@0.25 . 0.5@0.75}
+	^ {0.25@0.25 . 0.75@0.25 . 0.75@0.75 . 0.25@0.75 . 0.25@0.5 . 0.75@0.5 . 0.5@0.5 . 0.5@0.25 . 0.5@0.75}
 \end{methods}
 \on{kind of ugly boilerplate code -- should be a nice way to map these more elegantly to coordinates.}
 
@@ -965,8 +971,6 @@ SBEDieMorph>>>mouseDown: anEvent
 		ifTrue: [isStopped := isStopped not]
 \end{methods}
 Now the die will roll or stop rolling when we click on it.
-
-% That's all for the essentials of Morphic!
 
 % Most of the work on \ct{SBEDieMorph} was done with an instance of it living in the environment; this is quite nice when to tweak programs.
 
