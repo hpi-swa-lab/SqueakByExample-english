@@ -810,16 +810,18 @@ SBEScreenshotRecorder writeTo: './figures/fooNotFound_debugger.png' building: [:
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
 \begin{center}
+\begin{scaletikzpicturetowidth}{\textwidth} % TODO: Support lulu
 \begin{tikzpicture}[      
 	every node/.style={anchor=south west,inner sep=0pt},
-	x=1mm, y=1mm%,
-	%width=\textwidth % TODO: Support lulu
+	x=1mm, y=1mm,
+	scale=\tikzscale
 ]
 	\node (diagram) at (0,0)
 	{\includegraphics[width=\textwidth]{fooNotFound}};
-	\node (debugger) at (72,30)
-	{\includegraphics[width=.32\textwidth]{fooNotFound_debugger}};  
+	\node (debugger) at (78,28)
+	{\includegraphics[width=.3\textwidth]{fooNotFound_debugger}};  
 \end{tikzpicture}
+\end{scaletikzpicturetowidth}
 \caption{Message \lct{foo} is not understood\label{fig:fooNotFound}}
 \end{center}
 \end{figure}
