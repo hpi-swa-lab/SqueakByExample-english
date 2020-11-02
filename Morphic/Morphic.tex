@@ -86,7 +86,7 @@ SBEScreenshotRecorder writeTo: 'figures/detachingMenu.png' frame: [:bounds | bou
 
 All of the objects that you see on the screen when you run \sq are \emph{Morphs}, that is, they are instances of subclasses of class \ct{Morph}.
 \mbox{\ct{Morph}} itself is a large class with many methods; this makes it possible for subclasses to implement interesting behavior with little code.
-You can create a morph to represent any object, although how good a representation you get depends on the object!
+You can create a morph to represent any object, although how good a representation you get depends on whether the creators of the class of the object provided the necessary methods.
 
 \dothis{To create a morph to represent a string object, execute the following code in a workspace, one line at a time.}
 \begin{code}{}
@@ -123,7 +123,7 @@ By sending messages, we can change their properties, create new subclasses of Mo
 
 Every morph, even if it is not currently open on the screen, has a position and a size.  
 For convenience, all morphs are considered to occupy a rectangular region of the screen; if they are irregularly shaped, their position and size are those of the smallest rectangular ``box'' that surrounds them, which is known as the morph's bounding box, or just its ``bounds''.
-The \mthind{Morph}{position} method returns a \ct{Point} that describes the location of the morph's upper left corner (or the upper left corner of its bounding box).
+The \mthind{Morph}{position} method returns a \ct{Point} that describes the location of the morph's upper left corner (which is also the upper left corner of its bounding box).
 The origin of the coordinate system is the screen's upper left corner, with $y$ coordinates increasing \emph{down} the screen and $x$ coordinates increasing to the \emph{right}.
 The \ct{extent} method also returns a point, but this point specifies the width and height of the morph rather than a location.
 
@@ -1060,11 +1060,12 @@ Morphic is a graphical framework in which graphical interface elements can be dy
   \item You can convert an object into a morph and display that morph on the screen by sending it the messages \ct{asMorph openInWorld}.
   \item You can manipulate a morph by blue-clicking on it and using the handles that appear.
   	(Handles have help balloons that explain what they do.)
-  \item You can compose morphs by embedding one onto another, either by drag and drop or by sending the message \ct{addMorph:}.
+  \item You can compose morphs by sending the message \ct{addMorph:} or by using the \menu{embed into} feature, either through the menu or via drag and drop.
   \item You can subclass an existing morph class and redefine key methods, like \ct{initialize} and \ct{drawOn:}.
   \item You can control how a morph reacts to mouse and keyboard events by redefining the methods \ct{handlesMouseDown:}, \ct{handlesMouseOver:}, \etc
   \item You can animate a morph by defining the methods \ct{step} (what to do) and \ct{stepTime} (the number of milliseconds between steps).
   \item Various pre-defined morphs, like \ct{PopUpMenu} and \ct{FillInTheBlank}, are available for interacting with users.
+  \item \ct{Canvas} objects provide basic drawing operations, advanced features such as antialiasing support are provided by \ct{Canvas} subclasses.
 \end{itemize}
 
 %=================================================================
