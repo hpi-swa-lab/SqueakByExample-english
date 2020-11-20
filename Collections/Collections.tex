@@ -632,7 +632,7 @@ s size --> 2
 You can also create sets using \cmind{Set class}{newFrom:} or the conversion message \cmind{Collection}{asSet}:
 
 \begin{code}{@TEST}
-(Set newFrom: #( 1 2 3 1 4 )) = #(1 2 3 4 3 2 1) asSet --> true
+(Set newFrom: #(1 2 3 1 4 )) = #(1 2 3 4 3 2 1) asSet --> true
 \end{code}
 
 \mthind{Collection}{asSet} offers us a convenient way to eliminate duplicates from a collection:
@@ -646,7 +646,7 @@ The result of the example is 2, as the color white was included twice in the col
 
 A \clsindmain{Bag} is much like a \ct{Set} except that it does allow duplicates:
 \begin{code}{@TEST}
-{ Color black. Color white. (Color red + Color blue + Color green) } asBag size --> 3
+{Color black. Color white. (Color red + Color blue + Color green)} asBag size --> 3
 \end{code}
 
 The set operations \emph{union}, \emph{intersection}, and \emph{membership test} are implemented by the \ct{Collection} messages \mthind{Collection}{union:}, \mthind{Collection}{intersection:}, and \mthind{Collection}{includes:}.
@@ -705,7 +705,7 @@ String withAll: ('hello' asSortedCollection)     --> 'ehllo'
 It is possible to have different kinds of elements in a \ct{SortedCollection} as long as they are all comparable.
 For example, we can mix different kinds of numbers such as integers, floats, and fractions:
 \begin{code}{@TEST | col |}
-{ 5. 2/-3. 5.21 } asSortedCollection --> a SortedCollection((-2/3) 5 5.21)
+{5 . 2/-3 . 5.21} asSortedCollection --> a SortedCollection((-2/3) 5 5.21)
 \end{code}
 
 Imagine that you want to sort objects that do not define the method \ct{<=} or that you would like to have a different sorting criterion.
@@ -777,7 +777,7 @@ s copyReplaceAll: 'rries' with: 'mbats' --> 'No wombats'
 If you take a quick look at the implementation of these methods, you can see that they are defined not only for \ct{String}s but for any kind of \ct{SequenceableCollection}, so the following also works:
 
 \begin{code}{@TEST}
-(1 to: 6) copyReplaceAll: (3 to: 5) with: { 'three'. 'etc.' } --> #(1 2 'three' 'etc.' 6)
+(1 to: 6) copyReplaceAll: (3 to: 5) with: {'three'. 'etc.'} --> #(1 2 'three' 'etc.' 6)
 \end{code}
 
 \paragraph{String matching.}
