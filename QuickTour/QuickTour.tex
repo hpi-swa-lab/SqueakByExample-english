@@ -938,7 +938,7 @@ Now let's define the method that will make the test succeed!
 \dothis{Select class \clsind{String} in the system browser, select the \menu{converting} category, type the text in \mthref{shout} over the method creation template, and \menu{accept} it.}
 \begin{method}[shout]{The shout method}
 shout
-	^ self asUppercase, 'BANG'
+    ^ self asUppercase, 'BANG'
 \end{method}
 
 The comma is the string concatenation operation, so the body of this method appends an exclamation mark to an upper-case version of whatever \ct{String} object the \ct{shout} message was sent to.

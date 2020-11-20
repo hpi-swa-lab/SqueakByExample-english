@@ -200,7 +200,7 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 	For instance, \ct{<primitive: 1>} is the VM primitive for \ct{SmallInteger>>>+}.
 	Any code following the primitive is executed only if the primitive fails.
 
-\item[Unary messages] consist of a single word (like \ct{factorial}) sent to a receiver (like \ct{3}).
+\item[Unary messages] consist of a single word (such as \ct{factorial}) sent to a receiver (like the number \ct{3}).
 	\index{message!unary}
 	\seeindex{unary message}{message, unary}
 
@@ -612,8 +612,8 @@ Pragmas don't have any effect on the method by themselves, but other objects can
 \item	Use \ct{#( ... )} to define a literal array.
 		Use \ct|{ ... }| to define a dynamic array.
 		Note that 
-		\ct{#( 1 + 2 ) size --> 3}, but 
-		\ct|{ 1 + 2 } size --> 1|
+		\ct{#(1 + 2) size --> 3}, but 
+		\ct|{1 + 2} size --> 1|
 
 \item	There are three kinds of messages:
 		\emph{unary} (\eg \ct{1 asString}, \ct{Array new}),
@@ -625,7 +625,7 @@ Pragmas don't have any effect on the method by themselves, but other objects can
 
 \item	Local variables are declared with vertical bars.
 		Use \ct{:=} for assignment.
-		\ct{|x| x:=1}
+		\ct{| x | x:=1}
 
 \item	Expressions consist of message sends, cascades and assignments, possibly grouped with parentheses.
 		\emph{Statements} are expressions separated by periods.

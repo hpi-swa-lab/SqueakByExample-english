@@ -452,7 +452,7 @@ The method \mthind{Magnitude}{<} is abstract and defined as shown in \mthref{Mag
 \begin{method}[MagnitudeLessThan]{\ct{Magnitude>>><}}
 Magnitude>>>< aMagnitude 
 	"Answer whether the receiver is less than the argument."
-	^self subclassResponsibility
+	^ self subclassResponsibility
 \end{method}
 
 \noindent
@@ -461,7 +461,7 @@ By contrast, the method \mthind{Magnitude}{>=} is concrete; it is defined in ter
 \begin{method}[Magnitude>=]{\ct{Magnitude>>>>=}}
 >= aMagnitude 
 	"Answer whether the receiver is greater than or equal to the argument."
-	^(self < aMagnitude) not
+	^ (self < aMagnitude) not
 \end{method}
 The same is true of the other comparison methods.
 
@@ -471,7 +471,7 @@ The same is true of the other comparison methods.
 \begin{method}[CharacterLessThan]{\ct{Character>>><}}
 Character>>>< aCharacter 
 	"Answer true if the receiver's value < aCharacter's value."
-	^self asciiValue < aCharacter asciiValue
+	^ self asciiValue < aCharacter asciiValue
 \end{method}
 
 %---------------------------------------------------------
