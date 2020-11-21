@@ -7,19 +7,14 @@
 TO DO
 -----
 * Acknowledge all the contributors of errata!
-* Fix explanation 2.9: "A good trick is to always develop in the same folder." ...
 * Update the Metaprogramming chapter by incorporating material on metaprogramming and reflection from our lecture notes (including method wrappers and other  practical stuff), and http://www.iam.unibe.ch/~scg/Archive/Papers/Bergel06bRDLPrototyping.pdf.
-Check the code since Stef wrote it a while ago
 * Fix consistency of footnotes and captions. (needs consistent style -- full sentences with periods or what ...)
 - NB: Send a copy of each edition to:
 Schweizerische Nationalbibliothek, Erwerbungsdienst, Hallwylstr. 15, 3003 Bern
-[Done for first edition.]
-* NB: in First App that we depend on Squeak 3.9 not 3.8
 - Stef: want to write something on block, Exceptions....
 - Oscar: ? Add mechanism to test that certain expressions raise an ERROR?
 	1 / 0 --> ERROR
 - Oscar: Add means to define classes in tests (e.g., Model chapter)?
-- Add a code folder with change sets for all full examples (alternative to squeaksource)
 -----------------------------------------------------------------------------
 STATUS OF CHAPTERS
 ------------------
@@ -28,38 +23,20 @@ Preface -- DONE
 - Also add a reference to Dan Ingalls OOPSLA paper
 
 [GETTING STARTED]
-A Quick Tour of Squeak -- DONE
-A First Application -- DONE
-Syntax in a Nutshell -- DONE
-Understanding Message Syntax -- DONE
 
 [DEVELOPING IN SQUEAK]
-The Smalltalk Object Model -- DONE
-	- explain more why setters and getters are bad
-	- forwrad ref to Idioms chapter?
 The Squeak Programming Environment -- DONE (mostly)
 	- add more exercises
 	- Write more about Monticello -> Cassou?
-	* redo all screendumps with white background!
 SUnit -- DONE
-Add something on expected failures:
-expectedFailures
-	^#(testReifySendResult ...)
-Basic Classes -- Stef is working on it
-	* Need a chapter on Control Flow and Iterators?
-	[Iterators are discussed in the Collections chapter]
+ - Add something on expected failures:
+ - expectedFailures ^#(testReifySendResult ...)
 Collections -- DONE
 	* Fix description of IdentityDictionary
 	- the foobar example is confusing if someone tries to reproduce it
 	since there are no dots between the printits ...
-Streams -- DONE
-Morphic -- DONE
 
 [ADVANCED SQUEAK]
 Classes and Metaclasses -- DONE
 	* Needs more details and examples for responsibilities of Class,
 	  Behavior and Metaclass
-FAQ -- First rough draft
------------------------------------------------------------------------------
-For further chapters see SBE2-TO-DO.txt
------------------------------------------------------------------------------

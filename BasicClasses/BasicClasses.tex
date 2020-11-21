@@ -630,7 +630,7 @@ There is a dedicated method \mthind{Integer}{timesRepeat:} for evaluating a bloc
 We have already seen a similar example in \charef{syntax}:
 \begin{code}{@TEST | n |}
 n := 2.
-3 timesRepeat: [ n := n*n ].
+3 timesRepeat: [n := n*n].
 n --> 256
 \end{code}
 
@@ -767,7 +767,7 @@ The class \clsindmain{Boolean} offers a fascinating insight into how much of the
 Most of the behavior of \ct{Boolean}s can be understood by considering the method \mthind{Boolean}{ifTrue:ifFalse:}, which takes two \ct{Blocks} as arguments.
 
 \begin{code}{@TEST}
-4 factorial > 20 ifTrue: [ 'bigger' ] ifFalse: [ 'smaller' ] --> 'bigger'
+4 factorial > 20 ifTrue: ['bigger'] ifFalse: ['smaller'] --> 'bigger'
 \end{code}
 
 The method is abstract in \ct{Boolean}.
@@ -801,8 +801,8 @@ You also have a choice between eager and lazy conjunctions and disjunctions.
 
 \begin{code}{@TEST}
 (1>2) & (3<4)              --> false    "must evaluate both sides"
-(1>2) and: [ 3<4 ]        --> false    "only evaluate receiver"
-(1>2) and: [ (1/0) > 0 ] --> false    "argument block is never evaluated, so no exception"
+(1>2) and: [3<4]        --> false    "only evaluate receiver"
+(1>2) and: [(1/0) > 0] --> false    "argument block is never evaluated, so no exception"
 \end{code}
 
 In the first example, both \ct{Boolean} subexpressions are evaluated, since \mthind{Boolean}{&} takes a \ct{Boolean} argument.

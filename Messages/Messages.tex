@@ -390,7 +390,7 @@ Parenthesised messages are sent prior to other messages.\\
 \centerline{\ct{(Msg) > Unary > Binary > Keyword}}}
 
 \begin{code}{@TEST}
-1.5 tan rounded asString = (((1.5 tan) rounded) asString) --> true    "parentheses not needed here"
+1.5 tan rounded asString = (((1.5 tan) rounded) asString) --> true                                 "parentheses not needed for the sends above"
 3 + 4 factorial   --> 27    "not 5040"
 (3 + 4) factorial --> 5040
 \end{code}
@@ -568,7 +568,7 @@ By adding parenthesis we make it clear where one keyword message ends and where 
 
 \begin{code}{}
 ord := OrderedCollection new.
-(ord includes: $a) ifTrue:[...]
+(ord includes: $a) ifTrue: [...]
 \end{code}
 
 The same applies to the following example, in which we use the result of the keyword message send \ct{rotateBy:magnify:smoothing:} as an argument in the keyword message send \ct{at:put:}.
@@ -576,9 +576,9 @@ The same applies to the following example, in which we use the result of the key
 \begin{code}{}
 aDict
    at: (rotatingForm 
-          rotateBy: angle	
-          magnify: 2 
-          smoothing: 1)
+           rotateBy: angle	
+           magnify: 2 
+           smoothing: 1)
    put: 3
 \end{code}
 
@@ -589,17 +589,8 @@ To keep your code short and clear you should however try to use them less often 
 When messages have different precedence, you do not have to use parentheses.
 For example, the following piece of code does not require parentheses because the message send \ct{x isNil} is unary, hence it is always sent prior to the keyword message \ct{ifTrue:}.
 \begin{code}{}
-x isNil ifTrue:[...]
+x isNil ifTrue: [...]
 \end{code}
-
-The following piece of code requires parentheses because the messages \ct{includes:} and \ct{ifTrue:} are both keyword messages. 
-\begin{code}{}
-ord := OrderedCollection new.
-(ord includes: $a)
-   ifTrue:[...]
-\end{code}
-\noindent
-Without parentheses, the unknown message \ct{includes:ifTrue:} would be sent to the collection!
 
 %-------------------------------------------------------------
 \subsection{When to use \lct{[ ]} or \lct{( )}}
@@ -615,9 +606,9 @@ Parentheses, on the other hand, only affect the order of sending messages.
 So in \lct{(\emph{expression})}, the \lct{\emph{expression}} will \emph{always} be evaluated exactly once.
 
 \begin{code}{}
-[ x isReady ] whileTrue: [ y doSomething ]   "both the receiver and the argument must be blocks"
-4 timesRepeat: [ Beeper beep ]                   "the argument is evaluated more than once, so must be a block"
-(x isReady) ifTrue: [ y doSomething ]           "receiver is evaluated once, so is not a block"
+[x isReady] whileTrue: [y doSomething]   "both the receiver and the argument must be blocks"
+4 timesRepeat: [Beeper beep]                   "the argument is evaluated more than once, so must be a block"
+(x isReady) ifTrue: [y doSomething]           "receiver is evaluated once, so is not a block"
 \end{code}
 
 %=============================================================

@@ -188,9 +188,9 @@ SBEScreenshotRecorder writeTo: 'figures/joeStar.png' building: [:helper |
 	bill := Morph new color: Color red .
 	bill openInWorld.
 	joe := Morph new color: (Color blue alpha: 0.5).
-	joe extent: 55 @ 60.
+	joe extent: 55@60.
 	joe openInWorld.
-	bill position: joe position - (27 @ 20).
+	bill position: joe position - (27@20).
 	star := StarMorph new color: Color yellow.
 	joe addMorph: star.
 	star center: joe center.
@@ -256,8 +256,8 @@ drawOn: aCanvas
 	| crossHeight crossWidth horizontalBar verticalBar |
 	crossHeight := self height / 3.0 .
 	crossWidth := self width / 3.0 .
-	horizontalBar := self bounds insetBy: 0 @ crossHeight.
-	verticalBar := self bounds insetBy: crossWidth @ 0.
+	horizontalBar := self bounds insetBy: 0@crossHeight.
+	verticalBar := self bounds insetBy: crossWidth@0.
 	aCanvas fillRectangle: horizontalBar color: self color.
 	aCanvas fillRectangle: verticalBar color: self color
 \end{method}
@@ -328,8 +328,8 @@ containsPoint: aPoint
 	| crossHeight crossWidth horizontalBar verticalBar |
 	crossHeight := self height / 3.0.
 	crossWidth := self width / 3.0.
-	horizontalBar := self bounds insetBy: 0 @ crossHeight.
-	verticalBar := self bounds insetBy: crossWidth @ 0.
+	horizontalBar := self bounds insetBy: 0@crossHeight.
+	verticalBar := self bounds insetBy: crossWidth@0.
 	^ (horizontalBar containsPoint: aPoint)
 		or: [verticalBar containsPoint: aPoint]
 \end{method}
@@ -347,7 +347,7 @@ The solution is to factor out these calculations into two new methods, which we 
 SBECrossMorph>>>horizontalBar
 	| crossHeight |
 	crossHeight := self height / 3.0.
-	^ self bounds insetBy: 0 @ crossHeight
+	^ self bounds insetBy: 0@crossHeight
 \end{method}
 
 \needlines{4}
@@ -355,7 +355,7 @@ SBECrossMorph>>>horizontalBar
 SBECrossMorph>>>verticalBar
 	| crossWidth |
 	crossWidth := self width / 3.0.
-	^ self bounds insetBy: crossWidth @ 0
+	^ self bounds insetBy: crossWidth@0
 \end{method}
 
 \noindent
@@ -418,7 +418,7 @@ SBECrossMorph>>>drawOn: aCanvas
 	| topAndBottom |
 	aCanvas fillRectangle: self horizontalBar color: self color.
 	topAndBottom := self verticalBar areasOutside: self horizontalBar. 
-	topAndBottom do: [ :each | aCanvas fillRectangle: each color: self color]
+	topAndBottom do: [:each | aCanvas fillRectangle: each color: self color]
 \end{method}
 
 This code seems to work, but if you try it on some crosses and resize them, you may notice that at some sizes, a one-pixel wide line separates the bottom of the cross from the remainder, as shown in \figref{bug}.
@@ -727,7 +727,7 @@ Morph subclass: #ReceiverMorph
 ReceiverMorph>>>initialize
 	super initialize.
 	color := Color red.
-	bounds := 0 @ 0 extent: 200 @ 200
+	bounds := 0@0 extent: 200@200
 \end{method}
 
 How do we decide if the receiver morph will accept or repel the dropped morph?
@@ -790,8 +790,7 @@ Now we can specify what the dropped morph should do when it is rejected by the r
 DroppedMorph>>>rejectDropMorphEvent: anEvent
 	| h |
 	h := anEvent hand.
-	WorldState
-		addDeferredUIMessage: [h grabMorph: self].
+	WorldState addDeferredUIMessage: [h grabMorph: self].
 	anEvent wasHandled: true
 \end{method}
 
@@ -851,7 +850,7 @@ The \ct{initialize} method is defined on the instance side in the usual way; rem
 \begin{method}{Initializing instances of \ct{SBEDieMorph}.}
 SBEDieMorph>>>initialize
 	super initialize.
-	self extent: 50 @ 50.
+	self extent: 50@50.
 	self useGradientFill; borderWidth: 2; useRoundedCorners.
 	self setBorderStyle: #complexRaised.
 	self fillStyle direction: self extent.
@@ -914,8 +913,8 @@ It draws the die background with the \ct{super}-send, and then draws the dots.
 \begin{method}{Drawing the die morph.}
 SBEDieMorph>>>drawOn: aCanvas
 	super drawOn: aCanvas.
-	(self perform: ('face' , dieValue asString) asSymbol)
-		do: [:aPoint | self drawDotOn: aCanvas at: aPoint]
+	(self perform: ('face' , dieValue asString) asSymbol) do: [:aPoint |
+		self drawDotOn: aCanvas at: aPoint]
 \end{method}
 
 The second part of this method uses the reflective capacities of \st.
@@ -945,8 +944,8 @@ SBEDieMorph>>>dieValue: aNumber
 	(aNumber isInteger
 			and: [aNumber > 0]
 			and: [aNumber <= faces])
-		ifTrue:
-			[dieValue := aNumber.
+		ifTrue: [
+			dieValue := aNumber.
 			self changed]
 \end{method}
 
@@ -998,8 +997,8 @@ SBEDieMorph>>>drawOn: aCanvas
 	| theCanvas |
 	theCanvas := aCanvas asAlphaBlendingCanvas: 0.5.
 	super drawOn: theCanvas.
-	(self perform: ('face' , dieValue asString) asSymbol)
-		do: [:aPoint | self drawDotOn: theCanvas at: aPoint]
+	(self perform: ('face' , dieValue asString) asSymbol) do: [:aPoint |
+		self drawDotOn: theCanvas at: aPoint]
 \end{method}
 \noindent
 That's all you need to do!
@@ -1041,8 +1040,8 @@ SBEDieMorph>>>drawOn: aCanvas
 	| theCanvas |
 	theCanvas := aCanvas asBalloonCanvas aaLevel: 3.
 	super drawOn: aCanvas.
-	(self perform: ('face' , dieValue asString) asSymbol)
-		do: [:aPoint | self drawDotOn: theCanvas at: aPoint]
+	(self perform: ('face' , dieValue asString) asSymbol) do: [:aPoint | 
+		self drawDotOn: theCanvas at: aPoint]
 
 SBEDieMorph>>>drawDotOn: aCanvas at: aPoint
 	aCanvas
