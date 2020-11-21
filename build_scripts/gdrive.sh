@@ -4,7 +4,7 @@ set -e
 
 OPERATION=$1
 
-./travis_fold -start
+./build_scripts/travis_fold -start
 
 GDRIVE_URL="https://drive.google.com/drive/folders/1tNIvN-9Vx8djNZYfSYuqhjheb-EgJuTc?usp=sharing"
 GDRIVE=./bin/gdrive
@@ -66,5 +66,5 @@ case $OPERATION in
 		exit 1
 esac
 
-./travis_fold -end
+./build_scripts/travis_fold -end
 
