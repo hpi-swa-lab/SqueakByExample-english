@@ -14,12 +14,12 @@ before_script:
 - set -o pipefail
 script:
 - smalltalkci .smalltalk.ston
-- make | ./travis_fold Compiling PDF ...
+- make | ./build_scripts/travis_fold Compiling PDF ...
 - mv SBE.pdf "SBE_${SQUEAK_VERSION}.pdf"
 - | # Upload PDF file to Google Drive
   if [ "$TRAVIS_PULL_REQUEST" = false ]
   then
-    ./gdrive.sh upload "SBE_${SQUEAK_VERSION}.pdf"
+    ./build_scripts/gdrive.sh upload "SBE_${SQUEAK_VERSION}.pdf"
   fi
 
 jobs:
@@ -30,7 +30,7 @@ jobs:
       env: SQUEAK_VERSION=
       language: minimal
       install: skip
-      script: ./gdrive.sh download
+      script: ./build_scripts/gdrive.sh download
       deploy:
         provider: releases
         file_glob: true

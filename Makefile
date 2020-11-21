@@ -63,15 +63,15 @@ etc :
 	open ${ETC}.pdf
 
 examples :
-	./examples.rb $C > $@.txt
+	./build_scripts/examples.rb $C > $@.txt
 
 listings : clean_listings
-	bash -e annotate-listings.sh SmalltalkSources/ ListingSources/
+	bash -e build_scripts/annotate-listings.sh SmalltalkSources/ ListingSources/
 
 fun :
-	time ./examples.rb $C > $@1.txt
+	time ./build_scripts/examples.rb $C > $@1.txt
 	# Requires Gnu Smalltalk 2.95c with scripting support:
-	time ./examples.st $C > $@2.txt
+	time ./build_scripts/examples.st $C > $@2.txt
 	-diff $@1.txt $@2.txt
 
 # --------------------------------------------------------------------------------
