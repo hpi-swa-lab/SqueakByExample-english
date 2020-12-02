@@ -422,7 +422,7 @@ We can use \ct{new:}, \ct{with:}, and  the constructs \ct{#( )} and \ct|{ }|.
 The following code creates an array of three elements consisting of the number \ct{4}, the fraction \ct{3/2}, and the string \ct{'lulu'}.
 
 \begin{code}{@TEST | anArray |}
-Array with: 4 with: 3 / 2 with: 'lulu' -->  {4 . (3 / 2) . 'lulu'}
+Array with: 4 with: 3 / 2 with: 'lulu' -->  {4 . (3/2) . 'lulu'}
 \end{code}
 
 \paragraph{Literal creation with \ct|\#()|.}
@@ -455,7 +455,7 @@ This means in particular that the expressions enclosed by \ct|{| and \ct|}| are 
 \begin{code}{@TEST | anArray |}
 {1 + 2} --> #(3)
 {(1 / 2) asFloat} at: 1 --> 0.5
-{10 atRandom . 1 / 3} at: 2 --> (1 / 3)
+{10 atRandom . 1 / 3} at: 2 --> (1/3)
 \end{code}
 
 \paragraph{Element Access.}
@@ -554,7 +554,7 @@ We can use \cmind{Interval class}{from:to:by:} or \cmind{Number}{to:by:} to spec
 \begin{code}{@TEST}
 (Interval from: 1 to: 100 by: 0.5) size --> 199
 (1 to: 100 by: 0.5) at: 198 --> 99.5
-(1 / 2 to: 54 / 7 by: 1 / 3) last --> (15 / 2)
+(1 / 2 to: 54 / 7 by: 1 / 3) last --> (15/2)
 \end{code}
 
 %---------------------------------------------------------
@@ -589,7 +589,7 @@ We can create a \ct{Dictionary} from a collection of associations, or we may con
 \begin{code}{@TEST | colors |}
 colors := Dictionary newFrom: {#blue -> Color blue . #red -> Color red . #yellow -> Color yellow}.
 colors removeKey: #blue.
-colors associations --> {#red -> Color red . #yellow -> Color yellow}
+colors associations --> {#red->Color red . #yellow->Color yellow}
 \end{code}
 
 \paragraph{IdentityDictionary.}

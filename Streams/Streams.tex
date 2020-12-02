@@ -113,13 +113,13 @@ After that, the file contents are read again into the image.
 \needlines{3}
 \begin{code}{@TEST}
 StandardFileStream
-  fileNamed: 'test.txt'
+  fileNamed: 'someTestFile.txt'
   do: [:stream | stream
         nextPutAll: '123';
         space;
         nextPutAll: 'abcd'].
 
-StandardFileStream readOnlyFileNamed: 'test.txt' do: [:stream | stream contents]. --> '123 abcd'
+StandardFileStream readOnlyFileNamed: 'someTestFile.txt' do: [:stream | stream contents]. --> '123 abcd'
 \end{code}
 % ct TODO: Line breaks in the previous example would be nice but would require a redesign of SBEtests.
 \cmindex{FileStream class}{fileNamed:do:}

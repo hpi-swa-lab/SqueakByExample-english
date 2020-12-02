@@ -559,7 +559,7 @@ The receiver then decides how to respond by selecting its own \emph{method} for 
 Since different objects may have different methods for responding to the same message, the method must be chosen \emph{dynamically}, when the message is received.
 \begin{code}{@TEST}
 3 + 4         --> 7          "send message + with argument 4 to integer  3"
-(1 @ 2) + 4 --> 5 @ 6    "send message + with argument 4 to point (1@2)"
+(1 @ 2) + 4 --> 5@6    "send message + with argument 4 to point (1@2)"
 \end{code}
 \noindent
 As a consequence, we can send the \emph{same message} to different objects, each of which may have \emph{its own method} for responding to the message.
