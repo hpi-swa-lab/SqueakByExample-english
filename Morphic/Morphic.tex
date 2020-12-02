@@ -743,6 +743,7 @@ Morph subclass: #ReceiverMorph
 \dothis{Now define the initialization method in the usual way:}
 \begin{method}{Initializing \ct{ReceiverMorph}.}
 ReceiverMorph>>>initialize
+
 	super initialize.
 	color := Color red.
 	bounds := 0 @ 0 extent: 200 @ 200.
@@ -878,7 +879,6 @@ SBEDieMorph>>>initialize
 		useGradientFill; borderWidth: 2; useRoundedCorners;
 		setBorderStyle: #complexRaised;
 		color: Color green.
-	self fillStyle direction: self extent.
 	dieValue := 1.
 	faces := 6.
 	isStopped := false.
