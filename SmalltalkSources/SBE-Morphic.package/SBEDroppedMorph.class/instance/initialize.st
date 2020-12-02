@@ -1,5 +1,6 @@
 initialization
 initialize
+	
 	super initialize.
 	color := Color blue.
-	self position: 250@100.
+	self position: 250 @ 100.
