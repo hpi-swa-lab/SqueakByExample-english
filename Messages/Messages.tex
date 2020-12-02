@@ -191,12 +191,12 @@ Binary messages are messages that require exactly one argument \emph{and} whose 
 Note that \ct{--} is not allowed for parsing reasons.
 
 \begin{code}{@TEST}
-100@100      --> 100@100  "creates a Point object"
+100 @ 100      --> 100@100  "creates a Point object"
 3 + 4              --> 7
 10 - 1            --> 9
 4 <= 3            --> false
-(4/3) * 3 = 4   --> true  "equality is just a binary message, and Fractions are exact"
-(3/4) == (3/4) --> false  "two equal Fractions are not the same object"
+(4 / 3) * 3 = 4   --> true  "equality is just a binary message, and Fractions are exact"
+(3 / 4) == (3 / 4) --> false  "two equal Fractions are not the same object"
 \end{code}
 
 \important{Binary messages are messages that require exactly one argument \emph{and} whose selector is composed of a sequence of characters from: \ct{+}, \ct{-}, \ct{*}, \ct{/}, \ct{\&}, \ct{=}, \ct{>}, \ct{|}, \ct{<}, \ct{\~}, and \ct{@}. \ct{--} is not possible.\\
@@ -281,7 +281,7 @@ Unfortunately, the rules are a bit too simplistic for arithmetic message sends, 
 
 The following example, which is a bit more complex (!), offers a nice illustration that even complicated \st expressions can be read naturally:
 \begin{code}{@TEST}
-[:aClass | aClass methodDict keys sorted select: [:aMethod | (aClass>>aMethod) isAbstract ]] value: Boolean --> #(#& #==> #and: #asBit #ifFalse: #ifFalse:ifTrue: #ifTrue: #ifTrue:ifFalse: #not #or: #|)
+[:aClass | aClass methodDict keys sorted select: [:aMethod | (aClass>>aMethod) isAbstract]] value: Boolean --> #(#& #==> #and: #asBit #ifFalse: #ifFalse:ifTrue: #ifTrue: #ifTrue:ifFalse: #not #or: #|)
 \end{code}
 \noindent
 Here we want to know which methods of the \ct{Boolean} class are abstract.
@@ -412,23 +412,23 @@ In the following example, we need the \ind{parentheses} to force sending \ct{low
 %   'www.altavista.digital.com/av/pix/default/av-adv.gif') display
 
 \paragraph{Example.}
-The message \ct{(65@325 extent: 134 @ 100) center} returns the center of a rectangle whose top-left point is $(65, 325)$ and whose size is $134{\times}100$.
+The message \ct{(65 @ 325 extent: 134 @ 100) center} returns the center of a rectangle whose top-left point is $(65, 325)$ and whose size is $134{\times}100$.
 \Egref{decExtent} shows how the message is decomposed and sent.
 First, the message between parentheses is sent:
-It contains two binary messages \ct{65@325} and \ct{134@100} that are sent first and return points, and a keyword message \ct{extent:} which is then sent and returns a rectangle.
+It contains two binary messages \ct{65 @ 325} and \ct{134 @ 100} that are sent first and return points, and a keyword message \ct{extent:} which is then sent and returns a rectangle.
 Finally, the unary message \ct{center} is sent to the rectangle and a point is returned. 
 Evaluating the message without parentheses would lead to an error because the object \ct{100} does not understand the message \ct{center}.
 
 \begin{example}[decExtent]{Example of Parentheses.}{}
-      (65@325 extent: 134@100) center
-(1)   65@325                                                    "binary"
+      (65 @ 325 extent: 134 @ 100) center
+(1)   65 @ 325                                                    "binary"
     --> aPoint
-(2)                                134@100                     "binary"
+(2)                                  134 @ 100                     "binary"
                                  --> anotherPoint
 (3)   aPoint extent: anotherPoint                       "keyword"
       --> aRectangle
 (4)   aRectangle center                                     "unary"
-      --> 132@375
+      --> 132 @ 375
 \end{example}
 
 \subsection{From left to right}
@@ -462,10 +462,10 @@ Here we see the common situations where extra parentheses are needed.
 \begin{code}{@TEST}
 3 + 4 * 5      --> 35    "(not 23)  Binary messages sent from left to right"
 3 + (4 * 5)    --> 23
-1 + 1/3         --> (2/3)    "and not 4/3"
-1 + (1/3)       --> (4/3)
-1/3 + 2/3       --> (7/9)    "and not 1"
-(1/3) + (2/3)  --> 1
+1 + 1 / 3         --> (2 / 3)    "and not 4/3"
+1 + (1 / 3)       --> (4 / 3)
+1 / 3 + 2 / 3       --> (7 / 9)    "and not 1"
+(1 / 3) + (2 / 3)  --> 1
 \end{code}
 
 \paragraph{Example.} 
@@ -622,8 +622,8 @@ Therefore a final period is optional.
 
 \begin{code}{@TEST}
 | box |
-box := 20@30 corner: 60@90.
-box containsPoint: 40@50 --> true
+box := 20 @ 30 corner: 60 @ 90.
+box containsPoint: 40 @ 50 --> true
 \end{code}
 
 %=============================================================

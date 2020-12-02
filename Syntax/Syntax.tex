@@ -83,19 +83,19 @@ Expressions are composed of the following building blocks:
 		\lct{\$a}					&	the character `a' \\
 		\lct{'Hello'}				&	the string ``Hello'' \\
 		\lct{\#Hello}				&	the symbol \lct{\#Hello} \\
-		\lct{\{1. 2. 1+2\}}		&	a dynamic array \\
+		\lct{\{1 . 2 . 1 + 2\}}		&	a dynamic array \\
 		\lct{\#(1 2 3)}			&	a literal array \\
 		\lct{\#[255 33 200 1]}   &	a byte array \\
 		\midrule
 		\lct{"a comment"} 		&	a comment \\
 		\midrule
-		\lct{| x y |}				&	declaration of variables \lct{x} and \lct{y}	\\
+		\lct{|x y|}				&	declaration of variables \lct{x} and \lct{y}	\\
 		\lct{x := 1}				&	assign 1 to \lct{x} \\
 		\lct{[x + y]}			&	a block that evaluates to \lct{x+y} \\
 		\lct{<primitive: 1>}		&	primitive pragma to invoke virtual machine \\
 		\midrule
 		\lct{3 factorial}			&	unary message \\
-		\lct{3+4}					&	binary messages \\
+		\lct{3 + 4}					&	binary messages \\
 		\lct{2 raisedTo: 6 modulo: 10}		&	keyword message \\
 		\midrule
 		\lct{\textasciicircum true} 			&	return the value true	\\
@@ -151,7 +151,7 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 \item[Run-time arrays.]
 	Curly braces \ct|{ }| define a (\subind{Array}{dynamic}) array at run-time.
 	Elements are expressions separated by periods.
-	So \ct|{ 1. 2. 1+2 }| defines an array with elements 1, 2, and the result of evaluating 1+2.
+	So \ct|{1 . 2 . 1 + 2}| defines an array with elements 1, 2, and the result of evaluating 1+2.
 	(The curly-brace notation is peculiar to the \sq dialect of \st!
 	In other \st{}s you must build up dynamic arrays explicitly.)
 	
@@ -205,7 +205,7 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 	\seeindex{unary message}{message, unary}
 
 \item[Binary messages] are operators (like \ct{+}) sent to a receiver and taking a single argument.
-	In \ct{3+4}, the receiver is \ct{3} and the argument is \ct{4}.
+	In \ct{3 + 4}, the receiver is \ct{3} and the argument is \ct{4}.
 	\index{message!binary}
 	\seeindex{binary message}{message, binary}
 
@@ -348,11 +348,12 @@ Here is the method \mthind{String}{lineCount} in the class \clsind{String}.
 String>>>lineCount
    "Answer the number of lines represented by the receiver,
    where every cr adds one line."
+   
    | cr count |
    cr := Character cr.
    count := 1 min: self size.
-   self do: [:c | 
-      c = cr ifTrue: [count := count + 1]].
+   self do: [:eachChar | 
+      eachChar = cr ifTrue: [count := count + 1]].
    ^ count
 \end{method}
 
@@ -407,7 +408,7 @@ Locals are declared after any arguments:
 \index{variable!declaration}
 
 \begin{code}{@TEST}
-[:x :y | | z | z := x+ y. z] value: 1 value: 2 --> 3
+[:x :y | | z | z := x + y. z] value: 1 value: 2 --> 3
 \end{code}
 
 Blocks are actually lexical \emph{closures} since they can refer to variables of the surrounding environment.
@@ -431,6 +432,7 @@ In the following example (see \mthref{detectReturnBlock}), when the expression \
 \begin{method}[detectReturnBlock]{The method \ct{detect:ifFound:ifNone:} illustrating how returning inside blocks can be used}
 Collection>>>detect: aBlock ifFound: foundBlock ifNone: exceptionBlock 
    "foundBlock takes one argument, the found object."
+
    self do: [:element | 
       (aBlock value: element) ifTrue: [^ foundBlock value: element]].
    ^ exceptionBlock value
@@ -463,7 +465,7 @@ Here is an example of a very procedural loop:
 
 \begin{code}{@TEST | n |}
 n := 1.
-[n < 1000] whileTrue: [n := n*2].
+[n < 1000] whileTrue: [n := n * 2].
 n --> 1024
 \end{code}
 \cmindex{BlockClosure}{whileTrue:}
@@ -472,7 +474,7 @@ n --> 1024
 \mthind{BlockClosure}{whileFalse:} reverses the exit condition.
 \begin{code}{@TEST | n |}
 n := 1.
-[n > 1000] whileFalse: [n := n*2].
+[n > 1000] whileFalse: [n := n * 2].
 n --> 1024
 \end{code}
 
@@ -481,7 +483,7 @@ n --> 1024
 
 \begin{code}{@TEST | n |}
 n := 1.
-10 timesRepeat: [n := n*2].
+10 timesRepeat: [n := n * 2].
 n --> 1024
 \end{code}
 
@@ -491,7 +493,7 @@ The two arguments are the upper bound, and a block that takes the current value 
 \needlines{4}
 \begin{code}{@TEST | result |}
 result := String new.
-1 to: 10 do: [:n | result := result, n printString, ' '].
+1 to: 10 do: [:n | result := result , n printString , ' '].
 result --> '1 2 3 4 5 6 7 8 9 10 '
 \end{code}
 
@@ -508,7 +510,7 @@ The argument is a block that is evaluated for each element of the collection.
 
 \begin{code}{@TEST | result |}
 result := String new.
-(1 to: 10) do: [:n | result := result, n printString, ' '].
+(1 to: 10) do: [:n | result := result , n printString , ' '].
 result --> '1 2 3 4 5 6 7 8 9 10 '
 \end{code}
 
@@ -625,7 +627,7 @@ Pragmas don't have any effect on the method by themselves, but other objects can
 
 \item	Local variables are declared with vertical bars.
 		Use \ct{:=} for assignment.
-		\ct{| x | x:=1}
+		\ct{| x | x := 1}
 
 \item	Expressions consist of message sends, cascades and assignments, possibly grouped with parentheses.
 		\emph{Statements} are expressions separated by periods.

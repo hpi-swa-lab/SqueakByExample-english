@@ -246,11 +246,11 @@ The rest of the method sets up the state of this object.
 Sending \ct{self label: ''}, for example, sets the label of this object to the empty string.
 \pvindex{self}
 
-The expression \ct{0@0 corner: 16@16} probably needs some explanation. 
-\lct{0@0} represents a \clsind{Point} object with $x$ and $y$ coordinates both set to 0.
-In fact, \ct{0@0} sends the message \ct{@} to the \clsind{Number} object \ct{0} with argument \ct{0}.
+The expression \ct{0 @ 0 corner: 16 @ 16} probably needs some explanation. 
+\lct{0 @ 0} represents a \clsind{Point} object with $x$ and $y$ coordinates both set to 0.
+In fact, \ct{0 @ 0} sends the message \ct{@} to the \clsind{Number} object \ct{0} with argument \ct{0}.
 The effect will be that the number \ct{0} will ask the \ct{Point} class to create a new instance with coordinates $(0,0)$.
-Now we send this newly created point the message \ct{corner: 16@16}, which causes it to create a \clsind{Rectangle} with corners \ct{0@0} and \ct{16@16}.
+Now we send this newly created point the message \ct{corner: 16 @ 16}, which causes it to create a \clsind{Rectangle} with corners \ct{0 @ 0} and \ct{16 @ 16}.
 We use the setter method \ct{bounds}, inherited from the superclass, to set the \ct{bounds} of the cell to the newly created rectangle.
 
 Note that the origin of the \sq screen is the \emph{top left}, and the $y$ coordinate increases \emph{downward}.
@@ -285,7 +285,7 @@ You can test the effect of the code you have written by creating a new \ct{SBECe
 The left-hand pane of the \ind{inspector} shows a list of instance variables; if you select one (try \mbox{\ct{bounds}),} the value of the \ind{instance variable} is shown in the right pane.
 You can also use the inspector to change the value of an instance variable.
 
-\dothis{Change the value of \ct{bounds} to \ct{0@0 corner: 50@50} and \menu{accept} it.}
+\dothis{Change the value of \ct{bounds} to \ct{0 @ 0 corner: 50 @ 50} and \menu{accept} it.}
 
 The bottom pane of the inspector is a mini-workspace.
 It's useful because in this workspace the pseudo-variable \self is bound to the object being inspected. 
@@ -438,7 +438,7 @@ It turns out to be a very good syntax because the name of the method can be used
 For example, it is pretty clear that \ct{Matrix rows: 5 columns: 2} has 5 rows and 2 columns, and not 2 rows and 5 columns.
 \cmindex{Matrix class}{rows:columns:}
 
-\ct{Matrix new: self cellsPerSide tabulate: [ :i :j | self newCellAt: i at: j ]} creates a new \ct{n}{$\times$}\ct{n} matrix and initializes its elements.
+\ct{Matrix new: self cellsPerSide tabulate: [:i :j | self newCellAt: i at: j ]} creates a new \ct{n}{$\times$}\ct{n} matrix and initializes its elements.
 The initial value of each element will depend on its coordinates.
 The {$(i,j)$}\textsuperscript{th} element will be initialized to the result of evaluating \ct{self newCellAt: i at: j}.
 
@@ -507,7 +507,8 @@ One advantage of representing constants as methods is that if the program evolve
 \begin{method}[newCellAt:at:]{An initialization helper method}
 SBEGame>>>newCellAt: i at: j 
 	"Create a cell for position (i,j) and add it to my on-screen
-	representation at the appropriate screen position.  Answer the new cell"
+	representation at the appropriate screen position. Answer the new cell."
+
 	| cell origin |
 	cell := SBECell new.
 	origin := self innerBounds origin.
