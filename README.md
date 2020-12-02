@@ -165,6 +165,15 @@ It will run all the test code in the latex sources and exercise the hands-on cod
 
 The repository was previously hosted on [squeaksource](http://www.squeaksource.com/@QJbXgqmsC7AwLgNB/jkjcsr-2).
 
+# Coding Style Guide
+
+* An empty line before the first line of the code 
+* Point at the end of a line, except for a line with a return statement
+* Space around all binary selectors
+* Keyword message with more than one keyword are broken up on several lines
+* Use cascades whenever possible (except for very early introductory examples)
+* Avoid unnecessary parentheses
+
 ---
 
 # License
