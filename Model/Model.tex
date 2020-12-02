@@ -102,7 +102,7 @@ Every object has a class; you can find out which by sending it the message \ct{c
 20 factorial class --> LargePositiveInteger
 'hello' class          --> ByteString
 #(1 2 3) class       --> Array
-(4@5) class         --> Point
+(4 @ 5) class         --> Point
 Object new class --> Object
 \end{code}
 
@@ -146,7 +146,8 @@ However, the instance variables of the other point must be accessed by sending i
 \needlines{7}
 \begin{method}[dist:]{the distance between two points}
 Point>>>dist: aPoint 
-	"Answer the distance between aPoint and the receiver."  
+	"Answer the distance between aPoint and the receiver."
+
 	| dx dy |
 	dx := aPoint x - x.
 	dy :=  aPoint y - y.
@@ -154,7 +155,7 @@ Point>>>dist: aPoint
 \end{method}
 
 \begin{code}{@TEST}
-1@1 dist: 4@5 --> 5
+1 @ 1 dist: 4 @ 5 --> 5
 \end{code}
 
 The key reason to prefer instance-based encapsulation to class-based encapsulation is that it enables different implementations of the same abstraction to coexist.
@@ -295,18 +296,23 @@ Dog subclass: #Hyena
 \end{classdef}
 
 Now suppose we define class methods for \ct{Dog} to initialize its \ct{count} to \ct{0}, and to increment it when new instances are created:
-\begin{method}[dogcount]{Keeping count of new dogs}
+\begin{methods}[dogcount]{Keeping count of new dogs}
 Dog class>>>initialize
+
 	super initialize.
 	count := 0.
 
+
 Dog class>>>new
+
 	count := count +1.
 	^ super new
 
+
 Dog class>>>count
+
 	^ count
-\end{method}
+\end{methods}
 
 Now when we create a new \ct{Dog} its count is incremented, and so is that of every \ct{Hyena}, but they are counted separately:
 \begin{code}{}
@@ -366,6 +372,7 @@ Since \ct{uniqueInstance} is a class instance variable, this method can directly
     
 \begin{method}[uniqueInstance]{uniqueInstance (on the class side)}
 SBEWebServer class>>>uniqueInstance
+
      uniqueInstance ifNil: [uniqueInstance := self new].
      ^ uniqueInstance
 \end{method}
@@ -452,6 +459,7 @@ The method \mthind{Magnitude}{<} is abstract and defined as shown in \mthref{Mag
 \begin{method}[MagnitudeLessThan]{\ct{Magnitude>>><}}
 Magnitude>>>< aMagnitude 
 	"Answer whether the receiver is less than the argument."
+
 	^ self subclassResponsibility
 \end{method}
 
@@ -461,6 +469,7 @@ By contrast, the method \mthind{Magnitude}{>=} is concrete; it is defined in ter
 \begin{method}[Magnitude>=]{\ct{Magnitude>>>>=}}
 >= aMagnitude 
 	"Answer whether the receiver is greater than or equal to the argument."
+
 	^ (self < aMagnitude) not
 \end{method}
 The same is true of the other comparison methods.
@@ -471,6 +480,7 @@ The same is true of the other comparison methods.
 \begin{method}[CharacterLessThan]{\ct{Character>>><}}
 Character>>>< aCharacter 
 	"Answer true if the receiver's value < aCharacter's value."
+
 	^ self asciiValue < aCharacter asciiValue
 \end{method}
 
@@ -501,7 +511,8 @@ We might do this as follows:
 \begin{method}[author]{An author method}
 TAuthor>>>author
     "Returns author initials"
-	^ 'on'    "oscar nierstrasz"
+	
+	^ 'taa'    "the anonymous author"
 \end{method}
 
 \noindent
@@ -520,7 +531,7 @@ BorderedMorph subclass: #SBEGame
 If we now instantiate \ct{SBEGame}, it will respond to the \ct{author} message as expected.
 
 \begin{code}{}
-SBEGame new author --> 'on'
+SBEGame new author --> 'taa'
 \end{code}
 
 Trait composition expressions may combine multiple traits using the \ct{+} operator.
@@ -548,7 +559,7 @@ The receiver then decides how to respond by selecting its own \emph{method} for 
 Since different objects may have different methods for responding to the same message, the method must be chosen \emph{dynamically}, when the message is received.
 \begin{code}{@TEST}
 3 + 4         --> 7          "send message + with argument 4 to integer  3"
-(1@2) + 4 --> 5@6    "send message + with argument 4 to point (1@2)"
+(1 @ 2) + 4 --> 5 @ 6    "send message + with argument 4 to point (1@2)"
 \end{code}
 \noindent
 As a consequence, we can send the \emph{same message} to different objects, each of which may have \emph{its own method} for responding to the message.
@@ -631,6 +642,7 @@ The class \ct{EllipseMorph} implements \ct{defaultColor}, so the appropriate met
 \begin{method}[defaultColor]{A locally implemented method}
 EllipseMorph>>>defaultColor
 	"answer the default color/fill style for the receiver"
+
 	^ Color yellow
 \end{method}
 \cmindex{EllipseMorph}{defaultColor}
@@ -641,6 +653,7 @@ The search therefore continues in the superclass, \lct{BorderedMorph}, and so on
 \begin{method}[openInWorld]{An inherited method}
 Morph>>>openInWorld
 	"Add this morph to the world."
+
 	self openInWorld: self currentWorld.
 \end{method}
 \cmindex{Morph}{openInWorld}
@@ -673,6 +686,7 @@ This suggests that \mthref{openInWorld} is equivalent to \mthref{openInWorldRetu
 \begin{method}[openInWorldReturnSelf]{Explicitly returning self}
 Morph>>>openInWorld
 	"Add this morph to the world."
+
 	self openInWorld: self currentWorld.
 	^ self		"Don't do this unless you mean it!"
 \end{method}
@@ -714,9 +728,10 @@ It is therefore good practice whenever implementing an initialize method to send
 \needlines{6}
 \begin{method}[morphinit]{Super initialize}
 BorderedMorph>>>initialize
-	"initialize the state of the receiver"
+	"Initialize the state of the receiver."
+
 	super initialize.
-	self borderInitialize
+	self borderInitialize.
 \end{method}
 
 \important{An \ct{initialize} method should always start by sending \ct{super initialize}.}
@@ -759,7 +774,8 @@ as shown in \figref{initStringLookup}.
 \needlines{5}
 \begin{method}[initString]{A \self send}
 Morph>>>initString
-	^ String streamContents: [:s | self fullPrintOn: s]
+
+	^ String streamContents: [:stream | self fullPrintOn: stream]
 \end{method}
 The method \cmind{Morph}{initString} performs a \self send of \ct{fullPrintOn:}.
 This causes a second lookup to take place, starting in the class \ct{EllipseMorph}, and finding \mthind{BorderedMorph}{fullPrintOn:} in \ct{BorderedMorph} (see \figref{initStringLookup} once again).
@@ -770,10 +786,13 @@ What is critical to notice is that the \self send causes the method lookup to st
 \needlines{4}
 \begin{method}[fullPrintOn]{Combining \super and \self sends}
 BorderedMorph>>>fullPrintOn: aStream
+
 	aStream nextPutAll: '('.
 	!\textbf{super fullPrintOn: aStream.}!
-	aStream nextPutAll: ') setBorderWidth: '; print: self borderWidth;
-		nextPutAll: ' borderColor: ' , (self colorString: self borderColor)
+	aStream 
+		nextPutAll: ') setBorderWidth: ';
+		print: self borderWidth;
+		nextPutAll: ' borderColor: ' , (self colorString: self borderColor).
 \end{method}
 At this point, \ct{BorderedMorph>>>fullPrintOn:} does a \super send to extend the 
 \ct{fullPrintOn:} behavior it inherits from its superclass.
@@ -973,7 +992,8 @@ This furthermore imposes the cost of the accessor send and the initialization te
 It also arguably defeats the point of using a class variable, since in fact it is no longer shared.
 
 \begin{method}[colorclasscolornames]{Color class>>colorNames}
-Color class>>>colorNames	
+Color class>>>colorNames
+
 	ColorNames ifNil: [self initializeNames].
 	^ ColorNames
 \end{method}	
@@ -983,7 +1003,8 @@ Another solution is to override the class method \ct{initialize}.
 
 \needlines{3}
 \begin{method}[colorclassinit]{Color class>>initialize}
-Color class>>>initialize	
+Color class>>>initialize
+	
 	!\ldots!
 	self initializeNames
 \end{method}	
@@ -1017,7 +1038,8 @@ This allows methods of the class \ct{Text} to access the keys of the dictionary 
 For example, we can write the following method. 
   
 \begin{method}[texttestcr]{Text>>testCR}
-Text>>>testCR 	
+Text>>>testCR
+
       ^ CR == Character cr
 \end{method}
 

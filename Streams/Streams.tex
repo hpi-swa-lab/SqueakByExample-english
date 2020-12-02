@@ -175,8 +175,8 @@ This code can be simplified using \mthind{PositionableStream}{peekFor:}, which m
 
 \begin{code}{@TEST |stream negative number|}
 stream := '-143' readStream.
-(stream peekFor: $-) --> true
-stream upToEnd         --> '143'
+stream peekFor: $-. --> true
+stream upToEnd.         --> '143'
 \end{code}
 \noindent
 \ct{peekFor:} also returns a boolean indicating if the parameter equals the element.
@@ -197,7 +197,7 @@ You can obtain the state of the stream depicted in \figref{ab_cde} with the foll
 \begin{code}{@TEST |stream|}
 stream := 'abcde' readStream.
 stream position: 2.
-stream peek --> $c
+stream peek. --> $c
 \end{code}
 
 \begin{figure}[h!t]
@@ -325,13 +325,13 @@ Using the comma concatenation operator (\ct{,}) is far less efficient:
 [| temp |
   temp := String new.
   (1 to: 100000) do: [:i | 
-    temp := temp, i asString, ' ']] timeToRun --> 386381 "(milliseconds)"
+    temp := temp, i asString, ' ']] timeToRun. --> 386381 "(milliseconds)"
 
 [| temp |
   temp := WriteStream on: String new.
   (1 to: 100000) do: [:i | 
     temp nextPutAll: i asString; space].
-  temp contents] timeToRun --> 25 "(milliseconds)"
+  temp contents] timeToRun. --> 25 "(milliseconds)"
 \end{code}
 
 The reason that using a stream can be much more efficient is that the comma creates a new string containing the concatenation of the receiver and the argument, so it must copy both of them.
@@ -344,7 +344,7 @@ In fact, you can use \mthind{SequenceableCollection class}{streamContents:} (men
 \begin{code}{}
 String streamContents: [:tempStream |
   (1 to: 100000) do: [:i | 
-    tempStream nextPutAll: i asString; space]] 
+    tempStream nextPutAll: i asString; space]].
 \end{code}
 
 %-----------------------------------------------------------------
@@ -437,7 +437,8 @@ A possible solution is:
 
 \begin{code}{}
 SBEHistory>>goTo: aPage
-		stream nextPut: aPage.
+
+	stream nextPut: aPage.
 \end{code}
 
 This version is incomplete however, as when the user clicks on the link, there should be no more future pages to go to, \ie the forward button must be deactivated.
@@ -466,6 +467,7 @@ To go forward, the stream should not be at its end, and the next element should 
 Let us add a method to peek at the contents of the stream:
 \begin{code}{}
 SBEHistory>>contents
+
 	^ stream contents
 \end{code}
 % ct TODO: Reuse SmalltalkSources here!
@@ -479,7 +481,7 @@ SBEHistory new
 	goBackward;
 	goBackward;
 	goTo: #page4;
-	contents --> #(#page1 #page4 nil nil)
+	contents. --> #(#page1 #page4 nil nil)
 \end{code}
 
 %=============================================================

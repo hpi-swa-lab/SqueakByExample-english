@@ -204,10 +204,11 @@ The method \mthind{TestCase}{setUp} defines the context in which the tests will 
 
 \begin{method}[setupExampleSetTest]{Setting up a fixture}
 ExampleSetTest>>>setUp
+
 	super setUp.
 	
 	empty := Set new.
-	full := Set with: 5 with: 6
+	full := Set with: 5 with: 6.
 \end{method}
 
 \noindent
@@ -229,8 +230,9 @@ Clearly, this test relies on the fact that the \ct{setUp} method has already run
 
 \begin{method}[testIncludes]{Testing set membership}
 ExampleSetTest>>>testIncludes
+
 	self assert: (full includes: 5).
-	self assert: (full includes: 6)
+	self assert: (full includes: 6).
 \end{method}
 
 The second test, named \ct{testOccurrences}, verifies that the number of occurrences of~5 in \ct{full} set is equal to one, even if we add another element~5 to the set. Here we make use of the specific assertion \ct{assert:equals:} that asserts whether the two arguments are equal in value.
@@ -238,19 +240,21 @@ The second test, named \ct{testOccurrences}, verifies that the number of occurre
 \needlines{6}
 \begin{method}[testOccurrences]{Testing occurrences}
 ExampleSetTest>>>testOccurrences
+
 	self assert: 0 equals: (empty occurrencesOf: 0).
 	self assert: 1 equals: (full occurrencesOf: 5).
 	full add: 5.
-	self assert: 1 equals: (full occurrencesOf: 5)
+	self assert: 1 equals: (full occurrencesOf: 5).
 \end{method}
 
 Finally, we test that the set no longer contains the element 5 after we have removed it.
 
 \begin{method}[testRemove]{Testing removal}
 ExampleSetTest>>>testRemove
+
 	full remove: 5.
 	self assert: (full includes: 6).
-	self deny: (full includes: 5)
+	self deny: (full includes: 5).
 \end{method}
 
 \noindent
@@ -335,8 +339,9 @@ Note that the first argument of the \ct{should:} and \ct{shouldnt:} methods is a
 
 \begin{method}[ESTtestIllegal]{Testing error raising}
 ExampleSetTest>>>testIllegal
+
 	self should: [empty at: 5] raise: Error.
-	self should: [empty at: 5 put: #zork] raise: Error
+	self should: [empty at: 5 put: #zork] raise: Error.
 \end{method}
 
 \sunit is portable: it can be used from all dialects of \st.
@@ -348,8 +353,9 @@ If you want to write tests that will work in any dialect of \st, instead of \mth
 \needlines{4}
 \begin{method}[portabletestillegal]{Portable error handling}
 ExampleSetTest>>>testIllegal
+
 	self should: [empty at: 5] raise: TestResult error.
-	self should: [empty at: 5 put: #zork] raise: TestResult error
+	self should: [empty at: 5 put: #zork] raise: TestResult error.
 \end{method}
 
 \dothis{Give it a try.}
@@ -462,6 +468,7 @@ TestResource subclass: #MyTestResource
 
 MyTestCase class>>>resources
 	"associate the resource with this class of test cases"
+
 	^ {MyTestResource}
 \end{classdef}
 
@@ -501,7 +508,7 @@ Of course, this string can be constructed dynamically.
 e := 42.
 self 
   assert: e = 23
-  description: 'expected 23, got ', e printString
+  description: 'expected 23, got ', e printString.
 \end{code}
 
 The relevant methods in \ct{TestCase} are:
@@ -538,7 +545,7 @@ You can do this as follows:
 	self
 		assert: each even
 		description: each printString , ' is not even'
-		resumable: true]
+		resumable: true].
 \end{code}
 This will print out a message on your logging stream for each element that fails.
 It doesn't accumulate failures, \ie if the assertion fails 10~times in your test method, you'll still only see one failure.
@@ -572,17 +579,19 @@ Then the \ct{TestCase} instance sends itself the message \mthind{TestCase}{run:}
 \needlines{6}
 \begin{method}[tastecaserun]{Running a test case}
 TestCase>>>run
+
 	| result |
 	result := TestResult new.
 	self run: result.
-	^result
+	^ result
 \end{method}
 
 The method \cmind{TestCase}{run:} sends the message \mthind{TestResult}{runCase:} to the test result:
 
 \begin{method}[testcaserun:]{Passing the test case to the test result}
 TestCase>>>run: aResult
-	aResult runCase: self
+
+	aResult runCase: self.
 \end{method}
 
 The method \ct{TestResult>>>runCase:} sends the message \mthind{TestCase}{runCase} to an individual test, to execute the test.
@@ -590,6 +599,7 @@ The method \ct{TestResult>>>runCase:} sends the message \mthind{TestCase}{runCas
 
 \begin{method}[testresultruncase]{Catching test case errors and failures}
 TestResult>>>runCase: aTestCase
+
 	| testCasePassed timeToRun |
 	testCasePassed := true.
 
@@ -613,9 +623,10 @@ The method \ct{TestCase>>>runCase} sends the messages \mthind{TestCase}{setUp} a
 \begin{method}[testcaseruncase]{Test case template method}
 TestCase>>>runCase
 	"Run this TestCase. Time out if the test takes too long."
+
 	[self timeout: [self setUp] after: self timeoutForSetUp.
 	self timeout: [self performTest] after: self timeoutForTest]
-			ensure: [self tearDown]
+			ensure: [self tearDown].
 \end{method}
 
 %---------------------------------------------------------
@@ -627,6 +638,7 @@ The expression \ct{MyTestCase buildSuiteFromSelectors} returns a suite containin
 The core of this process is
 \begin{method}[testcasetestselectors]{Auto-building the test suite}
 TestCase class>>>testSelectors
+
 	^ (self selectors asArray select: [:each | 
 		(each beginsWith: 'test') and: [each numArgs isZero]]) sort
 \end{method}
@@ -636,19 +648,21 @@ The method \cmind{TestSuite}{run} creates an instance of \ct{TestResult}, verifi
 All the resources are then released.
 \begin{method}[testsuiterun]{Running a test suite}
 TestSuite>>>run
+
 	| result |
  	result := self resultClass new.
-	self resources do: [:res |
-		res isAvailable ifFalse: [^res signalInitializationError]].
+	self resources do: [:resource | 
+		res isAvailable ifFalse: [^ resource signalInitializationError]].
 	[self run: result] ensure: [self resources do: [:each | each reset]].
-	^result
+	^ result
 \end{method}
 
 \begin{method}[testsuiterun:]{Passing the test suite to the test result}
 TestSuite>>>run: aResult
+
 	self tests do: [:each |
 		self sunitChanged: each.
-		each run: aResult]
+		each run: aResult].
 \end{method}
 The class \clsind{TestResource} and its subclasses keep track of their currently created instances (one per class) that can be accessed and created using the class method \mthind{TestResource class}{current}.
 This instance is cleared when the tests have finished running and the resources are reset.
@@ -659,16 +673,19 @@ During the \ct{TestResource} instance creation, it is initialized and the method
 \needlines{4}
 \begin{method}[testresourceisavailable]{Test resource availability}
 TestResource class>>>isAvailable
-	^self current notNil
+
+	^ self current notNil
 \end{method}
 \begin{method}[testresourcecurrent]{Test resource creation}
 TestResource class>>>current
-	current isNil ifTrue: [current := self new].
-	^current
+
+	current ifNil: [current := self new].
+	^ current
 \end{method}
 \begin{method}[restresourceinitialize]{Test resource initialization}
 TestResource>>>initialize
-	self setUp
+
+	self setUp.
 \end{method}
 %=================================================================
 \section{Some advice on testing}

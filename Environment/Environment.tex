@@ -1077,6 +1077,7 @@ To demonstrate the debugger, let's start by writing a bug!
 \begin{method}[buggy]{A buggy method}
 suffix
 	"assumes that I'm a file name, and answers my suffix, the part after the last dot"
+
 	| dot dotPosition |
 	dot := FileDirectory dot.
 	dotPosition := (self size to: 1 by: -1) detect: [:i | (self at: i) = dot].
@@ -1314,7 +1315,8 @@ We start by adding the following test method \mthref{testSuffix} to \ct{StringTe
 
 \begin{method}[testSuffix]{A simple test for the \ct{suffix} method}
 testSuffixFound
-	self assert: 'txt' equals: 'readme.txt' suffix
+
+	self assert: 'txt' equals: 'readme.txt' suffix.
 \end{method}
 
 The effort required to do that was little more than to run the same code in the workspace, but by creating a test, we save the code as executable documentation, and make it easy for others to run.
@@ -1326,9 +1328,10 @@ Here is a better test:
 
 \begin{method}[testSuffix2]{A better test for the \ct{suffix} method}
 testSuffixFound
+
 	self 
 		assert: 'txt' equals: 'readme.txt' suffix;
-		assert: 'txt' equals: 'read.me.txt' suffix
+		assert: 'txt' equals: 'read.me.txt' suffix.
 \end{method}
 \noindent
 Why is this test better?
@@ -1394,6 +1397,7 @@ So, for example, we might edit the \ct{suffix} method to read as follows:
 \begin{method}[suffix]{Inserting a \ct{halt} into the \ct{suffix} method.}
 suffix
 	"assumes that I'm a file name, and answers my suffix, the part after the last dot"
+
 	| dot dotPosition |
 	dot := FileDirectory dot asCharacter.
 	dotPosition := (self size to: 1 by: -1) detect: [:i | (self at: i) = dot].
@@ -1409,7 +1413,8 @@ This isn't the behavior that we want, so let's add a second test to specify what
 
 \begin{method}[testNoSuffix]{A second test for the \ct{suffix} method: the target has no suffix}
 testSuffixNotFound
-	self assert: 'readme' suffix = ''
+
+	self assert: 'readme' suffix = ''.
 \end{method}
 
 \needlines{2}

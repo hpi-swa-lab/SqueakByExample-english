@@ -109,6 +109,7 @@ For many objects, that is not a very useful graphical representation and thus th
 \dothis{Open a browser on the \ct{Color} class and browse the following method.}
 \begin{method}{Getting a morph for an instance of \ct{Color}.}
 Color>>>asMorph
+
 	^ (RectangleMorph new)
 		fillStyle: self;
 		borderWidth: 0;
@@ -139,7 +140,7 @@ bill openInWorld.
 \end{code}
 \noindent
 Then type \ct{joe position} and \menu{print it}.
-To move joe, execute \ct{joe position: joe position + (10@3)} repeatedly.
+To move joe, execute \ct{joe position: joe position + (10 @ 3)} repeatedly.
 
 It is possible to do a similar thing with size.
 \ct{joe} \mthind{Morph}{extent} answers joe's size; to have joe grow, execute \ct{joe extent: joe extent * 1.1}.
@@ -148,7 +149,7 @@ To add transparency, try \ct{joe color: (Color orange alpha: 0.5)}.
 
 \dothis{To make bill follow joe, you can repeatedly execute this code:}
 \begin{code}{}
-bill position: joe position + (100@0)
+bill position: joe position + (100 @ 0)
 \end{code}
 \noindent
 If you move joe using the mouse and then execute this code, bill will move so that it is 100 pixels to the right of joe.
@@ -253,13 +254,14 @@ Morph subclass: #SBECrossMorph
 We can define the \ct{drawOn:} method like this:
 \begin{method}[firstDrawOn]{Drawing a \ct{SBECrossMorph}.}
 drawOn: aCanvas 
+
 	| crossHeight crossWidth horizontalBar verticalBar |
 	crossHeight := self height / 3.0 .
 	crossWidth := self width / 3.0 .
-	horizontalBar := self bounds insetBy: 0@crossHeight.
-	verticalBar := self bounds insetBy: crossWidth@0.
+	horizontalBar := self bounds insetBy: 0 @ crossHeight.
+	verticalBar := self bounds insetBy: crossWidth @ 0.
 	aCanvas fillRectangle: horizontalBar color: self color.
-	aCanvas fillRectangle: verticalBar color: self color
+	aCanvas fillRectangle: verticalBar color: self color.
 \end{method}
 
 
@@ -325,11 +327,12 @@ So, to limit the sensitive zone of the morph to the cross shape, we need to over
 \needlines{4}
 \begin{method}[firstContains]{Shaping the sensitive zone of the \ct{SBECrossMorph}.}
 containsPoint: aPoint
+
 	| crossHeight crossWidth horizontalBar verticalBar |
 	crossHeight := self height / 3.0.
 	crossWidth := self width / 3.0.
-	horizontalBar := self bounds insetBy: 0@crossHeight.
-	verticalBar := self bounds insetBy: crossWidth@0.
+	horizontalBar := self bounds insetBy: 0 @ crossHeight.
+	verticalBar := self bounds insetBy: crossWidth @ 0.
 	^ (horizontalBar containsPoint: aPoint)
 		or: [verticalBar containsPoint: aPoint]
 \end{method}
@@ -345,17 +348,19 @@ The solution is to factor out these calculations into two new methods, which we 
 \needlines{4}
 \begin{method}{\ct{horizontalBar}.}
 SBECrossMorph>>>horizontalBar
+
 	| crossHeight |
 	crossHeight := self height / 3.0.
-	^ self bounds insetBy: 0@crossHeight
+	^ self bounds insetBy: 0 @ crossHeight
 \end{method}
 
 \needlines{4}
 \begin{method}{\ct{verticalBar}.}
 SBECrossMorph>>>verticalBar
+
 	| crossWidth |
 	crossWidth := self width / 3.0.
-	^ self bounds insetBy: crossWidth@0
+	^ self bounds insetBy: crossWidth @ 0
 \end{method}
 
 \noindent
@@ -364,13 +369,15 @@ We can then define both \ct{drawOn:} and \ct{containsPoint:} using these methods
 \needlines{4}
 \begin{method}{Refactored \ct{SBECrossMorph>>>drawOn:}.}
 SBECrossMorph>>>drawOn: aCanvas 
+
 	aCanvas fillRectangle: self horizontalBar color: self color.
-	aCanvas fillRectangle: self verticalBar color: self color
+	aCanvas fillRectangle: self verticalBar color: self color.
 \end{method}
 
 \needlines{4}
 \begin{method}{Refactored \ct{SBECrossMorph>>>containsPoint:}.}
-SBECrossMorph>>>containsPoint: aPoint 
+SBECrossMorph>>>containsPoint: aPoint
+
 	^ (self horizontalBar containsPoint: aPoint)
 		or: [self verticalBar containsPoint: aPoint]
 \end{method}
@@ -402,10 +409,9 @@ This doesn't matter when we fill the cross with an opaque color, but the bug bec
 \dothis{Execute the following code in  a workspace, line by line:}
 
 \begin{code}{}
-m := SBECrossMorph newBounds: (0@0 corner: 300@300).
+m := SBECrossMorph newBounds: (0 @ 0 corner: 300 @ 300).
 m openInWorld.
 m color: (Color blue alpha: 0.3).
-
 \end{code}
 
 \noindent
@@ -414,11 +420,12 @@ Once again we find a method in class \ct{Rectangle} that does the hard work for 
 Here is the revised code:
 
 \begin{method}{The revised \ct{drawOn:} method, which fills the center of the cross once.}
-SBECrossMorph>>>drawOn: aCanvas 
+SBECrossMorph>>>drawOn: aCanvas
+
 	| topAndBottom |
 	aCanvas fillRectangle: self horizontalBar color: self color.
 	topAndBottom := self verticalBar areasOutside: self horizontalBar. 
-	topAndBottom do: [:each | aCanvas fillRectangle: each color: self color]
+	topAndBottom do: [:each | aCanvas fillRectangle: each color: self color].
 \end{method}
 
 This code seems to work, but if you try it on some crosses and resize them, you may notice that at some sizes, a one-pixel wide line separates the bottom of the cross from the remainder, as shown in \figref{bug}.
@@ -429,6 +436,7 @@ We can work around this by rounding explicitly when we calculate the sizes of th
 \needlines{5}
 \begin{method}{\ct{SBECrossMorph>>>horizontalBar} with explicit rounding.}
 SBECrossMorph>>>horizontalBar
+
 	| crossHeight |
 	crossHeight := (self height / 3.0) rounded.
 	^ self bounds insetBy: 0 @ crossHeight
@@ -437,6 +445,7 @@ SBECrossMorph>>>horizontalBar
 \needlines{5}
 \begin{method}{\ct{SBECrossMorph>>>verticalBar} with explicit rounding.}
 SBECrossMorph>>>verticalBar
+
 	| crossWidth |
 	crossWidth := (self width / 3.0) rounded.
 	^ self bounds insetBy: crossWidth @ 0
@@ -503,6 +512,7 @@ We start by ensuring that all crossMorphs answer \ct{true} to the \mthind{Morph}
 \dothis{Add this method to \ct{SBECrossMorph}:}
 \begin{method}{Declaring that \ct{SBECrossMorph} will react to mouse clicks.}
 SBECrossMorph>>>handlesMouseDown: anEvent
+
 	^ true
 \end{method}
 
@@ -512,11 +522,12 @@ This can be accomplished by \mthref{mouseDown}.
 \needlines{7}
 \begin{method}[mouseDown]{Reacting to mouse clicks by changing the morph's color.}
 SBECrossMorph>>>mouseDown: anEvent
+
 	anEvent redButtonPressed
 		ifTrue: [self color: Color red].
 	anEvent yellowButtonPressed
 		ifTrue: [self color: Color yellow].
-	self changed
+	self changed.
 \end{method}
 
 \ab{I added this note:}
@@ -548,6 +559,7 @@ This will happen if our morph answers \ct{true} to the \mthind{Morph}{handlesMou
 \dothis{Declare that \ct{SBECrossMorph} will react when it is under the mouse pointer.}
 \begin{method}{We want to handle ``mouse over'' events.} 
 SBECrossMorph>>>handlesMouseOver: anEvent
+
 	^ true
 \end{method}
 
@@ -558,16 +570,19 @@ When the mouse pointer enters or leaves the morph, the \mthind{Morph}{mouseEnter
 \dothis{Define two methods so that \ct{SBECrossMorph} catches and releases the keyboard focus, and a third method to actually handle the keystrokes.}
 \begin{method}{Getting the keyboard focus when the mouse enters the morph.}
 SBECrossMorph>>>mouseEnter: anEvent
-	anEvent hand newKeyboardFocus: self
+
+	anEvent hand newKeyboardFocus: self.
 \end{method}
 
 \begin{method}{Handing back the focus when the pointer goes away.}
 SBECrossMorph>>>mouseLeave: anEvent
-	anEvent hand newKeyboardFocus: nil
+
+	anEvent hand releaseKeyboardFocus: self.
 \end{method}
 
 \begin{method}[handleKeystroke]{Receiving and handling keyboard events.}
 SBECrossMorph>>>handleKeystroke: anEvent
+
 	| keyValue |
 	keyValue := anEvent keyValue.
 	keyValue = 30	 "up arrow"
@@ -577,7 +592,7 @@ SBECrossMorph>>>handleKeystroke: anEvent
 	keyValue = 29	 "right arrow"
 		ifTrue: [self position: self position + (1 @ 0)].
 	keyValue = 28	 "left arrow"
-		ifTrue: [self position: self position - (1 @ 0)]
+		ifTrue: [self position: self position - (1 @ 0)].
 \end{method}
 
 We have written this method so that you can move the morph using the arrow keys.
@@ -601,6 +616,7 @@ For cases like this, there is the class \clsind{EventSensor} an instance of whic
 To implement our example, we can do the following:
 \begin{method}{Retrieving information about the cursor from \ct{EventSensor} without using events.}
 getPositionFromClick
+
 	| position |
 	[EventSensor default anyButtonPressed] whileFalse: [
 		position := EventSensor default cursorPoint].
@@ -621,13 +637,15 @@ In addition, \mthind{Morphic}{startStepping} turns on the stepping mechanism, wh
 \dothis{Make \ct{SBECrossMorph} blink by defining these methods as follows:}
 \begin{method}{Defining the animation time interval.}
 SBECrossMorph>>>stepTime
+
 	^ 100
 \end{method}
 \begin{method}{Making a step in the animation.}
 SBECrossMorph>>>step
+
 	(self color diff: Color black) < 0.1
 		ifTrue: [self color: Color red]
-		ifFalse: [self color: self color darker]
+		ifFalse: [self color: self color darker].
 \end{method}
 \noindent
 To start things off, you can open an inspector on a \ct{SBECrossMorph} (using the debug handle \debugHandle{} in the morphic halo), type \ct{self startStepping} in the small workspace pane at the bottom, and \menu{do it}.
@@ -727,7 +745,7 @@ Morph subclass: #ReceiverMorph
 ReceiverMorph>>>initialize
 	super initialize.
 	color := Color red.
-	bounds := 0@0 extent: 200@200
+	bounds := 0 @ 0 extent: 200 @ 200.
 \end{method}
 
 How do we decide if the receiver morph will accept or repel the dropped morph?
@@ -738,6 +756,7 @@ The default implementation of this method (in the class \ct{Morph}) answers \ct{
 
 \begin{method}{Accept dropped morphs based on their color.}
 ReceiverMorph>>>wantsDroppedMorph: aMorph event: anEvent
+
 	^ aMorph color = Color blue
 \end{method}
 
@@ -779,19 +798,21 @@ Morph subclass: #DroppedMorph
 \needlines{5}
 \begin{method}{Initializing \ct{DroppedMorph}.}
 DroppedMorph>>>initialize
+
 	super initialize.
 	self 
 		color: Color blue;
-		position: 250@100
+		position: 250 @ 100.
 \end{method}
 
 Now we can specify what the dropped morph should do when it is rejected by the receiver; here it will stay attached to the mouse pointer:
 \begin{method}{Reacting when the morph was dropped but rejected.}
 DroppedMorph>>>rejectDropMorphEvent: anEvent
+
 	| h |
 	h := anEvent hand.
 	WorldState addDeferredUIMessage: [h grabMorph: self].
-	anEvent wasHandled: true
+	anEvent wasHandled: true.
 \end{method}
 
 Sending the \mthind{MorphicEvent}{hand} message to an event answers the \emph{hand}, an instance of \ct{HandMorph} that represents the mouse pointer and whatever it holds.
@@ -843,21 +864,24 @@ The instance variable \ct{faces} records the number of faces on the die; we allo
 To create a die instance, we define the \ct{faces: n} method on the \emph{class} side of \clsind{SBEDieMorph} to create a new die with \ct{n} faces.
 \begin{method}{Creating a new die with the number of faces we like.}
 SBEDieMorph class>>>faces: aNumber
+
 	^ self new faces: aNumber
 \end{method}
 
 The \ct{initialize} method is defined on the instance side in the usual way; remember that \ct{new} sends \ct{initialize} to the newly-created instance.
 \begin{method}{Initializing instances of \ct{SBEDieMorph}.}
 SBEDieMorph>>>initialize
+
 	super initialize.
-	self extent: 50@50.
-	self useGradientFill; borderWidth: 2; useRoundedCorners.
-	self setBorderStyle: #complexRaised.
+	self 
+		extent: 50 @ 50;
+		useGradientFill; borderWidth: 2; useRoundedCorners;
+		setBorderStyle: #complexRaised;
+		color: Color green.
 	self fillStyle direction: self extent.
-	self color: Color green.
 	dieValue := 1.
 	faces := 6.
-	isStopped := false
+	isStopped := false.
 \end{method}
 
 We use a few methods of \ct{BorderedMorph} to give a nice appearance to the die: a thick border with a raised effect, rounded corners, and a color gradient on the visible face.
@@ -865,10 +889,11 @@ We define the instance method \ct{faces:} to check for a valid parameter as foll
 \begin{method}{Setting the number of faces of the die.}
 SBEDieMorph>>>faces: aNumber
 	"Set the number of faces"
+
 	(aNumber isInteger
 			and: [aNumber > 0]
 			and: [aNumber <= 9])
-		ifTrue: [faces := aNumber]
+		ifTrue: [faces := aNumber].
 \end{method}
 \on{Why not make this a pre-condition, \ie an assertion?}
 
@@ -885,23 +910,23 @@ For instance, if we start by evaluating \ct{SBEDieMorph faces: 9}:
 Before defining \ct{drawOn:}, we need a few methods to place the dots on the displayed face:
 \begin{methods}{Nine methods for placing points on the faces of the die.}
 SBEDieMorph>>>face1
-	^ {0.5@0.5}
+	^ {0.5 @ 0.5}
 SBEDieMorph>>>face2
-	^ {0.25@0.25 . 0.75@0.75}
+	^ {0.25 @ 0.25 . 0.75 @ 0.75}
 SBEDieMorph>>>face3
-	^ {0.25@0.25 . 0.75@0.75 . 0.5@0.5}
+	^ {0.25 @ 0.25 . 0.75 @ 0.75 . 0.5 @ 0.5}
 SBEDieMorph>>>face4
-	^ {0.25@0.25 . 0.75@0.25 . 0.75@0.75 . 0.25@0.75}
+	^ {0.25 @ 0.25 . 0.75 @ 0.25 . 0.75 @ 0.75 . 0.25 @ 0.75}
 SBEDieMorph>>>face5
-	^ {0.25@0.25 . 0.75@0.25 . 0.75@0.75 . 0.25@0.75 . 0.5@0.5}
+	^ {0.25 @ 0.25 . 0.75 @ 0.25 . 0.75 @ 0.75 . 0.25 @ 0.75 . 0.5 @ 0.5}
 SBEDieMorph>>>face6
-	^ {0.25@0.25 . 0.75@0.25 . 0.75@0.75 . 0.25@0.75 . 0.25@0.5 . 0.75@0.5}
+	^ {0.25 @ 0.25 . 0.75 @ 0.25 . 0.75 @ 0.75 . 0.25 @ 0.75 . 0.25 @ 0.5 . 0.75 @ 0.5}
 SBEDieMorph>>>face7
-	^ {0.25@0.25 . 0.75@0.25 . 0.75@0.75 . 0.25@0.75 . 0.25@0.5 . 0.75@0.5 . 0.5@0.5}
+	^ {0.25 @ 0.25 . 0.75 @ 0.25 . 0.75 @ 0.75 . 0.25 @ 0.75 . 0.25 @ 0.5 . 0.75 @ 0.5 . 0.5 @ 0.5}
 SBEDieMorph >>>face8
-	^ {0.25@0.25 . 0.75@0.25 . 0.75@0.75 . 0.25@0.75 . 0.25@0.5 . 0.75@0.5 . 0.5@0.5 . 0.5@0.25}
+	^ {0.25 @ 0.25 . 0.75 @ 0.25 . 0.75 @ 0.75 . 0.25 @ 0.75 . 0.25 @ 0.5 . 0.75 @ 0.5 . 0.5 @ 0.5 . 0.5 @ 0.25}
 SBEDieMorph >>>face9
-	^ {0.25@0.25 . 0.75@0.25 . 0.75@0.75 . 0.25@0.75 . 0.25@0.5 . 0.75@0.5 . 0.5@0.5 . 0.5@0.25 . 0.5@0.75}
+	^ {0.25 @ 0.25 . 0.75 @ 0.25 . 0.75 @ 0.75 . 0.25 @ 0.75 . 0.25 @ 0.5 . 0.75 @ 0.5 . 0.5 @ 0.5 . 0.5 @ 0.25 . 0.5 @ 0.75}
 \end{methods}
 \on{kind of ugly boilerplate code -- should be a nice way to map these more elegantly to coordinates.}
 
@@ -912,9 +937,10 @@ The \ct{drawOn:} method does two things:
 It draws the die background with the \ct{super}-send, and then draws the dots.
 \begin{method}{Drawing the die morph.}
 SBEDieMorph>>>drawOn: aCanvas
+
 	super drawOn: aCanvas.
 	(self perform: ('face' , dieValue asString) asSymbol) do: [:aPoint |
-		self drawDotOn: aCanvas at: aPoint]
+		self drawDotOn: aCanvas at: aPoint].
 \end{method}
 
 The second part of this method uses the reflective capacities of \st.
@@ -924,11 +950,12 @@ To call the correct \ct{faceX} method, we use the \mthind{Object}{perform:} meth
 
 \begin{method}{Drawing a single dot on a face.}
 SBEDieMorph>>>drawDotOn: aCanvas at: aPoint
+
 	aCanvas
 		fillOval: (Rectangle
 			center: self position + (self extent * aPoint)
 			extent: self extent / 6)
-		color: Color black
+		color: Color black.
 \end{method}
 
 Since the coordinates are normalized to the $[0{:}1]$ interval, we scale them to the dimensions of our die: \ct{self extent * aPoint}.
@@ -941,6 +968,7 @@ Since the coordinates are normalized to the $[0{:}1]$ interval, we scale them to
 To change the displayed face, we create an accessor that we can use as \ct{myDie dieValue: 4}:
 \begin{method}{Setting the current value of the die.}
 SBEDieMorph>>>dieValue: aNumber
+
 	(aNumber isInteger
 			and: [aNumber > 0]
 			and: [aNumber <= faces])
@@ -954,10 +982,13 @@ Now we will use the animation system to show quickly all the faces:
 \index{Morphic!animation}
 \begin{methods}{Animating the die.}
 SBEDieMorph>>>stepTime
+
 	^ 100
 
+
 SBEDieMorph>>>step
-	isStopped ifFalse: [self dieValue: (1 to: faces) atRandom]
+
+	isStopped ifFalse: [self dieValue: (1 to: faces) atRandom].
 \end{methods}
 Now the die is rolling!
 
@@ -966,11 +997,13 @@ First, activate the reception of mouse events:
 
 \begin{methods}{Handling mouse clicks to start and stop the animation.}
 SBEDieMorph>>>handlesMouseDown: anEvent
+
 	^ true
 
 SBEDieMorph>>>mouseDown: anEvent
-	anEvent redButtonPressed
-		ifTrue: [isStopped := isStopped not]
+
+	anEvent redButtonPressed ifTrue: [
+		isStopped := isStopped not].
 \end{methods}
 Now the die will roll or stop rolling when we click on it.
 
@@ -994,11 +1027,12 @@ Fortunately, you can transform one kind of canvas into another.
 \needlines{7}
 \begin{method}{Drawing a translucent die.}
 SBEDieMorph>>>drawOn: aCanvas
+
 	| theCanvas |
 	theCanvas := aCanvas asAlphaBlendingCanvas: 0.5.
 	super drawOn: theCanvas.
 	(self perform: ('face' , dieValue asString) asSymbol) do: [:aPoint |
-		self drawDotOn: theCanvas at: aPoint]
+		self drawDotOn: theCanvas at: aPoint].
 \end{method}
 \noindent
 That's all you need to do!
@@ -1037,20 +1071,23 @@ SBEScreenshotRecorder writeTo: 'figures/multiMorphs.png' building: [:helper |
 \needlines{6}
 \begin{methods}[aadie]{Drawing an antialiased die.}
 SBEDieMorph>>>drawOn: aCanvas
+
 	| theCanvas |
 	theCanvas := aCanvas asBalloonCanvas aaLevel: 3.
 	super drawOn: aCanvas.
 	(self perform: ('face' , dieValue asString) asSymbol) do: [:aPoint | 
-		self drawDotOn: theCanvas at: aPoint]
+		self drawDotOn: theCanvas at: aPoint].
+
 
 SBEDieMorph>>>drawDotOn: aCanvas at: aPoint
+
 	aCanvas
 		drawOval: (Rectangle
 			center: self position + (self extent * aPoint)
 			extent: self extent / 6)
 		color: Color black
 		borderWidth: 0
-		borderColor: Color transparent
+		borderColor: Color transparent.
 \end{methods}
 
 %=================================================================
