@@ -1,10 +1,12 @@
 initialization
 initialize
+
 	super initialize.
-	self label: ''.
-	self borderWidth: 2.
-	self bounds: (0@0 corner: 16@16).
-	self offColor: Color cantaloupe.
-	self onColor: Color aqua.
-	self useSquareCorners.
+	self 
+		label: '';
+		borderWidth: 2;
+		bounds: (0 @ 0 corner: 16 @ 16);
+		offColor: Color cantaloupe;
+		onColor: Color aqua;
+		useSquareCorners.
 	self turnOff.

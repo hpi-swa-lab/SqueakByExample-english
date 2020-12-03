@@ -2,7 +2,7 @@
 	"class" : {
 		 },
 	"instance" : {
-		"cellsPerSide" : "apb 11/29/2006 22:19",
-		"initialize" : "pre 10/10/2019 10:24",
-		"newCellAt:at:" : "pre 10/9/2019 15:45",
-		"toggleNeighboursOfCellAt:at:" : "pre 10/9/2019 15:46" } }
+		"cellsPerSide" : "pre 12/2/2020 18:41",
+		"initialize" : "pre 12/2/2020 18:41",
+		"newCellAt:at:" : "pre 12/2/2020 18:41",
+		"toggleNeighboursOfCellAt:at:" : "pre 12/2/2020 18:41" } }

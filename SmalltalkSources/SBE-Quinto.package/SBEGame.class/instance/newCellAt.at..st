@@ -1,7 +1,8 @@
 initialization
 newCellAt: i at: j 
 	"Create a cell for position (i,j) and add it to my on-screen
-	representation at the appropriate screen position.  Answer the new cell"
+	representation at the appropriate screen position. Answer the new cell"
+	
 	| cell origin |
 	cell := SBECell new.
 	origin := self innerBounds origin.

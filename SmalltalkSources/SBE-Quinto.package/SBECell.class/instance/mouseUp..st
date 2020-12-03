@@ -1,3 +1,4 @@
 event handling
 mouseUp: anEvent
-	mouseAction value
+
+	mouseAction value.
