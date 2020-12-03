@@ -4,5 +4,5 @@
 	"instance" : {
 		"cellsPerSide" : "pre 12/2/2020 18:41",
 		"initialize" : "pre 12/2/2020 18:41",
-		"newCellAt:at:" : "pre 12/2/2020 18:41",
+		"newCellAt:at:" : "pre 12/3/2020 15:32",
 		"toggleNeighboursOfCellAt:at:" : "pre 12/2/2020 18:41" } }
