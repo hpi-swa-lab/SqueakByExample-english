@@ -372,7 +372,15 @@
 	backgroundcolor=\color{source},
 	lineskip={-1pt}, % Ugly hack
 	upquote=true, % straight quote; requires textcomp package
-	columns=fullflexible} % no fixed width fonts
+	columns=fullflexible,
+	framesep=1pt,
+	rulecolor=\color{source},
+	xleftmargin=1pt,
+	xrightmargin=1pt,
+	framerule=1pt,
+	frame=single,
+	numbers=left,
+	numberstyle={\tiny\sffamily}} % no fixed width fonts
 % In-line code (literal)
 % Normally use this for all in-line code:
 % \newcommand{\ct}{\lstinline[mathescape=false,basicstyle={\sffamily\upshape}]}
@@ -392,12 +400,13 @@
 \newcommand{\sbeLstSet}[0]{%
 	\bgroup%
 	\lstset{%
-		frame=single,
-		framerule=0pt,
 		mathescape=false}%
 	\egroup}
 \lstnewenvironment{code}[1]{%
-	\sbeLstSet{}
+	\sbeLstSet{}%
+	\lstset{
+		numbers=none
+	}
 }{}
 \def\ignoredollar#1{}
 %=============================================================
@@ -408,6 +417,7 @@
 	\renewcommand{\lstlistingname}{Example}%
 	\sbeLstSet{}%
 	\lstset{
+		numbers=none,
 		caption={\emph{#2}},
 		label={eg:#1}
 	}
@@ -416,6 +426,7 @@
 	\renewcommand{\lstlistingname}{Script}%
 	\sbeLstSet{}%
 	\lstset{
+		numbers=none,
 		name={Script},
 		caption={\emph{#2}},
 		label={scr:#1}
