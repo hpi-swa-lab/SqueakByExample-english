@@ -1,5 +1,6 @@
 tests - actions
 testGoToErases
+
 	emptyHistory 
 		goTo: 1;
 		goTo: 2;
