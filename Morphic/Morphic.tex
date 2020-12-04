@@ -388,7 +388,7 @@ The area in the center of the cross, which is under both the horizontal and the 
 This doesn't matter when we fill the cross with an opaque color, but the bug becomes apparent immediately if we draw a semi-transparent cross, as shown in \figref{overdrawBug}.
 
 \begin{figure}[t]
-\begin{minipage}{0.48\textwidth}
+\begin{minipage}[t]{0.48\textwidth}
 	\ifluluelse
 		{\centerline{\includegraphics[scale=0.6]{overdrawBug}}}
 		{\centerline{\includegraphics{overdrawBug}}}
@@ -396,7 +396,7 @@ This doesn't matter when we fill the cross with an opaque color, but the bug bec
 		\label{fig:overdrawBug}}
 \end{minipage}
 \hfill
-\begin{minipage}{0.48\textwidth}
+\begin{minipage}[t]{0.48\textwidth}
 	\ifluluelse
 		{\centerline{\includegraphics[scale=0.6]{hairlineBug}}}
 		{\centerline{\includegraphics{hairlineBug}}}
@@ -674,7 +674,7 @@ SBEScreenshotRecorder writeTo: 'figures/dialog.png' building: [:helper |
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
-\begin{minipage}{0.363\textwidth}
+\begin{minipage}[t]{0.363\textwidth}
 	\centerline{\includegraphics[width=\textwidth]{dialog}}
 	\caption{Dialog displayed by \ct{UIManager>>>request:initialAnswer:}.
 		\label{fig:dialogName}}
@@ -687,7 +687,7 @@ SBEScreenshotRecorder writeTo: 'figures/popup.png' building: [:helper |
 			chooseFrom: #('circle' 'oval' 'square' 'rectangle' 'triangle')]
 ]
 \end{ExecuteSmalltalkScript}
-\begin{minipage}{0.587\textwidth}
+\begin{minipage}[t]{0.587\textwidth}
 	\vfill
 	\centerline{\includegraphics[width=\textwidth]{popup}}
 	\vfill
