@@ -1,5 +1,6 @@
 tests - scenario
 testScenario1
+
 	emptyHistory
 		goTo: 1; goTo: 2; goTo: 3; goTo: 4.
 	self assert: emptyHistory goBackward = 3.

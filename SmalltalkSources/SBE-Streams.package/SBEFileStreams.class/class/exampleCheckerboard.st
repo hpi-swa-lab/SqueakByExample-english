@@ -13,4 +13,4 @@ exampleCheckerboard
 				nextPutAll: #[255 0 255 0];
 				nextPutAll: #[0 255 0 255];
 				nextPutAll: #[255 0 255 0];
-				nextPutAll: #[0 255 0 255]]
+				nextPutAll: #[0 255 0 255]].

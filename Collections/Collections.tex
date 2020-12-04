@@ -1009,7 +1009,7 @@ Smalltalk allClasses detect: [:each | '*java*' match: each asString] ifNone: [ni
 Correspondingly, there is also the variant \mthind{Collection}{detect:ifFound:} that let's you handle the case when an element is found or otherwise returns \ct{nil}:
 
 \begin{code}{@TEST}
-'Smalltalk' detect: [:each | each isVowel] ifFound: [:char | char asString capitalized , '!'] --> 'A!'
+'Smalltalk' detect: [:each | each isVowel] ifFound: [:char | char asString capitalized] --> 'A'
 \end{code}
 
 %---------------------------------------------------------
@@ -1054,14 +1054,14 @@ colors includes: Color blue. --> true
 The message \ct{anySatisfy:} answers true if at least one element of the collection satisfies the condition represented by the argument.
 
 \begin{code}{@TEST | colors | colors := {Color white . Color yellow. Color red . Color blue . Color orange}.}
-colors anySatisfy: [:c | c red > 0.5] --> true
+colors anySatisfy: [:color | color red > 0.5] --> true
 \end{code}
 
 \paragraph{\mthind{OrderedCollection}{gather:}}
 The message \mthind{Collection}{gather:} can be used to turn nested collections into a flat collection while at the same time converting the values. Some languages refer to this collection operation as flat map\seeindex{flat map}{Collection, gather:}.
 
 \begin{code}{@TEST | colors | colors := {Color white . Color yellow. Color red . Color blue . Color orange}.}
-colors anySatisfy: [:c | c red > 0.5] --> true
+colors anySatisfy: [:color | color red > 0.5] --> true
 \end{code}
 
 %=========================================================
@@ -1124,7 +1124,9 @@ Book>>>= aBook
    self class = aBook class ifFalse: [^ false].
    ^ title = aBook title and: [authors = aBook authors]
 
+
 Book>>>hash 
+
    ^ title hash xor: authors hash
 \end{method}
 % ct TODO DISCUSS: I always use "{title. authors} = {aBook title. aBook authors}" and "{title. authors} hash" instead to increase reuse and write less low-level code. Is there anything wrong with my approach or could we simplify the above example?
