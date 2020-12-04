@@ -1,11 +1,11 @@
 OrderedDictionary {
-	'SmalltalkSources\/SBE-Environment.package' : #SquotCypressCodeSerializer,
-	'SmalltalkSources\/SBE-Morphic.package' : #SquotCypressCodeSerializer,
-	'SmalltalkSources\/SBE-QuickTour.package' : #SquotCypressCodeSerializer,
-	'SmalltalkSources\/SBE-Quinto.package' : #SquotCypressCodeSerializer,
-	'SmalltalkSources\/SBE-Streams.package' : #SquotCypressCodeSerializer,
-	'SmalltalkSources\/SBE-Testing.package' : #SquotCypressCodeSerializer,
-	'SmalltalkSources\/SBE-Extract.package' : #SquotCypressCodeSerializer,
-	'SmalltalkSources\/BaselineOfSBE.package' : #SquotCypressCodeSerializer,
-	'SmalltalkSources\/SBE-Monticello.package' : #SquotCypressCodeSerializer
+	'SmalltalkSources/SBE-Environment.package' : #SquotCypressCodeSerializer,
+	'SmalltalkSources/SBE-Morphic.package' : #SquotCypressCodeSerializer,
+	'SmalltalkSources/SBE-QuickTour.package' : #SquotCypressCodeSerializer,
+	'SmalltalkSources/SBE-Quinto.package' : #SquotCypressCodeSerializer,
+	'SmalltalkSources/SBE-Streams.package' : #SquotCypressCodeSerializer,
+	'SmalltalkSources/SBE-Testing.package' : #SquotCypressCodeSerializer,
+	'SmalltalkSources/SBE-Extract.package' : #SquotCypressCodeSerializer,
+	'SmalltalkSources/BaselineOfSBE.package' : #SquotCypressCodeSerializer,
+	'SmalltalkSources/SBE-Monticello.package' : #SquotCypressCodeSerializer
 }
