@@ -35,7 +35,7 @@ To program effectively with Smalltalk, you need to learn how the class libraries
 The class libraries are entirely written in Smalltalk and we can easily extend them since a package may add new functionality to a class even if it does not define this class. 
 
 Our goal here is not to present in tedious detail the whole of the Squeak class library, but rather to point out the key classes and methods that you will need to use or override to program effectively.
-In this chapter we cover the basic classes that you will need for nearly every application: \ct{Object}, \ct{Number} and its subclasses, \ct{Character}, \ct{String}, \ct{Symbol}, and \ct{Boolean}. 
+In this chapter we cover the basic classes that you will need for nearly every application: \ct{Object}, \ct{Number} and its subclasses, \ct{Character}, \ct{String}, \ct{Symbol}, \ct{Boolean}, and \ct{Exception}. 
 In the following chapter \charef{cha:collections}, we will discuss the equally important \ct{Collection} subclasses.
 
 \md{Here are some comments:\\
@@ -93,11 +93,12 @@ It prints the name of the class followed by the family name, the size, and the s
 \needlines{7}
 \begin{method}[zork]{printOn: redefinition.}
 TTCFont>>>printOn: aStream
+
     aStream nextPutAll: 'TTCFont(';
 		nextPutAll: self familyName; space;
 		print: self pointSize; space;
 		nextPutAll: self subfamilyName;
-		nextPut: $)
+		nextPut: $).
 \end{method}
 
 \begin{code}{@TEST}
@@ -120,7 +121,7 @@ Here are some examples of such self-evaluating expressions.
 
 \begin{code}{@TEST}
 true       --> true
-3@4     --> 3@4
+3 @ 4     --> 3@4
 $a         --> $a
 #(1 2 3) --> #(1 2 3)
 \end{code}
@@ -129,14 +130,14 @@ Note that some objects, such as arrays, are self-evaluating or not depending on 
 For example, an array of booleans is self-evaluating whereas an array of persons is not.
 The following example shows that a \subind{Array}{dynamic} array is self-evaluating only if its elements are:
 \begin{code}{@TEST}
-{10@10 . 100@100}          --> {10@10 . 100@100}
-{Browser new . 100@100} --> {a Browser . 100@100}
+{10 @ 10 . 100 @ 100}          --> {10@10 . 100@100}
+{Browser new . 100 @ 100} --> {a Browser . 100@100}
 \end{code}
 
 Remember that \subind{Array}{literal} arrays can only contain literals.
 Hence the following array does not contain two points but rather six literal elements.
 \begin{code}{@TEST}
-#(10@10 100@100) --> #(10 #@ 10 100 #@ 100)
+#(10 @ 10 100 @ 100) --> #(10 #@ 10 100 #@ 100)
 \end{code}
 
 Lots of \ct{printOn:} method specializations implement self-evaluating behavior.
@@ -145,20 +146,22 @@ The implementations of \cmind{Point}{printOn:} and \cmind{Interval}{printOn:} ar
 \begin{method}[Self-evaluating points]{\ct{Point} print string definition that enables self-evaluation}
 Point>>>printOn: aStream 
     "The receiver prints on aStream in terms of infix notation."
+
     x printOn: aStream.
     aStream nextPut: $@.
 	...
-    y printOn: aStream
+    y printOn: aStream.
 \end{method}
 
 \begin{method}[Self-evaluating intervals]{\ct{Interval} print string definition that enables self-evaluation}
 Interval>>>printOn: aStream
+
     aStream nextPut: $(;
         print: start;
         nextPutAll: ' to: ';
         print: stop.
     step ~= 1 ifTrue: [aStream nextPutAll: ' by: '; print: step].
-    aStream nextPut: $)
+    aStream nextPut: $).
 \end{method}
 
 \begin{code}{@TEST}
@@ -179,6 +182,7 @@ The default implementation of object equality is to test for object identity:
 Object>>>= anObject
     "Answer whether the receiver and the argument represent the same object.
     If = is redefined in any subclass, consider also redefining the message hash."
+
     ^ self == anObject
 \end{method}
 \cmindex{Object}{=}
@@ -196,9 +200,10 @@ This works because \ct{Complex} overrides \ct{=} as follows:
 \needlines{5}
 \begin{method}{Equality for complex numbers}
 Complex>>>= anObject
+
 	anObject isNumber ifFalse: [^ false].
 	anObject isComplex
-		ifTrue: [^ (real = anObject real) & (imaginary = anObject imaginary)]
+		ifTrue: [^ real = anObject real and: [imaginary = anObject imaginary]]
 		ifFalse: [^ anObject adaptToComplex: self andSend: #=]
 \end{method}
 
@@ -216,7 +221,8 @@ If instances of your class are ever used as keys in a \clsind{Dictionary}, then 
 \begin{method}{Hash must be reimplemented for complex numbers}
 Complex>>>hash
     "Hash is reimplemented because = is implemented."
-    ^ real hash bitXor: imaginary hash.
+
+    ^ real hash bitXor: imaginary hash
 \end{method}
 
 Although you should override \ct{=} and \ct{hash} together, you should \emph{never} override \ct{==}.
@@ -255,11 +261,11 @@ Since Smalltalk is written in itself, you can really navigate through its struct
 1 isKindOf: Object           --> true
 1 isKindOf: String            --> false
 
-1/3 isKindOf: Number      --> true
-1/3 isKindOf: Integer        --> false
+1 / 3 isKindOf: Number      --> true
+1 / 3 isKindOf: Integer        --> false
 \end{code}
 
-\ct{1/3} which is a \clsind{Fraction} is a kind of \clsind{Number}, since the class \ct{Number} is a superclass of the class \ct{Fraction}, but \ct{1/3} is not a \ct{Integer}.
+\ct{1 / 3} which is a \clsind{Fraction} is a kind of \clsind{Number}, since the class \ct{Number} is a superclass of the class \ct{Fraction}, but \ct{1 / 3} is not a \ct{Integer}.
 
 \paragraph{\ct{respondsTo:}}
 \cmind{Object}{respondsTo:} answers whether the receiver understands the message selector given as an argument.
@@ -283,6 +289,7 @@ Since instance variables are accessed by reference, a \emphsubind{Object}{shallo
 \seeindex{shallow copy}{Object, \ct{shallowCopy}}
 \seeindex{deep copy}{Object, \ct{deepCopy}}
 
+% The spaces are deliberate in the listing below, to emphasize the nested arrays --pre
 \begin{code}{@TEST | array1 array2 |}
 array1 := { { 'harry' } }.
 array1 --> #(#('harry'))
@@ -321,8 +328,8 @@ array2 --> #(#(#('harry')))
 However, \ct{deepCopy} does not keep track of previously copied objects. This means that it does not preserve the identity of re-occurring objects. When the object to be copied contains another object twice in its contents, there will be two new objects. 
 
 \begin{code}{@TEST | object array copiedArray |}
-object := { 'harry' }.
-array := { object . object }.
+object := {'harry'}.
+array := {object . object}.
 array first == array second. --> true
 copiedArray := array deepCopy.
 copiedArray first == copiedArray second. --> false
@@ -331,8 +338,8 @@ copiedArray first == copiedArray second. --> false
 Also, not keeping track of previously copied objects, means that \ct{deepCopy} will not terminate when applied to a mutually recursive structure.
 
 \begin{code}{NB: CANNOT TEST}
-array1 := { 'harry' }.
-array2 := { array1 }.
+array1 := {'harry'}.
+array2 := {array1}.
 array1 at: 1 put: array2.
 array1 deepCopy --> !\emph{... does not terminate!}!
 \end{code}
@@ -341,8 +348,8 @@ Another way to copy an object is provided by \cmind{Object}{deepCopy}:
 It creates arbitrarily deep copies of objects but preserves object identities and cycles. 
 
 \begin{code}{@TEST | array1 array2 copiedArray |}
-array1 := { 'harry' }.
-array2 := { array1 }.
+array1 := {'harry'}.
+array2 := {array1}.
 array1 at: 1 put: array2.
 copiedArray := array1 veryDeepCopy.
 copiedArray first first = copiedArray --> true
@@ -355,7 +362,8 @@ As this can not be decided in general for all objects and all use cases, \cmind{
 \begin{method}{Copying objects as a template method}
 Object>>>copy
     "Answer another instance just like the receiver. Subclasses typically override postCopy; they typically do not override shallowCopy."
-    ^self shallowCopy postCopy
+
+    ^ self shallowCopy postCopy
 \end{method}
 
 You should override \mthind{Object}{postCopy} to copy any instance variables that should not be shared.
@@ -366,7 +374,7 @@ As the first four instance variables are all described by numbers, there is no n
 \begin{method}{Copying objects as a template method}
 Form>>>postCopy
     super postCopy.
-    bits := bits copy
+    bits := bits copy.
 \end{method}
 
 
@@ -392,8 +400,9 @@ The most typical usage is to check non-trivial pre-conditions to public methods 
 \begin{method}{Checking a pre-condition}
 Stack>>>pop
     "Return the first element and remove it from the stack."
-    self assert: [ self isEmpty not ].
-    ^self linkedList removeFirst element
+
+    self assert: [self isEmpty not].
+    ^ self linkedList removeFirst element
 \end{method}
 
 Do not confuse \ct{Object>>>assert:} with \cmind{TestCase}{assert:}, which occurs in the SUnit testing framework (see \charef{SUnit}).
@@ -430,9 +439,10 @@ Should an abstract class be instantiated by accident, then calls to abstract met
 Object>>>subclassResponsibility
     "This message sets up a framework for the behavior of the class' subclasses.
     Announce that the subclass should have implemented this message."
+
     ^ SubclassResponsibility
         signal: ('My {1} subclass should have overridden {2}'
-            format: {self className. thisContext sender selector}).
+            format: {self className. thisContext sender selector})
 \end{method}
 
 \clsind{Magnitude}, \clsind{Number} and \clsind{Boolean} are classical examples of \subind{class}{abstract} classes that we shall see shortly in this chapter.
@@ -482,6 +492,7 @@ The reason this is important is that in Squeak, the default \mthind{Behavior}{ne
 \begin{method}{\lct{new} as a class-side template method}
 Behavior>>>new
     "Answer a new initialized instance of the receiver (which is a class) with no indexable variables. Fail if the class is indexable."
+
     ^ self basicNew initialize
 \end{method}
 \cmindex{Behavior}{new}
@@ -520,11 +531,14 @@ For example:
 \begin{method}{Abstract comparison methods}
 Magnitude>>> < aMagnitude 
     "Answer whether the receiver is less than the argument."
-    ^self subclassResponsibility
+
+    ^ self subclassResponsibility
+
 
 Magnitude>>> > aMagnitude 
     "Answer whether the receiver is greater than the argument."
-    ^aMagnitude < self
+
+    ^ aMagnitude < self
 \end{method}
 \cmindex{Magnitude}{>}
 
@@ -558,7 +572,7 @@ More interesting, \mthind{Number}{isInfinite} is defined to return \ct{false}.
 12 > 9      --> true            "Greater than"
 12 >= 10  --> true            "Greater or equal  than"
 12 < 10    --> false           "Smaller than"
-100@10   --> 100@10    "Point creation"
+100 @ 10   --> 100@10    "Point creation"
 \end{code}
 \on{Should check how tabbing works in the listings package ...}
 
@@ -593,14 +607,14 @@ Float infinity isInfinite --> true
 \ct{Fraction}s are normally created by \ct{Integer} division (rather than using the constructor method \cmind{Fraction}{numerator:denominator:}):
 
 \begin{code}{@TEST}
-6/8             --> (3/4)
-(6/8) class --> Fraction
+6 / 8             --> (3/4)
+(6 / 8) class --> Fraction
 \end{code}
 
 Multiplying a \ct{Fraction} by an \ct{Integer} or another \ct{Fraction} may yield an \ct{Integer}:
 
 \begin{code}{@TEST}
-6/8 * 4 --> 3
+6 / 8 * 4 --> 3
 \end{code}
 
 \lr{Maybe mention to avoid fractions in results that one of the operands has to be a float, e.g. 6.0 / 8 or 6 asFloat / 8. (p. 213)}
@@ -630,7 +644,7 @@ There is a dedicated method \mthind{Integer}{timesRepeat:} for evaluating a bloc
 We have already seen a similar example in \charef{syntax}:
 \begin{code}{@TEST | n |}
 n := 2.
-3 timesRepeat: [n := n*n].
+3 timesRepeat: [n := n * n].
 n --> 256
 \end{code}
 
@@ -774,11 +788,14 @@ The method is abstract in \ct{Boolean}.
 The implementations in its concrete subclasses are both trivial:
 
 \begin{method}{Implementations of \lct{ifTrue:ifFalse:}}
-True>>>ifTrue: trueAlternativeBlock ifFalse: falseAlternativeBlock 
-    ^trueAlternativeBlock value
+True>>>ifTrue: trueAlternativeBlock ifFalse: falseAlternativeBlock
 
-False>>>ifTrue: trueAlternativeBlock ifFalse: falseAlternativeBlock 
-    ^falseAlternativeBlock value
+    ^ trueAlternativeBlock value
+
+
+False>>>ifTrue: trueAlternativeBlock ifFalse: falseAlternativeBlock
+
+    ^ falseAlternativeBlock value
 \end{method}
 \cmindex{True}{ifTrue:}
 \cmindex{False}{ifTrue:}
@@ -792,7 +809,8 @@ For example:
 \begin{method}{Implementing negation}
 True>>>not
     "Negation--answer false since the receiver is true."
-    ^false
+
+    ^ false
 \end{method}
 \cmindex{True}{not}
 
@@ -800,9 +818,9 @@ True>>>not
 You also have a choice between eager and lazy conjunctions and disjunctions.
 
 \begin{code}{@TEST}
-(1>2) & (3<4)              --> false    "must evaluate both sides"
-(1>2) and: [3<4]        --> false    "only evaluate receiver"
-(1>2) and: [(1/0) > 0] --> false    "argument block is never evaluated, so no exception"
+(1 > 2) & (3 < 4)              --> false    "must evaluate both sides"
+(1 > 2) and: [3 < 4]        --> false    "only evaluate receiver"
+(1 > 2) and: [(1 / 0) > 0] --> false    "argument block is never evaluated, so no exception"
 \end{code}
 
 In the first example, both \ct{Boolean} subexpressions are evaluated, since \mthind{Boolean}{&} takes a \ct{Boolean} argument.

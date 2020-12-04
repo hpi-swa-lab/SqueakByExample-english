@@ -388,7 +388,7 @@ OrderedCollection newFrom: #(7 3 1 3)                     --> an OrderedCollecti
 SortedCollection newFrom: #(7 3 1 3)                       --> a SortedCollection(1 3 3 7)
 Set newFrom: #(7 3 1 3)                                            --> a Set(7 1 3)
 Bag newFrom: #(7 3 1 3)                                           --> a Bag(7 1 3 3)
-Dictionary newFrom: {1 -> 7. 2 -> 3. 3 -> 1. 4 -> 3} --> a Dictionary(1->7 2->3 3->1 4->3 )
+Dictionary newFrom: {1 -> 7 . 2 -> 3 . 3 -> 1 . 4 -> 3} --> a Dictionary(1->7 2->3 3->1 4->3 )
 \end{code}
 \noindent
 Note that these two methods are not identical.
@@ -407,7 +407,7 @@ The following code creates an array of size 5, puts values in the first 3 locati
 \begin{code}{@TEST | anArray | }
 anArray := Array new: 5.
 anArray at: 1 put: 4.
-anArray at: 2 put: 3/2.
+anArray at: 2 put: 3 / 2.
 anArray at: 3 put: 'ssss'.
 anArray at: 1 --> 4
 \end{code}
@@ -422,7 +422,7 @@ We can use \ct{new:}, \ct{with:}, and  the constructs \ct{#( )} and \ct|{ }|.
 The following code creates an array of three elements consisting of the number \ct{4}, the fraction \ct{3/2}, and the string \ct{'lulu'}.
 
 \begin{code}{@TEST | anArray |}
-Array with: 4 with: 3/2 with: 'lulu' -->  {4 . (3/2) . 'lulu'}
+Array with: 4 with: 3 / 2 with: 'lulu' -->  {4 . (3/2) . 'lulu'}
 \end{code}
 
 \paragraph{Literal creation with \ct|\#()|.}
@@ -436,10 +436,10 @@ The following code creates an array of size 2 where the first element is the (li
 #(1 'here') size --> 2
 \end{code}
 
-Now, if you evaluate \ct{#(1+2)}, you do not get an array with a single element \ct{3} but instead you get the array \ct{#(1 #+ 2)} \ie with three elements: \ct{1}, the symbol \ct{#+}, and the number \ct{2}.
+Now, if you evaluate \ct{#(1 + 2)}, you do not get an array with a single element \ct{3} but instead you get the array \ct{#(1 #+ 2)} \ie with three elements: \ct{1}, the symbol \ct{#+}, and the number \ct{2}.
 
 \begin{code}{@TEST}
-#(1+2) -->  #(1 #+ 2)
+#(1 + 2) -->  #(1 #+ 2)
 \end{code}
 
 \noindent
@@ -449,13 +449,13 @@ Literal arrays contain numbers, \ct{nil}, \ct{true}, \ct{false}, symbols, and st
 
 \paragraph{Dynamic creation with \ct|\{ \}|.}
 Finally, you can create a dynamic array using the construct \ct|{}|.
-\ct|{ a . b }| is equivalent to \lct{Array with: a with: b}.
+\ct|{a . b}| is equivalent to \lct{Array with: a with: b}.
 This means in particular that the expressions enclosed by \ct|{| and \ct|}| are executed. 
 
 \begin{code}{@TEST | anArray |}
-{ 1 + 2 } --> #(3)
-{(1/2) asFloat} at: 1 --> 0.5
-{10 atRandom . 1/3} at: 2 --> (1/3)
+{1 + 2} --> #(3)
+{(1 / 2) asFloat} at: 1 --> 0.5
+{10 atRandom . 1 / 3} at: 2 --> (1/3)
 \end{code}
 
 \paragraph{Element Access.}
@@ -554,7 +554,7 @@ We can use \cmind{Interval class}{from:to:by:} or \cmind{Number}{to:by:} to spec
 \begin{code}{@TEST}
 (Interval from: 1 to: 100 by: 0.5) size --> 199
 (1 to: 100 by: 0.5) at: 198 --> 99.5
-(1/2 to: 54/7 by: 1/3) last --> (15/2)
+(1 / 2 to: 54 / 7 by: 1 / 3) last --> (15/2)
 \end{code}
 
 %---------------------------------------------------------
@@ -587,7 +587,7 @@ We can create a \ct{Dictionary} from a collection of associations, or we may con
 
 \needlines{5}
 \begin{code}{@TEST | colors |}
-colors := Dictionary newFrom: { #blue->Color blue. #red->Color red. #yellow->Color yellow }.
+colors := Dictionary newFrom: {#blue -> Color blue . #red -> Color red . #yellow -> Color yellow}.
 colors removeKey: #blue.
 colors associations --> {#red->Color red . #yellow->Color yellow}
 \end{code}
@@ -625,20 +625,20 @@ Objects put in a set should implement the methods \ct{hash} and \ct{=}.
 
 \begin{code}{@TEST | s | }
 s := Set new.
-s add: 4/2; add: 4; add:2.
+s add: 4 / 2; add: 4; add:2.
 s size --> 2
 \end{code}
 
 You can also create sets using \cmind{Set class}{newFrom:} or the conversion message \cmind{Collection}{asSet}:
 
 \begin{code}{@TEST}
-(Set newFrom: #(1 2 3 1 4 )) = #(1 2 3 4 3 2 1) asSet --> true
+(Set newFrom: #(1 2 3 1 4)) = #(1 2 3 4 3 2 1) asSet --> true
 \end{code}
 
 \mthind{Collection}{asSet} offers us a convenient way to eliminate duplicates from a collection:
 
 \begin{code}{@TEST}
-{Color black. Color white. (Color red + Color blue + Color green)} asSet size --> 2
+{Color black . Color white . (Color red + Color blue + Color green)} asSet size --> 2
 \end{code}
 
 \noindent
@@ -646,7 +646,7 @@ The result of the example is 2, as the color white was included twice in the col
 
 A \clsindmain{Bag} is much like a \ct{Set} except that it does allow duplicates:
 \begin{code}{@TEST}
-{Color black. Color white. (Color red + Color blue + Color green)} asBag size --> 3
+{Color black . Color white . (Color red + Color blue + Color green)} asBag size --> 3
 \end{code}
 
 The set operations \emph{union}, \emph{intersection}, and \emph{membership test} are implemented by the \ct{Collection} messages \mthind{Collection}{union:}, \mthind{Collection}{intersection:}, and \mthind{Collection}{includes:}.
@@ -705,7 +705,7 @@ String withAll: ('hello' asSortedCollection)     --> 'ehllo'
 It is possible to have different kinds of elements in a \ct{SortedCollection} as long as they are all comparable.
 For example, we can mix different kinds of numbers such as integers, floats, and fractions:
 \begin{code}{@TEST | col |}
-{5 . 2/-3 . 5.21} asSortedCollection --> a SortedCollection((-2/3) 5 5.21)
+{5 . 2 / -3 . 5.21} asSortedCollection --> a SortedCollection((-2/3) 5 5.21)
 \end{code}
 
 Imagine that you want to sort objects that do not define the method \ct{<=} or that you would like to have a different sorting criterion.
@@ -714,7 +714,7 @@ For example, the class \ct{Color} is not a Magnitude and it does not implement t
 
 \begin{code}{@TEST | col |}
 col := SortedCollection sortBlock: [:c1 :c2 | c1 luminance <= c2 luminance].
-col addAll: { Color red. Color yellow. Color white. Color black }.
+col addAll: { Color red . Color yellow . Color white . Color black }.
 col --> a SortedCollection(Color black Color red Color yellow Color white)
 \end{code}
 \cmindex{SortedCollection class}{sortBlock:}
@@ -739,7 +739,7 @@ To keep things simple, we usually ignore the difference and just talk about inst
 Two instances of \ct{String} can be concatenated with a comma.
 \index{Collection!comma operator}
 \begin{code}{@TEST |s|}
-s := 'no', ' ', 'worries'.
+s := 'no' , ' ' , 'worries'.
 s -->  'no worries'
 \end{code}
 
@@ -777,7 +777,7 @@ s copyReplaceAll: 'rries' with: 'mbats' --> 'No wombats'
 If you take a quick look at the implementation of these methods, you can see that they are defined not only for \ct{String}s but for any kind of \ct{SequenceableCollection}, so the following also works:
 
 \begin{code}{@TEST}
-(1 to: 6) copyReplaceAll: (3 to: 5) with: {'three'. 'etc.'} --> #(1 2 'three' 'etc.' 6)
+(1 to: 6) copyReplaceAll: (3 to: 5) with: {'three' . 'etc.'} --> #(1 2 'three' 'etc.' 6)
 \end{code}
 
 \paragraph{String matching.}
@@ -884,7 +884,7 @@ The following code shows an interesting message: \mthind{Collection}{do:separate
 executes the second block only in between two elements.
 \begin{code}{@TEST | res | }
 res := ''.
-#('bob' 'joe' 'toto') do: [:e | res := res, e] separatedBy: [res := res, '.'].
+#('bob' 'joe' 'toto') do: [:e | res := res , e] separatedBy: [res := res , '.'].
 res --> 'bob.joe.toto'
 \end{code}
 \noindent
@@ -909,7 +909,7 @@ String streamContents: [:stream | #('bob' 'joe' 'toto') asStringOn: stream delim
 When the message \mthind{Dictionary}{do:} is sent to a dictionary, the elements taken into account are the values, not the associations. The proper methods to use are \mthind{Dictionary}{keysDo:}, \mthind{Dictionary}{valuesDo:}, and \mthind{Dictionary}{associationsDo:}, which iterate respectively on keys, values or associations.
 
 \begin{code}{}
-colors := Dictionary newFrom: {#yellow -> Color yellow. #blue -> Color blue. #red -> Color red}.
+colors := Dictionary newFrom: {#yellow -> Color yellow . #blue -> Color blue . #red -> Color red}.
 colors keysDo: [:key | Transcript show: key; cr].                    "displays the keys"
 colors valuesDo: [:value | Transcript show: value;cr].            "displays the values"
 colors associationsDo: [:value | Transcript show: value; cr].  "displays the associations"
@@ -1120,6 +1120,7 @@ Then we would redefine not only \ct{=} but also \ct{hash} as follows:
 
 \begin{method}{Redefining \lct{=} and \lct{hash}.}
 Book>>>= aBook
+
    self class = aBook class ifFalse: [^ false].
    ^ title = aBook title and: [authors = aBook authors]
 
@@ -1140,8 +1141,8 @@ The \st collection hierarchy provides a common vocabulary for uniformly manipula
   \item A key distinction is between \ct{SequenceableCollection}s, which maintain their elements in a given order, \ct{Dictionary} and its subclasses, which maintain key-to-value associations, and \ct{Set}s and \ct{Bag}s, which are unordered.
   \item You can convert most collections to another kind of collection by sending them the messages \ct{asArray}, \ct{asOrderedCollection} \etc.
   \item To sort a collection, send it the message \ct{sorted}, the create a collection that always keeps its element sorted send \ct{asSortedCollection}.
-  \item Literal \ct{Array}s are created with the special syntax \ct{#( ... )}.
-  Dynamic \ct{Array}s are created with the syntax \ct|{ ... }|.
+  \item Literal \ct{Array}s are created with the special syntax \ct{#(...)}.
+  Dynamic \ct{Array}s are created with the syntax \ct|{...}|.
   \item A \ct{Dictionary} compares keys by equality.
   It is most useful when keys are instances of \ct{String}. An \ct{IdentityDictionary} instead uses object identity to compare keys.
   It is more suitable when \ct{Symbol}s are used as keys, or when mapping object references to values.

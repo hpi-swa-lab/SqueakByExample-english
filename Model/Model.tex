@@ -78,7 +78,7 @@ Integers, for example, are true objects, so you can send messages to them, just 
 20 factorial  --> 2432902008176640000   "send factorial, yielding a big number"
 \end{code}
 
-The representation of a number as large as \ct{20 factorial} is different from the representation of a number as small as \ct{7}, but because they are both objects, none of the code\,---\,not even the implementation of \ct{factorial}\,---\,needs to now about this.
+The representation of a number as large as \ct{20 factorial} is different from the representation of a number as small as \ct{7}, but because they are both objects, none of the code\,---\,not even the implementation of \ct{factorial}\,---\,needs to know about this.
 
 \needlines{3}
 Perhaps the most fundamental consequence of this rule is the following:
@@ -88,7 +88,7 @@ This means that \squeak is a truly reflective system, which gives a great deal o
 
 Deep in the implementation of \st, there are three different kinds of objects.
 There are (1) ordinary objects with instance variables that are passed by references, there are (2) \emph{immediate objects} such as \clsind{SmallInteger}s that are passed by value, and there are (3) indexable objects like arrays that hold a contiguous portion of memory.
-The beauty of \st is that you normally don't need to care about the differences between these three kinds of objects.
+The beauty of \st is that you normally do not need to care about the differences between these three kinds of objects.
 
 %=========================================================
 \section{Every object is an instance of a class}
@@ -98,11 +98,11 @@ The beauty of \st is that you normally don't need to care about the differences 
 Every object has a class; you can find out which by sending it the message \ct{class}.
 
 \begin{code}{@TEST}
-1 class                 --> SmallInteger
+1 class                --> SmallInteger
 20 factorial class --> LargePositiveInteger
 'hello' class          --> ByteString
-#(1 2 3) class       --> Array
-(4@5) class         --> Point
+#(1 2 3) class      --> Array
+(4 @ 5) class         --> Point
 Object new class --> Object
 \end{code}
 
@@ -139,14 +139,15 @@ This means that \st instance variables are similar to \emph{protected} variables
 However, we prefer to say that they are private because it is considered bad style in \st to access an instance variable directly from a subclass. 
 
 \subsubsection{Example}
-Method \cmind{Point}{dist:} (\mthref{dist:}) computes the distance between the receiver and another point.
+Method \cmind{Point}{dist:} (see \Mthref{dist:}) computes the distance between the receiver and another point.
 The instance variables \ct{x} and \ct{y} of the receiver are accessed directly by the method body.
 However, the instance variables of the other point must be accessed by sending it the messages \ct{x} and \ct{y}.
 
 \needlines{7}
 \begin{method}[dist:]{the distance between two points}
 Point>>>dist: aPoint 
-	"Answer the distance between aPoint and the receiver."  
+	"Answer the distance between aPoint and the receiver."
+
 	| dx dy |
 	dx := aPoint x - x.
 	dy :=  aPoint y - y.
@@ -154,12 +155,12 @@ Point>>>dist: aPoint
 \end{method}
 
 \begin{code}{@TEST}
-1@1 dist: 4@5 --> 5
+1 @ 1 dist: 4 @ 5 --> 5
 \end{code}
 
 The key reason to prefer instance-based encapsulation to class-based encapsulation is that it enables different implementations of the same abstraction to coexist.
-For example, method \ct{point>>>dist:}, need not know or care whether the argument \ct{aPoint} is an instance of the same class as the receiver.
-The argument object might be represented in polar coordinates, or as a record in a database, or on another computer in a distributed system; as long as it can respond to the messages \ct{x} and \ct{y}, the code in \mthref{dist:} will still work.
+For example, method \ct{Point>>>dist:}, need not know or care whether the argument \ct{aPoint} is an instance of the same class as the receiver.
+The argument object might be represented in polar coordinates, or as a record in a database, or on another computer in a distributed system; as long as it can respond to the messages \ct{x} and \ct{y}, the code in \Mthref{dist:} will still work.
 
 %---------------------------------------------------------
 \subsection{Methods}
@@ -221,7 +222,7 @@ SBEScreenshotRecorder
 \end{figure}
 
 For this reason, the browser \index{system browser} helps you to browse both class and metaclass as if they were a single thing with two ``sides'': the ``\subind{system browser}{instance side}'' and the ``\subind{system browser}{class side}'', as shown in \figref{Buttons}. Clicking on the \button{instance} button browses the class \ct{Color}, \ie you browse the methods that are executed when messages
-are sent to an instance of \ct{Color}, like the blue color.
+are sent to an instance of \ct{Color}, like the color blue.
 Pressing the \button{class} button browses the class \ct{Color class}, \ie you see the methods that will be executed when messages are sent to the class \ct{Color} itself.
 For example, \ct{Color blue} sends the message \ct{blue} to the class \clsind{Color}.
 You will therefore find the method \ct{blue} defined on the class side of \ct{Color}, not on the instance side.
@@ -262,19 +263,20 @@ You will see the effect of executing this method directly within the world.
 For those familiar with \ind{Java} and \ind{C++}, class methods may seem similar to static methods. 
 However, the uniformity of \st means that they are somewhat different:
 Whereas Java static methods are really just statically-resolved procedures, \st class methods are dynamically-dispatched methods.
-This means that inheritance, overriding, and super-sends work for class methods in \st, whereas they don't work for static methods in Java.
+This means that inheritance, overriding, and super-sends work for class methods in \st, whereas they do not work for static methods in Java.
 
 %---------------------------------------------------------
 \subsection{Class instance variables}
-With ordinary instance variables, all the instances of a class have the same set of variable names, and the instances of its subclasses inherit those names; however, each instance has its own private set of values.
+With ordinary instance variables, all the instances of a class have the same set of variable names, and the instances of its subclasses inherit those names.
+However, each instance has its own private set of values.
 The story is exactly the same with class \subind{class}{instance variable}{}s: each class has its own private class instance variables.
 A subclass will inherit those class instance variables, \emph{but it has its own private copies of those variables}.
-Just as objects don't share instance variables, neither do classes and their subclasses share class instance variables.
+Just as objects do not share instance variables, neither do classes and their subclasses share class instance variables.
 
 You could use a class instance variable called \ct{count} to keep track of how many instances you create of a given class.
 However, any subclass would have its own \ct{count} variable, so subclass instances would be counted separately.
 
-\paragraph{Example: class instance variables are not shared with subclasses.}
+\paragraph{Example: Class instance variables are not shared with subclasses.}
 Suppose we define classes \ct{Dog} and \ct{Hyena}, where \ct{Hyena} inherits the class instance variable \ct{count} from \ct{Dog}.
 
 \begin{classdef}[dog]{Dogs and Hyenas}
@@ -295,18 +297,23 @@ Dog subclass: #Hyena
 \end{classdef}
 
 Now suppose we define class methods for \ct{Dog} to initialize its \ct{count} to \ct{0}, and to increment it when new instances are created:
-\begin{method}[dogcount]{Keeping count of new dogs}
+\begin{methods}[dogcount]{Keeping count of new dogs}
 Dog class>>>initialize
+
 	super initialize.
 	count := 0.
 
+
 Dog class>>>new
+
 	count := count +1.
 	^ super new
 
+
 Dog class>>>count
+
 	^ count
-\end{method}
+\end{methods}
 
 Now when we create a new \ct{Dog} its count is incremented, and so is that of every \ct{Hyena}, but they are counted separately:
 \begin{code}{}
@@ -327,7 +334,7 @@ Note also that class instance variables are private to a class in exactly the sa
 Since classes and their instances are different objects, this has the following immediate consequences:
 \important{A class does not have access to the instance variables of its own instances.}
 \important{An instance of a class does not have access to the class instance variables of its class.}
-For this reason, instance initialization methods must always be defined on the \subind{system browser}{instance side}\,---\,the \subind{system browser}{class side} has no access to instance variables, so cannot initialize them!  
+For this reason, instance initialization methods must always be defined on the \subind{system browser}{instance side}\,---\,the \subind{system browser}{class side} has no access to instance variables, so it cannot initialize them!  
 All that the class can do is to send \ind{initialization} messages, possibly using accessors, to newly created instances.
 
 Similarly, instances can only access class instance variables indirectly, by sending accessor messages to their class.
@@ -366,6 +373,7 @@ Since \ct{uniqueInstance} is a class instance variable, this method can directly
     
 \begin{method}[uniqueInstance]{uniqueInstance (on the class side)}
 SBEWebServer class>>>uniqueInstance
+
      uniqueInstance ifNil: [uniqueInstance := self new].
      ^ uniqueInstance
 \end{method}
@@ -401,7 +409,7 @@ Object superclass           --> ProtoObject
 ProtoObject superclass  --> nil
 \end{code}
 
-Traditionally the root of the \st inheritance hierarchy is the class \clsind{Object} (since everything is an object).
+Traditionally, the root of the \st inheritance hierarchy is the class \clsind{Object} (since everything is an object).
 In \squeak, the root is actually a class called \clsind{ProtoObject}, but you will normally not pay any attention to this class.
 \ct{ProtoObject} encapsulates the minimal set of messages that all objects \emph{must} have.
 However, most classes inherit from \ct{Object}, which defines many additional messages that almost all objects ought to understand and respond to.
@@ -452,6 +460,7 @@ The method \mthind{Magnitude}{<} is abstract and defined as shown in \mthref{Mag
 \begin{method}[MagnitudeLessThan]{\ct{Magnitude>>><}}
 Magnitude>>>< aMagnitude 
 	"Answer whether the receiver is less than the argument."
+
 	^ self subclassResponsibility
 \end{method}
 
@@ -461,6 +470,7 @@ By contrast, the method \mthind{Magnitude}{>=} is concrete; it is defined in ter
 \begin{method}[Magnitude>=]{\ct{Magnitude>>>>=}}
 >= aMagnitude 
 	"Answer whether the receiver is greater than or equal to the argument."
+
 	^ (self < aMagnitude) not
 \end{method}
 The same is true of the other comparison methods.
@@ -471,6 +481,7 @@ The same is true of the other comparison methods.
 \begin{method}[CharacterLessThan]{\ct{Character>>><}}
 Character>>>< aCharacter 
 	"Answer true if the receiver's value < aCharacter's value."
+
 	^ self asciiValue < aCharacter asciiValue
 \end{method}
 
@@ -501,7 +512,8 @@ We might do this as follows:
 \begin{method}[author]{An author method}
 TAuthor>>>author
     "Returns author initials"
-	^ 'on'    "oscar nierstrasz"
+	
+	^ 'taa'    "the anonymous author"
 \end{method}
 
 \noindent
@@ -520,7 +532,7 @@ BorderedMorph subclass: #SBEGame
 If we now instantiate \ct{SBEGame}, it will respond to the \ct{author} message as expected.
 
 \begin{code}{}
-SBEGame new author --> 'on'
+SBEGame new author --> 'taa'
 \end{code}
 
 Trait composition expressions may combine multiple traits using the \ct{+} operator.
@@ -529,7 +541,7 @@ It is also possible to \emph{alias} methods (with \ct{@}), providing a new name 
 
 
 %=========================================================
-\section{Everything happens by message sending}
+\section{Everything happens by sending messages}
 
 %\ruleref{message}
 
@@ -548,7 +560,7 @@ The receiver then decides how to respond by selecting its own \emph{method} for 
 Since different objects may have different methods for responding to the same message, the method must be chosen \emph{dynamically}, when the message is received.
 \begin{code}{@TEST}
 3 + 4         --> 7          "send message + with argument 4 to integer  3"
-(1@2) + 4 --> 5@6    "send message + with argument 4 to point (1@2)"
+(1 @ 2) + 4 --> 5@6    "send message + with argument 4 to point (1@2)"
 \end{code}
 \noindent
 As a consequence, we can send the \emph{same message} to different objects, each of which may have \emph{its own method} for responding to the message.
@@ -557,7 +569,7 @@ Each has its own method for \ct{+}, and responds to \ct{+ 4} accordingly.
 
 One of the consequences of \st's model of message sending is that it encourages a style in which objects tend to have very small methods and delegate tasks to other objects, rather than implementing huge, procedural methods that assume too much responsibility.
 Joseph Pelrine expresses this principle succinctly as follows:
-\important{Don't do anything that you can push off onto someone else.}
+\important{Don not do anything that you can push off onto someone else.}
 \index{Pelrine, Joseph}
 \ab{Citation?}
 \on{sorry, just personal communication and my own lecture notes!}
@@ -582,7 +594,7 @@ Other than these few exceptions, pretty much everything else does truly happen b
 In particular, since there are no ``public fields'' in \st, the only way to update an \ind{instance variable} of another object is to send it a message asking that it update its own field.
 Of course, providing setter and getter methods for all the instance variables of an object is no good object-oriented style.
 Joseph Pelrine also states this very nicely:
-\important{Don't let anyone else play with your data.}
+\important{Do not let anyone else play with your data.}
 
 %=========================================================
 \section{Method lookup follows the inheritance chain} 
@@ -609,7 +621,7 @@ Nevertheless, there are a few questions that need some care to answer:
 
 The rules for method lookup that we present here are conceptual:
 Virtual machine implementors use all kinds of tricks and optimizations to speed-up method lookup. 
-That's their job, but you should never be able to detect that they are doing something different from our rules.
+That is their job, but you should never be able to detect that they are doing something different from the rules mentioned above.
 % Whatever the implementation does, these rules will give you a clear understanding of the semantics of sending messages to \self and \super.
 
 First let us look at the basic lookup strategy, and then consider these further questions.
@@ -631,6 +643,7 @@ The class \ct{EllipseMorph} implements \ct{defaultColor}, so the appropriate met
 \begin{method}[defaultColor]{A locally implemented method}
 EllipseMorph>>>defaultColor
 	"answer the default color/fill style for the receiver"
+
 	^ Color yellow
 \end{method}
 \cmindex{EllipseMorph}{defaultColor}
@@ -641,6 +654,7 @@ The search therefore continues in the superclass, \lct{BorderedMorph}, and so on
 \begin{method}[openInWorld]{An inherited method}
 Morph>>>openInWorld
 	"Add this morph to the world."
+
 	self openInWorld: self currentWorld.
 \end{method}
 \cmindex{Morph}{openInWorld}
@@ -673,6 +687,7 @@ This suggests that \mthref{openInWorld} is equivalent to \mthref{openInWorldRetu
 \begin{method}[openInWorldReturnSelf]{Explicitly returning self}
 Morph>>>openInWorld
 	"Add this morph to the world."
+
 	self openInWorld: self currentWorld.
 	^ self		"Don't do this unless you mean it!"
 \end{method}
@@ -700,7 +715,7 @@ In fact, if we open a new morph (\ct{Morph new openInWorld}) we see that we get 
 We say that \ct{EllipseMorph} \emph{overrides} the \ct{defaultColor} method that it inherits from \ct{Morph}.
 The inherited method no longer exists from the point of view of \ct{anEllipse}.
 
-Sometimes we do not want to override inherited methods, but rather \emph{extend} them with some new functionality, that is, we would like to be able to invoke the overridden method \emph{in addition to} the new functionality we are defining in the subclass.
+Sometimes, we do not want to override inherited methods, but rather \emph{extend} them with some new functionality, that is, we would like to be able to invoke the overridden method \emph{in addition to} the new functionality we are defining in the subclass.
 In \st, as in many object-oriented languages that support single inheritance, this can be done with the help of \super sends.
 
 The most important application of this mechanism is in the \ct{initialize} method.
@@ -714,9 +729,10 @@ It is therefore good practice whenever implementing an initialize method to send
 \needlines{6}
 \begin{method}[morphinit]{Super initialize}
 BorderedMorph>>>initialize
-	"initialize the state of the receiver"
+	"Initialize the state of the receiver."
+
 	super initialize.
-	self borderInitialize
+	self borderInitialize.
 \end{method}
 
 \important{An \ct{initialize} method should always start by sending \ct{super initialize}.}
@@ -759,7 +775,8 @@ as shown in \figref{initStringLookup}.
 \needlines{5}
 \begin{method}[initString]{A \self send}
 Morph>>>initString
-	^ String streamContents: [:s | self fullPrintOn: s]
+
+	^ String streamContents: [:stream | self fullPrintOn: stream]
 \end{method}
 The method \cmind{Morph}{initString} performs a \self send of \ct{fullPrintOn:}.
 This causes a second lookup to take place, starting in the class \ct{EllipseMorph}, and finding \mthind{BorderedMorph}{fullPrintOn:} in \ct{BorderedMorph} (see \figref{initStringLookup} once again).
@@ -770,10 +787,13 @@ What is critical to notice is that the \self send causes the method lookup to st
 \needlines{4}
 \begin{method}[fullPrintOn]{Combining \super and \self sends}
 BorderedMorph>>>fullPrintOn: aStream
+
 	aStream nextPutAll: '('.
 	!\textbf{super fullPrintOn: aStream.}!
-	aStream nextPutAll: ') setBorderWidth: '; print: self borderWidth;
-		nextPutAll: ' borderColor: ' , (self colorString: self borderColor)
+	aStream 
+		nextPutAll: ') setBorderWidth: ';
+		print: self borderWidth;
+		nextPutAll: ' borderColor: ' , (self colorString: self borderColor).
 \end{method}
 At this point, \ct{BorderedMorph>>>fullPrintOn:} does a \super send to extend the 
 \ct{fullPrintOn:} behavior it inherits from its superclass.
@@ -797,7 +817,7 @@ What happens if the method we are looking for is not found?
 \index{message!not understood}
 
 Suppose we send the message \ct{foo} to our ellipse.
-First the normal method lookup would go through the inheritance chain all the way up to \clsind{Object} (or rather \clsind{ProtoObject}) looking for this method.
+First, the normal method lookup would go through the inheritance chain all the way up to \clsind{Object} (or rather \clsind{ProtoObject}) looking for this method.
 When this method is not found, the \ind{virtual machine} will cause the object to send \ct{self doesNotUnderstand: #foo}.
 (See \figref{fooNotFound}.)
 
@@ -840,7 +860,7 @@ A \ct{Delegator} object could simply delegate all messages it does not understan
 %=========================================================
 \section{Shared variables}
 
-Now we will look at an aspect of \st that is not so easily covered by our five rules: \subind{variable}{shared} variables.
+Next, we will look at an aspect of \st that is not so easily covered by our five rules: \subind{variable}{shared} variables.
 
 \st provides three kinds of shared variables: (1) \emph{globally} shared variables; (2) variables shared between instances and classes (\emph{class variables}), and (3) variables shared amongst a group of  classes (\emph{pool variables}).
 The names of all of these shared variables start with a capital letter, to warn us that they are indeed shared between multiple objects.
@@ -851,14 +871,14 @@ The names of all of these shared variables start with a capital letter, to warn 
 %---------------------------------------------------------
 \subsection{Global variables}
 In \squeak, all global variables are stored in a namespace called \glbind{Smalltalk} which is an instance of the class \clsind{SmalltalkImage}.
-Global variables are accessible everywhere. 
+Global variables are accessible from anywhere. 
 Every class is named by a global variable; in addition, a few globals are used to name special or commonly useful objects.
 
 However, what may sound so handy and convenient at the first glance has turned out as bad practice during the evolution of \sq.
 While we state in rule 4 that ``everything happens by message sends'', the concept of globals is a violation of this rule.
 Accessing a global allows you to exchange information between two objects\,---\,\emph{without} sending any message.
 As a consequence, when using globals, we lose an important advantage of the \st object model, which is the encapsulation of every object's state.
-Also, global variables introduce \emph{global state} as mentioned earlier which impedes the modularity of \st objects and hinders us to use a \st object directly without taking care of its environment.
+Furthermore, global variables introduce \emph{global state} as mentioned earlier which impedes the modularity of \st objects and hinders us to use a \st object directly without taking care of its environment.
 
 For these reasons, current practice is to strictly limit the use of global variables; it is usually better to use class instance variables or class variables and to provide class methods to access them.
 Still, there are a number of globals defined in \sq, but for most of them, there is a preferred alternative too, which is a message that usually can be sent to a particular class.
@@ -905,7 +925,7 @@ If you write a method that references an undeclared variable, the browser will n
 However, if you later delete the declaration, the code will then reference an undeclared variable.
 Inspecting the undeclared dictionary can sometimes help explain strange behavior!
 
-In case you really need to define a new global, the usual way to do so is just to \menu{do it} on an assignment to a capitalized but undeclared identifier.
+In case you really need to define a new global, the common way to do so is just to \menu{do it} on an assignment to a capitalized but undeclared identifier.
 The parser will then offer to declare the global for you.
 If you want to define a global programmatically, just execute \ct{Smalltalk at: #AGlobalName put: nil}.
 To remove it, execute \ct{Smalltalk removeKey: #AGlobalName}.
@@ -914,7 +934,7 @@ To remove it, execute \ct{Smalltalk removeKey: #AGlobalName}.
 \subsection{Class variables}
 \label{sec:classVars}
 
-Sometimes we need to share some data amongst all the instances of a class and the class itself.
+Sometimes, we need to share some data amongst all the instances of a class and the class itself.
 This is possible using \emph{class variables}.
 The term class \subind{class}{variable} indicates that the lifetime of the variable is the same as that of the class.
 However, what the term does not convey is that these variables are shared amongst all the instances of a class as well as the class itself,
@@ -973,7 +993,8 @@ This furthermore imposes the cost of the accessor send and the initialization te
 It also arguably defeats the point of using a class variable, since in fact it is no longer shared.
 
 \begin{method}[colorclasscolornames]{Color class>>colorNames}
-Color class>>>colorNames	
+Color class>>>colorNames
+
 	ColorNames ifNil: [self initializeNames].
 	^ ColorNames
 \end{method}	
@@ -983,7 +1004,8 @@ Another solution is to override the class method \ct{initialize}.
 
 \needlines{3}
 \begin{method}[colorclassinit]{Color class>>initialize}
-Color class>>>initialize	
+Color class>>>initialize
+	
 	!\ldots!
 	self initializeNames
 \end{method}	
@@ -1017,7 +1039,8 @@ This allows methods of the class \ct{Text} to access the keys of the dictionary 
 For example, we can write the following method. 
   
 \begin{method}[texttestcr]{Text>>testCR}
-Text>>>testCR 	
+Text>>>testCR
+
       ^ CR == Character cr
 \end{method}
 

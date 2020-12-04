@@ -1,3 +1,4 @@
 event handling
 mouseLeave: anEvent
-	anEvent hand releaseKeyboardFocus: self
+
+	anEvent hand releaseKeyboardFocus: self.

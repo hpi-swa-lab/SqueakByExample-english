@@ -1,3 +1,4 @@
 *SBE-QuickTour
 shout
-	^ self asUppercase, '!'
+
+	^ self asUppercase , '!'
