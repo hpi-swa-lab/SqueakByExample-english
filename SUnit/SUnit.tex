@@ -44,7 +44,7 @@ but in fact it can be used for integration tests and functional tests as well.
 \seeindex{resource}{test, resource}
 
 The interest in testing and \ind{Test Driven Development} is not limited to \squeak or \st.
-Automated testing has become a hallmark of the \ind{Agile software development} movement, and any software developer concerned with improving software quality would do well to adopt it.
+Automated testing has become a hallmark of the \ind{agile software development} movement, and any software developer concerned with improving software quality would do well to adopt it.
 Indeed, developers in many languages have come to appreciate the power of unit testing, and versions of \xUnit{} now exist for many languages, including \ind{Java}, \ind{Python}, and .NET.
 \index{xUnit}
 \index{Net@.Net}
@@ -328,7 +328,6 @@ In addition to \ct{assert:} and \ct{deny:}, several other methods can be used to
 
 First, \mthind{TestCase}{assert:description:} and \mthind{TestCase}{deny:description:} take a second argument which is a message string that can be used to describe the reason for the failure if it is not obvious from the test itself.
 These methods are described in~\secref{descriptionStrings}.
-
 Next, \sunit provides two additional methods, \mthind{TestCase}{should:raise:} and
 \mthind{TestCase}{shouldnt:raise:} for testing exception propagation.
 For example, you would use \ct{(self should: aBlock raise: anException)} to test that a particular exception is raised during the execution of \ct{aBlock}.
@@ -366,7 +365,7 @@ Normally, you will run your tests using the Test Runner.
 If you don't want to launch the Test Runner from the menus, you can execute \ct{TestRunner open} as a \menu{print it}.
 \index{Tools flap}
 
-You can run a single test as follows.
+You can run a single test as follows:
 
 % ct TODO: Add code examples to SmaltlalkSources, then turn on @TEST for snippets
 \begin{code}{}
@@ -635,7 +634,7 @@ TestCase>>>runCase
 To run more than one test, we send the message \ct{run} to a \ct{TestSuite} that contains the relevant tests.
 \ct{TestCase class} provides some functionality to build a test suite from its methods.
 The expression \ct{MyTestCase buildSuiteFromSelectors} returns a suite containing all the tests defined in the {\ct{MyTestCase} class.
-The core of this process is
+The core of this process is:
 \begin{method}[testcasetestselectors]{Auto-building the test suite}
 TestCase class>>>testSelectors
 
@@ -1108,7 +1107,7 @@ Finally, we looked deep inside \sunit by following the execution of a test and a
   \item To maximize their potential, unit tests should be fast, repeatable, independent of any direct human interaction, and cover a single unit of functionality.
   \item Tests for a class called \ct{MyClass} belong in a class classed \ct{MyClassTest}, which should be introduced as a subclass of \lct{TestCase}.
   \item Initialize your test data in a \ct{setUp} method.
-  \item Each test method should start with the word ``test''.
+  \item Each test method should start with the word \ct{test}.
   \item Use the \ct{TestCase} methods \ct{assert:}, \ct{deny:} and others to make assertions.
   \item Run tests using the SUnit test runner tool (in the tool bar).
 \end{itemize}
