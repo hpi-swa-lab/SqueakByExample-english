@@ -25,12 +25,10 @@
          {{{Smalltalk} Best Practice Patterns}%
           {}{}{2}{}{}{}{}{}}%
         ]{Beck97a}
- \jburldef
-  {Beck97a}{http://stephane.ducasse.free.fr/FreeBooks/BestSmalltalkPractices/Draft-Smalltalk%20Best%20Practice%20Patterns%20Kent%20Beck.pdf}%
  \jbbibargs {\bibnf {Beck} {Kent} {K.} {} {}} {Kent Beck} {au} {\bibtfont
   {{Smalltalk} Best Practice Patterns}\bibatsep\  \apyformat
-  {Prentice-Hall\bibbdsep {} 1997} \jburluse {Beck97a}} {\bibhowcited}
-  \jbdoitem {{Beck}{Kent}{K.}{}{}} {} {} \bibAnnoteFile {Beck97a}
+  {Prentice-Hall\bibbdsep {} 1997}} {\bibhowcited} \jbdoitem
+  {{Beck}{Kent}{K.}{}{}} {} {} \bibAnnoteFile {Beck97a}
 
 \bibitem[{Beck\jbdy {2003}}%
          {}%
@@ -67,8 +65,7 @@
          {{{Smalltalk} 80: the Language and its Implementation}%
           {}{}{2}{}{}{}{}{}}%
         ]{Gold83a}
- \jburldef
-  {Gold83a}{http://stephane.ducasse.free.fr/FreeBooks/BlueBook/Bluebook.pdf}%
+ \jburldef {Gold83a}{https://dl.acm.org/doi/pdf/10.5555/273}%
  \jbbibargs {\bibnf {Goldberg} {Adele} {A.} {} {}\Bibbtasep \bibnf {Robson}
   {David} {D.} {} {}} {Adele GoldbergDavid Robson} {aus} {\bibtfont
   {{Smalltalk} 80: the Language and its Implementation}\bibatsep\  \apyformat
