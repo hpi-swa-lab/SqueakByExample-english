@@ -99,7 +99,21 @@ collection sorted == collection. --> false
 collection asSortedCollection. --> a SortedCollection(1 2 6 7)
 
 collection sort. --> #(1 2 6 7)
+collection. --> #(1 2 6 7)
 collection sort == collection. --> true
+\end{code}
+
+To define custom sort criteria, use a sort block or a function (see \secref{sec:sorting}):
+
+\begin{code}{@TEST}
+collection := #('Foo' 'Bar' 'baz').
+collection sorted. --> #('Bar' 'Foo' 'baz')
+
+collection sorted: [:a :b | a caseInsensitiveLessOrEqual: b]. --> #('Bar' 'baz' 'Foo')
+collection sorted: [:a | a asUppercase] ascending. --> #('Bar' 'baz' 'Foo')
+collection sorted: [:a | a asUppercase] descending. --> #('Foo' 'baz' 'Bar')
+
+(#(1 0 2) @ #(2 0 1)) sorted: #r ascending , #x descending. --> {0 @ 0. 2 @ 1. 1 @ 2}
 \end{code}
 
 \begin{faq}
