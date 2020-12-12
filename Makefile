@@ -17,6 +17,7 @@ ifndef TRAVIS
 	endif
 	PDFLATEX = ${PREFIX} pdflatex -file-line-error -interaction=nonstopmode
 	BIBTEX = ${PREFIX} bibtex
+	MAKEINDEX = ${PREFIX} makeindex
 else
 	PDFLATEX = docker run -v $(CURDIR):/src tom95/texlive-docker-swa pdflatex -interaction=nonstopmode
 	BIBTEX = docker run -v $(CURDIR):/src tom95/texlive-docker-swa bibtex
@@ -50,14 +51,14 @@ book-pages :
 
 # We need a makefile rule to generate the index as well ...
 index :
-	makeindex ${BOOK}
+	${MAKEINDEX} ${BOOK}
 
 complete : book index
 	time ${PDFLATEX} ${BOOK}
 
 etc :
 	time ${PDFLATEX} ${ETC}
-	makeindex ${ETC}
+	${MAKEINDEX} ${ETC}
 	time ${PDFLATEX} ${ETC}
 	time ${PDFLATEX} ${ETC}
 	open ${ETC}.pdf
