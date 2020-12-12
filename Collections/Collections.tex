@@ -1186,7 +1186,7 @@ It can be instantiated from any unary block by sending the message \mthind{Block
 \mthind{Symbol}{ascending} and \mthind{BlockClosure}{descending} are defined on \clsind{Symbol} as well, so we could also write the previous example in the following way (but the former version is more efficient):
 
 \begin{code}{@TEST}
-#('Foo' 'Bar' 'baz') sorted: #asUppercase descending --> #('Foo' 'Bar' 'baz')
+#('Foo' 'Bar' 'baz') sorted: #asUppercase descending --> #('Foo' 'baz' 'Bar')
 \end{code}
 
 Sort functions provide a bunch of other useful functionality.
