@@ -1167,8 +1167,7 @@ These messages take a two-argument sort block or a \emphind{sort function}\index
 Here is a simple example of how to use a sort block:
 
 \begin{code}{@TEST}
-#('Foo' 'Bar' 'baz') sorted:
-    [:a :b | a caseInsensitiveLessOrEqual: b] --> #('Bar' 'baz' 'Foo')
+#('Foo' 'Bar' 'baz') sorted: [:a :b | a caseInsensitiveLessOrEqual: b] --> #('Bar' 'baz' 'Foo')
 \end{code}
 
 In many cases, you will need to sort a collection by a particular property or transformation of each element.
@@ -1195,9 +1194,7 @@ For example, you can chain them by using \mthind{SortFunction}{\#,}, reverse the
 Let's lump them all together to demonstrate the overwhelming power of sort functions:
 
 \begin{code}{@TEST}
-{1. 100. nil. 1000. 10} sorted:
-	[:ea | ea ifNotNil: [ea asWords first]] ascending undefinedLast
-		, SortFunction default reversed. --> #(1000 100 1 10 nil)
+{1. 100. nil. 1000. 10} sorted: [:ea | ea ifNotNil: [ea asWords first]] ascending undefinedLast , SortFunction default reversed. --> #(1000 100 1 10 nil)
 \end{code}
 
 For further information on sort functions, you can browse the system category \ct{Collections-SortFunctions} and in particular its extension methods on \clsind{BlockClosure} and \clsind{Symbol}.
