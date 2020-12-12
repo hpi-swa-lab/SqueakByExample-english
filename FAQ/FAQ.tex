@@ -113,7 +113,7 @@ collection sorted: [:a :b | a caseInsensitiveLessOrEqual: b]. --> #('Bar' 'baz' 
 collection sorted: [:a | a asUppercase] ascending. --> #('Bar' 'baz' 'Foo')
 collection sorted: [:a | a asUppercase] descending. --> #('Foo' 'baz' 'Bar')
 
-(#(1 0 2) @ #(2 0 1)) sorted: #r ascending , #x descending. --> {0 @ 0. 2 @ 1. 1 @ 2}
+Fix(#(1 0 2) @ #(2 0 1)) sorted: #r ascending , #x descending. --> {0@0 . 2@1 . 1@2}
 \end{code}
 
 \begin{faq}
