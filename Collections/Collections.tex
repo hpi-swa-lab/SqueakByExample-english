@@ -783,7 +783,7 @@ If you take a quick look at the implementation of these methods, you can see tha
 \paragraph{String matching.}
 \index{String!pattern matching}
 It is possible to ask whether a pattern matches a string by sending the \mthind{String}{match:} message.
-The pattern can specify \ct{*} to match an arbitrary series of characters and \ct{\#} to match a single character.
+The pattern can specify \ct{*} to match an arbitrary series of characters and \ct{#} to match a single character.
 Note that \ct{match:} is sent to the pattern and not the string to be matched.
 \begin{code}{@TEST}
 'Linux *' match: 'Linux mag'                      --> true
@@ -797,7 +797,7 @@ Another useful method is \ct{findString:}.
 \end{code}
 
 More advanced pattern matching facilities based on regular expressions are provided by the \ind{regular expression package} named \ind{Regex}, based on the package by Vassili Bykov.
-\index{Bykov, Vassili}}.
+\index{Bykov, Vassili}}
 
 \paragraph{Some tests on strings.}
 The  following examples illustrate the use of \mbox{\mthind{String}{isEmpty},} \mthind{String}{includes:}, and \mthind{String}{anySatisfy:} which are further messages defined not only on Strings but more generally on collections. 
@@ -952,28 +952,28 @@ Contrast the above with the much simpler following expression:
 \noindent
 A further advantage of the second solution is that it will also work for sets and bags.
 
-Generally, you should avoid using \ct{do:} unless you want to send messages to each of the elements of a collection.
+Generally, you should only use \ct{do:} when you only want to send messages to each of the elements of a collection.
 
 Note that sending the message \ct{collect:} returns the same kind of collection as the receiver.
 For this reason, the following code fails.
 (A \ct{String} cannot hold integer values.)
 \begin{code}{}
-'abc' collect: [:ea | ea asciiValue]      "errorBANG"
+'abc' collect: [:each | each asciiValue]      "errorBANG"
 \end{code}
 \noindent
 Instead we must first convert the string to an \ct{Array} or an \ct{OrderedCollection}:
 \begin{code}{@TEST}
-'abc' asArray collect: [:ea | ea asciiValue] --> #(97 98 99)
+'abc' asArray collect: [:each | each asciiValue] --> #(97 98 99)
 \end{code}
 We can even save one redundant copy operation of the string by using \mthind{Collection}{collect:as:} instead:
 \begin{code}{@TEST}
-'abc' collect: [:ea | ea asciiValue] as: Array --> #(97 98 99)
+'abc' collect: [:each | each asciiValue] as: Array --> #(97 98 99)
 \end{code}
 
 Actually \ct{collect:} is not guaranteed to return a collection of exactly the same class as the receiver, but only the same \emph{``species''}.
 In the case of an \ct{Interval}, the species is actually \ct{Array}!
 \begin{code}{@TEST}
-(1 to: 5) collect: [:ea | ea * 2] --> #(2 4 6 8 10)
+(1 to: 5) collect: [:each | each * 2] --> #(2 4 6 8 10)
 \end{code}
 
 %---------------------------------------------------------
@@ -999,6 +999,7 @@ The method \mthind{OrderedCollection}{detect:} returns the first element of the 
 'through' detect: [:each | each isVowel] --> $o
 \end{code}
 
+If \ct{detect:} can not find an element, it will signal a \ct{NotFound} error.
 The method \mthind{Collection}{detect:ifNone:} is a variant of the method \ct{detect:}.
 Its second block is evaluated when there is no element matching the block.
 
