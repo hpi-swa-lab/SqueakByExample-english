@@ -316,7 +316,7 @@ As shown in \figref{collsByImpl}, five main implementation techniques are employ
 \begin{enumerate}
   \item Arrays store their elements in the (indexable) instance variables of the collection object itself; as a consequence, arrays must be of a fixed size, but can be created with a single memory allocation message.
   \clsindex{Array}
-  \item \clsind{OrderedCollections} and \clsind{SortedCollections} store their elements in an array that is referenced by one of the instance variables of the collection.
+  \item \clsind{OrderedCollection}s and \clsind{SortedCollection}s store their elements in an array that is referenced by one of the instance variables of the collection.
   Consequently, the internal array can be replaced with a larger one if the collection grows beyond its storage capacity.
   \item The various kinds of set and dictionary also reference a subsidiary array for storage but use the array as a hash table.
   Bags use a subsidiary \ct{Dictionary}, with the elements of the bag as keys and the number of occurrences as values.
@@ -1159,10 +1159,10 @@ array sort.
 array. --> #(1 3 5)
 \end{code}
 
-Sort methods use the message \mthind{Magnitude}{<=} to establish sort order, so by default they can sort magnitudes such as numbers, characters, times \etc (\seeindex{Magnitude}), but also other objects such as strings or points.
+Sort methods use the message \mthind{Magnitude}{<=} to establish sort order, so by default, they can sort magnitudes such as numbers, characters, times \etc (see \charef{basic} on \ct{Magnitude}), but also other objects such as strings or points.
 However, what can you do if you want to sort objects that do not implement \ct{<=}, or if you would like to customize sort order?
 For this purpose, \ct{Collection} also provides \mthind{Collection}{sorted:} in addition to \ct{sorted} (note the colon), and analogously, arrays \etc also implement \mthind{ArrayCollection}{sort:}.
-These messages take a two-argument sort block or a \emphind{sort function}\index{SortFunction} that, speaking formally, defines a partial order on the collection to be sorted.%
+These messages take a two-argument sort block or a \emphind{sort function}\index{SortFunction, class} that, speaking formally, defines a partial order on the collection to be sorted.%
 \footnote{Further reading: \href{https://en.wikipedia.org/wiki/Partially_ordered_set}{Wikipedia -- Partially ordered set}}
 Here is a simple example of how to use a sort block:
 
@@ -1190,7 +1190,7 @@ It can be instantiated from any unary block by sending the message \mthind{Block
 \end{code}
 
 Sort functions provide a bunch of other useful functionality.
-For example, you can chain them by using \mthind{SortFunction}{\#,}, reverse the order of elements by using \mthind{SortFunction}{reversed}, or make sure that your code does not founder at \ct{nil} values in a collection by using \mthind{SortFunction}{undefinedFirst} or \mthind{SortFunction}{undefinedLast}.
+For example, you can chain them by using \mthind{SortFunction}{,}, reverse the order of elements by using \mthind{SortFunction}{reversed}, or make sure that your code does not founder at \ct{nil} values in a collection by using \mthind{SortFunction}{undefinedFirst} or \mthind{SortFunction}{undefinedLast}.
 Let's lump them all together to demonstrate the overwhelming power of sort functions:
 
 \begin{code}{@TEST}
