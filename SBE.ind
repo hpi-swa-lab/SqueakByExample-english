@@ -686,7 +686,7 @@
   \indexspace
 
   \item Mac OS X Finder, \hyperpage{109}
-  \item Magnitude, \hyperindexformat{\see{)}}{215}
+  \item Magnitude
     \subitem \lstinline [mathescape=false,backgroundcolor=\color  {white},basicstyle={\sffamily  \upshape }]{<}, 
 		\hyperpage{87}, \hyperpage{182}
     \subitem \lstinline [mathescape=false,backgroundcolor=\color  {white},basicstyle={\sffamily  \upshape }]{<=}, 
@@ -1044,8 +1044,6 @@
 		\hyperpage{118}
     \subitem \lstinline [mathescape=false,backgroundcolor=\color  {white},basicstyle={\sffamily  \upshape }]{reverseDo:}, 
 		\hyperpage{209}
-  \item OrderedCollections
-    \subitem (class), \hyperpage{197}
   \item overriding, \hyperindexformat{\see{method, overriding}}{93}
 
   \indexspace
@@ -1280,14 +1278,13 @@
     \subitem (class), \hyperpage{97, 98}
   \item sort function, \hyperpage{215}
   \item SortedCollection
-    \subitem (class), \hyperpage{194}, \hyperpage{199}, \hyperpage{205}
+    \subitem (class), \hyperpage{194}, \hyperpage{197}, \hyperpage{199}, 
+		\hyperpage{205}
   \item SortedCollection class
     \subitem \lstinline [mathescape=false,backgroundcolor=\color  {white},basicstyle={\sffamily  \upshape }]{sortBlock:}, 
 		\hyperpage{206}
-  \item SortedCollections
-    \subitem (class), \hyperpage{197}
-  \item SortFunction, \hyperpage{215}
-    \subitem \lstinline [mathescape=false,backgroundcolor=\color  {white},basicstyle={\sffamily  \upshape }]{\#,}, 
+  \item SortFunction
+    \subitem \lstinline [mathescape=false,backgroundcolor=\color  {white},basicstyle={\sffamily  \upshape }]{,}, 
 		\hyperpage{216}
     \subitem \lstinline [mathescape=false,backgroundcolor=\color  {white},basicstyle={\sffamily  \upshape }]{reversed}, 
 		\hyperpage{216}
@@ -1295,6 +1292,7 @@
 		\hyperpage{216}
     \subitem \lstinline [mathescape=false,backgroundcolor=\color  {white},basicstyle={\sffamily  \upshape }]{undefinedLast}, 
 		\hyperpage{216}
+  \item SortFunction, class, \hyperpage{215}
   \item sources, \hyperpage{4}
   \item SqueakSource, \hyperpage{46}, \hyperpage{126}
   \item Squeaksource, \hyperpage{280}
