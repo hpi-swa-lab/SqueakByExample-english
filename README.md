@@ -58,6 +58,15 @@ part of the book, you will find that printing 2 up at 140% works well.
 
 ---
 
+# Style Rules
+
+* Captions of all material is terminated with a period.
+* No title case in headings
+* In unnamed code snippets: If the expression is followed by the result (-->) there is no period, otherwise add a period.
+
+
+---
+
 # Testing
 
 Tests are automatically generated from the LaTeX sources.
