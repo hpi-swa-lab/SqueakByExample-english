@@ -175,7 +175,7 @@ Try entering the code as we go along.
 \ct{ExampleSetTest}.
 	Add two instance variables so that your new class looks like this:}
 
-\begin{classdef}[exampleSetTest]{An Example Set Test class}
+\begin{classdef}[exampleSetTest]{An Example Set Test class.}
 TestCase subclass: #ExampleSetTest
 	instanceVariableNames: 'full empty'
 	classInstanceVariableNames: ''
@@ -202,7 +202,7 @@ The method \mthind{TestCase}{setUp} defines the context in which the tests will 
 \dothis{Define the \ct{setUp} method as follows, to initialize the \ct{empty} variable to refer to an empty set and the \ct{full} variable to refer to a set containing two elements.
 	Never forget to call \ct{super setUp} as the very first operation in a \ct{setUp} method!}
 
-\begin{method}[setupExampleSetTest]{Setting up a fixture}
+\begin{method}[setupExampleSetTest]{Setting up a fixture.}
 ExampleSetTest>>>setUp
 
 	super setUp.
@@ -228,7 +228,7 @@ Test methods take no arguments.
 The first test, named \ct{testIncludes}, tests the \ct{includes:} method of \ct{Set}.  The test says that sending the message \ct{includes: 5} to a set containing 5 should return \ct{true}.
 Clearly, this test relies on the fact that the \ct{setUp} method has already run.
 
-\begin{method}[testIncludes]{Testing set membership}
+\begin{method}[testIncludes]{Testing set membership.}
 ExampleSetTest>>>testIncludes
 
 	self 
@@ -239,7 +239,7 @@ ExampleSetTest>>>testIncludes
 The second test, named \ct{testOccurrences}, verifies that the number of occurrences of~5 in \ct{full} set is equal to one, even if we add another element~5 to the set. Here we make use of the specific assertion \ct{assert:equals:} that asserts whether the two arguments are equal in value.
 
 \needlines{6}
-\begin{method}[testOccurrences]{Testing occurrences}
+\begin{method}[testOccurrences]{Testing occurrences.}
 ExampleSetTest>>>testOccurrences
 
 	self 
@@ -251,7 +251,7 @@ ExampleSetTest>>>testOccurrences
 
 Finally, we test that the set no longer contains the element 5 after we have removed it.
 
-\begin{method}[testRemove]{Testing removal}
+\begin{method}[testRemove]{Testing removal.}
 ExampleSetTest>>>testRemove
 
 	full remove: 5.
@@ -339,7 +339,7 @@ For example, you would use \ct{(self should: aBlock raise: anException)} to test
 \dothis{Try running this test.}
 Note that the first argument of the \ct{should:} and \ct{shouldnt:} methods is a \emphind{block} that \emph{contains} the expression to be evaluated.   
 
-\begin{method}[ESTtestIllegal]{Testing error raising}
+\begin{method}[ESTtestIllegal]{Testing error raising.}
 ExampleSetTest>>>testIllegal
 
 	self 
@@ -354,7 +354,7 @@ You can take advantage of this:
 If you want to write tests that will work in any dialect of \st, instead of \mthref{ESTtestIllegal} you would write:
 
 \needlines{4}
-\begin{method}[portabletestillegal]{Portable error handling}
+\begin{method}[portabletestillegal]{Portable error handling.}
 ExampleSetTest>>>testIllegal
 
 	self 
@@ -406,7 +406,7 @@ The notion of a \emph{test resource} represents a resource that is expensive to 
   	\ifluluelse
 		{\includegraphics[width=\textwidth]{sunit-classes}}
 		{\includegraphics[width=0.7\textwidth]{sunit-classes}}
-	\caption{The four classes representing the core of \SUnit}
+	\caption{The four classes representing the core of \SUnit.}
 	\label{fig:sunit-classes}
   \end{center}
 \end{figure}
@@ -466,7 +466,7 @@ Here is an example.
 We define a subclass of \ct{TestResource} called \ct{MyTestResource} and we associate it with \ct{MyTestCase} by specializing the class method \ct{resources} to return an array of the test classes that it will use.
 
 \needlines{8}
-\begin{classdef}[mytestresource]{An example of a TestResource subclass}
+\begin{classdef}[mytestresource]{An example of a TestResource subclass.}
 TestResource subclass: #MyTestResource
 	instanceVariableNames: ''
 
@@ -571,7 +571,7 @@ To execute one test, we evaluate the expression \ct{(aTestClass selector: aSymbo
   	\ifluluelse
 		{\includegraphics[width=0.7\textwidth]{sunit-scenario}}
 		{\includegraphics[width=0.5\textwidth]{sunit-scenario}}
-	\caption{Running one test}
+	\caption{Running one test.}
 	\label{fig:sunit-scenario}
   \end{center}
 \end{figure}
@@ -581,7 +581,7 @@ Then the \ct{TestCase} instance sends itself the message \mthind{TestCase}{run:}
 (See \figref{sunit-scenario}.)
 
 \needlines{6}
-\begin{method}[tastecaserun]{Running a test case}
+\begin{method}[tastecaserun]{Running a test case.}
 TestCase>>>run
 
 	| result |
@@ -592,7 +592,7 @@ TestCase>>>run
 
 The method \cmind{TestCase}{run:} sends the message \mthind{TestResult}{runCase:} to the test result:
 
-\begin{method}[testcaserun:]{Passing the test case to the test result}
+\begin{method}[testcaserun:]{Passing the test case to the test result.}
 TestCase>>>run: aResult
 
 	aResult runCase: self.
@@ -601,7 +601,7 @@ TestCase>>>run: aResult
 The method \ct{TestResult>>>runCase:} sends the message \mthind{TestCase}{runCase} to an individual test, to execute the test.
 \ct{TestResult>>>runCase} deals with any exceptions that may be raised during the execution of a test, runs a \ct{TestCase} by sending it the message \ct{runCase}, and counts the errors, failures, and passes.
 
-\begin{method}[testresultruncase]{Catching test case errors and failures}
+\begin{method}[testresultruncase]{Catching test case errors and failures.}
 TestResult>>>runCase: aTestCase
 
 	| testCasePassed timeToRun |
@@ -624,7 +624,7 @@ TestResult>>>runCase: aTestCase
 \end{method}
 
 The method \ct{TestCase>>>runCase} sends the messages \mthind{TestCase}{setUp} and \mthind{TestCase}{tearDown} as shown below.
-\begin{method}[testcaseruncase]{Test case template method}
+\begin{method}[testcaseruncase]{Test case template method.}
 TestCase>>>runCase
 	"Run this TestCase. Time out if the test takes too long."
 
@@ -640,7 +640,7 @@ To run more than one test, we send the message \ct{run} to a \ct{TestSuite} that
 \ct{TestCase class} provides some functionality to build a test suite from its methods.
 The expression \ct{MyTestCase buildSuiteFromSelectors} returns a suite containing all the tests defined in the {\ct{MyTestCase} class.
 The core of this process is:
-\begin{method}[testcasetestselectors]{Auto-building the test suite}
+\begin{method}[testcasetestselectors]{Auto-building the test suite.}
 TestCase class>>>testSelectors
 
 	^ (self selectors asArray select: [:each | 
@@ -650,7 +650,7 @@ TestCase class>>>testSelectors
 
 The method \cmind{TestSuite}{run} creates an instance of \ct{TestResult}, verifies that all the resources are available, and then sends itself the message \mthind{TestSuite}{run:}, which runs all the tests in the suite.
 All the resources are then released.
-\begin{method}[testsuiterun]{Running a test suite}
+\begin{method}[testsuiterun]{Running a test suite.}
 TestSuite>>>run
 
 	| result |
@@ -661,7 +661,7 @@ TestSuite>>>run
 	^ result
 \end{method}
 
-\begin{method}[testsuiterun:]{Passing the test suite to the test result}
+\begin{method}[testsuiterun:]{Passing the test suite to the test result.}
 TestSuite>>>run: aResult
 
 	self tests do: [:each |
@@ -675,18 +675,18 @@ The resource availability check makes it possible for the resource to be re-crea
 During the \ct{TestResource} instance creation, it is initialized and the method \mthind{TestResource}{setUp} is invoked.
 
 \needlines{4}
-\begin{method}[testresourceisavailable]{Test resource availability}
+\begin{method}[testresourceisavailable]{Test resource availability.}
 TestResource class>>>isAvailable
 
 	^ self current notNil
 \end{method}
-\begin{method}[testresourcecurrent]{Test resource creation}
+\begin{method}[testresourcecurrent]{Test resource creation.}
 TestResource class>>>current
 
 	current ifNil: [current := self new].
 	^ current
 \end{method}
-\begin{method}[restresourceinitialize]{Test resource initialization}
+\begin{method}[restresourceinitialize]{Test resource initialization.}
 TestResource>>>initialize
 
 	self setUp.

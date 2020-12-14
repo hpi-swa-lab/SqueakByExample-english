@@ -103,7 +103,7 @@ Expressions are composed of the following building blocks:
 		\lct{Transcript show: 'hello'; cr}					&	message cascade (\lct{;}) \\
 		\bottomrule
 	\end{tabular}
-	\caption{\sq Syntax in a nutshell\label{tab:syntax}}
+	\caption{\sq Syntax in a nutshell\label{tab:syntax}.}
 \end{table}
 
 We can see examples of the various syntactic elements in \tabref{syntax}.
@@ -249,8 +249,8 @@ They are called \subind{variable}{pseudo}-variables because they are predefined 
 See \charef{basic} for more details.
 
 \ct{nil} is the undefined object.
-It is the unique instance of the class \clsind{UndefinedObject}. 
 Instance variables, class variables, and local variables are initialized to \ct{nil}.
+It is the unique instance of the class \clsind{UndefinedObject}.
 
 \pvind{self} always refers to the receiver of the currently executing method.
 
@@ -564,7 +564,7 @@ Here we see the code for \cmind{SmallInteger}{+}.
 If the primitive fails, the expression \ct{super + aNumber} will be evaluated and returned.
 
 \needlines{6}
-\begin{method}[primitive]{A primitive method}
+\begin{method}[primitive]{A primitive method.}
 + aNumber 
   "Primitive. Add the receiver to the argument and answer with the result
   if it is a SmallInteger. Fail if the argument or the result is not a

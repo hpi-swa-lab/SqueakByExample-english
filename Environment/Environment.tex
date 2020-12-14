@@ -111,7 +111,7 @@ We will take a look at the standard \ind{system browser} first since the others 
    \ifluluelse
 	 {\includegraphics[width=\textwidth]{SystemBrowser0} }
 	 {\includegraphics[scale=.7]{SystemBrowser0} }
-   \caption{The system browser}
+   \caption{The system browser.}
    \label{fig:SystemBrowser0}
 \end{figure}
 
@@ -128,7 +128,7 @@ The leftmost pane lists \emph{categories} of classes; select one (say \scat{Kern
    \ifluluelse
 	   {\includegraphics[width=\textwidth]{SystemBrowser1} }
 	   {\includegraphics[scale=.7]{SystemBrowser1} }
-   \caption{System Browser with the class \ct{Model} selected
+   \caption{System Browser with the class \ct{Model} selected.
    \label{fig:SystemBrowserModel}}
 \end{figure}
 
@@ -149,7 +149,7 @@ If you select the class \menu{Model}, the protocol \protind{dependents}, and the
    \ifluluelse
 	   {\includegraphics[width=\textwidth]{SystemBrowserMyDependents}}
 	   {\includegraphics[scale=.7]{SystemBrowserMyDependents}}
-   \caption{System Browser showing the \ct{myDependents} method in class \ct{Model}
+   \caption{System Browser showing the \ct{myDependents} method in class \ct{Model}.
    \label{fig:SystemBrowserMyDependents}}
 \end{figure}
 
@@ -174,7 +174,7 @@ Enter the name of the new thing in the dialog, and you are done: there is nothin
    \ifluluelse
 	   {\includegraphics[width=\textwidth]{SystemBrowserClassCreation}}
 	   {\includegraphics[scale=.7]{SystemBrowserClassCreation}}
-   \caption{System Browser showing the class-creation template
+   \caption{System Browser showing the class-creation template.
    \label{fig:SystemBrowserClassCreation}}
 \end{figure}
 
@@ -213,7 +213,7 @@ The browser will display a method-creation template, as shown in \figref{SystemB
    \ifluluelse
 	   {\includegraphics [width=\textwidth]{SystemBrowserMethodTemplate}}
 	   {\includegraphics[scale=.7]{SystemBrowserMethodTemplate}}
-   \caption{System Browser showing the method-creation template
+   \caption{System Browser showing the method-creation template.
    \label{fig:SystemBrowserMethodTemplate}}
 \end{figure}
 
@@ -346,7 +346,7 @@ When you save a new \subind{method}{version} of a method, the old one is not los
    \ifluluelse
 	   {\includegraphics[width=\textwidth]{VersionsOfMouseUp} }
 	   {\includegraphics[scale=0.7]{VersionsOfMouseUp} }
-   \caption{The \ind{versions browser} showing several versions of the \ct{SBECell>>>mouseUp:} method}
+   \caption{The \ind{versions browser} showing several versions of the \ct{SBECell>>>mouseUp:} method.}
    \label{fig:mouseUpVersions}
 \end{figure}
 The \button{versions} button gives access to the successive modifications made to the selected method.
@@ -413,7 +413,7 @@ The colors are explained in a help balloon:
 		{\includegraphics[scale=0.7]{inheritanceOverriding}}
 	\end{center}
 	\caption{\ct{ScaleMorph>>>defaultColor} and the methods that it overrides, in inheritance order. 
-	The \lct{inheritance} button is gold because the displayed method is overridden in a subclass}
+	The \lct{inheritance} button is gold because the displayed method is overridden in a subclass.}
 	\label{fig:inheritanceOverriding}
 \end{figure}
 
@@ -952,7 +952,7 @@ SBEScreenshotRecorder writeTo: './figures/inspectTimeNow1.png' building: [:helpe
 	\begin{center}
 		\includegraphics[scale=0.65]{inspectTimeNow1}
 	\end{center}
-	\caption{Inspecting \ct{TimeStamp now}}
+	\caption{Inspecting \ct{TimeStamp now}.}
 	\label{fig:inspectTimeNow1}
 \end{figure}
 
@@ -1004,7 +1004,7 @@ SBEScreenshotRecorder writeInto: './figures/' recordSeries: [:recorder |
 		{\includegraphics[width=\textwidth]{exploreTimeStampNow}}
 		{\includegraphics[scale=0.7]{exploreTimeStampNow}}
 	\end{center}
-	\caption{Exploring \ct{TimeStamp now}}
+	\caption{Exploring \ct{TimeStamp now}.}
 	\label{fig:exploreTimeStampNow}
 \end{minipage}
 \hfill
@@ -1014,7 +1014,7 @@ SBEScreenshotRecorder writeInto: './figures/' recordSeries: [:recorder |
 		{\includegraphics[width=\textwidth]{exploreTimeStampNow2}}
 		{\includegraphics[scale=0.7]{exploreTimeStampNow2}}
 	\end{center}
-	\caption{Exploring the instance variables}
+	\caption{Exploring the instance variables.}
 	\label{fig:exploreTimeStampNow2}
 \end{minipage}
 \end{figure}
@@ -1059,7 +1059,7 @@ SBEScreenshotRecorder writeTo: './figures/explorePluggableListMorph.png' buildin
 	\begin{center}
 		\includegraphics[scale=0.45]{explorePluggableListMorph}
 	\end{center}
-	\caption{Exploring a \ct{PluggableListMorph}}
+	\caption{Exploring a \ct{PluggableListMorph}.}
 	\label{fig:explorePluggableListMorph}
 \end{figure}
 
@@ -1074,7 +1074,7 @@ To demonstrate the debugger, let's start by writing a bug!
 \dothis{Using the browser, add the following method to the class \ct{String}:}
 
 \needspace{10ex}
-\begin{method}[buggy]{A buggy method}
+\begin{method}[buggy]{A buggy method.}
 suffix
 	"assumes that I'm a file name, and answers my suffix, the part after the last dot"
 
@@ -1229,7 +1229,7 @@ The blue highlight shows that the next message to be sent will be {\ct{do:}} (se
 		{\includegraphics[width=\textwidth]{RestartDetect}}
 		{\includegraphics[scale=0.7]{RestartDetect}}
 	\end{center}
-	\caption{The debugger after restarting the \ct{detect:ifFound:ifNone:} method}
+	\caption{The debugger after restarting the \ct{detect:ifFound:ifNone:} method.}
 	\label{fig:RestartDetect}
 \end{figure}
 
@@ -1262,7 +1262,7 @@ To see what is going wrong, go \button{Into} the execution of \ct{value:} as ill
 		{\includegraphics[width=\textwidth]{steppingIntoValue}}
 		{\includegraphics[scale=0.7]{steppingIntoValue}}
 	\end{center}
-	\caption{The debugger after stepping \lct{Through} the \ct{do:} method several times}
+	\caption{The debugger after stepping \lct{Through} the \ct{do:} method several times.}
 	\label{fig:steppingIntoValue}
 \end{figure}
 
@@ -1280,7 +1280,7 @@ And now you see why they are not equal: the seventh character of \ct{'readme.txt
 		{\includegraphics[width=\textwidth]{dotIsAString}}
 		{\includegraphics[scale=0.7]{dotIsAString}}
 	\end{center}
-	\caption{The debugger showing why \ct{'readme.txt' at: 7} is not equal to \ct{dot}}
+	\caption{The debugger showing why \ct{'readme.txt' at: 7} is not equal to \ct{dot}.}
 	\label{fig:dotIsAString}
 \end{figure}
 
@@ -1292,7 +1292,7 @@ Now that we see the bug, the fix is obvious: we have to convert \ct{dot} to a ch
 		{\includegraphics[width=\textwidth]{revertDialog}}
 		{\includegraphics[scale=0.7]{revertDialog}}
 	\end{center}
-	\caption{Changing the \ct{suffix} method in the debugger: asking for confirmation of the exit from an inner block}
+	\caption{Changing the \ct{suffix} method in the debugger: asking for confirmation of the exit from an inner block.}
 	\label{fig:revertDialog}
 \end{figure}
 
@@ -1326,7 +1326,7 @@ It is then only a second of work to click on the \button{Run Failures} button in
 
 Here is a better test:
 
-\begin{method}[testSuffix2]{A better test for the \ct{suffix} method}
+\begin{method}[testSuffix2]{A better test for the \ct{suffix} method.}
 testSuffixFound
 
 	self 
@@ -1383,7 +1383,7 @@ self assert: ''txt'' equals: ''readme.txt'' suffix'
 	\begin{center}
 		\includegraphics[width=\textwidth]{fixOffByOne}
 	\end{center}
-	\caption{Changing the \ct{suffix} method in the debugger: fixing the off-by-one error after an \sunit assertion failure}
+	\caption{Changing the \ct{suffix} method in the debugger: fixing the off-by-one error after an \sunit assertion failure.}
 	\label{fig:fixOffByOne}
 \end{figure}
 
@@ -1411,7 +1411,7 @@ That's all there is to the debugger, but it's not all there is to the \ct{suffix
 The initial bug should have made you realize that if there is no dot in the target string, the \ct{suffix} method will raise an error.  
 This isn't the behavior that we want, so let's add a second test to specify what should happen in this case.
 
-\begin{method}[testNoSuffix]{A second test for the \ct{suffix} method: the target has no suffix}
+\begin{method}[testNoSuffix]{A second test for the \ct{suffix} method: the target has no suffix.}
 testSuffixNotFound
 
 	self assert: 'readme' suffix = ''.
@@ -1450,7 +1450,7 @@ SBEScreenshotRecorder writeTo: './figures/processBrowser.png' building: [:helper
 		{\includegraphics[width=\textwidth]{processBrowser}}
 		{\includegraphics[scale=0.7]{processBrowser}}
 	\end{center}
-	\caption{The process browser}
+	\caption{The process browser.}
 	\label{fig:processBrowser}
 \end{figure}
 

@@ -153,7 +153,7 @@ SBEScreenshotRecorder writeTo: 'figures/TranslucentEllipse.png' building: [:help
 \ifluluelse
 	{\centerline {\includegraphics[scale=0.5]{TranslucentEllipse}}}
 	{\centerline {\includegraphics[width=6cm]{TranslucentEllipse}}}
-\caption{A translucent ellipse\label{fig:translucentEllipse}}
+\caption{A translucent ellipse.\label{fig:translucentEllipse}}
 \end{figure}
 \end{center}
 
@@ -174,7 +174,7 @@ Method lookup follows the inheritance chain (\ref{rule:lookup}), so when we send
 \ifluluelse
 	{\centerline{\includegraphics[width=\textwidth]{TranslucentClassMessage}}}
 	{\centerline{\includegraphics[width=0.8\textwidth]{TranslucentClassMessage}}}
-\caption{Sending a message to a translucent color\label{fig:classmessage}}
+\caption{Sending a message to a translucent color.\label{fig:classmessage}}
 \end{figure}
 \end{center}
 
@@ -219,7 +219,7 @@ Object class --> Object class
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{TranslucentMetaclasses}}}
 	{\centerline {\includegraphics[width=0.8\textwidth]{TranslucentMetaclasses}}}
-\caption{The metaclasses of Translucent and its superclasses\label{fig:translucentmetaclasses}}
+\caption{The metaclasses of Translucent and its superclasses.\label{fig:translucentmetaclasses}}
 \end{figure}
 \end{center}
 
@@ -346,7 +346,7 @@ We can see the complete picture in \figref{inheritbehavior}.
 \ifluluelse
 	{\centerline{\includegraphics[width=\textwidth]{TranslucentBehavior}}}
 	{\centerline{\includegraphics[width=0.8\textwidth]{TranslucentBehavior}}}
-\caption{Metaclasses inherit from \lct{Class} and \lct{Behavior}\label{fig:inheritbehavior}}
+\caption{Metaclasses inherit from \lct{Class} and \lct{Behavior}.\label{fig:inheritbehavior}}
 \end{figure}
 \end{center}
 
@@ -461,13 +461,13 @@ The following examples show us how we can query the class hierarchy to demonstra
 (Actually, you will see that we told a white lie\,---\,\ct{Object class superclass -->}\clsind{ProtoObject class}, not \ct{Class}.
 In \sq, we must go one superclass higher to reach \ct{Class}.)
 
-\begin{example}{The class hierarchy}{@TEST}
+\begin{example}{The class hierarchy.}{@TEST}
 TranslucentColor superclass --> Color
 Color superclass                   --> Object
 \end{example}
 
 \needlines{4}
-\begin{example}{The parallel metaclass hierarchy}{@TEST}
+\begin{example}{The parallel metaclass hierarchy.}{@TEST}
 TranslucentColor class superclass   --> Color class
 Color class superclass                     --> Object class
 Object class superclass superclass --> Class    "NB: skip ProtoObject class"
@@ -476,14 +476,14 @@ ClassDescription superclass            --> Behavior
 Behavior superclass                         --> Object
 \end{example}
 
-\begin{example}{Instances of Metaclass}{@TEST}
+\begin{example}{Instances of Metaclass.}{@TEST}
 TranslucentColor class class --> Metaclass
 Color class class                   --> Metaclass
 Object class class                 --> Metaclass
 Behavior class class              --> Metaclass
 \end{example}
 
-\begin{example}{Metaclass class is a Metaclass}{@TEST}
+\begin{example}{Metaclass class is a Metaclass.}{@TEST}
 Metaclass class class --> Metaclass
 Metaclass superclass --> ClassDescription
 \end{example}
