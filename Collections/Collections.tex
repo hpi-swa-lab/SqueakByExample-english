@@ -48,7 +48,7 @@ Suppose you have a data structure containing a collection of student records and
 Programmers raised to use an imperative language might reach for a loop.
 But the \st programmer will write:
 \begin{code}{}
-students select: [:each | each gpa < threshold]
+students select: [:each | each gpa < threshold].
 \end{code}
 \noindent
 which evaluates to a new collection containing precisely those elements of \ct{students} for which the bracketed function returns \ct{true}\footnote{The expression in brackets can be thought of as a $\lambda$-expression defining an anonymous function $\lambda x. x~{\sf gpa} < {\sf threshold}$.
@@ -958,7 +958,7 @@ Note that sending the message \ct{collect:} returns the same kind of collection 
 For this reason, the following code fails.
 (A \ct{String} cannot hold integer values.)
 \begin{code}{}
-'abc' collect: [:each | each asciiValue]      "errorBANG"
+'abc' collect: [:each | each asciiValue].      "errorBANG"
 \end{code}
 \noindent
 Instead we must first convert the string to an \ct{Array} or an \ct{OrderedCollection}:

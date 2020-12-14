@@ -305,7 +305,7 @@ This returns a \ct{Color} object, which is used as an argument in the message se
 
 \needlines{5}
 \begin{example}[decColor]{Decomposing the evaluation of \ct{aPen color: Color yellow}.}{}
-        aPen color: Color yellow
+        aPen color: Color yellow.
 (1)                       Color yellow        "unary message is sent first"
                         --> aColor
 (2)   aPen color: aColor                 "keyword message is sent next"
@@ -319,7 +319,7 @@ The message \ct{+ 20} is sent to the object \ct{100} and returns the number \ct{
 Then the message send \ct{aPen go: 120} is sent with \ct{120} as argument (2).
 
 \begin{example}[decGo]{Decomposing \ct{aPen go: 100 + 20}.}{}
-      aPen go: 100 + 20   
+      aPen go: 100 + 20.   
 (1)                 100 + 20           "binary message first"
                    -->   120
 (2)  aPen go: 120                   "then keyword message"
@@ -414,7 +414,7 @@ Finally, the unary message \ct{center} is sent to the rectangle and a point is r
 Evaluating the message without parentheses would lead to an error because the object \ct{100} does not understand the message \ct{center}.
 
 \begin{example}[decExtent]{Example of Parentheses.}{}
-      (65 @ 325 extent: 134 @ 100) center
+      (65 @ 325 extent: 134 @ 100) center.
 (1)   65 @ 325                                                    "binary"
     --> aPoint
 (2)                                  134 @ 100                     "binary"
@@ -486,7 +486,7 @@ So, the leftmost message \ct{+} is sent first (1) and then the \ct{*} is sent to
 \begin{example}[binaryMessages1]{Decomposing \ct{20 + 2 * 5}.}{}
 "As there is no priority among binary messages, the leftmost message + is evaluated first even if by the rules of arithmetic the * should be sent first."
 
-      20 + 2 * 5 
+      20 + 2 * 5. 
 (1)  20 + 2 --> 22
 (2)  22       * 5 --> 110
 \end{example}
@@ -506,7 +506,7 @@ Hence the message send \ct{20 + (2 * 5)} returns the result as shown in \egref{m
 \begin{example}[mathcorrect]{Decomposing \ct{20 + (2 * 5)}.}{}
 "The messages surrounded by parentheses are evaluated first. Therefore * is sent prior to +, which produces the correct behavior."
 
-    20 + (2 * 5) 
+    20 + (2 * 5). 
 (1)        (2 * 5) --> 10
 (2) 20 + 10      --> 30
 \end{example}
@@ -574,7 +574,7 @@ aDict
            rotateBy: angle	
            magnify: 2 
            smoothing: 1)
-   put: 3
+   put: 3.
 \end{code}
 
 \paragraph{Hints.}
@@ -602,11 +602,11 @@ So in \lct{(\emph{expression})}, the \lct{\emph{expression}} will \emph{always} 
 
 \begin{code}{}
 "both the receiver and the argument must be blocks"
-[x isReady] whileTrue: [y doSomething]   
+[x isReady] whileTrue: [y doSomething].   
 "the argument is evaluated more than once, so must be a block"
-4 timesRepeat: [Beeper beep]                   
+4 timesRepeat: [Beeper beep].                   
 "the receiver is evaluated once, so it is not a block"
-(x isReady) ifTrue: [y doSomething]
+(x isReady) ifTrue: [y doSomething].
 \end{code}
 
 %=============================================================
@@ -621,7 +621,7 @@ Therefore a final period is optional.
 \begin{code}{@TEST}
 | box |
 box := 20 @ 30 corner: 60 @ 90.
-box containsPoint: 40 @ 50. --> true
+box containsPoint: 40 @ 50 --> true
 \end{code}
 
 %=============================================================

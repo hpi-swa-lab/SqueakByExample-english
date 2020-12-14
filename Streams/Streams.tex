@@ -91,16 +91,16 @@ For example, the following snippet creates a stream on an interval, then it read
 \needlines{5}
 \begin{code}{@TEST |r|}
 r := ReadStream on: (1 to: 1000).
-r next.   --> 1
-r next.   --> 2
-r atEnd.--> false
+r next   --> 1
+r next   --> 2
+r atEnd --> false
 \end{code}
 
 \ct{WriteStream}s can write data to the collection:
 \begin{code}{@TEST |w|}
 w := WriteStream on: (String new: 5).
 w nextPut: $a; nextPut: $b.
-w contents. -->  'ab'
+w contents -->  'ab'
 \end{code}
 
 It is also possible to create \ct{ReadWriteStream}s that support both the reading and writing protocols.
@@ -118,7 +118,7 @@ StandardFileStream
         space;
         nextPutAll: 'abcd'].
 
-StandardFileStream readOnlyFileNamed: 'someTestFile.txt' do: [:stream | stream contents]. --> '123 abcd'
+StandardFileStream readOnlyFileNamed: 'someTestFile.txt' do: [:stream | stream contents] --> '123 abcd'
 \end{code}
 % ct TODO: Line breaks in the previous example would be nice but would require a redesign of SBEtests.
 \cmindex{FileStream class}{fileNamed:do:}
@@ -143,18 +143,18 @@ Methods \mthind{ReadStream}{next} and \mthind{ReadStream}{next:} are used to ret
 
 \begin{code}{@TEST |stream|}
 stream := ReadStream on: #(1 (a b c) false).
-stream next. -->   1
-stream next. -->   #(#a #b #c)
-stream next. -->   false
+stream next -->   1
+stream next -->   #(#a #b #c)
+stream next -->   false
 \end{code}
 \cmindex{PositionableStream class}{on:}
 
 \begin{code}{@TEST |stream|}
 stream := ReadStream on: 'abcdef'.
-stream next: 0. -->   ''
-stream next: 1. -->   'a'
-stream next: 3. -->   'bcd'
-stream next: 2. -->   'ef'
+stream next: 0 -->   ''
+stream next: 1 -->   'a'
+stream next: 3 -->   'bcd'
+stream next: 2 -->   'ef'
 \end{code}
 
 The message \mthind{PositionableStream}{peek} is used when you want to know what is the next element in the stream without going forward.
@@ -162,10 +162,10 @@ The message \mthind{PositionableStream}{peek} is used when you want to know what
 \begin{code}{@TEST |stream negative number|}
 stream := ReadStream on: '-143'.
 negative := stream peek = $-.    "look at the first element without reading it"
-negative. --> true
+negative --> true
 negative ifTrue: [stream next].       "ignores the minus character"
 number := stream upToEnd.
-number. --> '143'
+number --> '143'
 \end{code}
 \noindent
 This code sets the boolean variable \ct{negative} according to the sign of the number in the stream and \ct{number} to its absolute value.
@@ -174,8 +174,8 @@ This code can be simplified using \mthind{PositionableStream}{peekFor:}, which m
 
 \begin{code}{@TEST |stream negative number|}
 stream := '-143' readStream.
-stream peekFor: $-. --> true
-stream upToEnd.         --> '143'
+stream peekFor: $- --> true
+stream upToEnd         --> '143'
 \end{code}
 \noindent
 \ct{peekFor:} also returns a boolean indicating if the parameter equals the element.
@@ -196,7 +196,7 @@ You can obtain the state of the stream depicted in \figref{ab_cde} with the foll
 \begin{code}{@TEST |stream|}
 stream := 'abcde' readStream.
 stream position: 2.
-stream peek. --> $c
+stream peek --> $c
 \end{code}
 
 \begin{figure}[h!t]
@@ -215,16 +215,16 @@ Note that it positions the stream after the matched element.
 
 \begin{code}{@TEST |stream|}
 stream := 'abcdef' readStream.
-stream next.        --> $a    "stream is now positioned just after the a"
+stream next        --> $a    "stream is now positioned just after the a"
 stream skip: 3.                           "stream is now after the d"
-stream position.  -->   4
+stream position  -->   4
 stream skip: -2.                          "stream is after the b"
-stream position.  --> 2
+stream position  --> 2
 stream reset.
-stream position.  --> 0
+stream position  --> 0
 stream skipTo: $e.                      "stream is just after the e now"
-stream next.        --> $f
-stream contents. --> 'abcdef'
+stream next        --> $f
+stream contents --> 'abcdef'
 \end{code}
 
 As you can see, the letter \ct{e} has been skipped. The method \mthind{PositionableStream}{contents} always returns a copy of the entire stream.
@@ -290,7 +290,7 @@ string := String streamContents: [:stream |
                  nextPut: $=;
                  space;
                  print: 3].
-string. -->   '#(1 2 3) size = 3'
+string -->   '#(1 2 3) size = 3'
 \end{code}
 
 The method \mthind{SequenceableCollection class}{streamContents:} \label{sec:streamContents} creates a collection and a stream on
@@ -598,8 +598,8 @@ FileStream
           stream binary.
           stream size.         --> 4
           stream next.         --> 145
-          stream upToEnd. --> #[250 139 98]
-      ].
+          stream upToEnd --> #[250 139 98]
+   		].
 \end{code}
 
 Here is another example which creates a picture in a file named ``test.pgm'' (portable graymap file format).
