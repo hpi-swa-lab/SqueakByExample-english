@@ -38,7 +38,7 @@ If you already feel comfortable with the syntax, you may choose to skip this cha
 \section{Identifying messages}
 
 In \st, except for the syntactic elements listed in \charef{syntax} (\ct+:= ^ . ; # () {} [ : | ]+), everything is a message send. 
-As in \ind{C++}, you can define operators like \ct{+} for your own classes, but all operators have the same precedence.
+Even operations such as \ct{+} are message sends and you can implement methods for these operations in your classes.
 Moreover, you cannot change the arity of a method.
 ``\ct{-}'' is always a binary message; there is no way to have a unary ``\ct{-}'' with different overloading.
 
@@ -132,7 +132,7 @@ In all the cases, a message is sent to an object called the \emph{receiver} whic
 		\\
 		\bottomrule
 	\end{tabularx}
-	\caption{Examples of Message Sends and their Types}\label{tab:messageExamples}
+	\caption{Examples of message sends and their types.}\label{tab:messageExamples}
 \end{table}
 
 %=============================================================
@@ -208,7 +208,7 @@ Hence \ct{r:g:b:} is a method with three arguments, \ct{playFileNamed:} and \ct{
 To create an instance of the class \ct{Color} one can use the method \ct{r:g:b:} as in \ct{Color r: 1 g: 0 b: 0}, which creates the color red.
 Note that the colons are part of the selector.
 
-\important{In \ind{Java} or \ind{C++}, the \st method invocation \ct{Color r: 1 g: 0 b: 0} would be written \ct{Color.rgb(1,0,0)}.}
+\important{In Java-style syntax, the \st method invocation \ct{Color r: 1 g: 0 b: 0} would be written \ct{Color.rgb(1,0,0)}.}
 
 \begin{code}{@TEST | nums |}
 1 to: 10                        --> (1 to: 10)  "creates an interval"
@@ -304,7 +304,7 @@ This returns a \ct{Color} object, which is used as an argument in the message se
 \figref{uKeyUn} shows graphically how messages are sent.
 
 \needlines{5}
-\begin{example}[decColor]{Decomposing the evaluation of \ct{aPen color: Color yellow}}{}
+\begin{example}[decColor]{Decomposing the evaluation of \ct{aPen color: Color yellow}.}{}
         aPen color: Color yellow
 (1)                       Color yellow        "unary message is sent first"
                         --> aColor
@@ -318,7 +318,7 @@ Binary messages are sent prior to keyword messages, so \ct{100 + 20} is sent fir
 The message \ct{+ 20} is sent to the object \ct{100} and returns the number \ct{120}.
 Then the message send \ct{aPen go: 120} is sent with \ct{120} as argument (2).
 
-\begin{example}[decGo]{Decomposing \ct{aPen go: 100 + 20}}{}
+\begin{example}[decGo]{Decomposing \ct{aPen go: 100 + 20}.}{}
       aPen go: 100 + 20   
 (1)                 100 + 20           "binary message first"
                    -->   120
@@ -338,7 +338,7 @@ Then the message send \ct{aPen go: 120} is sent with \ct{120} as argument (2).
 	\ifluluelse
 		{\includegraphics[width=0.9\textwidth]{uunKeyBin}}
 		{\includegraphics[width=6cm]{uunKeyBin}}
-\caption{Decomposing \ct{Pen new go: 100 + 20}}\label{fig:unKeyBin}
+\caption{Decomposing \ct{Pen new go: 100 + 20}.}\label{fig:unKeyBin}
 \end{center}
 \end{minipage}
 \end{figure}
@@ -445,7 +445,7 @@ This returns a newly created pen to which the second message \ct{down} is sent, 
 \begin{figure}
 	\centering
 	\includegraphics[width=8cm]{ucompoUn}
-	\caption{Decomposing \ct{Pen new down}\label{fig:unaryMessages}}
+	\caption{Decomposing \ct{Pen new down}.\label{fig:unaryMessages}}
 \end{figure}
 
 % pre: The figure does not add anything to the explanation
@@ -618,7 +618,7 @@ Therefore a final period is optional.
 \begin{code}{@TEST}
 | box |
 box := 20 @ 30 corner: 60 @ 90.
-box containsPoint: 40 @ 50 --> true
+box containsPoint: 40 @ 50. --> true
 \end{code}
 
 %=============================================================
@@ -641,7 +641,7 @@ Transcript cr.
 Transcript        
    show: 'Squeak is';
    show: 'fun ';
-   cr
+   cr.
 \end{code}
 \end{minipage}
 

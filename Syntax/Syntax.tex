@@ -103,7 +103,7 @@ Expressions are composed of the following building blocks:
 		\lct{Transcript show: 'hello'; cr}					&	message cascade (\lct{;}) \\
 		\bottomrule
 	\end{tabular}
-	\caption{\sq Syntax in a Nutshell\label{tab:syntax}}
+	\caption{\sq Syntax in a nutshell\label{tab:syntax}}
 \end{table}
 
 We can see examples of the various syntactic elements in \tabref{syntax}.
@@ -241,21 +241,21 @@ The classes \ct{Number}, \ct{Character}, \ct{String}, and \ct{Boolean} are descr
 \section{Pseudo-variables}
 
 In \st, there are six reserved keywords, or \emph{pseudo-variables}:
-\pvind{nil}, \pvind{true}, \pvind{false}, \pvind{self}, \pvind{super}, and \pvind{thisContext}.
+\pvind{true}, \pvind{false}, \pvind{nil}, \pvind{self}, \pvind{super}, and \pvind{thisContext}.
 They are called \subind{variable}{pseudo}-variables because they are predefined and cannot be assigned to.
 \ct{true}, \ct{false}, and \ct{nil} are constants while the values of \ct{self}, \ct{super}, and \ct{thisContext} vary dynamically as code is executed.
 
 \ct{true} and \ct{false} are the unique instances of the \clsind{Boolean} classes \clsind{True} and \clsind{False}.
 See \charef{basic} for more details.
 
+\ct{nil} is the undefined object.
+It is the unique instance of the class \clsind{UndefinedObject}. 
+Instance variables, class variables, and local variables are initialized to \ct{nil}.
+
 \pvind{self} always refers to the receiver of the currently executing method.
 
 \ct{super} also refers to the receiver of the current method, but when you send a message to \super, the method-lookup changes so that it starts from the superclass of the class containing the method that uses \ct{super}.
 For further details see \charef{model}.
-
-\ct{nil} is the undefined object.
-It is the unique instance of the class \clsind{UndefinedObject}. 
-Instance variables, class variables, and local variables are initialized to \ct{nil}.
 
 \ct{thisContext} is a pseudo-variable that represents the top frame of the run-time stack.
 In other words, it represents the currently executing \clsind{MethodContext} or \clsind{BlockContext}.
@@ -278,7 +278,7 @@ There are three kinds of messages in \sq.
 Unary message selectors consist of alphanumeric characters, and start with a lower case letter.
 \index{message!unary}
 
-Binary message selectors consist of one or more characters from the following set:
+Binary message selectors consist of one or more special characters. The following set are the most commonly used characters for binary message selectors:
 \index{message!binary}
 \begin{code}{}
 + - / \ * ~ < > = @ % | & ! ? ,
@@ -344,7 +344,7 @@ Here is the method \mthind{String}{lineCount} in the class \clsind{String}.
 (The usual convention is to refer to methods as \ct{ClassName>>>methodName}, so we call this method \ct{String>>>lineCount}.)
 
 \needlines{9}
-\begin{method}[lineCount]{Line count}
+\begin{method}[lineCount]{Line count.}
 String>>>lineCount
    "Answer the number of lines represented by the receiver,
    where every cr adds one line."
@@ -429,7 +429,7 @@ Return expressions inside a nested block expression will terminate the lexically
 In the following example (see \mthref{detectReturnBlock}), when the expression \ct{^ foundBlock value: element} is executed, the method \ct{detect:ifFound:ifNone:} escapes the current iteration and returns it. 
 
 \needlines{5}	
-\begin{method}[detectReturnBlock]{The method \ct{detect:ifFound:ifNone:} illustrating how returning inside blocks can be used}
+\begin{method}[detectReturnBlock]{The method \ct{detect:ifFound:ifNone:} illustrating how returning inside blocks can be used.}
 Collection>>>detect: aBlock ifFound: foundBlock ifNone: exceptionBlock 
    "foundBlock takes one argument, the found object."
 
@@ -451,7 +451,7 @@ See \charef{basic} for more about booleans.
 \begin{code}{}
 17 * 13 > 220
    ifTrue: ['bigger']
-   ifFalse: ['smaller'] --> 'bigger'
+   ifFalse: ['not bigger'] --> 'bigger'
 \end{code}
 
 Loops are typically expressed by sending messages to blocks, integers, or collections.
