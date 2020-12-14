@@ -577,7 +577,7 @@ If you are used to getters and setters in other programming languages, you might
 The \st convention is different.
 A getter always has the same name as the variable it gets, and a setter is named similarly, but with a trailing ``\ct{:}'', hence \ct{mouseAction} and \ct{mouseAction:}.
 
-Collectively, setters and getters are called \emphind{accessor} methods, and by convention they should be placed in the \protind{accessing} protocol.
+Collectively, setters and getters are called \emphind{accessor} methods\cite{Klim96a}, and by convention they should be placed in the \protind{accessing} protocol.
 In Smalltalk, \emph{all} instance variables are private to the object that owns them, so the only way for another object to read or write those variables in the Smalltalk language is through accessor methods like this one\footnote{%
 	In fact, the instance variables can be accessed in subclasses too.%
 }.
