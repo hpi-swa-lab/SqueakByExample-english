@@ -415,10 +415,10 @@ anArray at: 1 --> 4
 There are several ways to create instances of the class \clsind{Array}.
 We can use \ct{new:}, \ct{with:}, and  the constructs \ct{#( )} and \ct|{ }|.
 
-\paragraph{Creation with \mthind{Array class}{new:}} \ct{new: anInteger} creates an array of size \ct{anInteger}.
+\paragraph{Creation with \mthind{Array class}{new:}.} \ct{new: anInteger} creates an array of size \ct{anInteger}.
 \ct{Array new: 5} creates an array of size 5.
 
-\paragraph{Creation with \mthind{Array class}{with:}} \ct{with:} methods allows one to specify the value of the elements.  
+\paragraph{Creation with \mthind{Array class}{with:}.} \ct{with:} methods allows one to specify the value of the elements.  
 The following code creates an array of three elements consisting of the number \ct{4}, the fraction \ct{3/2}, and the string \ct{'lulu'}.
 
 \begin{code}{@TEST | anArray |}
@@ -1035,7 +1035,7 @@ factorial value: 10 --> 3628800
 %---------------------------------------------------------
 \subsection{Other messages}
 
-\paragraph{\mthind{Collection}{count:}}
+\paragraph{\mthind{Collection}{count:}.}
 The message \ct{count:} returns the number of elements satisfying a condition.
 The condition is represented as a boolean block.
 
@@ -1043,7 +1043,7 @@ The condition is represented as a boolean block.
 Smalltalk allClasses count: [:each | 'Collection*' match: each asString] --> !\SqVersionSwitch{6.0}{4}{2}!
 \end{code}
 
-\paragraph{\mthind{Collection}{includes:}}
+\paragraph{\mthind{Collection}{includes:}.}
 The message \ct{includes:} checks whether the argument is contained in the collection. 
 
 \begin{code}{@TEST | colors |}
@@ -1051,14 +1051,14 @@ colors := {Color white . Color yellow. Color red . Color blue . Color orange}.
 colors includes: Color blue. --> true
 \end{code}
 
-\paragraph{\mthind{OrderedCollection}{anySatisfy:}}
+\paragraph{\mthind{OrderedCollection}{anySatisfy:}.}
 The message \ct{anySatisfy:} answers true if at least one element of the collection satisfies the condition represented by the argument.
 
 \begin{code}{@TEST | colors | colors := {Color white . Color yellow. Color red . Color blue . Color orange}.}
 colors anySatisfy: [:color | color red > 0.5] --> true
 \end{code}
 
-\paragraph{\mthind{OrderedCollection}{gather:}}
+\paragraph{\mthind{OrderedCollection}{gather:}.}
 The message \mthind{Collection}{gather:} can be used to turn nested collections into a flat collection while at the same time converting the values. Some languages refer to this collection operation as flat map\seeindex{flat map}{Collection, gather:}.
 
 \begin{code}{@TEST | colors | colors := {Color white . Color yellow. Color red . Color blue . Color orange}.}
@@ -1068,7 +1068,7 @@ colors anySatisfy: [:color | color red > 0.5] --> true
 %=========================================================
 \section{Some hints for using collections}
 
-\paragraph{A common mistake with \mthind{OrderedCollection}{add:}}
+\paragraph{A common mistake with \mthind{OrderedCollection}{add:}.}
 The following error is one of the most frequent \st mistakes.
 \index{Collection!common errors}
 
