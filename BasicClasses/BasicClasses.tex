@@ -215,7 +215,8 @@ The default implementation of \ct{Object>>>~=} simply negates \ct{Object>>>=}, a
 (1 + 2 i) ~= (1 + 4 i) --> true
 \end{code}
 
-If you override \ct{=}, you should override \mthind{Object}{hash}.
+\important{If you override \ct{=}, you should override \mthind{Object}{hash}.}
+
 If instances of your class are ever used as keys in a \clsind{Dictionary}, then you should make sure that instances that are considered to be equal have the same hash value. This is because the implementation of \clsind{Dictionary} will only use the \ct{hash} to determine whether it includes an object as a key:
 \cmindex{Complex}{hash}
 \begin{method}{Hash must be reimplemented for complex numbers}
@@ -296,8 +297,8 @@ array1 --> #(#('harry'))
 array2 := array1 shallowCopy.
 array2 --> #(#('harry'))
 (array1 at: 1) at: 1 put: 'sally'.
-array1 --> #(#('sally'))
-array2 --> #(#('sally'))    "the subarray is shared!"
+array1. --> #(#('sally'))
+array2. --> #(#('sally'))    "the subarray is shared!"
 \end{code}
 
 \cmind{Object}{shallowCopy} creates a shallow copy of an object, which means that the content of the object is not copied.
@@ -311,8 +312,8 @@ For some classes even a shallow copy does not make sense if instances are unique
 array1 := { { 'harry' } } .
 array2 := array1 copyTwoLevel.
 (array1 at: 1) at: 1 put: 'sally'.
-array1 --> #(#('sally'))
-array2 --> #(#('harry'))    "fully independent state"
+array1. --> #(#('sally'))
+array2. --> #(#('harry'))    "fully independent state"
 \end{code}
 
 \cmind{Object}{deepCopy} makes an arbitrarily deep copy of an object.
@@ -321,8 +322,8 @@ array2 --> #(#('harry'))    "fully independent state"
 array1 := { { { 'harry' } } } .
 array2 := array1 deepCopy.
 (array1 at: 1) at: 1 put: 'sally'.
-array1 --> #(#('sally'))
-array2 --> #(#(#('harry')))
+array1. --> #(#('sally'))
+array2. --> #(#(#('harry')))
 \end{code}
 
 However, \ct{deepCopy} does not keep track of previously copied objects. This means that it does not preserve the identity of re-occurring objects. When the object to be copied contains another object twice in its contents, there will be two new objects. 
@@ -341,7 +342,7 @@ Also, not keeping track of previously copied objects, means that \ct{deepCopy} w
 array1 := {'harry'}.
 array2 := {array1}.
 array1 at: 1 put: array2.
-array1 deepCopy --> !\emph{... does not terminate!}!
+array1 deepCopy. --> !\emph{... does not terminate!}!
 \end{code}
 
 Another way to copy an object is provided by \cmind{Object}{deepCopy}: 
@@ -352,7 +353,7 @@ array1 := {'harry'}.
 array2 := {array1}.
 array1 at: 1 put: array2.
 copiedArray := array1 veryDeepCopy.
-copiedArray first first = copiedArray --> true
+copiedArray first first = copiedArray. --> true
 \end{code}
 
 Whether any of these four copy methods is the right one depends on the meaning of the object and its instance variables. 
@@ -373,7 +374,8 @@ As the first four instance variables are all described by numbers, there is no n
 
 \begin{method}{Copying objects as a template method}
 Form>>>postCopy
-    super postCopy.
+
+	super postCopy.
     bits := bits copy.
 \end{method}
 

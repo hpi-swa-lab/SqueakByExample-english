@@ -99,8 +99,7 @@ r atEnd.--> false
 \ct{WriteStream}s can write data to the collection:
 \begin{code}{@TEST |w|}
 w := WriteStream on: (String new: 5).
-w nextPut: $a.
-w nextPut: $b.
+w nextPut: $a; nextPut: $b.
 w contents. -->  'ab'
 \end{code}
 
@@ -407,7 +406,7 @@ This behavior can be implemented using a \clsind{ReadWriteStream}.
 
 \needlines{6}
 % todo: would be nice to use numFiletreeMethodInput here again ...
-\begin{code}{}
+\begin{code}{Class definition of \ct{SBEHistory}.}
 Object subclass: #SBEHistory
 	instanceVariableNames: 'stream'
 	classVariableNames: ''
@@ -416,7 +415,7 @@ Object subclass: #SBEHistory
 \end{code}
 
 \numFiletreeMethodInput[sbehistoryinitialize]%
-{}%
+{Initialization of \ct{SBEHistory} instances.}%
 {ListingSources/SBE-Streams.package/SBEHistory.class/instance/initialize.st}
 
 Nothing really difficult here, we define a new class which contains a stream.
@@ -425,10 +424,10 @@ The stream is created during the \ct{initialize} method.
 We need methods to go backward and forward:
 
 \numFiletreeMethodInput[sbehistorygobackward]%
-{}%
+{Method \ct{goBackward} in \ct{SBEHistory}.}%
 {ListingSources/SBE-Streams.package/SBEHistory.class/instance/goBackward.st}
 \numFiletreeMethodInput[sbehistorygoforward]%
-{}%
+{Method \ct{goForward} in \ct{SBEHistory}.}%
 {ListingSources/SBE-Streams.package/SBEHistory.class/instance/goForward.st}
 
 Until then, the code was pretty straightforward.
@@ -445,7 +444,7 @@ This version is incomplete however, as when the user clicks on the link, there s
 To represent this, the simplest solution is to write \ct{nil} after adding the page to indicate the end of the history:
 
 \numFiletreeMethodInput[sbehistorygoto]%
-{}%
+{Method \ct{goTo:} in \ct{SBEHistory}.}%
 {ListingSources/SBE-Streams.package/SBEHistory.class/instance/goTo..st}
 
 Now, only methods \ct{canGoBackward} and \ct{canGoForward} have to be implemented.
@@ -455,13 +454,13 @@ To go backward, there must be two pages before the current position:
 One page is the current page, and the other one is the page we want to go to.
 
 \numFiletreeMethodInput[sbehistorycangobackward]%
-{}%
+{Method \ct{canGoBackward} in \ct{SBEHistory}.}%
 {ListingSources/SBE-Streams.package/SBEHistory.class/instance/canGoBackward.st}
 
 To go forward, the stream should not be at its end, and the next element should not be \ct{nil}, which we used to represent the end of the history.
 
 \numFiletreeMethodInput[sbehistorycangoforward]%
-{}%
+{Method \ct{canGoForward} in \ct{SBEHistory}.}%
 {ListingSources/SBE-Streams.package/SBEHistory.class/instance/canGoForward.st}
 
 Let us add a method to peek at the contents of the stream:

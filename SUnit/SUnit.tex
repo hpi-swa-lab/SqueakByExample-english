@@ -231,8 +231,9 @@ Clearly, this test relies on the fact that the \ct{setUp} method has already run
 \begin{method}[testIncludes]{Testing set membership}
 ExampleSetTest>>>testIncludes
 
-	self assert: (full includes: 5).
-	self assert: (full includes: 6).
+	self 
+		assert: (full includes: 5);
+		assert: (full includes: 6).
 \end{method}
 
 The second test, named \ct{testOccurrences}, verifies that the number of occurrences of~5 in \ct{full} set is equal to one, even if we add another element~5 to the set. Here we make use of the specific assertion \ct{assert:equals:} that asserts whether the two arguments are equal in value.
@@ -241,8 +242,9 @@ The second test, named \ct{testOccurrences}, verifies that the number of occurre
 \begin{method}[testOccurrences]{Testing occurrences}
 ExampleSetTest>>>testOccurrences
 
-	self assert: 0 equals: (empty occurrencesOf: 0).
-	self assert: 1 equals: (full occurrencesOf: 5).
+	self 
+		assert: 0 equals: (empty occurrencesOf: 0);
+		assert: 1 equals: (full occurrencesOf: 5).
 	full add: 5.
 	self assert: 1 equals: (full occurrencesOf: 5).
 \end{method}
@@ -253,8 +255,9 @@ Finally, we test that the set no longer contains the element 5 after we have rem
 ExampleSetTest>>>testRemove
 
 	full remove: 5.
-	self assert: (full includes: 6).
-	self deny: (full includes: 5).
+	self 
+		assert: (full includes: 6);
+		deny: (full includes: 5).
 \end{method}
 
 \noindent
@@ -277,7 +280,7 @@ SBEScreenshotRecorder writeTo: 'figures/test-runner.png' building: [:helper |
 \begin{figure}[tbh]
   \begin{center}
 	\includegraphics[width=\linewidth]{test-runner}
-	\caption{The \squeak \sunit Test Runner}
+	\caption{The \squeak \sunit test runner.}
 	\label{fig:test-runner}
   \end{center}
 \end{figure}
@@ -339,8 +342,9 @@ Note that the first argument of the \ct{should:} and \ct{shouldnt:} methods is a
 \begin{method}[ESTtestIllegal]{Testing error raising}
 ExampleSetTest>>>testIllegal
 
-	self should: [empty at: 5] raise: Error.
-	self should: [empty at: 5 put: #zork] raise: Error.
+	self 
+		should: [empty at: 5] raise: Error;
+		should: [empty at: 5 put: #zork] raise: Error.
 \end{method}
 
 \sunit is portable: it can be used from all dialects of \st.
@@ -353,8 +357,9 @@ If you want to write tests that will work in any dialect of \st, instead of \mth
 \begin{method}[portabletestillegal]{Portable error handling}
 ExampleSetTest>>>testIllegal
 
-	self should: [empty at: 5] raise: TestResult error.
-	self should: [empty at: 5 put: #zork] raise: TestResult error.
+	self 
+		should: [empty at: 5] raise: TestResult error;
+		should: [empty at: 5 put: #zork] raise: TestResult error.
 \end{method}
 
 \dothis{Give it a try.}

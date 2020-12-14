@@ -367,19 +367,25 @@ The consequence of this is that the class \ct{SBEWebServer} now has another inst
 
 We can now define a class \subind{class}{method} named \ct{uniqueInstance} as shown in \mthref{uniqueInstance}. 
 This method first checks whether \ct{uniqueInstance} has been initialized.
-If it has not, the method creates an instance and assigns it to the class instance variable \ct{uniqueInstance}.  
+If it has not, the method creates an instance and assigns it to the class instance variable \ct{uniqueInstance}.
+We use a \ct{super} send, as we have forbidden the use of \ct{new} for our web server class.
 Finally the value of \ct{uniqueInstance} is returned.
 Since \ct{uniqueInstance} is a class instance variable, this method can directly access it.
     
-\begin{method}[uniqueInstance]{uniqueInstance (on the class side)}
+\begin{method}[uniqueInstance]{uniqueInstance and new (on the class side).}
 SBEWebServer class>>>uniqueInstance
 
-     uniqueInstance ifNil: [uniqueInstance := self new].
+     uniqueInstance ifNil: [uniqueInstance := super new].
      ^ uniqueInstance
+
+
+SBEWebServer class>>>new
+
+	^ self error: 'Singleton: use #uniqueInstance'
 \end{method}
 
 The first time that \ct{SBEWebServer uniqueInstance} is executed, an instance of the class \ct{SBEWebServer} will be created and assigned to the \ct{uniqueInstance} variable. 
-The next time, the previously created instance will be returned instead of creating a new one. 
+The next time, the previously created instance will be returned instead of creating a new one.
 
 Note that the instance creation code inside the conditional in \mthref{uniqueInstance} is written as \ct{self new} and not as \ct{SBEWebServer new}.
 What is the difference?
@@ -732,7 +738,7 @@ BorderedMorph>>>initialize
 	"Initialize the state of the receiver."
 
 	super initialize.
-	self borderInitialize.
+	self initializeBorder.
 \end{method}
 
 \important{An \ct{initialize} method should always start by sending \ct{super initialize}.}
@@ -887,7 +893,7 @@ For example, the variable \glbind{Transcript} names an instance of \clsind{Trans
 The following code displays some information in a new of the \ct{Transcript}.
 
 \begin{code}{}
-Transcript showln: 'Squeak is fun and powerful'
+Transcript show: 'Squeak is fun and powerful'; cr.
 \end{code}
 
 \noindent

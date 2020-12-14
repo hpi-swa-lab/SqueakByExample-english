@@ -1,6 +1,7 @@
 actions
 goTo: anObject
 
-	stream nextPut: anObject.
-	stream nextPut: nil.
-	stream back.
+	stream 
+		nextPut: anObject;
+		nextPut: nil;
+		back.
