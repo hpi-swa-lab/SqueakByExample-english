@@ -875,7 +875,7 @@ For the indexed collections (\ct{Array}, \ct{OrderedCollection}, and \ct{SortedC
 This method is related to \ct{to:do:} which is defined in class \ct{Number}.
 
 \begin{code}{@TEST}
-#('bob' 'joe' 'toto') withIndexDo: [:each :i | (each = 'joe') ifTrue: [^ i]] --> 2
+#('bob' 'joe' 'toto') withIndexDo: [:each :i | each = 'joe' ifTrue: [^ i]] --> 2
 \end{code}
 
 For ordered collections, \mthind{OrderedCollection}{reverseDo:} walks the collection in the reverse order. 
@@ -910,9 +910,9 @@ When the message \mthind{Dictionary}{do:} is sent to a dictionary, the elements 
 
 \begin{code}{}
 colors := Dictionary newFrom: {#yellow -> Color yellow . #blue -> Color blue . #red -> Color red}.
-colors keysDo: [:key | Transcript show: key; cr].                    "displays the keys"
-colors valuesDo: [:value | Transcript show: value;cr].            "displays the values"
-colors associationsDo: [:value | Transcript show: value; cr].  "displays the associations"
+colors keysDo: [:key | Transcript show: key; cr].                    "displays keys"
+colors valuesDo: [:value | Transcript show: value;cr].            "displays values"
+colors associationsDo: [:value | Transcript show: value; cr].  "displays associations"
 \end{code}
 
 %---------------------------------------------------------
