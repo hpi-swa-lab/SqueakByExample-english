@@ -862,7 +862,7 @@ To catch an exception you can use the method \ct{BlockClosure>>>on: anExceptionO
 \begin{code}{NB: CANNOT TEST}
 [(10 to: -10 by: -1) collect: [:i | 100 / i]] 
    on: ZeroDivide
-   do: [:ex | "do nothing"]
+   do: [:ex | "do nothing"].
 \end{code}
 
 The code above does not return a collection, as the block was interrupted by the \ct{ZeroDivide} exception before it could return the result of the \ct{#collect:} send.

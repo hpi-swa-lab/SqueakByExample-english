@@ -418,7 +418,7 @@ The colors are explained in a help balloon:
 \end{figure}
 
 
-\subsubsection{The Hierarchy Browser}
+\subsubsection{The hierarchy browser}
 \label{sec:hierarchy}
 
 The \button{hierarchy} button opens a \ind{hierarchy browser} on the current class; this browser can also be opened by using the \menu{browse hierarchy} menu item in the class pane.
@@ -933,7 +933,7 @@ Any of those objects can be examined by the programmer, and even changed\,---\,a
 By all means experiment, but save your image first!
 
 %---------------------------------------------------------
-\subsection{The Inspector}
+\subsection{The inspector}
 
 \dothis{As an illustration of what you can do with an \ind{inspector}, type \ct{TimeStamp now} in a workspace, and then choose \menu{inspect it} from the \ind{yellow button} menu.
 (It's not necessary to select the text before using the menu; if no text is selected, the menu operations work on the whole of the current line.
@@ -1019,7 +1019,7 @@ SBEScreenshotRecorder writeInto: './figures/' recordSeries: [:recorder |
 \end{minipage}
 \end{figure}
 
-\subsection{The Object Explorer}
+\subsection{The object explorer}
 
 The \emph{object explorer} is conceptually similar to the inspector, but presents its information in a different way.
 To see the difference, we'll \emph{explore} the same object that we were just inspecting.
@@ -1751,14 +1751,14 @@ So, if you have created any new classes, \emph{first} file-in the class creation
 Beyond the common tools introduced in this chapter, \sq also provides a set of other interesting and rich tools.
 We introduce some of them which you might want to use after becoming more proficient in using \sq:
 
-\paragraph{Dependency Browser}
+\paragraph{Dependency browser}
 Whenever you use a class in a method, the method from then on depends on the presence of this class.
 If the class is not in the environment, your method will result in an exception, as \sq does not who should receive the message.
 This is relevant for example whenever you use a class that is not part of the base system but stems from a project you installed.
 Using the \ind{dependency browser} you can see the dependencies of your package down to the individual methods.
 You can open the dependency browser through \menu{world main docking bar \go Apps \go Dependency Browser}.
 
-\paragraph{Git Tools}
+\paragraph{Git tools}
 \ind{Git} is a common version control system.
 For sharing you projects via Git on platforms such as GitHub, GitLab, or Bitbucket, you can use the Git tools.
 However, the tools are not part of the standard environment and you will have to install them.
@@ -1771,7 +1771,7 @@ Instances of that class understand many more messages, for example by messages i
 If you want to know all the methods an instance of a class understands you can open the \ind{lexicon}.
 You can get the lexicon from the system browser by opening the yellow button menu for the class and selecting \menu{browse protocol (p)}.
 
-\paragraph{Message Tally}
+\paragraph{Message tally}
 Sometimes you might write code that is too slow.
 The \ind{Message Tally} tool, sometimes also called \ind{profiler}, can help you to determine which parts of your program are slow.
 You can either let it measure the times for all executions in the image through \menu{world main docking bar \go Extras \go Start Profiler}.

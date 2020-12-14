@@ -121,7 +121,7 @@ Do whatever works best for your style of working and your operating system.
 
 \index{launching Squeak}
 \paragraph{Launching.} To start \sq, do whatever your operating system expects: drag the \emph{.}\emphind{image} file onto the icon of the virtual machine, or double-click the \emph{.image} file, or double-click the virtual machine icon, or at the command line type the name of the virtual machine followed by the path to the \emph{.image} file.
-(When you have multiple VMs installed on your machine the operating system may not automatically pick the right one; in this case, it is safer to drag and drop the image onto the virtual machine, or to use the command line.)
+(When you have multiple VMs installed on your machine, the operating system may not automatically pick the right one; in this case, it is safer to drag and drop the image onto the virtual machine, or to use the command line.)
 
 Once \sq is running, you should see a single large window, possibly containing some open workspace windows (see \figref{startup}).
 You will also notice that there is a small menu bar at the top.
@@ -856,7 +856,7 @@ This can be quite useful if you have merely made a typing mistake, but in this c
 %%	helper
 %%		runModal: [helper forgetSymbol: #shout during: [
 %%			helper
-%%				type: 'testShout\\	self assert: (''Don''''t panic'' shout = ''DON''''T PANIC!'')' withCRs into: textField;
+%%				type: 'testShout\\	self assert: ''DON''''T PANIC!'' equals: ''Don''''t panic'' shout' withCRs into: textField;
 %%				keyStroke: textField key: $s modifiers: #(cmd)]]
 %%		then: [helper dialogWindow position: 500 @ 40].
 %%]}
