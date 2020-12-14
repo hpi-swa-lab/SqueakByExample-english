@@ -1347,13 +1347,15 @@ SBEScreenshotRecorder writeTo: './figures/fixOffByOne.png' building: [:helper |
 			StringTest >> #testSuffixNotFound }
 		after: block].
 	String compile: 'suffix
+
 "assumes that I''m a file name, and answers my suffix, the part after the last dot"
 | dot dotPosition |
 dot := FileDirectory dot asCharacter.
-dotPosition := (self size to: 1 by: -1) detect: [ :i | (self at: i) = dot ].
+dotPosition := (self size to: 1 by: -1) detect: [:i | (self at: i) = dot].
 ^ self copyFrom: dotPosition to: self size'
 .
 	StringTest compile: 'testSuffixFound
+
 self assert: ''txt'' equals: ''readme.txt'' suffix'
 .
 	StringTest removeSelector: #testSuffixNotFound.

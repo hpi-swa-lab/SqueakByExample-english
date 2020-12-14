@@ -297,8 +297,8 @@ array1 --> #(#('harry'))
 array2 := array1 shallowCopy.
 array2 --> #(#('harry'))
 (array1 at: 1) at: 1 put: 'sally'.
-array1. --> #(#('sally'))
-array2. --> #(#('sally'))    "the subarray is shared!"
+array1 --> #(#('sally'))
+array2 --> #(#('sally'))    "the subarray is shared!"
 \end{code}
 
 \cmind{Object}{shallowCopy} creates a shallow copy of an object, which means that the content of the object is not copied.
@@ -309,21 +309,21 @@ For some classes even a shallow copy does not make sense if instances are unique
 \cmind{Object}{copyTwoLevel} can be used when a simple shallow copy does not suffice. It copies the object and its contents, but not deeper.
 
 \begin{code}{@TEST | array1 array2 |}
-array1 := { { 'harry' } } .
+array1 := { { 'harry' } }.
 array2 := array1 copyTwoLevel.
 (array1 at: 1) at: 1 put: 'sally'.
-array1. --> #(#('sally'))
-array2. --> #(#('harry'))    "fully independent state"
+array1 --> #(#('sally'))
+array2 --> #(#('harry'))    "fully independent state"
 \end{code}
 
 \cmind{Object}{deepCopy} makes an arbitrarily deep copy of an object.
 
 \begin{code}{@TEST | array1 array2 |}
-array1 := { { { 'harry' } } } .
+array1 := { { { 'harry' } } }.
 array2 := array1 deepCopy.
 (array1 at: 1) at: 1 put: 'sally'.
-array1. --> #(#('sally'))
-array2. --> #(#(#('harry')))
+array1 --> #(#('sally'))
+array2 --> #(#(#('harry')))
 \end{code}
 
 However, \ct{deepCopy} does not keep track of previously copied objects. This means that it does not preserve the identity of re-occurring objects. When the object to be copied contains another object twice in its contents, there will be two new objects. 
@@ -331,9 +331,9 @@ However, \ct{deepCopy} does not keep track of previously copied objects. This me
 \begin{code}{@TEST | object array copiedArray |}
 object := {'harry'}.
 array := {object . object}.
-array first == array second. --> true
+array first == array second --> true
 copiedArray := array deepCopy.
-copiedArray first == copiedArray second. --> false
+copiedArray first == copiedArray second --> false
 \end{code}
 
 Also, not keeping track of previously copied objects, means that \ct{deepCopy} will not terminate when applied to a mutually recursive structure.
@@ -342,7 +342,7 @@ Also, not keeping track of previously copied objects, means that \ct{deepCopy} w
 array1 := {'harry'}.
 array2 := {array1}.
 array1 at: 1 put: array2.
-array1 deepCopy. --> !\emph{... does not terminate!}!
+array1 deepCopy --> !\emph{... does not terminate!}!
 \end{code}
 
 Another way to copy an object is provided by \cmind{Object}{deepCopy}: 
@@ -353,7 +353,7 @@ array1 := {'harry'}.
 array2 := {array1}.
 array1 at: 1 put: array2.
 copiedArray := array1 veryDeepCopy.
-copiedArray first first = copiedArray. --> true
+copiedArray first first = copiedArray --> true
 \end{code}
 
 Whether any of these four copy methods is the right one depends on the meaning of the object and its instance variables. 
@@ -851,8 +851,8 @@ If you want to pass a message along to help users figure out what happened, you 
 When an exception is not handled by anyone, a debugger will open.
 
 \begin{code}{NB: CANNOT TEST}
-Error signal. --> "Will open a debugger"
-Error signal: 'We wanted this to happen'. --> "Will open a debugger with a message"
+Error signal --> "Will open a debugger"
+Error signal: 'We wanted this to happen' --> "Will open a debugger with a message"
 \end{code}
 
 As we do not want to present users with debuggers every time something unexpected happens, we can also handle exceptions directly within our code.
