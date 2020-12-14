@@ -106,7 +106,7 @@ SBEScreenshotRecorder writeTo: './figures/ClassTemplate.png' frame: [:bounds | b
 \ifluluelse
 	{\centerline {\includegraphics[width=0.9\textwidth]{ClassTemplate}}}
 	{\centerline {\includegraphics[scale=0.7]{ClassTemplate}}}
-	\caption{The class-creation Template.
+	\caption{The class-creation template.
 	\label{fig:classTemplate}}
 \end{minipage}
 \end{figure}
@@ -170,7 +170,7 @@ To actually send this message, you must \menu{accept} it.
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{AcceptClassDef}}}
 	{\centerline {\includegraphics[scale=0.7]{AcceptClassDef}}}
-\caption{The class-creation Template.
+\caption{The class-creation template.
 \label{fig:acceptClassDef}}
 \end{figure}
 
@@ -199,7 +199,7 @@ A class \subind{class}{comment} need not contain a detailed description of the i
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{SBECell}}}
 	{\centerline {\includegraphics[scale=0.7]{SBECell}}}
-\caption{The newly-created class \ct{SBECell}\label{fig:SBECell}}
+\caption{The newly-created class \ct{SBECell}\label{fig:SBECell}.}
 \end{figure}
 
 %=================================================================
@@ -513,8 +513,9 @@ SBEGame>>>newCellAt: i at: j
 	cell := SBECell new.
 	origin := self innerBounds origin.
 	self addMorph: cell.
-	cell position: ((i - 1) * cell width) @ ((j - 1) * cell height) + origin.
-	cell mouseAction: [self toggleNeighboursOfCellAt: i at: j].
+	cell 
+		position: ((i - 1) * cell width) @ ((j - 1) * cell height) + origin;
+		mouseAction: [self toggleNeighboursOfCellAt: i at: j].
 \end{method}
 \cmindex{SBEGame}{newCellAt:at:}
 
@@ -833,7 +834,7 @@ Once you have accepted this template, your new repository should be listed on th
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{BrowseRepository}}}
 	{\centerline {\includegraphics[scale=0.7]{BrowseRepository}}}
-\caption{Browsing a Monticello Repository
+\caption{Browsing a Monticello repository.
 \label{fig:monticello3}}
 \end{figure}
 
