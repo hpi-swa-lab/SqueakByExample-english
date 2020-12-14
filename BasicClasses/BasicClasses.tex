@@ -252,7 +252,7 @@ Conversely, you can ask if an object is an instance of a specific class:
 
 Since Smalltalk is written in itself, you can really navigate through its structure using the right combination of superclass and class messages (see \charef{metaclasses}). 
 
-\paragraph{\ct{isKindOf:}}
+\paragraph{\ct{isKindOf:}.}
 \cmind{Object}{isKindOf:} answers whether the receiver's class is either the same as, or a subclass of the argument class.
 
 \begin{code}{@TEST}
@@ -268,7 +268,7 @@ Since Smalltalk is written in itself, you can really navigate through its struct
 
 \ct{1 / 3} which is a \clsind{Fraction} is a kind of \clsind{Number}, since the class \ct{Number} is a superclass of the class \ct{Fraction}, but \ct{1 / 3} is not a \ct{Integer}.
 
-\paragraph{\ct{respondsTo:}}
+\paragraph{\ct{respondsTo:}.}
 \cmind{Object}{respondsTo:} answers whether the receiver understands the message selector given as an argument.
 
 \begin{code}{@TEST}
