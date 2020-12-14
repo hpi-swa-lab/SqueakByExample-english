@@ -1,4 +1,4 @@
 *SBE-QuickTour
 testShout
 
-	self assert: 'DON''T PANIC!' equals: 'Don''t panic' shout.
+	self assert: 'DON''T PANICBANG' equals: 'Don''t panic' shout.
