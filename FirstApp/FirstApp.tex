@@ -133,7 +133,7 @@ We simply modify the template to create the class that we really want.
 \end{itemize}
 The result should look like \clsref{firstClassDef}.
 
-\begin{classdef}[firstClassDef]{Defining the class \ct| SBECell|}
+\begin{classdef}[firstClassDef]{Defining the class \ct| SBECell|.}
 SimpleSwitchMorph subclass: #SBECell
    instanceVariableNames: 'mouseAction'
    classVariableNames: ''
@@ -216,7 +216,7 @@ Select it, and replace it by the text of \mthref{scbecellinitialize}.
 
 \needlines{10}
 \numFiletreeMethodInput[scbecellinitialize]%
-{Initializing instances of \ct{SBECell}}%
+{Initializing instances of \ct{SBECell}.}%
 {ListingSources/SBE-Quinto.package/SBECell.class/instance/initialize.st}	
 \index{initialization}
 
@@ -348,7 +348,7 @@ Now let's define an \mthind{SBEGame}{initialize} method for \ct{SBEGame}.
 
 \needlines{9}
 \numFiletreeMethodInput[sbegameinitialize]%
-{Initializing the game}%
+{Initializing the game.}%
 {ListingSources/SBE-Quinto.package/SBEGame.class/instance/initialize.st}	
 
 %\sd{it would be nicer if we would not have to create an instance of SBECell for nothing}
@@ -504,7 +504,7 @@ It answers the constant 10.
 One advantage of representing constants as methods is that if the program evolves so that the constant then depends on some other features, the method can be changed to calculate this value.
 
 \needlines{10}	
-\begin{method}[newCellAt:at:]{An initialization helper method}
+\begin{method}[newCellAt:at:]{An initialization helper method.}
 SBEGame>>>newCellAt: i at: j 
 	"Create a cell for position (i,j) and add it to my on-screen
 	representation at the appropriate screen position. Answer the new cell."

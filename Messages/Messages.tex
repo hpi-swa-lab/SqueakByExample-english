@@ -483,7 +483,7 @@ However, in \st there is no specific priority for the operations \ct{+} and \ct{
 They are just binary messages, hence \ct{*} does not have priority over \ct{+}.
 So, the leftmost message \ct{+} is sent first (1) and then the \ct{*} is sent to the result as shown in \egref{binaryMessages1}.  
 
-\begin{example}[binaryMessages1]{Decomposing \ct{20 + 2 * 5}}{}
+\begin{example}[binaryMessages1]{Decomposing \ct{20 + 2 * 5}.}{}
 "As there is no priority among binary messages, the leftmost message + is evaluated first even if by the rules of arithmetic the * should be sent first."
 
       20 + 2 * 5 
@@ -503,7 +503,7 @@ When messages are enclosed in parentheses, they are evaluated first.
 Hence the message send \ct{20 + (2 * 5)} returns the result as shown in \egref{mathcorrect}.
 
 \needlines{4}
-\begin{example}[mathcorrect]{Decomposing \ct{20 + (2 * 5)}}{}
+\begin{example}[mathcorrect]{Decomposing \ct{20 + (2 * 5)}.}{}
 "The messages surrounded by parentheses are evaluated first. Therefore * is sent prior to +, which produces the correct behavior."
 
     20 + (2 * 5) 
@@ -544,7 +544,7 @@ Both message sends result in the same effect or return the same value.
 		\\
 	\bottomrule
 	\end{tabular}
-	\caption{Message sends and their fully parenthesized equivalents\label{tab:expressions}}
+	\caption{Message sends and their fully parenthesized equivalents\label{tab:expressions}.}
 \end{figure}
 
 %=============================================================

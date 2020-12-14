@@ -673,8 +673,9 @@ SBEScreenshotRecorder writeTo: 'figures/dialog.png' building: [:helper |
 			initialAnswer: 'no name'].
 ]
 \end{ExecuteSmalltalkScript}
-\begin{figure}[htb]
-\begin{minipage}[t]{0.363\textwidth}
+\begin{figure}
+\centering
+\begin{minipage}[t]{0.35\textwidth}
 	\centerline{\includegraphics[width=\textwidth]{dialog}}
 	\caption{Dialog displayed by \ct{UIManager>>>request:initialAnswer:}.
 		\label{fig:dialogName}}
@@ -687,11 +688,8 @@ SBEScreenshotRecorder writeTo: 'figures/popup.png' building: [:helper |
 			chooseFrom: #('circle' 'oval' 'square' 'rectangle' 'triangle')]
 ]
 \end{ExecuteSmalltalkScript}
-\begin{minipage}[t]{0.587\textwidth}
-	\vfill
+\begin{minipage}[t]{0.56\textwidth}
 	\centerline{\includegraphics[width=\textwidth]{popup}}
-	\vfill
-	\vspace{4ex}
 	\caption{Dialog displayed by \ct{UIManager>>>chooseFrom:}.
 		\label{fig:dialogChoosing}}
 \end{minipage}

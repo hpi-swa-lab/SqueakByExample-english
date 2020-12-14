@@ -814,7 +814,7 @@ To make this example into something that the system can use, we turn it into a t
 
 \needlines{3}
 \numFiletreeMethodInput[stringtesttestshout]%
-{A test for a shout method}%
+{A test for a shout method.}%
 {ListingSources/SBE-QuickTour.package/StringTest.extension/instance/testShout.st}	
 
 How do we create a new method in \sq?
@@ -934,7 +934,7 @@ Note that often with Smalltalk you can define the missing method using the \butt
 Now let's define the method that will make the test succeed!
 
 \dothis{Select class \clsind{String} in the system browser, select the \menu{converting} category, type the text in \mthref{shout} over the method creation template, and \menu{accept} it.}
-\begin{method}[shout]{The shout method}
+\begin{method}[shout]{The shout method.}
 shout
 
     ^ self asUppercase , 'BANG'

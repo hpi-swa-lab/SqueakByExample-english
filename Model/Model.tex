@@ -144,7 +144,7 @@ The instance variables \ct{x} and \ct{y} of the receiver are accessed directly b
 However, the instance variables of the other point must be accessed by sending it the messages \ct{x} and \ct{y}.
 
 \needlines{7}
-\begin{method}[dist:]{the distance between two points}
+\begin{method}[dist:]{The distance between two points.}
 Point>>>dist: aPoint 
 	"Answer the distance between aPoint and the receiver."
 
@@ -279,7 +279,7 @@ However, any subclass would have its own \ct{count} variable, so subclass instan
 \paragraph{Example: Class instance variables are not shared with subclasses.}
 Suppose we define classes \ct{Dog} and \ct{Hyena}, where \ct{Hyena} inherits the class instance variable \ct{count} from \ct{Dog}.
 
-\begin{classdef}[dog]{Dogs and Hyenas}
+\begin{classdef}[dog]{Dogs and Hyenas.}
 Object subclass: #Dog
 	instanceVariableNames: ''
 	classVariableNames: ''
@@ -297,7 +297,7 @@ Dog subclass: #Hyena
 \end{classdef}
 
 Now suppose we define class methods for \ct{Dog} to initialize its \ct{count} to \ct{0}, and to increment it when new instances are created:
-\begin{methods}[dogcount]{Keeping count of new dogs}
+\begin{methods}[dogcount]{Keeping count of new dogs.}
 Dog class>>>initialize
 
 	super initialize.
@@ -348,7 +348,7 @@ Imagine that we would like to implement a class \ct{SBEWebServer} and use the Si
 
 Clicking on the \button{instance} button in the browser, we define the class \clsind{SBEWebServer} as follows (\clsref{singleton}).
 
-\begin{classdef}[singleton]{A singleton class}
+\begin{classdef}[singleton]{A singleton class.}
 Object subclass: #SBEWebServer
 	instanceVariableNames: 'sessions'
 	classVariableNames: ''
@@ -358,7 +358,7 @@ Object subclass: #SBEWebServer
 
 Then, clicking on the \button{class} button, we add the instance variable \ct{uniqueInstance} to the \subind{system browser}{class side}.
 
-\begin{classdef}[sbewebserver]{The class side of the singleton class}
+\begin{classdef}[sbewebserver]{The class side of the singleton class.}
 SBEWebServer class 	
 	instanceVariableNames: 'uniqueInstance'
 \end{classdef}
@@ -463,7 +463,7 @@ Using such messages \ct{Magnitude} defines other methods such as \ct{>}, \ct{>=}
 Such methods are inherited by subclasses.
 The method \mthind{Magnitude}{<} is abstract and defined as shown in \mthref{MagnitudeLessThan}.
 
-\begin{method}[MagnitudeLessThan]{\ct{Magnitude>>><}}
+\begin{method}[MagnitudeLessThan]{\ct{Magnitude>>><}.}
 Magnitude>>>< aMagnitude 
 	"Answer whether the receiver is less than the argument."
 
@@ -473,7 +473,7 @@ Magnitude>>>< aMagnitude
 \noindent
 By contrast, the method \mthind{Magnitude}{>=} is concrete; it is defined in terms of \ct{<}:
 
-\begin{method}[Magnitude>=]{\ct{Magnitude>>>>=}}
+\begin{method}[Magnitude>=]{\ct{Magnitude>>>>=}.}
 Magnitude>>>>= aMagnitude 
 	"Answer whether the receiver is greater than or equal to the argument."
 
@@ -484,7 +484,7 @@ The same is true of the other comparison methods.
 \clsind{Character} is a subclass of \ct{Magnitude}; it overrides the \mthind{Object}{subclassResponsibility} method for \ct{<} with its own version of \ct{<} (see \mthref{CharacterLessThan}).
 \ct{Character} also defines methods \ct{=} and \ct{hash}; it inherits from \ct{Magnitude} the methods \ct{>=}, \ct{<=}, \ct{~=} and others.
 
-\begin{method}[CharacterLessThan]{\ct{Character>>><}}
+\begin{method}[CharacterLessThan]{\ct{Character>>><}.}
 Character>>>< aCharacter 
 	"Answer true if the receiver's value < aCharacter's value."
 
@@ -499,7 +499,7 @@ This makes it easy for classes to have a unique superclass, yet still share usef
 To define a new trait, simply replace the subclass creation template by a message to the class \clsind{Trait}.
 
 \needspace{5\baselineskip}
-\begin{classdef}[tauthor]{Defining a new trait}
+\begin{classdef}[tauthor]{Defining a new trait.}
 Trait named: #TAuthor
 	uses: { }
 	category: 'SBE-Quinto'
@@ -515,7 +515,7 @@ Traits may contain methods, but no instance variables.
 Suppose we would like to be able to add an \ct{author} method to various classes, independent of where they occur in the hierarchy.
 We might do this as follows:
 
-\begin{method}[author]{An author method}
+\begin{method}[author]{An author method.}
 TAuthor>>>author
     "Returns author initials"
 	
@@ -526,7 +526,7 @@ TAuthor>>>author
 Now we can use this trait in a class that already has its own superclass, for instance the \ct{SBEGame} class that we defined in \charef{firstApp}.
 We simply modify the class creation template for \ct{SBEGame} to include a \ct{uses:} keyword argument that specifies that \ct{TAuthor} should be used.
 
-\begin{classdef}[sbegamewithtrait]{Using a trait}
+\begin{classdef}[sbegamewithtrait]{Using a trait.}
 BorderedMorph subclass: #SBEGame
 	uses: TAuthor
 	instanceVariableNames: 'cells'
@@ -646,7 +646,7 @@ anEllipse defaultColor --> Color yellow
 \noindent
 The class \ct{EllipseMorph} implements \ct{defaultColor}, so the appropriate method is found immediately.
 
-\begin{method}[defaultColor]{A locally implemented method}
+\begin{method}[defaultColor]{A locally implemented method.}
 EllipseMorph>>>defaultColor
 	"answer the default color/fill style for the receiver"
 
@@ -657,7 +657,7 @@ EllipseMorph>>>defaultColor
 In contrast, if we send the message \ct{openInWorld} to \ct{anEllipse}, the method is not immediately found, since the class \ct{EllipseMorph} does not implement \ct{openInWorld}.
 The search therefore continues in the superclass, \lct{BorderedMorph}, and so on, until an \ct{openInWorld} method is found in the class \ct{Morph} (see \figref{openInWorldLookup}).
 
-\begin{method}[openInWorld]{An inherited method}
+\begin{method}[openInWorld]{An inherited method.}
 Morph>>>openInWorld
 	"Add this morph to the world."
 
@@ -690,7 +690,7 @@ We usually say that the method ``answers \self'', because in Smalltalk the pseud
 This suggests that \mthref{openInWorld} is equivalent to \mthref{openInWorldReturnSelf}:
 
 \needlines{5}
-\begin{method}[openInWorldReturnSelf]{Explicitly returning self}
+\begin{method}[openInWorldReturnSelf]{Explicitly returning self.}
 Morph>>>openInWorld
 	"Add this morph to the world."
 
@@ -733,7 +733,7 @@ It is therefore good practice whenever implementing an initialize method to send
 \index{super!initialize}
 
 \needlines{6}
-\begin{method}[morphinit]{Super initialize}
+\begin{method}[morphinit]{Super initialize.}
 BorderedMorph>>>initialize
 	"Initialize the state of the receiver."
 
@@ -774,12 +774,12 @@ as shown in \figref{initStringLookup}.
 \ifluluelse
 	{\includegraphics[width=\textwidth]{initStringLookup}}
 	{\includegraphics[width=0.8\textwidth]{initStringLookup}}
-\caption{\self and \super sends\label{fig:initStringLookup}}
+\caption{\self and \super sends\label{fig:initStringLookup}.}
 \end{center}
 \end{figure}
 
 \needlines{5}
-\begin{method}[initString]{A \self send}
+\begin{method}[initString]{A \self send.}
 Morph>>>initString
 
 	^ String streamContents: [:stream | self fullPrintOn: stream]
@@ -791,7 +791,7 @@ What is critical to notice is that the \self send causes the method lookup to st
 \important{A \self send triggers a \emph{dynamic} method lookup starting in the class of the receiver.}
 
 \needlines{4}
-\begin{method}[fullPrintOn]{Combining \super and \self sends}
+\begin{method}[fullPrintOn]{Combining \super and \self sends.}
 BorderedMorph>>>fullPrintOn: aStream
 
 	aStream nextPutAll: '('.
@@ -848,7 +848,7 @@ SBEScreenshotRecorder writeTo: './figures/fooNotFound_debugger.png' building: [:
 	{\includegraphics[width=.3\textwidth]{fooNotFound_debugger}};  
 \end{tikzpicture}
 \end{scaletikzpicturetowidth}
-\caption{Message \lct{foo} is not understood\label{fig:fooNotFound}}
+\caption{Message \lct{foo} is not understood\label{fig:fooNotFound}.}
 \end{center}
 \end{figure}
 
@@ -972,7 +972,7 @@ Both instance methods and class methods can access these shared variables.
 A class \subind{class}{variable} is declared in the class definition template.
 For example, the class \ct{Color} defines a large number of class variables to speed up color creation; its definition is shown below (\clsref{Color}).
 
-\begin{classdef}[Color]{Color and its class variables}
+\begin{classdef}[Color]{Color and its class variables.}
 Object subclass: #Color 	
         instanceVariableNames: 'rgb cachedDepth cachedBitPattern'
         classVariableNames: 'Black Blue BlueShift Brown CachedColormaps ColorChart ColorNames ComponentMask ComponentMax Cyan DarkGray Gray GrayToIndexMap Green GreenShift HalfComponentMask HighLightBitmaps IndexedColors LightBlue LightBrown LightCyan LightGray LightGreen LightMagenta LightOrange LightRed LightYellow Magenta MaskingMap Orange PaleBlue PaleBuff PaleGreen PaleMagenta PaleOrange PalePeach PaleRed PaleTan PaleYellow PureBlue PureCyan PureGreen PureMagenta PureRed PureYellow RandomStream Red RedShift TranslucentPatterns Transparent VeryDarkGray VeryLightGray VeryPaleRed VeryVeryDarkGray VeryVeryLightGray White Yellow'
@@ -998,7 +998,7 @@ This implies that we must use the accessor all the time and never use the class 
 This furthermore imposes the cost of the accessor send and the initialization test.
 It also arguably defeats the point of using a class variable, since in fact it is no longer shared.
 
-\begin{method}[colorclasscolornames]{Color class>>colorNames}
+\begin{method}[colorclasscolornames]{Color class>>colorNames.}
 Color class>>>colorNames
 
 	ColorNames ifNil: [self initializeNames].
@@ -1009,7 +1009,7 @@ Color class>>>colorNames
 Another solution is to override the class method \ct{initialize}.
 
 \needlines{3}
-\begin{method}[colorclassinit]{Color class>>initialize}
+\begin{method}[colorclassinit]{Color class>>initialize.}
 Color class>>>initialize
 	
 	!\ldots!
@@ -1033,7 +1033,7 @@ For example, the class \clsind{Text} indicates that it is using the pool diction
 This dictionary has a key \ct{#CR} that is bound to the value \ct{Character cr}, \ie the carriage return character.
 \cmindex{Character class}{cr}
 
-\begin{classdef}[textpooldict]{Pool dictionaries in the \ct{Text} class}
+\begin{classdef}[textpooldict]{Pool dictionaries in the \ct{Text} class.}
 ArrayedCollection subclass: #Text
         instanceVariableNames: 'string runs' 	
         classVariableNames: '' 	
@@ -1044,7 +1044,7 @@ ArrayedCollection subclass: #Text
 This allows methods of the class \ct{Text} to access the keys of the dictionary in the method body \emph{directly}, \ie by using variable syntax rather than an explicit dictionary lookup.
 For example, we can write the following method. 
   
-\begin{method}[texttestcr]{Text>>testCR}
+\begin{method}[texttestcr]{Text>>testCR.}
 Text>>>testCR
 
       ^ CR == Character cr

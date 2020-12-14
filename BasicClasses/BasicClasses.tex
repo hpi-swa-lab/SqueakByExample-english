@@ -143,7 +143,7 @@ Hence the following array does not contain two points but rather six literal ele
 Lots of \ct{printOn:} method specializations implement self-evaluating behavior.
 The implementations of \cmind{Point}{printOn:} and \cmind{Interval}{printOn:} are self-evaluating.
 
-\begin{method}[Self-evaluating points]{\ct{Point} print string definition that enables self-evaluation}
+\begin{method}[Self-evaluating points]{\ct{Point} print string definition that enables self-evaluation.}
 Point>>>printOn: aStream 
     "The receiver prints on aStream in terms of infix notation."
 
@@ -153,7 +153,7 @@ Point>>>printOn: aStream
     y printOn: aStream.
 \end{method}
 
-\begin{method}[Self-evaluating intervals]{\ct{Interval} print string definition that enables self-evaluation}
+\begin{method}[Self-evaluating intervals]{\ct{Interval} print string definition that enables self-evaluation.}
 Interval>>>printOn: aStream
 
     aStream nextPut: $(;
@@ -178,7 +178,7 @@ In Smalltalk, the message \ct{=} tests object \emphsubindmain{Object}{equality} 
 \seeindex{identity}{Object, identity}
 
 The default implementation of object equality is to test for object identity:
-\begin{method}{Object equality}
+\begin{method}{Object equality.}
 Object>>>= anObject
     "Answer whether the receiver and the argument represent the same object.
     If = is redefined in any subclass, consider also redefining the message hash."
@@ -198,7 +198,7 @@ Consider the case of \ct{Complex} numbers:
 This works because \ct{Complex} overrides \ct{=} as follows:
 \cmindex{Complex}{=}
 \needlines{5}
-\begin{method}{Equality for complex numbers}
+\begin{method}{Equality for complex numbers.}
 Complex>>>= anObject
 
 	anObject isNumber ifFalse: [^ false].
@@ -219,7 +219,7 @@ The default implementation of \ct{Object>>>~=} simply negates \ct{Object>>>=}, a
 
 If instances of your class are ever used as keys in a \clsind{Dictionary}, then you should make sure that instances that are considered to be equal have the same hash value. This is because the implementation of \clsind{Dictionary} will only use the \ct{hash} to determine whether it includes an object as a key:
 \cmindex{Complex}{hash}
-\begin{method}{Hash must be reimplemented for complex numbers}
+\begin{method}{Hash must be reimplemented for complex numbers.}
 Complex>>>hash
     "Hash is reimplemented because = is implemented."
 
@@ -360,7 +360,7 @@ Whether any of these four copy methods is the right one depends on the meaning o
 As this can not be decided in general for all objects and all use cases, \cmind{Object}{copy} delegates this decision to specific subclasses. 
 \cmind{Object}{copy} first creates a shallow copy, and then asks this shallow copy to copy any instance variables that should be copied by sending \ct{postCopy} to it.
 
-\begin{method}{Copying objects as a template method}
+\begin{method}{Copying objects as a template method.}
 Object>>>copy
     "Answer another instance just like the receiver. Subclasses typically override postCopy; they typically do not override shallowCopy."
 
@@ -372,7 +372,7 @@ You should override \mthind{Object}{postCopy} to copy any instance variables tha
 For example, a \clsind{Form} object has instance variables for width, height, bit depth, an offset, and the actual bits. 
 As the first four instance variables are all described by numbers, there is no need to copy them as you can see in \mthind{Form}{postCopy}.
 
-\begin{method}{Copying objects as a template method}
+\begin{method}{Copying objects as a template method.}
 Form>>>postCopy
 
 	super postCopy.
@@ -399,7 +399,7 @@ If this exception is not otherwise caught, the debugger will open to this point 
 The most typical usage is to check non-trivial pre-conditions to public methods of objects.
 \cmind{Stack}{pop} could easily have been implemented as follows:
 
-\begin{method}{Checking a pre-condition}
+\begin{method}{Checking a pre-condition.}
 Stack>>>pop
     "Return the first element and remove it from the stack."
 
@@ -437,7 +437,7 @@ It may be useful to override \lct{does\-Not\-Un\-der\-stand:} to provide some ot
 Abstract methods in Smalltalk are implemented by convention with the body \lct{self sub\-class\-Res\-pon\-si\-bi\-li\-ty}.
 Should an abstract class be instantiated by accident, then calls to abstract methods will result in \cmind{Object}{subclassResponsibility} being evaluated.
 
-\begin{method}{Signaling that a method is abstract}
+\begin{method}{Signaling that a method is abstract.}
 Object>>>subclassResponsibility
     "This message sets up a framework for the behavior of the class' subclasses.
     Announce that the subclass should have implemented this message."
@@ -484,14 +484,14 @@ The most useful are probably \cmind{ProtoObject}{isNil} and \cmind{Object}{notNi
 
 A final key method that occurs not in \ct{Object} but in \ct{ProtoObject} is \mthind{ProtoObject}{initialize}.
 
-\begin{method}{\lct{initialize} as an empty hook method}
+\begin{method}{\lct{initialize} as an empty hook method.}
 ProtoObject>>>initialize
     "Subclasses should redefine this method to perform initializations on instance creation"
 \end{method}
 
 The reason this is important is that in Squeak, the default \mthind{Behavior}{new} method defined for every class in the system will send \ct{initialize} to newly created instances.
 
-\begin{method}{\lct{new} as a class-side template method}
+\begin{method}{\lct{new} as a class-side template method.}
 Behavior>>>new
     "Answer a new initialized instance of the receiver (which is a class) with no indexable variables. Fail if the class is indexable."
 
@@ -511,7 +511,7 @@ Of course, numbers are implemented efficiently in the virtual machine, but the \
 
 \begin{figure}[ht]
 \centerline {\includegraphics[width=8cm]{NumberHierarchy}}
-\caption{The Number Hierarchy \label{fig:numbers}}
+\caption{The Number Hierarchy \label{fig:numbers}.}
 \end{figure}
 
 Numbers are found in the \scatind{Kernel-Numbers} category.
@@ -530,7 +530,7 @@ Methods \mthind{Magnitude}{<} and \mthind{Magnitude}{=} are abstract.
 The remaining operators are generically defined.
 For example:
 
-\begin{method}{Abstract comparison methods}
+\begin{method}{Abstract comparison methods.}
 Magnitude>>> < aMagnitude 
     "Answer whether the receiver is less than the argument."
 
@@ -700,7 +700,7 @@ A \ct{String} is an indexed \ct{Collection} that holds only \ct{Characters}.
 \ifluluelse
 	{\centerline {\includegraphics[width=0.5\textwidth]{StringHierarchy}}}
 	{\centerline {\includegraphics[width=6cm]{StringHierarchy}}}
-\caption{The String Hierarchy \label{fig:strings}}
+\caption{The String Hierarchy.\label{fig:strings}}
 \end{figure}
 
 In fact, \ct{String} is abstract, and Squeak \ct{Strings} are usually instances of the concrete class \clsindmain{ByteString}, or \clsindmain{WideString} if they contain any special character that cannot be represented by a single byte. The distinction between the two does not concern you most of the time, as the two classes convert their instances between each other automatically.
@@ -777,7 +777,7 @@ The class \clsindmain{Boolean} offers a fascinating insight into how much of the
 \ifluluelse
 	{\centerline {\includegraphics[width=0.6\textwidth]{BooleanHierarchy}}}
 	{\centerline {\includegraphics[width=6cm]{BooleanHierarchy}}}
-\caption{The Boolean Hierarchy \label{fig:booleans}}
+\caption{The Boolean Hierarchy.\label{fig:booleans}}
 \end{figure}
 
 Most of the behavior of \ct{Boolean}s can be understood by considering the method \mthind{Boolean}{ifTrue:ifFalse:}, which takes two \ct{Blocks} as arguments.
@@ -789,7 +789,7 @@ Most of the behavior of \ct{Boolean}s can be understood by considering the metho
 The method is abstract in \ct{Boolean}.
 The implementations in its concrete subclasses are both trivial:
 
-\begin{method}{Implementations of \lct{ifTrue:ifFalse:}}
+\begin{method}{Implementations of \lct{ifTrue:ifFalse:}.}
 True>>>ifTrue: trueAlternativeBlock ifFalse: falseAlternativeBlock
 
     ^ trueAlternativeBlock value
@@ -808,7 +808,7 @@ In this case an instance of \ct{True} simply evaluates the \emph{true} alternati
 All the abstract \ct{Boolean} methods are implemented in this way for \ct{True} and \ct{False}.
 For example:
 
-\begin{method}{Implementing negation}
+\begin{method}{Implementing negation.}
 True>>>not
     "Negation--answer false since the receiver is true."
 

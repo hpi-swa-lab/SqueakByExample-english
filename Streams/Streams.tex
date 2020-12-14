@@ -227,9 +227,7 @@ stream next.        --> $f
 stream contents. --> 'abcdef'
 \end{code}
 
-As you can see, the letter \ct{e} has been skipped.
-
-The method \mthind{PositionableStream}{contents} always returns a copy of the entire stream.
+As you can see, the letter \ct{e} has been skipped. The method \mthind{PositionableStream}{contents} always returns a copy of the entire stream.
 
 \paragraph{Testing.} Some methods allow you to test the state of the current stream:
 \mthind{PositionableStream}{atEnd} returns true if and only if no more elements can be read whereas \mthind{PositionableStream}{isEmpty} returns true if and only if there is no element at all in the collection.
@@ -609,7 +607,7 @@ You can open this file with your favorite drawing program.
 If you do not have a relevant program, you can also drag the file into your \sq image to watch it.
 
 \numFiletreeMethodInput[sbefilestreamsexamplecheckerboard]%
-{A test for a shout method}%
+{Writing a checkerboard file.}%
 {ListingSources/SBE-Streams.package/SBEFileStreams.class/class/exampleCheckerboard.st}
 
 This creates a 4x4 checkerboard as shown in \figref{checkerboard4x4}.
