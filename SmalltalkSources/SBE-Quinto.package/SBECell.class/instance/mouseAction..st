@@ -1,4 +1,4 @@
 accessing
 mouseAction: aBlock
 
-	^ mouseAction := aBlock
+	mouseAction := aBlock

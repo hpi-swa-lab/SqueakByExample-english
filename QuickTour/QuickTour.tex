@@ -74,7 +74,7 @@ However, there are two important components common to all versions (see \figref{
 
   \item The current \emph{system \ind{image}} is a snapshot of a running \sq system, frozen in time.
   It consists of two files: an \emph{.}\emphind{image} file, which contains the state of all of the objects in the system (including classes and methods, since they are objects too), and a \emph{.}\emphind{changes} file, which contains a log of all of the changes to the source code of the system.
-In \figref{download}, we see that we have grabbed the \textit{{\sq}5.2-18231} image and changes files.
+In \figref{download}, we see that we have grabbed the \textit{{\sq}5.3-19435} image and changes files.
 Actually, we will use a slightly different image in this book.
 \end{enumerate}
 
@@ -283,7 +283,7 @@ We will encounter most of them in the coming chapters.
 \end{figure}
 
 %=================================================================
-\section{Saving, quitting and restarting a \sq session}
+\section{Saving, quitting, and restarting a \sq session}
 
 \dothis{Bring up the world menu.
 Now select \menu{new morph \ldots} and navigate to \menu{from alphabetical list{\go}A-C{\go}BouncingAtomsMorph}.
@@ -366,7 +366,7 @@ For now, we will continue by cleaning up the image before we take a look at the 
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{Tools}}}
 	{\centerline {\includegraphics[width=0.8\textwidth]{Tools}}}
-\caption{The \sq \toolsmenu.\label{fig:tools}}
+\caption{The \sq \menu{Tools} menu.\label{fig:tools}}
 \end{figure}
 
 %=================================================================
@@ -430,7 +430,7 @@ More on this in the next section!)
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{Doit}}}
 	{\centerline {\includegraphics[scale=0.65]{Doit}}}
-\caption{``Doing'' an expression\label{fig:doit}}
+\caption{``Doing'' an expression\label{fig:doit}.}
 \end{figure}
 
 You have just evaluated your first \st expression!
@@ -837,7 +837,7 @@ In this case, the \ct{shout} method that we are testing will go in class \clsind
 
 \dothis{Open a browser on the class \ct{StringTest}, and select an appropriate protocol for our method, in this case \menu{tests - converting}, as shown in \figref{newMethodTemplate}.
 The highlighted text in the bottom pane is a template that reminds you of what a \st method looks like.
-Delete this and enter the code from  \mthref{testShout}.}
+Delete this and enter the code from \mthref{stringtesttestshout}.}
 Once you have typed the text into the browser, notice that the bottom pane is outlined in red.
 This is a reminder that the pane contains unsaved changes.
 So select \menu{accept (s)} from the yellow-button menu in the bottom pane, or just type \short{s}, to compile and save your method.
@@ -987,7 +987,7 @@ You have also seen a little of \sq's syntax, even though you may not understand 
   The most important of these are \menu{do it} (\short{d}), \menu{print it} (\short{p}), \menu{inspect it} (\short{i}), \menu{explore it} (\short{I}) and \menu{browse it} (\short{b}).
   \item The \emph{system browser} is the main tool for browsing \sq code, and for developing new code.
   \item The \emph{test runner} is a tool for running unit tests.
-  It also supports Test Driven Development.
+  It also supports Test Driven Development (TDD).
 \end{itemize}
 
 %=================================================================
