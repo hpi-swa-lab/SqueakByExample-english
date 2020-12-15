@@ -1344,7 +1344,8 @@ SBEScreenshotRecorder writeTo: './figures/fixOffByOne.png' building: [:helper |
 	thisContext wrap: [:block | helper restoreMethods: {
 			String >> #suffix.
 			StringTest >> #testSuffixFound.
-			StringTest >> #testSuffixNotFound }
+			StringTest >> #testSuffixNotFound.
+			StringTest >> #testShout. }
 		after: block].
 	String compile: 'suffix
 
@@ -1358,6 +1359,7 @@ dotPosition := (self size to: 1 by: -1) detect: [:i | (self at: i) = dot].
 
 self assert: ''txt'' equals: ''readme.txt'' suffix'
 .
+	StringTest compile: 'testShout'. "To prevent a failure from this test"
 	StringTest removeSelector: #testSuffixNotFound.
 	testRunner := TestRunner newForSuite: StringTest suite.
 	testRunner runAll.
