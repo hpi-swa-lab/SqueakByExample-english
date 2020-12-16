@@ -1183,7 +1183,7 @@ It can be instantiated from any unary block by sending the message \mthind{Block
 (1 to: 10) sorted: [:ea | ea raisedTo: 2 modulo: 3] ascending --> #(3 6 9 1 2 4 5 7 8 10)
 \end{code}
 
-\mthind{Symbol}{ascending} and \mthind{BlockClosure}{descending} are defined on \clsind{Symbol} as well, so we could also write the previous example in the following way (but the former version is more efficient):
+\mthind{Symbol}{ascending} and \mthind{BlockClosure}{descending} are defined on \clsind{Symbol} as well, so we could also write the previous example in the following way (however, the former version is more efficient, and it also would be considered better style):
 
 \begin{code}{@TEST}
 #('Foo' 'Bar' 'baz') sorted: #asUppercase descending --> #('Foo' 'baz' 'Bar')
