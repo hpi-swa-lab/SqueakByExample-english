@@ -675,7 +675,7 @@ SortedCollection new add: 5; add: 2; add: 50; add: -10; yourself. --> a SortedCo
 \end{code}
 
 While \ct{SortedCollection}s are quite useful if the collection should always be in sorted order, they should not be used to simply sort a collection once.
-To achieve the latter, you can use the messages \ct{sort} and \ct{sorted} which are introduced in \secref{sorting}.
+To achieve the latter, you can use the messages \ct{sorted} and \ct{sorted:} which are introduced in \secref{sorting}.
 
 \begin{code}{@TEST}
 'hello' sorted --> #($e $h $l $l $o)
@@ -1159,7 +1159,7 @@ array sort.
 array. --> #(1 3 5)
 \end{code}
 
-Sort methods use the message \mthind{Magnitude}{<=} to establish sort order, so by default, they can sort magnitudes such as numbers, characters, times \etc (see \charef{basic} on \ct{Magnitude}), but also other objects such as strings or points.
+Sort methods use the message \mthind{Magnitude}{<=} to establish sort order, so by default, they can sort magnitudes such as numbers, characters, timestamps, \etc (see \charef{basic} on \ct{Magnitude}), but also other objects such as strings or points.
 However, what can you do if you want to sort objects that do not implement \ct{<=}, or if you would like to customize the sort order?
 For this purpose, \ct{Collection} also provides \mthind{Collection}{sorted:} in addition to \ct{sorted} (note the colon), and analogously, arrays \etc also implement \mthind{ArrayCollection}{sort:}.
 These messages take a two-argument sort block or a \emphind{sort function}\index{SortFunction, class} that, speaking formally, defines a partial order on the collection to be sorted.%
