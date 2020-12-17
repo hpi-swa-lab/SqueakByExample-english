@@ -38,7 +38,7 @@ If you already feel comfortable with the syntax, you may choose to skip this cha
 
 In \st, except for the syntactic elements listed in \charef{syntax} (\ct+:= ^ . ; # () {} [ : | ]+), everything is a message send. 
 Even operations such as \ct{+} are message sends and you can implement methods for these operations in your classes.
-Moreover, you cannot change the arity of a method.
+At the same time, the arity of a method is set.
 ``\ct{-}'' is always a binary message; there is no way to have a unary ``\ct{-}'' with different overloading.
 
 In \st the order in which messages are sent is determined by the kind of message.
@@ -412,6 +412,7 @@ It contains two binary messages \ct{65 @ 325} and \ct{134 @ 100} that are sent f
 Finally, the unary message \ct{center} is sent to the rectangle and a point is returned. 
 Evaluating the message without parentheses would lead to an error because the object \ct{100} does not understand the message \ct{center}.
 
+\needlines{9}
 \begin{example}[decExtent]{Example of Parentheses.}{}
       (65 @ 325 extent: 134 @ 100) center.
 (1)   65 @ 325                                                    "binary"
