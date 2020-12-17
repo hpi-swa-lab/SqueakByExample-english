@@ -34,7 +34,7 @@ Along the way, we will demonstrate most of the tools that \squeak programmers us
 We will see the system browser, the object inspector, the debugger, and the \ind{Monticello} \ind{package} browser. 
 Development in Smalltalk is efficient:
 You will find that you spend far more time actually writing code and far less managing the development process. 
-This is partly because the Smalltalk language is very simple, and partly because the tools that make up the programming environment are very well integrated with the language.
+This is partly because the Smalltalk language is simple, and partly because the tools that make up the programming environment are integrated well with the language.
 
 Nevertheless, if you find yourself not understanding all of the code, don't worry.
 We will explain the details of the syntax, the object model, and message passing in later chapters.
@@ -50,18 +50,19 @@ We will explain the details of the syntax, the object model, and message passing
 %%]}
 \begin{figure}[ht]
 	\vskip -\baselineskip
-	\centerline{\includegraphics[width=.3\linewidth]{GameBoard}}
+	\centerline{\includegraphics[width=.33\linewidth]{GameBoard}}
 	\caption{The Quinto game board. The user has just clicked the mouse as shown by the cursor.
 	\label{fig:gameBoard}}
 \end{figure}
 
 To show you how to use \squeak's programming tools, we will build a simple game called \emph{Quinto}.
-The game board is shown in \figref{gameBoard}; it consists of a rectangular array of light yellow \emph{cells}.
-When you click on one of the cells with the mouse, the four surrounding cells turn blue.
-Click again, and they toggle back to light yellow.
-The object of the game is to turn blue as many cells as possible.
+The game board is shown in \figref{gameBoard}. The board consists of a rectangular grid of light yellow \emph{cells}.
+When you click on one of the cells with the mouse, the four surrounding cells turn blue, but not the cell you clicked on.
+Click again, and the surrounding cells toggle back to light yellow.
+The objective of the game is to turn as many cells as possible to blue.
 
-The Quinto game shown in \figref{gameBoard} is made up of two kinds of objects: the game board itself, and 100 individual cell objects.  The \squeak code to implement the game will contain two classes: one for the game and one for the cells.
+The Quinto game shown in \figref{gameBoard} is made up of two kinds of objects: the game board itself, and 100 individual cell objects.
+The \squeak code to implement the game will contain two classes: one for the game and one for the cells.
 We will now show you how to define these classes using the \squeak programming tools.
 
 %=================================================================
@@ -118,11 +119,9 @@ If you selected an existing category first, then the new category will be positi
 
 As yet there are  of course no classes in the new category.
 However, the main editing pane displays a template to make it easy to create a new class (see \figref{classTemplate}).
-
 This template shows us a \st expression that sends a message to a class called \ct{Object}, asking it to create a subclass called \ct{NameOfSubClass}.
 The new class has no variables and should belong to the category \scat{SBE-Quinto}.
-
-We simply modify the template to create the class that we really want.
+We now modify the template to create the class that we want.
 
 \dothis{Modify the class creation template as follows:}
 \begin{itemize}
@@ -562,6 +561,7 @@ To move the method, you can simply click on its name and drag it to the newly-cr
 \end{figure}
 
 To complete the Quinto game, we need to define two more methods in class \ct{SBECell} to handle mouse events.
+\needlines{3}
 \numFiletreeMethodInput[mouseAction:]%
 {A typical setter method.}%
 {ListingSources/SBE-Quinto.package/SBECell.class/instance/mouseAction..st}
@@ -829,15 +829,15 @@ Once you have accepted this template, your new repository should be listed on th
 %%		packageList := helper listMorphIncludingMatch: 'SBE-Quinto' in: window.
 %%		window model versionSelection: 1]
 %%]}
-\begin{figure}[hbt]
+\begin{figure}[h]
 \ifluluelse
-	{\centerline {\includegraphics[width=\textwidth]{BrowseRepository}}}
-	{\centerline {\includegraphics[scale=0.7]{BrowseRepository}}}
+	{{\includegraphics[width=\textwidth]{BrowseRepository}}}
+	{{\includegraphics[scale=0.7]{BrowseRepository}}}
 \caption{Browsing a Monticello repository.
 \label{fig:monticello3}}
 \end{figure}
 
-\dothis{Click on the \button{Save} button to save the first version of your Quinto game on SqueakSource.}
+\dothis{Click on \button{Save} to save the first version of your Quinto game on SqueakSource.}
 
 To load a package into your image, you must first select a particular version.
 You can do this in the repository browser, which you can open using the \button{Open} button or the yellow-button menu.
