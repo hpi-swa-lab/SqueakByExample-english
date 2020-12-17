@@ -35,7 +35,7 @@ The class libraries are entirely written in Smalltalk and we can easily extend t
 
 Our goal here is not to present in tedious detail the whole of the Squeak class library, but rather to point out the key classes and methods that you will need to use or override to program effectively.
 In this chapter we cover the basic classes that you will need for nearly every application: \ct{Object}, \ct{Number} and its subclasses, \ct{Character}, \ct{String}, \ct{Symbol}, \ct{Boolean}, and \ct{Exception}. 
-In the following chapter \charef{cha:collections}, we will discuss the equally important \ct{Collection} subclasses.
+In the following chapter \charef{collections}, we will discuss the equally important \ct{Collection} subclasses.
 
 \md{Here are some comments:\\
 - Debugging: Yes, needs its own chapter. We should talk about haltIf, haltOnce...\\
@@ -77,7 +77,7 @@ The method \mthind{Object}{printString}, which is a \ind{template method}, at it
 The message \ct{printOn:} is a hook that can be specialized. 
 
 \ct{Object>>>printOn:} is very likely one of the methods that you will most frequently override.
-This method takes as its argument a \clsind{Stream} (for more on streams see \charef{cha:streams}) on which a \clsind{String} representation of the object will be written.
+This method takes as its argument a \clsind{Stream} (for more on streams see \charef{streams}) on which a \clsind{String} representation of the object will be written.
 The default implementation simply writes the class name preceded by ``\ct{a}'' or ``\ct{an}''.
 \ct{Object>>>printString} returns the \ct{String} that is written.
 
