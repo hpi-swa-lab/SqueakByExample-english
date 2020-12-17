@@ -213,7 +213,7 @@ The \emphind{yellow button} is the next most used button; it is used to bring up
 Now click the yellow button in the workspace.
 Select \menu{print it}.}
 
-Finally, there is the \emphind{blue button}, which is used to activate the ``morphic \subind{Morphic}{halo}'', an array of handles that are used to perform operations on the on-screen objects themselves, such as rotating them or resizing them; see \figref{threeButtons:blue}. 
+Finally, there is the \emphind{blue button} to activate the ``morphic \subind{Morphic}{halo}'', an array of handles that are used to perform operations on the on-screen objects themselves, such as rotating or resizing; see \figref{threeButtons:blue}. 
 If you let the mouse linger over a handle, a help balloon will explain its function.
 
 \dothis{Click the blue button on the workspace.
@@ -373,7 +373,7 @@ For now, we will continue by cleaning up the image before we take a look at the 
 \label{sec:transcript}
 
 \dothis{Close all open windows.
-	In the menu bar at the top of the \sq environment select \menu{Tools}.}
+	In the menu bar at the top select \menu{Tools}.}
 You will see entries for some of the key tools in \sq (\figref{tools}).
 Open a \ind{transcript} and a \ind{workspace}.
 
@@ -797,10 +797,9 @@ Only then do we write the code that satisfies the test.
 \seeindex{Behavior Driven Development}{Test Driven Development}
 
 Suppose that our assignment is to write a method that ``says something loudly and with emphasis''.
-What exactly could that mean?
-What would be a good name for such a method?
+What exactly does that mean?
 How can we make sure that programmers who may have to maintain our method in the future have an unambiguous description of what it should do?
-We can answer all of these questions by giving an example:
+We can start answering these questions by giving an example:
 
 \begin{quote}
 When we send the message \ct{shout} to the string ``Don't panic'' the result should be ``DON'T PANIC!''.
@@ -929,7 +928,6 @@ Running the test generates an error because we haven't yet written a method that
 Nevertheless, it's good practice to make sure that the test fails because this confirms that we have set up the testing machinery correctly and that the new test is actually being run.
 Once you have seen the error, you can \button{Abandon} the running test, which will close the debugger window.
 Note that often with Smalltalk you can define the missing method using the \button{Create} button, edit the newly-created method in the debugger, and then \button{Proceed} with the test.
-
 Now let's define the method that will make the test succeed!
 
 \dothis{Select class \clsind{String} in the system browser, select the \menu{converting} category, type the text in \mthref{shout} over the method creation template, and \menu{accept} it.}
