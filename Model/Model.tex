@@ -422,7 +422,7 @@ Unless you have a very good reason to do otherwise, when creating application cl
 \footnote{Actually, the only use case for directly subclassing \ct{ProtoObject} is when you write a \emph{transparent decorator} that implements \emph{message forwarding} by overriding \ct{#doesNotUnderstand:}.
 	In \sq, see \clsind{MessageCatcher} for a simple example.}
 
-\dothis{A new class is normally created by sending the message \ct{subclass: instanceVariableNames: ...} to an existing class.
+\dothis{A new class is normally created by sending a message to an existing class, most often the message \ct{subclass:instanceVariableNames: ...}.
 There are a few other methods to create classes.
 Have a look at the protocol \prot{Kernel-Classes \go Class \go subclass creation} to see what they are.}
 \scatindex{Kernel-Classes}
@@ -851,7 +851,7 @@ SBEScreenshotRecorder writeTo: './figures/fooNotFound_debugger.png' building: [:
 \end{center}
 \end{figure}
 
-Now, this is a perfectly ordinary, dynamic message send, so the lookup starts again from the class \ct{EllipseMorph}, but this time searching for the method \ct{doesNotUnderstand:}.
+Now, this is an ordinary, dynamic message send, so the lookup starts again from the class \ct{EllipseMorph}, but this time searching for the method \ct{doesNotUnderstand:}.
 As it turns out, \ct{Object} implements \ct{doesNotUnderstand:}.
 This method will create a new \ct{MessageNotUnderstood} object which is capable of starting a Debugger in the current execution context.
 
@@ -997,6 +997,7 @@ This implies that we must use the accessor all the time and never use the class 
 This furthermore imposes the cost of the accessor send and the initialization test.
 It also arguably defeats the point of using a class variable, since in fact it is no longer shared.
 
+\needlines{4}
 \begin{method}[colorclasscolornames]{Color class>>colorNames.}
 Color class>>>colorNames
 
@@ -1007,7 +1008,7 @@ Color class>>>colorNames
 
 Another solution is to override the class method \ct{initialize}.
 
-\needlines{3}
+\needlines{4}
 \begin{method}[colorclassinit]{Color class>>initialize.}
 Color class>>>initialize
 	
