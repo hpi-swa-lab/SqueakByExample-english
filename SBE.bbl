@@ -74,6 +74,21 @@
   {{Goldberg}{Adele}{A.}{}{}; {Robson}{David}{D.}{}{}} {} {} \bibAnnoteFile
   {Gold83a}
 
+\bibitem[{Klimas\jbbfsasep Skublics\jbbstasep Thomas\jbdy {1996}}%
+         {}%
+         {{0}{}{book}{1996}{}{}{}{}%
+          {Prentice-Hall\bibbdsep {} 1996}}%
+         {{Smalltalk with Style}%
+          {}{}{2}{}{}{}{}{}}%
+        ]{Klim96a}
+ \jbbibargs {\bibnf {Klimas} {Edward~J.} {E.~J.} {} {}\Bibbfsasep \bibnf
+  {Skublics} {Suzanne} {S.} {} {}\Bibbstasep \bibnf {Thomas} {David~A.} {D.~A.}
+  {} {}} {Edward~J. KlimasSuzanne SkublicsDavid~A. Thomas} {aus} {\bibtfont
+  {Smalltalk with Style}\bibatsep\  \apyformat {Prentice-Hall\bibbdsep {}
+  1996}\jbisbn {0--13--165549--3}} {\bibhowcited} \jbdoitem
+  {{Klimas}{Edward~J.}{E.~J.}{}{}; {Skublics}{Suzanne}{S.}{}{};
+  {Thomas}{David~A.}{D.~A.}{}{}} {} {} \bibAnnoteFile {Klim96a}
+
 \bibitem[{LaLonde\jbbtasep Pugh\jbdy {1990}}%
          {}%
          {{0}{}{book}{1990}{}{}{}{}%
