@@ -106,6 +106,8 @@ The method \mthind{Object}{asMorph} has a default implementation in class \ct{Ob
 For many objects, that is not a very useful graphical representation and thus the override it with a more interesting mapping.
 
 \dothis{Open a browser on the \ct{Color} class and browse the following method.}
+
+\needlines{6}
 \begin{method}{Getting a morph for an instance of \ct{Color}.}
 Color>>>asMorph
 
@@ -251,6 +253,8 @@ Morph subclass: #SBECrossMorph
 \end{classdef}
 
 We can define the \ct{drawOn:} method like this:
+
+%The page break in this listing is fine, there is no better layouting option here --pre
 \begin{method}[firstDrawOn]{Drawing a \ct{SBECrossMorph}.}
 drawOn: aCanvas 
 
@@ -706,7 +710,7 @@ To get the \clsind{UIManager} for our UI system, we can ask the class \clsind{Pr
 The class \clsind{Project} takes care of instantiating the \clsind{UIManager} corresponding to our UI system.
 For this reason, the most idiomatic and thus recommended way to retrieve a \clsind{UIManager} instance is the method \cmind{Project class}{uiManager}.
 
-For example, to display the request dialog in \figref{dialogName}, send a \ct{request:initialAnswer:} message:
+For example, to display the request dialog in \figref{dialogName}, you can send the message \ct{request:initialAnswer:}:
 \begin{code}{}
 Project uiManager
 	request: 'What''s your name?'
@@ -804,6 +808,8 @@ DroppedMorph>>>initialize
 \end{method}
 
 Now we can specify what the dropped morph should do when it is rejected by the receiver; here it will stay attached to the mouse pointer:
+
+\needlines{6}
 \begin{method}{Reacting when the morph was dropped but rejected.}
 DroppedMorph>>>rejectDropMorphEvent: anEvent
 
@@ -883,13 +889,12 @@ SBEDieMorph>>>initialize
 
 We use a few methods of \ct{BorderedMorph} to give a nice appearance to the die: a thick border with a raised effect, rounded corners, and a color gradient on the visible face.
 We define the instance method \ct{faces:} to check for a valid parameter as follows:
+
 \begin{method}{Setting the number of faces of the die.}
 SBEDieMorph>>>faces: aNumber
 	"Set the number of faces"
 
-	(aNumber isInteger
-			and: [aNumber > 0]
-			and: [aNumber <= 9])
+	(aNumber isInteger and: [aNumber > 0] and: [aNumber <= 9])
 		ifTrue: [faces := aNumber].
 \end{method}
 \on{Why not make this a pre-condition, \ie an assertion?}
