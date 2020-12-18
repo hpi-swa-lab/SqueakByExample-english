@@ -3,6 +3,7 @@ services:
 - docker
 
 env:
+- SQUEAK_VERSION=Trunk
 - SQUEAK_VERSION=5.3
 
 smalltalk: "Squeak64-${SQUEAK_VERSION}"
@@ -11,6 +12,7 @@ before_script:
 - | # Ignore missing figures during PDF build
   test $TRAVIS_BRANCH = master || export DEBUG_FIGURES=true
 - set -o pipefail
+
 script:
 - smalltalkci .smalltalk.ston
 - make | ./build_scripts/travis_fold Compiling PDF ...
