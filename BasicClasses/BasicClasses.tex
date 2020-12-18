@@ -109,7 +109,7 @@ The message \ct{storeOn:} puts an expression that can be used to recreate the re
 This expression is evaluated when the stream is read using the message \ct{readFrom:}.
 \ct{printOn:} just returns a textual version of the receiver that may or may not be a self-evaluating expression.
 
-\paragraph{A word about representation and self-evaluating representation.}
+\paragraph{A word about representation and self-evaluation.}
 In functional programming, expressions return values when executed.
 In Smalltalk, messages (expressions) return objects (values).
 Some objects have the nice properties that their value is themselves.
@@ -327,6 +327,7 @@ array2 --> #(#(#('harry')))
 
 However, \ct{deepCopy} does not keep track of previously copied objects. This means that it does not preserve the identity of re-occurring objects. When the object to be copied contains another object twice in its contents, there will be two new objects. 
 
+\needlines{5}
 \begin{code}{@TEST | object array copiedArray |}
 object := {'harry'}.
 array := {object . object}.
@@ -359,6 +360,7 @@ Whether any of these four copy methods is the right one depends on the meaning o
 As this can not be decided in general for all objects and all use cases, \cmind{Object}{copy} delegates this decision to specific subclasses. 
 \cmind{Object}{copy} first creates a shallow copy, and then asks this shallow copy to copy any instance variables that should be copied by sending \ct{postCopy} to it.
 
+\needlines{5}
 \begin{method}{Copying objects as a template method.}
 Object>>>copy
     "Answer another instance just like the receiver. Subclasses typically override postCopy; they typically do not override shallowCopy."
@@ -371,6 +373,7 @@ You should override \mthind{Object}{postCopy} to copy any instance variables tha
 For example, a \clsind{Form} object has instance variables for width, height, bit depth, an offset, and the actual bits. 
 As the first four instance variables are all described by numbers, there is no need to copy them as you can see in \mthind{Form}{postCopy}.
 
+\needlines{4}
 \begin{method}{Copying objects as a template method.}
 Form>>>postCopy
 
@@ -464,8 +467,8 @@ A typical example is \cmind{Collection}{remove:} which is inherited by \clsind{D
 %-----------------------------------------------------------------
 \subsection{Testing}
 
-The \protind{testing} methods have nothing to do with SUnit testing!
-A testing method is one that lets you ask a question about the state of the receiver and returns a \clsind{Boolean}.
+The methods in \protind{testing} are not related to unit tests!
+A testing method lets you ask a question about the state of the receiver and returns a \clsind{Boolean}.
 
 Numerous testing methods are provided by \ct{Object}.
 We have already seen \mthind{Object}{isComplex}.
@@ -526,9 +529,10 @@ For the most part, users do not need to be aware of the difference between the t
 (\clsind{Complex} numbers are not comparable, and so do not inherit from \clsind{Number}.)
 
 Methods \mthind{Magnitude}{<} and \mthind{Magnitude}{=} are abstract.
-The remaining operators are generically defined.
+The remaining operators are defined generically.
 For example:
 
+\needlines{10}
 \begin{method}{Abstract comparison methods.}
 Magnitude>>> < aMagnitude 
     "Answer whether the receiver is less than the argument."
@@ -856,7 +860,7 @@ Error signal: 'We wanted this to happen' --> "Will open a debugger with a messag
 
 As we do not want to present users with debuggers every time something unexpected happens, we can also handle exceptions directly within our code.
 The methods for handling exceptions are associated with blocks, so you can find them in the \ct{exceptions} protocol of the class \ct{BlockClosure}.
-To catch an exception you can use the method \ct{BlockClosure>>>on: anExceptionOrExceptionSet do: aBlock}\cmindex{BlockClosure}{on:do:}\footnote{This is similar to \ct{try...catch} in other languages.}.
+To catch an exception you can use the method \ct{BlockClosure>>>on:do:}\cmindex{BlockClosure}{on:do:}\footnote{This is similar to \ct{try...catch} in other languages.}, which takes an exception class (or \ct{ExceptionSet}) as the first argument and a block as the second.
 
 \begin{code}{NB: CANNOT TEST}
 [(10 to: -10 by: -1) collect: [:i | 100 / i]] 
@@ -864,11 +868,11 @@ To catch an exception you can use the method \ct{BlockClosure>>>on: anExceptionO
    do: [:ex | "do nothing"].
 \end{code}
 
-The code above does not return a collection, as the block was interrupted by the \ct{ZeroDivide} exception before it could return the result of the \ct{#collect:} send.
+The code above does not return a collection, as the block was interrupted by the \ct{ZeroDivide} exception before it was able to return the result of the \ct{#collect:} send.
 
 Sometimes you might not be interested in handling an exception. 
 Instead you might only want to ensure that some code is always executed after your block, regardless of whether an exception occurs, the block returns early, or the block finishes normally.
-To achieve this you can use the method \ct{BlockClosure>>>ensure:}\footnote{This is similar to \ct{finally} in other languages.} which will always execute the block passed to it.
+To achieve this, use the method \ct{BlockClosure>>>ensure:}\footnote{This is similar to \ct{finally} in other languages.} which will always execute the block passed to it.
 
 \begin{code}{NB: CANNOT TEST}
 [connectedSocket sendData: 'my network message'] 
