@@ -164,8 +164,7 @@ Moreover, test-first development gives us the courage to go fast, because we are
 %=================================================================
 \section{\sunit by example}
 
-Before going into the details of \SUnit, we will show a step by step example.
-We use an example that tests the class \ct{Set}.
+Before going into the details of \SUnit, we will show a step by step example testing the class \ct{Set}.
 Try entering the code as we go along.
 %---------------------------------------------------------
 \subsection{Step 1: create the test class}
@@ -397,7 +396,7 @@ The framework is there, use it.
 %=================================================================
 \section{The SUnit framework}
 
-\sunit consists of four main classes: \clsind{TestCase}, \clsind{TestSuite}, \clsind{TestResult}, and \clsind{TestResource}, as shown in \figref{sunit-classes}.
+The core of \sunit consists of four main classes: \clsind{TestCase}, \clsind{TestSuite}, \clsind{TestResult}, and \clsind{TestResource}, as shown in \figref{sunit-classes}.
 The notion of a \emph{test resource} represents a resource that is expensive to set-up but which can be used by a whole series of tests.  A \ct{TestResource} specifies a \ct{setUp} method that is executed just once before a suite of tests; this is in distinction to the \ct{TestCase>>>setUp} method, which is executed before each test.
 
 \begin{figure}[htb]
@@ -458,11 +457,11 @@ Methods \ct{setUp} and \ct{tearDown} should be overridden in the subclass to ens
 One thing remains:
 Somehow, \sunit has to be told which resources are associated with which test suite.
 A resource is associated with a particular subclass of \ct{TestCase} by overriding the \emph{class} method \ct{resources}.
-\ab{The set of resources attributed to each test is actually the closure of these resources under the resources message, but I think that we don't want to say that!}
+%\ab{The set of resources attributed to each test is actually the closure of these resources under the resources message, but I think that we don't want to say that!}
 By default, the resources of a \ct{TestSuite} are the union of the resources of the \ct{TestCase}s that it contains.
 
 Here is an example.
-We define a subclass of \ct{TestResource} called \ct{MyTestResource} and we associate it with \ct{MyTestCase} by specializing the class method \ct{resources} to return an array of the test classes that it will use.
+We define our own subclass of \ct{TestResource} called \ct{MyTestResource} and we associate it with \ct{MyTestCase} by specializing the class method \ct{resources} to return an array of the test classes that it will use.
 
 \needlines{8}
 \begin{classdef}[mytestresource]{An example of a TestResource subclass.}
@@ -623,6 +622,7 @@ TestResult>>>runCase: aTestCase
 \end{method}
 
 The method \ct{TestCase>>>runCase} sends the messages \mthind{TestCase}{setUp} and \mthind{TestCase}{tearDown} as shown below.
+\needlines{6}
 \begin{method}[testcaseruncase]{Test case template method.}
 TestCase>>>runCase
 	"Run this TestCase. Time out if the test takes too long."
