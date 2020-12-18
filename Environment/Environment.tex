@@ -452,7 +452,7 @@ Once you click on the button or select the menu item, you will be presented with
 The list is in inheritance order; it can often be useful to bring up this list just to remind yourself of the name of an instance variable.
 If you click outside the list, it will go away and no variable browser will be created.
 
-Also available from the yellow button menu on the class pane is \menu{class refs (N)}, which displays a list of all of the methods that directly reference the current class.
+Another interesting action in the yellow button menu of the class pane is \menu{class refs (N)}, which displays a list of all of the methods that directly reference the current class.
 
 \subsubsection{Source}
 \label{sec:sources}
@@ -490,7 +490,7 @@ Although the categories are useful for the code that we are actively developing,
 \index{class!finding}
 \index{class!recent}
 
-In the class pane, there are two menu items \menu{find method} and \menu{find method wildcard\ldots} that can be useful if you want to browse a particular method.
+In the class pane, there are two menu items usefule for browsing a particular method: \menu{find method} and \menu{find method wildcard\ldots}.
 However, unless the list of methods is very long, it is often quicker to browse the \prot{-{}-all-{}-} protocol (which is the default), place the mouse in the method pane, and type the first letter of the name of the method that you are looking for.
 This will filter the elements in the list so that the sought-for method name is visible.
 \index{method!finding}
@@ -501,7 +501,7 @@ This will filter the elements in the list so that the sought-for method name is 
 There are many other options available in the menus.
 It pays to spend a few minutes working with the browser and seeing what is there.   
 
-\dothis{Compare the result of \menu{Browse Protocol}, \menu{Browse Hierarchy}, and \menu{Show Hierarchy} in the class pane menu.}
+\dothis{Compare the result of the following three menu items in the class pane: \menu{Browse Protocol}, \menu{Browse Hierarchy}, and \menu{Show Hierarchy}.}
 
 In general, the common navigation functions, such as searching for a class, browsing senders, or browsing implementors have keyboard shortcuts, which you can find in parentheses after the corresponding menu items.
 Further, the feature that you can filter the list of methods by typing while having the list selected is a general feature of all lists in \sq.
@@ -512,7 +512,7 @@ Even in menus, such as the world menu, you can simply start typing to filter ent
 \label{sec:otherBrowsers}
 
 At the beginning of this section we mentioned another class browser: the \emphind{package pane browser}. 
-This can be opened from the world menu: \menu{World \go open\ldots \go package pane browser}
+This browser can be opened from the world menu: \menu{World \go open\ldots \go package pane browser}
 It's basically the same as the class browser, but it knows about the naming convention for system categories.
 You will have noticed that the names of categories have two parts.
 For example, the \ct{ScaleMorph} class belongs to the \scat{Morphic-Widgets} category.
@@ -586,8 +586,8 @@ Suppose that you are developing a framework to facilitate the use of relational 
 You have decided to call your framework \ct{SqueakLink}, and have created a series of system categories to contain all of the classes that you have written, \eg
 
 \begin{itemize}
-\item Category \ct{'SqueakLink-Connections'} contains \ct{OracleConnection MySQLConnection PostgresConnection}
-\item Category \ct{'SqueakLink-Model'} contains \ct{DBTable DBRow DBQuery}
+\item The category \ct{'SqueakLink-Connections'} contains classes \ct{OracleConnection}, \ct{MySQLConnection}, \ct{PostgresConnection}
+\item The category \ct{'SqueakLink-Model'} contains \ct{DBTable}, \ct{DBRow}, \ct{DBQuery}
 \end{itemize}
 
 However, not all of your code will reside in these classes.
@@ -1475,7 +1475,7 @@ The process browser is not equipped with mini-inspectors for \self and \lct{this
 \section{Finding methods}
 \label{sec:methodFinder} 
 
-There are three tools in \sq to help you find messages; the first two, MethodFinder and MessageNames, can be opened from \menu{World docking bar\go{}Tools}, the third one is the global search in the right corner of the world docking bar.
+There are three tools in \sq to help you find messages. You can open the first two, MethodFinder and MessageNames from \menu{World docking bar\go{}Tools}. The third one is the global search in the right corner of the world docking bar.
 They differ in both interface and functionality.
 
 The \emph{method finder} was described at some length in \secref{quick:methodFinder}; you can use it to find methods by name or by functionality. 
@@ -1732,7 +1732,7 @@ In the worst case, you can use a text editor on the \emph{.changes} file, but si
 
 %---------------------------------------------------------
 \subsection{How to get your code back}
-Restart \sq from the most recent snapshot, and select \menu{World Docking Bar\go{}Extras\go{}Recover Changes}. This will ask you how far back in history you wish to browse. The list includes snapshots that get older the further down they are in the list. The topmost snapshot is the most recent one. Selecting it will give you all changes that have been recorded since this snapshot.
+To start recovering, restart \sq from the most recent snapshot. Then select \menu{World Docking Bar\go{}Extras\go{}Recover Changes}. This will ask you how far back in history you wish to browse. The list includes snapshots that get older the further down they are in the list. The topmost snapshot is the most recent one. Selecting it will give you all changes that have been recorded since this snapshot.
 Normally, it's sufficient to browse changes as far back as the last snapshot.
 
 Once you have a \emph{recent changes} browser, showing, say, changes back as far as your last snapshot, you will have a list of everything that you have done in \sq during that time.
@@ -1777,7 +1777,7 @@ You can get the lexicon from the system browser by opening the yellow button men
 \paragraph{Message tally}
 Sometimes you might write code that is too slow.
 The \ind{Message Tally} tool, sometimes also called \ind{profiler}, can help you to determine which parts of your program are slow.
-You can either let it measure the times for all executions in the image through \menu{world main docking bar \go Extras \go Start Profiler}.
+You can start it to record the execution times for all processes in the image from the menu item \menu{world main docking bar \go Extras \go Start Profiler}.
 Alternatively, you can also let it observe sections of code by selecting the code, opening the yellow button menu, and choosing \menu{spy on it}.
 Note, that the message tally is a sampling profiler, so for detailed information, you will have to let your code run for some seconds (e.g. by running it 1000 times if it only takes little time).
 
