@@ -37,15 +37,15 @@
 \section{Introduction}
 
 To make good use of the collection classes, \st programmers needs at least an overview of the wide variety of collections, and their commonalities and differences.
-
+%
 Programming with collections rather than individual elements is an important way to raise the level of abstraction of a program. 
 The \ind{Lisp} function \ct{map}, which applies an argument function to every element of a list and returns a new list containing the results is an early example of this style. \st-80 adopted collection-based programming as a central tenet.
 
 
 Why is this a good idea?
 Suppose you have a data structure containing a collection of student records and wish to perform some action on all of the students that meet a particular criterion.
-Programmers raised to use an imperative language might reach for a loop.
-But the \st programmer will write:
+Programmers used to an imperative language might reach for a loop.
+But \st programmers will write:
 \begin{code}{}
 students select: [:each | each gpa < threshold].
 \end{code}
@@ -56,8 +56,8 @@ The \st code has the simplicity and elegance of a domain-specific query language
 
 The message \ct{select:} is understood by \emph{all} collections in \st.
 There is no need to find out if the student data structure is an array or a linked list:
-The \ct{select:} message is understood by both.
-Note that this is quite different from using a loop, where one must know whether \ct{students} is an array or a linked list before the loop can be set up.
+\ct{select:} is understood by both.
+Note that this is quite different from using a loop, where one must know whether \ct{students} is an array or a linked list.
 
 
 %"The following figure is created with the following script"
