@@ -1751,26 +1751,26 @@ So, if you have created any new classes, \emph{first} file-in the class creation
 
 %=========================================================
 \section{Other interesting tools}
-Beyond the common tools introduced in this chapter, \sq also provides a set of other interesting and rich tools.
-We introduce some of them which you might want to use after becoming more proficient in using \sq:
+Beyond the common tools introduced in this chapter, \sq also provides a number of other interesting and rich tools.
+We briefly introduce some of these tools which you might want to use when you are more proficient in using \sq:
 
 \paragraph{Dependency browser}
-Whenever you use a class in a method, the method from then on depends on the presence of this class.
-If the class is not in the environment, your method will result in an exception, as \sq does not who should receive the message.
-This is relevant for example whenever you use a class that is not part of the base system but stems from a project you installed.
-Using the \ind{dependency browser} you can see the dependencies of your package down to the individual methods.
+Whenever you use a class in a method, the method then depends on the presence of this class.
+If the class is not in the environment, running the method will result in an exception, as \sq does not know who should receive the message.
+This is relevant, for example, whenever you use a class that is not part of the base system but stems from a project you installed.
+Using the \ind{dependency browser} you can see the dependencies of your package.
 You can open the dependency browser through \menu{world main docking bar \go Apps \go Dependency Browser}.
 
 \paragraph{Git tools}
-\ind{Git} is a common version control system.
-For sharing you projects via Git on platforms such as GitHub, GitLab, or Bitbucket, you can use the Git tools.
-However, the tools are not part of the standard environment and you will have to install them.
+\ind{Git} is a commonly used version control system.
+For sharing you projects via Git on platforms such as GitHub, GitLab, or Bitbucket, you can use the Squeak Git tools.
+The Git tools are not part of the standard environment and you have to install them.
 You can do so by clicking \menu{world docking bar \go Tools \go Git Browser (click to install)}.
-The Git Browser allows you to manage a local git repository directly from within the image using parts of the \ind{gitless}\footnote{\url{https://gitless.com/}} semantic.
+The Git Browser allows you to manage a local Git repository directly from within the image using parts of the \ind{gitless}\footnote{\url{https://gitless.com/}} semantic.
 
 \paragraph{Lexicon}
-The browser only shows the messages implemented by a class.
-Instances of that class understand many more messages, for example by messages implemented by super classes of their class.
+Objects understand all messages for which their class or their super classes have methods.
+The system browser introduced earlier can only show you the methods of one class.
 If you want to know all the methods an instance of a class understands you can open the \ind{lexicon}.
 You can get the lexicon from the system browser by opening the yellow button menu for the class and selecting \menu{browse protocol (p)}.
 
