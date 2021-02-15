@@ -13,7 +13,6 @@ sourceLines: lines
 				into: [:result :escape |
 					result copyWithRegex: escape key matchesReplacedWith: escape value])
 			translatingMatchesUsing: [:match |
-				self halt.
 				self systemVersionString >= (matcher subexpression: 2)
 					ifTrue: [matcher subexpression: 3]
 					ifFalse: [matcher subexpression: 5]]].
