@@ -5,7 +5,7 @@ sourceLines: lines
 	| matcher |
 	self flag: #NB. "This is not fully compatible with escaping inside the source nor with patterns spanning over multiple lines, implement this when you really need it ..."
 	
-	matcher := '!\s*\\SqVersionSwitch\{([\w.]+)\}\{((\\[{}]|[^{}])+)\}\{((\\[{}]|[^{}])+)\}\s*!' asRegex.
+	matcher := '!\s*\\SqVersionSwitch\{([\w.]+)\}\{((\\[{}]|[^{}])*)\}\{((\\[{}]|[^{}])*)\}\s*!' asRegex.
 	sourceLines := lines collect: [:line |
 		matcher
 			copy: (self escapeSequences
@@ -13,6 +13,7 @@ sourceLines: lines
 				into: [:result :escape |
 					result copyWithRegex: escape key matchesReplacedWith: escape value])
 			translatingMatchesUsing: [:match |
+				self halt.
 				self systemVersionString >= (matcher subexpression: 2)
 					ifTrue: [matcher subexpression: 3]
 					ifFalse: [matcher subexpression: 5]]].
