@@ -16,8 +16,11 @@ ifndef TRAVIS
 		PREFIX = 
 	endif
 	PDFLATEX = ${PREFIX} pdflatex -file-line-error -interaction=nonstopmode
+	BIBTEX = ${PREFIX} bibtex
+	MAKEINDEX = ${PREFIX} makeindex
 else
 	PDFLATEX = docker run -v $(CURDIR):/src tom95/texlive-docker-swa pdflatex -interaction=nonstopmode
+	BIBTEX = docker run -v $(CURDIR):/src tom95/texlive-docker-swa bibtex
 endif
 
 BOOK=SBE
