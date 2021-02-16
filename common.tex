@@ -337,6 +337,7 @@
 \definecolor{source}{gray}{0.95}
 \usepackage{listings}
 \usepackage{textcomp} % For upquote
+% Prevent line breaks after escape sections within a listing, see: https://tex.stackexchange.com/a/583537/221054
 \makeatletter
 \lst@AddToHook{InitVars}{\finalhyphendemerits=0\relax\doublehyphendemerits=0\relax}
 \makeatother
