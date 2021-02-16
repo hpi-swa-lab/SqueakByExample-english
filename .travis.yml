@@ -45,4 +45,4 @@ notifications:
     if: type = cron
   slack:
     rooms: hpi-swa-teaching:bfvhBDSWLe3kuUnRXk2JmSLp#squeak
-    if: type = cron
+    #if: type = cron
