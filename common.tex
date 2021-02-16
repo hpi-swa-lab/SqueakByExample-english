@@ -337,6 +337,9 @@
 \definecolor{source}{gray}{0.95}
 \usepackage{listings}
 \usepackage{textcomp} % For upquote
+\makeatletter
+\lst@AddToHook{InitVars}{\finalhyphendemerits=0\relax\doublehyphendemerits=0\relax}
+\makeatother
 \lstdefinelanguage{Smalltalk}{
   morekeywords={self,super,true,false,nil,thisContext},
   morestring=[d]',
