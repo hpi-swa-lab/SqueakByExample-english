@@ -47,5 +47,5 @@ notifications:
   slack:
     rooms:
       - secure: DgNrOYTC1PU6pdL/flK+MoqYy+JvPpEvewfj97Z15MnrshAoBnjTUxFw5adBKA3Qeo2aDUDYn6LDKKTyZ26KECc6Db6K/4gr4lhe6DFSEWoIL7+G1Xya5V7MG9se6RcFODIZW5zICdwjZkctHDzMKTkzl/H+uzkx1iI1MNSA+tfyrrHLVj9QiMqCeNlX5G5l0fS6WuAUBa/bl73XdA4HQzua1TydmooGWIQwgfogCl1u3GfItpKXNjPSlwfLE/DKy0wSGVEhtfcPf2Z0hGdpDaT2p3GMH+XbAZ/j/QbVyONGPVjENloe8lnl2ci1CVF55XcYpwIiB/FPHOUMz/tNIPt+R1VO4RBlVKa479kLFz34QOKXyd9wgPSfJFNjhNMTXcV7w6nnVdvWILG4Q2RhFu5mYsdUXwaTMhiX+7G1SFsRMkzp9jnyFgAF3nCgEudHaODqpc6mytIUBpryGEE3FM9BuLU5XCkMRGte3zwFukoa5Ha4/K3ZhT374V5FDSNngUKmSmRY2gVNwZqhDdizu92KoNJP4I8Bk3Ox/xkZKRkioWvm7xn0zekLPk9ZsgGnfZVpoo78Cg7CIWCfI17w8MAtoud+AyV4XR0zq7u0S+uDFoAkDdgI4fHJIBNK3SwFgNpJ2eAroTmW3+1NDYmBdsQR07x06q25OvivVXxsIe8=
-    on_failure: change
+    on_failure: always
     #if: type = cron
