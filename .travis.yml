@@ -13,6 +13,7 @@ before_script:
   test $TRAVIS_BRANCH = master || export DEBUG_FIGURES=true
 - set -o pipefail
 script:
+- false # debug
 - smalltalkci .smalltalk.ston
 - make | ./build_scripts/travis_fold Compiling PDF ...
 - mv SBE.pdf "SBE_${SQUEAK_VERSION}.pdf"
