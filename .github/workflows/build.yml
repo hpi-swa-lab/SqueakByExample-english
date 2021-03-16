@@ -99,12 +99,12 @@ jobs:
         with:
           name: figures-${{ matrix.smalltalk }}
           path: .
-      - name: Generate PDF
+      - name: Compile PDF
         uses: xu-cheng/latex-action@v2
         with:
           root_file: SBE.tex
-          args:
-            jobname: SBE-${{ matrix.smalltalk }}.pdf
+      - name: Rename PDF
+        run: mv SBE,{-${{ matrix.smalltalk }}}.pdf
         env:
           SQUEAK_VERSION: ${{ matrix.smalltalk }}
       - name: Store book
