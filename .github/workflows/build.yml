@@ -1,0 +1,128 @@
+name: 📕 Make Book
+
+on:
+  push:
+  schedule:
+    - cron: "0 0 * * 1"  # every monday
+
+env:
+  os: ubuntu-latest
+  smalltalks:
+    - Trunk
+    - 5.3
+  fail-fast: false  # facilitates debugging
+
+jobs:
+  tests:
+    name: 🐞 Internal tests [Squeak ${{ env.smalltalk }}]
+    runs-on: ${{ env.os }}
+    strategy:
+      fail-fast: ${{ env.fail-fast }}
+      matrix:
+        smalltalk: ${{ env.smalltalks }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: hpi-swa/setup-smalltalkCI@v1
+        with:
+          smalltalk-version: ${{ matrix.smalltalk }}
+      - name: Run SmalltalkSources tests
+        run: smalltalkci -s Squeak64-${{ matrix.smalltalk }} SBETests.smalltalk.ston
+        timeout-minutes: 15
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # for coverage reports
+  tex-assertions:
+    name: 🧪 Inline TEX assertions (@TEST) [Squeak ${{ matrix.smalltalk }}]
+    needs: tests
+    runs-on: ${{ env.os }}
+    strategy:
+      fail-fast: ${{ env.fail-fast }}
+      matrix:
+        smalltalk: ${{ env.smalltalks }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: hpi-swa/setup-smalltalkCI@v1
+        with:
+          smalltalk-version: ${{ matrix.smalltalk }}
+      - name: Run assertion tests
+        run: smalltalkci -s Squeak64-${{ matrix.smalltalk }} assertions.smalltalk.ston
+        timeout-minutes: 15
+  listings:
+    name: 📄 Collect listings from SmalltalkSources
+    runs-on: ${{ env.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - run: make listings
+      - name: Store listings
+        uses: actions/upload-artifact@master
+        with:
+          name: listings
+          path: ListingSources
+  figures:
+    name: 🖼 Build Squeak figures [Squeak ${{ matrix.smalltalk }}]
+    needs: tests
+    runs-on: ${{ env.os }}
+    strategy:
+      fail-fast: ${{ env.fail-fast }}
+      matrix:
+        smalltalk: ${{ env.smalltalks }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: hpi-swa/setup-smalltalkCI@v1
+        with:
+          smalltalk-version: ${{ matrix.smalltalk }}
+      - name: Build figures
+        run: smalltalkci -s Squeak64-${{ matrix.smalltalk }} figures.smalltalk.ston
+        timeout-minutes: 15
+      - name: Store figures
+        uses: actions/upload-artifact@master
+        with:
+          name: figures-${{ matrix.smalltalk }}
+          path: '**/figures/*.png'
+  build:
+    name: 📖 Build book [Squeak ${{ matrix.smalltalk }}]
+    needs: [listings, figures]
+    runs-on: ${{ env.os }}
+    strategy:
+      fail-fast: ${{ env.fail-fast }}
+      matrix:
+        smalltalk: ${{ env.smalltalks }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Load listings
+        uses: actions/download-artifact@master
+        with:
+          name: listings
+          path: SmalltalkSources
+      - name: Load figures
+        uses: actions/download-artifact@master
+        with:
+          name: figures-${{ matrix.smalltalk }}
+          path: .
+      - name: Generate PDF
+      - uses: xu-cheng/latex-action@v2
+        with:
+          root_file: SBE.tex
+          args:
+            - jobname: SBE-${{ matrix.smalltalk }}.pdf
+        env:
+          SQUEAK_VERSION: ${{ matrix.smalltalk }}
+      - name: Store book
+        uses: actions/upload-artifact@master
+        with:
+          name: book-${{ matrix.smalltalk }}
+          path: SBE-${{ matrix.smalltalk }}.pdf
+  notify:
+    name: 📣 Notify community on failure
+    needs: [build, tex-assertions]
+    if: |
+      github.event_name == 'schedule' && (
+        needs.build.result == 'failure'
+        || needs.tex-assertions.result == 'failure')
+    jobs:
+      - uses: voxmedia/github-action-slack-notify-build@v1
+        with:
+          channel: squeak
+          status: FAILED
+          color: danger
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
