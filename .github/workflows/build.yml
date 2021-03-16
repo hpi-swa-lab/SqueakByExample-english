@@ -6,16 +6,19 @@ on:
     - cron: "0 0 * * 1"  # every monday
 
 env:
-  os: ubuntu-latest
+  # not yet implemented: https://github.community/t/how-to-set-and-access-a-workflow-variable/17335/6?u=linqlover
+  # ---
+  # os: ubuntu-latest
+  # fail-fast: false  # facilitates debugging
+  # ---
   smalltalks: "[Trunk, 5.3]"
-  fail-fast: false  # facilitates debugging
 
 jobs:
   tests:
     name: 🐞 Internal tests [Squeak ${{ matrix.smalltalk }}]
-    runs-on: ${{ env.os }}
+    runs-on: ubuntu-latest
     strategy:
-      fail-fast: ${{ env.fail-fast }}
+      fail-fast: false  # facilitates debugging
       matrix:
         smalltalk: ${{ env.smalltalks }}
     steps:
@@ -31,9 +34,9 @@ jobs:
   tex-assertions:
     name: 🧪 Inline TEX assertions (@TEST) [Squeak ${{ matrix.smalltalk }}]
     needs: tests
-    runs-on: ${{ env.os }}
+    runs-on: ubuntu-latest
     strategy:
-      fail-fast: ${{ env.fail-fast }}
+      fail-fast: false  # facilitates debugging
       matrix:
         smalltalk: ${{ env.smalltalks }}
     steps:
@@ -46,7 +49,7 @@ jobs:
         timeout-minutes: 15
   listings:
     name: 📄 Collect listings from SmalltalkSources
-    runs-on: ${{ env.os }}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - run: make listings
@@ -58,9 +61,9 @@ jobs:
   figures:
     name: 🖼 Build Squeak figures [Squeak ${{ matrix.smalltalk }}]
     needs: tests
-    runs-on: ${{ env.os }}
+    runs-on: ubuntu-latest
     strategy:
-      fail-fast: ${{ env.fail-fast }}
+      fail-fast: false  # facilitates debugging
       matrix:
         smalltalk: ${{ env.smalltalks }}
     steps:
@@ -79,9 +82,9 @@ jobs:
   build:
     name: 📖 Build book [Squeak ${{ matrix.smalltalk }}]
     needs: [listings, figures]
-    runs-on: ${{ env.os }}
+    runs-on: ubuntu-latest
     strategy:
-      fail-fast: ${{ env.fail-fast }}
+      fail-fast: false  # facilitates debugging
       matrix:
         smalltalk: ${{ env.smalltalks }}
     steps:
@@ -116,6 +119,7 @@ jobs:
       github.event_name == 'schedule' && (
         needs.build.result == 'failure'
         || needs.tex-assertions.result == 'failure')
+    runs-on: ubuntu-latest
     steps:
       - uses: voxmedia/github-action-slack-notify-build@v1
         with:
