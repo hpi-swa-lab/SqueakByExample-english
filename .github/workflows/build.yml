@@ -8,10 +8,10 @@ on:
 # not yet implemented: https://github.community/t/how-to-set-and-access-a-workflow-variable/17335/6?u=linqlover
 # ---
 #env:
-#   os: ubuntu-latest
-#   fail-fast: false  # facilitates debugging
-#   smalltalks: "[Trunk, 5.3]"
-# ---
+#  os: ubuntu-latest
+#  fail-fast: false  # facilitates debugging
+#  smalltalks: "[Trunk, 5.3]"
+#---
 
 jobs:
   tests:
