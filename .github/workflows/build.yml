@@ -12,7 +12,7 @@ env:
 
 jobs:
   tests:
-    name: 🐞 Internal tests [Squeak ${{ env.smalltalk }}]
+    name: 🐞 Internal tests [Squeak ${{ matrix.smalltalk }}]
     runs-on: ${{ env.os }}
     strategy:
       fail-fast: ${{ env.fail-fast }}
