@@ -2,13 +2,13 @@ SmalltalkCISpec {
 	#loading : [
 		SCIMetacelloLoadSpec {
 			#baseline : 'SBE',
-			#directory : '.',
+			#directory : 'SmalltalkSources',
  			#platforms : [ #squeak ],
  			#load : [ 'ci' ],
 			#useLatestMetacello : true
 		}
 	],
-	#preTesting : 'build_scripts/prepareSuiteTesting.st',
+	#preTesting : 'build_scripts/prepareTestingSuite.st',
 	#testing : {
 		#failOnSCIDeprecationWarnings : false,
 		#categories : [ 'SBEGenerated-Tests' ]
