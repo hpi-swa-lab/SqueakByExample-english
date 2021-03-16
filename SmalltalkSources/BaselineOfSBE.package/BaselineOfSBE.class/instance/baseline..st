@@ -23,5 +23,5 @@ baseline: spec
 			#'SBE-Quinto'
 			#'SBE-QuickTour'
 			#'SBE-Streams'
-			#'SBE-Testing';
+			#'SBE-Testing'
 			#'SBE-Tests')].
