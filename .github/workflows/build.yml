@@ -104,7 +104,7 @@ jobs:
         with:
           root_file: SBE.tex
           args:
-            - jobname: SBE-${{ matrix.smalltalk }}.pdf
+            jobname: SBE-${{ matrix.smalltalk }}.pdf
         env:
           SQUEAK_VERSION: ${{ matrix.smalltalk }}
       - name: Store book
