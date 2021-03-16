@@ -118,7 +118,7 @@ jobs:
       github.event_name == 'schedule' && (
         needs.build.result == 'failure'
         || needs.tex-assertions.result == 'failure')
-    jobs:
+    steps:
       - uses: voxmedia/github-action-slack-notify-build@v1
         with:
           channel: squeak
