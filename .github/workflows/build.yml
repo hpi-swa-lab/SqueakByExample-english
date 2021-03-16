@@ -99,7 +99,7 @@ jobs:
           name: figures-${{ matrix.smalltalk }}
           path: .
       - name: Generate PDF
-      - uses: xu-cheng/latex-action@v2
+        uses: xu-cheng/latex-action@v2
         with:
           root_file: SBE.tex
           args:
