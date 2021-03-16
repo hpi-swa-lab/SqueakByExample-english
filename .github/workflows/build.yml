@@ -10,7 +10,7 @@ on:
 #env:
 #  os: ubuntu-latest
 #  fail-fast: false  # facilitates debugging
-#  smalltalks: "[Trunk, 5.3]"
+#  smalltalks: "[5.3] # [Trunk, 5.3] # DEBUG"
 #---
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
     strategy:
       fail-fast: false  # facilitates debugging
       matrix:
-        smalltalk: [Trunk, 5.3]
+        smalltalk: [5.3] # [Trunk, 5.3] # DEBUG
     steps:
       - uses: actions/checkout@v2
       - uses: hpi-swa/setup-smalltalkCI@v1
@@ -38,7 +38,7 @@ jobs:
     strategy:
       fail-fast: false  # facilitates debugging
       matrix:
-        smalltalk: [Trunk, 5.3]
+        smalltalk: [5.3] # [Trunk, 5.3] # DEBUG
     steps:
       - uses: actions/checkout@v2
       - uses: hpi-swa/setup-smalltalkCI@v1
@@ -65,7 +65,7 @@ jobs:
     strategy:
       fail-fast: false  # facilitates debugging
       matrix:
-        smalltalk: [Trunk, 5.3]
+        smalltalk: [5.3] # [Trunk, 5.3] # DEBUG
     steps:
       - uses: actions/checkout@v2
       - uses: hpi-swa/setup-smalltalkCI@v1
@@ -86,7 +86,7 @@ jobs:
     strategy:
       fail-fast: false  # facilitates debugging
       matrix:
-        smalltalk: [Trunk, 5.3]
+        smalltalk: [5.3] # [Trunk, 5.3] # DEBUG
     steps:
       - uses: actions/checkout@v2
       - name: Load listings
