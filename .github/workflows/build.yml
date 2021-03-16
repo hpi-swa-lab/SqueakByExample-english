@@ -27,7 +27,7 @@ jobs:
         with:
           smalltalk-version: Squeak64-${{ matrix.smalltalk }}
       - name: Run SmalltalkSources tests
-        run: smalltalkci -s Squeak64-${{ matrix.smalltalk }} SBETests.smalltalk.ston
+        run: smalltalkci -s Squeak64-${{ matrix.smalltalk }} SmalltalkSources/SBE-Tests.smalltalk.ston
         timeout-minutes: 15
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # for coverage reports
@@ -45,7 +45,7 @@ jobs:
         with:
           smalltalk-version: Squeak64-${{ matrix.smalltalk }}
       - name: Run assertion tests
-        run: smalltalkci -s Squeak64-${{ matrix.smalltalk }} assertions.smalltalk.ston
+        run: smalltalkci -s Squeak64-${{ matrix.smalltalk }} SmalltalkSources/SBE-Testing.smalltalk.ston
         timeout-minutes: 15
   listings:
     name: 📄 Collect listings from SmalltalkSources
@@ -72,7 +72,7 @@ jobs:
         with:
           smalltalk-version: Squeak64-${{ matrix.smalltalk }}
       - name: Build figures
-        run: smalltalkci -s Squeak64-${{ matrix.smalltalk }} figures.smalltalk.ston
+        run: smalltalkci -s Squeak64-${{ matrix.smalltalk }} SmalltalkSources/SBE-Extract.smalltalk.ston
         timeout-minutes: 15
       - name: Store figures
         uses: actions/upload-artifact@master

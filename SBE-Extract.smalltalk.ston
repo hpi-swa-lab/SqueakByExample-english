@@ -8,9 +8,9 @@ SmalltalkCISpec {
 			#useLatestMetacello : true
 		}
 	],
-	#preTesting : 'build_scripts/prepareSuite.st',
+	#preTesting : 'build_scripts/prepareSuiteFigures.st',
 	#testing : {
 		#failOnSCIDeprecationWarnings : false,
-		#categories : [ 'SBE-Testing', 'SBEGenerated*' ]
+		#categories : [ 'SBEGenerated-Figures' ]
 	}
 }
