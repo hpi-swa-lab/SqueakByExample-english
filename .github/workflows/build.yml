@@ -120,7 +120,7 @@ jobs:
           SQUEAKVERSION: matrix.smalltalk
           BASH_V5: true
       - name: Rename PDF
-        run: mv SBE,{-${{ matrix.smalltalk }}}.pdf
+        run: mv SBE.pdf SBE-${{ matrix.smalltalk }}.pdf
         env:
           SQUEAK_VERSION: ${{ matrix.smalltalk }}
       - name: Store book
