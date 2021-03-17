@@ -37,7 +37,7 @@ book: clean listings book-pages
 
 book-pages :
 	# DEBUG
-	bash -v
+	bash --version
 	echo '\\'
 	echo $(shell echo '\\newcommand')
 	echo $(shell echo "'\\newcommand'")
