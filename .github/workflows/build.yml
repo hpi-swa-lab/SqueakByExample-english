@@ -115,16 +115,20 @@ jobs:
     if: always()
     runs-on: ubuntu-latest
     steps:
-      - uses: voxmedia/github-action-slack-notify-build@v1
       # DEBUG  
-        if: |
+      - if: |
           github.event_name != 'schedule' && (
             needs.tests.result == 'failure'
             || needs.build.result == 'failure'
             || needs.tex-assertions.result == 'failure')
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_USERNAME: "GitHub Actions"
+          SLACK_COLOR: red
+          SLACK_MESSAGE: "Build failed!"
+          SLACK_TITLE: "Oh no, the latest CI build for SqueakByExample failed! 😱"
         with:
           channel: squeak
           status: FAILED
           color: danger
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
