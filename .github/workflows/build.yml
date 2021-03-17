@@ -119,7 +119,7 @@ jobs:
         if: |
           needs.tests.result == 'failure'
           || needs.build.result == 'failure'
-          || needs.tex-assertions.result == 'failure')
+          || needs.tex-assertions.result == 'failure'
         with:
           channel: squeak
           status: FAILED
