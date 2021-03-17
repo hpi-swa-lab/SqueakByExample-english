@@ -15,7 +15,7 @@ on:
 
 jobs:
   tests:
-    name: 🐞 Internal tests [Squeak ${{ matrix.smalltalk }}]
+    name: 🐞 Internal tests [${{ matrix.smalltalk }}]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -32,7 +32,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # for coverage reports
   tex-assertions:
-    name: 🧪 Inline TEX assertions (@TEST) [Squeak ${{ matrix.smalltalk }}]
+    name: 🧪 @TEST assertions [${{ matrix.smalltalk }}]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -58,7 +58,7 @@ jobs:
           name: listings
           path: ListingSources
   build:
-    name: 📖 Build book [Squeak ${{ matrix.smalltalk }}]
+    name: 📖 Build book [${{ matrix.smalltalk }}]
     needs: [listings]
     runs-on: ubuntu-latest
     strategy:
