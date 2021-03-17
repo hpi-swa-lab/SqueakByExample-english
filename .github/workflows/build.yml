@@ -118,6 +118,7 @@ jobs:
             make book-pages
         env:
           SQUEAKVERSION: matrix.smalltalk
+          BASH_V5: true
       - name: Rename PDF
         run: mv SBE,{-${{ matrix.smalltalk }}}.pdf
         env:
