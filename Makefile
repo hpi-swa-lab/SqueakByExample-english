@@ -31,16 +31,18 @@ TEXINPUT=$(shell echo "$$([ "$$DEBUG_FIGURES" = true ] && echo '\\\\AtBeginDocum
 all : book
 
 # NB: be sure to use texlive and to set the TEXINPUTS variable accordingly
-# See README.txt
+# See README.md
 
 book: clean listings book-pages
 
 book-pages :
 	# DEBUG
+	bash -v
 	echo '\\'
 	echo $(shell echo '\\newcommand')
 	echo $(shell echo "'\\newcommand'")
 	echo $(shell echo "$$(echo '\\\\newcommand')")
+	echo $(shell echo "$$(echo '$\$\newcommand')")
 	# GUBED
 	echo '${TEXINPUT}'
 
