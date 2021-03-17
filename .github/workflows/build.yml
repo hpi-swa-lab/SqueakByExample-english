@@ -112,14 +112,14 @@ jobs:
   notify:
     name: 📣 Notify community on failure
     needs: [tests, tex-assertions, build]
-    if: |
-      github.event_name == 'schedule' && (
-        needs.tests.result == 'failure'  
-        || needs.build.result == 'failure'
-        || needs.tex-assertions.result == 'failure')
+    if: always() && github.event_name == 'schedule'
     runs-on: ubuntu-latest
     steps:
       - uses: voxmedia/github-action-slack-notify-build@v1
+        if: |
+          needs.tests.result == 'failure'
+          || needs.build.result == 'failure'
+          || needs.tex-assertions.result == 'failure')
         with:
           channel: squeak
           status: FAILED
