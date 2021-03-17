@@ -103,7 +103,7 @@ jobs:
         with:
           name: book-${{ matrix.smalltalk }}
           path: SBE-${{ matrix.smalltalk }}.pdf
-      - if: (needs.figures.result != 'success')
+      - if: (steps.figures.outcome == 'failure')
         name: Check DEBUG_FIGURES
         run: |
           echo ::error::jobs.figures has failed, so the compiled PDF might miss some figures!
