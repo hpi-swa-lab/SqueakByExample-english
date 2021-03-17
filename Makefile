@@ -26,7 +26,7 @@ endif
 BOOK=SBE
 ETC=SBE-etc
 ifdef BASH_V5  # Bash v5 interprets escape characters differently 🙄
-	TEXINPUT=$(shell echo "$$([ "$$DEBUG_FIGURES" = true ] && echo '\\AtBeginDocument{\\include{robustize-figures}}')$$([ -z "$$SQUEAK_VERSION" ] || echo '\\newcommand{\\SQUEAKVERSION}{${SQUEAK_VERSION}}')\\input{${BOOK}}")
+	TEXINPUT=$(shell echo "$$([ "$$DEBUG_FIGURES" = true ] && echo '\AtBeginDocument{\include{robustize-figures}}')$$([ -z "$$SQUEAK_VERSION" ] || echo '\newcommand{\SQUEAKVERSION}{${SQUEAK_VERSION}}')\\input{${BOOK}}")
 else
 	TEXINPUT=$(shell echo "$$([ "$$DEBUG_FIGURES" = true ] && echo '\\\\AtBeginDocument{\\\\include{robustize-figures}}')$$([ -z "$$SQUEAK_VERSION" ] || echo '\\\\newcommand{\\\\SQUEAKVERSION}{${SQUEAK_VERSION}}')\\\\input{${BOOK}}")
 endif
