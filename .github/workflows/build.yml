@@ -107,12 +107,11 @@ jobs:
           echo ::warning::jobs.figures has failed, compiling PDF with missing figures
           echo "DEBUG_FIGURES=true" >> $GITHUB_ENV
       - name: Compile PDF
-        uses: xu-cheng/latex-action@v2
-        # We want to use our custom Makefile here which supports DEBUG_FIGURES and filtered warnings. Thus deliberately abuse the arguments of this action ...
+        uses: xu-cheng/texlive-action/full@v1
         with:
-          root_file: common.tex
-          args: "-v"
-          post_compile: "make book-pages"
+          run: |
+            apk add make
+            make book-pages
       - name: Rename PDF
         run: mv SBE,{-${{ matrix.smalltalk }}}.pdf
         env:
