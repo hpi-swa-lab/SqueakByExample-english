@@ -36,6 +36,14 @@ all : book
 book: clean listings book-pages
 
 book-pages :
+	# DEBUG
+	echo '\\'
+	echo $(shell echo '\\newcommand')
+	echo $(shell echo "'\\newcommand'")
+	echo $(shell echo "$$(echo '\\\\newcommand')")
+	# GUBED
+	echo '${TEXINPUT}'
+
 	time ${PDFLATEX} '${TEXINPUT}'
 	time ${BIBTEX} ${BOOK}
 	time ${PDFLATEX} '${TEXINPUT}'
