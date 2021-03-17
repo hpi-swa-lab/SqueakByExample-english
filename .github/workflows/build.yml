@@ -93,7 +93,7 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: listings
-          path: SmalltalkSources
+          path: ListingSources
       - name: Load figures
         uses: actions/download-artifact@master
         with:
