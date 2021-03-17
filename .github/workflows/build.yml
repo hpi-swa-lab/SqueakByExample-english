@@ -92,7 +92,7 @@ jobs:
             apk add make
             make book-pages
         env:
-          SQUEAKVERSION: matrix.smalltalk
+          SQUEAK_VERSION: matrix.smalltalk
           BASH_V5: true
       - name: Rename PDF
         run: mv SBE.pdf SBE-${{ matrix.smalltalk }}.pdf
