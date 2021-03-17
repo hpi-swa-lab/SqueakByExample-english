@@ -52,7 +52,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: make listings
-      - name: Store listings
+      - name: 💾 Store listings
         uses: actions/upload-artifact@master
         with:
           name: listings
@@ -98,7 +98,7 @@ jobs:
         run: mv SBE.pdf SBE-${{ matrix.smalltalk }}.pdf
         env:
           SQUEAK_VERSION: ${{ matrix.smalltalk }}
-      - name: Store book
+      - name: 💾 Store book
         uses: actions/upload-artifact@master
         with:
           name: book-${{ matrix.smalltalk }}
