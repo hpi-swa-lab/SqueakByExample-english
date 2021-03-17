@@ -115,12 +115,10 @@ jobs:
     if: always()
     runs-on: ubuntu-latest
     steps:
-      # DEBUG  
       - if: |
-          github.event_name != 'schedule' && (
             needs.tests.result == 'failure'
             || needs.build.result == 'failure'
-            || needs.tex-assertions.result == 'failure')
+            || needs.tex-assertions.result == 'failure'
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
