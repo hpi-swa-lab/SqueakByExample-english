@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hpi-swa/setup-smalltalkCI@v1
         with:
-          smalltalk-version: Squeak64-${{ matrix.smalltalk }}
+          smalltalk-image: Squeak64-${{ matrix.smalltalk }}
       - name: Run SmalltalkSources tests
         run: smalltalkci -s Squeak64-${{ matrix.smalltalk }} SBE-Tests.smalltalk.ston
         timeout-minutes: 15
@@ -43,7 +43,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hpi-swa/setup-smalltalkCI@v1
         with:
-          smalltalk-version: Squeak64-${{ matrix.smalltalk }}
+          smalltalk-image: Squeak64-${{ matrix.smalltalk }}
       - name: Run assertion tests
         run: smalltalkci -s Squeak64-${{ matrix.smalltalk }} SBE-Testing.smalltalk.ston
         timeout-minutes: 15
@@ -70,7 +70,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hpi-swa/setup-smalltalkCI@v1
         with:
-          smalltalk-version: Squeak64-${{ matrix.smalltalk }}
+          smalltalk-image: Squeak64-${{ matrix.smalltalk }}
       - name: Build figures
         run: smalltalkci -s Squeak64-${{ matrix.smalltalk }} SBE-Extract.smalltalk.ston
         timeout-minutes: 15
