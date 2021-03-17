@@ -117,7 +117,7 @@ jobs:
     steps:
       - uses: voxmedia/github-action-slack-notify-build@v1
         if: |
-          github.event_name == 'schedule' && (
+          github.event_name != 'schedule' && (  # DEBUG
             needs.tests.result == 'failure'
             || needs.build.result == 'failure'
             || needs.tex-assertions.result == 'failure')
