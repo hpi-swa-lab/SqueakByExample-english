@@ -125,10 +125,7 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_USERNAME: "GitHub Actions"
-          SLACK_COLOR: red
-          SLACK_MESSAGE: "Build failed!"
-          SLACK_TITLE: "Oh no, the latest CI build for SqueakByExample failed! 😱"
-        with:
-          channel: squeak
-          status: FAILED
-          color: danger
+          SLACK_COLOR: danger
+          SLACK_ICON: https://avatars1.githubusercontent.com/u/65916846?v=4
+          SLACK_TITLE: "Build failed!"
+          SLACK_MESSAGE: "Oh no, the latest CI build for SqueakByExample failed! 😱"
