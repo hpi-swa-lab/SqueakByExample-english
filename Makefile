@@ -25,7 +25,7 @@ endif
 
 BOOK=SBE
 ETC=SBE-etc
-ifdef BASH_V5
+ifdef BASH_V5  # Bash v5 interprets escape characters differently 🙄
 	TEXINPUT=$(shell echo "$$([ "$$DEBUG_FIGURES" = true ] && echo '\\AtBeginDocument{\\include{robustize-figures}}')$$([ -z "$$SQUEAK_VERSION" ] || echo '\\newcommand{\\SQUEAKVERSION}{${SQUEAK_VERSION}}')\\input{${BOOK}}")
 else
 	TEXINPUT=$(shell echo "$$([ "$$DEBUG_FIGURES" = true ] && echo '\\\\AtBeginDocument{\\\\include{robustize-figures}}')$$([ -z "$$SQUEAK_VERSION" ] || echo '\\\\newcommand{\\\\SQUEAKVERSION}{${SQUEAK_VERSION}}')\\\\input{${BOOK}}")
@@ -40,16 +40,6 @@ all : book
 book: clean listings book-pages
 
 book-pages :
-	# DEBUG
-	bash --version
-	echo '\\'
-	echo $(shell echo '\\newcommand')
-	echo $(shell echo "'\\newcommand'")
-	echo $(shell echo "$$(echo '\\\\newcommand')")
-	echo $(shell echo "$$(echo '$\$\newcommand')")
-	# GUBED
-	echo '${TEXINPUT}'
-
 	time ${PDFLATEX} '${TEXINPUT}'
 	time ${BIBTEX} ${BOOK}
 	time ${PDFLATEX} '${TEXINPUT}'

@@ -111,10 +111,6 @@ jobs:
         with:
           run: |
             apk add make
-            # DEBUG
-            echo '\\'
-            bash -v
-            # GUBED
             make book-pages
         env:
           SQUEAKVERSION: matrix.smalltalk
