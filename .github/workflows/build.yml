@@ -9,7 +9,7 @@ on:
 # ---
 #env:
 #  os: ubuntu-latest
-#  fail-fast: false  # facilitates debugging
+#  fail-fast: false
 #  smalltalks: "[Trunk, 5.3]"
 #---
 
@@ -18,7 +18,7 @@ jobs:
     name: 🐞 Internal tests [Squeak ${{ matrix.smalltalk }}]
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false  # facilitates debugging
+      fail-fast: false
       matrix:
         smalltalk: [Trunk, 5.3]
     steps:
@@ -33,10 +33,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # for coverage reports
   tex-assertions:
     name: 🧪 Inline TEX assertions (@TEST) [Squeak ${{ matrix.smalltalk }}]
-    needs: tests
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false  # facilitates debugging
+      fail-fast: false
       matrix:
         smalltalk: [Trunk, 5.3]
     steps:
@@ -44,7 +43,7 @@ jobs:
       - uses: hpi-swa/setup-smalltalkCI@v1
         with:
           smalltalk-image: Squeak64-${{ matrix.smalltalk }}
-      - name: Run assertion tests
+      - name: Run TEX assertions
         run: smalltalkci -s Squeak64-${{ matrix.smalltalk }} SBE-Testing.smalltalk.ston
         timeout-minutes: 15
   listings:
@@ -58,12 +57,12 @@ jobs:
         with:
           name: listings
           path: ListingSources
-  figures:
-    name: 🖼 Build Squeak figures [Squeak ${{ matrix.smalltalk }}]
-    needs: tests
+  build:
+    name: 📖 Build book [Squeak ${{ matrix.smalltalk }}]
+    needs: [listings]
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false  # facilitates debugging
+      fail-fast: false
       matrix:
         smalltalk: [Trunk, 5.3]
     steps:
@@ -71,42 +70,17 @@ jobs:
       - uses: hpi-swa/setup-smalltalkCI@v1
         with:
           smalltalk-image: Squeak64-${{ matrix.smalltalk }}
-      - name: Build figures
+      - id: figures
+        name: 🖼 Build Squeak figures
         run: smalltalkci -s Squeak64-${{ matrix.smalltalk }} SBE-Extract.smalltalk.ston
         timeout-minutes: 15
-      - name: Store figures
-        if: always()
-        uses: actions/upload-artifact@master
-        with:
-          name: figures-${{ matrix.smalltalk }}
-          path: '**/figures/*.png'
-  build:
-    name: 📖 Build book [Squeak ${{ matrix.smalltalk }}]
-    needs: [listings, figures]
-    if: (needs.listings.result == 'success')  # build book even if figures did not succeed, see DEBUG_FIGURES below
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false  # facilitates debugging
-      matrix:
-        smalltalk: [Trunk, 5.3]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Load listings
-        uses: actions/download-artifact@master
-        with:
-          name: listings
-          path: ListingSources
-      - name: Load figures
-        uses: actions/download-artifact@master
-        with:
-          name: figures-${{ matrix.smalltalk }}
-          path: .
-      - if: (needs.figures.result != 'success')
+        continue-on-error: true
+      - if: (steps.figures.outcome == 'failure')
         name: Configure DEBUG_FIGURES
         run: |
           echo ::warning::jobs.figures has failed, compiling PDF with missing figures
           echo "DEBUG_FIGURES=true" >> $GITHUB_ENV
-      - name: Compile PDF
+      - name: ⚙ Compile PDF
         uses: xu-cheng/texlive-action/full@v1
         with:
           run: |
@@ -132,10 +106,11 @@ jobs:
           exit 1
   notify:
     name: 📣 Notify community on failure
-    needs: [build, tex-assertions]
+    needs: [tests, tex-assertions, build]
     if: |
       github.event_name == 'schedule' && (
-        needs.build.result == 'failure'
+        needs.tests.result == 'failure'  
+        || needs.build.result == 'failure'
         || needs.tex-assertions.result == 'failure')
     runs-on: ubuntu-latest
     steps:
