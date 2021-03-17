@@ -9,6 +9,10 @@ SmalltalkCISpec {
 		}
 	],
 	#testing : {
-		#categories : [ 'SBE-Tests' ]
+		#categories : [ 'SBE-Tests' ],
+		#coverage : {
+			#packages : [ 'SBE-Extract' ],
+			#format : #coveralls
+		}
 	}
 }
