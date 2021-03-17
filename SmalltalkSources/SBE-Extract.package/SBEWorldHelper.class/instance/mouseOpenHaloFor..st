@@ -11,5 +11,5 @@ mouseOpenHaloFor: aMorph
 		stamp: 0.
 	(aMorph respondsTo: #defaultHaloDispatcher)
 		ifTrue: [aMorph defaultHaloDispatcher invokeHaloOrMove: event on: aMorph]
-		ifFalse: ["<Morphic-mt.1732" aMorph invokeHaloOrMove: event].
+		ifFalse: ["< Morphic-mt.1732 (6.0)" aMorph invokeHaloOrMove: event].
 	^ self hand halo
