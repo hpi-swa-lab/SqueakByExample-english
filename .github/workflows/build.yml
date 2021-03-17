@@ -102,6 +102,7 @@ jobs:
           name: figures-${{ matrix.smalltalk }}
           path: .
       - if: (needs.figures.result != 'success')
+        name: Configure DEBUG_FIGURES
         run: |
           echo ::warning::jobs.figures has failed, compiling PDF with missing figures
           echo "DEBUG_FIGURES=true" >> $GITHUB_ENV
@@ -122,6 +123,7 @@ jobs:
           name: book-${{ matrix.smalltalk }}
           path: SBE-${{ matrix.smalltalk }}.pdf
       - if: (needs.figures.result != 'success')
+        name: Check DEBUG_FIGURES
         run: |
           echo ::error::jobs.figures has failed, so the compiled PDF might miss some figures!
           echo "DEBUG_FIGURES=true" >> $GITHUB_ENV
