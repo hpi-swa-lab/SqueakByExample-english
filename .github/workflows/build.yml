@@ -75,6 +75,7 @@ jobs:
         run: smalltalkci -s Squeak64-${{ matrix.smalltalk }} SBE-Extract.smalltalk.ston
         timeout-minutes: 15
       - name: Store figures
+        if: always()
         uses: actions/upload-artifact@master
         with:
           name: figures-${{ matrix.smalltalk }}
@@ -82,6 +83,7 @@ jobs:
   build:
     name: 📖 Build book [Squeak ${{ matrix.smalltalk }}]
     needs: [listings, figures]
+    if: (needs.listings.result == 'success')  # build book even if figures did not succeed, see DEBUG_FIGURES below
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false  # facilitates debugging
@@ -99,10 +101,17 @@ jobs:
         with:
           name: figures-${{ matrix.smalltalk }}
           path: .
+      - if: (needs.figures.result != 'success')
+        run: |
+          echo ::warning::jobs.figures has failed, compiling PDF with missing figures
+          echo "DEBUG_FIGURES=true" >> $GITHUB_ENV
       - name: Compile PDF
         uses: xu-cheng/latex-action@v2
+        # We want to use our custom Makefile here which supports DEBUG_FIGURES and filtered warnings. Thus deliberately abuse the arguments of this action ...
         with:
-          root_file: SBE.tex
+          root_file: pseudo
+          args: "-v"
+          post_compile: "make book-pages"
       - name: Rename PDF
         run: mv SBE,{-${{ matrix.smalltalk }}}.pdf
         env:
@@ -112,6 +121,11 @@ jobs:
         with:
           name: book-${{ matrix.smalltalk }}
           path: SBE-${{ matrix.smalltalk }}.pdf
+      - if: (needs.figures.result != 'success')
+        run: |
+          echo ::error::jobs.figures has failed, so the compiled PDF might miss some figures!
+          echo "DEBUG_FIGURES=true" >> $GITHUB_ENV
+          exit 1
   notify:
     name: 📣 Notify community on failure
     needs: [build, tex-assertions]
