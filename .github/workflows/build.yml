@@ -116,9 +116,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - if: |
-            needs.tests.result == 'failure'
-            || needs.build.result == 'failure'
-            || needs.tex-assertions.result == 'failure'
+            github.event_name == 'schedule' && (
+              needs.tests.result == 'failure'
+              || needs.build.result == 'failure'
+              || needs.tex-assertions.result == 'failure')
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
@@ -126,4 +127,4 @@ jobs:
           SLACK_COLOR: danger
           SLACK_ICON: https://avatars1.githubusercontent.com/u/65916846?v=4
           SLACK_TITLE: "Build failed!"
-          SLACK_MESSAGE: "Oh no, the latest CI build for SqueakByExample failed! 😱"
+          SLACK_MESSAGE: "Oh no, the latest scheduled CI build for SqueakByExample failed! 😱"
