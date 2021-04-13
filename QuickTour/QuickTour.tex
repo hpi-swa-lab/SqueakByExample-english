@@ -408,27 +408,23 @@ Do it again.
 (The \menu{(d)} in the menu item \menu{do it (d)} tells you that the keyboard shortcut to \emph{do it} is \short{d}.
 More on this in the next section!)
 
-\iffalse
-figures/Doit.png created via
-SBESqueakPicture
-	writeTo: './figures/Doit.png'
-	frame: [:morphsRect | morphsRect withBottom: morphsRect bottom - 150]
-	using: [:helper | | workspace |
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/Doit.png' frame: [:morphsRect | morphsRect withBottom: morphsRect bottom - 150] using: [:helper | | workspace |
 	ToolBuilder open: Transcript.
 	Transcript show: 'hello world'; cr.
 	helper foregroundWindow bounds: (0 @ 120 extent: 450 @ 230).
-
+	
 	workspace := ToolBuilder open: Workspace new.
 	workspace position: 200 @ 100.
-
+	
 	helper type: 'Transcript show: ''hello world''; cr.' into: workspace.
 	helper keyStroke: workspace key: $a modifiers: #(cmd).
-
 	helper click: workspace at: workspace topCenter + (0 @ 30) buttons: #(right).
 	helper hand releaseMouseFocus.
 	helper mouseEnter: (helper menuItemMorphLabeled: 'do it (d)' in: helper world).
-	helper closeBalloons]
-\fi
+	helper closeBalloons
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{Doit}}}
