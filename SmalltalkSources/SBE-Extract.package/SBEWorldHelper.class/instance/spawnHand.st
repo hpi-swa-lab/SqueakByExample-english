@@ -1,6 +1,15 @@
 utils
 spawnHand
 
-	self world addMorph: (self hand imageForm asMorph
+	| imageMorph |
+	imageMorph := self hand imageForm asMorph
 		topLeft: self hand fullTopLeft;
-		yourself).
+		yourself.
+	
+	(self world respondsTo: #addMorphFrontInLayer:)
+		ifFalse: ["< Morphic-mt.1726 (6.0)"
+			self world addMorph: imageMorph.
+			^ self].
+	
+	imageMorph morphicLayerNumber: Morph frontmostLayer.
+	self world addMorphFrontInLayer: imageMorph.
