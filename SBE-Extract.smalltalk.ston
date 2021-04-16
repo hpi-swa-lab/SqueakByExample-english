@@ -1,0 +1,16 @@
+SmalltalkCISpec {
+	#loading : [
+		SCIMetacelloLoadSpec {
+			#baseline : 'SBE',
+			#directory : 'SmalltalkSources',
+ 			#platforms : [ #squeak ],
+ 			#load : [ 'ci' ],
+			#useLatestMetacello : true
+		}
+	],
+	#preTesting : 'build_scripts/prepareFiguresSuite.st',
+	#testing : {
+		#failOnSCIDeprecationWarnings : false,
+		#categories : [ 'SBEGenerated-Figures' ]
+	}
+}

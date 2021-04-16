@@ -4,7 +4,10 @@ resourceDirectory
 
 	^ ResourceDirectory ifNil: [
 		| directory |
-		Smalltalk globals at: #SmalltalkCI
-			ifPresent: [:sci | (sci perform: #getEnv: with: #TRAVIS_BUILD_DIR)
-				ifNotNil: [:path | directory := FileSystem disk referenceTo: path]].
+		(Smalltalk classNamed: #SmalltalkCI) ifNotNil: [:sci | | path |
+			#(GITHUB_WORKSPACE TRAVIS_BUILD_DIR)
+				detect: [:key | (path := sci getEnv: key) notNil]
+				ifNone: [].
+			path ifNotNil: [
+				directory := FileSystem disk referenceTo: path]].
 		directory ifNil: [FileDirectory default asFSReference]]

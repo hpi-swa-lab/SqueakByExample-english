@@ -7,5 +7,6 @@ OrderedDictionary {
 	'SmalltalkSources\/SBE-Testing.package' : #SquotCypressCodeSerializer,
 	'SmalltalkSources\/SBE-Extract.package' : #SquotCypressCodeSerializer,
 	'SmalltalkSources\/BaselineOfSBE.package' : #SquotCypressCodeSerializer,
-	'SmalltalkSources\/SBE-Monticello.package' : #SquotCypressCodeSerializer
+	'SmalltalkSources\/SBE-Monticello.package' : #SquotCypressCodeSerializer,
+	'SmalltalkSources\/SBE-Tests.package' : #SquotCypressCodeSerializer
 }

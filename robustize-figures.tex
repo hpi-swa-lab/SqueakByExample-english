@@ -1,48 +1,74 @@
 \let\StandardIncludeGraphics\includegraphics
 
 %==========================================
-% CREDITS: https://tex.stackexchange.com/questions/99070/check-for-a-valid-file-before-using-includegraphics/99099#99099
+% CREDITS: https://tex.stackexchange.com/a/567990/221054
 \makeatletter
 \newif\ifgraphicexist
-
 \catcode`\*=11
 \newcommand\imagetest[1]{%
- \begingroup
- \global\graphicexisttrue
-   \let\input@path\Ginput@path
-  \filename@parse{#1}%
-  \ifx\filename@ext\relax
-    \@for\Gin@temp:=\Gin@extensions\do{%
-      \ifx\Gin@ext\relax
-        \Gin@getbase\Gin@temp
-      \fi}%
-  \else
-    \Gin@getbase{\Gin@sepdefault\filename@ext}%
-    \ifx\Gin@ext\relax
-       \global\graphicexistfalse
-       \def\Gin@base{\filename@area\filename@base}%
-       \edef\Gin@ext{\Gin@sepdefault\filename@ext}%
-    \fi
-  \fi
-  \ifx\Gin@ext\relax
-         \global\graphicexistfalse
-    \else 
-       \@ifundefined{Gin@rule@\Gin@ext}%
-         {\global\graphicexistfalse}%
-         {}%
-    \fi  
-  \ifx\Gin@ext\relax 
-   \gdef\imageextension{unknown}%
-  \else
-   \xdef\imageextension{\Gin@ext}%
-  \fi 
- \endgroup 
- \ifgraphicexist
-  \expandafter \@firstoftwo
- \else
-  \expandafter \@secondoftwo
- \fi 
- } 
+	\begingroup
+		\global\graphicexisttrue
+		\ifx\detokenize\@undefined\else
+			\edef\Gin@extensions{\detokenize\expandafter{\Gin@extensions}}%
+		\fi
+		\let\input@path\Ginput@path
+		\set@curr@file{#1}%
+		\expandafter\filename@parse\expandafter{\@curr@file}%
+		\ifx\filename@ext\Gin@gzext
+			\expandafter\filename@parse\expandafter{\filename@base}%
+			\ifx\filename@ext\relax
+				\let\filename@ext\Gin@gzext
+			\else
+				\edef\Gin@ext{\Gin@ext\Gin@sepdefault\Gin@gzext}%
+			\fi
+		\fi
+		\ifx\filename@ext\relax
+			\@for\Gin@temp:=\Gin@extensions\do{%
+				\ifx\Gin@ext\relax
+					\Gin@getbase\Gin@temp
+				\fi}%
+		\else
+			\Gin@getbase{\Gin@sepdefault\filename@ext}%
+			\ifx\Gin@ext\relax
+				\global\graphicexistfalse
+				\let\Gin@savedbase\filename@base
+				\let\Gin@savedext\filename@ext
+				\edef\filename@base{\filename@base\Gin@sepdefault\filename@ext}%
+				\let\filename@ext\relax
+				\@for\Gin@temp:=\Gin@extensions\do{%
+					\ifx\Gin@ext\relax
+						\Gin@getbase\Gin@temp
+					\fi}%
+					\ifx\Gin@ext\relax
+						\let\filename@base\Gin@savedbase
+						\let\filename@ext\Gin@savedext
+					\fi
+				\fi
+				\ifx\Gin@ext\relax
+					\global\graphicexistfalse
+					\def\Gin@base{\filename@area\filename@base}%
+					\edef\Gin@ext{\Gin@sepdefault\filename@ext}%
+				\fi
+		\fi
+		\ifx\Gin@ext\relax
+			\global\graphicexistfalse
+		\else
+		\@ifundefined{Gin@rule@\Gin@ext}%
+			{\global\graphicexistfalse}%
+			{}%
+		\fi
+		\ifx\Gin@ext\relax 
+			\gdef\imageextension{unknown}%
+		\else
+			\xdef\imageextension{\Gin@ext}%
+		\fi 
+	\endgroup
+	\ifgraphicexist
+		\expandafter \@firstoftwo
+	\else
+		\expandafter \@secondoftwo
+	\fi
+}
 \catcode`\*=12
 \makeatother
 %==========================================
@@ -62,11 +88,11 @@
 		\centering 
 		Missing figure
 		
-    \texttt{#2}
-    
-    \medskip
-    
-    \shrug
+		\texttt{#2}
+		
+		\medskip
+		
+		\shrug
 		\vspace*{\fill}
 	\end{minipage}}
 }

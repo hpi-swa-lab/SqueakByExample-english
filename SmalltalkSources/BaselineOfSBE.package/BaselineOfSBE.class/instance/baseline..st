@@ -13,7 +13,8 @@ baseline: spec
 			package: #'SBE-Quinto';
 			package: #'SBE-QuickTour';
 			package: #'SBE-Streams';
-			package: #'SBE-Testing'.
+			package: #'SBE-Testing';
+			package: #'SBE-Tests'.
 		spec group: #ci with: #(
 			#'SBE-Environment'
 			#'SBE-Extract'
@@ -22,4 +23,5 @@ baseline: spec
 			#'SBE-Quinto'
 			#'SBE-QuickTour'
 			#'SBE-Streams'
-			#'SBE-Testing')].
+			#'SBE-Testing'
+			#'SBE-Tests')].

@@ -25,13 +25,17 @@ endif
 
 BOOK=SBE
 ETC=SBE-etc
-TEXINPUT=$(shell echo "$$([ "$$DEBUG_FIGURES" = true ] && echo '\\\\AtBeginDocument{\\\\include{robustize-figures}}')$$([ -z "$$SQUEAK_VERSION" ] || echo '\\\\newcommand{\\\\SQUEAKVERSION}{${SQUEAK_VERSION}}')\\\\input{${BOOK}}")
+ifdef BASH_V5  # Bash v5 interprets escape characters differently 🙄
+	TEXINPUT=$(shell echo "$$([ "$$DEBUG_FIGURES" = true ] && echo '\AtBeginDocument{\include{robustize-figures}}')$$([ -z "$$SQUEAK_VERSION" ] || echo '\newcommand{\SQUEAKVERSION}{${SQUEAK_VERSION}}')\\input{${BOOK}}")
+else
+	TEXINPUT=$(shell echo "$$([ "$$DEBUG_FIGURES" = true ] && echo '\\\\AtBeginDocument{\\\\include{robustize-figures}}')$$([ -z "$$SQUEAK_VERSION" ] || echo '\\\\newcommand{\\\\SQUEAKVERSION}{${SQUEAK_VERSION}}')\\\\input{${BOOK}}")
+endif
 
 # --------------------------------------------------------------------------------
 all : book
 
 # NB: be sure to use texlive and to set the TEXINPUTS variable accordingly
-# See README.txt
+# See README.md
 
 book: clean listings book-pages
 
