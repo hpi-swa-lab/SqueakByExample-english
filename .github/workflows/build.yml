@@ -123,10 +123,12 @@ jobs:
         with:
           filename: ListingSources.zip
           path: listings
+      - uses: benjlevesque/short-sha@v1.2
+        id: short-sha
       - name: 📣 Create pre-release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: untagged-${{ github.sha }}
+          tag_name: untagged-${{ steps.short-sha.outputs.sha }}
           body: ${{ github.event.head_commit.message }}
           files: |
             book-*/SBE-*.pdf
