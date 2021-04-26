@@ -109,18 +109,26 @@ jobs:
           echo ::error::jobs.figures has failed, so the compiled PDF might miss some figures!
           echo "DEBUG_FIGURES=true" >> $GITHUB_ENV
           exit 1
+  release:
+    name: ✈ Create pre-release
+    needs: [tests, tex-assertions, build]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    steps:
+      - name: Load artifacts
+        uses: actions/download-artifact@master
+        with:
+          path: .
       - uses: thedoctor0/zip-release@master
         with:
           filename: ListingSources.zip
           path: ListingSources
       - name: 📣 Create pre-release
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         uses: softprops/action-gh-release@v1
         with:
           tag_name: untagged-${{ github.sha }}
           body: ${{ github.event.head_commit.message }}
           files: |
-            SBE-${{ matrix.smalltalk }}.pdf
+            SBE-*.pdf
             ListingSources.zip
           prerelease: true
         env:
