@@ -122,14 +122,14 @@ jobs:
       - uses: thedoctor0/zip-release@master
         with:
           filename: ListingSources.zip
-          path: ListingSources
+          path: listings/ListingSources
       - name: 📣 Create pre-release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: untagged-${{ github.sha }}
           body: ${{ github.event.head_commit.message }}
           files: |
-            SBE-*.pdf
+            book-*/SBE-*.pdf
             ListingSources.zip
           prerelease: true
         env:
