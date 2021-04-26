@@ -112,7 +112,7 @@ jobs:
   release:
     name: ✈ Create pre-release
     needs: [tests, tex-assertions, build]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    if: github.event_name == 'push' #&& github.ref == 'refs/heads/master' # DEBUG
     runs-on: ubuntu-latest
     steps:
       - name: Load artifacts
