@@ -122,7 +122,7 @@ jobs:
       - uses: thedoctor0/zip-release@master
         with:
           filename: ListingSources.zip
-          path: listings/ListingSources
+          path: listings
       - name: 📣 Create pre-release
         uses: softprops/action-gh-release@v1
         with:
