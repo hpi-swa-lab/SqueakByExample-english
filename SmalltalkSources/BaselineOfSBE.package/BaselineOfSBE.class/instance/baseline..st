@@ -3,7 +3,7 @@ baseline: spec
 	<baseline>
 	spec for: #'common' do: [
 		spec baseline: 'FileSystem' with: [spec
-			repository: 'github://j4yk/Squeak-FileSystem:master/src';
+			repository: 'github://squeak-smalltalk/Squeak-FileSystem:master/src';
 			loads: #('default' 'tests')].
 		spec
 			package: #'SBE-Environment';
