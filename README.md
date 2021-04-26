@@ -1,6 +1,8 @@
 # Squeak by Example
 
 [![📕 Make Book](https://github.com/hpi-swa-lab/SqueakByExample-english/actions/workflows/build.yml/badge.svg)](https://github.com/hpi-swa-lab/SqueakByExample-english/actions/workflows/build.yml)
+[![Latest release](https://img.shields.io/github/v/release/hpi-swa-lab/SqueakByExample-english)](https://github.com/hpi-swa-lab/SqueakByExample-english/releases/latest)
+[![Latest preprint](https://img.shields.io/github/v/release/hpi-swa-lab/SqueakByExample-english?include_prereleases&label=preprint)](https://github.com/hpi-swa-lab/SqueakByExample-english/releases)
 
 This is the LaTeX source repository of the _Squeak by Example_ book.
 
@@ -35,9 +37,11 @@ to verify that you have added all the dependent files (e.g., figures).
 The PDF of the book is built via GitHub Actions on each commit, which includes the execution of internal tests, the check of TEX-inlined `@TEST` assertions, and the generation of screenshots that are described by figure scripts.
 Two PDFs are created, one for the latest Squeak release and one for the current Trunk version.
 
+You can download the latest version of the book from the [Releases page](https://github.com/hpi-swa-lab/SqueakByExample-english/releases).
+
 The usual workflow to **add a scripted screenshot to the book** is as follows:
 
-1. Open the relevant tex file and insert the following snipped before the `\figure` definition:
+1. Open the relevant `.tex` file and insert the following snipped before the `\figure` definition:
 
    ```tex
    \begin{ExecuteSmalltalkScript}
@@ -62,7 +66,7 @@ The usual workflow to **add a scripted screenshot to the book** is as follows:
 
 4. Build the PDF using the Makefile to make sure your screenshot looks well.
 
-5. Commit! 🚀 The PDF will automatically build on the CI now ...
+5. Commit! 🚀 The PDF will automatically be built on the CI now ...
 
 6. If the build process has completed, you can watch the results [in the Actions tab of the GitHub repository](https://github.com/hpi-swa-lab/SqueakByExample-english/actions?query=branch%3Amaster) by opening the latest successful build and scrolling down to the artifacts.
 
