@@ -1,4 +1,8 @@
-# Squeak by Example [![Build Status](https://travis-ci.com/hpi-swa-lab/SqueakByExample-english.svg?branch=master)](https://travis-ci.com/hpi-swa-lab/SqueakByExample-english)
+# Squeak by Example
+
+[![📕 Make Book](https://github.com/hpi-swa-lab/SqueakByExample-english/actions/workflows/build.yml/badge.svg)](https://github.com/hpi-swa-lab/SqueakByExample-english/actions/workflows/build.yml)
+[![Latest release](https://img.shields.io/github/v/release/hpi-swa-lab/SqueakByExample-english)](https://github.com/hpi-swa-lab/SqueakByExample-english/releases/latest)
+[![Latest preprint](https://img.shields.io/github/v/release/hpi-swa-lab/SqueakByExample-english?include_prereleases&label=preprint)](https://github.com/hpi-swa-lab/SqueakByExample-english/releases)
 
 This is the LaTeX source repository of the _Squeak by Example_ book.
 
@@ -6,7 +10,7 @@ See the issues in the [Github repository](https://github.com/hpi-swa-lab/SqueakB
 
 ---
 
-# File structure
+# Repository structure
 
 The main file is SBE.tex.  Chapters are in subdirectories.
 You can latex either the entire book, or each individual chapter.
@@ -30,26 +34,69 @@ to verify that you have added all the dependent files (e.g., figures).
 
 ## Build process
 
-The PDF of the book is built via Travis CI on each commit, which includes the execution of SBEtests and the generation of screenshots that are described by a figure script. Two PDFs are created, one for the latest Squeak release and one for the current Trunk version.
+The PDF of the book is built via GitHub Actions on each commit, which includes the execution of internal tests, the check of TEX-inlined `@TEST` assertions, and the generation of screenshots that are described by figure scripts.
+Two PDFs are created, one for the latest Squeak release and one for the current Trunk version.
 
-The usual workflow to codify a screenshot is documented [here](https://github.com/hpi-swa-lab/SqueakByExample-english/issues/21#issue-516598115). If the build process completed, you can watch the results [here](https://drive.google.com/drive/folders/1tNIvN-9Vx8djNZYfSYuqhjheb-EgJuTc).
-To build the PDF manually, do the following:
+You can download the latest version of the book from the [Releases page](https://github.com/hpi-swa-lab/SqueakByExample-english/releases).
+
+The usual workflow to **add a scripted screenshot to the book** is as follows:
+
+1. Open the relevant `.tex` file and insert the following snipped before the `\figure` definition:
+
+   ```tex
+   \begin{ExecuteSmalltalkScript}
+   SBESqueakPicture writeTo: './figures/<name>.png' using: [:helper |
+   	self shouldBeImplemented
+   ]
+   \end{ExecuteSmalltalkScript}
+   
+   \begin{figure}
+      \centering
+      \includegraphics[scale=0.65]{<name>} 
+      \caption{<caption>.\label{fig:<name>}}
+   \end{figure}
+   ```
+
+2. Insert figure name, caption, and script generation logic in the template above.
+   Browse the repository to find existing examples.
+
+   **Tip:** You can also use `SBEDebuggingScreenshotRecorder` instead of `SBEFigureBuilder` for testing your screenshot script right in the image (the file won't be saved on disk in this case).
+
+3. Test your script by doing `SBEFigureBuilder buildAllTexFigures` (maybe you need to set `#resourceDirectory` before) or `SBEFigureBuilder buildFiguresWith: FSPath * 'your' / 'path'`.
+
+4. Build the PDF using the Makefile to make sure your screenshot looks well.
+
+5. Commit! 🚀 The PDF will automatically be built on the CI now ...
+
+6. If the build process has completed, you can watch the results [in the Actions tab of the GitHub repository](https://github.com/hpi-swa-lab/SqueakByExample-english/actions?query=branch%3Amaster) by opening the latest successful build and scrolling down to the artifacts.
+
+**To build the PDF manually,** do the following:
+
 ### I. Installation
+
 1. Get a support Squeak image (any release since 5.3 or the latest Trunk image)
-2. Open the Git Browser and clone this repository
+
+2. Open the Git Browser and clone this repository. Install missing dependencies as specified in the baseline if necessary.
+
 3. Make sure to set the resource directory to the path of your working copy:
- ```smalltalk
-SBEFigureBuilder resourceDirectory: FileDirectory default asFSReference / 'path' / 'to' / 'workingCopy'.
- ```
+
+   ```smalltalk
+   SBEFigureBuilder resourceDirectory: FileDirectory default asFSReference / 'path' / 'to' / 'workingCopy'.
+   ```
+
 4. Install any Linux distribution.
+
 ### II. Building
+
 1. Do it:
- ```smalltalk
-SBEFigureBuilder buildAllTexFigures.
- ```
+
+   ```smalltalk
+   SBEFigureBuilder buildAllTexFigures.
+   ```
+
 2. From the shell, run "make" in the working copy.
 
-For more insights into the build process, have a look at the `Makefile` and the `.travis.yml`.
+For more insights into the build process, have a look at the [`Makefile`](/Makefile) and the [`.github/worfklows/build.yml`](.github/workflows/build.yml).
 
 ## Printing
 
