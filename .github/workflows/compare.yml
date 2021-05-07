@@ -1,0 +1,41 @@
+name: ⚖ Compare
+
+on:
+  workflow_run:
+    workflows: ["📕 Make Book"]
+    types: [completed]
+
+jobs:
+  diff:
+    if: ${{ github.base_ref == 'refs/heads/master' }}
+    runs-on: windows-latest
+    steps:
+      - name: Setup comparepdfcmd
+        run: |
+          curl http://www.qtrac.eu/comparepdfcmd-2.1.9.zip -o comparepdfcmd.zip
+          unzip comparepdfcmd.zip
+          ./comparepdfcmd/comparepdfcmd.exe try
+      - name: Find latest prelease
+        run: |
+          echo "::set-output name=sha::$(git describe --tags $(git rev-list origin/master --tags) | grep ^untagged- | head -n 1)\n"
+        id: find-latest-prerelease
+      - name: Load latest prereleases
+        uses: dsaltares/fetch-gh-release-asset@master
+        with:
+          repo: ${{ github.repository }}
+          version: ${{ steps.find-latest-prerelease.outputs.sha }}
+          file: SBE-Trunk.pdf
+          target: SBE-Trunk.old.pdf
+          token: ${{ github.token }}
+      - name: Load artifacts
+        uses: actions/download-artifact@master
+        with:
+          path: .
+      - name: Compare PDFs
+        run: |
+           comparepdfcmd.exe -r diff-Trunk.pdf SBE-Trunk.old.pdf SBE-Trunk.pdf
+      - name: Upload diffs
+        uses: actions/upload-artifact@master
+        with:
+          name: diff-Trunk
+          path: diff-Trunk.pdf
