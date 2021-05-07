@@ -14,38 +14,38 @@ on:
 #---
 
 jobs:
-  tests:
-    name: 🐞 Internal tests [${{ matrix.smalltalk }}]
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        smalltalk: [Trunk, 5.3]
-    steps:
-      - uses: actions/checkout@v2
-      - uses: hpi-swa/setup-smalltalkCI@v1
-        with:
-          smalltalk-image: Squeak64-${{ matrix.smalltalk }}
-      - name: Run SmalltalkSources tests
-        run: smalltalkci -s Squeak64-${{ matrix.smalltalk }} SBE-Tests.smalltalk.ston
-        timeout-minutes: 15
-        env:
-          GITHUB_TOKEN: ${{ github.token }}  # for coverage reports
-  tex-assertions:
-    name: 🧪 @TEST assertions [${{ matrix.smalltalk }}]
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        smalltalk: [Trunk, 5.3]
-    steps:
-      - uses: actions/checkout@v2
-      - uses: hpi-swa/setup-smalltalkCI@v1
-        with:
-          smalltalk-image: Squeak64-${{ matrix.smalltalk }}
-      - name: Run TEX assertions
-        run: smalltalkci -s Squeak64-${{ matrix.smalltalk }} SBE-Testing.smalltalk.ston
-        timeout-minutes: 15
+  #tests:
+  #  name: 🐞 Internal tests [${{ matrix.smalltalk }}]
+  #  runs-on: ubuntu-latest
+  #  strategy:
+  #    fail-fast: false
+  #    matrix:
+  #      smalltalk: [Trunk, 5.3]
+  #  steps:
+  #    - uses: actions/checkout@v2
+  #    - uses: hpi-swa/setup-smalltalkCI@v1
+  #      with:
+  #        smalltalk-image: Squeak64-${{ matrix.smalltalk }}
+  #    - name: Run SmalltalkSources tests
+  #      run: smalltalkci -s Squeak64-${{ matrix.smalltalk }} SBE-Tests.smalltalk.ston
+  #      timeout-minutes: 15
+  #      env:
+  #        GITHUB_TOKEN: ${{ github.token }}  # for coverage reports
+  #tex-assertions:
+  #  name: 🧪 @TEST assertions [${{ matrix.smalltalk }}]
+  #  runs-on: ubuntu-latest
+  #  strategy:
+  #    fail-fast: false
+  #    matrix:
+  #      smalltalk: [Trunk, 5.3]
+  #  steps:
+  #    - uses: actions/checkout@v2
+  #    - uses: hpi-swa/setup-smalltalkCI@v1
+  #      with:
+  #        smalltalk-image: Squeak64-${{ matrix.smalltalk }}
+  #    - name: Run TEX assertions
+  #      run: smalltalkci -s Squeak64-${{ matrix.smalltalk }} SBE-Testing.smalltalk.ston
+  #      timeout-minutes: 15
   listings:
     name: 📄 Collect listings from SmalltalkSources
     runs-on: ubuntu-latest
@@ -67,16 +67,16 @@ jobs:
         smalltalk: [Trunk, 5.3]
     steps:
       - uses: actions/checkout@v2
-      - uses: hpi-swa/setup-smalltalkCI@v1
-        with:
-          smalltalk-image: Squeak64-${{ matrix.smalltalk }}
-      - id: figures
-        name: 🖼 Build Squeak figures
-        run: smalltalkci -s Squeak64-${{ matrix.smalltalk }} SBE-Extract.smalltalk.ston
-        timeout-minutes: 15
-        continue-on-error: true
-      - if: (steps.figures.outcome == 'failure')
-        name: Configure DEBUG_FIGURES
+      #- uses: hpi-swa/setup-smalltalkCI@v1
+      #  with:
+      #    smalltalk-image: Squeak64-${{ matrix.smalltalk }}
+      #- id: figures
+      #  name: 🖼 Build Squeak figures
+      #  run: smalltalkci -s Squeak64-${{ matrix.smalltalk }} SBE-Extract.smalltalk.ston
+      #  timeout-minutes: 15
+      #  continue-on-error: true
+      #- if: (steps.figures.outcome == 'failure')
+      - name: Configure DEBUG_FIGURES
         run: |
           echo ::warning::jobs.figures has failed, compiling PDF with missing figures
           echo "DEBUG_FIGURES=true" >> $GITHUB_ENV
