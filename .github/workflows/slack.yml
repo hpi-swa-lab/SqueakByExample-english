@@ -1,0 +1,21 @@
+name: 📣 Slack
+
+on:
+  workflow_run:
+    workflows: ["📕 Make Book"]
+    types: [completed]
+
+jobs:
+  notify:
+    name: 📣 Notify community on failure
+    if: ${{  github.event_name == 'schedule' && github.event.workflow_run.conclusion == 'failure' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_USERNAME: "GitHub Actions"
+          SLACK_COLOR: danger
+          SLACK_ICON: https://avatars1.githubusercontent.com/u/65916846?v=4
+          SLACK_TITLE: "Build failed!"
+          SLACK_MESSAGE: "Oh no, the latest scheduled CI build for SqueakByExample failed! 😱"
