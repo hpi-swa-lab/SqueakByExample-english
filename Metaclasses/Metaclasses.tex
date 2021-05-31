@@ -134,7 +134,7 @@ You can see the effect in \figref{translucentEllipse}.
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: 'figures/TranslucentEllipse.png' building: [:helper |
 	| workspace |
-	workspace := Workspace open.
+	workspace := Workspace open containingWindow.
 	helper
 		type: [EllipseMorph new
 			color: (Color blue alpha: 0.4);
