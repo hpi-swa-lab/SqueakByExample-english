@@ -16,5 +16,6 @@ sourceLines: lines
 				self unescapeLatex: (self systemVersionString >= (matcher subexpression: 2)
 					ifTrue: [matcher subexpression: 3]
 					ifFalse: [matcher subexpression: 5])]].
+	sourceLines := sourceLines collect: [:line | line withBlanksTrimmed].
 	
 	self chapter generateTestMethod: self testSource.
