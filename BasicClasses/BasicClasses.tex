@@ -86,39 +86,21 @@ For example, the class \clsind{Browser} does not redefine the method \ct{printOn
 Browser new printString --> 'a Browser'
 \end{code}
 
-In contrast, the class \ct{TTCFont} shows an example of \mthind{TTCFont}{printOn:} specialization.
-It prints the name of the class followed by the family name, the size, and some other properties of the font as shown by the code below which prints an instance of the class.
+In contrast, the class \ct{PackageInfo} shows an example of \mthind{PackageInfo}{printOn:} specialization.
+In addition to the usual name of the class, it prints the name of the package as shown by the code below which prints an instance of the class.
 
-\SqVersionSwitch{6.0}{
 \needlines{7}
 \begin{method}[zork]{printOn: redefinition.}
-TTCFont>>>printOn: aStream
+PackagInfo>>>printOn: aStream
 	super printOn: aStream.
-	
 	aStream
 		nextPut: $(;
-		nextPutAll: self familyName;
-		space; nextPutAll: self subfamilyName;
-		space; print: self pointSize; nextPutAll: 'pt';
-		space; print: self pixelsPerInch; nextPutAll: 'ppi';
-		space; print: self height; nextPutAll: 'px';
+		nextPutAll: self packageName;
 		nextPut: $)
 \end{method}
-}{
-\needlines{7}
-\begin{method}[zork]{printOn: redefinition.}
-TTCFont>>>printOn: aStream
-
-    aStream nextPutAll: 'TTCFont(';
-        nextPutAll: self familyName; space;
-        print: self pointSize; space;
-        nextPutAll: self subfamilyName;
-        nextPut: $).
-\end{method}
-}
 
 \begin{code}{@TEST}
-(TTCFont family: #BitstreamVeraSans size: 12) printString --> !\SqVersionSwitch{6.0}{'a TTCFont(BitstreamVeraSans Roman 12pt 96ppi 16px)'}{'TTCFont(BitstreamVeraSans 12 Roman)'}! 
+Object packageInfo printString --> 'a PackageInfo(Kernel)'
 \end{code}
 
 Note that the message \ct{printOn:} is not the same as \mthind{Object}{storeOn:}.
