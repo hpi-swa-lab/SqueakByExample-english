@@ -135,7 +135,7 @@ does provide a way to ask another object for the values of its instance variable
 
 Instance variables can be accessed by name in any of the instance methods of the class that defines them, and also in the methods defined in its subclasses.
 This means that \st instance variables are similar to \emph{protected} variables in C++ and Java.
-However, we prefer to say that they are private because it is considered bad style in \st to access an instance variable directly from a subclass. 
+However, we prefer to say that they are private because it is considered bad style in \st to access an instance variable directly from a subclass.
 
 \subsubsection{Example}
 Method \cmind{Point}{dist:} (see \Mthref{dist:}) computes the distance between the receiver and another point.
@@ -144,7 +144,7 @@ However, the instance variables of the other point must be accessed by sending i
 
 \needlines{7}
 \begin{method}[dist:]{The distance between two points.}
-Point>>>dist: aPoint 
+Point>>>dist: aPoint
 	"Answer the distance between aPoint and the receiver."
 
 	| dx dy |
@@ -179,12 +179,12 @@ This practice has some value, but it also clutters the interface of your classes
 
 Since classes are objects, they can have their own instance variables and their own methods.
 We call these \emph{class instance variables} and \emph{class methods}, but they are really no different from ordinary instance variables and methods:
-Class instance variables are just instance variables defined by a metaclass, and class methods are just methods defined by a \ind{metaclass}. 
+Class instance variables are just instance variables defined by a metaclass, and class methods are just methods defined by a \ind{metaclass}.
 \index{class!instance variable}
 \seeindex{variable!class instance}{class, instance variable}
 \index{class!method}
 
-A class and its \ind{metaclass} are two separate classes, even though the former is an instance of the latter. 
+A class and its \ind{metaclass} are two separate classes, even though the former is an instance of the latter.
 However, this is largely irrelevant to you as a programmer:
 You are concerned with defining the behavior of your objects and the classes that create them.
 
@@ -246,7 +246,7 @@ For example, we can see in \figref{Buttons} that the method \ct{hue} is defined 
 In contrast, the \button{class} button lets you browse and edit the metaclass (in this case \ct{Color class}).
 
 %---------------------------------------------------------
-\subsection{Class methods} 
+\subsection{Class methods}
 
 Class methods can be quite useful; browse \ct{Color class} for some good examples.
 You will see that there are two kinds of \subind{class}{method} defined on a class: those that create instances of the class, like \cmind{Color class}{blue} and those that perform a utility function, like \cmind{Color class}{showColorCube}.
@@ -259,7 +259,7 @@ Indeed, many of them will contain a comment designed to make it easy to execute 
 You will see the effect of executing this method directly within the world.
 (Select \menu{World \go \ind{restore display}~(r)} to undo the effects.)
 
-For those familiar with \ind{Java} and \ind{C++}, class methods may seem similar to static methods. 
+For those familiar with \ind{Java} and \ind{C++}, class methods may seem similar to static methods.
 However, the uniformity of \st means that they are somewhat different:
 Whereas Java static methods are really just statically-resolved procedures, \st class methods are dynamically-dispatched methods.
 This means that inheritance, overriding, and super-sends work for class methods in \st, whereas they do not work for static methods in Java.
@@ -333,12 +333,12 @@ Note also that class instance variables are private to a class in exactly the sa
 Since classes and their instances are different objects, this has the following immediate consequences:
 \important{A class does not have access to the instance variables of its own instances.}
 \important{An instance of a class does not have access to the class instance variables of its class.}
-For this reason, instance initialization methods must always be defined on the \subind{system browser}{instance side}\,---\,the \subind{system browser}{class side} has no access to instance variables, so it cannot initialize them!  
+For this reason, instance initialization methods must always be defined on the \subind{system browser}{instance side}\,---\,the \subind{system browser}{class side} has no access to instance variables, so it cannot initialize them!
 All that the class can do is to send \ind{initialization} messages, possibly using accessors, to newly created instances.
 
 Similarly, instances can only access class instance variables indirectly, by sending accessor messages to their class.
 
-\ind{Java} has nothing equivalent to class instance variables.  
+\ind{Java} has nothing equivalent to class instance variables.
 Java and \ind{C++} static variables are more like \st class variables, which we will discuss in \secref{classVars}: all of the subclasses and all of their instances share the same static variable.
 
 \paragraph{Example: Defining a Singleton.}
@@ -358,19 +358,19 @@ Object subclass: #SBEWebServer
 Then, clicking on the \button{class} button, we add the instance variable \ct{uniqueInstance} to the \subind{system browser}{class side}.
 
 \begin{classdef}[sbewebserver]{The class side of the singleton class.}
-SBEWebServer class 	
+SBEWebServer class
 	instanceVariableNames: 'uniqueInstance'
 \end{classdef}
 
 The consequence of this is that the class \ct{SBEWebServer} now has another instance variable, in addition to the variables that it inherits, such as \ct{superclass} and \ct{methodDict}.
 
-We can now define a class \subind{class}{method} named \ct{uniqueInstance} as shown in \mthref{uniqueInstance}. 
+We can now define a class \subind{class}{method} named \ct{uniqueInstance} as shown in \mthref{uniqueInstance}.
 This method first checks whether \ct{uniqueInstance} has been initialized.
 If it has not, the method creates an instance and assigns it to the class instance variable \ct{uniqueInstance}.
 We use a \ct{super} send, as we have forbidden the use of \ct{new} for our web server class.
 Finally the value of \ct{uniqueInstance} is returned.
 Since \ct{uniqueInstance} is a class instance variable, this method can directly access it.
-    
+
 \begin{method}[uniqueInstance]{uniqueInstance and new (on the class side).}
 SBEWebServer class>>>uniqueInstance
 
@@ -383,7 +383,7 @@ SBEWebServer class>>>new
 	^ self error: 'Singleton: use #uniqueInstance'
 \end{method}
 
-The first time that \ct{SBEWebServer uniqueInstance} is executed, an instance of the class \ct{SBEWebServer} will be created and assigned to the \ct{uniqueInstance} variable. 
+The first time that \ct{SBEWebServer uniqueInstance} is executed, an instance of the class \ct{SBEWebServer} will be created and assigned to the \ct{uniqueInstance} variable.
 The next time, the previously created instance will be returned instead of creating a new one.
 
 Note that the instance creation code inside the conditional in \mthref{uniqueInstance} is written as \ct{self new} and not as \ct{SBEWebServer new}.
@@ -445,15 +445,15 @@ The ``missing'' methods\,---\,those that the other methods assume, but which are
 \seeindex{abstract class}{class, abstract}
 \seeindex{abstract method}{method, abstract}
 
-\st has no dedicated syntax to specify that a method or a class is abstract. 
-By convention, the body of an abstract method consists of the expression \mbox{\ct{self subclassResponsibility}.} 
-This is known as a ``marker method'', and indicates that subclasses have the responsibility to define a concrete version of the method. 
+\st has no dedicated syntax to specify that a method or a class is abstract.
+By convention, the body of an abstract method consists of the expression \mbox{\ct{self subclassResponsibility}.}
+This is known as a ``marker method'', and indicates that subclasses have the responsibility to define a concrete version of the method.
 \ct{self subclassResponsibility} methods should always be overridden, and thus should never be executed.
-If you forget to override one, and it is executed, an exception will be raised. 
+If you forget to override one, and it is executed, an exception will be raised.
 \cmindex{Object}{subclassResponsibility}
 
 A class is considered abstract if one of its methods is abstract.
-Nothing actually prevents you from creating an instance of an abstract class; everything will work until an abstract method is invoked. 
+Nothing actually prevents you from creating an instance of an abstract class; everything will work until an abstract method is invoked.
 
 \subsubsection{Example: the class \ct{Magnitude}}
 \clsind{Magnitude} is an abstract class that helps us to  define objects that can be compared to each other.
@@ -463,7 +463,7 @@ Such methods are inherited by subclasses.
 The method \mthind{Magnitude}{<} is abstract and defined as shown in \mthref{MagnitudeLessThan}.
 
 \begin{method}[MagnitudeLessThan]{\ct{Magnitude>>><}.}
-Magnitude>>>< aMagnitude 
+Magnitude>>>< aMagnitude
 	"Answer whether the receiver is less than the argument."
 
 	^ self subclassResponsibility
@@ -473,7 +473,7 @@ Magnitude>>>< aMagnitude
 By contrast, the method \mthind{Magnitude}{>=} is concrete; it is defined in terms of \ct{<}:
 
 \begin{method}[Magnitude>=]{\ct{Magnitude>>>>=}.}
-Magnitude>>>>= aMagnitude 
+Magnitude>>>>= aMagnitude
 	"Answer whether the receiver is greater than or equal to the argument."
 
 	^ (self < aMagnitude) not
@@ -484,7 +484,7 @@ The same is true of the other comparison methods.
 \ct{Character} also defines methods \ct{=} and \ct{hash}; it inherits from \ct{Magnitude} the methods \ct{>=}, \ct{<=}, \ct{~=} and others.
 
 \begin{method}[CharacterLessThan]{\ct{Character>>><}.}
-Character>>>< aCharacter 
+Character>>>< aCharacter
 	"Answer true if the receiver's value < aCharacter's value."
 
 	^ self asciiValue < aCharacter asciiValue
@@ -517,7 +517,7 @@ We might do this as follows:
 \begin{method}[author]{An author method.}
 TAuthor>>>author
     "Returns author initials"
-	
+
 	^ 'taa'    "the anonymous author"
 \end{method}
 
@@ -553,7 +553,7 @@ It is also possible to \emph{alias} methods (with \ct{@}), providing a new name 
 This rule captures the essence of programming in \st.
 
 In procedural programming, the choice of which piece of code to execute when a procedure is called is made by the caller.
-The caller chooses the procedure or function to execute \emph{statically}, by name.  
+The caller chooses the procedure or function to execute \emph{statically}, by name.
 
 In object-oriented programming, we do \emph{not} ``call methods'': we ``\subind{message}{send} messages.''
 The choice of terminology is significant.
@@ -602,7 +602,7 @@ Joseph Pelrine also states this very nicely:
 \important{Do not let anyone else play with your data.}
 
 %=========================================================
-\section{Method lookup follows the inheritance chain} 
+\section{Method lookup follows the inheritance chain}
 
 %\ruleref{lookup}
 
@@ -625,7 +625,7 @@ Nevertheless, there are a few questions that need some care to answer:
 \end{itemize}
 
 The rules for method lookup that we present here are conceptual:
-Virtual machine implementors use all kinds of tricks and optimizations to speed-up method lookup. 
+Virtual machine implementors use all kinds of tricks and optimizations to speed-up method lookup.
 That is their job, but you should never be able to detect that they are doing something different from the rules mentioned above.
 % Whatever the implementation does, these rules will give you a clear understanding of the semantics of sending messages to \self and \super.
 
@@ -679,7 +679,7 @@ Morph>>>openInWorld
 Notice that \ct{EllipseMorph>>>defaultColor} (\mthref{defaultColor}) explicitly returns \ct{Color yellow} whereas \ct{Morph>>>openInWorld} (\mthref{openInWorld}) does not appear to return anything.
 
 Actually, a method \emph{always} answers a message with a value\,---\,which is, of course, an object.
-The answer may be defined by the \ct{^} construct in the method, but if execution reaches the end of the method without executing a \ct{^}, the method still answers a value: 
+The answer may be defined by the \ct{^} construct in the method, but if execution reaches the end of the method without executing a \ct{^}, the method still answers a value:
 It answers the object that received the message.
 We usually say that the method ``answers \self'', because in Smalltalk the pseudo-variable \self represents the receiver of the message, rather like \ct{this} in \ind{Java}.
 \index{variable!pseudo}
@@ -795,12 +795,12 @@ BorderedMorph>>>fullPrintOn: aStream
 
 	aStream nextPutAll: '('.
 	!\textbf{super fullPrintOn: aStream.}!
-	aStream 
+	aStream
 		nextPutAll: ') setBorderWidth: ';
 		print: self borderWidth;
 		nextPutAll: ' borderColor: ' , (self colorString: self borderColor).
 \end{method}
-At this point, \ct{BorderedMorph>>>fullPrintOn:} does a \super send to extend the 
+At this point, \ct{BorderedMorph>>>fullPrintOn:} does a \super send to extend the
 \ct{fullPrintOn:} behavior it inherits from its superclass.
 Because this is a \super send, the lookup now starts in the superclass of the class where the \super send occurs, namely in \ct{Morph}.
 We then immediately find and evaluate \ct{Morph>>>fullPrintOn:}.
@@ -836,7 +836,7 @@ SBEScreenshotRecorder writeTo: './figures/fooNotFound_debugger.png' building: [:
 \begin{figure}[htb]
 \begin{center}
 \begin{scaletikzpicturetowidth}{\textwidth} % TODO: Support lulu
-\begin{tikzpicture}[      
+\begin{tikzpicture}[
 	every node/.style={anchor=south west,inner sep=0pt},
 	x=1mm, y=1mm,
 	scale=\tikzscale
@@ -844,7 +844,7 @@ SBEScreenshotRecorder writeTo: './figures/fooNotFound_debugger.png' building: [:
 	\node (diagram) at (0,0)
 	{\includegraphics[width=\textwidth]{fooNotFound}};
 	\node (debugger) at (78,28)
-	{\includegraphics[width=.3\textwidth]{fooNotFound_debugger}};  
+	{\includegraphics[width=.3\textwidth]{fooNotFound_debugger}};
 \end{tikzpicture}
 \end{scaletikzpicturetowidth}
 \caption{Message \lct{foo} is not understood\label{fig:fooNotFound}.}
@@ -876,7 +876,7 @@ The names of all of these shared variables start with a capital letter, to warn 
 %---------------------------------------------------------
 \subsection{Global variables}
 In \squeak, all global variables are stored in a namespace called \glbind{Smalltalk} which is an instance of the class \clsind{SmalltalkImage}.
-Global variables are accessible from anywhere. 
+Global variables are accessible from anywhere.
 Every class is named by a global variable; in addition, a few globals are used to name special or commonly useful objects.
 
 However, what may sound so handy and convenient at the first glance has turned out as bad practice during the evolution of \sq.
@@ -898,7 +898,7 @@ Transcript show: 'Squeak is fun and powerful'; cr
 \noindent
 Before you \menu{do it}, open a transcript from the world menu.
 
-\hint{Writing to the Transcript is slow, especially when the transcript window is open. 
+\hint{Writing to the Transcript is slow, especially when the transcript window is open.
 So, if you experience some sluggishness and are writing to the Transcript, think about collapsing it.}
 
 Transcript outputs are mostly used for debugging and experimenting purposes where code quality is not the most important thing.
@@ -951,7 +951,7 @@ Indeed, a better name would have been \emph{shared variables} since this express
 \ifluluelse
 	{\includegraphics[width=\textwidth]{privateSharedVarColor}}
 	{\includegraphics[width=0.7\textwidth]{privateSharedVarColor}}
-\caption{Instance and class methods accessing different 
+\caption{Instance and class methods accessing different
 variables.\label{fig:privateSharedVar}}
 \end{center}
 \end{figure}
@@ -972,10 +972,10 @@ A class \subind{class}{variable} is declared in the class definition template.
 For example, the class \ct{Color} defines a large number of class variables to speed up color creation; its definition is shown below (\clsref{Color}).
 
 \begin{classdef}[Color]{Color and its class variables.}
-Object subclass: #Color 	
+Object subclass: #Color
         instanceVariableNames: 'rgb cachedDepth cachedBitPattern'
         classVariableNames: 'Black Blue BlueShift Brown CachedColormaps ColorChart ColorNames ComponentMask ComponentMax Cyan DarkGray Gray GrayToIndexMap Green GreenShift HalfComponentMask HighLightBitmaps IndexedColors LightBlue LightBrown LightCyan LightGray LightGreen LightMagenta LightOrange LightRed LightYellow Magenta MaskingMap Orange PaleBlue PaleBuff PaleGreen PaleMagenta PaleOrange PalePeach PaleRed PaleTan PaleYellow PureBlue PureCyan PureGreen PureMagenta PureRed PureYellow RandomStream Red RedShift TranslucentPatterns Transparent VeryDarkGray VeryLightGray VeryPaleRed VeryVeryDarkGray VeryVeryLightGray White Yellow'
-        poolDictionaries: '' 	
+        poolDictionaries: ''
         category: 'Graphics-Primitives'
 \end{classdef}
 
@@ -990,7 +990,7 @@ Since most colors do not have names, it was thought inappropriate to add an inst
 \subsubsection{Class initialization}
 
 The presence of class variables raises the question:
-How do we initialize them?  
+How do we initialize them?
 One solution is lazy \subind{class}{initialization}.
 This can be done by introducing an accessor method which, when executed, initializes the variable if it has not yet been initialized.
 This implies that we must use the accessor all the time and never use the class variable directly.
@@ -1003,7 +1003,7 @@ Color class>>>colorNames
 
 	ColorNames ifNil: [self initializeNames].
 	^ ColorNames
-\end{method}	
+\end{method}
 \cmindex{Color class}{colorNames}
 
 Another solution is to override the class method \ct{initialize}.
@@ -1011,10 +1011,10 @@ Another solution is to override the class method \ct{initialize}.
 \needlines{4}
 \begin{method}[colorclassinit]{Color class>>initialize.}
 Color class>>>initialize
-	
+
 	!\ldots!
 	self initializeNames
-\end{method}	
+\end{method}
 \cmindex{Color class}{initialize}
 
 \noindent
@@ -1026,31 +1026,31 @@ Although \subind{system browser}{class side} \ct{initialize} methods are execute
 Pool variables are variables that are shared between several classes that may not be related by inheritance.
 Pool variables were originally stored in pool dictionaries; now they should be defined as class variables of dedicated classes (subclasses of SharedPool).
 Our advice is to avoid them; you will need them only in rare and specific circumstances.
-Our goal here is therefore to explain \subind{variable}{pool} variables just enough so that you can understand them when you are reading code. 
+Our goal here is therefore to explain \subind{variable}{pool} variables just enough so that you can understand them when you are reading code.
 
-A class that accesses a pool variable must mention the pool in its class definition. 
-For example, the class \clsind{Text} indicates that it is using the pool dictionary \ct{TextConstants}, which contains all the text constants such as \glbind{CR} and \glbind{LF}. 
+A class that accesses a pool variable must mention the pool in its class definition.
+For example, the class \clsind{Text} indicates that it is using the pool dictionary \ct{TextConstants}, which contains all the text constants such as \glbind{CR} and \glbind{LF}.
 This dictionary has a key \ct{#CR} that is bound to the value \ct{Character cr}, \ie the carriage return character.
 \cmindex{Character class}{cr}
 
 \begin{classdef}[textpooldict]{Pool dictionaries in the \ct{Text} class.}
 ArrayedCollection subclass: #Text
-        instanceVariableNames: 'string runs' 	
-        classVariableNames: '' 	
+        instanceVariableNames: 'string runs'
+        classVariableNames: ''
         !\textbf{poolDictionaries: 'TextConstants'}!
         category: 'Collections-Text'
 \end{classdef}
-   
+
 This allows methods of the class \ct{Text} to access the keys of the dictionary in the method body \emph{directly}, \ie by using variable syntax rather than an explicit dictionary lookup.
-For example, we can write the following method. 
-  
+For example, we can write the following method.
+
 \begin{method}[texttestcr]{Text>>testCR.}
 Text>>>testCR
 
       ^ CR == Character cr
 \end{method}
 
-Once again, we recommend that you avoid the use of pool variables and pool dictionaries. 
+Once again, we recommend that you avoid the use of pool variables and pool dictionaries.
 
 %=========================================================
 \section{Chapter summary}
@@ -1073,7 +1073,7 @@ Everything is an object, and pretty much everything happens by message sends.
   The root of the single inheritance hierarchy is \lct{ProtoObject}.
   Classes you define, however, should normally inherit from \ct{Object} or its subclasses.
   There is no syntax for defining abstract classes.
-  An abstract class is simply a class with an abstract method\,---\,one 
+  An abstract class is simply a class with an abstract method\,---\,one
   whose implementation consists of the expression \ct{self subclassResponsibility}.
   Although \squeak supports only single inheritance, it is easy to share implementations of methods by packaging them as \emph{traits}.
 
@@ -1084,7 +1084,7 @@ Everything is an object, and pretty much everything happens by message sends.
   \item Method lookup follows the inheritance chain;
   \self sends are dynamic and start the method lookup again in the class of the receiver, whereas
   \super sends are static, and start in the superclass of class in which the \super send is written.
-  
+
   \item There are three kinds of shared variables.
   		Global variables are accessible everywhere in the system.
 		Class variables are shared between a class, its subclasses and its instances.

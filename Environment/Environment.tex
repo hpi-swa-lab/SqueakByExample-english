@@ -34,14 +34,14 @@ You have already seen how to define methods and classes using the system browser
 
 Sometimes your program does not work as you expect.
 Squeak has an excellent debugger, but like most powerful tools, it can be confusing on first use.
-We will walk you through a debugging session and demonstrate some of the features of the debugger. 
+We will walk you through a debugging session and demonstrate some of the features of the debugger.
 
 One of the unique features of Smalltalk is that while you are programming, you are living in a world of live objects, not in a world of static program text.
 This makes it possible to get very rapid feedback while programming, which makes you more productive.
 There are two tools that let you look at, and indeed change, live objects: the \emph{inspector} and the \emph{explorer}.
 
 The consequence of programming in a world of live objects rather than with files and a text editor is that you have to do something explicit to export your program from your Smalltalk image.
-The old way of doing this, also supported by all Smalltalk dialects, is by creating a \emph{fileout} or a \emph{change set}, which are essentially encoded text files that can be imported into another system.  
+The old way of doing this, also supported by all Smalltalk dialects, is by creating a \emph{fileout} or a \emph{change set}, which are essentially encoded text files that can be imported into another system.
 The new way of doing this in \Squeak is to upload your code to a versioned repository on a server.
 This is done using a tool called \ind{Monticello}, and is a much more powerful and effective way to work, especially when working in a team.
 \seeindex{change set}{file, filing out}
@@ -65,7 +65,7 @@ Let's start by looking at the main tools in \Squeak, all of which can be opened 
 		Unlike other environments where the source code is stored in separate files, in Smalltalk, all classes and methods are contained in the image.
 		\index{system browser}
 
-	\item{The \menu{Workspace}} is a window into which you can type input.  
+	\item{The \menu{Workspace}} is a window into which you can type input.
 		It can be used for any purpose, but is most often used for typing Smalltalk expressions and executing them as \menu{do it}s.
 		The use of the \ind{workspace} was also illustrated in \secref{transcript}.
 
@@ -80,9 +80,9 @@ Let's start by looking at the main tools in \Squeak, all of which can be opened 
 
 	\item{The \menu{Message Names}} tool is used to look at all of the methods with a particular selector, or with a selector containing a substring.
 	\index{message name finder}
-	
+
 	\item{The \menu{Monticello Browser}} is the starting point for loading code from, and saving code in, \ind{Monticello} packages.
-	
+
 	\item{The \menu{Process Browser} provides a view on all of the processes (threads) executing in Smalltalk.}
 	\index{process browser}
 \end{itemize}
@@ -97,7 +97,7 @@ The debugger is not launched from a menu or from the \toolsflap; it is normally 
 \section{The system browser}
 \label{sec:browser} % (fold)
 
-There are actually several browsers in \sq: the standard system browser, the package browser, and the Monticello snapshot browser. 
+There are actually several browsers in \sq: the standard system browser, the package browser, and the Monticello snapshot browser.
 We will take a look at the standard \ind{system browser} first since the others are variations on it.
 \figref{SystemBrowser0} shows the browser as it appears when you first open it from the world menu.
 
@@ -131,7 +131,7 @@ The leftmost pane lists \emph{categories} of classes; select one (say \scat{Kern
    \label{fig:SystemBrowserModel}}
 \end{figure}
 
-Similarly, if you select one of the classes in the second pane, say, \menu{Model} (see \figref{SystemBrowserModel}), the third pane will show all of the \emph{protocols} defined for that class, as well as a virtual protocol \prot{-{}-all-{}-}, which is selected by default (the browser sometimes refers to protocols as ``message categories''). 
+Similarly, if you select one of the classes in the second pane, say, \menu{Model} (see \figref{SystemBrowserModel}), the third pane will show all of the \emph{protocols} defined for that class, as well as a virtual protocol \prot{-{}-all-{}-}, which is selected by default (the browser sometimes refers to protocols as ``message categories'').
 Protocols help organizing methods; they make it easier to find and think about the behavior of a class by breaking it up into smaller, conceptually coherent pieces.
 The fourth pane shows the names of all of the methods defined in the selected protocol.
 If you then select a method name, the source code of the corresponding method appears in the large pane at the bottom of the browser, where you can view it, edit it, and save the edited version.
@@ -152,10 +152,10 @@ If you select the class \menu{Model}, the protocol \protind{dependents}, and the
    \label{fig:SystemBrowserMyDependents}}
 \end{figure}
 
-Unlike directories in the Mac OS X \emph{Finder}, the four top panes of the browser are not quite equal.  
+Unlike directories in the Mac OS X \emph{Finder}, the four top panes of the browser are not quite equal.
 Whereas classes and methods are part of the Smalltalk language, system categories and protocols are not:
 They are a convenience introduced by the programming tools to limit the amount of information that needs to be shown in each pane.
-For example, if there were no categories, the browser would have to show a list of all of the methods in the selected class; for many classes, this list would be too large to navigate conveniently.  
+For example, if there were no categories, the browser would have to show a list of all of the methods in the selected class; for many classes, this list would be too large to navigate conveniently.
 \index{Mac OS X Finder}
 
 Because of this, the way that you create a new class category or protocol is different from the way that you create a new class or a new method.
@@ -231,7 +231,7 @@ The buttons are labeled \button{browse}, \button{senders}, \button{implementors}
 The \button{browse} button opens a new system browser on the class or method that is currently selected.
 It's often useful to have multiple browsers open at the same time.
 When you are writing code you will almost certainly need at least two: one for the method that you are typing, and another to browse around the system to see what to type.
-You can also open a browser on a class named by any selected text using the \short{b} \ind{keyboard shortcut}. 
+You can also open a browser on a class named by any selected text using the \short{b} \ind{keyboard shortcut}.
 \index{system browser!browse button}
 \index{keyboard shortcut!browse it}
 
@@ -308,7 +308,7 @@ Since all of the methods with the same selector ought to be used in the same way
 Another way to determine implementors of a message is to browse the hierarchy. If you look at the send of \ct{drawOn:} in \ct{AtomMorph>>>drawOn:}, you will see that it is a super \subind{super}{send}.
 So we know that the method that will be executed will be in \ct{AtomMorph}'s superclass.
 What class is that?
-Click the \button{hierarchy} button and you will see that it is \ct{EllipseMorph}. 
+Click the \button{hierarchy} button and you will see that it is \ct{EllipseMorph}.
 \index{system browser!hierarchy button}
 
 
@@ -354,10 +354,10 @@ In \figref{mouseUpVersions} we can see the versions of the \ct{mouseUp:} method 
 \index{system browser!versions button}
 The top pane displays one line for each version of the method, listing the initials of the programmer who wrote it, the date and time at which it was saved, the names of the class and the method, and the protocol in which it was defined.
 The current (active) version is at the top of the list; whichever version is selected is displayed in the bottom pane.
-If the \menu{showDiffs} view is selected from the right most button, as it is in \figref{mouseUpVersions}, the display also shows the differences between the selected version and the one immediately older. 
-The \menu{prettyDiffs} view is useful if there have been changes to the layout: It pretty-prints both versions before differencing so that the differences that are displayed exclude formatting changes. 
-Through the leftmost button you can revert the method to the selected version. 
-The yellow button menu in the list of versions provides you further actions, such as comparing any version to the current one. 
+If the \menu{showDiffs} view is selected from the right most button, as it is in \figref{mouseUpVersions}, the display also shows the differences between the selected version and the one immediately older.
+The \menu{prettyDiffs} view is useful if there have been changes to the layout: It pretty-prints both versions before differencing so that the differences that are displayed exclude formatting changes.
+Through the leftmost button you can revert the method to the selected version.
+The yellow button menu in the list of versions provides you further actions, such as comparing any version to the current one.
 
 The existence of the \ind{versions browser} means that you never have to worry about preserving code that you think might no longer be needed:
 Just delete it.
@@ -373,7 +373,7 @@ Smalltalkers rate code readability extremely highly.
 \subsubsection{Method overridings}
 \label{sec:overriding}
 
-The \button{inheritance} button opens a specialized browser that displays all the methods overridden by the displayed method. 
+The \button{inheritance} button opens a specialized browser that displays all the methods overridden by the displayed method.
 To see how it works, display the \cmind{ScaleMorph}{defaultColor} method and click \button{inheritance}.
 This method definition overrides \mbox{\cmind{RectangleMorph}{defaultColor},} which itself overrides \cmind{Morph}{defaultColor}, as shown in \figref{inheritanceOverriding}.
 The color of the \button{inheritance} button depends on how the \subind{method}{overriding} occurs.
@@ -411,7 +411,7 @@ The colors are explained in a help balloon:
 		{\includegraphics[width=\textwidth]{inheritanceOverriding}}
 		{\includegraphics[scale=0.7]{inheritanceOverriding}}
 	\end{center}
-	\caption{\ct{ScaleMorph>>>defaultColor} and the methods that it overrides, in inheritance order. 
+	\caption{\ct{ScaleMorph>>>defaultColor} and the methods that it overrides, in inheritance order.
 	The \lct{inheritance} button is gold because the displayed method is overridden in a subclass.}
 	\label{fig:inheritanceOverriding}
 \end{figure}
@@ -446,8 +446,8 @@ In \figref{hierarchyBrowser}, the hierarchy browser reveals that the direct supe
 
 \index{system browser!vars button}
 \index{system browser!references}
-The \button{vars} button helps you find where an instance variable or a class variable is used; the same information is accessible from the \ind{yellow button} menu item \menu{references} in the class pane.  
-The menu also includes \menu{assignments}, which shows the subset of the instance variable references that assign to the variable. 
+The \button{vars} button helps you find where an instance variable or a class variable is used; the same information is accessible from the \ind{yellow button} menu item \menu{references} in the class pane.
+The menu also includes \menu{assignments}, which shows the subset of the instance variable references that assign to the variable.
 Once you click on the button or select the menu item, you will be presented with a dialog that invites you to choose a variable from all of the variables defined in the current class, and all of the variables that it inherits.
 The list is in inheritance order; it can often be useful to bring up this list just to remind yourself of the name of an instance variable.
 If you click outside the list, it will go away and no variable browser will be created.
@@ -468,19 +468,19 @@ Try some of them.
 
 Note that selecting \menu{prettyPrint} in the ``what to show'' menu is \emph{not} the same as prettyPrinting a method before you save it.
 The menu controls only what the browser displays, and does not affect the code stored in the system.
-You can verify this by opening two browsers, and selecting \menu{prettyPrint} in one and \menu{source} in the other.   
+You can verify this by opening two browsers, and selecting \menu{prettyPrint} in one and \menu{source} in the other.
 Focussing two browsers on the same method and selecting \menu{byteCodes} in one and \menu{decompile} in another is a good way to learn about the Squeak virtual machine's byte-coded instruction set.
 
 %---------------------------------------------------------
 \subsection{The browser menus}
 
-Many additional functions are available from the browser's yellow button menu.  
-Since yellow button menus are context-sensitive,  each pane in the browser has its own menu.  
-Even if the labels on the menu items are the same, their \emph{meaning} depends on the context.  
+Many additional functions are available from the browser's yellow button menu.
+Since yellow button menus are context-sensitive,  each pane in the browser has its own menu.
+Even if the labels on the menu items are the same, their \emph{meaning} depends on the context.
 For example, the category pane, the class pane, the protocol pane, and the messages pane all have a \menu{file out} menu item.
 However, they do different things:
 The category pane's \menu{file out} menu files out the whole category, the class pane's \menu{file out} menu files-out the whole class, the protocol pane's \menu{file out} menu files out the whole protocol, and the method pane's \menu{file out} menu files-out just the displayed method.
-Although this may seem obvious, it can be a source of confusion for beginners. 
+Although this may seem obvious, it can be a source of confusion for beginners.
 \index{file!filing in}
 \index{file!filing out}
 
@@ -499,7 +499,7 @@ This will filter the elements in the list so that the sought-for method name is 
 \dothis{Try both ways of navigating to \cmind{OrderedCollection}{removeAt:}}
 
 There are many other options available in the menus.
-It pays to spend a few minutes working with the browser and seeing what is there.   
+It pays to spend a few minutes working with the browser and seeing what is there.
 
 \dothis{Compare the result of the following three menu items in the class pane: \menu{Browse Protocol}, \menu{Browse Hierarchy}, and \menu{Show Hierarchy}.}
 
@@ -511,7 +511,7 @@ Even in menus, such as the world menu, you can simply start typing to filter ent
 \subsection{Other class browsers}
 \label{sec:otherBrowsers}
 
-At the beginning of this section we mentioned another class browser: the \emphind{package pane browser}. 
+At the beginning of this section we mentioned another class browser: the \emphind{package pane browser}.
 This browser can be opened from the world menu: \menu{World \go open\ldots \go package pane browser}
 It's basically the same as the class browser, but it knows about the naming convention for system categories.
 You will have noticed that the names of categories have two parts.
@@ -520,7 +520,7 @@ For example, the \ct{ScaleMorph} class belongs to the \scat{Morphic-Widgets} cat
 The package browser assumes that the part before the hyphen, \ct{Morphic} is the name of a ``package'', and adds a fifth pane that allows you to browse only those categories in a particular package.
 However, if you select no package at all, then all the categories are available, just as with the ordinary four-pane browser.
 
-Note that the meaning of the term \ind{package} as used in the package pane browser is different from the concept of Monticello 
+Note that the meaning of the term \ind{package} as used in the package pane browser is different from the concept of Monticello
 packages.
 To browse all classes of a Monticello package, you can open a Snapshot Browser from the Monticello Browser by selecting a package and then pressing \button{Browse}.
 
@@ -562,17 +562,17 @@ SystemOrganizer default classesIn: 'Collections-Strings' --> an OrderedCollectio
 %---------------------------------------------------------
 \subsection{Summary}
 
-As you have seen, there are many ways to navigate around Smalltalk code. 
+As you have seen, there are many ways to navigate around Smalltalk code.
 You may find this confusing at first, in which case you can always fall back to the traditional system browser.
 However, we usually find that once beginners gain more experience with \sq, the availability of different browsers becomes one of its most valued features, because they provide many ways to help you to understand and organize your code.
-The problem of understanding code is one of the greatest challenges of large-scale software development. 
+The problem of understanding code is one of the greatest challenges of large-scale software development.
 % section browser (end)
 
 %=========================================================
 \section{Monticello}
 
-We gave you a quick overview of \ind{Monticello}, Squeak's packaging tool, in \secref{Monticello}.  
-However, Monticello has many more features than were discussed there.  
+We gave you a quick overview of \ind{Monticello}, Squeak's packaging tool, in \secref{Monticello}.
+However, Monticello has many more features than were discussed there.
 Monticello manages \emph{Packages}. Before telling you more about Monticello, we will first explain exactly what a \ind{package} is, as Monticello is centered around this concept.
 
 %---------------------------------------------------------
@@ -601,7 +601,7 @@ Date>>>asSQL
 
 \noindent
 These methods belong in \damien{don't we say 'belong to'?} the same package as the classes in the categories \ct{SqueakLink-Connections} and \ct{SqueakLink-Model}.
-But clearly the whole of class \ct{Object} does not belong in your package! 
+But clearly the whole of class \ct{Object} does not belong in your package!
 So you need a way of putting certain \emph{methods} in a package, even though the rest of the class is in another package.
 \index{package!extension}
 \seeindex{extension package}{package, extension}
@@ -614,9 +614,9 @@ A package named \ct{Foo} contains:
 
 \begin{enumerate}		\label{sec:packageRules}
 	\item{} all class definitions of classes in the category \scat{Foo}, or in categories with names starting with \scat{Foo-},
-	and 
+	and
 	\item{} \label{env:extensions} all method definitions in any class in a protocol named \prot{*Foo} or whose name starts with \prot{*Foo-} (when performing this name comparison, the case of the letters in the names is actually ignored),
-	and 
+	and
 	\item{} all methods in classes in the category \scat{Foo} or in a category whose name starts with \scat{Foo-}, \emph{except} for those methods in protocols whose names start with \prot{*}.
 \end{enumerate}
 \noindent
@@ -632,11 +632,11 @@ In a workspace, create a model of this package with
 \index{refactoring}
 
 \begin{code}{}
-morphic := PackageInfo named: 'Morphic'. 
+morphic := PackageInfo named: 'Morphic'.
 \end{code}
 
-It is now possible to introspect on this package. 
-For example, \ct{morphic classes} will return the long list of classes from the core of Morphic as well as a number of specific Morph classes.  
+It is now possible to introspect on this package.
+For example, \ct{morphic classes} will return the long list of classes from the core of Morphic as well as a number of specific Morph classes.
 \ct{morphic coreMethods} will return a list of \ct{MethodReference}s for all of the methods in those classes.
 \ct{morphic extensionMethods} is perhaps one of the most interesting queries:
 It will return a list of all methods contained in the \ct{Morphic} package but not contained within a \lct{Morphic} class.
@@ -673,7 +673,7 @@ The left-hand pane lists all of the packages that have been loaded into the imag
 
 The right-hand pane lists all of the source-code repositories that Monticello knows about, usually because it has loaded code from them.  If you select a package in the left pane, the right pane is filtered to show only those repositories that contain versions of the selected package.
 
-One of the repositories is a directory named \emph{package-cache}, which is a sub-directory of the directory in which your image is running.  
+One of the repositories is a directory named \emph{package-cache}, which is a sub-directory of the directory in which your image is running.
 When you load code from or write code to a remote repository, a copy is also saved in the package cache.
 This can be useful if the network is not available and you need to access a package.
 Also, if you are given a Monticello (.mcz) file directly, for example as an email attachment, the most convenient way to access it is to place it in the package-cache directory.
@@ -764,11 +764,11 @@ Monticello will add \ct{SBE} to its list of packages; the package entry will be 
 
 Initially, the only repository associated with this package will be your package cache, as shown in \figref{MC+SBE}.
 That's OK:
-You can still save the code, which will cause it to be written to the package cache.  
+You can still save the code, which will cause it to be written to the package cache.
 Just click \button{Save} and you will be invited to provide a log message for the version of the package that you are about to save, as shown in \figref{SBE-apb}; when you accept the message, Monticello will save your package.
 To indicate this, the asterisk decorating the name in Monticello's package pane will be removed, and the version number added.
 
-If you then make a change to the package\,---\,say by adding a method to one of the classes\,---\,the asterisk will re-appear, showing that you have unsaved changes.  If you open a repository browser on the package cache, you can select the saved version, and use \button{Changes} and the other buttons.  
+If you then make a change to the package\,---\,say by adding a method to one of the classes\,---\,the asterisk will re-appear, showing that you have unsaved changes.  If you open a repository browser on the package cache, you can select the saved version, and use \button{Changes} and the other buttons.
 You can of course save the new version to the repository too; once you \button{Refresh} the repository view, it should look like \figref{package-cache-browser}.
 \index{package!cache}
 
@@ -777,7 +777,7 @@ You can of course save the new version to the repository too; once you \button{R
 SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 	thisContext wrap: [:block | helper mcIgnoreAllModificationsBut: #('SBE') during: block].
 	helper hideProgressMorph.
-	
+
 	MCWorkingCopyBrowser open.
 	picture writeTo: 'MC+SBE.png' frame: #morphs building: [
 		[helper click: (helper buttonLabeled: '+Package' in: helper foregroundWindow)]
@@ -786,7 +786,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 	].
 	picture writeTo: 'SBE-apb.png' frame: #morphs building: [
 		helper selectAnyListIn: helper foregroundWindow at: '*package-cache*' andScrollIntoViewBy: 5.
-		
+
 		[| relevantOperations |
 		relevantOperations := ((MCWorkingCopy forPackageNamed: 'SBE-Monticello') package snapshot
 			patchRelativeToBase: MCSnapshot empty) operations.
@@ -796,7 +796,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 			do: [:ex | ex resumeExcluding: relevantOperations]]
 				valueSuppressingMessages: #('*versions*may be newer*').
 		helper foregroundWindow delete] value.
-		
+
 		helper
 			runModal: [helper click: (helper buttonLabeled: 'Save' in: helper foregroundWindow)]
 			then: [| messageField |
@@ -809,7 +809,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 				"messageField setText: 'Change a few things'; flag: #fallback."
 				helper scaleWindow: helper foregroundWindow extent: 375 @ 300.
 				helper takeScreenshotOf: helper foregroundWindow.
-				
+
 				"This is preparation for the next screenshot"
 				[helper click: (helper buttonLabeled: 'Accept' in: helper foregroundWindow)]
 					valueSuppressingMessages: #('*message*empty*');
@@ -853,13 +853,13 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 	\label{fig:package-cache-browser}
 \end{figure}
 
-To save the new package to a repository other than the package cache, you need to first make sure that Monticello knows about the repository, adding it if necessary.  
-Then you can use the \button{Copy} in the package-cache repository browser, and select the repository to which the package should be copied.  
-You can also associate the desired repository with the package by using the \ind{yellow button} menu item \menu{add to package...} on the repository, as shown in \figref{associateRepository}.  
-Once the package knows about a repository, you can save a new version by selecting the repository and the package in the Monticello Browser, and clicking \button{Save}.  
-Of course, you must have permission to write to a repository.  
-The \ct{SqueakByExample} repository on \emphind{SqueakSource} is world readable but not world writable, so if you try and save there, you will see an error message.  
-However, you can create your own repository on \emph{SqueakSource} by using the web interface at \url{http://www.squeaksource.com}, and use this to save your work. 
+To save the new package to a repository other than the package cache, you need to first make sure that Monticello knows about the repository, adding it if necessary.
+Then you can use the \button{Copy} in the package-cache repository browser, and select the repository to which the package should be copied.
+You can also associate the desired repository with the package by using the \ind{yellow button} menu item \menu{add to package...} on the repository, as shown in \figref{associateRepository}.
+Once the package knows about a repository, you can save a new version by selecting the repository and the package in the Monticello Browser, and clicking \button{Save}.
+Of course, you must have permission to write to a repository.
+The \ct{SqueakByExample} repository on \emphind{SqueakSource} is world readable but not world writable, so if you try and save there, you will see an error message.
+However, you can create your own repository on \emph{SqueakSource} by using the web interface at \url{http://www.squeaksource.com}, and use this to save your work.
 This is especially useful as a mechanism to share your code with friends, or if you use multiple computers.
 
 \begin{ExecuteSmalltalkScript}
@@ -887,7 +887,7 @@ SBEScreenshotRecorder writeTo: './figures/MCaddToPackage.png' building: [:helper
 	\label{fig:associateRepository}
 \end{figure}
 
-If you do try and save to a repository where you don't have write permission, a version will nevertheless be written to the package-cache.  
+If you do try and save to a repository where you don't have write permission, a version will nevertheless be written to the package-cache.
 So you can recover by editing the repository information (\ind{yellow button} menu in the Monticello Browser) or choosing a different repository, and then using \button{Copy} from the package-cache browser.
 
 \on{I have commented out the Advanced Monticello section for now, as it will surely not be ready for the first release.}
@@ -917,7 +917,7 @@ Monticello provides some quite sophisticated features for managing versions.
 \subsubsection{Nested packages}
 
 One of the most important functions for a version management tool is to let the user build a package out of a number of smaller packages.
-For example, a complex package like refactoring support might be made up of the refactoring engine itself, a GUI, and the services interface that makes it accessible to other tools.  
+For example, a complex package like refactoring support might be made up of the refactoring engine itself, a GUI, and the services interface that makes it accessible to other tools.
 Each of these components goes in its own package, and yet,  for the convenience of the user, the whole needs to be available as a single package.
 
 How is this accomplished using Monticello?  \ab{How indeed?  I hope that someone can write this section, because I haven't a clue, but would really like to know.}
@@ -955,7 +955,7 @@ SBEScreenshotRecorder writeTo: './figures/inspectTimeNow1.png' building: [:helpe
 	\label{fig:inspectTimeNow1}
 \end{figure}
 
-A window like that shown in \figref{inspectTimeNow1} will appear.   
+A window like that shown in \figref{inspectTimeNow1} will appear.
 This is an inspector, and can be thought of as a window onto the internals of a particular object\,---\,in this case, the particular instance of \ct{TimeStamp} that was created when you evaluated the expression \ct{TimeStamp now}.
 The title bar of the window shows the \emph{class} of the object that is being inspected.
 If you select \menu{self} at the top of the left pane, the right pane will show the print string of the object.
@@ -963,7 +963,7 @@ If you select \menu{all inst vars} in the left pane, the right pane will show a 
 The remaining items in the left pane represent the instance variables; this makes it easy to examine them one at a time, and also to change them.
 
 The horizontal pane at the bottom of the inspector is a small workspace window.
-In this window, the pseudo-variable \ct{self} is bound to the very object that you are inspecting.  
+In this window, the pseudo-variable \ct{self} is bound to the very object that you are inspecting.
 So, if you \menu{inspect it} on
 \begin{code}{}
 self - TimeStamp today
@@ -1026,7 +1026,7 @@ To see the difference, we'll \emph{explore} the same object that we were just in
 \dothis{Select \menu{self} in the inspector's left-hand pane, and choose \menu{explore (I)} from the \ind{yellow button} menu.}
 The \ind{explorer} window looks like \figref{exploreTimeStampNow}.
 If you click on the small triangle next to \ct{root}, the view will change to \figref{exploreTimeStampNow2}, which shows the instance variables of the object that you are exploring.
-Click on the triangle next to \ct{localOffsetSeconds}, and you will see \emph{its} instance variables. (Actually, in this example \ct{hexadecimal}, \ct{octal} etc. are no instance variables of the Integer object, but rather different representations.)  
+Click on the triangle next to \ct{localOffsetSeconds}, and you will see \emph{its} instance variables. (Actually, in this example \ct{hexadecimal}, \ct{octal} etc. are no instance variables of the Integer object, but rather different representations.)
 The explorer is really useful when you need to explore a complex hierarchic structure\,---\,hence the name.
 \index{keyboard shortcut!explore it}
 
@@ -1035,15 +1035,15 @@ The workspace pane of the object explorer works slightly differently to that of 
 
 To see the value of the explorer, let's use it to explore a deeply-nested structure of objects.
 
-\dothis{Open a browser, and blue-click twice on the method pane to bring-up the Morphic halo on the \ct{PluggableListMorph} that is used to represent the list of messages. 
+\dothis{Open a browser, and blue-click twice on the method pane to bring-up the Morphic halo on the \ct{PluggableListMorph} that is used to represent the list of messages.
 Click on the \emph{debug} handle \debugHandle{} and select \menu{explore morph}
-from the menu that appears.  This will open an Explorer on the \clsind{PluggableListMorph} object that represents the method list on the screen.  
+from the menu that appears.  This will open an Explorer on the \clsind{PluggableListMorph} object that represents the method list on the screen.
 Open the root object (by clicking in its triangle), open its \ct{submorphs}, and continue exploring the structure of the objects that underlie this Morph, as shown in \figref{explorePluggableListMorph}.}
 \index{red button}
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/explorePluggableListMorph.png' building: [:helper |
-	| lists tree |	
+	| lists tree |
 	Browser open.
 	lists := (helper foregroundWindow submorphsSatisfying: #isPluggableListMorph)
 		collect: [:list | list center x -> list] as: Dictionary.
@@ -1080,7 +1080,7 @@ suffix
 	| dot dotPosition |
 	dot := FileDirectory dot.
 	dotPosition := (self size to: 1 by: -1) detect: [:i | (self at: i) = dot].
-	^ self copyFrom: dotPosition to: self size 
+	^ self copyFrom: dotPosition to: self size
 \end{method}
 
 Of course, we are sure that such a trivial method will work, so instead of writing an SUnit test, we just type \ct{'readme.txt' suffix} into a workspace and \menu{print it (p)}.
@@ -1105,7 +1105,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 			runModal: ['readme.txt' suffix]
 			then: [
 				helper takeScreenshot.
-				
+
 				"Next screenshots"
 				thisContext preponeSender: home.
 			].
@@ -1163,10 +1163,10 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 	\label{fig:PreDebugWindow}
 \end{figure}
 
-The \ct{PreDebugWindow} has a title-bar that tells us what error occurred, and shows us a \emphind{stack trace} of the messages that led up to the error. 
+The \ct{PreDebugWindow} has a title-bar that tells us what error occurred, and shows us a \emphind{stack trace} of the messages that led up to the error.
 Starting from the bottom of the trace, \ct{UndefinedObject>>>DoIt} represents the code that was compiled and run when we selected \ct{'readme.txt' suffix} in the workspace and asked \sq to \menu{print it}.
 This code, of course, sent the message \ct{suffix} to a \clsind{ByteString} object (\ct{'readme.txt'}).
-This caused the inherited \ct{suffix} method in class \ct{String} to execute; all this information is encoded in the next line of the stack trace, \ct{ByteString(String)>>>suffix}.  
+This caused the inherited \ct{suffix} method in class \ct{String} to execute; all this information is encoded in the next line of the stack trace, \ct{ByteString(String)>>>suffix}.
 Working up the stack, we can see that \ct{suffix} sent \ct{detect:}\ldots and eventually \ct{detect:ifFound:ifNone:} sent \ct{errorNotFound}.
 \clsindex{UndefinedObject}
 
@@ -1186,9 +1186,9 @@ To find out \emph{why} the dot was not found, we need the debugger itself, so cl
 	If you do this, the debugger will open already focussed on the corresponding method.}
 
 The debugger is shown in \figref{debuggerDetect}; it looks intimidating at first, but it is quite easy to use.
-The title-bar and the top pane are very similar to those that we saw in the \lct{PreDebugWindow}.  
+The title-bar and the top pane are very similar to those that we saw in the \lct{PreDebugWindow}.
 However, the debugger combines the stack trace with a method browser, so when you select a line in the stack trace, the corresponding method is shown in the pane below.
-It's important to realize that the execution that caused the error is still in your image, but in a suspended state.  
+It's important to realize that the execution that caused the error is still in your image, but in a suspended state.
 Each line of the stack trace represents a frame on the execution stack that contains all of the information necessary to continue the execution.
 This includes all of the objects involved in the computation, with their instance variables, and all of the temporary variables of the executing methods.
 
@@ -1199,8 +1199,8 @@ The four panes at the bottom of the debugger are really two mini-inspectors (wit
 The inspector on the left shows the current object, that is, the object named \self in the center pane.
 As you select different stack frames, the identity of \self may change, and so will the contents of the \self{}-inspector.
 If you click on \self in the bottom-left pane, you will see that \self is the interval \ct{(10 to: 1 by -1)}, which is what we expect.
-The workspace panes are not needed in the debugger's mini-inspectors because all of the variables are also in scope in the method pane; you should feel free to type or select expressions in this pane and evaluate them.  
-You can always \menu{cancel (l)} your changes using the menu or \short{\textit{l}}. 
+The workspace panes are not needed in the debugger's mini-inspectors because all of the variables are also in scope in the method pane; you should feel free to type or select expressions in this pane and evaluate them.
+You can always \menu{cancel (l)} your changes using the menu or \short{\textit{l}}.
 % apb: that lower-case-L is in italics so that it doesn't look like a 1 or a |
 \index{keyboard shortcut!cancel}
 
@@ -1211,15 +1211,15 @@ In \figref{debuggerDetect}, \ct{value} was sent to the parameter \ct{exceptionBl
 This will tell you that \ct{exceptionBlock} is \ct{[self errorNotFound: ...]}.
 So, it is not surprising that we see the corresponding error message.}
 
-Incidentally, if you want to open a full inspector or explorer on one of the variables shown in the mini-inspectors, select the name of the variable and choose \menu{inspect (i)} or \menu{explore (I)} from the yellow button menu.  
-This can be useful if you want to watch how a variable changes while you execute other code. 
+Incidentally, if you want to open a full inspector or explorer on one of the variables shown in the mini-inspectors, select the name of the variable and choose \menu{inspect (i)} or \menu{explore (I)} from the yellow button menu.
+This can be useful if you want to watch how a variable changes while you execute other code.
 \index{keyboard shortcut!inspect it}
 \index{keyboard shortcut!explore it}
 
 Looking back at the method window, we see that we expected the penultimate line of the method to find \ct{dot} in the string \ct{'readme.txt'}, and that execution should never have reached the final line.
-\sq does not let us run an execution backward, but it does let us start a method again, which works very well in code such as this that does not mutate objects, but instead creates new ones.  
+\sq does not let us run an execution backward, but it does let us start a method again, which works very well in code such as this that does not mutate objects, but instead creates new ones.
 
-\dothis{Click \button{Restart}, and you will see that the locus of execution returns to the first statement of the current method.  
+\dothis{Click \button{Restart}, and you will see that the locus of execution returns to the first statement of the current method.
 The blue highlight shows that the next message to be sent will be {\ct{do:}} (see \figref{RestartDetect}).}
 
 \begin{figure}[btp]
@@ -1233,9 +1233,9 @@ The blue highlight shows that the next message to be sent will be {\ct{do:}} (se
 \end{figure}
 
 The \button{Into} and \button{Over} buttons give us two different ways to step through the execution.
-If you click \button{Over}, \sq executes the current message send (in this case the \ct{do:}) in one step, unless there is an error.  
+If you click \button{Over}, \sq executes the current message send (in this case the \ct{do:}) in one step, unless there is an error.
 So \button{Over} will take us to the next message send in the current method, which is \ct{value}:
-This is exactly where we started, and not much help. 
+This is exactly where we started, and not much help.
 What we need to do is to find out why the \ct{do:} is not finding the character that we are looking for.
 
 \dothis{Click \button{Over}, and then click \button{Restart} to get back to the situation shown in \figref{RestartDetect}.}
@@ -1246,7 +1246,7 @@ However, it turns out that this is not much help either:
 We can be fairly confident that \ct{Collection>>>do:} is not broken.
 The bug is much more likely to be in \emph{what} we asked \sq to do.
 \button{Through} is the appropriate button to use in this case:
-We want to ignore the details of the \ct{do:} itself and focus on the execution of the argument block. 
+We want to ignore the details of the \ct{do:} itself and focus on the execution of the argument block.
 
 \dothis{Click on \button{Through} a few times.
 	Select \ct{each} in the context window as you do so.
@@ -1266,8 +1266,8 @@ To see what is going wrong, go \button{Into} the execution of \ct{value:} as ill
 \end{figure}
 
 After clicking \button{Into}, we find ourselves in the position shown in \figref{dotIsAString}.
-It looks at first that we have gone \emph{back} to the \ct{suffix} method, but this is because we are now executing the block that \ct{suffix} provided as argument to \ct{detect:}.  
-If you select \ct{i} in the context inspector, you can see its current value, which should be \ct{7} if you have been following along.  
+It looks at first that we have gone \emph{back} to the \ct{suffix} method, but this is because we are now executing the block that \ct{suffix} provided as argument to \ct{detect:}.
+If you select \ct{i} in the context inspector, you can see its current value, which should be \ct{7} if you have been following along.
 You can then select the corresponding element of \self from the \self{}-inspector.
 In \figref{dotIsAString} you can see that element \ct{7} of the string is character 46, which is indeed a dot.
 If you select \ct{dot} in the context inspector, you will see that its value is \ct{'.'}.
@@ -1283,7 +1283,7 @@ And now you see why they are not equal: the seventh character of \ct{'readme.txt
 	\label{fig:dotIsAString}
 \end{figure}
 
-Now that we see the bug, the fix is obvious: we have to convert \ct{dot} to a character before starting to search for it.  
+Now that we see the bug, the fix is obvious: we have to convert \ct{dot} to a character before starting to search for it.
 
 \begin{figure}[btp]
 	\begin{center}
@@ -1306,8 +1306,8 @@ Because we are executing code inside a block that is inside a \lct{detect:}, sev
 Is the answer correct?
 Unfortunately, we can't say for sure.
 Should the suffix be \ct{.txt} or \ct{txt}?
-The method comment in \ct{suffix} is not very precise.  
-A good way to avoid this kind of problem is to write an \ind{SUnit} test that defines the answer. 
+The method comment in \ct{suffix} is not very precise.
+A good way to avoid this kind of problem is to write an \ind{SUnit} test that defines the answer.
 As you will see in the following example, we can also use the tests to advance our debugging sessions quickly.
 
 We start by adding the following test method \mthref{testSuffix} to \ct{StringTest}.
@@ -1328,7 +1328,7 @@ Here is a better test:
 \begin{method}[testSuffix2]{A better test for the \ct{suffix} method.}
 testSuffixFound
 
-	self 
+	self
 		assert: 'txt' equals: 'readme.txt' suffix;
 		assert: 'txt' equals: 'read.me.txt' suffix.
 \end{method}
@@ -1405,13 +1405,13 @@ suffix
 	dot := FileDirectory dot asCharacter.
 	dotPosition := (self size to: 1 by: -1) detect: [:i | (self at: i) = dot].
 	self halt.
-	^ self copyFrom: dotPosition to: self size 
+	^ self copyFrom: dotPosition to: self size
 \end{method}
 
 When we run this method, the execution of the \ct{self halt} will bring up the \ind{pre-debugger}, from where we can proceed, or go into the debugger and look at variables, step the computation, and edit the code.
 
-That's all there is to the debugger, but it's not all there is to the \ct{suffix} method.  
-The initial bug should have made you realize that if there is no dot in the target string, the \ct{suffix} method will raise an error.  
+That's all there is to the debugger, but it's not all there is to the \ct{suffix} method.
+The initial bug should have made you realize that if there is no dot in the target string, the \ct{suffix} method will raise an error.
 This isn't the behavior that we want, so let's add a second test to specify what should happen in this case.
 
 \begin{method}[testNoSuffix]{A second test for the \ct{suffix} method: the target has no suffix.}
@@ -1434,7 +1434,7 @@ We will learn more about SUnit in \charef{SUnit}.
 %=========================================================
 \section{The process browser}
 
-\st is a multi-threaded system: there are many lightweight processes (also known as threads) running concurrently in your image. 
+\st is a multi-threaded system: there are many lightweight processes (also known as threads) running concurrently in your image.
 The \sq virtual machine implements concurrency by time-slicing.
 
 \begin{ExecuteSmalltalkScript}
@@ -1460,7 +1460,7 @@ SBEScreenshotRecorder writeTo: './figures/processBrowser.png' building: [:helper
 The process \subind{process}{browser} is a cousin of the debugger that lets you look at the various processes running inside \sq.
 \figref{processBrowser} shows a screenshot.
 The top-left pane lists all of the processes in \sq, in priority order, from the timer interrupt watcher at priority 80 to the idle process at priority 10.
-Of course, on a uniprocessor, when you look which program is running, the only process that can be running is the UI process, as it is currently displaying the information to you; all of the other will be waiting for some kind of event. 
+Of course, on a uniprocessor, when you look which program is running, the only process that can be running is the UI process, as it is currently displaying the information to you; all of the other will be waiting for some kind of event.
 By default, the display of processes is static; it can be updated using the \ind{yellow button} menu, which also provides an option to \menu{turn on auto-update (a)}
 
 If you select a process in the top-left pane, its stack trace is displayed in the top-right pane, just as with the debugger.
@@ -1473,12 +1473,12 @@ The process browser is not equipped with mini-inspectors for \self and \lct{this
 
 %=========================================================
 \section{Finding methods}
-\label{sec:methodFinder} 
+\label{sec:methodFinder}
 
 There are three tools in \sq to help you find messages. You can open the first two, MethodFinder and MessageNames from \menu{World docking bar\go{}Tools}. The third one is the global search in the right corner of the world docking bar.
 They differ in both interface and functionality.
 
-The \emph{method finder} was described at some length in \secref{quick:methodFinder}; you can use it to find methods by name or by functionality. 
+The \emph{method finder} was described at some length in \secref{quick:methodFinder}; you can use it to find methods by name or by functionality.
 However, to look at the body of a method, the method finder opens a new browser.
 This can quickly become overwhelming.
 
@@ -1510,8 +1510,8 @@ If you select one of the names in the left pane, all of the methods with that na
 As with the class browser, the message names browser has a button bar that can be used to open other  browsers on the selected method or its class.
 
 \index{global method search}
-The \emph{search bar} in the top right corner allows you to quickly access any method in the system. 
-You can either directly enter the full selector of the method, which will open a class browser, or enter a search term including wildcards represented by ``*'', which will open a message names browser. 
+The \emph{search bar} in the top right corner allows you to quickly access any method in the system.
+You can either directly enter the full selector of the method, which will open a class browser, or enter a search term including wildcards represented by ``*'', which will open a message names browser.
 You can also use the search bar to search for classes also using wildcards.
 As this search bar allows you to quickly jump to methods, it is also accessible via the keyboard shortcut \short{0}.
 
@@ -1580,11 +1580,11 @@ SBEScreenshotRecorder writeTo: './figures/changeSorter.png' building: [:helper |
 	\label{fig:changeSetBrowser}
 \end{figure}
 
-At any time, many change sets exist, but only one of them\,---\,\ct{ChangeSet current}\,---\,is collecting the changes that are being made to the image.  
+At any time, many change sets exist, but only one of them\,---\,\ct{ChangeSet current}\,---\,is collecting the changes that are being made to the image.
 You can see which change set is current and can examine all of the change sets using the  change set browser, available from \menu{World\go{}open...\go{}simple change sorter} or \menu{World docking bar\go{}Tools}.
 
 \figref{changeSetBrowser} shows this browser.
-The title bar shows which change set is current, and this change set is selected when the browser opens. 
+The title bar shows which change set is current, and this change set is selected when the browser opens.
 
 Other change sets can be selected in the top-left pane; the \ind{yellow button} menu allows you to make a different change set current, or to create a new change set.
 The top-right pane lists all of the classes affected by the selected change set (with their categories).
@@ -1614,7 +1614,7 @@ They do not keep track of dependencies.
 \index{file!filing out}
 
 Before the advent of Monticello, change sets were the main means for exchanging code between \sq{} users.
-They have the advantage of simplicity (the file-out is just a text file, although we \emph{don't} recommend that you try to edit it with a text editor), and a degree of portability.  
+They have the advantage of simplicity (the file-out is just a text file, although we \emph{don't} recommend that you try to edit it with a text editor), and a degree of portability.
 It's also quite easy to create a change set that makes changes to many different, unrelated parts of the system\,---\,something that Monticello is not yet equipped to do.
 \ab{Or is it?}
 \on{you mean something different than extensions to foreign packages using the *package protocol notation?}
@@ -1674,7 +1674,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder :helper |
 	\label{fig:fileList}
 \end{figure}
 
-The \ind{file list browser} is in fact a general-purpose tool for browsing the file system (and also FTP servers) from \sq. 
+The \ind{file list browser} is in fact a general-purpose tool for browsing the file system (and also FTP servers) from \sq.
 You can open it from the \menu{World\go{}open...\go{}file list} menu, or \menu{World docking bar\go{}Tools}.
 What you see of course depends on the contents of your local file system, but a typical view is shown in \figref{fileList}.
 \seeindex{file!browsing}{file list browser}
@@ -1683,7 +1683,7 @@ When you first open a file list browser it will be focused on the current direct
 The title bar shows the path to this directory.
 The larger pane on the left-hand side can be used to navigate the file system in the conventional way.
 When a directory is selected, the files that it contains (but not the directories) are displayed on the right.
-This list of files can be filtered by entering a Unix-style pattern in the small box at the top-left of the window.  
+This list of files can be filtered by entering a Unix-style pattern in the small box at the top-left of the window.
 Initially, this pattern is the current folder followed by a \ct{*}, which matches all file names in the folder, but you can type a different string there and accept it, changing the pattern.
 (Note that a \ct{*} is implicitly prepended and appended to the pattern that you type.)
 The sort order of the files can be changed using the \button{name}, \button{date} and \button{size} buttons.
@@ -1724,10 +1724,10 @@ This includes one-liners that you evaluate in a workspace, as well as code that 
 \index{changes}
 
 So here are the instructions on how to get your code back.
-There is no need to read this until you need it. 
+There is no need to read this until you need it.
 However, when you do need it, you'll find it here waiting for you.
 
-In the worst case, you can use a text editor on the \emph{.changes} file, but since it is many megabytes in size, this can be slow and is not recommended. 
+In the worst case, you can use a text editor on the \emph{.changes} file, but since it is many megabytes in size, this can be slow and is not recommended.
 \sq offers you better ways.
 
 %---------------------------------------------------------
@@ -1739,8 +1739,8 @@ Once you have a \emph{recent changes} browser, showing, say, changes back as far
 You can delete items from this list using the \ind{yellow button} menu.
 When you are satisfied, you can file-in what is left also using the \ind{yellow button} menu, thus incorporating the changes into your new image.
 
-One useful thing to do in the \emph{recent changes} browser is to \menu{remove doIts}. 
-Usually, you won't want to file in (and thus re-execute) doIts. 
+One useful thing to do in the \emph{recent changes} browser is to \menu{remove doIts}.
+Usually, you won't want to file in (and thus re-execute) doIts.
 However, there is an exception.
 Creating a class shows up as a \menu{doIt}.
 \emph{Before you can file in the methods for a class, the class must exist.}

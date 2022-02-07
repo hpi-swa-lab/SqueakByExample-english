@@ -137,12 +137,12 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 \item[Characters.]
 	A dollar sign introduces a literal \subind{literal}{character}: \ct{$a}\ignoredollar$ is the literal for `a'.
 	Instances of non-printing characters can be obtained by sending appropriately named messages to the \clsind{Character} class, such as \ct{Character space} \cmindex{Character class}{space} and \ct{Character tab}\cmindex{Character class}{tab}.
-		
+
 \item[Strings.]
 	Single quotes are used to define a literal \subind{literal}{string}.
 	If you want a string with a quote inside, just double the quote, as in \ct{'G''day'}.
 
-\item[Symbols] are like Strings, in that they contain a sequence of characters.  
+\item[Symbols] are like Strings, in that they contain a sequence of characters.
 	However, unlike a string, a literal \subind{literal}{symbol} is guaranteed to be globally unique.
 	There is only one Symbol object \ct{#Hello} but there may be multiple String objects with the value \ct{'Hello'}.
 	\seeindex{\#@{\textsf{\#}}}{literal symbol}
@@ -153,7 +153,7 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 	So \ct|{1 . 2 . 1 + 2}| defines an array with elements 1, 2, and the result of evaluating 1+2.
 	(The curly-brace notation is peculiar to the \sq dialect of \st!
 	In other \st{}s you must build up dynamic arrays explicitly.)
-	
+
 \item[Literal arrays] are defined by \ct{#( )}, surrounding space-separated literals.
 	Everything within the parentheses must be a compile-time constant.
 	These arrays are created at compile-time of the method.
@@ -167,7 +167,7 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 \item[Comments] are enclosed in double quotes.
 	\ct{"hello"} is a \ind{comment}, not a string, and is ignored by the \sq compiler.
 	Comments may span multiple lines.
-	
+
 \item[Local variable definitions.]
 	Vertical bars \ct{| |} enclose the \subind{variable}{declaration} of one or more local variables in a method (and also in a block).
 	% \seeindex{\|@{\textsf{\|\|}}}{assignment}
@@ -208,19 +208,19 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 	\index{message!binary}
 	\seeindex{binary message}{message, binary}
 
-\item[Keyword messages] consist of multiple keywords (like \ct{raisedTo:modulo:}), each ending with a colon and taking a single argument. 
+\item[Keyword messages] consist of multiple keywords (like \ct{raisedTo:modulo:}), each ending with a colon and taking a single argument.
 	In the expression \ct{2 raisedTo: 6 modulo: 10}, the \emphind{message selector} \ct{raisedTo:modulo:} takes the two arguments \ct{6} and \ct{10}, one following each colon.
 	We send the message to the receiver \ct{2}.
 	\index{message!keyword}
 	\seeindex{keyword message}{message, keyword}
 
 \item[Method return.]
-	\ct{^} is used to \emphind{return} a value from a method. 
+	\ct{^} is used to \emphind{return} a value from a method.
 	\md{\ct{^} always returns from the method, even if used in a block, it returns from the enclosing method.}
 
 \item[Sequences of statements.]
 	A period or full-stop (\ct{.}) is the \emph{statement} \emphsubind{statement}{separator}.
-	Putting a period between two expressions turns them into independent statements.	
+	Putting a period between two expressions turns them into independent statements.
 	\seeindex{full stop}{statement separator}
 	\seeindex{period}{statement separator}
 	\seeindex{\ct{.}}{statement separator}
@@ -293,7 +293,7 @@ Unary messages have the highest precedence, then binary messages, and finally ke
 \begin{code}{@TEST}
 2 raisedTo: 1 + 3 factorial --> 128
 \end{code}
-(First we send \ct{factorial} to \ct{3}, then we send \ct{+ 6} to \ct{1}, and finally we send \ct{raisedTo: 7} to \ct{2}.)  
+(First we send \ct{factorial} to \ct{3}, then we send \ct{+ 6} to \ct{1}, and finally we send \ct{raisedTo: 7} to \ct{2}.)
 Recall that we use the notation \lct{\emph{expression}}\ct{-->}\lct{\emph{result}} to show the result of evaluating an expression.
 
 Precedence aside, evaluation is strictly from left to right, so
@@ -323,7 +323,7 @@ When a series of messages is being sent to the \emph{same} receiver, then this c
 The receiver is specified just once, and the sequence of messages is separated by semi-colons:
 
 \begin{code}{}
-Transcript 
+Transcript
 	cr;
     show: 'hello world';
     cr.
@@ -347,11 +347,11 @@ Here is the method \mthind{String}{lineCount} in the class \clsind{String}.
 String>>>lineCount
    "Answer the number of lines represented by the receiver,
    where every cr adds one line."
-   
+
    | cr count |
    cr := Character cr.
    count := 1 min: self size.
-   self do: [:eachChar | 
+   self do: [:eachChar |
       eachChar = cr ifTrue: [count := count + 1]].
    ^ count
 \end{method}
@@ -423,16 +423,16 @@ Blocks are instances of the class \clsind{BlockContext}.
 This means that they are objects, so they can be assigned to variables and passed as arguments just like any other object.
 
 \paragraph{Returning inside blocks.}
-Returning inside blocks acts as an escaping mechanism. 
+Returning inside blocks acts as an escaping mechanism.
 Return expressions inside a nested block expression will terminate the lexically enclosing method.
-In the following example (see \mthref{detectReturnBlock}), when the expression \ct{^ foundBlock value: element} is executed, the method \ct{detect:ifFound:ifNone:} escapes the current iteration and returns it. 
+In the following example (see \mthref{detectReturnBlock}), when the expression \ct{^ foundBlock value: element} is executed, the method \ct{detect:ifFound:ifNone:} escapes the current iteration and returns it.
 
-\needlines{5}	
+\needlines{5}
 \begin{method}[detectReturnBlock]{The method \ct{detect:ifFound:ifNone:} illustrating how returning inside blocks can be used.}
-Collection>>>detect: aBlock ifFound: foundBlock ifNone: exceptionBlock 
+Collection>>>detect: aBlock ifFound: foundBlock ifNone: exceptionBlock
    "foundBlock takes one argument, the found object."
 
-   self do: [:element | 
+   self do: [:element |
       (aBlock value: element) ifTrue: [^ foundBlock value: element]].
    ^ exceptionBlock value
 \end{method}
@@ -564,7 +564,7 @@ If the primitive fails, the expression \ct{super + aNumber} will be evaluated an
 
 \needlines{6}
 \begin{method}[primitive]{A primitive method.}
-+ aNumber 
++ aNumber
   "Primitive. Add the receiver to the argument and answer with the result
   if it is a SmallInteger. Fail if the argument or the result is not a
   SmallInteger  Essential  No Lookup. See Object documentation whatIsAPrimitive."
@@ -573,13 +573,13 @@ If the primitive fails, the expression \ct{super + aNumber} will be evaluated an
   ^ super + aNumber
 \end{method}
 
-%The other use of primitives is to optimize some crucial methods. The idea is that the system could work 
-%without the primitive but it would be slow. The following method shows that the method \ct{@} is calling the primitive 18. Here the point creation is clearly expressible in \st therefore the code after the primitive is just the creation of a point illustrating what the primitive is actually doing. Note that such a code will be never called except if the primitive would failed which is extremely rare.  
+%The other use of primitives is to optimize some crucial methods. The idea is that the system could work
+%without the primitive but it would be slow. The following method shows that the method \ct{@} is calling the primitive 18. Here the point creation is clearly expressible in \st therefore the code after the primitive is just the creation of a point illustrating what the primitive is actually doing. Note that such a code will be never called except if the primitive would failed which is extremely rare.
 
 %\begin{method}[xxx]{xxx}
-%Integer>>@ y 
-%   "Primitive. Answer a Point whose x value is the receiver and whose y 
-%   value is the argument. Optional. No Lookup. See Object documentation 
+%Integer>>@ y
+%   "Primitive. Answer a Point whose x value is the receiver and whose y
+%   value is the argument. Optional. No Lookup. See Object documentation
 %   whatIsAPrimitive."
 
 %   <primitive: 18>
@@ -612,8 +612,8 @@ Pragmas don't have any effect on the method by themselves, but other objects can
 
 \item	Use \ct{#( ... )} to define a literal array.
 		Use \ct|{ ... }| to define a dynamic array.
-		Note that 
-		\ct{#(1 + 2) size --> 3}, but 
+		Note that
+		\ct{#(1 + 2) size --> 3}, but
 		\ct|{1 + 2} size --> 1|
 
 \item	There are three kinds of messages:
@@ -633,7 +633,7 @@ Pragmas don't have any effect on the method by themselves, but other objects can
 
 \item	Block closures are expressions enclosed in square brackets.
 		Blocks may take arguments and can contain temporary variables.
-		The expressions in the block are not evaluated until you send the block a 
+		The expressions in the block are not evaluated until you send the block a
 		\ct{value...} message with the correct number of arguments.\\
 		\ct{[:x | x + 2] value: 4 --> 6}.
 

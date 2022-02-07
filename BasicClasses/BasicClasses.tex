@@ -31,10 +31,10 @@
 
 Most of the power of Smalltalk is not in the language but the class libraries.
 To program effectively with Smalltalk, you need to learn how the class libraries support the language and environment.
-The class libraries are entirely written in Smalltalk and we can easily extend them since a package may add new functionality to a class even if it does not define this class. 
+The class libraries are entirely written in Smalltalk and we can easily extend them since a package may add new functionality to a class even if it does not define this class.
 
 Our goal here is not to present in tedious detail the whole of the Squeak class library, but rather to point out the key classes and methods that you will need to use or override to program effectively.
-In this chapter we cover the basic classes that you will need for nearly every application: \ct{Object}, \ct{Number} and its subclasses, \ct{Character}, \ct{String}, \ct{Symbol}, \ct{Boolean}, and \ct{Exception}. 
+In this chapter we cover the basic classes that you will need for nearly every application: \ct{Object}, \ct{Number} and its subclasses, \ct{Character}, \ct{String}, \ct{Symbol}, \ct{Boolean}, and \ct{Exception}.
 In the following chapter \charef{collections}, we will discuss the equally important \ct{Collection} subclasses.
 
 \md{Here are some comments:\\
@@ -57,10 +57,10 @@ The class comment for the \ct{Object} states:
 \begin{quote}\itshape
     \ct{Object} is the root class for almost all of the other classes in the class hierarchy.
     The exceptions are \ct{ProtoObject} (the superclass of \ct{Object}) and its subclasses.
-    
+
     Class \ct{Object} provides default behavior common to all normal objects, such as access, copying, comparison, error handling, message sending, and \ind{reflection}.
     Also, utility messages that all objects should respond to are defined here.
-    
+
     \ct{Object} has no instance variables, nor should any be added.
     This is due to several classes of objects that inherit from \ct{Object} that have special implementations (\ct{SmallInteger} and \ct{UndefinedObject} for example) or the VM knows about and depends on the structure and layout of certain standard classes.
 \end{quote}
@@ -74,14 +74,14 @@ You can select any expression in a workspace and select the \menu{print it} menu
 This executes the expression and asks the returned object to print itself.
 In fact, this sends the message \ct{printString} to the returned object.
 The method \mthind{Object}{printString}, which is a \ind{template method}, at its core sends the message \mthind{Object}{printOn:} to its receiver.
-The message \ct{printOn:} is a hook that can be specialized. 
+The message \ct{printOn:} is a hook that can be specialized.
 
 \ct{Object>>>printOn:} is very likely one of the methods that you will most frequently override.
 This method takes as its argument a \clsind{Stream} (for more on streams see \charef{streams}) on which a \clsind{String} representation of the object will be written.
 The default implementation simply writes the class name preceded by ``\ct{a}'' or ``\ct{an}''.
 \ct{Object>>>printString} returns the \ct{String} that is written.
 
-For example, the class \clsind{Browser} does not redefine the method \ct{printOn:} and sending the message \ct{printString} to a \ct{Browser} instance executes the method defined in \ct{Object}. 
+For example, the class \clsind{Browser} does not redefine the method \ct{printOn:} and sending the message \ct{printString} to a \ct{Browser} instance executes the method defined in \ct{Object}.
 \begin{code}{@TEST}
 Browser new printString --> 'a Browser'
 \end{code}
@@ -115,7 +115,7 @@ Some objects have the nice properties that their value is themselves.
 For example, the value of the object \ct{true} is itself \ie the object \ct{true}.
 We call such objects \emphind{self-evaluating objects}.
 You can see a \emph{printed} version of an object value when you print the object in a workspace.
-Here are some examples of such self-evaluating expressions. 
+Here are some examples of such self-evaluating expressions.
 
 \begin{code}{@TEST}
 true       --> true
@@ -142,7 +142,7 @@ Lots of \ct{printOn:} method specializations implement self-evaluating behavior.
 The implementations of \cmind{Point}{printOn:} and \cmind{Interval}{printOn:} are self-evaluating.
 
 \begin{method}[Self-evaluating points]{\ct{Point} print string definition that enables self-evaluation.}
-Point>>>printOn: aStream 
+Point>>>printOn: aStream
     "The receiver prints on aStream in terms of infix notation."
 
     x printOn: aStream.
@@ -231,7 +231,7 @@ Although you should override \ct{=} and \ct{hash} together, you should \emph{nev
 
 %-----------------------------------------------------------------
 \subsection{Class membership}
-Several methods allow you to query the class of an object. 
+Several methods allow you to query the class of an object.
 
 \paragraph{\mthind{Object}{class}.}
 You can ask any object about its class using the message \ct{class}.
@@ -248,7 +248,7 @@ Conversely, you can ask if an object is an instance of a specific class:
 1 isMemberOf: Object           --> false
 \end{code}
 
-Since Smalltalk is written in itself, you can really navigate through its structure using the right combination of superclass and class messages (see \charef{metaclasses}). 
+Since Smalltalk is written in itself, you can really navigate through its structure using the right combination of superclass and class messages (see \charef{metaclasses}).
 
 \paragraph{\ct{isKindOf:}.}
 \cmind{Object}{isKindOf:} answers whether the receiver's class is either the same as, or a subclass of the argument class.
@@ -281,7 +281,7 @@ Instead of making decisions based on the class of object, you should simply send
 
 There are several ways to copy objects in \sq, depending on what you want to copy. For example, when you copy a collection, you might want to or might not want to copy all its elements. If you are not sure what the right way to copy an object is, the first message to send is \ct{copy}, as it takes care of copying the right instance variables for you.
 
-To understand the other messages for copying, we will discuss different ways at looking at copying one after another. 
+To understand the other messages for copying, we will discuss different ways at looking at copying one after another.
 In general, copying objects introduces some subtle issues.
 Since instance variables are accessed by reference, a \emphsubind{Object}{shallow copy} of an object would share its references to instance variables with the original object:
 \seeindex{copy}{Object, \ct{copy}}
@@ -324,7 +324,7 @@ array1 --> #(#('sally'))
 array2 --> #(#(#('harry')))
 \end{code}
 
-However, \ct{deepCopy} does not keep track of previously copied objects. This means that it does not preserve the identity of re-occurring objects. When the object to be copied contains another object twice in its contents, there will be two new objects. 
+However, \ct{deepCopy} does not keep track of previously copied objects. This means that it does not preserve the identity of re-occurring objects. When the object to be copied contains another object twice in its contents, there will be two new objects.
 
 \needlines{5}
 \begin{code}{@TEST | object array copiedArray |}
@@ -344,8 +344,8 @@ array1 at: 1 put: array2.
 array1 deepCopy --> !\emph{... does not terminate!}!
 \end{code}
 
-Another way to copy an object is provided by \cmind{Object}{deepCopy}: 
-It creates arbitrarily deep copies of objects but preserves object identities and cycles. 
+Another way to copy an object is provided by \cmind{Object}{deepCopy}:
+It creates arbitrarily deep copies of objects but preserves object identities and cycles.
 
 \begin{code}{@TEST | array1 array2 copiedArray |}
 array1 := {'harry'}.
@@ -355,8 +355,8 @@ copiedArray := array1 veryDeepCopy.
 copiedArray first first = copiedArray --> true
 \end{code}
 
-Whether any of these four copy methods is the right one depends on the meaning of the object and its instance variables. 
-As this can not be decided in general for all objects and all use cases, \cmind{Object}{copy} delegates this decision to specific subclasses. 
+Whether any of these four copy methods is the right one depends on the meaning of the object and its instance variables.
+As this can not be decided in general for all objects and all use cases, \cmind{Object}{copy} delegates this decision to specific subclasses.
 \cmind{Object}{copy} first creates a shallow copy, and then asks this shallow copy to copy any instance variables that should be copied by sending \ct{postCopy} to it.
 
 \needlines{5}
@@ -368,8 +368,8 @@ Object>>>copy
 \end{method}
 
 You should override \mthind{Object}{postCopy} to copy any instance variables that should not be shared.
-\ct{postCopy} should always do a \ct{super postCopy}. 
-For example, a \clsind{Form} object has instance variables for width, height, bit depth, an offset, and the actual bits. 
+\ct{postCopy} should always do a \ct{super postCopy}.
+For example, a \clsind{Form} object has instance variables for width, height, bit depth, an offset, and the actual bits.
 As the first four instance variables are all described by numbers, there is no need to copy them as you can see in \mthind{Form}{postCopy}.
 
 \needlines{4}
@@ -456,7 +456,7 @@ Number new + 1 --> !\emph{Error: My subclass should have overridden \#+}!
 
 \ct{self shouldNotImplement} is sent by convention to signal that an inherited method is not appropriate for this subclass.
 This is generally a sign that something is not quite right with the design of the class hierarchy.
-Due to the limitations of single inheritance, however, sometimes it is very hard to avoid such workarounds. 
+Due to the limitations of single inheritance, however, sometimes it is very hard to avoid such workarounds.
 \cmindex{Object}{shouldNotImplement}
 \index{inheritance!canceling}
 A typical example is \cmind{Collection}{remove:} which is inherited by \clsind{Dictionary} but flagged as not implemented.
@@ -533,13 +533,13 @@ For example:
 
 \needlines{10}
 \begin{method}{Abstract comparison methods.}
-Magnitude>>> < aMagnitude 
+Magnitude>>> < aMagnitude
     "Answer whether the receiver is less than the argument."
 
     ^ self subclassResponsibility
 
 
-Magnitude>>> > aMagnitude 
+Magnitude>>> > aMagnitude
     "Answer whether the receiver is greater than the argument."
 
     ^ aMagnitude < self
@@ -838,10 +838,10 @@ While you have the choice, by default you should always use the lazy conjunction
 %=================================================================
 \section{Exceptions}
 
-\ct{Exceptions}\clsindexmain{Exception} might not be the first class you will need when starting to explore \sq. 
+\ct{Exceptions}\clsindexmain{Exception} might not be the first class you will need when starting to explore \sq.
 However, \ct{Exceptions} provide a fundamental way to influence the control flow in your application, thus we already introduce them with the other basic classes.
 
-Similar to \ct{ifTrue:} and \ct{ifFalse:}, exceptions are not part of the language, but implemented as ordinary objects in the class library. 
+Similar to \ct{ifTrue:} and \ct{ifFalse:}, exceptions are not part of the language, but implemented as ordinary objects in the class library.
 Thus, we can work with them as we would work with any other object.
 
 The common superclass of all exceptions is the abstract class \ct{Exception}.
@@ -862,19 +862,19 @@ The methods for handling exceptions are associated with blocks, so you can find 
 To catch an exception you can use the method \ct{BlockClosure>>>on:do:}\cmindex{BlockClosure}{on:do:}\footnote{This is similar to \ct{try...catch} in other languages.}, which takes an exception class (or \ct{ExceptionSet}) as the first argument and a block as the second.
 
 \begin{code}{NB: CANNOT TEST}
-[(10 to: -10 by: -1) collect: [:i | 100 / i]] 
+[(10 to: -10 by: -1) collect: [:i | 100 / i]]
    on: ZeroDivide
    do: [:ex | "do nothing"].
 \end{code}
 
 The code above does not return a collection, as the block was interrupted by the \ct{ZeroDivide} exception before it was able to return the result of the \ct{#collect:} send.
 
-Sometimes you might not be interested in handling an exception. 
+Sometimes you might not be interested in handling an exception.
 Instead you might only want to ensure that some code is always executed after your block, regardless of whether an exception occurs, the block returns early, or the block finishes normally.
 To achieve this, use the method \ct{BlockClosure>>>ensure:}\footnote{This is similar to \ct{finally} in other languages.} which will always execute the block passed to it.
 
 \begin{code}{NB: CANNOT TEST}
-[connectedSocket sendData: 'my network message'] 
+[connectedSocket sendData: 'my network message']
    ensure: [connectedSocket close].
 
 [(1 to: 10) pairsDo: [:number1 :number2 | | sum |
@@ -888,7 +888,7 @@ To achieve this, use the method \ct{BlockClosure>>>ensure:}\footnote{This is sim
 % - Passing along state
 % As we sometimes want to catch several kinds of exceptions, you can combine \ct{Exception}s into an \ct{ExceptionSet} by sending the message \ct{Exception>>>,}.
 
-Further, \ct{Exception}s have several rich features such as resuming, restarting, or signaling other exceptions. 
+Further, \ct{Exception}s have several rich features such as resuming, restarting, or signaling other exceptions.
 Browse the class \lct{Exception} to learn more.
 
 
