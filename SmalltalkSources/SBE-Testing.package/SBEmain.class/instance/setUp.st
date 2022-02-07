@@ -1,5 +1,6 @@
 initialize-release
 setUp
+	"SBEmain new setUp"
 
 	SystemChangeNotifier uniqueInstance doSilently: [
 		self class removeOldTestCategory.
