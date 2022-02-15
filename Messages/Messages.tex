@@ -36,7 +36,7 @@ If you already feel comfortable with the syntax, you may choose to skip this cha
 %=============================================================
 \section{Identifying messages}
 
-In \st, except for the syntactic elements listed in \charef{syntax} (\ct+:= ^ . ; # () {} [ : | ]+), everything is a message send. 
+In \st, except for the syntactic elements listed in \charef{syntax} (\ct+:= ^ . ; # () {} [ : | ]+), everything is a message send.
 Even operations such as \ct{+} are message sends and you can implement methods for these operations in your classes.
 At the same time, the arity of a method is set.
 ``\ct{-}'' is always a binary message; there is no way to have a unary ``\ct{-}'' with different overloading.
@@ -55,7 +55,7 @@ The following terminology will help us:
   \item A message is composed of the message \emphsubind{message}{selector} and the optional message arguments.
   \item A message is sent to a \emphsubind{message}{receiver}.
   \item The combination of a message and its receiver is called a \emph{message} \emphsubind{message}{send} as shown in \figref{firstScriptMessage}.
-%  \item We call expression a message send, a variable, an assignment, a literal or a block. 
+%  \item We call expression a message send, a variable, an assignment, a literal or a block.
 \end{itemize}
 
 \begin{figure}[htb]
@@ -139,13 +139,13 @@ In all the cases, a message is sent to an object called the \emph{receiver} whic
 \label{sec:threeKindsOfMessages}
 
 \st defines a few simple rules to determine the order in which the messages are sent.
-These rules are based on the distinction between 3 different kinds of messages: 
+These rules are based on the distinction between 3 different kinds of messages:
 \begin{itemize}
 \item \emph{Unary messages} are messages that are sent to an object without arguments.
-	For example in \ct{3 factorial}, \ct{factorial} is a unary message. 
+	For example in \ct{3 factorial}, \ct{factorial} is a unary message.
 \item \emph{Binary messages} are messages consisting of operators (often arithmetic).
 	They are binary because they always involve only two objects: the receiver and the argument object.
-	For example in \ct{10 + 20}, \ct{+} is a binary message sent to the receiver \ct{10} with argument \ct{20}. 
+	For example in \ct{10 + 20}, \ct{+} is a binary message sent to the receiver \ct{10} with argument \ct{20}.
 \item \emph{Keyword messages} are messages consisting of one or more keywords, each ending with a colon (\ct{:}) and taking an argument.
 	For example in \ct{anArray at: 1 put: 10}, the keyword \ct{at:} takes the argument \ct{1} and the keyword \ct{put:} takes the argument \ct{10}.
 \end{itemize}
@@ -179,7 +179,7 @@ Object class --> Object class  "The class of Object is Object class (BANG)"
 They follow the syntactic template: \lct{receiver \textbf{selector}}}
 
 %-------------------------------------------------------------
-\subsection{Binary messages} 
+\subsection{Binary messages}
 Binary messages are messages that require exactly one argument \emph{and} whose selector consists of a sequence of one or more characters from the set: \ct{+}, \ct{-}, \ct{*}, \ct{/}, \ct{&}, \ct{=}, \ct{>}, \ct{|}, \ct{<}, \ct{~}, and \ct{@}.
 Note that \ct{--} is not allowed for parsing reasons.
 
@@ -196,7 +196,7 @@ Note that \ct{--} is not allowed for parsing reasons.
 They follow the syntactic template: \lct{receiver \textbf{selector} argument}}
 
 %-------------------------------------------------------------
-\subsection{Keyword messages} 
+\subsection{Keyword messages}
 
 Keyword messages are messages that require one or more arguments and whose selector consists of one or more keywords each ending in \ct{:}.
 Keyword messages follow the syntactic template:
@@ -227,12 +227,12 @@ nums --> #(6 2 3 4 5)
 
 %=============================================================
 \section{Message composition}
-The three kinds of messages each have different precedence, which allows them to be composed in an elegant way. 
+The three kinds of messages each have different precedence, which allows them to be composed in an elegant way.
 
 \begin{enumerate}
-\item Unary messages are always sent first, then binary messages and finally keyword messages. 
-\item Messages in \ind{parentheses} are sent prior to any kind of message. 
-\item Messages of the same kind are evaluated from left to right. 
+\item Unary messages are always sent first, then binary messages and finally keyword messages.
+\item Messages in \ind{parentheses} are sent prior to any kind of message.
+\item Messages of the same kind are evaluated from left to right.
 \end{enumerate}
 \index{message!evaluation order}
 
@@ -285,10 +285,10 @@ The result shows us which methods must be implemented by \ct{Boolean}'s concrete
 
 %\begin{code}{}
 %Pen new go: 30 + 50          "create a turtle and moves it forward 80 pixels"
-%Display restoreAfter: [WarpBlt test4] 					
+%Display restoreAfter: [WarpBlt test4]
 %	"Keyword message, try test1, test12, test3, test4 and test 5"
-%#($t $e $s $t) at: 3 --> $s 
-%#($a $b $c $d) at: 2 factorial put: $z 
+%#($t $e $s $t) at: 3 --> $s
+%#($a $b $c $d) at: 2 factorial put: $z
 %\end{code}
 
 %As you can see the syntax and in particular the keyword messages as in
@@ -318,7 +318,7 @@ The message \ct{+ 20} is sent to the object \ct{100} and returns the number \ct{
 Then the message send \ct{aPen go: 120} is sent with \ct{120} as argument (2).
 
 \begin{example}[decGo]{Decomposing \ct{aPen go: 100 + 20}.}{}
-      aPen go: 100 + 20.   
+      aPen go: 100 + 20.
 (1)                 100 + 20           "binary message first"
                    -->   120
 (2)  aPen go: 120                   "then keyword message"
@@ -343,13 +343,13 @@ Then the message send \ct{aPen go: 120} is sent with \ct{120} as argument (2).
 \end{figure}
 
 %\begin{figure}[ht]
-%\centerline{\includegraphics[width=6cm]{uKeyBin}} 
+%\centerline{\includegraphics[width=6cm]{uKeyBin}}
 %\caption{Unary messages are sent first so \ct{Color yellow} is sent. This returns a color object which is passed as argument of the message \ct{aPen color:}.\label{fig:uKeyBin}}
 %\end{figure}
 
 %\paragraph{Example 3.}
 %The message \ct{aPen penSize: aPen penSize + 2} contains one unary message \ct{penSize}, one binary message \ct{+},  and one keyword message \ct{penSize:}.
-%The unary message \ct{aPen penSize} is sent first (1), this message returns a number representing the current size of the receiver pen. Then the binary message is sent (2), the returned number is sent the message \ct{+ 2} which in its turn returns another number. Finally the keyword message 
+%The unary message \ct{aPen penSize} is sent first (1), this message returns a number representing the current size of the receiver pen. Then the binary message is sent (2), the returned number is sent the message \ct{+ 2} which in its turn returns another number. Finally the keyword message
 %\ct{penSize:} is sent with the last number as argument. The expression increases the receiver pen size by two pixels. \Egref{decpen} illustrates the decomposition of message evaluation.
 
 % penSize does not exist on Pen
@@ -360,8 +360,8 @@ Then the message send \ct{aPen go: 120} is sent with \ct{120} as argument (2).
 %(1)                        aPen penSize            "unary"
 %                              $\arrow$  aNumber
 %(2)                              aNumber + 2	             "binary"
-%                                    $\arrow$   anotherNumber	
-%(3)   aPen penSize: anotherNumber           "keyword"      
+%                                    $\arrow$   anotherNumber
+%(3)   aPen penSize: anotherNumber           "keyword"
 %\end{scriptfigwithsize}
 
 \paragraph{Example.}
@@ -390,7 +390,7 @@ Parenthesised messages are sent prior to other messages.\\
 
 In the following example, we need the \ind{parentheses} to force sending \ct{lowMajorScaleOn:} before \ct{play}.
 \begin{code}{}
-(FMSound lowMajorScaleOn: FMSound clarinet) play 
+(FMSound lowMajorScaleOn: FMSound clarinet) play
 "(1) send the message clarinet to the FMSound class to create a clarinet sound.
  (2) send this sound to FMSound as an argument to the lowMajorScaleOn: keyword message.
  (3) play the resulting sound."
@@ -409,7 +409,7 @@ The message \ct{(65 @ 325 extent: 134 @ 100) center} returns the center of a rec
 \Egref{decExtent} shows how the message is decomposed and sent.
 First, the message between parentheses is sent:
 It contains two binary messages \ct{65 @ 325} and \ct{134 @ 100} that are sent first and return points, and a keyword message \ct{extent:} which is then sent and returns a rectangle.
-Finally, the unary message \ct{center} is sent to the rectangle and a point is returned. 
+Finally, the unary message \ct{center} is sent to the rectangle and a point is returned.
 Evaluating the message without parentheses would lead to an error because the object \ct{100} does not understand the message \ct{center}.
 
 \needlines{9}
@@ -434,7 +434,7 @@ The answer is \emph{from the left to the right}. Note that you already saw this 
 	When the messages are of the same kind, the order of evaluation is from left to right.}}
 
 %\begin{figure}
-%\centerline{\includegraphics[width=8cm]{ucompoUn}} 
+%\centerline{\includegraphics[width=8cm]{ucompoUn}}
 %\caption{The message \ct{Pen new east} is composed of two unary messages. Therefore the leftmost one, \ct{new},  is sent and it returns a new robot to which the second message \ct{east} is sent. \label{fig:compoUn}}
 %\end{figure}
 
@@ -463,7 +463,7 @@ This returns a newly created pen to which the second message \ct{down} is sent, 
 
 %-------------------------------------------------------------
 \subsection{The absence of arithmetic precedence}
-The message composition rules are simple, but, as they apply to all message sends, might not always match your expectations. 
+The message composition rules are simple, but, as they apply to all message sends, might not always match your expectations.
 In particular, arithmetic message sends, such as \ct{+} and \ct{*} are also subject to the same set of rules.
 Thus, there is no special precedence between these message sends.
 Here, we see the common situations where extra parentheses are needed:
@@ -477,16 +477,16 @@ Here, we see the common situations where extra parentheses are needed:
 (1 / 3) + (2 / 3)  --> 1
 \end{code}
 
-\paragraph{Example.} 
+\paragraph{Example.}
 In the message sends \ct{20 + 2 * 5}, there are only binary messages \ct{+} and \ct{*}.
 However, in \st there is no specific priority for the operations \ct{+} and \ct{*}.
 They are just binary messages, hence \ct{*} does not have priority over \ct{+}.
-So, the leftmost message \ct{+} is sent first (1) and then the \ct{*} is sent to the result as shown in \egref{binaryMessages1}.  
+So, the leftmost message \ct{+} is sent first (1) and then the \ct{*} is sent to the result as shown in \egref{binaryMessages1}.
 
 \begin{example}[binaryMessages1]{Decomposing \ct{20 + 2 * 5}.}{}
 "As there is no priority among binary messages, the leftmost message + is evaluated first even if by the rules of arithmetic the * should be sent first."
 
-      20 + 2 * 5. 
+      20 + 2 * 5.
 (1)  20 + 2 --> 22
 (2)  22       * 5 --> 110
 \end{example}
@@ -506,7 +506,7 @@ Hence the message send \ct{20 + (2 * 5)} returns the result as shown in \egref{m
 \begin{example}[mathcorrect]{Decomposing \ct{20 + (2 * 5)}.}{}
 "The messages surrounded by parentheses are evaluated first. Therefore * is sent prior to +, which produces the correct behavior."
 
-    20 + (2 * 5). 
+    20 + (2 * 5).
 (1)        (2 * 5) --> 10
 (2) 20 + 10      --> 30
 \end{example}
@@ -549,7 +549,7 @@ Both message sends result in the same effect or return the same value.
 
 %=============================================================
 \section{Hints for identifying keyword messages}
-Often beginners face the challenge of when they need to add parentheses. Let's see how keywords messages are recognized by the compiler. 
+Often beginners face the challenge of when they need to add parentheses. Let's see how keywords messages are recognized by the compiler.
 
 %-------------------------------------------------------------
 \subsection{Parentheses or not?}
@@ -570,9 +570,9 @@ The same applies to the following example, in which we use the result of the key
 
 \begin{code}{}
 aDict
-   at: (rotatingForm 
-           rotateBy: angle	
-           magnify: 2 
+   at: (rotatingForm
+           rotateBy: angle
+           magnify: 2
            smoothing: 1)
    put: 3.
 \end{code}
@@ -602,9 +602,9 @@ So in \lct{(\emph{expression})}, the \lct{\emph{expression}} will \emph{always} 
 
 \begin{code}{}
 "both the receiver and the argument must be blocks"
-[x isReady] whileTrue: [y doSomething].   
+[x isReady] whileTrue: [y doSomething].
 "the argument is evaluated more than once, so must be a block"
-4 timesRepeat: [Beeper beep].                   
+4 timesRepeat: [Beeper beep].
 "the receiver is evaluated once, so it is not a block"
 (x isReady) ifTrue: [y doSomething].
 \end{code}
@@ -641,14 +641,14 @@ Transcript cr.
 \emph{is equivalent to:}
 \begin{minipage}{0.35\textwidth}
 \begin{code}{}
-Transcript        
+Transcript
    show: 'Squeak is';
    show: 'fun ';
    cr.
 \end{code}
 \end{minipage}
 
-Note that the object receiving the cascaded messages can itself be the result of a message send. 
+Note that the object receiving the cascaded messages can itself be the result of a message send.
 In fact, the receiver of all the cascaded messages is the receiver of the first message involved in a cascade.
 In the following example, the first cascaded message is \ct{setX:setY} since it is followed by a cascade.
 The receiver of the cascaded message \ct{setX:setY:} is the newly created point resulting from the evaluation of \ct{Point new}, and \emph{not} \ct{Point}.

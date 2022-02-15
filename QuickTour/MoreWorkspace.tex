@@ -35,27 +35,27 @@
 \on{I feel most of this stuff is inappropriate for the Quick Start chapter.
 Maybe some can be recycled for a later chapter ...}
 
-Click the mouse button twice without moving it; in \Squeak, two successive clicks in the same spot is regarded as a double-click, regardless of how long a time elapses between the clicks. 
-Experiment and find out what double-click does when the cursor is in the middle of a word, at the beginning of a line, at the beginning of the workspace, or after quotes, brackets or parentheses? (The bracket/quote feature will come in handy when you need to match nested brackets and parentheses when you are writing code.) Bring up the yellow button menu and practice using copy, cut and paste.  
+Click the mouse button twice without moving it; in \Squeak, two successive clicks in the same spot is regarded as a double-click, regardless of how long a time elapses between the clicks.
+Experiment and find out what double-click does when the cursor is in the middle of a word, at the beginning of a line, at the beginning of the workspace, or after quotes, brackets or parentheses? (The bracket/quote feature will come in handy when you need to match nested brackets and parentheses when you are writing code.) Bring up the yellow button menu and practice using copy, cut and paste.
 Copy and paste will also work between \Squeak and other applications.
 
 ``Command keys'' can be used as shortcuts keys for copy, cut, and paste, as well as for many other editing operations.
-In this book, we will write command-\ct{c} to mean that you type \ct{c} while holding down the command shortcut key. 
-However, the actual key that you press to get a shortcut depends on your operating system. On the Macintosh, hold down the \clover{} key. 
+In this book, we will write command-\ct{c} to mean that you type \ct{c} while holding down the command shortcut key.
+However, the actual key that you press to get a shortcut depends on your operating system. On the Macintosh, hold down the \clover{} key.
 On a Windows PC, hold down the \ct{Alt} key.  On Linux, \ab{do what?}
 
-%	
+%
 %	\begin{figure}[ht]
 %	\centerline {\includegraphics[width=0.7\textwidth]{WorkspaceWithText}}
 %	\caption{A workspace containing some text.\label{fig:workspacetext}}
 %	%	\end{figure}
-%	\ab{I commented this out because it does not appear to be referenced.  
+%	\ab{I commented this out because it does not appear to be referenced.
 %	Also, we have not yet told the reader how to make text BIG
 
 Some command key shortcuts are written with a capital letter. For example, command-\ct{T} inserts the text \ct{ifTrue:}. To type these capitalized shortcuts you can hold down the shift and the command keys while you type \ct{t}.  (On the Macintosh, you can more conveniently hold down ctrl while you type \ct{t}).  The exact behavior of these shortcuts depends on the keyboard preferences that you choose.
 \on{Too much detail}
 
-\tabref{GeneralEditingCommands} shows some of the more commonly used editing shortcuts. Note that packages such as KeyMapping\sd{not sure} can be loaded into your image to change these settings. 
+\tabref{GeneralEditingCommands} shows some of the more commonly used editing shortcuts. Note that packages such as KeyMapping\sd{not sure} can be loaded into your image to change these settings.
 
 \on{BORING -- move this elsewhere. Focus on ``do it'', ``accept it'' etc.}
 
@@ -84,7 +84,7 @@ Some command key shortcuts are written with a capital letter. For example, comma
 
 
 %-----------------------------------------------------------------
-\paragraph{Scrolling.} Using copy and paste, type in more text than will fit in the window. The scroll bar works as you expect; whether scroll bars are on the right or the left, and whether they flop out when they are needed or are permanently on view, can be controlled by preferences. (\menu{World menu \go Preferences \& Services \go 1. Preference Browser}). 
+\paragraph{Scrolling.} Using copy and paste, type in more text than will fit in the window. The scroll bar works as you expect; whether scroll bars are on the right or the left, and whether they flop out when they are needed or are permanently on view, can be controlled by preferences. (\menu{World menu \go Preferences \& Services \go 1. Preference Browser}).
 Notice that there is a tiny menu icon at the top of the scroll bar. Press the red mouse button here to get the yellow button menu that applies to the scrolling text pane. This is a nice shortcut, especially when using a stylus or a one-button mouse.
 
 
@@ -102,7 +102,7 @@ Notice that there is a tiny menu icon at the top of the scroll bar. Press the re
       \midrule
       f      & Find. Set the search string from a string entered in a dialog. Then, advance the cursor to the next occurrence of the search string.
 &  \\
-  
+
 
 g & Find again. Advance the cursor to the next occurrence of the search string. & \\
 
@@ -154,7 +154,7 @@ o & Spawn. Open a new window containing the present contents of this pane, and t
       d      & Do ``it'' (where ``it'' is expected to be a \Squeak expression) &  \\
       i      & Inspect ``it'': evaluate ``it'' and open an inspector on the result. (``it'' is a \Squeak expression) Exception: in a method list pane, i opens an inheritance browser.    &  \\
       p      & Print ``it'': evaluate ``it'' and insert the result immediately after ``it'' (``it'' is a \Squeak expression)  &  \\
-      I      & Explore ``it'': like inspect, but open the object explorer instead of the inspector.  &  \\ 
+      I      & Explore ``it'': like inspect, but open the object explorer instead of the inspector.  &  \\
       \bottomrule
    \end{tabular}
 \end{table}

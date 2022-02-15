@@ -45,7 +45,7 @@ All the graphical elements can be assembled and disassembled by the user, at any
 %=================================================================
 \section{The history of Morphic}
 
-Morphic was developed by John Maloney and Randy Smith for the \ind{Self} programming language, starting around 1993. 
+Morphic was developed by John Maloney and Randy Smith for the \ind{Self} programming language, starting around 1993.
 Maloney later wrote a new version of Morphic for \sq, but the basic ideas behind the Self version are still alive and well in \sq Morphic: \emph{directness} and \emph{liveness}.
 Directness means that the shapes on the screen are objects that can be examined or changed directly, that is, by pointing at them using the mouse.
 Liveness means that the user interface is always able to respond to user actions:
@@ -126,7 +126,7 @@ When you try this method by executing \ct{Color orange asMorph} \mthind{Morph}{o
 Morphs are objects, so we can manipulate them like any other object in \st:
 By sending messages, we can change their properties, create new subclasses of Morph, and so on.
 
-Every morph, even if it is not currently open on the screen, has a position and a size.  
+Every morph, even if it is not currently open on the screen, has a position and a size.
 For convenience, all morphs are considered to occupy a rectangular region of the screen; if they are irregularly shaped, their position and size are those of the smallest rectangular ``box'' that surrounds them, which is known as the morph's bounding box, or just its ``bounds''.
 The \mthind{Morph}{position} method returns a \ct{Point} that describes the location of the morph's upper left corner (which is also the upper left corner of its bounding box).
 The origin of the coordinate system is the screen's upper left corner, with $y$ coordinates increasing \emph{down} the screen and $x$ coordinates increasing to the \emph{right}.
@@ -207,11 +207,11 @@ SBEScreenshotRecorder writeTo: 'figures/joeStar.png' building: [:helper |
 
 If you now try to grab the star with the mouse, you will find that you actually grab joe, and the two morphs move together:
 The star is \emph{embedded} inside joe.
-It is possible to embed more morphs inside joe.  
+It is possible to embed more morphs inside joe.
 In addition to doing this programmatically, you can also embed morphs by direct manipulation.
 
 \dothis{From the world menu select ``objects'' and click on the button labeled ``Graphics''.
-	% If you don't have a \menu{Supplies} flap at the bottom of your screen, execute \ct{Flaps enableGlobalFlaps} to create one.  
+	% If you don't have a \menu{Supplies} flap at the bottom of your screen, execute \ct{Flaps enableGlobalFlaps} to create one.
 	% ct TODO DISCUSS: We should uncomment the above line.
 	Drag an ellipse and a star from the \menu{Supplies} flap.
 	Place the star over the ellipse, and yellow-click the star to bring up a menu\footnote{You can also blue-click the star to bring up the morphic halo, and then click the red menu handle.}.
@@ -256,7 +256,7 @@ We can define the \ct{drawOn:} method like this:
 
 %The page break in this listing is fine, there is no better layouting option here --pre
 \begin{method}[firstDrawOn]{Drawing a \ct{SBECrossMorph}.}
-drawOn: aCanvas 
+drawOn: aCanvas
 
 	| crossHeight crossWidth horizontalBar verticalBar |
 	crossHeight := self height / 3.0 .
@@ -371,7 +371,7 @@ We can then define both \ct{drawOn:} and \ct{containsPoint:} using these methods
 
 \needlines{4}
 \begin{method}{Refactored \ct{SBECrossMorph>>>drawOn:}.}
-SBECrossMorph>>>drawOn: aCanvas 
+SBECrossMorph>>>drawOn: aCanvas
 
 	aCanvas fillRectangle: self horizontalBar color: self color.
 	aCanvas fillRectangle: self verticalBar color: self color.
@@ -387,7 +387,7 @@ SBECrossMorph>>>containsPoint: aPoint
 
 This code is much simpler to understand, largely because we have given meaningful names to the private methods.
 In fact, it is so simple that you may have noticed the second problem:
-The area in the center of the cross, which is under both the horizontal and the vertical bars, is drawn twice.  
+The area in the center of the cross, which is under both the horizontal and the vertical bars, is drawn twice.
 This doesn't matter when we fill the cross with an opaque color, but the bug becomes apparent immediately if we draw a semi-transparent cross, as shown in \figref{overdrawBug}.
 
 \begin{figure}[t]
@@ -418,7 +418,7 @@ m color: (Color blue alpha: 0.3).
 \end{code}
 
 \noindent
-The fix is to divide the vertical bar into three pieces, and to fill only the top and bottom.  
+The fix is to divide the vertical bar into three pieces, and to fill only the top and bottom.
 Once again we find a method in class \ct{Rectangle} that does the hard work for us: \ct{r1 areasOutside: r2} answers an array of rectangles comprising the parts of \ct{r1} outside \ct{r2}.
 Here is the revised code:
 
@@ -427,7 +427,7 @@ SBECrossMorph>>>drawOn: aCanvas
 
 	| topAndBottom |
 	aCanvas fillRectangle: self horizontalBar color: self color.
-	topAndBottom := self verticalBar areasOutside: self horizontalBar. 
+	topAndBottom := self verticalBar areasOutside: self horizontalBar.
 	topAndBottom do: [:each | aCanvas fillRectangle: each color: self color].
 \end{method}
 
@@ -509,8 +509,8 @@ If a morph answers \ct{true}, then Morphic immediately sends it the \mthind{Morp
 If all morphs answer \ct{false}, then Morphic initiates a drag-and-drop operation.
 As we will discuss below, the \ct{mouseDown:} and \ct{mouseUp:} messages are sent with an argument\,---\,a \clsind{MouseEvent} object\,---\,that encodes the details of the mouse action.
 
-Let's extend \ct{SBECrossMorph} to handle mouse events.  
-We start by ensuring that all crossMorphs answer \ct{true} to the \mthind{Morph}{handlesMouseDown:} message. 
+Let's extend \ct{SBECrossMorph} to handle mouse events.
+We start by ensuring that all crossMorphs answer \ct{true} to the \mthind{Morph}{handlesMouseDown:} message.
 
 \dothis{Add this method to \ct{SBECrossMorph}:}
 \begin{method}{Declaring that \ct{SBECrossMorph} will react to mouse clicks.}
@@ -560,7 +560,7 @@ First, we need to arrange to be notified when the mouse is over the morph.
 This will happen if our morph answers \ct{true} to the \mthind{Morph}{handlesMouseOver:} message.
 
 \dothis{Declare that \ct{SBECrossMorph} will react when it is under the mouse pointer.}
-\begin{method}{We want to handle ``mouse over'' events.} 
+\begin{method}{We want to handle ``mouse over'' events.}
 SBECrossMorph>>>handlesMouseOver: anEvent
 
 	^ true
@@ -652,7 +652,7 @@ SBECrossMorph>>>step
 \end{method}
 \noindent
 To start things off, you can open an inspector on a \ct{SBECrossMorph} (using the debug handle \debugHandle{} in the morphic halo), type \ct{self startStepping} in the small workspace pane at the bottom, and \menu{do it}.
-Alternatively, you can modify the \ct{handleKeystroke:} method so that you can use the $+$ and $-$ keys to start and stop stepping. 
+Alternatively, you can modify the \ct{handleKeystroke:} method so that you can use the $+$ and $-$ keys to start and stop stepping.
 
 \dothis{Add the following code to \mthref{handleKeystroke}:}
 
@@ -719,7 +719,7 @@ Project uiManager
 
 To display the request dialog in \figref{dialogChoosing}, send a \ct{chooseFrom:}:
 \begin{code}{}
-Project uiManager 
+Project uiManager
 	chooseFrom: #('circle' 'oval' 'square' 'rectangle' 'triangle')
 \end{code}
 
@@ -727,7 +727,7 @@ Project uiManager
 \section{Drag-and-drop}
 
 Morphic also supports drag-and-drop.
-Let's examine a simple example with two morphs, a receiver morph and a dropped morph. 
+Let's examine a simple example with two morphs, a receiver morph and a dropped morph.
 The receiver will accept a morph only if the dropped morph matches a given condition:
 In our example, the morph should be blue.
 If it is rejected, the dropped morph decides what to do.
@@ -752,7 +752,7 @@ ReceiverMorph>>>initialize
 
 How do we decide if the receiver morph will accept or repel the dropped morph?
 In general, both of the morphs will have to agree to the interaction.
-The receiver does this by responding to \mthind{Morph}{wantsDroppedMorph:event:}; the first argument is the dropped morph, and the second the mouse event, so that the receiver can, for example, see if any modifier keys were held down at the time of the drop. 
+The receiver does this by responding to \mthind{Morph}{wantsDroppedMorph:event:}; the first argument is the dropped morph, and the second the mouse event, so that the receiver can, for example, see if any modifier keys were held down at the time of the drop.
 The dropped morph is also given the opportunity to check and see if it likes the morph onto which it is being dropped; it is sent the message \ct{wantsToBeDroppedInto:}.
 The default implementation of this method (in the class \ct{Morph}) answers \ct{true}.
 
@@ -802,7 +802,7 @@ Morph subclass: #DroppedMorph
 DroppedMorph>>>initialize
 
 	super initialize.
-	self 
+	self
 		color: Color blue;
 		position: 250 @ 100.
 \end{method}
@@ -877,7 +877,7 @@ The \ct{initialize} method is defined on the instance side in the usual way; rem
 SBEDieMorph>>>initialize
 
 	super initialize.
-	self 
+	self
 		extent: 50 @ 50;
 		useGradientFill; borderWidth: 2; useRoundedCorners;
 		setBorderStyle: #complexRaised;
@@ -1078,7 +1078,7 @@ SBEDieMorph>>>drawOn: aCanvas
 	| theCanvas |
 	theCanvas := aCanvas asBalloonCanvas aaLevel: 3.
 	super drawOn: aCanvas.
-	(self perform: ('face' , dieValue asString) asSymbol) do: [:aPoint | 
+	(self perform: ('face' , dieValue asString) asSymbol) do: [:aPoint |
 		self drawDotOn: theCanvas at: aPoint].
 
 

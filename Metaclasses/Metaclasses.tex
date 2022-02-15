@@ -35,7 +35,7 @@ As we saw in \charef{model}, in \st, everything is an object, and every object i
 Classes are no exception:
 Classes are objects, and class objects are instances of other classes.
 This object model captures the essence of object-oriented programming:
-It is lean, simple, elegant, and uniform. 
+It is lean, simple, elegant, and uniform.
 However, the implications of this uniformity may confuse newcomers.
 The goal of this chapter is to show that there is nothing complex, ``magic'' or special here: just simple rules applied uniformly.
 By following these rules you can always understand why the situation is the way that it is.
@@ -43,7 +43,7 @@ By following these rules you can always understand why the situation is the way 
 %=================================================================
 \section{Rules for classes and metaclasses}
 
-The Smalltalk object model is based on a limited number of concepts applied uniformly. 
+The Smalltalk object model is based on a limited number of concepts applied uniformly.
 Smalltalk's designers applied Occam's razor:
 Any consideration leading to a model more complex than necessary was discarded.
 
@@ -74,7 +74,7 @@ The class of a class is called a \emph{metaclass}.
 A \indmain{metaclass} is created automatically for you whenever you create a class.
 Most of the time you do not need to care or think about metaclasses.
 However, every time that you use the system browser to browse the ``\subind{system browser}{class side}'' of a class, it is helpful to recall that you are actually browsing a different class.
-A class and its metaclass are two separate classes, even though the former is an instance of the latter. 
+A class and its metaclass are two separate classes, even though the former is an instance of the latter.
 
 To properly explain classes and metaclasses, we need to extend the rules from \charef{model} with the following additional rules.
 
@@ -200,7 +200,7 @@ As we mentioned in \secref{metaclassIntro}, classes whose instances are themselv
 Metaclasses are automatically created when you define a class.
 We say that they are \emph{implicit} since as a programmer you never have to worry about them.
 An \subind{metaclass}{implicit} metaclass is created for each class you create, so each metaclass has only a single instance.
-% At a more advanced level, this implies that sharing between metaclasses is difficult except by subclassing. 
+% At a more advanced level, this implies that sharing between metaclasses is difficult except by subclassing.
 
 Whereas ordinary classes are named by global variables, metaclasses are anonymous.
 However, we can always refer to them through the class that is their instance.
@@ -270,7 +270,7 @@ TranslucentColor class superclass superclass --> Object class
 \end{code}
 
 \paragraph{Uniformity between classes and objects.}
-It is interesting to step back a moment and realize that there is no difference between sending a message to an object and a class. 
+It is interesting to step back a moment and realize that there is no difference between sending a message to an object and a class.
 In both cases, the search for the corresponding method starts in the class of the receiver and proceeds up the inheritance chain.
 
 Thus, messages sent to classes must follow the metaclass inheritance chain.
@@ -294,7 +294,7 @@ Note that we get as a result an ordinary \ct{Color blue} and not a translucent o
 \end{center}
 
 Thus we see that there is one uniform kind of method \subind{method}{lookup} in Smalltalk.
-Classes are just objects, and behave like any other objects. 
+Classes are just objects, and behave like any other objects.
 Classes have the power to create new instances only because classes happen to respond to the message \ct{new}, and because the method for \ct{new} knows how to create new instances.
 Normally, non-class objects do not understand this message, but if you have a good reason to do so, nothing is stopping you from adding a \ct{new} method to a non-metaclass.
 
@@ -304,7 +304,7 @@ Since classes are objects, we can also inspect them.
 \dothis{Inspect \ct{Color blue} and \ct{Color}.}
 
 \noindent
-Notice that in one case you are inspecting an instance of \ct{Color} and in the other case the \ct{Color} class itself.  
+Notice that in one case you are inspecting an instance of \ct{Color} and in the other case the \ct{Color} class itself.
 This can be a bit confusing because the title bar of the inspector names the \emph{class} of the object being inspected.
 
 The inspector on \ct{Color} allows you to see the superclass, instance variables, method \subind{method}{dictionary}, and so on, of the \ct{Color} class, as shown in \figref{inspectingColor}.
@@ -384,7 +384,7 @@ Instead, you should look in \ct{Array class} and its superclasses since that is 
 \paragraph{Responsibilities of \lct{Behavior}, \lct{ClassDescription}, and \lct{Class}.}
 \clsind{Behavior} provides the minimum state necessary for objects that have instances: this includes a superclass link, a method dictionary, and a description of the instances (\ie representation and number).
 \on{not sure I understand the last point}
-\ct{Behavior} inherits from \ct{Object}, so it, and all of its subclasses, can behave like objects. 
+\ct{Behavior} inherits from \ct{Object}, so it, and all of its subclasses, can behave like objects.
 
 \ct{Behavior} is also the basic interface to the compiler.
 It provides methods for creating a method dictionary,
@@ -491,8 +491,8 @@ Metaclass superclass --> ClassDescription
 \section{Chapter summary}
 Now you should understand better how classes are organized and the impact of a uniform object model.
 If you get lost or confused, you should always remember that message passing is the key:
-You look for the method in the class of the receiver. 
-This works on \emph{any} receiver. 
+You look for the method in the class of the receiver.
+This works on \emph{any} receiver.
 If the method is not found in the class of the receiver, it is looked up in its superclasses.
 
 \begin{itemize}

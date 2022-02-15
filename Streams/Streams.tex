@@ -29,7 +29,7 @@
 \chapter{Streams}\label{cha:streams}
 
 \clsindexmain{Stream}
-Streams are used to iterate over sequences of elements such as sequenced collections, files, and network streams. 
+Streams are used to iterate over sequences of elements such as sequenced collections, files, and network streams.
 With Streams you can represent different iterations on the same collection, speed up the creation of large collections, and even iterate over potentially infinite collections without running into an infinite loop.
 A Stream instance represents an iteration for reading, writing, or both.
 Reading or writing is always relative to the current position in the stream.
@@ -51,7 +51,7 @@ You can go back to this position using the message \mthind{PositionableStream}{r
 \vspace{.2in}
 \end{figure}
 
-You can now read the next element from the stream using the message \mthind{Stream}{next}. 
+You can now read the next element from the stream using the message \mthind{Stream}{next}.
 Reading an element conceptually means removing the first element of the future element sequence, returning it, and putting it after the last element in the past element sequence.
 After having read one element using the message \ct{next}, the state of your stream is that shown in \figref{a_bcde}.
 
@@ -206,7 +206,7 @@ stream peek --> $c
 \end{figure}
 
 To position the stream at the beginning or the end,
-% If you want to go to the beginning or at the end is what you want, 
+% If you want to go to the beginning or at the end is what you want,
 you can use \mthind{PositionableStream}{reset} or \mthind{PositionableStream}{setToEnd}.
 \mthind{PositionableStream}{skip:} and \mthind{PositionableStream}{skipTo:} are used to go forward to a location relative to the current position:
 \ct{skip:} accepts a number as argument and skips that number of elements whereas \ct{skipTo:} skips all elements in the stream until it finds an element equal to its parameter.
@@ -320,12 +320,12 @@ Using the comma concatenation operator (\ct{,}) is far less efficient:
 \begin{code}{}
 [| temp |
   temp := String new.
-  (1 to: 100000) do: [:i | 
+  (1 to: 100000) do: [:i |
     temp := temp, i asString, ' ']] timeToRun. --> 386381 "(milliseconds)"
 
 [| temp |
   temp := WriteStream on: String new.
-  (1 to: 100000) do: [:i | 
+  (1 to: 100000) do: [:i |
     temp nextPutAll: i asString; space].
   temp contents] timeToRun. --> 25 "(milliseconds)"
 \end{code}
@@ -339,7 +339,7 @@ In fact, you can use \mthind{SequenceableCollection class}{streamContents:} (men
 
 \begin{code}{}
 String streamContents: [:tempStream |
-  (1 to: 100000) do: [:i | 
+  (1 to: 100000) do: [:i |
     tempStream nextPutAll: i asString; space]].
 \end{code}
 
@@ -505,12 +505,12 @@ To create file streams, you will have to use one of the following instance creat
   If the file already exists, its prior contents may be modified or replaced, but the file will not be truncated on close.
   If the name has no directory part, then the file will be created in the default directory.
 	\cmindex{FileStream class}{fileNamed:}
-	
+
 \item[\lct{newFileNamed:}]
   Create a new file with the given name and answer a stream opened for writing on that file.
   If the file already exists, ask the user what to do.
 	\cmindex{FileStream class}{newFileNamed:}
-	
+
 \item[\lct{forceNewFileNamed:}]
   Create a new file with the given name and answer a stream opened for writing on that file.
   If the file already exists, delete it without asking before creating the new file.
@@ -554,7 +554,7 @@ The method \mthind{FileStream}{localName} answers the last component of the name
 You can also access the full pathname using the method \mthind{StandardFileStream}{fullName}.
 
 You will soon notice that manually closing the file stream is painful and error-prone.
-That's why \ct{FileStream} offers varieties of the above messages, that take care of opening and closing the \ct{FileStream} before and after you work with it. 
+That's why \ct{FileStream} offers varieties of the above messages, that take care of opening and closing the \ct{FileStream} before and after you work with it.
 You pass the code that works with the stream as a block to these methods, \eg the second argument of \mthind{FileStream class}{forceNewFileNamed:do:}.
 
 \begin{code}{@TEST |string|}
@@ -647,7 +647,7 @@ There are easy ways to convert back and forth between streams and collections.
 
 %-----------------------------------------------------------------
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% coding: utf-8
 %%% mode: latex
 %%% TeX-master: t
