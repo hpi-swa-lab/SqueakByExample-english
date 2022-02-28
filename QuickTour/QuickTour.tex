@@ -652,14 +652,18 @@ The hierarchy browser is like the system browser, except that the list of classe
 This will open a hierarchy browser showing the superclasses and subclasses of \clsind{Boolean}.
 % (\figref{booleanhierarchybrowser}).
 
-%%{SBESqueakPicture writeTo: './figures/BooleanHierarchyBrowser.png' frame: [:morphsRect | morphsRect] using: [:helper | | browser browserMorph b_morph |
-%%  browser := HierarchyBrowser new.
-%%  browser setClass: Boolean.
-%%  browser buildDefaultBrowserWith: ToolBuilder default.
-%%  b_morph := ToolBuilder open: browser.
-%%  b_morph submorphs ninth repositionBy: (0@60).
-%%  helper closeBalloons.
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/BooleanHierarchyBrowser.png' frame: [:morphsRect | morphsRect] building: [:helper | | browser browserMorph splitter |
+	browser := HierarchyBrowser new.
+	browser setClass: Boolean.
+	browser buildDefaultBrowserWith: ToolBuilder default.
+	browserMorph := ToolBuilder open: browser.
+	splitter := browserMorph allMorphs detect: [:m |
+		(m isKindOf: ProportionalSplitterMorph) and: [m splitsTopAndBottom]].
+	splitter repositionBy: 0 @ 60.
+	helper closeBalloons.
+]
+\end{ExecuteSmalltalkScript}
 
 Navigate to the immediate superclass and subclasses of \ct{Boolean}.
 
