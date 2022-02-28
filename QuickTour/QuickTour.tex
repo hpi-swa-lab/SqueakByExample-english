@@ -653,16 +653,16 @@ This will open a hierarchy browser showing the superclasses and subclasses of \c
 % (\figref{booleanhierarchybrowser}).
 
 \begin{ExecuteSmalltalkScript}
-	SBESqueakPicture writeTo: './figures/BooleanHierarchyBrowser.png' frame: [:morphsRect | morphsRect] using: [:helper | | browser browserMorph splitter |
-		browser := HierarchyBrowser new.
-		browser setClass: Boolean.
-		browser buildDefaultBrowserWith: ToolBuilder default.
-		browserMorph := ToolBuilder open: browser.
-		splitter := browserMorph allMorphs detect: [:m |
-			(m isKindOf: ProportionalSplitterMorph) and: [m splitsTopAndBottom]].
-		splitter repositionBy: 0 @ 60.
-		helper closeBalloons.
-	]
+SBESqueakPicture writeTo: './figures/BooleanHierarchyBrowser.png' frame: [:morphsRect | morphsRect] using: [:helper | | browser browserMorph splitter |
+	browser := HierarchyBrowser new.
+	browser setClass: Boolean.
+	browser buildDefaultBrowserWith: ToolBuilder default.
+	browserMorph := ToolBuilder open: browser.
+	splitter := browserMorph allMorphs detect: [:m |
+		(m isKindOf: ProportionalSplitterMorph) and: [m splitsTopAndBottom]].
+	splitter repositionBy: 0 @ 60.
+	helper closeBalloons.
+]
 \end{ExecuteSmalltalkScript}	
 
 Navigate to the immediate superclass and subclasses of \ct{Boolean}.
