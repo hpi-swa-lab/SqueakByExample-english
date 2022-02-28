@@ -133,7 +133,7 @@ You can collapse the windows (so that they can be expanded again later) by click
 %-----------------------------------------------------------------
 \paragraph{First interaction.}
 
-A good place to get started is the \ind{world menu} shown in \figref{threeButtons:red}. 
+A good place to get started is the \ind{world menu} shown in \figref{threeButtons:red}.
 
 \dothis{Click with the mouse on the background of the main window to show the world menu, then choose \menu{open \ldots \go workspace} to create a new workspace.}
 \begin{ExecuteSmalltalkScript}
@@ -149,7 +149,7 @@ SBESqueakPicture writeTo: './figures/worldMenu.png' frame: #morphs using: [:help
 %%	| workspace menu |
 %%	workspace := ToolBuilder open: Workspace new.
 %%	helper type: 'Time now ' into: workspace.
-%%	
+%%
 %%	helper click: workspace at: workspace topCenter + (0 @ 30) buttons: #(right).
 %%	helper hand releaseMouseFocus.
 %%	helper mouseEnter: (helper menuItemMorphLabeled: 'print it (p)' in: helper world).
@@ -213,7 +213,7 @@ The \emphind{yellow button} is the next most used button; it is used to bring up
 Now click the yellow button in the workspace.
 Select \menu{print it}.}
 
-Finally, there is the \emphind{blue button} to activate the ``morphic \subind{Morphic}{halo}'', an array of handles that are used to perform operations on the on-screen objects themselves, such as rotating or resizing; see \figref{threeButtons:blue}. 
+Finally, there is the \emphind{blue button} to activate the ``morphic \subind{Morphic}{halo}'', an array of handles that are used to perform operations on the on-screen objects themselves, such as rotating or resizing; see \figref{threeButtons:blue}.
 If you let the mouse linger over a handle, a help balloon will explain its function.
 
 \dothis{Click the blue button on the workspace.
@@ -225,9 +225,9 @@ If you use a Mac without a second mouse button, you can simulate one by holding 
 
 You can configure your mouse to work the way you want by using the preferences of your operating system and mouse driver.
 \sq has some preferences for customizing the mouse and the meta keys on your keyboard.
-You can find the \ind{preference browser} in the \menu{open} item of the \menu{World} menu. 
+You can find the \ind{preference browser} in the \menu{open} item of the \menu{World} menu.
 In the preference browser, the \menu{general} category contains an option \menu{Swap mouse buttons} that switches the yellow and blue functions (see \figref{prefBrowser}).
-The \menu{keyboard} category has options to duplicate the various command keys.   
+The \menu{keyboard} category has options to duplicate the various command keys.
 
 \dothis{Open the preference browser and find the \menu{Swap mouse buttons} option using the search box.}
 
@@ -413,13 +413,13 @@ More on this in the next section!)
 %%  ToolBuilder open: Transcript.
 %%  Transcript show: 'hello world'; cr.
 %%  helper foregroundWindow bounds: (0 @ 120 extent: 450 @ 230).
-%%  
+%%
 %%  workspace := ToolBuilder open: Workspace new.
 %%  workspace position: 200 @ 100.
-%%  
+%%
 %%  helper type: 'Transcript show: ''hello world''; cr.' into: workspace.
 %%  helper keyStroke: workspace key: $a modifiers: #(cmd).
-%%  
+%%
 %%  helper click: workspace at: workspace topCenter + (0 @ 30) buttons: #(right).
 %%  helper hand releaseMouseFocus.
 %%  helper mouseEnter: (helper menuItemMorphLabeled: 'do it (d)' in: helper world).
@@ -437,8 +437,8 @@ You just sent the message \ct{show: 'hello world'} to the \ct{Transcript} object
 The \ct{Transcript} then decided what to do with this message, that is, it looked up its \emph{methods} for handling \ct{show:} and \ct{cr} messages and reacted appropriately.
 
 If you talk to Smalltalkers for a while, you will quickly notice that they generally do not use expressions like ``call an operation'' or ``invoke a method'', but instead they will say ``send a message''.
-This reflects the idea that objects are responsible for their own actions. 
-You never \emph{tell} an object what to do\,---\,instead, you politely \emph{ask} it to do something by sending it a message. 
+This reflects the idea that objects are responsible for their own actions.
+You never \emph{tell} an object what to do\,---\,instead, you politely \emph{ask} it to do something by sending it a message.
 The object, not you, selects the appropriate method for responding to your message (more about this in \charef{understanding}).
 
 
@@ -472,7 +472,7 @@ This time we see the result we expect (\figref{printit}).
 %%{SBESqueakPicture writeTo: './figures/PrintIt.png' frame: #morphs using: [:helper | | workspace |
 %%  workspace := ToolBuilder open: Workspace new.
 %%  workspace extent: 277 @ 143.
-%%  
+%%
 %%  helper type: '3 + 4' into: workspace.
 %%  helper keyStroke: workspace key: $p modifiers: #(cmd).
 %%]}
@@ -501,7 +501,7 @@ The bottom panel can be used to write expressions to send messages to the object
 %%	| workspace |
 %%	workspace := ToolBuilder open: Workspace new.
 %%	workspace bounds: (0 @ 30 extent: 277 @ 143).
-%%	
+%%
 %%	helper type: '3 + 4' into: workspace.
 %%	helper keyStroke: workspace key: $i modifiers: #(cmd).
 %%	(helper windowLabeled: 'SmallInteger#*')
@@ -552,7 +552,7 @@ As we shall see, there are several interesting browsers available for \sq, but t
 %%	Browser fullOnClass: class selector: selector.
 %%	window := helper foregroundWindow.
 %%	helper displayForegroundWindowFocused.
-%%	
+%%
 %%	Dictionary new
 %%		at: class category put: 'System categories';
 %%		at: ('\s*' , class) asRegex put: 'Classes';
@@ -615,7 +615,7 @@ The first, as we have just seen above, is to know (or guess) what category it is
 
 A second way is to send the \ct{browse} message to the class, asking it to open a browser on itself.
 Suppose we want to browse the class \clsind{Boolean}.
- 
+
 \dothis{Type \ct{Boolean browse} into a workspace and \menu{do it}.}
 A browser will open on the Boolean class (\figref{browseBoolean}).
 There is also a \ind{keyboard shortcut} \short{b} (browse) that you can use in any tool where you find a class name; \index{keyboard shortcut!browse it}, select the name and type \short{b}.
@@ -643,7 +643,7 @@ This opens the \subind{class}{comment} in a dedicated pane.
 
 \ab{I thought that this was supposed to be a \emph{Quick} tour!  And here we are describing a tool that I have used maybe twice in 10 years!   In any case, this description should be deferred to the \textbf{Environment} chapter}
 \on{I don't see why.  I use the hierarchy browser a lot!  I think it is really useful to know from the beginning, to help you find your through the hierarchy.}
-If you would like to explore \sq's inheritance hierarchy, the \emphind{hierarchy browser} can help you.  
+If you would like to explore \sq's inheritance hierarchy, the \emphind{hierarchy browser} can help you.
 This can be useful if you are looking for an unknown subclass or superclass of a known class.
 The hierarchy browser is like the system browser, except that the list of classes is arranged as an indented tree mirroring the inheritance hierarchy.
 
@@ -653,7 +653,7 @@ This will open a hierarchy browser showing the superclasses and subclasses of \c
 % (\figref{booleanhierarchybrowser}).
 
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/BooleanHierarchyBrowser.png' frame: [:morphsRect | morphsRect] using: [:helper | | browser browserMorph splitter |
+SBEScreenshotRecorder writeTo: './figures/BooleanHierarchyBrowser.png' frame: [:morphsRect | morphsRect] building: [:helper | | browser browserMorph splitter |
 	browser := HierarchyBrowser new.
 	browser setClass: Boolean.
 	browser buildDefaultBrowserWith: ToolBuilder default.
@@ -663,7 +663,7 @@ SBESqueakPicture writeTo: './figures/BooleanHierarchyBrowser.png' frame: [:morph
 	splitter repositionBy: 0 @ 60.
 	helper closeBalloons.
 ]
-\end{ExecuteSmalltalkScript}	
+\end{ExecuteSmalltalkScript}
 
 Navigate to the immediate superclass and subclasses of \ct{Boolean}.
 
@@ -671,7 +671,7 @@ Often, the fastest way to find a class is to search for it by name.
 For example, suppose that you are looking for some unknown class that represents dates and times.
 
 \dothis{Put the mouse in the system category pane of the system browser and type \short{f}, or select \menu{find class \ldots (f)} from the yellow-button menu.
-	Type ``time'' in the dialog box.} 
+	Type ``time'' in the dialog box.}
 \noindent
 You will be presented with a list of classes whose names contain ``time'' (see \figref{findit}).
 Choose one, say, \ct{Time}, and the browser will show it.
@@ -680,7 +680,7 @@ Choose one, say, \ct{Time}, and the browser will show it.
 %%{SBESqueakPicture writeTo: './figures/FindIt.png' frame: #morphs using: [:helper | | browser |
 %%  browser := ToolBuilder open: Browser.
 %%  browser position: 0 @ 0.
-%%  
+%%
 %%  helper
 %%    runModal: [helper keyStroke: browser submorphs sixth key: $f modifiers: #(cmd)]
 %%    then: [helper dialogWindow position: 60 asPoint]
@@ -689,7 +689,7 @@ Choose one, say, \ct{Time}, and the browser will show it.
 %%{SBESqueakPicture writeTo: './figures/TimeClasses.png' frame: #morphs using: [:helper | | browser |
 %%  browser := ToolBuilder open: Browser.
 %%  browser position: 0 @ 0.
-%%  
+%%
 %%  helper
 %%    runModal: [helper keyStroke: browser submorphs sixth key: $f modifiers: #(cmd)]
 %%    then: [
@@ -697,7 +697,7 @@ Choose one, say, \ct{Time}, and the browser will show it.
 %%      helper type: 'time' into: (helper morphByExternalName: 'searchText' in: helper world).
 %%      helper closeBalloons.
 %%    ].
-%%  
+%%
 %%]}
 
 \begin{figure}[hbt]
@@ -729,7 +729,7 @@ The \emphind{method finder} can help you.
 
 \dothis{Select \menu{Tools \go Method Finder} in the menu bar at the top or open the world menu and select \menu{open\ldots \go method finder}.
 Type ``now'' in the top left pane, and \menu{accept} it (or just press the \textsc{return} key).}
-The method finder will display a list of all the method names that contain the substring ``now''.  
+The method finder will display a list of all the method names that contain the substring ``now''.
 To scroll to \ct{now} itself, move the cursor to the list and type ``\ct{n}''; this trick works in all scrolling windows.
 Select ``now'' and the right-hand pane shows you the three classes that define a method with this name, as shown in \figref{MethodFinder}.  Selecting any one of them will open a browser on it.
 
@@ -759,7 +759,7 @@ For example, suppose that you would like to find a method that turns a string in
 \noindent
 The method finder will suggest a method that does what you want.
 
-An asterisk at the beginning of a line in the right pane of the method finder indicates that this method is the one that was actually used to obtain the requested result. 
+An asterisk at the beginning of a line in the right pane of the method finder indicates that this method is the one that was actually used to obtain the requested result.
 So, the asterisk in front of \ct{String asUppercase} lets us know that the method \mthind{String}{asUppercase} defined on the class \clsind{String} was executed and returned the result we wanted.
 The methods that do not have an asterisk are just the other methods that have the same name as the ones that returned the expected result.
 So \cmind{Character}{asUppercase} was not executed on our example, because \ct{'eureka'} is not a \clsind{Character} object.
@@ -795,7 +795,7 @@ When you try previous searches for the class \ct{Time} or the method \ct{now} yo
 \sq provides many more interesting tools, such as the test runner and the debugger.
 In order to illustrate you how these are typically used while programming in \sq, we will show you how you can make use of them while defining a new method.
 
-The advent of \ind{Test Driven Development}\cite{Beck03a} has changed the way that we write code.  
+The advent of \ind{Test Driven Development}\cite{Beck03a} has changed the way that we write code.
 The idea behind Test Driven Development, also called TDD or Behavior Driven Development, is that we write a test that defines the desired behavior of our code \emph{before} we write the code itself.
 Only then do we write the code that satisfies the test.
 \seeindex{Behavior Driven Development}{Test Driven Development}
@@ -817,7 +817,7 @@ To make this example into something that the system can use, we turn it into a t
 \needlines{3}
 \numFiletreeMethodInput[stringtesttestshout]%
 {A test for a shout method.}%
-{ListingSources/SBE-QuickTour.package/StringTest.extension/instance/testShout.st}	
+{ListingSources/SBE-QuickTour.package/StringTest.extension/instance/testShout.st}
 
 How do we create a new method in \sq?
 First, we have to decide which class the method should belong to.
@@ -848,7 +848,7 @@ So select \menu{accept (s)} from the yellow-button menu in the bottom pane, or j
 \seeindex{accept it}{keyboard shortcut, accept}
 
 Because there is as yet no method called \ct{shout}, the browser will ask you to confirm that this is the name that you really want\,---\,and it will suggest some other names that you might have intended (\figref{testShoutConfirm}).
-This can be quite useful if you have merely made a typing mistake, but in this case, we really \emph{do} mean \ct{shout}, since that is the method we are about to create, so we have to confirm this by selecting the first option from the menu of choices, as shown in \figref{testShoutConfirm}. 
+This can be quite useful if you have merely made a typing mistake, but in this case, we really \emph{do} mean \ct{shout}, since that is the method we are about to create, so we have to confirm this by selecting the first option from the menu of choices, as shown in \figref{testShoutConfirm}.
 
 %%{SBESqueakPicture writeTo: './figures/testShoutConfirm.png' frame: #morphs using: [:helper | | textField |
 %%	Browser fullOnClass: StringTest category: #'tests - converting'.
@@ -928,7 +928,7 @@ We will look at the \ind{debugger} and how to use it in \charef{env}.
 \end{figure}
 
 The error is, of course, exactly what we expected:
-Running the test generates an error because we haven't yet written a method that tells strings how to \ct{shout}.  
+Running the test generates an error because we haven't yet written a method that tells strings how to \ct{shout}.
 Nevertheless, it's good practice to make sure that the test fails because this confirms that we have set up the testing machinery correctly and that the new test is actually being run.
 Once you have seen the error, you can \button{Abandon} the running test, which will close the debugger window.
 Note that often with Smalltalk you can define the missing method using the \button{Create} button, edit the newly-created method in the debugger, and then \button{Proceed} with the test.
@@ -950,7 +950,7 @@ Does this method work?
 Let's run the tests and see.
 
 \dothis{Click on \menu{Run Selected} again in the test runner, and this time you should see a green bar and text indicating that all of the tests ran with no failures and no errors.}
-When you get to a green bar\footnotemark, it's a good idea to save your work and take a break.  
+When you get to a green bar\footnotemark, it's a good idea to save your work and take a break.
 So do that right now!
 \footnotetext{Actually, you might not get a green bar since some images contain tests for bugs that still need to be fixed.
 Don't worry about this.
@@ -992,7 +992,7 @@ You have also seen a little of \sq's syntax, even though you may not understand 
 \end{itemize}
 
 %=================================================================
-\ifx\wholebook\relax\else 
+\ifx\wholebook\relax\else
    \bibliographystyle{jurabib}
    \nobibliography{scg}
    \end{document}
