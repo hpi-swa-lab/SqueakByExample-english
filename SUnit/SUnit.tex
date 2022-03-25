@@ -35,7 +35,7 @@
 \on{Would be nice to have an example of test-driven development with SUnit from beginning to end. Perhaps this is for another chapter?}
 
 \indmain{SUnit} is a minimal yet powerful framework that supports the creation and deployment of tests.
-As might be guessed from its name, the design of \sunit focussed on \emph{Unit Tests}, 
+As might be guessed from its name, the design of \sunit focussed on \emph{Unit Tests},
 but in fact it can be used for integration tests and functional tests as well.
 \sunit was originally developed by Kent Beck and subsequently extended by Joseph Pelrine and others to incorporate the notion of a resource, which we will describe in \secref{resource}.
 \index{Beck, Kent}
@@ -51,7 +51,7 @@ Indeed, developers in many languages have come to appreciate the power of unit t
 Neither testing, nor the building of test suites, is new:
 Everybody knows that tests are a good way to catch errors.
 \mbox{\ind{eXtreme Programming},} by making testing a core practice and by emphasizing \emph{automated} tests, has helped to make testing productive and fun, rather than a chore that programmers dislike.
-The \st community has a long tradition of testing because of the incremental style of development supported by its programming environment.  
+The \st community has a long tradition of testing because of the incremental style of development supported by its programming environment.
 In traditional \st development, the programmer would write tests in a workspace as soon as a method was finished.
 Sometimes a test would be incorporated as a comment at the head of the method that it exercised, or tests that needed some setup would be included as example methods in the class.
 The problem with these practices is that tests in a workspace are not available to other programmers who modify the code; comments and example methods are better in this respect, but there is still no easy way to keep track of them and to run them automatically.
@@ -67,18 +67,18 @@ In less than two minutes you can write tests using \sunit, so instead of writing
 In this chapter we start by discussing why we test, and what makes a good test.
 We then present a series of small examples showing how to use \sunit.
 Finally, we look at the implementation of \sunit, so that you can understand how
-\st uses the power of \ind{reflection} for its tools. 
+\st uses the power of \ind{reflection} for its tools.
 
 %=================================================================
 \section{Why testing is important}
 \label{sec:why}
 
-Unfortunately, many developers believe that tests require to much of their time.  
+Unfortunately, many developers believe that tests require to much of their time.
 After all, \emph{they} do not write bugs\,---\,only \emph{other} programmers do that.
 Most of us have said, at some time or other:
 ``I would write tests if I had more time.''
 If you never write a bug, and if your code will never be changed in the future, then indeed you do not need tests.
-However, this most likely also means that your application is trivial, or that it is not used by you or anyone else.  
+However, this most likely also means that your application is trivial, or that it is not used by you or anyone else.
 Think of tests as an investment for the future:
 Having a suite of tests will be quite useful now, but it will be \emph{extremely} useful when your application, or the environment in which it executes, changes in the future.
 
@@ -88,7 +88,7 @@ Watching the tests pass tells you that the documentation is up-to-date.
 Second, tests help developers to confirm that some changes that they have just made to a package have not broken anything else in the system\,---\,and to find the parts that break when that confidence turns out to be misplaced.
 Finally, writing tests at the same time as\,---\,or even before\,---\,programming forces you to think about the functionality that you want to design, \emph{and how it should appear to the client}, rather than about how to implement it.
 By writing the tests first\,---\,before the code\,---\,you are compelled to state
-the context in which your functionality will run, the way it will interact with the client code, and the expected results.  
+the context in which your functionality will run, the way it will interact with the client code, and the expected results.
 Your code will improve:
 Try it.
 
@@ -128,7 +128,7 @@ Let us look at the properties that tests should have to get a maximum benefit.
 
 \item Tests should have a change frequency lower than that of the functionality they cover:
 	You do not want to have to change all your tests every time you modify your application.
-	One way to achieve this is to write tests based on the public interfaces of the class that you are testing.  
+	One way to achieve this is to write tests based on the public interfaces of the class that you are testing.
 	It is OK to write a test for a private ``helper'' method if you feel that the method is complicated enough to need the test, but you should be aware that such a test may have to be changed, or thrown away entirely when you think of a better implementation.
 \end{enumerate}
 
@@ -136,11 +136,11 @@ A consequence of property (\ref{prop:oneAspect}) is that the number of tests sho
 Changing one aspect of the system should not break all the tests but only a limited
 number.
 This is important because having 100 tests fail should send a much stronger message than having 10 tests fail.
-However, it is not always possible to achieve this ideal: 
+However, it is not always possible to achieve this ideal:
 In particular, if a change breaks the initialization of an object, or the setup of a test, it is likely to cause all of the tests to fail.
 
 \ind{eXtreme Programming} advocates writing tests before writing code.
-This may seem to go against our deep instincts as software developers.  
+This may seem to go against our deep instincts as software developers.
 All we can say is:
 Go ahead and try it.
 We have found that writing the tests before the code helps us to know what we want to code, helps us know when we are done, and helps us conceptualize the functionality of a class and to design its interface.
@@ -149,7 +149,7 @@ Moreover, test-first development gives us the courage to go fast, because we are
 % \on{I cannot understand this without some explanation!}
 
 %Writing tests is not difficult in itself. What is more difficult is choosing what to test.
-%The pragmatic programmers\footnote{\url{www.pragmaticprogrammer.com}} offer the right-BICEP principle. It stands for: 
+%The pragmatic programmers\footnote{\url{www.pragmaticprogrammer.com}} offer the right-BICEP principle. It stands for:
 %\begin{itemize}
 %\item Right -- Are the results right?
 %\item B -- Are all the boundary conditions correct?
@@ -204,7 +204,7 @@ The method \mthind{TestCase}{setUp} defines the context in which the tests will 
 ExampleSetTest>>>setUp
 
 	super setUp.
-	
+
 	empty := Set new.
 	full := Set with: 5 with: 6.
 \end{method}
@@ -229,7 +229,7 @@ Clearly, this test relies on the fact that the \ct{setUp} method has already run
 \begin{method}[testIncludes]{Testing set membership.}
 ExampleSetTest>>>testIncludes
 
-	self 
+	self
 		assert: (full includes: 5);
 		assert: (full includes: 6).
 \end{method}
@@ -240,7 +240,7 @@ The second test, named \ct{testOccurrences}, verifies that the number of occurre
 \begin{method}[testOccurrences]{Testing occurrences.}
 ExampleSetTest>>>testOccurrences
 
-	self 
+	self
 		assert: 0 equals: (empty occurrencesOf: 0);
 		assert: 1 equals: (full occurrencesOf: 5).
 	full add: 5.
@@ -253,7 +253,7 @@ Finally, we test that the set no longer contains the element 5 after we have rem
 ExampleSetTest>>>testRemove
 
 	full remove: 5.
-	self 
+	self
 		assert: (full includes: 6);
 		deny: (full includes: 5).
 \end{method}
@@ -287,7 +287,7 @@ SBEScreenshotRecorder writeTo: 'figures/test-runner.png' building: [:helper |
 
 
 You can also run your test by executing a \menu{print it} on the following code:
-\ct{ExampleSetTest run: #testRemove}. 
+\ct{ExampleSetTest run: #testRemove}.
 Finally, you can also run a test directly from the method pane in the browser by opening the yellow button menu on the test method and selecting \menu{run test}.
 
 \dothis{Introduce a bug in \ct{ExampleSetTest>>>testRemove} and run the tests again.
@@ -335,12 +335,12 @@ For example, you would use \ct{(self should: aBlock raise: anException)} to test
 \Mthref{ESTtestIllegal} illustrates the use of \mbox{\ct{should:raise:}.}
 
 \dothis{Try running this test.}
-Note that the first argument of the \ct{should:} and \ct{shouldnt:} methods is a \emphind{block} that \emph{contains} the expression to be evaluated.   
+Note that the first argument of the \ct{should:} and \ct{shouldnt:} methods is a \emphind{block} that \emph{contains} the expression to be evaluated.
 
 \begin{method}[ESTtestIllegal]{Testing error raising.}
 ExampleSetTest>>>testIllegal
 
-	self 
+	self
 		should: [empty at: 5] raise: Error;
 		should: [empty at: 5 put: #zork] raise: Error.
 \end{method}
@@ -355,7 +355,7 @@ If you want to write tests that will work in any dialect of \st, instead of \mth
 \begin{method}[portabletestillegal]{Portable error handling.}
 ExampleSetTest>>>testIllegal
 
-	self 
+	self
 		should: [empty at: 5] raise: TestResult error;
 		should: [empty at: 5 put: #zork] raise: TestResult error.
 \end{method}
@@ -439,7 +439,7 @@ It records the number of tests passed, the number of tests failed, and the numbe
 
 One of the important features of a suite of tests is that they should be independent of each other:
 The failure of one test should not cause an avalanche of failures of other tests that depend upon it, nor should the order in which the tests are run matter.
-Performing \ct{setUp} before each test and \ct{tearDown} afterwards helps to reinforce this independence. 
+Performing \ct{setUp} before each test and \ct{tearDown} afterwards helps to reinforce this independence.
 
 However, there are occasions where setting up the necessary context is just too time-consuming for it to be practical to do once before the execution of each test.
 Moreover, if it is known that the test cases do not disrupt the resources used by the tests, then it is wasteful to set them up afresh for each test; it is sufficient to set them up once for each suite of tests.
@@ -508,7 +508,7 @@ Of course, this string can be constructed dynamically.
 \begin{code}{}
 | e |
 e := 42.
-self 
+self
   assert: e = 23
   description: 'expected 23, got ', e printString.
 \end{code}
@@ -605,9 +605,9 @@ TestResult>>>runCase: aTestCase
 	| testCasePassed timeToRun |
 	testCasePassed := true.
 
-	[timeToRun := [aTestCase runCase] timeToRunWithoutGC] 
+	[timeToRun := [aTestCase runCase] timeToRunWithoutGC]
 		on: self class failure
-		do: [:signal | 
+		do: [:signal |
 				failures add: aTestCase.
 				testCasePassed := false.
 				signal return: false]
@@ -616,7 +616,7 @@ TestResult>>>runCase: aTestCase
 				errors add: aTestCase.
 				testCasePassed := false.
 				signal return: false].
-			
+
 	testCasePassed ifTrue: [passed add: aTestCase].
 	self durations at: aTestCase put: timeToRun.
 \end{method}
@@ -642,7 +642,7 @@ The core of this process is:
 \begin{method}[testcasetestselectors]{Auto-building the test suite.}
 TestCase class>>>testSelectors
 
-	^ (self selectors asArray select: [:each | 
+	^ (self selectors asArray select: [:each |
 		(each beginsWith: 'test') and: [each numArgs isZero]]) sort
 \end{method}
 \cmindex{MyTestCase class}{buildSuiteFromSelectors}
@@ -654,7 +654,7 @@ TestSuite>>>run
 
 	| result |
  	result := self resultClass new.
-	self resources do: [:resource | 
+	self resources do: [:resource |
 		res isAvailable ifFalse: [^ resource signalInitializationError]].
 	[self run: result] ensure: [self resources do: [:each | each reset]].
 	^ result
@@ -713,7 +713,7 @@ Here is some advice on how to design tests.
 
 \index{Feathers, Michael}
 \item[Feathers' Rules for Unit tests.]
-	Michael Feathers, an  agile process consultant and author, writes:\footnote{See \url{https://web.archive.org/web/20060212020903/http://www.artima.com/weblogs/viewpost.jsp?thread=126923}.} 
+	Michael Feathers, an  agile process consultant and author, writes:\footnote{See \url{https://web.archive.org/web/20060212020903/http://www.artima.com/weblogs/viewpost.jsp?thread=126923}.}
 	\begin{quotation}
 	\noindent
 	{\it
@@ -730,7 +730,7 @@ Here is some advice on how to design tests.
 	However, it is important to be able to separate them from true unit tests so that we can keep a set of tests that we can run fast whenever we make our changes.
  	}
 	\end{quotation}
-	Never get yourself into a situation where you don't want to run your unit test suite because it takes too long.   
+	Never get yourself into a situation where you don't want to run your unit test suite because it takes too long.
 
 \item[Unit Tests \textit{vs.}\ Acceptance Tests.]
 	Unit tests capture one piece of functionality, and as such make it easier to identify bugs in that functionality.

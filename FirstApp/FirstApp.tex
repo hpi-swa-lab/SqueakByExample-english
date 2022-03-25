@@ -29,11 +29,11 @@
 \chapter{Your first interactive object: the Quinto game}
 \label{cha:firstApp}
 
-In this chapter, we will develop a simple game: \ind{Quinto}. 
+In this chapter, we will develop a simple game: \ind{Quinto}.
 Along the way, we will demonstrate most of the tools that \squeak programmers use to construct and debug their programs, and show how programs are exchanged with other developers.
-We will see the system browser, the object inspector, the debugger, and the \ind{Monticello} \ind{package} browser. 
+We will see the system browser, the object inspector, the debugger, and the \ind{Monticello} \ind{package} browser.
 Development in Smalltalk is efficient:
-You will find that you spend far more time actually writing code and far less managing the development process. 
+You will find that you spend far more time actually writing code and far less managing the development process.
 This is partly because the Smalltalk language is simple, and partly because the tools that make up the programming environment are integrated well with the language.
 
 Nevertheless, if you find yourself not understanding all of the code, don't worry.
@@ -151,7 +151,7 @@ Note that in the upper right corner of the class template pane a red triangle ap
 This means that there are \emph{unsaved changes}.
 To actually send this message, you must \menu{accept} it.
 
-%%{SBESqueakPicture writeTo: './figures/AcceptClassDef.png' frame: [:rect | rect bottomHalf] using: [:helper | 
+%%{SBESqueakPicture writeTo: './figures/AcceptClassDef.png' frame: [:rect | rect bottomHalf] using: [:helper |
 %%	| window menu |
 %%	SBECell browse.
 %%	window := helper foregroundWindow.
@@ -183,9 +183,9 @@ The editing pane now shows the class definition, and a small pane below it will 
 This is called a \emph{class comment}, and it is quite important to write one that will give other programmers a high-level overview of the purpose of this class.
 Smalltalkers put a very high value on the readability of their code, and detailed comments about the content of a method are unusual:
 The philosophy is that the code should speak for itself.
-(If it doesn't, you should refactor it until it does!) 
+(If it doesn't, you should refactor it until it does!)
 Be aware that this refers to the content of the method, not the purpose of the method in the larger system or assumptions of the method; these aspects should definitely be described in a method or class comment.
-A class \subind{class}{comment} need not contain a detailed description of the implementation details of the class, but a few words describing its overall purpose are vital if programmers who come after you are to know whether to spend time looking at this class. 
+A class \subind{class}{comment} need not contain a detailed description of the implementation details of the class, but a few words describing its overall purpose are vital if programmers who come after you are to know whether to spend time looking at this class.
 \index{refactoring}
 
 \dothis{Type a class comment for \ct{SBECell} and accept it; you can always improve it later.}
@@ -215,7 +215,7 @@ Select it, and replace it by the text of \mthref{scbecellinitialize}.
 \needlines{10}
 \numFiletreeMethodInput[scbecellinitialize]%
 {Initializing instances of \ct{SBECell}.}%
-{ListingSources/SBE-Quinto.package/SBECell.class/instance/initialize.st}	
+{ListingSources/SBE-Quinto.package/SBECell.class/instance/initialize.st}
 \index{initialization}
 
 \noindent
@@ -244,7 +244,7 @@ The rest of the method sets up the state of this object.
 Sending \ct{self label: ''}, for example, sets the label of this object to the empty string.
 \pvindex{self}
 
-The expression \ct{0 @ 0 corner: 16 @ 16} probably needs some explanation. 
+The expression \ct{0 @ 0 corner: 16 @ 16} probably needs some explanation.
 \lct{0 @ 0} represents a \clsind{Point} object with $x$ and $y$ coordinates both set to 0.
 In fact, \ct{0 @ 0} sends the message \ct{@} to the \clsind{Number} object \ct{0} with argument \ct{0}.
 The effect will be that the number \ct{0} will ask the \ct{Point} class to create a new instance with coordinates $(0,0)$.
@@ -276,7 +276,7 @@ You can test the effect of the code you have written by creating a new \ct{SBECe
 %%]}
 \begin{figure}[htbp]
    \centering
-   \includegraphics[scale=0.7]{SBECellInspector} 
+   \includegraphics[scale=0.7]{SBECellInspector}
    \caption{The inspector used to examine a SBECell object.\label{fig:SBECellInspector}}
 \end{figure}
 
@@ -286,7 +286,7 @@ You can also use the inspector to change the value of an instance variable.
 \dothis{Change the value of \ct{bounds} to \ct{0 @ 0 corner: 50 @ 50} and \menu{accept} it.}
 
 The bottom pane of the inspector is a mini-workspace.
-It's useful because in this workspace the pseudo-variable \self is bound to the object being inspected. 
+It's useful because in this workspace the pseudo-variable \self is bound to the object being inspected.
 
 \dothis{Type the text \ct{self openInWorld} in the bottom pane and \menu{do it}.}
 The cell should appear at the top left-hand corner of the screen, indeed, exactly where its \ct{bounds} say that it should appear.
@@ -337,7 +337,7 @@ BorderedMorph subclass: #SBEGame
    category: 'SBE-Quinto'
 \end{classdef}
 
-Here we subclass \clsind{BorderedMorph}; \clsind{Morph} is the superclass of all of the graphical shapes in \squeak, and (surprise!) a \ct{BorderedMorph} is a \ct{Morph} with a border.  
+Here we subclass \clsind{BorderedMorph}; \clsind{Morph} is the superclass of all of the graphical shapes in \squeak, and (surprise!) a \ct{BorderedMorph} is a \ct{Morph} with a border.
 We could also insert the names of the instance variables between the quotes on the second line, but for now, let's just leave that list empty.
 
 Now let's define an \mthind{SBEGame}{initialize} method for \ct{SBEGame}.
@@ -347,7 +347,7 @@ Now let's define an \mthind{SBEGame}{initialize} method for \ct{SBEGame}.
 \needlines{9}
 \numFiletreeMethodInput[sbegameinitialize]%
 {Initializing the game.}%
-{ListingSources/SBE-Quinto.package/SBEGame.class/instance/initialize.st}	
+{ListingSources/SBE-Quinto.package/SBEGame.class/instance/initialize.st}
 
 %\sd{it would be nicer if we would not have to create an instance of SBECell for nothing}
 %\on{yes}
@@ -398,7 +398,7 @@ It offers you a number of ways of fixing this.
 \dothis{Choose \menu{declare instance} because we want \ct{cells} to be an instance variable.}
 Finally, \squeak will complain about the message \ct{newCellAt:at:} sent on the last line; this is also not a mistake, so confirm that message too.
 \index{on the fly variable definition}
-\index{instance variable definition} 
+\index{instance variable definition}
 
 If you now look at the class definition once again (which you can do by clicking on the \button{instance} button), you will see that the browser has modified it to include the instance variable \ct{cells}.
 
@@ -406,7 +406,7 @@ Let's look at our \ct{initialize} method.
 The line \ct{|height overallBorderWidth sampleCell width|}  declares 4 temporary variables.
 They are called temporary variables because their scope and lifetime are limited to this method.
 Temporary variables with explanatory names are helpful in making code more readable.
-Smalltalk has no special syntax to distinguish constants and variables, and in fact all four of these ``variables'' are really constants. 
+Smalltalk has no special syntax to distinguish constants and variables, and in fact all four of these ``variables'' are really constants.
 Lines 5--7 define these constants.
 
 How big should our game board be?
@@ -421,7 +421,7 @@ It is actually good practice to write in terms of other methods that we haven't 
 Why?
 Well, it wasn't until we started writing the \ct{initialize} method that we realized that we needed it, and at that point, we can give it a meaningful name, and move on, without interrupting our flow.
 
-The lines 4--6 create a new \ct{SBECell} object, and assign its width and height to the appropriate temporary variables. 
+The lines 4--6 create a new \ct{SBECell} object, and assign its width and height to the appropriate temporary variables.
 
 Line 8 sets the \ct{extent} of the new object.
 Without worrying too much about the details just yet, just believe us that the expression in parentheses creates a square with its origin (\ie its top-left corner) at the point $(5,5)$ and its bottom-right corner far enough away to allow space for the right number of cells.
@@ -444,7 +444,7 @@ The {$(i,j)$}\textsuperscript{th} element will be initialized to the result of e
 \section{Organizing methods into protocols}
 
 Before we define any more methods, let's take a quick look at the third pane at the top of the browser.
-In the same way that the first pane of the browser lets us categorize classes so we are not overwhelmed by a very long list of class names in the second pane, so the third pane lets us categorize methods so that we are not overwhelmed by a very long list of method names in the fourth pane.  
+In the same way that the first pane of the browser lets us categorize classes so we are not overwhelmed by a very long list of class names in the second pane, so the third pane lets us categorize methods so that we are not overwhelmed by a very long list of method names in the fourth pane.
 These categories of methods are also called ``protocols''.
 \index{protocol}
 
@@ -470,7 +470,7 @@ SBEScreenshotRecorder writeTo: './figures/Categorize.png' frame: [:bounds | boun
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htbp]
    \centering
-   \includegraphics[scale=0.65]{Categorize} 
+   \includegraphics[scale=0.65]{Categorize}
    \caption{Categorize all uncategorized methods.\label{fig:categorize}}
 \end{figure}
 
@@ -486,14 +486,14 @@ Smalltalkers frequently use the notation ``\verb|>>|'' to identify the class to 
 To indicate that this is \emph{not} \st syntax, we will use the special symbol \ct{>>>} instead, so this method will appear in the text as \ct{SBEGame>>>cellsPerSide}.
 \cmindex{Behavior}{>>}
 From now on, when we show a method in this book, we will write the name of the method in this form.
-Of course, when you actually type the code into the browser, you don't have to type the class name or the \ct{>>>}; instead, you just make sure that the appropriate class is selected in the class pane.  
+Of course, when you actually type the code into the browser, you don't have to type the class name or the \ct{>>>}; instead, you just make sure that the appropriate class is selected in the class pane.
 
 Now let's define the other two methods that are used by the \ct{SBEGame>>>initialize} method.
 Both of them can go in the \prot{initialization} protocol.
 
 \numFiletreeMethodInput[sbegamecellsperside]%
 {A constant method.}%
-{ListingSources/SBE-Quinto.package/SBEGame.class/instance/cellsPerSide.st}	
+{ListingSources/SBE-Quinto.package/SBEGame.class/instance/cellsPerSide.st}
 \cmindex{SBEGame}{cellsPerSide}
 \index{constant methods}
 
@@ -501,9 +501,9 @@ This method could hardly be simpler:
 It answers the constant 10.
 One advantage of representing constants as methods is that if the program evolves so that the constant then depends on some other features, the method can be changed to calculate this value.
 
-\needlines{10}	
+\needlines{10}
 \begin{method}[newCellAt:at:]{An initialization helper method.}
-SBEGame>>>newCellAt: i at: j 
+SBEGame>>>newCellAt: i at: j
 	"Create a cell for position (i,j) and add it to my on-screen
 	representation at the appropriate screen position. Answer the new cell."
 
@@ -511,7 +511,7 @@ SBEGame>>>newCellAt: i at: j
 	cell := SBECell new.
 	origin := self innerBounds origin.
 	self addMorph: cell.
-	cell 
+	cell
 		position: ((i - 1) * cell width) @ ((j - 1) * cell height) + origin;
 		mouseAction: [self toggleNeighboursOfCellAt: i at: j].
 \end{method}
@@ -593,10 +593,10 @@ Finally, we need to define a method \ct{mouseUp:}; this will be called automatic
 \dothis{Add the method \ct{SBECell>>>mouseUp:} and then \menu{categorize all uncategorized} methods.}
 \index{method!categorize}
 
-This method sends the message \ct{value} to the object stored in the instance variable \ct{mouseAction}. 
+This method sends the message \ct{value} to the object stored in the instance variable \ct{mouseAction}.
 Recall that in \ct{SBEGame>>>newCellAt: i at: j} we assigned the following code fragment to \ct{mouseAction}:
 
-\ct{[self toggleNeighboursOfCellAt: i at: j ]} 
+\ct{[self toggleNeighboursOfCellAt: i at: j ]}
 
 \noindent
 Sending the \ct{value} message causes this code fragment to be evaluated, and consequently, the state of the cells will toggle.
@@ -737,20 +737,20 @@ Verify that the game now works in the new image.}
 
 \subsection{Monticello packages}
 Although fileouts are a convenient way of making a snapshot of the code you have written, they do not work well for long-running projects.
-Just as most open-source projects find it much more convenient to maintain their code in a repository using \ind{Git}\footnote{\url{www.git-scm.com}} or \ind{Mercurial}\footnote{\url{www.mercurial-scm.org}}, so \squeak programmers find it more convenient to manage their code using \ind{Monticello} packages. 
+Just as most open-source projects find it much more convenient to maintain their code in a repository using \ind{Git}\footnote{\url{www.git-scm.com}} or \ind{Mercurial}\footnote{\url{www.mercurial-scm.org}}, so \squeak programmers find it more convenient to manage their code using \ind{Monticello} packages.
 These packages are represented as files with names ending in \ct{.mcz}; they are actually zip-compressed bundles that contain the complete code of your \ind{package}.
 
 Using the Monticello package browser, you can save packages to repositories on various types of servers, including FTP and HTTP servers; you can also just write the packages to a repository in a local file system directory.
-A copy of your package is also always cached on your local hard-disk in the \emph{package-cache} folder. 
-Monticello lets you save multiple versions of your program, merge versions, go back to an old version, and browse the differences between versions. 
+A copy of your package is also always cached on your local hard-disk in the \emph{package-cache} folder.
+Monticello lets you save multiple versions of your program, merge versions, go back to an old version, and browse the differences between versions.
 In fact, Monticello is a distributed version control system just like Git; this means it allows developers to save their work on different places, not on a single repository.
 \seeindex{package browser}{Monticello}
 
-You can also send a \ct{.mcz} file by email. 
+You can also send a \ct{.mcz} file by email.
 The recipient will have to place it in her \emph{package-cache} folder; she will then be able to use Monticello to browse and load it.
 
 \dothis{Open the Monticello browser by selecting \menu{World \go open\,\ldots \go Monticello browser}.}
-In the right-hand pane of the browser (see \figref{monticello1}) is a list of Monticello repositories, which will include all of the repositories from which code has been loaded into the image that you are using.  
+In the right-hand pane of the browser (see \figref{monticello1}) is a list of Monticello repositories, which will include all of the repositories from which code has been loaded into the image that you are using.
 
 %%{SBESqueakPicture writeTo: './figures/MonticelloBrowser.png' frame: #morphs using: [:helper |
 %%  MCWorkingCopyBrowser open
@@ -780,8 +780,8 @@ Since we put all of the code for the Quinto game into the class category called 
 
 \dothis{Add the \ct{SBE-Quinto} package to your Monticello browser using the \button{+Package} button and type \ct{SBE-Quinto}.}
 
-\subsection{\ind{SqueakSource}: a sharing platform for Monticello.} 
-We think that the best way to save your code and share it is to create an account for your project on a SqueakSource server. 
+\subsection{\ind{SqueakSource}: a sharing platform for Monticello.}
+We think that the best way to save your code and share it is to create an account for your project on a SqueakSource server.
 SqueakSource is like GitHub\footnote{\url{www.github.com}}:
 It is a web front-end to an HTTP Monticello server that lets you manage your projects.
 There is a public SqueakSource server at \url{http://www.squeaksource.com}, and a copy of the code related to our game is stored there at \url{http://www.squeaksource.com/QuintoExampleSBE.html}.
@@ -789,9 +789,9 @@ You can look at this project with a web browser, but it's a lot more productive 
 
 \dothis{Open a web browser to \url{www.squeaksource.com}.
 Create an account for yourself and then create (\ie ``register'') a project for the Quinto game.}
-SqueakSource will show you the information that you should use when adding a repository using the Monticello browser. 
+SqueakSource will show you the information that you should use when adding a repository using the Monticello browser.
 
-Once your project has been created on SqueakSource, you have to tell your \squeak system to use it. 
+Once your project has been created on SqueakSource, you have to tell your \squeak system to use it.
 
 \dothis{With the \ct{SBE-Quinto} package selected, click the \button{+Repository} button in the Monticello browser.}
 You will see a list of the different available types of repositories; to add a SqueakSource repository select \menu{HTTP}.

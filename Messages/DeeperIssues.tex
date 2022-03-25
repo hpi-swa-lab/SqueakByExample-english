@@ -37,13 +37,13 @@ Knowing that the message \ct{+} when sent to a point with a point returns a poin
 
 \begin{figure}[ht]
 % MISSING FIGURE
-% \centerline{\includegraphics[width=5cm]{ucompoBinBracket}} 
+% \centerline{\includegraphics[width=5cm]{ucompoBinBracket}}
 \caption{Another example of using parentheses to control the way messages are executed.\label{fig:compoBinBracket}}
 \end{figure}
 
 \begin{figure}[ht]
 % MISSING FIGURE
-% \centerline{\includegraphics[width=5cm]{ucompoBinNoBracket}} 
+% \centerline{\includegraphics[width=5cm]{ucompoBinNoBracket}}
 \caption{As the message \ct{@} when sent to a \textit{point} returns a B3DVector, the expression does not return a simple point but a B3DPoint.  \label{fig:compoBinNoBracket}}
 \end{figure}
 
@@ -53,12 +53,12 @@ Knowing that the message \ct{+} when sent to a point with a point returns a poin
 Note that evaluating from left to right and the other rules we explained is equivalent to put around parentheses. Here are some expressions without and their equivalent with parentheses. Note that you do not have to really understand what these expressions are meaning, you just have to identify the different kinds of messages.
 
 \begin{script}{Expressions and their equivalence fully parenthesized}
-Turtle new east 
+Turtle new east
     (Turtle new) east
 
 100@200 = 200@300
 	((100@200) = 200) @ 300
-	
+
 20 + 2 * 5 + 2
    ((20 + 2) * 5) + 2
 
@@ -78,7 +78,7 @@ As we already mentioned, messages can have multiple arguments. In such a case, k
 \begin{script}{Examples of long keyword based messages}\label{scr:longkey}
 1 !\textbf{between:}! 5 !\textbf{and:}! 10.
 
-1 !\textbf{between:}! 5 
+1 !\textbf{between:}! 5
   !\textbf{and:}! 10.
 \end{script}
 
@@ -86,7 +86,7 @@ In fact this is a bit more complex. The characters \ct{[}, \ct{]}, and \ct{(}, \
 We use different style (italic, bold...) to group together the words belonging to a same keyword-based message.
 
 \begin{script}{Identifying keyword-based messages}\label{scr:keywordComplex}
-1   | dist| 
+1   | dist|
 2   dist := self !\textit{distanceBetween:}! (World bounds !\textbf{centeredBy:}! self topLeft)
 3                !\textit{and:}! self position.
 4   dist > 300
@@ -96,10 +96,10 @@ We use different style (italic, bold...) to group together the words belonging t
 8         ifFalse: [self !\textit{color:}! Color yellow]]
 \end{script}
 
-\Tscrref{scr:keywordComplex} can be seen as \tscrref{scr:keywordComplex2} where we replaced the first level areas by \ct{xxx}. 
+\Tscrref{scr:keywordComplex} can be seen as \tscrref{scr:keywordComplex2} where we replaced the first level areas by \ct{xxx}.
 
 \begin{script}{Identifying keyword-based messages}\label{scr:keywordComplex2}
-1   | dist| 
+1   | dist|
 2   dist := self !\textit{distanceBetween:}! xxx
 3                !\textit{and:}! self position.
 4   dist > 300
@@ -110,15 +110,15 @@ We use different style (italic, bold...) to group together the words belonging t
 \end{script}
 
 \begin{itemize}
-\item Line 2 contains \ct{(World bounds centeredBy: self topLeft)} which creates a distinct area. In such an area there is one complete keyword-based message \ct{centeredBy:}. 
+\item Line 2 contains \ct{(World bounds centeredBy: self topLeft)} which creates a distinct area. In such an area there is one complete keyword-based message \ct{centeredBy:}.
 
 \item Line 2 contains the word \ct{distanceBetween:}. It does not represent a complete keyword-based message because there is not \ct{.} or \ct{;} so we pass to the next line. Note that the word \ct{centeredBy:} does not participate in the keyword-based message starting with \ct{distanceBetween:} because it is in a distinct area delimited by \ct{(} and \ct{)}.
 
-\item The line 3 complements the keyword-based message with  the word \ct{and:}. There is a dot at the end so the message is finally \ct{distanceBetween:and:}. 
+\item The line 3 complements the keyword-based message with  the word \ct{and:}. There is a dot at the end so the message is finally \ct{distanceBetween:and:}.
 
-\item Line 5 contains \ct{[self color: Color green withSize: 2]} which creates another distinct area. In such an area, there is the keyword-based message \ct{color:withSize:}. 
+\item Line 5 contains \ct{[self color: Color green withSize: 2]} which creates another distinct area. In such an area, there is the keyword-based message \ct{color:withSize:}.
 
-\item Lines 7 and 8 defines two distinct areas that contain the same keyword-based message \ct{color:}. 
+\item Lines 7 and 8 defines two distinct areas that contain the same keyword-based message \ct{color:}.
 
 \item Lines 6, 7 and 8 define one extra area \ct{[dist < 200 ifTrue: [self color: Color red]  ifFalse: [self color: Color yellow]]} containing the two smaller areas identified above. This bigger area contains the message \ct{ifTrue:ifFalse:} starting at line 7.
 
@@ -126,14 +126,14 @@ We use different style (italic, bold...) to group together the words belonging t
 \end{itemize}
 
 \important{
-The characters \ct{[}, \ct{]}, and \ct{(}, \ct{)} delimit distinct areas. In such an area, 
-a keyword-based message is the longest sequence  of words terminated by \ct{:} that is not cut by the characters \ct{.},  or \ct{;}. 
+The characters \ct{[}, \ct{]}, and \ct{(}, \ct{)} delimit distinct areas. In such an area,
+a keyword-based message is the longest sequence  of words terminated by \ct{:} that is not cut by the characters \ct{.},  or \ct{;}.
 When the characters \ct{[}, \ct{]}, and \ct{(}, \ct{)} surround some words, these words participate in the keyword-based message local to the area defined.}
 % \end{largecadre}
 
 
 The problem is that when we compose two keyword-based messages sometimes we want to say
-that the message is \textit{not} the longuest sequence of words. For example in \tscrref{scr:withParenthesis2}  we want to send a rectangle the message \ct{containsPoint:} and not \ct{containsPoint:ifTrue:} which does not exist. For this reason we put parenthesis around the message \lct{aRect \textbf{containsPoint:} aTurtle center}. This creates a new area and distinguish the message \ct{containsPoint:} and \ct{ifTrue:} as two complete keyword-based messages. 
+that the message is \textit{not} the longuest sequence of words. For example in \tscrref{scr:withParenthesis2}  we want to send a rectangle the message \ct{containsPoint:} and not \ct{containsPoint:ifTrue:} which does not exist. For this reason we put parenthesis around the message \lct{aRect \textbf{containsPoint:} aTurtle center}. This creates a new area and distinguish the message \ct{containsPoint:} and \ct{ifTrue:} as two complete keyword-based messages.
 
 \begin{script}{Conditional Requiring Parenthesis}\label{scr:withParenthesis2}
 | aRect aTurtle |

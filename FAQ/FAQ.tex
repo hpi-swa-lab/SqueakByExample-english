@@ -55,7 +55,7 @@ I have destroyed my world docking bar at the top of the world in some way.
 How do I get it back?
 \end{faq}
 \answer
-Open the yellow button menu of the world (by clicking the yellow button in the world). 
+Open the yellow button menu of the world (by clicking the yellow button in the world).
 There you find the menu item \menu{show main docking bar}.
 Click it once to deactivate it completely, and then click it a second time to re-activate it.
 
@@ -63,17 +63,17 @@ Click it once to deactivate it completely, and then click it a second time to re
 How do I install more than what is already in the image?
 \end{faq}
 \answer
-There are several ways to install additional packages. 
+There are several ways to install additional packages.
 First, you can always download sar- or mcz-files and simply drop them into \sq.
-Second, you can use the class \clsind{Installer}, which provides methods for installing several kinds of packages from different sources, \eg Squeaksource. 
+Second, you can use the class \clsind{Installer}, which provides methods for installing several kinds of packages from different sources, \eg Squeaksource.
 To start using the \ct{Installer} you can take a look at the class comment.
 Finally, you can currently find an increasing number of \sq projects on GitHub, many of them to be installed via \ind{Metacello}.
 Metacello is a configuration management project for specifying dependencies between \st projects.
-Before you can install a project via Metacello you may have to setup Metacello in your environment. 
+Before you can install a project via Metacello you may have to setup Metacello in your environment.
 You can do so via \ct{Installer ensureRecentMetacello}.
 
 \begin{faq}
-Some code triggered a lot of debuggers and my whole screen is filled with them. 
+Some code triggered a lot of debuggers and my whole screen is filled with them.
 How can I get rid of them?
 \end{faq}
 \answer
@@ -86,7 +86,7 @@ You can close all windows that look similar at once by selecting \menu{World doc
 How do I sort a \clsind{Collection}?
 \end{faq}
 \answer
-If you want a sorted copy, you can use \mthind{Collection}{sorted}. 
+If you want a sorted copy, you can use \mthind{Collection}{sorted}.
 If you want to have a collection that keeps the elements sorted, even when you add or remove elements, send the message \mthind{Collection}{asSortedCollection}.
 Finally, some collections can be sorted in-place as they understand \ct{sort}, which will not return a copy, but re-order the collection.
 
@@ -231,7 +231,7 @@ This will create an \clsind{ImageMorph} in the world.
 ImageMorph new
     image: (Form fromFileNamed: 'anImage.jpg');
     openInHand.
-\end{code}  
+\end{code}
 
 \begin{faq}
 How do I center text in a \clsind{TextMorph}?
@@ -241,28 +241,28 @@ The following expression will do this:
 \begin{code}{}
 TextMorph new
     contents: 'Hello';
-    hResizing: #rigid; "States that the morph should not change 
+    hResizing: #rigid; "States that the morph should not change
                         its width to match the width of the content"
     width: 300;
     centered;
     openInWorld.
-\end{code}  
+\end{code}
 
 \begin{faq}
 How do I add formatting to text?
 \end{faq}
 \answer
-The relevant classes are \clsind{Text} and \clsind{TextAttribute}. 
+The relevant classes are \clsind{Text} and \clsind{TextAttribute}.
 You can add \ct{TextAttribute}s to section of text by using the messages in the \ct{emphasis} protocol of \ct{Text}, for example:
 \begin{code}{}
 text := 'yellow and green' asText.
-text 
+text
 	addAttribute: TextColor yellow from: 1 to: 6;
 	addAttribute: TextEmphasis italic from: 1 to: 6;
 	addAttribute: TextColor green from: 12 to: 16;
 	addAttribute: TextEmphasis bold from: 12 to: 16.
 text asMorph openInHand.
-\end{code}  
+\end{code}
 
 %=================================================================
 \section{System}
@@ -278,11 +278,11 @@ Note, that, like most interpreter-based languages to date, the \sq environment r
 Writing concurrent code might still be useful for background processing of long computations or I/O.
 
 \begin{faq}
-I have created concurrent behavior, but lost track of some of the processes I started. 
+I have created concurrent behavior, but lost track of some of the processes I started.
 What can I do?
 \end{faq}
 \answer
-There is a tool called \ind{Process Browser} which you can either open from \menu{World menu \go open} or \menu{World docking bar \go Tools}. 
+There is a tool called \ind{Process Browser} which you can either open from \menu{World menu \go open} or \menu{World docking bar \go Tools}.
 The process browser lists all processes and the yellow button menu allows you to control the process, \eg terminate it.
 
 \begin{faq}
@@ -342,7 +342,7 @@ Monticello gathers all methods that are in other categories named like *package 
 \section{Tools}
 
 \begin{faq}
-Doing everything with the mouse take so much time. 
+Doing everything with the mouse take so much time.
 Which keyboard shortcuts are there?
 \end{faq}
 \answer
@@ -352,7 +352,7 @@ You can find a list of available keyboard shortcuts directly in the environment 
 Some menus are quite large and I struggle to find what I am looking for.
 \end{faq}
 \answer
-Menus, like all panes, can be filtered by simply typing on your keyboard. 
+Menus, like all panes, can be filtered by simply typing on your keyboard.
 If you type the complete string of the menu item you can also directly activate it by pressing return.
 
 \begin{faq}
@@ -360,7 +360,7 @@ Some message sends seem slow to me.
 How do I find out what makes them slow?
 \end{faq}
 \answer
-You can use the \ct{MessageTally} tool that allows you to profile your code. 
+You can use the \ct{MessageTally} tool that allows you to profile your code.
 To profile all processes currently running in the process, you can open the tool from \menu{World docking bar \go Extras \go Start Profiler}\index{Profiler}.
 If you only want to profile a specific message send, you can use \mthind{MessageTally class}{spyOn:}, for example:
 \begin{code}{}

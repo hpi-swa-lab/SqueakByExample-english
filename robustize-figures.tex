@@ -57,11 +57,11 @@
 			{\global\graphicexistfalse}%
 			{}%
 		\fi
-		\ifx\Gin@ext\relax 
+		\ifx\Gin@ext\relax
 			\gdef\imageextension{unknown}%
 		\else
 			\xdef\imageextension{\Gin@ext}%
-		\fi 
+		\fi
 	\endgroup
 	\ifgraphicexist
 		\expandafter \@firstoftwo
@@ -84,14 +84,14 @@
 	\ClassWarning{robustize-figures}{Figure #2 does not exist -- but robust mode is activated, so I am going to replace this with a placeholder}
 	\noindent\colorbox{gray!20}{
 	\begin{minipage}[t][4.2cm][t]{0.8\textwidth}
-		\vspace*{\fill} 
-		\centering 
+		\vspace*{\fill}
+		\centering
 		Missing figure
-		
+
 		\texttt{#2}
-		
+
 		\medskip
-		
+
 		\shrug
 		\vspace*{\fill}
 	\end{minipage}}
