@@ -1,5 +1,8 @@
-*SBE-Extract-transforming
+*SBE-Extract-transforming-override
 pointAtFraction: relativePoint
-	
-	self flag: #deprecate.
-	^ self @* relativePoint
+
+	| result |
+	result := self origin + (self extent * relativePoint).
+	^ self isIntegerRectangle
+		ifTrue: [result rounded]
+		ifFalse: [result]
