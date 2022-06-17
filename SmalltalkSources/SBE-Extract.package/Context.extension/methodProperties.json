@@ -3,7 +3,6 @@
 		"contextWrap:" : "ct 10/14/2020 14:42" },
 	"instance" : {
 		"findCalleeOf:" : "ct 12/4/2019 11:40",
-		"insertEnsure:" : "ct 10/25/2019 14:19",
 		"preponeSender" : "ct 12/4/2019 11:01",
 		"preponeSender:" : "ct 12/4/2019 11:56",
 		"removeSender:" : "ct 12/4/2019 11:54",
