@@ -8,8 +8,6 @@ This is the LaTeX source repository of the _Squeak by Example_ book.
 
 See the issues in the [Github repository](https://github.com/hpi-swa-lab/SqueakByExample-english) for the status of tasks for SBE.
 
----
-
 # Repository structure
 
 The main file is SBE.tex.  Chapters are in subdirectories.
