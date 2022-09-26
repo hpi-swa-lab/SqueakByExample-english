@@ -335,7 +335,7 @@ copiedArray := array deepCopy.
 copiedArray first == copiedArray second --> false
 \end{code}
 
-Also, not keeping track of previously copied objects, means that \ct{deepCopy} will not terminate when applied to a mutually recursive structure.
+Also, not keeping track of previously copied objects means that \ct{deepCopy} will not terminate when applied to a mutually recursive structure.
 
 \begin{code}{NB: CANNOT TEST}
 array1 := {'harry'}.
@@ -344,7 +344,7 @@ array1 at: 1 put: array2.
 array1 deepCopy --> !\emph{... does not terminate!}!
 \end{code}
 
-Another way to copy an object is provided by \cmind{Object}{deepCopy}:
+Another way to copy an object is provided by \cmind{Object}{veryDeepCopy}:
 It creates arbitrarily deep copies of objects but preserves object identities and cycles.
 
 \begin{code}{@TEST | array1 array2 copiedArray |}
