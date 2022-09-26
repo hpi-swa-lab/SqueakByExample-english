@@ -899,6 +899,8 @@ SBEDieMorph>>>faces: aNumber
 \end{method}
 \on{Why not make this a pre-condition, \ie an assertion?}
 
+Now that we have created an acessor method for this instance variable, we can also use it in the \ct{initialize} method to assure that all changes to the variable go through the accessor method.
+
 It may be good to review the order in which the messages are sent when a die is created.
 For instance, if we start by evaluating \ct{SBEDieMorph faces: 9}:
 \begin{enumerate}
