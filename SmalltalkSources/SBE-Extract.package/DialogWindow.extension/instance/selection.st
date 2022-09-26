@@ -4,5 +4,8 @@ selection
 	| listMorph |
 	listMorph := self
 		findDeepSubmorphThat: [:m | m knownName = #list]
-		ifAbsent: [^ self error: 'list not found'].
+		ifAbsent: [
+			"buttons (e.g., UIManager>>#chooseOptionFrom:* >= Squeak 6.0)"
+			^ self selectedButton label].
+	"list (e.g., UIManager>>#chooseFrom:*)"
 	^ listMorph selection
