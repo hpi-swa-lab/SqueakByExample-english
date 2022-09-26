@@ -942,7 +942,7 @@ It draws the die background with the \ct{super}-send, and then draws the dots.
 SBEDieMorph>>>drawOn: aCanvas
 
 	super drawOn: aCanvas.
-	(self perform: ('face' , dieValue asString) asSymbol) do: [:aPoint |
+	(self perform: ('face' , dieValue) asSymbol) do: [:aPoint |
 		self drawDotOn: aCanvas at: aPoint].
 \end{method}
 
