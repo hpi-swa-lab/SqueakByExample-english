@@ -1,4 +1,8 @@
 *SBE-Extract-accessing
 selection
 
-	^ self selectedButton
+	| listMorph |
+	listMorph := self
+		findDeepSubmorphThat: [:m | m knownName = #list]
+		ifAbsent: [^ self error: 'list not found'].
+	^ listMorph selection
