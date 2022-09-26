@@ -941,10 +941,14 @@ You can also type \short{i} for \menu{\textbf{i}nspect it}.)}
 \index{keyboard shortcut!inspect it}
 
 \begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder writeTo: './figures/inspectTimeNow1.png' building: [:helper |
+SBEScreenshotRecorder writeTo: './figures/inspectTimeNow1.png' building: [:helper | | window splitter |
 	TimeStamp now inspect.
-	helper scaleWindow: helper foregroundWindow.
+	window := helper foregroundWindow.
 	helper selectAnyListIn: helper foregroundWindow at: #utcMicroseconds.
+	helper scaleWindow: window.
+	splitter := window allMorphs detect: [:m |
+		(m isKindOf: ProportionalSplitterMorph) and: [m splitsLeftAndRight]].
+	splitter repositionBy: 50 @ 0
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
