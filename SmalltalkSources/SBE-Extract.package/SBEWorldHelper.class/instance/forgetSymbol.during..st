@@ -5,6 +5,7 @@ forgetSymbol: aStringOrSymbol during: aBlock
 	
 	(Symbol lookup: aStringOrSymbol) ifNotNil: [:symbol |
 		#(SymbolTable NewSymbols) do: [:name | | table |
+			"WriteBarrier (#beWritableObject/#beReadOnlyObject): >= Squeak 6.0"
 			table := Symbol classPool at: name.
 			(table respondsTo: #beWritableObject) ifTrue: [table beWritableObject].
 			table remove: symbol ifAbsent: [].

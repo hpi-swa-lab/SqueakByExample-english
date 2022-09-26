@@ -5,8 +5,9 @@ testForgetSymbolDuring
 	newString := UUID new asString.
 	newSymbol := (String new: newString size)
 		copyFrom: newString;
-		beReadOnlyObject;
 		yourself.
+	(newSymbol respondsTo: #beReadOnlyObject) ifTrue: [">= Squeak 6.0"
+		newSymbol beReadOnlyObject].
 	helper forgetSymbol: newSymbol during:
 		[self deny: newSymbol identical: newString asSymbol].
 	self deny: newSymbol identical: newString asSymbol.
