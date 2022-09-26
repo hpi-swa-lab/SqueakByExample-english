@@ -894,10 +894,9 @@ We define the instance method \ct{faces:} to check for a valid parameter as foll
 SBEDieMorph>>>faces: aNumber
 	"Set the number of faces"
 
-	(aNumber isInteger and: [aNumber > 0] and: [aNumber <= 9])
-		ifTrue: [faces := aNumber].
+	self assert: (aNumber isInteger and: [aNumber > 0] and: [aNumber <= 9]).
+	faces := aNumber.
 \end{method}
-\on{Why not make this a pre-condition, \ie an assertion?}
 
 Now that we have created an acessor method for this instance variable, we can also use it in the \ct{initialize} method to assure that all changes to the variable go through the accessor method.
 
