@@ -10,7 +10,7 @@ testForgetSymbolDuring
 		newSymbol beReadOnlyObject].
 	helper forgetSymbol: newSymbol during:
 		[self deny: newString asSymbol == newSymbol].
-	self deny: newSymbol identical: newString asSymbol.
+	self deny: newString asSymbol == newSymbol.
 	
 	self assert: #test42 identical: 'test42' asSymbol.
 	helper forgetSymbol: #test42 during:
