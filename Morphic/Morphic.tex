@@ -942,7 +942,7 @@ It draws the die background with the \ct{super}-send, and then draws the dots.
 SBEDieMorph>>>drawOn: aCanvas
 
 	super drawOn: aCanvas.
-	(self perform: ('face' , dieValue) asSymbol) do: [:aPoint |
+	(self perform: ('face' , self dieValue) asSymbol) do: [:aPoint |
 		self drawDotOn: aCanvas at: aPoint].
 \end{method}
 
@@ -972,12 +972,9 @@ To change the displayed face, we create an accessor that we can use as \ct{myDie
 \begin{method}{Setting the current value of the die.}
 SBEDieMorph>>>dieValue: aNumber
 
-	(aNumber isInteger
-			and: [aNumber > 0]
-			and: [aNumber <= faces])
-		ifTrue: [
-			dieValue := aNumber.
-			self changed]
+	self assert: (aNumber isInteger and: [aNumber between: 1 and: faces]).
+	dieValue := aNumber.
+	self changed.
 \end{method}
 
 Now we will use the animation system to show quickly all the faces:
@@ -991,7 +988,7 @@ SBEDieMorph>>>stepTime
 
 SBEDieMorph>>>step
 
-	isStopped ifFalse: [self dieValue: (1 to: faces) atRandom].
+	isStopped ifFalse: [self dieValue: (1 to: self faces) atRandom].
 \end{methods}
 Now the die is rolling!
 
