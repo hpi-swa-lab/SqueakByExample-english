@@ -1,0 +1,4 @@
+accessing
+classUnderTest
+
+	^ SBEWorldHelper
