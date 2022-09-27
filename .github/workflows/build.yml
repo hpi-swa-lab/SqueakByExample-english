@@ -10,7 +10,7 @@ on:
 #env:
 #  os: ubuntu-latest
 #  fail-fast: false
-#  smalltalks: "[Trunk, 5.3]"
+#  smalltalks: "[Trunk, 6.0]"
 #---
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        smalltalk: [Trunk, 5.3]
+        smalltalk: [Trunk, 6.0]
     steps:
       - uses: actions/checkout@v2
       - uses: hpi-swa/setup-smalltalkCI@v1
@@ -37,7 +37,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        smalltalk: [Trunk, 5.3]
+        smalltalk: [Trunk, 6.0]
     steps:
       - uses: actions/checkout@v2
       - uses: hpi-swa/setup-smalltalkCI@v1
@@ -64,7 +64,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        smalltalk: [Trunk, 5.3]
+        smalltalk: [Trunk, 6.0]
     steps:
       - uses: actions/checkout@v2
       - uses: hpi-swa/setup-smalltalkCI@v1

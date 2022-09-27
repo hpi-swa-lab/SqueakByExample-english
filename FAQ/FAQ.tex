@@ -176,7 +176,7 @@ Here we ask which methods are introduced by \ct{TranslucentColor}:
 \begin{code}{@TEST | newMethods |}
 newMethods := [:aClass| aClass methodDict keys select:
 	[:aMethod | (aClass superclass canUnderstand: aMethod) not ]].
-newMethods value: TranslucentColor --> #(!\SqVersionSwitch{6.0}{\#setAlpha: }{}!\#setRgb:alpha:)
+newMethods value: TranslucentColor --> #setAlpha:
 \end{code}
 
 \begin{faq}
@@ -187,7 +187,7 @@ How do I tell which methods of a class are abstract?
 abstractMethods :=
 	[:aClass | aClass methodDict keys select:
 		[:aMethod | (aClass>>aMethod) isAbstract ]].
-abstractMethods value: Collection --> !\SqVersionSwitch{6.0}{\#(\#remove:ifAbsent: \#add: \#do:)}{\#(\#add: \#remove:ifAbsent: \#do:)}!
+abstractMethods value: Collection --> #(#remove:ifAbsent: #add: #do:)
 \end{code}
 
 \begin{faq}
