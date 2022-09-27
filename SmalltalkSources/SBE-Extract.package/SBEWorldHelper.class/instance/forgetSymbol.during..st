@@ -5,15 +5,15 @@ forgetSymbol: aStringOrSymbol during: aBlock
 	
 	(Symbol lookup: aStringOrSymbol) ifNotNil: [:symbol |
 		#(SymbolTable NewSymbols) do: [:name | | table |
-			"WriteBarrier (#beWritableObject/#beReadOnlyObject): >= Squeak 6.0"
 			table := Symbol classPool at: name.
-			(table respondsTo: #beWritableObject) ifTrue: [table beWritableObject].
-			table remove: symbol ifAbsent: [].
-			(table respondsTo: #beReadOnlyObject) ifTrue: [table beReadOnlyObject].
+			table
+				beWritableObject;
+				remove: symbol ifAbsent: [];
+				beReadOnlyObject.
 			thisContext home insertSender: (Context contextEnsure: [
 				table := Symbol classPool at: name.
-				(table respondsTo: #beWritableObject) ifTrue: [table beWritableObject].
+				table beWritableObject.
 				[(table remove: symbol ifAbsent: []) isNil] whileFalse.
 				table add: symbol.
-				(table respondsTo: #beReadOnlyObject) ifTrue: [table beReadOnlyObject]])]].
+				table beReadOnlyObject])]].
 	^ aBlock value
