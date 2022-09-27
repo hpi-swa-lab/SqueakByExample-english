@@ -176,7 +176,7 @@ Here we ask which methods are introduced by \ct{TranslucentColor}:
 \begin{code}{@TEST | newMethods |}
 newMethods := [:aClass| aClass methodDict keys select:
 	[:aMethod | (aClass superclass canUnderstand: aMethod) not ]].
-newMethods value: TranslucentColor --> #setAlpha:
+newMethods value: TranslucentColor --> #(#setAlpha: #setRgb:alpha:)
 \end{code}
 
 \begin{faq}
