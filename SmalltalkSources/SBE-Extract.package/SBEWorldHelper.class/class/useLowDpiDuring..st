@@ -1,4 +1,4 @@
 utils - dpi
 useLowDpiDuring: aBlock
 
-	^ Preferences useFontSize: self standardFontSize during: aBlock
+	^ Display sbeUiScaleFactor: 1.0 during: aBlock

@@ -879,20 +879,23 @@ The left pane contains a list of system categories, but it's restricted to those
 \dothis{Select \scat{CollectionsTests-Text} and the pane to the right will show all of the test classes in that category, which includes the class \ct{StringTest}.
 The names of the classes are already selected, so click \menu{Run Selected} to run all these tests.}
 
-%%{SBESqueakPicture writeTo: './figures/testRunnerOnStringTest.png' frame: #morphs using: [:helper |
-%%	| testRunner categoryIndex |
-%%	thisContext wrap: [:block | helper restoreMethods: {StringTest >> #testShout} after: block].
-%%	StringTest compile: 'testShout self assert: false'.
-%%	testRunner := (ToolBuilder open: TestRunner new) model.
-%%	categoryIndex := testRunner categoryList indexOf: 'CollectionsTests-Text'.
-%%	testRunner
-%%		categorySelected: categoryIndex;
-%%		categoryAt: categoryIndex put: true;
-%%		selectNoClasses;
-%%		classAt: (testRunner classList findFirst: [:s | s beginsWith: 'StringTest']) put: true;
-%%		runAll.
-%%	helper hideProgressMorph.
-%%]}
+\begin{ExecuteSmalltalkScript}
+<timeout: 30 "seconds">
+SBESqueakPicture writeTo: './figures/testRunnerOnStringTest.png' frame: #morphs using: [:helper |
+	| testRunner categoryIndex |
+	thisContext wrap: [:block | helper restoreMethods: {StringTest >> #testShout} after: block].
+	StringTest compile: 'testShout self assert: false'.
+	testRunner := (ToolBuilder open: TestRunner new) model.
+	categoryIndex := testRunner categoryList indexOf: 'CollectionsTests-Text'.
+	testRunner
+		categorySelected: categoryIndex;
+		categoryAt: categoryIndex put: true;
+		selectNoClasses;
+		classAt: (testRunner classList findFirst: [:s | s beginsWith: 'StringTest']) put: true;
+		runAll.
+	helper hideProgressMorph
+]
+\end{ExecuteSmalltalkScript}
 
 \begin{figure}[hbt]
 \ifluluelse

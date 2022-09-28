@@ -10,8 +10,9 @@ executeShould: aBlock inScopeOfDebuggerThat: aPredicate thenDo: aHandlerBlock
 	newDebuggers := (self findDebuggersThat: aPredicate) copyWithoutAll: oldDebuggers]
 		doWhileFalse: [newDebuggers notEmpty].
 	self assert: [newDebuggers size = 1].
-	handleSemaphore signal.
-	aHandlerBlock "halt" value: newDebuggers anyOne model] fork.
+	aHandlerBlock value: newDebuggers anyOne model.
+	Processor yield.
+	handleSemaphore signal] fork.
 	
 	[aBlock value.
 	blockSemaphore signal] fork.

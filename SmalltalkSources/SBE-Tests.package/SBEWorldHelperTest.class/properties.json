@@ -1,0 +1,14 @@
+{
+	"category" : "SBE-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"helper" ],
+	"name" : "SBEWorldHelperTest",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"type" : "normal" }
