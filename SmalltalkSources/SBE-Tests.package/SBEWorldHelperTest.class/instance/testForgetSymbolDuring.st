@@ -6,8 +6,7 @@ testForgetSymbolDuring
 	newSymbol := (String new: newString size)
 		copyFrom: newString;
 		yourself.
-	(newSymbol respondsTo: #beReadOnlyObject) ifTrue: [">= Squeak 6.0"
-		newSymbol beReadOnlyObject].
+	newSymbol beReadOnlyObject.
 	helper forgetSymbol: newSymbol during:
 		[self deny: newString asSymbol == newSymbol].
 	self deny: newString asSymbol == newSymbol.

@@ -20,12 +20,12 @@ Use the \ct{} macro for in-line code.
 Use the {method} {classdef} {example} and {script} environments for
 multi-line code.
 
-If you add a new chapter: 
+If you add a new chapter:
 -	please be sure to include it from SBE.tex.
 -	Remember to include its /figures/ subdirectory in the graphicspath,
 	   which is set in the preamble to SBE.tex.  Don't forget the trailing /
 -	Please make sure the chapter compiles with latex both from the main book
-	and as a separate chapter.  
+	and as a separate chapter.
 
 IMPORTANT: Please check out a fresh copy of the book and compile the book
 to verify that you have added all the dependent files (e.g., figures).
@@ -50,7 +50,7 @@ The usual workflow to **add a scripted screenshot to the book** is as follows:
    
    \begin{figure}
       \centering
-      \includegraphics[scale=0.65]{<name>} 
+      \includegraphics[scale=0.65]{<name>}
       \caption{<caption>.\label{fig:<name>}}
    \end{figure}
    ```
@@ -72,7 +72,7 @@ The usual workflow to **add a scripted screenshot to the book** is as follows:
 
 ### I. Installation
 
-1. Get a support Squeak image (any release since 5.3 or the latest Trunk image)
+1. [Get a support Squeak image](https://squeak.org/downloads/) (either the latest release or the latest Trunk image)
 
 2. Open the Git Browser and clone this repository. Install missing dependencies as specified in the baseline if necessary.
 
@@ -198,7 +198,7 @@ If you are using a GUI like TeXshop, you must set the environment variable in ~/
 		<string>./local//:../local//:</string>
 	</dict>
 	</plist>
- 
+
 NB: You may need to logout and login again after creating or modifying this file.
 Note colon at end of TEXINPUTS that means "append current value here"
 (eg local has higher priority). Double slash means search recursively.
@@ -221,7 +221,7 @@ The repository was previously hosted on [squeaksource](http://www.squeaksource.c
 
 # Coding Style Guide
 
-* An empty line before the first line of the code 
+* An empty line before the first line of the code
 * Point at the end of a line, except for a line with a return statement
 * Space around all binary selectors
 * Keyword message with more than one keyword are broken up on several lines

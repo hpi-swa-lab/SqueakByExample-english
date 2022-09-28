@@ -1,7 +1,7 @@
 {
 	"class" : {
 		"standardFontSize" : "ct 11/23/2019 18:24",
-		"useLowDpiDuring:" : "ct 9/26/2022 21:45" },
+		"useLowDpiDuring:" : "ct 9/27/2022 12:27" },
 	"instance" : {
 		"adjustMorphsAreaOf:" : "ct 1/17/2020 14:48",
 		"assureScreenshot" : "ct 11/23/2019 17:53",
@@ -25,7 +25,7 @@
 		"focus:" : "ct 12/6/2019 17:03",
 		"foregroundMorph" : "ct 10/15/2020 14:00",
 		"foregroundWindow" : "ct 10/14/2020 17:15",
-		"forgetSymbol:during:" : "ct 9/26/2022 21:46",
+		"forgetSymbol:during:" : "ct 9/27/2022 12:33",
 		"generateKeyEvent:character:buttons:position:" : "ct 6/28/2021 11:45",
 		"generateMouseEvent:at:buttons:start:" : "ct 1/17/2020 19:18",
 		"haloHandleFormFor:" : "ct 11/2/2019 15:16",
@@ -60,7 +60,7 @@
 		"mouseLeave:" : "tobe 10/3/2019 20:00",
 		"mouseLeaveDragging:" : "tobe 10/3/2019 20:00",
 		"mouseMoveTo:buttons:in:" : "ct 10/18/2019 10:32",
-		"mouseOpenHaloFor:" : "ct 3/17/2021 23:01",
+		"mouseOpenHaloFor:" : "ct 9/27/2022 12:28",
 		"mousePress:at:buttons:" : "tobe 10/3/2019 20:00",
 		"mousePress:buttons:" : "tobe 10/3/2019 20:00",
 		"mouseRelease:at:buttons:" : "tobe 10/3/2019 20:00",
@@ -87,7 +87,7 @@
 		"simulateMouseEvent:" : "ct 1/17/2020 19:09",
 		"simulateMouseEvent:at:buttons:start:" : "ct 1/17/2020 19:18",
 		"simulateMouseEvent:at:buttons:start:morph:" : "ct 1/17/2020 19:21",
-		"spawnHand" : "ct 3/17/2021 23:00",
+		"spawnHand" : "ct 9/27/2022 12:28",
 		"takeScreenshot" : "ct 11/24/2019 19:36",
 		"takeScreenshotOf:" : "ct 11/24/2019 19:36",
 		"takeScreenshotOfAll:" : "ct 1/17/2020 20:03",
