@@ -1,6 +1,6 @@
-die logic
+accessing
 dieValue: aNumber
 
-	(aNumber isInteger and: [aNumber between: 1 and: faces]) ifTrue: [
-		dieValue := aNumber.
-         	self changed].
+	self assert: (aNumber isInteger and: [aNumber between: 1 and: self faces]).
+	dieValue := aNumber.
+	self changed.
