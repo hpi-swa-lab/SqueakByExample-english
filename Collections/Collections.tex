@@ -1051,7 +1051,7 @@ colors anySatisfy: [:color | color red > 0.5] --> true
 The message \mthind{Collection}{gather:} can be used to turn nested collections into a flat collection while at the same time converting the values. Some languages refer to this collection operation as flat map\seeindex{flat map}{Collection, gather:}.
 
 \begin{code}{@TEST | colors | colors := {Color white . Color yellow. Color red . Color blue . Color orange}.}
-colors anySatisfy: [:color | color red > 0.5] --> true
+colors gather: [:color | color names] --> #(#white #snow #yellow #lemon #red #maraschino #blue #blueberry #orange)
 \end{code}
 
 %=========================================================
