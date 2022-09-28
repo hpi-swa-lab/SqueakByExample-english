@@ -942,10 +942,14 @@ You can also type \short{i} for \menu{\textbf{i}nspect it}.)}
 \index{keyboard shortcut!inspect it}
 
 \begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder writeTo: './figures/inspectTimeNow1.png' building: [:helper |
+SBEScreenshotRecorder writeTo: './figures/inspectTimeNow1.png' building: [:helper | | window splitter |
 	TimeStamp now inspect.
-	helper scaleWindow: helper foregroundWindow.
+	window := helper foregroundWindow.
 	helper selectAnyListIn: helper foregroundWindow at: #utcMicroseconds.
+	helper scaleWindow: window.
+	splitter := window allMorphs detect: [:m |
+		(m isKindOf: ProportionalSplitterMorph) and: [m splitsLeftAndRight]].
+	splitter repositionBy: 50 @ 0
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
@@ -978,7 +982,37 @@ For example, if you evaluate \ct{localOffsetSeconds := localOffsetSeconds - 1} i
 You can change instance variables directly by selecting them, replacing the old value in the right-hand pane by a Squeak expression, and accepting.
 Squeak will evaluate the expression and assign the result to the instance variable.
 
-There are special variants of the inspector for Dictionaries, OrderedCollections, CompiledMethods, and a few other classes that make it easier to examine the contents of these special objects.
+There are many special variants of the inspector for different kinds of collections, methods, morphs, and a few other classes that make it easier to examine the contents of these special objects.
+For instance, if you inspect an \ct{EllipseMorph} by doing \ct{EllipseMorph new openInWorld; inspect}, you will see a window like that shown in \figref{inspectMorph} that has special fields for accessing the geometry, the screenshot, and the properties of the ellipse.
+
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/inspectMorph.png' building: [:helper | | window splitter |
+	EllipseMorph new openInWorld; inspect.
+	helper selectAnyListIn: helper foregroundWindow at: #screenshot.
+	window := helper foregroundWindow.
+	window extent: 360 @ 270.
+	splitter := window allMorphs detect: [:m |
+		(m isKindOf: ProportionalSplitterMorph) and: [m splitsTopAndBottom]].
+	splitter repositionBy: 0 @ 45.
+	helper takeScreenshotOf: window.
+]
+\end{ExecuteSmalltalkScript}
+
+\begin{figure}[btp]
+	\begin{center}
+		\includegraphics[scale=0.65]{inspectMorph}
+	\end{center}
+	\caption{Inspecting an \ct{ElipseMorph}.}
+	\label{fig:inspectMorph}
+\end{figure}
+
+If you do a yellow-button click on any field in an inspector, you will see a menu of operations that can be performed on that field.
+For instance, you can \menu{inspect} the value of the field, \menu{browse} its class, or search its implementation for all \menu{references} or \menu{assignments} to the selected variable.
+
+You can also add your own fields to the inspector by using the \menu{add field...} menu item.
+This concept is similar to what is known as \emph{watch expressions} in some other IDEs.
+For instance, in the inspector of the \ct{EllipseMorph}, choose \menu{add field...}, type \ct{self position}, and \menu{accept}.
+As you drag the ellipse around in the world, you will see the position of the ellipse change in the inspector.
 
 %---------------------------------------------------------
 \begin{ExecuteSmalltalkScript}"exploreTimeStampNow"
