@@ -16,6 +16,9 @@ ListingSources/
 warnings.txt
 bin/gdrive
 **/figures/*.png
+*.log
+*.fls
+*.fdb_latexmk
 
 # Editors
 .vscode/
