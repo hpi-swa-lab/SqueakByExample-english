@@ -4,6 +4,6 @@ buildFiguresWith: builders
 
 	| suite |
 	suite := self buildSuiteFromClasses: builders.
-	"Kind of workaround. If Preferences>>#changeFontSize: wasn't that teribbly slow and global, we could just set it per test in SBEWorldHelper>>#useScreenshotSettingsDuring:."
-	^ SBEWorldHelper useLowDpiDuring: [
+	"Kind of workaround. If this wasn't that teribbly slow and global, we could just set it per test in SBEWorldHelper>>#useScreenshotSettingsDuring:."
+	^ SBEWorldHelper useScaleFactorDuring: [
 		self runSuite: suite]

@@ -1,7 +1,7 @@
 {
 	"class" : {
-		"standardFontSize" : "ct 11/23/2019 18:24",
-		"useLowDpiDuring:" : "ct 9/27/2022 12:27" },
+		"scaleFactor" : "ct 9/28/2022 13:30",
+		"useScaleFactorDuring:" : "ct 9/28/2022 13:30" },
 	"instance" : {
 		"adjustMorphsAreaOf:" : "ct 1/17/2020 14:48",
 		"assureScreenshot" : "ct 11/23/2019 17:53",
