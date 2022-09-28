@@ -3,4 +3,4 @@ sbeDefaultExtent
 
 	^ true caseOf: {
 		[self isNotifier] -> [self initialExtentForNotifier].
-		[self isFull] -> [600 @ 400]. }
+		[self isFull] -> [600 px @ 400 px]. }
