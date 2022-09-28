@@ -7,5 +7,6 @@ escapeSequences
 		'BANG' -> '!'.
 		'CARET' -> '^'.
 		'UNDERSCORE'-> '_'.
-		'\\st' -> 'Smalltalk'
+		'\\st' -> 'Smalltalk'.
+		'\\#' -> '#'
 	}		

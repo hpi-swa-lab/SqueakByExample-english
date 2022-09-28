@@ -10,7 +10,13 @@ shouldOpenDebugger: aBlock that: aPredicate thenDo: aHandlerBlock
 		toValue: false
 		during: [
 			result := self
-				should: (self executeShould: aBlock inScopeOfDebuggerThat: aPredicate thenDo: aHandlerBlock)
+				should:
+					(self
+						executeShould:
+							[aBlock value.
+							Processor yield]
+						inScopeOfDebuggerThat: aPredicate
+						thenDo: aHandlerBlock)
 				description: 'aBlock should open debugger, but none found']]
 		ensure: [semaphore signal]] fork.
 	Processor yield.
