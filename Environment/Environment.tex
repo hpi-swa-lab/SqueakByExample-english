@@ -811,9 +811,10 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 				helper takeScreenshotOf: helper foregroundWindow.
 
 				"This is preparation for the next screenshot"
-				[helper click: (helper buttonLabeled: 'Accept' in: helper foregroundWindow)]
-					valueSuppressingMessages: #('*message*empty*');
-					flag: #workaround].
+					[[helper click: (helper buttonLabeled: 'Acce0pt' in: helper foregroundWindow)]
+							ifCurtailed: [helper world exportAsPNGNamed: (picture fileDirectory resolve: 'package-cache-browser.png') pathString; flag: #debug "https://github.com/hpi-swa-lab/SqueakByExample-english/issues/132"]]
+						valueSuppressingMessages: #('*message*empty*');
+						flag: #workaround].
 	].
 	picture writeTo: 'package-cache-browser.png' building: [
 		| window |
