@@ -1,1 +1,0 @@
-I represent a script to create a Squeak screenshot. I can write my output into a specified file, or display it to the user instead. I'm also capable of dealing with hi-DPI images.
