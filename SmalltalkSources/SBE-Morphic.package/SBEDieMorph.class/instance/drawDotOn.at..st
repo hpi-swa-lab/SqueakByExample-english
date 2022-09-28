@@ -1,4 +1,4 @@
-die logic
+drawing
 drawDotOn: aCanvas at: aPoint
    
 	aCanvas

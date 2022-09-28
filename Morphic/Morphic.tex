@@ -894,10 +894,11 @@ We define the instance method \ct{faces:} to check for a valid parameter as foll
 SBEDieMorph>>>faces: aNumber
 	"Set the number of faces"
 
-	(aNumber isInteger and: [aNumber > 0] and: [aNumber <= 9])
-		ifTrue: [faces := aNumber].
+	self assert: (aNumber isInteger and: [aNumber > 0] and: [aNumber <= 9]).
+	faces := aNumber.
 \end{method}
-\on{Why not make this a pre-condition, \ie an assertion?}
+
+Now that we have created an acessor method for this instance variable, we can also use it in the \ct{initialize} method to assure that all changes to the variable go through the accessor method.
 
 It may be good to review the order in which the messages are sent when a die is created.
 For instance, if we start by evaluating \ct{SBEDieMorph faces: 9}:
@@ -941,7 +942,7 @@ It draws the die background with the \ct{super}-send, and then draws the dots.
 SBEDieMorph>>>drawOn: aCanvas
 
 	super drawOn: aCanvas.
-	(self perform: ('face' , dieValue asString) asSymbol) do: [:aPoint |
+	(self perform: ('face' , self dieValue) asSymbol) do: [:aPoint |
 		self drawDotOn: aCanvas at: aPoint].
 \end{method}
 
@@ -971,12 +972,9 @@ To change the displayed face, we create an accessor that we can use as \ct{myDie
 \begin{method}{Setting the current value of the die.}
 SBEDieMorph>>>dieValue: aNumber
 
-	(aNumber isInteger
-			and: [aNumber > 0]
-			and: [aNumber <= faces])
-		ifTrue: [
-			dieValue := aNumber.
-			self changed]
+	self assert: (aNumber isInteger and: [aNumber between: 1 and: faces]).
+	dieValue := aNumber.
+	self changed.
 \end{method}
 
 Now we will use the animation system to show quickly all the faces:
@@ -990,7 +988,7 @@ SBEDieMorph>>>stepTime
 
 SBEDieMorph>>>step
 
-	isStopped ifFalse: [self dieValue: (1 to: faces) atRandom].
+	isStopped ifFalse: [self dieValue: (1 to: self faces) atRandom].
 \end{methods}
 Now the die is rolling!
 
