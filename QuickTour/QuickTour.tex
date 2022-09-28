@@ -98,20 +98,22 @@ Do whatever works best for your style of working and your operating system.
 \ab{I agree entirely; the reason that this is not here is because I could do only the Mac section.  Damien can probably do Windoze.  Perhaps we can ask on the list for a Linux volunteer?}
 
 %-----------------------------------------------------------------
-%%{SBESqueakPicture writeTo: './figures/startup.png' frame: #fullScreen using: [:helper |
-%%	| balloon |
-%%	helper world
-%%		color: (Color gray: 15 / 16); "Think green & save ink"
-%%		extent: 800 @ 450.
-%%	balloon := Form fromFileNamed: (helper resourceDirectory
-%%		/ 'branding' / 'balloon.png') fullName.
-%%	ReleaseBuilder openWelcomeWorkspacesWith: balloon.
-%%	helper foregroundWindow
-%%		height: helper world height * 0.75;
-%%		center: helper world center.
-%%	PreferenceWizardMorph open.
-%%	self flag: #sq60 "ct: After Objectland has been merged into Trunk, simplify this call and don't ask PreferenceWizardMorph".
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/startup.png' frame: #fullScreen using: [:helper |
+	| balloon |
+	helper world
+		color: (Color gray: 15 / 16); "Think green & save ink"
+		extent: 800 @ 450.
+	balloon := Form fromFileNamed: (helper resourceDirectory
+		/ 'branding' / 'balloon.png') fullName.
+	ReleaseBuilder openWelcomeWorkspacesWith: balloon.
+	helper foregroundWindow
+		height: helper world height * 0.75;
+		center: helper world center.
+	PreferenceWizardMorph open.
+	self flag: #sq60 "ct: After Objectland has been merged into Trunk, simplify this call and don't ask PreferenceWizardMorph".
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
 % \centerline {\includegraphics[width=0.6\textwidth]{download}}
 \centerline {\includegraphics[width=\textwidth]{startup}}
@@ -145,26 +147,30 @@ SBESqueakPicture writeTo: './figures/worldMenu.png' frame: #morphs using: [:help
 ]
 \end{ExecuteSmalltalkScript}
 
-%%{SBESqueakPicture writeTo: './figures/yellowButtonMenuOnWorkspace.png' frame: #morphs using: [:helper |
-%%	| workspace menu |
-%%	workspace := ToolBuilder open: Workspace new.
-%%	helper type: 'Time now ' into: workspace.
-%%
-%%	helper click: workspace at: workspace topCenter + (0 @ 30) buttons: #(right).
-%%	helper hand releaseMouseFocus.
-%%	helper mouseEnter: (helper menuItemMorphLabeled: 'print it (p)' in: helper world).
-%%	helper closeBalloons.
-%%	menu := helper foregroundMorph.
-%%	menu position: menu position + (30 @ 0).
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/yellowButtonMenuOnWorkspace.png' frame: #morphs using: [:helper |
+	| workspace menu |
+	workspace := ToolBuilder open: Workspace new.
+	helper type: 'Time now ' into: workspace.
 
-%%{SBESqueakPicture writeTo: './figures/morphicHaloOnWorkspace.png' frame: #morphs using: [:helper | | workspace |
-%%	workspace := ToolBuilder open: Workspace new.
-%%	helper type: 'Time now' into: workspace.
-%%	helper centerAllMorphs.
-%%	helper foregroundWindow lookFocused.
-%%	workspace addHalo.
-%%]}
+	helper click: workspace at: workspace topCenter + (0 @ 30) buttons: #(right).
+	helper hand releaseMouseFocus.
+	helper mouseEnter: (helper menuItemMorphLabeled: 'print it (p)' in: helper world).
+	helper closeBalloons.
+	menu := helper foregroundMorph.
+	menu position: menu position + (30 @ 0).
+]
+\end{ExecuteSmalltalkScript}
+
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/morphicHaloOnWorkspace.png' frame: #morphs using: [:helper | | workspace |
+	workspace := ToolBuilder open: Workspace new.
+	helper type: 'Time now' into: workspace.
+	helper centerAllMorphs.
+	helper foregroundWindow lookFocused.
+	workspace addHalo.
+]
+\end{ExecuteSmalltalkScript}
 
 \begin{figure}[tbh]
 	\centering
@@ -231,16 +237,18 @@ The \menu{keyboard} category has options to duplicate the various command keys.
 
 \dothis{Open the preference browser and find the \menu{Swap mouse buttons} option using the search box.}
 
-%%{SBESqueakPicture writeTo: './figures/PreferenceBrowser.png' frame: #morphs using: [:helper |
-%%	| browser searchBox |
-%%	PreferenceBrowser open.
-%%	browser := helper foregroundWindow.
-%%	browser extent: 600 @ 275.
-%%	searchBox := helper morphWithBalloonText: 'Search preference*' in: browser.
-%%	helper type: 'swap' into: searchBox.
-%%	searchBox model searchSelected.
-%%	(helper preferenceButtonMorphLabeled: 'Swap mouse buttons' in: browser) highlightOn.
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/PreferenceBrowser.png' frame: #morphs using: [:helper |
+	| browser searchBox |
+	PreferenceBrowser open.
+	browser := helper foregroundWindow.
+	browser extent: 600 @ 275.
+	searchBox := helper morphWithBalloonText: 'Search preference*' in: browser.
+	helper type: 'swap' into: searchBox.
+	searchBox model searchSelected.
+	(helper preferenceButtonMorphLabeled: 'Swap mouse buttons' in: browser) highlightOn.
+]
+\end{ExecuteSmalltalkScript}
 
 \begin{figure}[htb]
 \ifluluelse
@@ -266,12 +274,14 @@ The world menu provides you a simple means to access many of the tools that \sq 
 You will see a list of several of the core tools in \sq, including the system browser (one of many available class browsers) and the workspace.
 We will encounter most of them in the coming chapters.
 
-%%{SBESqueakPicture writeTo: './figures/OpenMenu.png' frame: #morphs using: [:helper |
-%%  helper click: helper world.
-%%  (helper menuItemMorphLabeled: 'open...' in: helper world) invokeWithEvent: nil.
-%%  helper closeBalloons.
-%%  helper hand releaseMouseFocus.
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/OpenMenu.png' frame: #morphs using: [:helper |
+  helper click: helper world.
+  (helper menuItemMorphLabeled: 'open...' in: helper world) invokeWithEvent: nil.
+  helper closeBalloons.
+  helper hand releaseMouseFocus.
+]
+\end{ExecuteSmalltalkScript}
 
 \begin{figure}[htb]
 \ifluluelse
@@ -290,17 +300,21 @@ You now have a morph full of bouncing atoms ``in hand''.
 Put the atoms morph down (by clicking) somewhere.}
 \index{Morphic}
 
-%%{SBESqueakPicture writeTo: './figures/BouncingAtoms.png' frame: #morphs using: [:helper |
-%%  BouncingAtomsMorph new openInWorld
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/BouncingAtoms.png' frame: #morphs using: [:helper |
+  BouncingAtomsMorph new openInWorld
+]
+\end{ExecuteSmalltalkScript}
 
-%%{SBESqueakPicture writeTo: './figures/saveAs.png' frame: #morphs using: [:helper |
-%%  helper
-%%    runModal: [Smalltalk saveAs]
-%%    then: [
-%%      helper closeBalloons.
-%%      helper type: 'SBE' into: (helper morphByExternalName: 'inputText' in: helper world) firstSubmorph firstSubmorph].
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/saveAs.png' frame: #morphs using: [:helper |
+  helper
+    runModal: [Smalltalk saveAs]
+    then: [
+      helper closeBalloons.
+      helper type: 'SBE' into: (helper morphByExternalName: 'inputText' in: helper world) firstSubmorph firstSubmorph].
+]
+\end{ExecuteSmalltalkScript}
 
 \begin{figure}[htb]
 \begin{minipage}[b]{.48\textwidth}
@@ -353,14 +367,16 @@ The image can be used as a mechanism for storing and managing software projects 
 However, as we shall see later on, there are also tools for managing code and sharing software developed by teams.
 For now, we will continue by cleaning up the image before we take a look at the tools \sq provides.
 
-%%{SBESqueakPicture writeTo: './figures/Tools.png' frame: #morphs using: [:helper |
-%%	| dockingBar appsItem |
-%%	dockingBar := TheWorldMainDockingBar new createDockingBar.
-%%	helper world addMorph: dockingBar.
-%%	dockingBar ownerChanged.
-%%	appsItem := helper menuItemMorphLabeled: 'Tools' in: dockingBar.
-%%	helper click: appsItem
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/Tools.png' frame: #morphs using: [:helper |
+	| dockingBar appsItem |
+	dockingBar := TheWorldMainDockingBar new createDockingBar.
+	helper world addMorph: dockingBar.
+	dockingBar ownerChanged.
+	appsItem := helper menuItemMorphLabeled: 'Tools' in: dockingBar.
+	helper click: appsItem
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{Tools}}}
@@ -408,23 +424,25 @@ Do it again.
 (The \menu{(d)} in the menu item \menu{do it (d)} tells you that the keyboard shortcut to \emph{do it} is \short{d}.
 More on this in the next section!)
 
-%%{SBESqueakPicture writeTo: './figures/Doit.png' frame: [:morphsRect | morphsRect withBottom: morphsRect bottom - 150] using: [:helper |
-%%  | workspace |
-%%  ToolBuilder open: Transcript.
-%%  Transcript show: 'hello world'; cr.
-%%  helper foregroundWindow bounds: (0 @ 120 extent: 450 @ 230).
-%%
-%%  workspace := ToolBuilder open: Workspace new.
-%%  workspace position: 200 @ 100.
-%%
-%%  helper type: 'Transcript show: ''hello world''; cr.' into: workspace.
-%%  helper keyStroke: workspace key: $a modifiers: #(cmd).
-%%
-%%  helper click: workspace at: workspace topCenter + (0 @ 30) buttons: #(right).
-%%  helper hand releaseMouseFocus.
-%%  helper mouseEnter: (helper menuItemMorphLabeled: 'do it (d)' in: helper world).
-%%  helper closeBalloons.
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/Doit.png' frame: [:morphsRect | morphsRect withBottom: morphsRect bottom - 150] using: [:helper |
+  | workspace |
+  ToolBuilder open: Transcript.
+  Transcript show: 'hello world'; cr.
+  helper foregroundWindow bounds: (0 @ 120 extent: 450 @ 230).
+
+  workspace := ToolBuilder open: Workspace new.
+  workspace position: 200 @ 100.
+
+  helper type: 'Transcript show: ''hello world''; cr.' into: workspace.
+  helper keyStroke: workspace key: $a modifiers: #(cmd).
+
+  helper click: workspace at: workspace topCenter + (0 @ 30) buttons: #(right).
+  helper hand releaseMouseFocus.
+  helper mouseEnter: (helper menuItemMorphLabeled: 'do it (d)' in: helper world).
+  helper closeBalloons.
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{Doit}}}
@@ -469,13 +487,15 @@ If you want to see the result, you should \menu{print it} instead.
 This time we see the result we expect (\figref{printit}).
 \index{keyboard shortcut!print it}
 
-%%{SBESqueakPicture writeTo: './figures/PrintIt.png' frame: #morphs using: [:helper | | workspace |
-%%  workspace := ToolBuilder open: Workspace new.
-%%  workspace extent: 277 @ 143.
-%%
-%%  helper type: '3 + 4' into: workspace.
-%%  helper keyStroke: workspace key: $p modifiers: #(cmd).
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/PrintIt.png' frame: #morphs using: [:helper | | workspace |
+  workspace := ToolBuilder open: Workspace new.
+  workspace extent: 277 @ 143.
+
+  helper type: '3 + 4' into: workspace.
+  helper keyStroke: workspace key: $p modifiers: #(cmd).
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
 \centerline {\includegraphics[scale=0.65]{PrintIt}}
 \caption{``Print it'' rather than ``do it''. \label{fig:printit}}
@@ -497,16 +517,18 @@ The title tells us that \ct{7} is an instance of the class \clsind{SmallInteger}
 The left panel allows us to browse the instance variables of an object, the values of which are shown in the right panel.
 The bottom panel can be used to write expressions to send messages to the object.
 
-%%{SBESqueakPicture writeTo: './figures/InspectIt.png' frame: #morphs using: [:helper |
-%%	| workspace |
-%%	workspace := ToolBuilder open: Workspace new.
-%%	workspace bounds: (0 @ 30 extent: 277 @ 143).
-%%
-%%	helper type: '3 + 4' into: workspace.
-%%	helper keyStroke: workspace key: $i modifiers: #(cmd).
-%%	(helper windowLabeled: 'SmallInteger#*')
-%%		position: 120 @ 20; extent: 300 @ 185.
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/InspectIt.png' frame: #morphs using: [:helper |
+	| workspace |
+	workspace := ToolBuilder open: Workspace new.
+	workspace bounds: (0 @ 30 extent: 277 @ 143).
+
+	helper type: '3 + 4' into: workspace.
+	helper keyStroke: workspace key: $i modifiers: #(cmd).
+	(helper windowLabeled: 'SmallInteger#*')
+		position: 120 @ 20; extent: 300 @ 185.
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
 \centerline {\includegraphics[scale=0.65]{InspectIt}}
 \caption{Inspecting an object. \label{fig:inspectit}}
@@ -524,9 +546,11 @@ This time you should see a window labeled \clsind{Object} containing the text
 \mbox{$\triangleright$ \ct{root: Object}}.
 Click on the triangle to open it up (\figref{exploreit}).
 
-%%{SBESqueakPicture writeTo: './figures/ExploreIt.png' frame: #morphs using: [:helper |
-%%  Object explore
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/ExploreIt.png' frame: #morphs using: [:helper |
+  Object explore
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
 \centerline {\includegraphics[scale=0.65]{ExploreIt}}
 \caption{Exploring an object. \label{fig:exploreit}}
@@ -546,31 +570,33 @@ As we shall see, there are several interesting browsers available for \sq, but t
 
 \dothis{Open a browser by selecting \menu{World \go Browser}, or by selecting \menu{Tools \go Browser} in the world menu bar.}
 
-%%{SBESqueakPicture writeTo: './figures/ClassBrowser2.png' frame: #morphs using: [:helper |
-%%	| class selector window codePane |
-%%	class := Object. selector := #printString.
-%%	Browser fullOnClass: class selector: selector.
-%%	window := helper foregroundWindow.
-%%	helper displayForegroundWindowFocused.
-%%
-%%	Dictionary new
-%%		at: class category put: 'System categories';
-%%		at: ('\s*' , class) asRegex put: 'Classes';
-%%		at: (class whichCategoryIncludesSelector: selector) put: 'Protocols';
-%%		at: selector put: 'Methods';
-%%		keysAndValuesDo: [:item :description |
-%%			(NewBalloonMorph string: description for: (helper listMorphIncludingMatch: item in: window))
-%%				popUp].
-%%	codePane := helper codePaneOfBrowser: window.
-%%	(NewBalloonMorph string: 'name of method' for: codePane)
-%%			popUpAt: codePane topLeft + (10 @ 5).
-%%	(SBEBalloonMorph string: 'method comment' for: codePane)
-%%			popUpTaillessAt: (codePane bounds pointAtFraction: 0.93 @ 0.12).
-%%	(SBEBalloonMorph
-%%		string: ('code of method\"{1}"' withCRs format: {selector})
-%%		for: codePane)
-%%			popUpTaillessAt: (codePane bounds pointAtFraction: 1 / 3 @ (1 / 2)).
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/ClassBrowser2.png' frame: #morphs using: [:helper |
+	| class selector window codePane |
+	class := Object. selector := #printString.
+	Browser fullOnClass: class selector: selector.
+	window := helper foregroundWindow.
+	helper displayForegroundWindowFocused.
+
+	Dictionary new
+		at: class category put: 'System categories';
+		at: ('\s*' , class) asRegex put: 'Classes';
+		at: (class whichCategoryIncludesSelector: selector) put: 'Protocols';
+		at: selector put: 'Methods';
+		keysAndValuesDo: [:item :description |
+			(NewBalloonMorph string: description for: (helper listMorphIncludingMatch: item in: window))
+				popUp].
+	codePane := helper codePaneOfBrowser: window.
+	(NewBalloonMorph string: 'name of method' for: codePane)
+			popUpAt: codePane topLeft + (10 @ 5).
+	(SBEBalloonMorph string: 'method comment' for: codePane)
+			popUpTaillessAt: (codePane bounds pointAtFraction: 0.93 @ 0.12).
+	(SBEBalloonMorph
+		string: ('code of method\"{1}"' withCRs format: {selector})
+		for: codePane)
+			popUpTaillessAt: (codePane bounds pointAtFraction: 1 / 3 @ (1 / 2)).
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{ClassBrowser2}}}
@@ -622,9 +648,11 @@ There is also a \ind{keyboard shortcut} \short{b} (browse) that you can use in a
 
 \dothis{Use the keyboard shortcut to browse the class \ct{Boolean}.}
 
-%%{SBESqueakPicture writeTo: './figures/Kernel-objects-boolean.png' frame: #morphs using: [:helper | | workspace |
-%%  Browser fullOnClass: Boolean
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/Kernel-objects-boolean.png' frame: #morphs using: [:helper | | workspace |
+  Browser fullOnClass: Boolean
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[hbt]
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{Kernel-objects-boolean}}}
@@ -677,28 +705,32 @@ You will be presented with a list of classes whose names contain ``time'' (see \
 Choose one, say, \ct{Time}, and the browser will show it.
 \index{keyboard shortcut!find ...}
 
-%%{SBESqueakPicture writeTo: './figures/FindIt.png' frame: #morphs using: [:helper | | browser |
-%%  browser := ToolBuilder open: Browser.
-%%  browser position: 0 @ 0.
-%%
-%%  helper
-%%    runModal: [helper keyStroke: browser submorphs sixth key: $f modifiers: #(cmd)]
-%%    then: [helper dialogWindow position: 60 asPoint]
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/FindIt.png' frame: #morphs using: [:helper | | browser |
+  browser := ToolBuilder open: Browser.
+  browser position: 0 @ 0.
 
-%%{SBESqueakPicture writeTo: './figures/TimeClasses.png' frame: #morphs using: [:helper | | browser |
-%%  browser := ToolBuilder open: Browser.
-%%  browser position: 0 @ 0.
-%%
-%%  helper
-%%    runModal: [helper keyStroke: browser submorphs sixth key: $f modifiers: #(cmd)]
-%%    then: [
-%%      helper dialogWindow position: 60 asPoint.
-%%      helper type: 'time' into: (helper morphByExternalName: 'searchText' in: helper world).
-%%      helper closeBalloons.
-%%    ].
-%%
-%%]}
+  helper
+    runModal: [helper keyStroke: browser submorphs sixth key: $f modifiers: #(cmd)]
+    then: [helper dialogWindow position: 60 asPoint]
+]
+\end{ExecuteSmalltalkScript}
+
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/TimeClasses.png' frame: #morphs using: [:helper | | browser |
+  browser := ToolBuilder open: Browser.
+  browser position: 0 @ 0.
+
+  helper
+    runModal: [helper keyStroke: browser submorphs sixth key: $f modifiers: #(cmd)]
+    then: [
+      helper dialogWindow position: 60 asPoint.
+      helper type: 'time' into: (helper morphByExternalName: 'searchText' in: helper world).
+      helper closeBalloons.
+    ].
+
+]
+\end{ExecuteSmalltalkScript}
 
 \begin{figure}[hbt]
 \centerline{
@@ -733,17 +765,19 @@ The method finder will display a list of all the method names that contain the s
 To scroll to \ct{now} itself, move the cursor to the list and type ``\ct{n}''; this trick works in all scrolling windows.
 Select ``now'' and the right-hand pane shows you the three classes that define a method with this name, as shown in \figref{MethodFinder}.  Selecting any one of them will open a browser on it.
 
-%%{SBESqueakPicture writeTo: './figures/methodFinder-now.png' frame: #morphs using: [:helper |
-%%	| window inputField hitList |
-%%	window := ToolBuilder open: SelectorBrowser new.
-%%	window extent: 500 @ 210.
-%%	inputField := (window rootMorphsAt: window topLeft + 30) first.
-%%	hitList := (window rootMorphsAt: inputField bottomLeft + 30) first.
-%%	helper
-%%		type: 'now' into: inputField;
-%%		keyStroke: inputField key: Character enter;
-%%		select: hitList at: 'now' andScrollIntoViewBy: 3.
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/methodFinder-now.png' frame: #morphs using: [:helper |
+	| window inputField hitList |
+	window := ToolBuilder open: SelectorBrowser new.
+	window extent: 500 @ 210.
+	inputField := (window rootMorphsAt: window topLeft + 30) first.
+	hitList := (window rootMorphsAt: inputField bottomLeft + 30) first.
+	helper
+		type: 'now' into: inputField;
+		keyStroke: inputField key: Character enter;
+		select: hitList at: 'now' andScrollIntoViewBy: 3.
+]
+\end{ExecuteSmalltalkScript}
 
 \begin{figure}[hbt]
 \centerline {\includegraphics[width=0.8\textwidth]{methodFinder-now}}
@@ -764,17 +798,19 @@ So, the asterisk in front of \ct{String asUppercase} lets us know that the metho
 The methods that do not have an asterisk are just the other methods that have the same name as the ones that returned the expected result.
 So \cmind{Character}{asUppercase} was not executed on our example, because \ct{'eureka'} is not a \clsind{Character} object.
 
-%%{SBESqueakPicture writeTo: './figures/MethodFinder-example1.png' frame: #morphs using: [:helper |
-%%	| window inputField hitList |
-%%	window := ToolBuilder open: SelectorBrowser.
-%%	window extent: 500 @ 210.
-%%	inputField := (window rootMorphsAt: window topLeft + 30) first.
-%%	hitList := (window rootMorphsAt: inputField bottomLeft + 30) first.
-%%	helper
-%%		type: '''eureka''. ''EUREKA''' into: inputField;
-%%		keyStroke: inputField key: $s modifiers: #(cmd).
-%%	helper click: hitList at: hitList topLeft + 10 buttons: #(left)
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/MethodFinder-example1.png' frame: #morphs using: [:helper |
+	| window inputField hitList |
+	window := ToolBuilder open: SelectorBrowser.
+	window extent: 500 @ 210.
+	inputField := (window rootMorphsAt: window topLeft + 30) first.
+	hitList := (window rootMorphsAt: inputField bottomLeft + 30) first.
+	helper
+		type: '''eureka''. ''EUREKA''' into: inputField;
+		keyStroke: inputField key: $s modifiers: #(cmd).
+	helper click: hitList at: hitList topLeft + 10 buttons: #(left)
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[hbt]
 \centerline {\includegraphics[width=0.8\textwidth]{MethodFinder-example1}}
 \caption{Finding a method by example.
@@ -823,10 +859,12 @@ How do we create a new method in \sq?
 First, we have to decide which class the method should belong to.
 In this case, the \ct{shout} method that we are testing will go in class \clsind{String}, so the corresponding test will, by convention, go in a class called \clsind{StringTest}.
 
-%%{SBESqueakPicture writeTo: './figures/StringTest-newMethodTemplate.png' frame: #morphs using: [:helper |
-%%	Browser fullOnClass: StringTest category: #'tests - converting'.
-%%	(helper codePaneOfBrowser: helper foregroundWindow) setSelection: (1 to: 0).
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/StringTest-newMethodTemplate.png' frame: #morphs using: [:helper |
+	Browser fullOnClass: StringTest category: #'tests - converting'.
+	(helper codePaneOfBrowser: helper foregroundWindow) setSelection: (1 to: 0).
+]
+\end{ExecuteSmalltalkScript}
 
 
 \begin{figure}[hbt]
@@ -850,18 +888,20 @@ So select \menu{accept (s)} from the yellow-button menu in the bottom pane, or j
 Because there is as yet no method called \ct{shout}, the browser will ask you to confirm that this is the name that you really want\,---\,and it will suggest some other names that you might have intended (\figref{testShoutConfirm}).
 This can be quite useful if you have merely made a typing mistake, but in this case, we really \emph{do} mean \ct{shout}, since that is the method we are about to create, so we have to confirm this by selecting the first option from the menu of choices, as shown in \figref{testShoutConfirm}.
 
-%%{SBESqueakPicture writeTo: './figures/testShoutConfirm.png' frame: #morphs using: [:helper | | textField |
-%%	Browser fullOnClass: StringTest category: #'tests - converting'.
-%%	textField := helper codePaneOfBrowser: helper foregroundWindow.
-%%	helper click: textField.
-%%	helper keyStroke: textField key: $a modifiers: #(cmd).
-%%	helper
-%%		runModal: [helper forgetSymbol: #shout during: [
-%%			helper
-%%				type: 'testShout\\	self assert: ''DON''''T PANIC!'' equals: ''Don''''t panic'' shout' withCRs into: textField;
-%%				keyStroke: textField key: $s modifiers: #(cmd)]]
-%%		then: [helper dialogWindow position: 500 @ 40].
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/testShoutConfirm.png' frame: #morphs using: [:helper | | textField |
+	Browser fullOnClass: StringTest category: #'tests - converting'.
+	textField := helper codePaneOfBrowser: helper foregroundWindow.
+	helper click: textField.
+	helper keyStroke: textField key: $a modifiers: #(cmd).
+	helper
+		runModal: [helper forgetSymbol: #shout during: [
+			helper
+				type: 'testShout\\	self assert: ''DON''''T PANIC!'' equals: ''Don''''t panic'' shout' withCRs into: textField;
+				keyStroke: textField key: $s modifiers: #(cmd)]]
+		then: [helper dialogWindow position: 500 @ 40].
+]
+\end{ExecuteSmalltalkScript}
 
 \begin{figure}[hbt]
 \ifluluelse
@@ -916,12 +956,14 @@ The window that opens with the error message is the \st debugger (see \figref{pr
 \ab{Well, it's actually the \emph{pre-}debugger.  Does this matter?}\damien{I don't think it's important at this point.}
 We will look at the \ind{debugger} and how to use it in \charef{env}.
 
-%%{SBESqueakPicture writeTo: './figures/Predebugger.png' frame: #morphs using: [:helper |
-%%	helper restoreMethods: ((String lookupSelector: #shout) ifNotNil: [{String>>#shout}] ifNil: [#()]) after: [
-%%		String removeSelector: #shout.
-%%		helper runModal: [StringTest new testShout].
-%%	]
-%%]}.
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/Predebugger.png' frame: #morphs using: [:helper |
+	helper restoreMethods: ((String lookupSelector: #shout) ifNotNil: [{String>>#shout}] ifNil: [#()]) after: [
+		String removeSelector: #shout.
+		helper runModal: [StringTest new testShout].
+	]
+]
+\end{ExecuteSmalltalkScript}.
 \begin{figure}[hbt]
 \ifluluelse
 	{\centerline {\includegraphics[width=0.75\textwidth]{Predebugger}}}
@@ -959,11 +1001,13 @@ So do that right now!
 Don't worry about this.
 \Squeak is constantly evolving.}
 
-%%{SBESqueakPicture writeTo: './figures/String-Shout.png' frame: #morphs using: [:helper |
-%%	helper restoreMethods: {String >> #shout} after: [
-%%		String organization classify: #shout under: 'converting' logged: true.
-%%		ToolSet browse: String selector: #shout]
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/String-Shout.png' frame: #morphs using: [:helper |
+	helper restoreMethods: {String >> #shout} after: [
+		String organization classify: #shout under: 'converting' logged: true.
+		ToolSet browse: String selector: #shout]
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[hbt]
 \ifluluelse
 	{\centerline{\includegraphics[width=\textwidth]{String-Shout}}}

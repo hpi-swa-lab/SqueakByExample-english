@@ -101,10 +101,12 @@ There are actually several browsers in \sq: the standard system browser, the pac
 We will take a look at the standard \ind{system browser} first since the others are variations on it.
 \figref{SystemBrowser0} shows the browser as it appears when you first open it from the world menu.
 
-%%{SBESqueakPicture writeTo: './figures/SystemBrowser0.png' frame: #morphs using: [:helper |
-%%	Browser open.
-%%	helper scaleWindow: helper foregroundWindow.
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/SystemBrowser0.png' frame: #morphs using: [:helper |
+	Browser open.
+	helper scaleWindow: helper foregroundWindow.
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[htbp]
    \centering
    \ifluluelse
@@ -118,10 +120,12 @@ The four small panes at the top of the browser represent a hierarchic view of th
 The leftmost pane lists \emph{categories} of classes; select one (say \scat{Kernel-Objects}) and the pane immediately to the right will then show all of the classes in that category.
 \on{I adopted the spelling of NeXTstep recommended by wikipedia}
 
-%%{SBESqueakPicture writeTo: './figures/SystemBrowser1.png' frame: #morphs using: [:helper |
-%%	Browser fullOnClass: Model.
-%%	helper scaleWindow: helper foregroundWindow.
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/SystemBrowser1.png' frame: #morphs using: [:helper |
+	Browser fullOnClass: Model.
+	helper scaleWindow: helper foregroundWindow.
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[htbp]
    \centering
    \ifluluelse
@@ -139,10 +143,12 @@ If you select the class \menu{Model}, the protocol \protind{dependents}, and the
 \protindex{all}
 \cmindex{Model}{myDependents}
 
-%%{SBESqueakPicture writeTo: './figures/SystemBrowserMyDependents.png' frame: #morphs using: [:helper |
-%%	Browser fullOnClass: Model selector: #myDependents.
-%%	helper scaleWindow: helper foregroundWindow.
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/SystemBrowserMyDependents.png' frame: #morphs using: [:helper |
+	Browser fullOnClass: Model selector: #myDependents.
+	helper scaleWindow: helper foregroundWindow.
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[htbp]
    \centering
    \ifluluelse
@@ -164,10 +170,12 @@ Enter the name of the new thing in the dialog, and you are done: there is nothin
 \index{category!creating}
 \index{protocol!creating}
 
-%%{SBESqueakPicture writeTo: './figures/SystemBrowserClassCreation.png' frame: #morphs using: [:helper |
-%%	Browser fullOnCategory: 'Kernel-Objects'.
-%%	helper scaleWindow: helper foregroundWindow.
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/SystemBrowserClassCreation.png' frame: #morphs using: [:helper |
+	Browser fullOnCategory: 'Kernel-Objects'.
+	helper scaleWindow: helper foregroundWindow.
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[htbp]
    \centering
    \ifluluelse
@@ -202,11 +210,13 @@ The browser will display a method-creation template, as shown in \figref{SystemB
 \index{method!creation}
 \index{system browser!defining a method}
 
-%%{SBESqueakPicture writeTo: './figures/SystemBrowserMethodTemplate.png' frame: #morphs using: [:helper |
-%%	Browser fullOnClass: Model category: #'morphic ui'.
-%%	helper scaleWindow: helper foregroundWindow.
-%%	helper focus: (helper codePaneOfBrowser: helper foregroundWindow).
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/SystemBrowserMethodTemplate.png' frame: #morphs using: [:helper |
+	Browser fullOnClass: Model category: #'morphic ui'.
+	helper scaleWindow: helper foregroundWindow.
+	helper focus: (helper codePaneOfBrowser: helper foregroundWindow).
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[htbp]
    \centering
    \ifluluelse
@@ -247,16 +257,18 @@ If you now press the \button{senders} button, a menu will appear with \ct{checkE
 Selecting an item in this menu will open a browser with the list of all methods in the image that send the selected message.
 You can also quickly access the senders of messages by typing \short{n} (for {se\textbf{n}ders}).
 
-%%{SBESqueakPicture writeTo: './figures/SendersOfCheckEvent.png' frame: #morphs using: [:helper |
-%%	| window sendersButton |
-%%	ToolSet browse: ScaleMorph selector: #checkExtent:.
-%%	window := helper foregroundWindow.
-%%	helper scaleWindow: window extent: 600 @ 400.
-%%	sendersButton := helper buttonLabeled: 'senders' in: window.
-%%	helper
-%%		runModal: [helper click: sendersButton buttons: #(left)]
-%%		then: [helper dialogWindow center: (window bounds pointAtFraction: 3 @ 2 / 4)]
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/SendersOfCheckEvent.png' frame: #morphs using: [:helper |
+	| window sendersButton |
+	ToolSet browse: ScaleMorph selector: #checkExtent:.
+	window := helper foregroundWindow.
+	helper scaleWindow: window extent: 600 @ 400.
+	sendersButton := helper buttonLabeled: 'senders' in: window.
+	helper
+		runModal: [helper click: sendersButton buttons: #(left)]
+		then: [helper dialogWindow center: (window bounds pointAtFraction: 3 @ 2 / 4)]
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[htbp]
 	\begin{center}
    \ifluluelse
@@ -280,14 +292,16 @@ You can also bring up an implementors browser at any time by selecting a message
 The \menu{senders} button lists \emph{all} methods that send the chosen message: not all of these sends will necessarily result in the execution of the method you are currently looking at..
 Indeed, much of the power of object-oriented programming comes from the fact that every message send is potentially \emph{polymorphic}, that is, it can work equally well on objects of any class.  Sometimes it is easy to figure out which method will be executed as result of a particular message send, and sometimes it is impossible; the senders and implementors tools don't try.
 
-%%{SBESqueakPicture writeTo: './figures/CanvasDraw.png' frame: #morphs using: [:helper |
-%%	| method window list |
-%%	helper systemNavigation browseAllCallsOn: #drawOn:.
-%%	method := 'Canvas draw:*'.
-%%	window := helper foregroundWindow.
-%%	window extent: 600 @ 300; fullBounds.
-%%	helper selectAnyListIn: helper foregroundWindow at: method andScrollIntoViewBy: 3.
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/CanvasDraw.png' frame: #morphs using: [:helper |
+	| method window list |
+	helper systemNavigation browseAllCallsOn: #drawOn:.
+	method := 'Canvas draw:*'.
+	window := helper foregroundWindow.
+	window extent: 600 @ 300; fullBounds.
+	helper selectAnyListIn: helper foregroundWindow at: method andScrollIntoViewBy: 3.
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[htbp]
 	\begin{center}
    \ifluluelse
@@ -318,28 +332,30 @@ Click the \button{hierarchy} button and you will see that it is \ct{EllipseMorph
 When you save a new \subind{method}{version} of a method, the old one is not lost.
 \sq keeps all of the old versions, and allows you to compare different versions and to go back (``revert'') to an old version.
 
-%%{SBESqueakPicture writeTo: './figures/VersionsOfMouseUp.png' frame: #morphs using: [:helper |
-%%	| list |
-%%	helper restoreMethods: {SBECell >> #mouseUp:} after: [
-%%		SBECell removeSelector: #mouseUp:.
-%%		"Just open browser now so it will select the newest version by itself"
-%%		SBECell
-%%			compile: (String streamContents: [:stream | stream
-%%				nextPutAll: 'mouseUp: anEvent';
-%%				crtab; nextPutAll: 'mouseAction value']).
-%%		SBECell organization classifyAllUnclassified.
-%%		SBECell
-%%			compile: (String streamContents: [:stream | stream
-%%				nextPutAll: 'mouseUp: anEvent';
-%%				crtab; nextPutAll: '(self containsPoint: anEvent position)';
-%%				crtab: 2; nextPutAll: 'ifTrue: [mouseAction value]'])
-%%			classified: (SBECell whichCategoryIncludesSelector: #mouseUp:).
-%%		ToolSet browseVersionsOf: SBECell selector: #mouseUp:.
-%%		helper scaleWindow: helper foregroundWindow extent: 500 @ 250.
-%%		list := helper listMorphIncludingMatch: '*mouseUp*' in: helper foregroundWindow.
-%%		list changeModelSelection: 1.
-%%		helper takeScreenshot]
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/VersionsOfMouseUp.png' frame: #morphs using: [:helper |
+	| list |
+	helper restoreMethods: {SBECell >> #mouseUp:} after: [
+		SBECell removeSelector: #mouseUp:.
+		"Just open browser now so it will select the newest version by itself"
+		SBECell
+			compile: (String streamContents: [:stream | stream
+				nextPutAll: 'mouseUp: anEvent';
+				crtab; nextPutAll: 'mouseAction value']).
+		SBECell organization classifyAllUnclassified.
+		SBECell
+			compile: (String streamContents: [:stream | stream
+				nextPutAll: 'mouseUp: anEvent';
+				crtab; nextPutAll: '(self containsPoint: anEvent position)';
+				crtab: 2; nextPutAll: 'ifTrue: [mouseAction value]'])
+			classified: (SBECell whichCategoryIncludesSelector: #mouseUp:).
+		ToolSet browseVersionsOf: SBECell selector: #mouseUp:.
+		helper scaleWindow: helper foregroundWindow extent: 500 @ 250.
+		list := helper listMorphIncludingMatch: '*mouseUp*' in: helper foregroundWindow.
+		list changeModelSelection: 1.
+		helper takeScreenshot]
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
    \centering
    \ifluluelse
@@ -398,13 +414,15 @@ The colors are explained in a help balloon:
 	\emph{pink tan:} & the displayed method overrides, is overridden, and makes a \ct!super!-send.
 \end{tabular}
 
-%%{SBESqueakPicture writeTo: './figures/inheritanceOverriding.png' frame: #morphs using: [:helper |
-%%	self systemNavigation
-%%		methodHierarchyBrowserForClass: ScaleMorph
-%%		selector: #defaultColor.
-%%	helper scaleWindow: helper foregroundWindow extent: 500 @ 250.
-%%	helper selectAnyListIn: helper foregroundWindow at: '*Morph*'.
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/inheritanceOverriding.png' frame: #morphs using: [:helper |
+	self systemNavigation
+		methodHierarchyBrowserForClass: ScaleMorph
+		selector: #defaultColor.
+	helper scaleWindow: helper foregroundWindow extent: 500 @ 250.
+	helper selectAnyListIn: helper foregroundWindow at: '*Morph*'.
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[tbp]
 	\begin{center}
    \ifluluelse
@@ -427,10 +445,12 @@ The hierarchy browser is designed to make it easy to navigate through the inheri
 In \figref{hierarchyBrowser}, the hierarchy browser reveals that the direct superclass of \clsind{ScaleMorph} is \clsind{RectangleMorph}.
 \index{system browser!hierarchy button}
 
-%%{SBESqueakPicture writeTo: './figures/hierarchyBrowser.png' frame: #morphs using: [:helper |
-%%	ScaleMorph browseHierarchy.
-%%	helper scaleWindow: helper foregroundWindow extent: 600 @ 400.
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/hierarchyBrowser.png' frame: #morphs using: [:helper |
+	ScaleMorph browseHierarchy.
+	helper scaleWindow: helper foregroundWindow extent: 600 @ 400.
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
 	\begin{center}
 	\ifluluelse
@@ -655,9 +675,11 @@ For more sophisticated versioning of packages, we use Monticello.
 The name means ``little mountain'' in Italian and so it is always pronounced with an Italian ``c'', which sounds like the ``ch'' in chair: Mont-y'-che-llo.
 
 
-%%{SBESqueakPicture writeTo: './figures/freshMonticello.png' frame: #morphs using: [:helper |
-%%  MCWorkingCopyBrowser open
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/freshMonticello.png' frame: #morphs using: [:helper |
+  MCWorkingCopyBrowser open
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
 	\begin{center}
 	\ifluluelse
@@ -694,15 +716,17 @@ MCHttpRepository
 	password: ''
 \end{code}
 
-%%{SBESqueakPicture writeTo: './figures/SqueakSource-SBE.png' frame: #morphs using: [:helper |
-%%	| window packageList |
-%%	helper mcCachePackages: #('SBE-QuickTour' 'SBE-Streams') during: [
-%%		helper hideProgressMorph.
-%%		MCCacheRepository default morphicOpen.
-%%		window := helper foregroundWindow.
-%%		packageList := helper listMorphIncludingMatch: 'SBE-QuickTour' in: window.
-%%		window model versionSelection: 1]
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/SqueakSource-SBE.png' frame: #morphs using: [:helper |
+	| window packageList |
+	helper mcCachePackages: #('SBE-QuickTour' 'SBE-Streams') during: [
+		helper hideProgressMorph.
+		MCCacheRepository default morphicOpen.
+		window := helper foregroundWindow.
+		packageList := helper listMorphIncludingMatch: 'SBE-QuickTour' in: window.
+		window model versionSelection: 1]
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
 	\begin{center}
 	\ifluluelse
@@ -731,10 +755,12 @@ To create a package with Monticello, you have to do two things: write some code,
 \dothis{Create a category called \scat{SBE-Monticello}, and put a couple of classes in it, as shown in \figref{MCnewcategory}.
 	Also, create a method in an existing class, and put it in the same package as your classes, using the rules from page \pageref{sec:packageRules}\,---\,see \figref{MCnewmethod}.}
 
-%%{SBESqueakPicture writeTo: './figures/MCnewcategory.png' frame: #morphs using: [:helper |
-%%	ToolSet browse: SBEGoodClass selector: #trialMethod.
-%%	helper scaleWindow: helper foregroundWindow.
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/MCnewcategory.png' frame: #morphs using: [:helper |
+	ToolSet browse: SBEGoodClass selector: #trialMethod.
+	helper scaleWindow: helper foregroundWindow.
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
 	\begin{center}
 	\ifluluelse
@@ -745,10 +771,12 @@ To create a package with Monticello, you have to do two things: write some code,
 	\label{fig:MCnewcategory}
 \end{figure}
 
-%%{SBESqueakPicture writeTo: './figures/MCnewmethod.png' frame: #morphs using: [:helper |
-%%	ToolSet browse: Object selector: #exampleMethod.
-%%	helper scaleWindow: helper foregroundWindow.
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBESqueakPicture writeTo: './figures/MCnewmethod.png' frame: #morphs using: [:helper |
+	ToolSet browse: Object selector: #exampleMethod.
+	helper scaleWindow: helper foregroundWindow.
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
 	\begin{center}
 	\ifluluelse
