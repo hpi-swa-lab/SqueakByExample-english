@@ -136,6 +136,13 @@ jobs:
           prerelease: true
         env:
           GITHUB_TOKEN: ${{ github.token }}
+      - uses: dev-drprasad/delete-older-releases@v0.2.0
+        with:
+          delete_tag_pattern: untagged-
+          keep_latest: 1
+          delete_tags: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
   notify:
     name: 📣 Notify community on failure
     needs: [tests, tex-assertions, build]
