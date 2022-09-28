@@ -43,7 +43,7 @@ We will explain the details of the syntax, the object model, and message passing
 \section{The Quinto game}
 
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/GameBoard.png' frame: #morphs using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/GameBoard.png' frame: #morphs building: [:helper |
 	| game |
 	game := SBEGame new openInWorld.
 	helper click: game at: (game bounds pointAtFraction: 4 @ 6 - 0.5 / 10) buttons: #(left).
@@ -154,7 +154,7 @@ This means that there are \emph{unsaved changes}.
 To actually send this message, you must \menu{accept} it.
 
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/AcceptClassDef.png' frame: [:rect | rect bottomHalf] using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/AcceptClassDef.png' frame: [:rect | rect bottomHalf] building: [:helper |
 	| window menu |
 	SBECell browse.
 	window := helper foregroundWindow.
@@ -195,7 +195,7 @@ A class \subind{class}{comment} need not contain a detailed description of the i
 \dothis{Type a class comment for \ct{SBECell} and accept it; you can always improve it later.}
 
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/SBECell.png' frame: #morphs using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/SBECell.png' frame: #morphs building: [:helper |
   SBECell browse
 ]
 \end{ExecuteSmalltalkScript}
@@ -272,7 +272,7 @@ You can test the effect of the code you have written by creating a new \ct{SBECe
 	Type the expression \ct{SBECell new} and \menu{inspect it}.}
 
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/SBECellInspector.png' frame: #morphs using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/SBECellInspector.png' frame: #morphs building: [:helper |
 	| window pane |
 	SBECell new inspect.
 	window := helper foregroundWindow.
@@ -303,7 +303,7 @@ Move the cell with the brown (next to top-right) handle and resize it with the y
 Notice how the bounds reported by the inspector also change.
 
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/SBECellResize.png' frame: #morphs using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/SBECellResize.png' frame: #morphs building: [:helper |
   | cell window list bottomPane |
   cell := SBECell new.
   cell inspect.
@@ -367,13 +367,13 @@ Now let's define an \mthind{SBEGame}{initialize} method for \ct{SBEGame}.
 
 
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/UnknownSelector.png' frame: #morphs using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/UnknownSelector.png' frame: #morphs building: [:helper |
 	thisContext wrap: [:block | helper forgetSymbol: #cellsPerSide during: block].
 	helper runModal: [UnknownSelector name: #cellsPerSide]
 ]
 \end{ExecuteSmalltalkScript}
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/DeclareInstanceVar.png' frame: #morphs using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/DeclareInstanceVar.png' frame: #morphs building: [:helper |
 	helper
 		runModal: [Compiler new
 			compile: 'initialize cells'
@@ -553,7 +553,7 @@ The only complication is that the board is finite, so we have to make sure that 
 To move the method, you can simply click on its name and drag it to the newly-created protocol (\figref{dragMethod}).
 
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/DragMethod.png' frame: [:rectangle | rectangle withHeight: rectangle height * 2 / 3] using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/DragMethod.png' frame: [:rectangle | rectangle withHeight: rectangle height * 2 / 3] building: [:helper |
 	| window messageList categoryList |
 	SBEGame browse.
 	window := helper foregroundWindow.
@@ -634,7 +634,7 @@ When you click on a cell, a \emphind{notifier} window appears with an error mess
 As depicted in \figref{quintoError}, it says \ct{MessageNotUnderstood: SBEGame>>>toggleState}.
 
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/Error.png' frame: #morphs using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/Error.png' frame: #morphs building: [:helper |
 	helper restoreMethods: {SBEGame >> #newCellAt:at:} after: [
 		| game |
 		SBEGame compile: ((SBEGame sourceCodeAt: #newCellAt:at:) asString
@@ -668,7 +668,7 @@ In the upper part of the debugger window you can see the execution stack, showin
 The debugger will show you the \ind{execution context} within this method where the error occurred (\figref{debugToggle}).
 
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/Debugger.png' frame: #morphs using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/Debugger.png' frame: #morphs building: [:helper |
 	helper restoreMethods: {SBEGame >> #newCellAt:at:} after: [
 		| game stackList |
 		SBEGame compile: ((SBEGame sourceCodeAt: #newCellAt:at:) asString
@@ -773,7 +773,7 @@ The recipient will have to place it in her \emph{package-cache} folder; she will
 In the right-hand pane of the browser (see \figref{monticello1}) is a list of Monticello repositories, which will include all of the repositories from which code has been loaded into the image that you are using.
 
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/MonticelloBrowser.png' frame: #morphs using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/MonticelloBrowser.png' frame: #morphs building: [:helper |
   MCWorkingCopyBrowser open
 ]
 \end{ExecuteSmalltalkScript}
@@ -843,7 +843,7 @@ MCHttpRepository
 Once you have accepted this template, your new repository should be listed on the right-hand side of the Monticello browser.
 
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/BrowseRepository.png' frame: #morphs using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/BrowseRepository.png' frame: #morphs building: [:helper |
 	| window packageList |
 	helper mcCachePackages: #('SBE-Quinto') during: [
 		helper hideProgressMorph.

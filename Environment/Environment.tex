@@ -102,7 +102,7 @@ We will take a look at the standard \ind{system browser} first since the others 
 \figref{SystemBrowser0} shows the browser as it appears when you first open it from the world menu.
 
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/SystemBrowser0.png' frame: #morphs using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/SystemBrowser0.png' frame: #morphs building: [:helper |
 	Browser open.
 	helper scaleWindow: helper foregroundWindow.
 ]
@@ -121,7 +121,7 @@ The leftmost pane lists \emph{categories} of classes; select one (say \scat{Kern
 \on{I adopted the spelling of NeXTstep recommended by wikipedia}
 
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/SystemBrowser1.png' frame: #morphs using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/SystemBrowser1.png' frame: #morphs building: [:helper |
 	Browser fullOnClass: Model.
 	helper scaleWindow: helper foregroundWindow.
 ]
@@ -144,7 +144,7 @@ If you select the class \menu{Model}, the protocol \protind{dependents}, and the
 \cmindex{Model}{myDependents}
 
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/SystemBrowserMyDependents.png' frame: #morphs using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/SystemBrowserMyDependents.png' frame: #morphs building: [:helper |
 	Browser fullOnClass: Model selector: #myDependents.
 	helper scaleWindow: helper foregroundWindow.
 ]
@@ -171,7 +171,7 @@ Enter the name of the new thing in the dialog, and you are done: there is nothin
 \index{protocol!creating}
 
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/SystemBrowserClassCreation.png' frame: #morphs using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/SystemBrowserClassCreation.png' frame: #morphs building: [:helper |
 	Browser fullOnCategory: 'Kernel-Objects'.
 	helper scaleWindow: helper foregroundWindow.
 ]
@@ -211,7 +211,7 @@ The browser will display a method-creation template, as shown in \figref{SystemB
 \index{system browser!defining a method}
 
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/SystemBrowserMethodTemplate.png' frame: #morphs using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/SystemBrowserMethodTemplate.png' frame: #morphs building: [:helper |
 	Browser fullOnClass: Model category: #'morphic ui'.
 	helper scaleWindow: helper foregroundWindow.
 	helper focus: (helper codePaneOfBrowser: helper foregroundWindow).
@@ -258,7 +258,7 @@ Selecting an item in this menu will open a browser with the list of all methods 
 You can also quickly access the senders of messages by typing \short{n} (for {se\textbf{n}ders}).
 
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/SendersOfCheckEvent.png' frame: #morphs using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/SendersOfCheckEvent.png' frame: #morphs building: [:helper |
 	| window sendersButton |
 	ToolSet browse: ScaleMorph selector: #checkExtent:.
 	window := helper foregroundWindow.
@@ -293,7 +293,7 @@ The \menu{senders} button lists \emph{all} methods that send the chosen message:
 Indeed, much of the power of object-oriented programming comes from the fact that every message send is potentially \emph{polymorphic}, that is, it can work equally well on objects of any class.  Sometimes it is easy to figure out which method will be executed as result of a particular message send, and sometimes it is impossible; the senders and implementors tools don't try.
 
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/CanvasDraw.png' frame: #morphs using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/CanvasDraw.png' frame: #morphs building: [:helper |
 	| method window list |
 	helper systemNavigation browseAllCallsOn: #drawOn:.
 	method := 'Canvas draw:*'.
@@ -333,7 +333,7 @@ When you save a new \subind{method}{version} of a method, the old one is not los
 \sq keeps all of the old versions, and allows you to compare different versions and to go back (``revert'') to an old version.
 
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/VersionsOfMouseUp.png' frame: #morphs using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/VersionsOfMouseUp.png' frame: #morphs building: [:helper |
 	| list |
 	helper restoreMethods: {SBECell >> #mouseUp:} after: [
 		SBECell removeSelector: #mouseUp:.
@@ -415,7 +415,7 @@ The colors are explained in a help balloon:
 \end{tabular}
 
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/inheritanceOverriding.png' frame: #morphs using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/inheritanceOverriding.png' frame: #morphs building: [:helper |
 	self systemNavigation
 		methodHierarchyBrowserForClass: ScaleMorph
 		selector: #defaultColor.
@@ -446,7 +446,7 @@ In \figref{hierarchyBrowser}, the hierarchy browser reveals that the direct supe
 \index{system browser!hierarchy button}
 
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/hierarchyBrowser.png' frame: #morphs using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/hierarchyBrowser.png' frame: #morphs building: [:helper |
 	ScaleMorph browseHierarchy.
 	helper scaleWindow: helper foregroundWindow extent: 600 @ 400.
 ]
@@ -676,7 +676,7 @@ The name means ``little mountain'' in Italian and so it is always pronounced wit
 
 
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/freshMonticello.png' frame: #morphs using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/freshMonticello.png' frame: #morphs building: [:helper |
   MCWorkingCopyBrowser open
 ]
 \end{ExecuteSmalltalkScript}
@@ -717,7 +717,7 @@ MCHttpRepository
 \end{code}
 
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/SqueakSource-SBE.png' frame: #morphs using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/SqueakSource-SBE.png' frame: #morphs building: [:helper |
 	| window packageList |
 	helper mcCachePackages: #('SBE-QuickTour' 'SBE-Streams') during: [
 		helper hideProgressMorph.
@@ -756,7 +756,7 @@ To create a package with Monticello, you have to do two things: write some code,
 	Also, create a method in an existing class, and put it in the same package as your classes, using the rules from page \pageref{sec:packageRules}\,---\,see \figref{MCnewmethod}.}
 
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/MCnewcategory.png' frame: #morphs using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/MCnewcategory.png' frame: #morphs building: [:helper |
 	ToolSet browse: SBEGoodClass selector: #trialMethod.
 	helper scaleWindow: helper foregroundWindow.
 ]
@@ -772,7 +772,7 @@ SBESqueakPicture writeTo: './figures/MCnewcategory.png' frame: #morphs using: [:
 \end{figure}
 
 \begin{ExecuteSmalltalkScript}
-SBESqueakPicture writeTo: './figures/MCnewmethod.png' frame: #morphs using: [:helper |
+SBEScreenshotRecorder writeTo: './figures/MCnewmethod.png' frame: #morphs building: [:helper |
 	ToolSet browse: Object selector: #exampleMethod.
 	helper scaleWindow: helper foregroundWindow.
 ]
