@@ -1,4 +1,4 @@
-die logic
+faces
 face1
 
 	^ {0.5 @ 0.5}
