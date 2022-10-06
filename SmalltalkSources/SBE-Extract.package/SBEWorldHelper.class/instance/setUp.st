@@ -8,6 +8,7 @@ setUp
 		clipSubmorphs: false;
 		flag: #refactor "ct: maybe make a subclass of PasteUpMorph?";
 		yourself.
+	world setProperty: #sbeMaximumUsableArea toValue: (0 asPoint corner: world extent).
 	
 	(world instVarNamed: #worldState)
 		instVarNamed: #canvas
