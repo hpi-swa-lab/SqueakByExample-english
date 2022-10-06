@@ -103,9 +103,10 @@ SBEScreenshotRecorder writeTo: './figures/startup.png' frame: #fullScreen buildi
 	| balloon |
 	helper world
 		color: (Color gray: 15 / 16); "Think green & save ink"
-		extent: 800 @ 450.
-	balloon := Form fromFileNamed: (helper resourceDirectory
-		/ 'branding' / 'balloon.png') fullName.
+		extent: 800 px @ 450 px.
+	balloon := (Form fromFileNamed: (helper resourceDirectory
+		/ 'branding' / 'balloon.png') fullName
+			magnifyBy: RealEstateAgent scaleFactor).
 	ReleaseBuilder openWelcomeWorkspacesWith: balloon.
 	helper foregroundWindow
 		height: helper world height * 0.75;
@@ -140,7 +141,7 @@ A good place to get started is the \ind{world menu} shown in \figref{threeButton
 \dothis{Click with the mouse on the background of the main window to show the world menu, then choose \menu{open \ldots \go workspace} to create a new workspace.}
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/worldMenu.png' frame: #morphs building: [:helper |
-	helper click: helper world at: helper world topCenter + (0 @ 30) buttons: #(left).
+	helper click: helper world at: helper world topCenter + (0 px @ 30 px) buttons: #(left).
 	helper hand releaseMouseFocus.
 	helper mouseEnter: (helper menuItemMorphLabeled: 'open...' in: helper world).
 	helper closeBalloons.
@@ -153,12 +154,12 @@ SBEScreenshotRecorder writeTo: './figures/yellowButtonMenuOnWorkspace.png' frame
 	workspace := ToolBuilder open: Workspace new.
 	helper type: 'Time now ' into: workspace.
 
-	helper click: workspace at: workspace topCenter + (0 @ 30) buttons: #(right).
+	helper click: workspace at: workspace topCenter + (0 px @ 30 px) buttons: #(right).
 	helper hand releaseMouseFocus.
 	helper mouseEnter: (helper menuItemMorphLabeled: 'print it (p)' in: helper world).
 	helper closeBalloons.
 	menu := helper foregroundMorph.
-	menu position: menu position + (30 @ 0).
+	menu position: menu position + (30 px @ 0 px).
 ]
 \end{ExecuteSmalltalkScript}
 
@@ -242,7 +243,7 @@ SBEScreenshotRecorder writeTo: './figures/PreferenceBrowser.png' frame: #morphs 
 	| browser searchBox |
 	PreferenceBrowser open.
 	browser := helper foregroundWindow.
-	browser extent: 600 @ 275.
+	browser extent: 600 px @ 275 px.
 	searchBox := helper morphWithBalloonText: 'Search preference*' in: browser.
 	helper type: 'swap' into: searchBox.
 	searchBox model searchSelected.
@@ -425,19 +426,19 @@ Do it again.
 More on this in the next section!)
 
 \begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder writeTo: './figures/Doit.png' frame: [:morphsRect | morphsRect withBottom: morphsRect bottom - 150] building: [:helper |
+SBEScreenshotRecorder writeTo: './figures/Doit.png' frame: [:morphsRect | morphsRect withBottom: morphsRect bottom - 150 px] building: [:helper |
   | workspace |
   ToolBuilder open: Transcript.
   Transcript show: 'hello world'; cr.
-  helper foregroundWindow bounds: (0 @ 120 extent: 450 @ 230).
+  helper foregroundWindow bounds: (0 px @ 120 px extent: 450 px @ 230 px).
 
   workspace := ToolBuilder open: Workspace new.
-  workspace position: 200 @ 100.
+  workspace position: 200 px @ 100 px.
 
   helper type: 'Transcript show: ''hello world''; cr.' into: workspace.
   helper keyStroke: workspace key: $a modifiers: #(cmd).
 
-  helper click: workspace at: workspace topCenter + (0 @ 30) buttons: #(right).
+  helper click: workspace at: workspace topCenter + (0 px @ 30 px) buttons: #(right).
   helper hand releaseMouseFocus.
   helper mouseEnter: (helper menuItemMorphLabeled: 'do it (d)' in: helper world).
   helper closeBalloons.
@@ -490,7 +491,7 @@ This time we see the result we expect (\figref{printit}).
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/PrintIt.png' frame: #morphs building: [:helper | | workspace |
   workspace := ToolBuilder open: Workspace new.
-  workspace extent: 277 @ 143.
+  workspace extent: 277 px @ 143 px.
 
   helper type: '3 + 4' into: workspace.
   helper keyStroke: workspace key: $p modifiers: #(cmd).
@@ -521,12 +522,12 @@ The bottom panel can be used to write expressions to send messages to the object
 SBEScreenshotRecorder writeTo: './figures/InspectIt.png' frame: #morphs building: [:helper |
 	| workspace |
 	workspace := ToolBuilder open: Workspace new.
-	workspace bounds: (0 @ 30 extent: 277 @ 143).
+	workspace bounds: (0 px @ 30 px extent: 277 px @ 143 px).
 
 	helper type: '3 + 4' into: workspace.
 	helper keyStroke: workspace key: $i modifiers: #(cmd).
 	(helper windowLabeled: 'SmallInteger#*')
-		position: 120 @ 20; extent: 300 @ 185.
+		position: 120 px @ 20 px; extent: 300 px @ 185 px.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
@@ -588,7 +589,7 @@ SBEScreenshotRecorder writeTo: './figures/ClassBrowser2.png' frame: #morphs buil
 				popUp].
 	codePane := helper codePaneOfBrowser: window.
 	(NewBalloonMorph string: 'name of method' for: codePane)
-			popUpAt: codePane topLeft + (10 @ 5).
+			popUpAt: codePane topLeft + (10 px @ 5 px).
 	(SBEBalloonMorph string: 'method comment' for: codePane)
 			popUpTaillessAt: (codePane bounds pointAtFraction: 0.93 @ 0.12).
 	(SBEBalloonMorph
@@ -688,7 +689,7 @@ SBEScreenshotRecorder writeTo: './figures/BooleanHierarchyBrowser.png' frame: [:
 	browserMorph := ToolBuilder open: browser.
 	splitter := browserMorph allMorphs detect: [:m |
 		(m isKindOf: ProportionalSplitterMorph) and: [m splitsTopAndBottom]].
-	splitter repositionBy: 0 @ 60.
+	splitter repositionBy: 0 @ 60 px.
 	helper closeBalloons.
 ]
 \end{ExecuteSmalltalkScript}
@@ -708,23 +709,23 @@ Choose one, say, \ct{Time}, and the browser will show it.
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/FindIt.png' frame: #morphs building: [:helper | | browser |
   browser := ToolBuilder open: Browser.
-  browser position: 0 @ 0.
+  browser position: 0 px @ 0 px.
 
   helper
     runModal: [helper keyStroke: browser submorphs sixth key: $f modifiers: #(cmd)]
-    then: [helper dialogWindow position: 60 asPoint]
+    then: [helper dialogWindow position: 60 px asPoint]
 ]
 \end{ExecuteSmalltalkScript}
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/TimeClasses.png' frame: #morphs building: [:helper | | browser |
   browser := ToolBuilder open: Browser.
-  browser position: 0 @ 0.
+  browser position: 0 px @ 0 px.
 
   helper
     runModal: [helper keyStroke: browser submorphs sixth key: $f modifiers: #(cmd)]
     then: [
-      helper dialogWindow position: 60 asPoint.
+      helper dialogWindow position: 60 px asPoint.
       helper type: 'time' into: (helper morphByExternalName: 'searchText' in: helper world).
       helper closeBalloons.
     ].
@@ -769,9 +770,9 @@ Select ``now'' and the right-hand pane shows you the three classes that define a
 SBEScreenshotRecorder writeTo: './figures/methodFinder-now.png' frame: #morphs building: [:helper |
 	| window inputField hitList |
 	window := ToolBuilder open: SelectorBrowser new.
-	window extent: 500 @ 210.
-	inputField := (window rootMorphsAt: window topLeft + 30) first.
-	hitList := (window rootMorphsAt: inputField bottomLeft + 30) first.
+	window extent: 500 px @ 210 px.
+	inputField := (window rootMorphsAt: window topLeft + 30 px) first.
+	hitList := (window rootMorphsAt: inputField bottomLeft + 30 px) first.
 	helper
 		type: 'now' into: inputField;
 		keyStroke: inputField key: Character enter;
@@ -802,13 +803,13 @@ So \cmind{Character}{asUppercase} was not executed on our example, because \ct{'
 SBEScreenshotRecorder writeTo: './figures/MethodFinder-example1.png' frame: #morphs building: [:helper |
 	| window inputField hitList |
 	window := ToolBuilder open: SelectorBrowser.
-	window extent: 500 @ 210.
-	inputField := (window rootMorphsAt: window topLeft + 30) first.
-	hitList := (window rootMorphsAt: inputField bottomLeft + 30) first.
+	window extent: 500 px @ 210 px.
+	inputField := (window rootMorphsAt: window topLeft + 30 px) first.
+	hitList := (window rootMorphsAt: inputField bottomLeft + 30 px) first.
 	helper
 		type: '''eureka''. ''EUREKA''' into: inputField;
 		keyStroke: inputField key: $s modifiers: #(cmd).
-	helper click: hitList at: hitList topLeft + 10 buttons: #(left)
+	helper click: hitList at: hitList topLeft + 10 px buttons: #(left)
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[hbt]
@@ -899,7 +900,7 @@ SBEScreenshotRecorder writeTo: './figures/testShoutConfirm.png' frame: #morphs b
 			helper
 				type: 'testShout\\	self assert: ''DON''''T PANIC!'' equals: ''Don''''t panic'' shout' withCRs into: textField;
 				keyStroke: textField key: $s modifiers: #(cmd)]]
-		then: [helper dialogWindow position: 500 @ 40].
+		then: [helper dialogWindow position: 500 px @ 40 px].
 ]
 \end{ExecuteSmalltalkScript}
 

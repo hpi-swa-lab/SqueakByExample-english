@@ -84,7 +84,7 @@ SBEScreenshotRecorder writeTo: './figures/AddCategory.png' frame: [:bounds | bou
 	| window |
 	Browser open.
 	window := helper foregroundWindow.
-	helper click: window at: window topLeft + (30 @ 30) buttons: #(right).
+	helper click: window at: window topLeft + (30 px @ 30 px) buttons: #(right).
 	helper hand releaseMouseFocus.
 	helper mouseEnter: (helper menuItemMorphLabeled: 'add item*' in: helper world).
 	helper closeBalloons.
@@ -158,12 +158,12 @@ SBEScreenshotRecorder writeTo: './figures/AcceptClassDef.png' frame: [:rect | re
 	| window menu |
 	SBECell browse.
 	window := helper foregroundWindow.
-	window bounds: (0 @ 120 extent: 500 @ 400).
+	window bounds: (0 px @ 120 px extent: 500 px @ 400 px).
 	(helper codePaneOfBrowser: window) hasUnacceptedEdits: true.
-	helper click: window at: window bottomCenter - (0 @ 30) buttons: #(right).
+	helper click: window at: window bottomCenter - (0 px @ 30 px) buttons: #(right).
 	helper closeBalloons.
 	menu := helper foregroundMorph.
-	menu bottomRight: window bottomRight - (50 @ 30).
+	menu bottomRight: window bottomRight - (50 px @ 30 px).
 	helper hand releaseMouseFocus.
 	helper mouseEnter: (helper menuItemMorphLabeled: 'accept*' in: helper world).
 ]
@@ -312,10 +312,10 @@ SBEScreenshotRecorder writeTo: './figures/SBECellResize.png' frame: #morphs buil
   list changeModelSelection: 3.
   bottomPane := window findDeepSubmorphThat: [:m | m isTextView and: [m text isEmptyOrNil]] ifAbsent: [self error: 'bottom pane not found'].
   bottomPane setText: 'self openInWorld'; doIt.
-  cell position: 100 @ 100; extent: 98 @ 89.
-  window position: 350 @ 50.
+  cell position: 100 px @ 100 px; extent: 98 px @ 89 px.
+  window position: 350 px @ 50 px.
   cell addHalo.
-  (NewBalloonMorph string: 'Change size' for: cell) popUpAt: cell bottomRight + 31.
+  (NewBalloonMorph string: 'Change size' for: cell) popUpAt: cell bottomRight + 31 px.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htbp]
@@ -475,8 +475,8 @@ SBEScreenshotRecorder writeTo: './figures/Categorize.png' frame: [:bounds | boun
   class compile: 'initialize'.
   browser fullOnClass: class.
   window := helper foregroundWindow.
-  window bounds: (0 @ 120 extent: 550 @ 350).
-  helper click: window at: window topCenter + (30 @ 60) buttons: #(right).
+  window bounds: (0 px @ 120 px extent: 550 px @ 350 px).
+  helper click: window at: window topCenter + (30 px @ 60 px) buttons: #(right).
   helper hand releaseMouseFocus.
   helper mouseEnter: (helper menuItemMorphLabeled: 'categorize all uncategorized' in: helper world).
   helper closeBalloons.
@@ -557,7 +557,7 @@ SBEScreenshotRecorder writeTo: './figures/DragMethod.png' frame: [:rectangle | r
 	| window messageList categoryList |
 	SBEGame browse.
 	window := helper foregroundWindow.
-	window extent: 600 @ 300.
+	window extent: 600 px @ 300 px.
 	messageList := helper listMorphIncludingMatch: #toggleNeighboursOfCellAt:at: in: window.
 	categoryList := helper listMorphIncludingMatch: 'game logic' in: window.
 	helper
@@ -682,7 +682,7 @@ SBEScreenshotRecorder writeTo: './figures/Debugger.png' frame: #morphs building:
 				game abandon.
 				stackList := helper listMorphIncludingMatch: '*toggleNeighboursOfCellAt:at:*' in: helper foregroundWindow.
 				helper keyStroke: stackList key: Character arrowDown.
-				helper foregroundWindow extent: 600 @ 400]]
+				helper foregroundWindow extent: 600 px @ 400 px]]
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[ht]

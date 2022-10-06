@@ -70,7 +70,7 @@ SBEScreenshotRecorder writeTo: 'figures/detachingMenu.png' frame: [:bounds | bou
 	helper
 		mouseDrag: handle
 			from: handle center
-			to: handle center + (-100 @ 15)
+			to: handle center + (-100 px @ 15 px)
 			buttons: #(left);
 		spawnHand
 ]
@@ -190,9 +190,9 @@ SBEScreenshotRecorder writeTo: 'figures/joeStar.png' building: [:helper |
 	bill := Morph new color: Color red .
 	bill openInWorld.
 	joe := Morph new color: (Color blue alpha: 0.5).
-	joe extent: 55@60.
+	joe extent: 55 px @ 60 px.
 	joe openInWorld.
-	bill position: joe position - (27@20).
+	bill position: joe position - (27 px @ 20 px).
 	star := StarMorph new color: Color yellow.
 	joe addMorph: star.
 	star center: joe center.
@@ -275,7 +275,7 @@ SBEScreenshotRecorder writeInto: 'figures' recordSeries: [:recorder :helper |
 	recorder writeTo: 'NewCross.png' building: [
 		| cross |
 		cross := SBECrossMorph new
-			extent: 123 asPoint;
+			extent: 123 px asPoint;
 			openInWorld.
 		helper centerAllMorphs.
 		cross addHalo
@@ -287,7 +287,7 @@ SBEScreenshotRecorder writeInto: 'figures' recordSeries: [:recorder :helper |
 	aCanvas fillRectangle: self horizontalBar color: self color.
 	aCanvas fillRectangle: self verticalBar color: self color'
 		.
-		cross := SBECrossMorph newBounds: (0 @ 0 corner: 160 @ 160).
+		cross := SBECrossMorph newBounds: (0 px @ 0 px corner: 160 px @ 160 px).
 		cross openInWorld.
 		cross color: (Color blue alpha: 0.3).
 		helper centerAllMorphs.
@@ -299,7 +299,7 @@ SBEScreenshotRecorder writeInto: 'figures' recordSeries: [:recorder :helper |
 	aCanvas fillRectangle: self horizontalBar color: self color.
 	topAndBottom := self verticalBar areasOutside: (self horizontalBar in: [:bar |
 		self flag: #hacked.
-		bar withHeight: bar height + 1]).
+		bar withHeight: bar height + 1 px]).
 	topAndBottom do: [ :each | aCanvas fillRectangle: each color: self color]'
 			.
 	]
@@ -1052,14 +1052,14 @@ SBEScreenshotRecorder writeTo: 'figures/multiMorphs.png' building: [:helper |
 		do: [:aPoint | self drawDotOn: theCanvas at: aPoint]'
 	.
 	{ Morph new
-		position: 30 @ 0;
+		position: 30 px @ 0 px;
 		color: Color red.
 	Morph new
-		position: 0 @ 20;
+		position: 0 px @ 20 px;
 		color: Color blue.
 	SBEDieMorph new
-		position: 25 @ 18;
-		extent: 75 @ 75 } do: #openInWorld.
+		position: 25 px @ 18 px;
+		extent: 75 px @ 75 px } do: #openInWorld.
 	helper takeScreenshot. "before the drawing method is reverted"
 ]
 \end{ExecuteSmalltalkScript}

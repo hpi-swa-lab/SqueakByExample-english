@@ -262,7 +262,7 @@ SBEScreenshotRecorder writeTo: './figures/SendersOfCheckEvent.png' frame: #morph
 	| window sendersButton |
 	ToolSet browse: ScaleMorph selector: #checkExtent:.
 	window := helper foregroundWindow.
-	helper scaleWindow: window extent: 600 @ 400.
+	helper scaleWindow: window extent: 600 px @ 400 px.
 	sendersButton := helper buttonLabeled: 'senders' in: window.
 	helper
 		runModal: [helper click: sendersButton buttons: #(left)]
@@ -298,7 +298,7 @@ SBEScreenshotRecorder writeTo: './figures/CanvasDraw.png' frame: #morphs buildin
 	helper systemNavigation browseAllCallsOn: #drawOn:.
 	method := 'Canvas draw:*'.
 	window := helper foregroundWindow.
-	window extent: 600 @ 300; fullBounds.
+	window extent: 600 px @ 300 px; fullBounds.
 	helper selectAnyListIn: helper foregroundWindow at: method andScrollIntoViewBy: 3.
 ]
 \end{ExecuteSmalltalkScript}
@@ -350,7 +350,7 @@ SBEScreenshotRecorder writeTo: './figures/VersionsOfMouseUp.png' frame: #morphs 
 				crtab: 2; nextPutAll: 'ifTrue: [mouseAction value]'])
 			classified: (SBECell whichCategoryIncludesSelector: #mouseUp:).
 		ToolSet browseVersionsOf: SBECell selector: #mouseUp:.
-		helper scaleWindow: helper foregroundWindow extent: 500 @ 250.
+		helper scaleWindow: helper foregroundWindow extent: 500 px @ 250 px.
 		list := helper listMorphIncludingMatch: '*mouseUp*' in: helper foregroundWindow.
 		list changeModelSelection: 1.
 		helper takeScreenshot]
@@ -419,7 +419,7 @@ SBEScreenshotRecorder writeTo: './figures/inheritanceOverriding.png' frame: #mor
 	self systemNavigation
 		methodHierarchyBrowserForClass: ScaleMorph
 		selector: #defaultColor.
-	helper scaleWindow: helper foregroundWindow extent: 500 @ 250.
+	helper scaleWindow: helper foregroundWindow extent: 500 px @ 250 px.
 	helper selectAnyListIn: helper foregroundWindow at: '*Morph*'.
 ]
 \end{ExecuteSmalltalkScript}
@@ -448,7 +448,7 @@ In \figref{hierarchyBrowser}, the hierarchy browser reveals that the direct supe
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/hierarchyBrowser.png' frame: #morphs building: [:helper |
 	ScaleMorph browseHierarchy.
-	helper scaleWindow: helper foregroundWindow extent: 600 @ 400.
+	helper scaleWindow: helper foregroundWindow extent: 600 px @ 400 px.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
@@ -835,7 +835,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 				messageField textMorph editor selectAt: 1; selectLine; backTo: 1.
 				helper type: 'Change a few things' into: messageField.
 				"messageField setText: 'Change a few things'; flag: #fallback."
-				helper scaleWindow: helper foregroundWindow extent: 375 @ 300.
+				helper scaleWindow: helper foregroundWindow extent: 375 px @ 300 px.
 				helper takeScreenshotOf: helper foregroundWindow.
 
 				"This is preparation for the next screenshot"
@@ -851,7 +851,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 		window := helper foregroundWindow.
 		helper selectAnyListIn: helper foregroundWindow at: 'SBE'.
 		window model versionSelection: 1.
-		helper scaleWindow: helper foregroundWindow extent: 400 @ 275.
+		helper scaleWindow: helper foregroundWindow extent: 400 px @ 275 px.
 		helper takeScreenshotOf: window.
 	].
 ]
@@ -901,7 +901,7 @@ SBEScreenshotRecorder writeTo: './figures/MCaddToPackage.png' building: [:helper
 	helper select: repositoryList at: repositoryMatch.
 	helper keyStroke: repositoryList key: Character escape.
 	helper menu
-		center: repositoryList center x @ 0;
+		center: repositoryList center x @ 0 px;
 		top: ((helper boundsOfItemMatching: repositoryMatch in: repositoryList)
 			pointAtFraction: 0 @ 0.75) y.
 	helper select: helper menu at: 'add to package*'.
@@ -977,7 +977,7 @@ SBEScreenshotRecorder writeTo: './figures/inspectTimeNow1.png' building: [:helpe
 	helper scaleWindow: window.
 	splitter := window allMorphs detect: [:m |
 		(m isKindOf: ProportionalSplitterMorph) and: [m splitsLeftAndRight]].
-	splitter repositionBy: 50 @ 0
+	splitter repositionBy: 50 px @ 0 px
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
@@ -1015,13 +1015,13 @@ For instance, if you inspect an \ct{EllipseMorph} by doing \ct{EllipseMorph new 
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/inspectMorph.png' building: [:helper | | window splitter |
-	EllipseMorph new openInWorld; inspect.
+	EllipseMorph new extent: 50 px @ 40 px; openInWorld; inspect.
 	helper selectAnyListIn: helper foregroundWindow at: #screenshot.
 	window := helper foregroundWindow.
-	window extent: 360 @ 270.
+	window extent: 360 px @ 270 px.
 	splitter := window allMorphs detect: [:m |
 		(m isKindOf: ProportionalSplitterMorph) and: [m splitsTopAndBottom]].
-	splitter repositionBy: 0 @ 45.
+	splitter repositionBy: 0 @ 45 px.
 	helper takeScreenshotOf: window.
 ]
 \end{ExecuteSmalltalkScript}
@@ -1113,7 +1113,7 @@ SBEScreenshotRecorder writeTo: './figures/explorePluggableListMorph.png' buildin
 	(lists at: lists keys max) explore.
 	tree := helper foregroundWindow findA: PluggableTreeMorph.
 	tree roots first openPathMatching: (#('root.*' 'submorphs.*' '1.*') collect: #asRegex).
-	helper scaleWindow: helper foregroundWindow extent: 500 @ 350.
+	helper scaleWindow: helper foregroundWindow extent: 500 px @ 350 px.
 	helper takeScreenshotOf: helper foregroundWindow.
 ]
 \end{ExecuteSmalltalkScript}
