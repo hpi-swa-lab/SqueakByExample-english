@@ -1,24 +1,25 @@
 *.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.glo
+*.idx
+*.ilg
+*.ind
 *.log
 *.out
-SBE*.blg
-SBE*.glo
-SBE*.idx
-SBE*.ilg
-SBE*.ind
 SBE*.pdf
-SBE*.synctex*
-SBE*.toc
-SBE*.url
-*.bbl
+*.synctex*
+*.toc
+*.url
+
 *.changes
 *.image
 ListingSources/
 warnings.txt
 bin/gdrive
 **/figures/*.png
-*.fls
-*.fdb_latexmk
 
 # Editors
 .vscode/
