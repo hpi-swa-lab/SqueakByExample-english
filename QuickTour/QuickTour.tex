@@ -573,29 +573,32 @@ As we shall see, there are several interesting browsers available for \sq, but t
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/ClassBrowser2.png' frame: #morphs building: [:helper |
-	| class selector window codePane |
+	| class selector window listBalloonHeight codePane |
 	class := Object. selector := #printString.
 	Browser fullOnClass: class selector: selector.
 	window := helper foregroundWindow.
 	helper displayForegroundWindowFocused.
 
+	listBalloonHeight := nil.
 	Dictionary new
 		at: class category put: 'System categories';
 		at: ('\s*' , class) asRegex put: 'Classes';
 		at: (class whichCategoryIncludesSelector: selector) put: 'Protocols';
 		at: selector put: 'Methods';
-		keysAndValuesDo: [:item :description |
-			(NewBalloonMorph string: description for: (helper listMorphIncludingMatch: item in: window))
-				popUp].
+		keysAndValuesDo: [:item :description | | list |
+			list := helper listMorphIncludingMatch: item in: window.
+			(SBEBalloonMorph string: description for: list)
+				popUpTaillessAt: (list center x @ (listBalloonHeight ifNil: [listBalloonHeight := list center y]))].
 	codePane := helper codePaneOfBrowser: window.
 	(NewBalloonMorph string: 'name of method' for: codePane)
-			popUpAt: codePane topLeft + (10 px @ 5 px).
+		popUpAt: codePane topLeft + (10 px @ 58 px);
+		orientation: #topLeft.
 	(SBEBalloonMorph string: 'method comment' for: codePane)
-			popUpTaillessAt: (codePane bounds pointAtFraction: 0.93 @ 0.12).
+		popUpTaillessAt: (codePane bounds pointAtFraction: 0.82 @ 0.22).
 	(SBEBalloonMorph
 		string: ('code of method\"{1}"' withCRs format: {selector})
 		for: codePane)
-			popUpTaillessAt: (codePane bounds pointAtFraction: 1 / 3 @ (1 / 2)).
+			popUpTaillessAt: (codePane bounds pointAtFraction: 1 / 2 @ (2 / 3)).
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
