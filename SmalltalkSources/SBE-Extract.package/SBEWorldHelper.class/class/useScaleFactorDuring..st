@@ -1,4 +1,4 @@
 utils - dpi
 useScaleFactorDuring: aBlock
 
-	^ Display sbeUiScaleFactor: self scaleFactor during: aBlock
+	^ self useScaleFactor: self scaleFactor during: aBlock

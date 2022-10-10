@@ -1,7 +1,8 @@
 {
 	"class" : {
 		"scaleFactor" : "ct 9/28/2022 13:30",
-		"useScaleFactorDuring:" : "ct 9/28/2022 13:30" },
+		"useScaleFactor:during:" : "ct 10/10/2022 17:23",
+		"useScaleFactorDuring:" : "ct 10/10/2022 17:23" },
 	"instance" : {
 		"adjustMorphsAreaOf:" : "ct 1/17/2020 14:48",
 		"assureScreenshot" : "ct 11/23/2019 17:53",
@@ -96,8 +97,9 @@
 		"touchMethod:" : "ct 12/6/2019 16:45",
 		"touchMethods:" : "ct 12/6/2019 16:43",
 		"type:into:" : "ct 10/21/2019 17:58",
+		"useScaleFactorDuring:" : "xyz 10/10/2022 17:27",
 		"useScreenshotPreferencesDuring:" : "ct 11/6/2020 17:20",
-		"useScreenshotSettingsDuring:" : "ct 9/28/2022 17:39",
+		"useScreenshotSettingsDuring:" : "ct 10/10/2022 17:22",
 		"useTemporaryChangeSetDuring:" : "ct 9/19/2020 17:56",
 		"useWorldAndHandDuring:" : "ct 10/14/2020 14:49",
 		"windowLabeled:" : "tobe 10/3/2019 20:00",
