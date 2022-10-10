@@ -149,9 +149,7 @@ SBEScreenshotRecorder writeTo: 'figures/TranslucentEllipse.png' building: [:help
 \end{ExecuteSmalltalkScript}
 \begin{center}
 \begin{figure}[!ht]
-\ifluluelse
-	{\centerline {\includegraphics[scale=0.5]{TranslucentEllipse}}}
-	{\centerline {\includegraphics[width=6cm]{TranslucentEllipse}}}
+\centerline {\includegraphics[width=0.55\textwidth]{TranslucentEllipse}}
 \caption{A translucent ellipse.\label{fig:translucentEllipse}}
 \end{figure}
 \end{center}
@@ -318,7 +316,7 @@ SBEScreenshotRecorder writeTo: 'figures/InspectingColor.png' building: [:helper 
 	helper type: 'self class inspect' into: codePane.
 	helper keyStroke: codePane key: $d modifiers: #(cmd).
 	rightInspector := helper foregroundWindow.
-	rightInspector topLeft: leftInspector topRight + (42 @ 0).
+	rightInspector topLeft: leftInspector topRight + (42 px @ 0).
 	SystemWindow new beKeyWindow "fast hack to display none of the windows as a key window"
 ]
 \end{ExecuteSmalltalkScript}

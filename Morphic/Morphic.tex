@@ -202,7 +202,7 @@ SBEScreenshotRecorder writeTo: 'figures/joeStar.png' building: [:helper |
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[ht]
-	\centerline{\includegraphics{joeStar}}
+	\centerline{\includegraphics[width=0.4\textwidth]{joeStar}}
 	\caption{The star is contained inside joe, the translucent blue morph.
 		\label{fig:joeStar}}
 \end{figure}
@@ -395,7 +395,7 @@ This doesn't matter when we fill the cross with an opaque color, but the bug bec
 \begin{figure}[t]
 \begin{minipage}[t]{0.48\textwidth}
 	\ifluluelse
-		{\centerline{\includegraphics[scale=0.6]{overdrawBug}}}
+		{\centerline{\includegraphics[width=0.3\textwidth]{overdrawBug}}}
 		{\centerline{\includegraphics{overdrawBug}}}
 	\caption{The center of the cross is filled twice with the color.
 		\label{fig:overdrawBug}}
@@ -403,7 +403,7 @@ This doesn't matter when we fill the cross with an opaque color, but the bug bec
 \hfill
 \begin{minipage}[t]{0.48\textwidth}
 	\ifluluelse
-		{\centerline{\includegraphics[scale=0.6]{hairlineBug}}}
+		{\centerline{\includegraphics[width=0.3\textwidth]{hairlineBug}}}
 		{\centerline{\includegraphics{hairlineBug}}}
 	\caption{The cross-shaped morph, showing a row of unfilled pixels.
 		\label{fig:bug}}
@@ -680,7 +680,7 @@ SBEScreenshotRecorder writeTo: 'figures/dialog.png' building: [:helper |
 \end{ExecuteSmalltalkScript}
 \begin{figure}
 \centering
-\begin{minipage}[t]{0.35\textwidth}
+\begin{minipage}[t]{0.4\textwidth}
 	\centerline{\includegraphics[width=\textwidth]{dialog}}
 	\caption{Dialog displayed by \ct{UIManager>>>request:initialAnswer:}.
 		\label{fig:dialogName}}
@@ -693,7 +693,7 @@ SBEScreenshotRecorder writeTo: 'figures/popup.png' building: [:helper |
 			chooseFrom: #('circle' 'oval' 'square' 'rectangle' 'triangle')]
 ]
 \end{ExecuteSmalltalkScript}
-\begin{minipage}[t]{0.56\textwidth}
+\begin{minipage}[t]{0.4\textwidth}
 	\centerline{\includegraphics[width=\textwidth]{popup}}
 	\caption{Dialog displayed by \ct{UIManager>>>chooseFrom:}.
 		\label{fig:dialogChoosing}}
@@ -853,7 +853,7 @@ SBEScreenshotRecorder writeTo: 'figures/die.png' building: [:helper | | die |
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[ht]
-	\centerline{\includegraphics[scale=0.65]{die}}
+	\centerline{\includegraphics[width=0.3\textwidth]{die}}
 	\caption{The die in Morphic.
 		\label{fig:dialogDie}}
 \end{figure}
@@ -1074,7 +1074,7 @@ SBEScreenshotRecorder writeTo: 'figures/multiMorphs.png' building: [:helper | | 
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[ht]
-	\centerline{\includegraphics[scale=0.7]{multiMorphs}}
+	\centerline{\includegraphics[width=0.3\textwidth]{multiMorphs}}
 	\caption{The die displayed with alpha-transparency.
 		\label{fig:multiMorphs}}
 \end{figure}

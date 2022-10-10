@@ -835,7 +835,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 				messageField textMorph editor selectAt: 1; selectLine; backTo: 1.
 				helper type: 'Change a few things' into: messageField.
 				"messageField setText: 'Change a few things'; flag: #fallback."
-				helper scaleWindow: helper foregroundWindow extent: 375 px @ 300 px.
+				helper scaleWindow: helper foregroundWindow extent: 450 px @ 300 px.
 				helper takeScreenshotOf: helper foregroundWindow.
 
 				"This is preparation for the next screenshot"
@@ -851,7 +851,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 		window := helper foregroundWindow.
 		helper selectAnyListIn: helper foregroundWindow at: 'SBE'.
 		window model versionSelection: 1.
-		helper scaleWindow: helper foregroundWindow extent: 400 px @ 275 px.
+		helper scaleWindow: helper foregroundWindow extent: 450 px @ 275 px.
 		helper takeScreenshotOf: window.
 	].
 ]
@@ -866,9 +866,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 
 \begin{figure}[tbp]
 	\begin{center}
-	\ifluluelse
-		{\includegraphics[scale=0.55]{SBE-apb}}
-		{\includegraphics[scale=0.6]{SBE-apb}}
+	\includegraphics[width=0.65\textwidth]{SBE-apb}
 	\end{center}
 	\caption{Providing a log message for a new version of a package.}
 	\label{fig:SBE-apb}
@@ -982,7 +980,7 @@ SBEScreenshotRecorder writeTo: './figures/inspectTimeNow1.png' building: [:helpe
 \end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
 	\begin{center}
-		\includegraphics[scale=0.65]{inspectTimeNow1}
+		\includegraphics[width=0.65\textwidth]{inspectTimeNow1}
 	\end{center}
 	\caption{Inspecting \ct{TimeStamp now}.}
 	\label{fig:inspectTimeNow1}
@@ -1028,7 +1026,7 @@ SBEScreenshotRecorder writeTo: './figures/inspectMorph.png' building: [:helper |
 
 \begin{figure}[btp]
 	\begin{center}
-		\includegraphics[scale=0.65]{inspectMorph}
+		\includegraphics[width=0.65\textwidth]{inspectMorph}
 	\end{center}
 	\caption{Inspecting an \ct{ElipseMorph}.}
 	\label{fig:inspectMorph}
@@ -1119,7 +1117,7 @@ SBEScreenshotRecorder writeTo: './figures/explorePluggableListMorph.png' buildin
 \end{ExecuteSmalltalkScript}
 \begin{figure}[tbp]
 	\begin{center}
-		\includegraphics[scale=0.45]{explorePluggableListMorph}
+		\includegraphics[width=0.65\textwidth]{explorePluggableListMorph}
 	\end{center}
 	\caption{Exploring a \ct{PluggableListMorph}.}
 	\label{fig:explorePluggableListMorph}

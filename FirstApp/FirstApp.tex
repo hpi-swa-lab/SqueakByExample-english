@@ -46,7 +46,15 @@ We will explain the details of the syntax, the object model, and message passing
 SBEScreenshotRecorder writeTo: './figures/GameBoard.png' frame: #morphs building: [:helper |
 	| game |
 	game := SBEGame new openInWorld.
-	helper click: game at: (game bounds pointAtFraction: 4 @ 6 - 0.5 / 10) buttons: #(left).
+
+	self flag: #workaround. "SBECell's fullBounds > SBECell's bounds because the empty label has a larger extent. In high-dpi mode, this leads to huge protuding spacing."
+	game submorphsDo: [:cell | cell firstSubmorph "label" delete].
+
+	game addFlexShell
+		scale: RealEstateAgent scaleFactor;
+		openInWorld.
+
+	helper click: game at: (game boundsInWorld pointAtFraction: 4 @ 6 - 0.5 / 10) buttons: #(left).
 	helper spawnHand.
 ]
 \end{ExecuteSmalltalkScript}
@@ -164,7 +172,7 @@ SBEScreenshotRecorder writeTo: './figures/AcceptClassDef.png' frame: [:rect | re
 	helper click: window at: codePane center buttons: #(right).
 	helper closeBalloons.
 	menu := helper foregroundMorph.
-	menu bottomRight: window bottomRight - (50 px @ 30 px).
+	menu bottomRight: window bottomRight - (50 px @ 35 px).
 	helper hand releaseMouseFocus.
 	helper mouseEnter: (helper menuItemMorphLabeled: 'accept*' in: helper world).
 ]
@@ -285,7 +293,7 @@ SBEScreenshotRecorder writeTo: './figures/SBECellInspector.png' frame: #morphs b
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htbp]
    \centering
-   \includegraphics[scale=0.7]{SBECellInspector}
+   \includegraphics[width=0.55\textwidth]{SBECellInspector}
    \caption{The inspector used to examine a SBECell object.\label{fig:SBECellInspector}}
 \end{figure}
 
@@ -322,7 +330,7 @@ SBEScreenshotRecorder writeTo: './figures/SBECellResize.png' frame: #morphs buil
 \begin{figure}[htbp]
 \centering
 \ifluluelse
-	{\includegraphics[width=\textwidth]{SBECellResize} }
+	{\includegraphics[width=0.8\textwidth]{SBECellResize} }
 	{\includegraphics[scale=0.7]{SBECellResize} }
 \caption{Resizing the cell.\label{fig:cellresize}}
 \end{figure}
@@ -389,7 +397,7 @@ SBEScreenshotRecorder writeTo: './figures/DeclareInstanceVar.png' frame: #morphs
 \begin{minipage}[t]{0.42\textwidth}
 	\centering
 	\ifluluelse
-		{\includegraphics[width=\textwidth]{UnknownSelector}}
+		{\includegraphics[width=0.7\textwidth]{UnknownSelector}}
 		{\includegraphics[scale=0.7]{UnknownSelector}}
 	\caption{\squeak detecting an unknown selector.\label{fig:unknownSelector}}
 \end{minipage}
@@ -397,7 +405,7 @@ SBEScreenshotRecorder writeTo: './figures/DeclareInstanceVar.png' frame: #morphs
 \begin{minipage}[t]{0.56\textwidth}
 	\centering
 	\ifluluelse
-		{\includegraphics[width=\textwidth]{DeclareInstanceVar}}
+		{\includegraphics[width=0.7\textwidth]{DeclareInstanceVar}}
 		{\includegraphics[scale=0.7]{DeclareInstanceVar}}
 	\caption{Declaring a new instance variable.\label{fig:declareInstance}}
 \end{minipage}
@@ -485,7 +493,7 @@ SBEScreenshotRecorder writeTo: './figures/Categorize.png' frame: [:bounds | boun
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htbp]
    \centering
-   \includegraphics[scale=0.65]{Categorize}
+   \includegraphics[width=0.65\textwidth]{Categorize}
    \caption{Categorize all uncategorized methods.\label{fig:categorize}}
 \end{figure}
 
