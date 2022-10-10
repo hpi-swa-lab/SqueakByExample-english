@@ -13,7 +13,7 @@ ifndef TRAVIS
 	ifdef NO_WSL
 		PREFIX = cmd.exe /c
 	else
-		PREFIX = 
+		PREFIX =
 	endif
 	PDFLATEX = ${PREFIX} pdflatex -file-line-error -interaction=nonstopmode
 	BIBTEX = ${PREFIX} bibtex
@@ -136,6 +136,9 @@ clean : clean_listings
 	-rm -f .DS_Store */.DS_Store
 	-rm -f common*.url common*.pdf SBE.url
 	-rm -f test.*
+
+clean_figures :
+	git clean -dfX -n | cut -d " " -f 3 | grep 'figures/$$\|\.png$$' | xargs rm -rf
 
 clean_listings :
 	-rm -rf ListingSources ||:
