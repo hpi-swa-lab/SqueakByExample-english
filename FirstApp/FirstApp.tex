@@ -294,20 +294,29 @@ Blue-click on the cell to bring up the morphic \subind{Morphic}{halo}.
 Move the cell with the brown (next to top-right) handle and resize it with the yellow (bottom-right) handle.
 Notice how the bounds reported by the inspector also change.
 
-%%{SBESqueakPicture writeTo: './figures/SBECellResize.png' frame: #morphs using: [:helper |
-%%  | cell window list bottomPane |
-%%  cell := SBECell new.
-%%  cell inspect.
-%%  window := helper foregroundWindow.
-%%  list := helper listMorphIncludingMatch: #bounds in: window.
-%%  list changeModelSelection: 3.
-%%  bottomPane := window findDeepSubmorphThat: [:m | m isTextView and: [m text isEmptyOrNil]] ifAbsent: [self error: 'bottom pane not found'].
-%%  bottomPane setText: 'self openInWorld'; doIt.
-%%  cell position: 100 @ 100; extent: 98 @ 89.
-%%  window position: 350 @ 50.
-%%  cell addHalo.
-%%  (NewBalloonMorph string: 'Change size' for: cell) popUpAt: cell bottomRight + 31.
-%%]}
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/SBECellResize.png' frame: #morphs building: [:helper |
+	| cell window list bottomPane |
+	cell := SBECell new.
+	cell inspect.
+
+	window := helper foregroundWindow.
+	list := helper listMorphIncludingMatch: #bounds in: window.
+	helper select: list at: 'bounds'.
+	bottomPane := window findDeepSubmorphThat: [:m | m isTextView and: [m text isEmptyOrNil]] ifAbsent: [self error: 'bottom pane not found'].
+	bottomPane setText: 'self openInWorld'; doIt.
+
+	cell position: 100 @ 100; extent: 98 @ 89.
+	window position: 350 @ 50.
+	cell addHalo.
+
+	helper mouseMoveTo: ((cell halo handles detectMax: [:h | h position r]) pointAtFraction: 2 / 3) buttons: #() in: helper world.
+	Preferences balloonHelpDelayTime milliSeconds wait.
+	helper world doOneCycleNow.
+	(helper world findA: NewBalloonMorph) setText: 'Change size'.
+	helper spawnBalloon; spawnHand
+]
+\end{ExecuteSmalltalkScript}
 \begin{figure}[htbp]
 \centering
 \ifluluelse
