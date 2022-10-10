@@ -1,11 +1,11 @@
 *.aux
+*.log
+*.out
 SBE*.blg
 SBE*.glo
 SBE*.idx
 SBE*.ilg
 SBE*.ind
-SBE*.log
-SBE*.out
 SBE*.pdf
 SBE*.synctex*
 SBE*.toc
