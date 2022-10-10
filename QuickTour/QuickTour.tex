@@ -105,8 +105,8 @@ SBEScreenshotRecorder writeTo: './figures/startup.png' frame: #fullScreen buildi
 		color: (Color gray: 15 / 16); "Think green & save ink"
 		extent: 800 px @ 450 px.
 	balloon := (Form fromFileNamed: (helper resourceDirectory
-		/ 'branding' / 'balloon.png') fullName
-			magnifyBy: RealEstateAgent scaleFactor).
+		/ 'branding' / 'balloon.png') fullName)
+			magnifyBy: RealEstateAgent scaleFactor.
 	ReleaseBuilder openWelcomeWorkspacesWith: balloon.
 	helper foregroundWindow
 		height: helper world height * 0.75;
@@ -438,7 +438,7 @@ SBEScreenshotRecorder writeTo: './figures/Doit.png' frame: [:morphsRect | morphs
   helper type: 'Transcript show: ''hello world''; cr.' into: workspace.
   helper keyStroke: workspace key: $a modifiers: #(cmd).
 
-  helper click: workspace at: workspace topCenter + (0 px @ 30 px) buttons: #(right).
+  helper click: workspace at: workspace topCenter + (10 px @ 30 px) buttons: #(right).
   helper hand releaseMouseFocus.
   helper mouseEnter: (helper menuItemMorphLabeled: 'do it (d)' in: helper world).
   helper closeBalloons.

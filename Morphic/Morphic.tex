@@ -187,13 +187,15 @@ For example, to center the star inside joe, execute \ct{star} \mthind{Morph}{cen
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: 'figures/joeStar.png' building: [:helper |
 	| bill joe star |
-	bill := Morph new color: Color red .
+	bill := Morph new color: Color red.
+	bill extent: 50 px @ 40 px.
 	bill openInWorld.
 	joe := Morph new color: (Color blue alpha: 0.5).
 	joe extent: 55 px @ 60 px.
 	joe openInWorld.
 	bill position: joe position - (27 px @ 20 px).
 	star := StarMorph new color: Color yellow.
+	star extent: 29 px @ 29 px.
 	joe addMorph: star.
 	star center: joe center.
 	helper centerAllMorphs.
@@ -838,8 +840,12 @@ Let's design a morph to roll a die.
 Clicking on it will display the values of all sides of the die in a quick loop, and another click will stop the animation.
 
 \begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder writeTo: 'figures/die.png' building: [:helper |
-	SBEDieMorph new
+SBEScreenshotRecorder writeTo: 'figures/die.png' building: [:helper | | die |
+	die := SBEDieMorph new.
+	die
+		extent: die extent * RealEstateAgent scaleFactor;
+		borderWidth: 2 px.
+	die
 		openCenteredInWorld;
 		stopStepping;
 		dieValue: 5;
@@ -1042,7 +1048,7 @@ If you're curious, have a look at the \mthind{Canvas}{asAlphaBlendingCanvas:} me
 You can also get antialiasing by using \clsind{BalloonCanvas} and transforming the die drawing methods as shown in \mthsref{aadie}.
 
 \begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder writeTo: 'figures/multiMorphs.png' building: [:helper |
+SBEScreenshotRecorder writeTo: 'figures/multiMorphs.png' building: [:helper | | die |
 	thisContext wrap: [:block | helper restoreMethods: {SBEDieMorph >> #drawOn:} after: block].
 	SBEDieMorph compile: 'drawOn: aCanvas
 	| theCanvas |
@@ -1053,13 +1059,17 @@ SBEScreenshotRecorder writeTo: 'figures/multiMorphs.png' building: [:helper |
 	.
 	{ Morph new
 		position: 30 px @ 0 px;
+		extent: 50 px @ 40 px;
 		color: Color red.
 	Morph new
-		position: 0 px @ 20 px;
+		position: 0 px @ 28 px;
+		extent: 50 px @ 47 px;
 		color: Color blue.
-	SBEDieMorph new
+	(die := SBEDieMorph new)
 		position: 25 px @ 18 px;
-		extent: 75 px @ 75 px } do: #openInWorld.
+		extent: 75 px @ 75 px;
+		borderWidth: 2 px } do: #openInWorld.
+	die stopStepping; dieValue: 6.
 	helper takeScreenshot. "before the drawing method is reverted"
 ]
 \end{ExecuteSmalltalkScript}

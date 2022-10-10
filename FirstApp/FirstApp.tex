@@ -155,12 +155,13 @@ To actually send this message, you must \menu{accept} it.
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/AcceptClassDef.png' frame: [:rect | rect bottomHalf] building: [:helper |
-	| window menu |
+	| window codePane menu |
 	SBECell browse.
 	window := helper foregroundWindow.
 	window bounds: (0 px @ 120 px extent: 500 px @ 400 px).
-	(helper codePaneOfBrowser: window) hasUnacceptedEdits: true.
-	helper click: window at: window bottomCenter - (0 px @ 30 px) buttons: #(right).
+	codePane := helper codePaneOfBrowser: window.
+	codePane hasUnacceptedEdits: true.
+	helper click: window at: codePane center buttons: #(right).
 	helper closeBalloons.
 	menu := helper foregroundMorph.
 	menu bottomRight: window bottomRight - (50 px @ 30 px).
@@ -644,7 +645,10 @@ SBEScreenshotRecorder writeTo: './figures/Error.png' frame: #morphs building: [:
 		helper
 			runModal: [helper click: game]
 			then: [
-				helper hand dropMorphs.
+				helper world
+					allMorphsDo: [:m | (m respondsTo: #updateFillStyle) ifTrue: [m updateFillStyle]];
+					flag: #workaround. "Avoid to display all buttons as pressed.
+						MorphicDebugger class>>#openOn:context:label:contents:fullView: schedules a deferred UI message for building the debugger. In the UI message, it reactivates the original current event, which is a mouseDown event in this context. During UI building, #updateFillStyle is sent to all buttons when their getStateSelector is set. Because of the current mouseDown event, #updateFillStyle will give a pressed look to any button that is under the cursor. As the buttons are not yet layouted properly during initialization, for some scale factors, all buttons initially appear under the cursor and are thus associated with an erroneous pressed look. It's hard to tell where this bug originates: in the debugger, which reuses the current event, or in the #updateFillStyle:, which does not check the mouseFocus of the current event. This workaround just updates the fill style of every button after the mouseDown event has been deactivated."
 				game abandon]]
 ]
 \end{ExecuteSmalltalkScript}

@@ -1601,7 +1601,7 @@ buildChangeSet := [:helper :outerBlock |
 		String >> #suffix.
 		StringTest >> #testSuffixFound }.
 	thisContext wrap: [:block | helper restoreMethods: methods after: block].
-helper touchMethods: methods.
+	helper touchMethods: methods.
 	outerBlock value].
 
 buildChangeSorter := [:helper |
