@@ -600,3 +600,19 @@
 %\setlength{\marginparsep}{2mm}
 %\renewcommand{\baselinestretch}{1.1}
 %=============================================================
+
+
+\makeatletter \def\IfEnvir #1%
+% implicit #2 "what if true"
+% implicit #3 "what if false"
+{%
+  \ifnum \pdfstrcmp{\@currenvir}{#1}=0
+    \expandafter\@firstoftwo
+  \else
+    \expandafter\@secondoftwo
+  \fi
+}
+
+\makeatother
+
+\newcommand{\tikzifintikzpicture}[2]{\IfEnvir{tikzpicture}{#1}{#2}}
