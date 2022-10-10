@@ -924,11 +924,17 @@ The left pane contains a list of system categories, but it's restricted to those
 The names of the classes are already selected, so click \menu{Run Selected} to run all these tests.}
 
 \begin{ExecuteSmalltalkScript}
-<timeout: 30 "seconds">
 SBEScreenshotRecorder writeTo: './figures/testRunnerOnStringTest.png' frame: #morphs building: [:helper |
 	| testRunner categoryIndex |
-	thisContext wrap: [:block | helper restoreMethods: {StringTest >> #testShout} after: block].
+	thisContext wrap: [:block |
+		helper
+		restoreMethods:
+			{StringTest >> #testShout.
+			StringTest >> #testPercentEncodingJa}
+		after: block].
 	StringTest compile: 'testShout self assert: false'.
+	StringTest removeSelector: #testPercentEncodingJa. "very slow"
+
 	testRunner := (ToolBuilder open: TestRunner new) model.
 	categoryIndex := testRunner categoryList indexOf: 'CollectionsTests-Text'.
 	testRunner
