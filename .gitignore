@@ -1,14 +1,15 @@
 *.aux
-SBE.blg
-SBE.glo
-SBE.idx
-SBE.ilg
-SBE.log
-SBE.out
-SBE.pdf
-SBE_*.pdf
-SBE.toc
-SBE.url
+SBE*.blg
+SBE*.glo
+SBE*.idx
+SBE*.ilg
+SBE*.ind
+SBE*.log
+SBE*.out
+SBE*.pdf
+SBE*.synctex*
+SBE*.toc
+SBE*.url
 *.bbl
 *.changes
 *.image
@@ -16,6 +17,8 @@ ListingSources/
 warnings.txt
 bin/gdrive
 **/figures/*.png
+*.fls
+*.fdb_latexmk
 
 # Editors
 .vscode/
