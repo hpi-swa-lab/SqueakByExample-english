@@ -1150,6 +1150,7 @@ Instead of getting the expected answer \ct{'txt'}, a \clsind{PreDebugWindow} pop
 
 \begin{ExecuteSmalltalkScript}
 "debuggers"
+<timeout: 120 "seconds">
 SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 	| home debugger codePane contextVarList |
 	home := thisContext.
@@ -1399,6 +1400,7 @@ Because it tells the reader what the method should do if there is more than one 
 
 
 \begin{ExecuteSmalltalkScript}
+<timeout: 40 "seconds">
 SBEScreenshotRecorder writeTo: './figures/fixOffByOne.png' building: [:helper |
 	| testRunner |
 	thisContext wrap: [:block | helper restoreMethods: {
