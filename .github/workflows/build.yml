@@ -73,7 +73,7 @@ jobs:
       - id: figures
         name: 🖼 Build Squeak figures
         run: smalltalkci -s Squeak64-${{ matrix.smalltalk }} SBE-Extract.smalltalk.ston
-        timeout-minutes: 15
+        timeout-minutes: 30
         continue-on-error: true
       - if: (steps.figures.outcome == 'failure')
         name: Configure DEBUG_FIGURES
