@@ -21,7 +21,7 @@ Indeed. A cool trick if you want to find the implementation behind a menu item: 
 ---------------------------------------------------------------------------
 Q How do I find out where a given primitive is used?
 A
-findPrim := [:prim | SystemNavigation default browseAllSelect: [:method | method pragmas contains: [:pragma | (pragma keyword = #primitive:) and: [(pragma argumentAt: 1) = prim]]]].
+findPrim := [:prim | self systemNavigation browseAllSelect: [:method | method pragmas contains: [:pragma | (pragma keyword = #primitive:) and: [(pragma argumentAt: 1) = prim]]]].
 findPrim value: 80
 ---------------------------------------------------------------------------
 Q. I have a Class PoolQueue which has instvars 'member' and 'processor'. I find that an instance of PoolQueue when placed in an OrderedCollection can no longer be considered equal. I suppose I have to reimplement #= and #hash to allow PoolQueue instances to be compared. 

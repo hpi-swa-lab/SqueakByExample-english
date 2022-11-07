@@ -554,17 +554,17 @@ Many of the functions offered by the classic browser are implemented by \ct{Syst
 \dothis{
 Open a workspace and \menu{do it} the following code to browse the senders of \ct{checkExtent:}:}
 \begin{code}{}
-SystemNavigation default browseAllCallsOn: #checkExtent:.
+self systemNavigation browseAllCallsOn: #checkExtent:.
 \end{code}
 To restrict the search for senders to the methods of a specific class:
 \begin{code}{}
-SystemNavigation default browseAllCallsOn: #drawOn: from: ScaleMorph.
+self systemNavigation browseAllCallsOn: #drawOn: from: ScaleMorph.
 \end{code}
 Because the development tools are objects, they are completely accessible from programs and you can develop your own tools or adapt the existing tools to your needs.
 
 The programmatic equivalent to the \button{implementors} button is:
 \begin{code}{}
-SystemNavigation default browseAllImplementorsOf: #checkExtent:.
+self systemNavigation browseAllImplementorsOf: #checkExtent:.
 \end{code}
 
 To learn more about what is available, explore the class \ct{SystemNavigation} with the browser.

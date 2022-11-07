@@ -147,8 +147,8 @@ How do I find/browse all sends to super?
 \answer
 The second solution is much faster:
 \begin{code}{}
-SystemNavigation default browseMethodsWithSourceString: 'super'.
-SystemNavigation default browseAllSelect: [:method | method sendsToSuper ].
+self systemNavigation browseMethodsWithSourceString: 'super'.
+self systemNavigation browseAllSelect: [:method | method sendsToSuper ].
 \end{code}
 \index{browsing programmatically}
 \clsindex{SystemNavigation}
@@ -158,7 +158,7 @@ How do I browse all super \subind{super}{send}{}s within a hierarchy?
 \end{faq}
 \answer
 \begin{code}{}
-browseSuperSends := [:aClass | SystemNavigation default
+browseSuperSends := [:aClass | self systemNavigation
 	browseMessageList: (aClass withAllSubclasses gather: [ :each |
 		(each methodDict associations
 			select: [ :assoc | assoc value sendsToSuper ])
