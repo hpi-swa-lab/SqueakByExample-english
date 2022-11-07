@@ -1,5 +1,6 @@
 initialization
 initialize
+
 	super initialize.
 	self 
 		extent: 50 @ 50;

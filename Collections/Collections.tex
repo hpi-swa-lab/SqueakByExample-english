@@ -469,14 +469,7 @@ anArray at: 3 --> 33
 \noindent
 Be careful with code that modifies literal arrays!
 The compiler allocates space just once for literal arrays.
-\SqVersionSwitch
-{6.0}{
-  Unless you copy the array, the VM will treat it as a \emph{read-only object} and raise a \clsind{ModificationForbidden} error every time you try to alter it.
-}{
-  Unless you copy the array, the second time you evaluate the code your ``literal'' array may not have the value you expect.
-  (Without cloning, the second time around, the literal \ct{#(1 2 3 4 5 6)} will actually be \ct{#(1 2 33 4 5 6)}!)
-  Actually, future \sq versions will forbid the manipulation of literal objects because it can have some really weird consequences.
-}
+Unless you copy the array, the VM will treat it as a \emph{read-only object} and raise a \clsind{ModificationForbidden} error every time you try to alter it.
 Dynamic arrays do not have this problem.
 
 %---------------------------------------------------------
@@ -1035,7 +1028,7 @@ The message \ct{count:} returns the number of elements satisfying a condition.
 The condition is represented as a boolean block.
 
 \begin{code}{@TEST}
-Smalltalk allClasses count: [:each | 'Collection*' match: each asString] --> !\SqVersionSwitch{6.0}{4}{2}!
+Smalltalk allClasses count: [:each | 'Collection*' match: each asString] --> 4
 \end{code}
 
 \paragraph{\mthind{Collection}{includes:}.}
@@ -1057,7 +1050,7 @@ colors anySatisfy: [:color | color red > 0.5] --> true
 The message \mthind{Collection}{gather:} can be used to turn nested collections into a flat collection while at the same time converting the values. Some languages refer to this collection operation as flat map\seeindex{flat map}{Collection, gather:}.
 
 \begin{code}{@TEST | colors | colors := {Color white . Color yellow. Color red . Color blue . Color orange}.}
-colors anySatisfy: [:color | color red > 0.5] --> true
+colors gather: [:color | color names] --> #(#white #snow #yellow #lemon #red #maraschino #blue #blueberry #orange)
 \end{code}
 
 %=========================================================
