@@ -537,12 +537,17 @@ It's basically the same as the class browser, but it knows about the naming conv
 You will have noticed that the names of categories have two parts.
 For example, the \ct{ScaleMorph} class belongs to the \scat{Morphic-Widgets} category.
 \label{sec:package-names}
-The package browser assumes that the part before the hyphen, \ct{Morphic} is the name of a ``package'', and adds a fifth pane that allows you to browse only those categories in a particular package.
+The package browser assumes that the part before the hyphen, \ct{Morphic}, is the name of a ``package'', and adds a fifth pane that allows you to browse only those categories in a particular package.
 However, if you select no package at all, then all the categories are available, just as with the ordinary four-pane browser.
+You can also open a package pane browser from a regular browser by yellow-clicking any system category on the left and choosing \menu{browse package}.
 
-Note that the meaning of the term \ind{package} as used in the package pane browser is different from the concept of Monticello
-packages.
-To browse all classes of a Monticello package, you can open a Snapshot Browser from the Monticello Browser by selecting a package and then pressing \button{Browse}.
+
+\SqVersionSwitch{6.1}{%
+	We will describe packages in more detail in \secref{packages_and_monticello}.
+}{% % http://lists.squeakfoundation.org/pipermail/squeak-dev/2022-September/222175.html
+	Note that the meaning of the term \ind{package} as used in the package pane browser is different from the concept of Monticello packages.
+	To browse all classes of a Monticello package, you can open a Snapshot Browser from the Monticello Browser by selecting a package and then pressing \button{Browse}.
+}
 
 %---------------------------------------------------------
 \subsection{Browsing programmatically}
@@ -696,6 +701,27 @@ This includes, for example, \ct{Object>>>asDraggableMorph:} and \ct{Text>>>embed
 You can send \ct{fileOut} to an instance of \ct{PackageInfo} to get a change set of the entire package.
 For more sophisticated versioning of packages, we use Monticello.
 \index{file!filing out}
+
+\begin{ExecuteSmalltalkScript}
+	SBEScreenshotRecorder writeTo: './figures/browsePackageExtensions.png' building: [:helper | | window |
+	Browser open.
+	window := helper foregroundWindow.
+	helper
+		selectAnyListIn: window at: 'Morphic-Kernel' andScrollIntoViewBy: 1;
+		selectAnyListIn: window at: 'Morph' andScrollIntoViewBy: 1.
+	helper
+		click: window at: (window pointAtFraction: 1 / 4 * 2 / 3 @ 0) + (7 px @ 40 px) buttons: #(right);
+		mouseMoveTo: (helper menuItemMorphLabeled: 'browse package*' in: helper world) center buttons: #() in: helper world;
+		mouseMoveTo: (helper menuItemMorphLabeled: 'extensions' in: helper world) center buttons: #() in: helper world].
+\end{ExecuteSmalltalkScript}
+\begin{figure}
+	\includegraphics[width=\textwidth]{figures/browsePackageExtensions.png}
+	\caption{Browsing all extension methods of the package \ct{Morphic}.}
+	\label{fig:browsePackageExtensions}
+\end{figure}
+
+If you do not feel like playing with the \ct{PackageInfo} class manually, you can also use the package pane browser introduced in \secref{otherBrowsers}.
+You can also browse all extension methods of a package by opening a yellow-button menu on any package or system category in the browser and selecting \ct{browse package extensions} (see \figref{browsePackageExtensions}).
 
 %---------------------------------------------------------
 \subsection{Basic Monticello}
