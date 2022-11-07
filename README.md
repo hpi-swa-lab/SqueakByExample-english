@@ -43,7 +43,7 @@ The usual workflow to **add a scripted screenshot to the book** is as follows:
 
    ```tex
    \begin{ExecuteSmalltalkScript}
-   SBESqueakPicture writeTo: './figures/<name>.png' using: [:helper |
+   SBEScreenshotRecorder writeTo: './figures/<name>.png' building: [:helper |
    	self shouldBeImplemented
    ]
    \end{ExecuteSmalltalkScript}
