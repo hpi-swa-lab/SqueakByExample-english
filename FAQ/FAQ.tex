@@ -256,9 +256,8 @@ You can add \ct{TextAttribute}s to section of text by using the messages in the 
 text := 'yellow and green' asText.
 text
 	addAttribute: TextColor yellow from: 1 to: 6;
-	addAttribute: TextEmphasis italic from: 1 to: 6;
 	addAttribute: TextColor green from: 12 to: 16;
-	addAttribute: TextEmphasis bold from: 12 to: 16.
+	addAllAttributes: {TextEmphasis italic. TextEmphasis bold}.
 text asMorph openInHand.
 \end{code}
 
