@@ -13,7 +13,7 @@ ifndef TRAVIS
 	ifdef NO_WSL
 		PREFIX = cmd.exe /c
 	else
-		PREFIX = 
+		PREFIX =
 	endif
 	PDFLATEX = ${PREFIX} pdflatex -file-line-error -interaction=nonstopmode
 	BIBTEX = ${PREFIX} bibtex
@@ -32,7 +32,7 @@ else
 endif
 
 # --------------------------------------------------------------------------------
-all : book
+all : complete
 
 # NB: be sure to use texlive and to set the TEXINPUTS variable accordingly
 # See README.md
@@ -58,7 +58,7 @@ index :
 	${MAKEINDEX} ${BOOK}
 
 complete : book index
-	time ${PDFLATEX} ${BOOK}
+	time ${PDFLATEX} '${TEXINPUT}'
 
 etc :
 	time ${PDFLATEX} ${ETC}
