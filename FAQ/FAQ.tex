@@ -68,9 +68,7 @@ First, you can always download sar- or mcz-files and simply drop them into \sq.
 Second, you can use the class \clsind{Installer}, which provides methods for installing several kinds of packages from different sources, \eg Squeaksource.
 To start using the \ct{Installer} you can take a look at the class comment.
 Finally, you can currently find an increasing number of \sq projects on GitHub, many of them to be installed via \ind{Metacello}.
-Metacello is a configuration management project for specifying dependencies between \st projects.
-Before you can install a project via Metacello you may have to setup Metacello in your environment.
-You can do so via \ct{Installer ensureRecentMetacello}.
+Metacello is a configuration management project for specifying dependencies between \st projects which installs itself on first usage.
 
 \begin{faq}
 Some code triggered a lot of debuggers and my whole screen is filled with them.
@@ -378,9 +376,7 @@ Evaluate \ct{TestRunner open}.
 Where can I find the \ind{Refactoring Browser}?
 \end{faq}
 \answer
-Load AST then Refactoring Engine from squeaksource.com:
-\url{www.squeaksource.com/AST}
-\url{www.squeaksource.com/RefactoringEngine}
+From the docking bar, select \menu{Apps \go Preference Wizard}, then click on \menu{Configure}, \menu{Done}, tick ``Refactoring support in code browsers'', and confirm via \menu{Yes, install selected packages}.
 
 \begin{faq}
 How do I register the browser that I want to be the default?
