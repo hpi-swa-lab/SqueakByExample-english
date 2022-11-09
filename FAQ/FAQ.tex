@@ -365,11 +365,30 @@ MessageTally spyOn: [10000 timesRepeat: [1.23 printString]]
 \end{code}
 You can achieve the same by selecting an expression and select \menu{spy on it} from the yellow button menu.
 
+%\begin{faq}
+%How do I programmatically open the \ind{SUnit} \ind{TestRunner}?
+%\end{faq}
+%\answer
+%Evaluate \ct{TestRunner open}.
 \begin{faq}
-How do I programmatically open the \ind{SUnit} \ind{TestRunner}?
+How do I programmatically trigger any UI logic in Morphic?
 \end{faq}
 \answer
-Evaluate \ct{TestRunner open}.
+Imagine you want to write a method that opens a test runner, reverts an earlier version of a method, or saves a new Monticello version.
+For tasks like this, you need to figure out the implementation behind certain graphical tools in the UI.
+Luckily, Morphic provides some tools to facilitate such exploration.
+
+To introspect on the object behind any morph (e.g., a window or a menu item), make a blue-button click on it to open a halo, click on the debug handle \debugHandle{}, and select \menu{inspect morph} or \menu{explore morph}.
+You can also choose \menu{browse morph class} to jump to the class definition of the morph directly.
+For many windows and their contents, the underlying \emph{model} is more interesting, so you can also select \menu{inspect model} or \menu{explore model}.
+In the case of a test runner, the model is a \clsind{TestRunner} instance, which you can use to programmatically open another test runner window.
+Open a halo on the existing window, select \menu{browse model class} from the debug menu, and browse the class side of \ct{TestRunner} to find the message \mthind{TestRunner class}{open}.
+
+For some widgets such as buttons, you can also observe its specific \emph{action code}.
+For instance, to find out what happens when you click on the \menu{Save} button in the Monticello browser, open a halo on the button and select \menu{browse action code} from the debug menu.
+You can also start a \ind{debugger} on the action code by selecting \menu{debug action code}, which allows you to follow the button's implementation in context and step-by-step.
+
+For more complex \ind{UI automation} tasks and \ind{UI testing} purposes, you can also use a UI automation framework such as the \ind{MorphicTestingFramework} (load it from \url{https://github.com/hpi-swa-teaching/Morphic-Testing-Framework}).
 
 \begin{faq}
 Where can I find the \ind{Refactoring Browser}?
