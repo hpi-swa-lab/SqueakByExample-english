@@ -1,4 +1,4 @@
 private
 buildingSelectorPattern
 
-	^ ['.*building[^\:]*\:' asRegex] once
+	^ '.*building[^\:]*\:' asRegex
