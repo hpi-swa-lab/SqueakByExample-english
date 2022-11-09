@@ -196,7 +196,7 @@ If you deselect the currently selected category (most left pane) and then resele
 You create a new class by editing this template: replace \ct{Object} by the name of the existing class of which you wish to create a subclass, replace \ct{NameOfSubclass} by the name that you would like to give to your new subclass, and fill in the instance variable names if you want some.
 The category for the new class is by default the currently selected category, but you can change this too if you like.
 If you already have the browser focussed on the class that you wish to subclass, you can get the same template with slightly different
-initialization by using the yellow button menu in the class pane, and selecting \menu{more \ldots \go subclass template}.
+initialization by using the yellow button menu in the class pane, and selecting \menu{more \ldots~\go{} subclass template}.
 You can also just edit the definition of an existing class, changing the class name to something new.
 In all cases, when you accept the new definition, the new class (the one whose name follows the \ct{#}) is created (as is
 the corresponding metaclass).
@@ -532,7 +532,7 @@ Even in menus, such as the world menu, you can simply start typing to filter ent
 \label{sec:otherBrowsers}
 
 At the beginning of this section we mentioned another class browser: the \emphind{package pane browser}.
-This browser can be opened from the world menu: \menu{World \go open\ldots \go package pane browser}
+This browser can be opened from the world menu: \menu{World~\go{} open\ldots~\go{} package pane browser}
 It's basically the same as the class browser, but it knows about the naming convention for system categories.
 You will have noticed that the names of categories have two parts.
 For example, the \ct{ScaleMorph} class belongs to the \scat{Morphic-Widgets} category.
@@ -1540,7 +1540,7 @@ The process browser is not equipped with mini-inspectors for \self and \lct{this
 \section{Finding methods}
 \label{sec:methodFinder}
 
-There are three tools in \sq to help you find messages. You can open the first two, MethodFinder and MessageNames from \menu{World docking bar\go{}Tools}. The third one is the global search in the right corner of the world docking bar.
+There are three tools in \sq to help you find messages. You can open the first two, \emph{method finder} and \emph{message names}, from \menu{World docking bar~\go{} Tools}. The third one is the global search in the right corner of the world docking bar.
 They differ in both interface and functionality.
 
 The \emph{method finder} was described at some length in \secref{quick:methodFinder}; you can use it to find methods by name or by functionality.
@@ -1842,7 +1842,7 @@ You can get the lexicon from the system browser by opening the yellow button men
 \paragraph{Message tally}
 Sometimes you might write code that is too slow.
 The \ind{Message Tally} tool, sometimes also called \ind{profiler}, can help you to determine which parts of your program are slow.
-You can start it to record the execution times for all processes in the image from the menu item \menu{world main docking bar \go Extras \go Start Profiler}.
+You can start it to record the execution times for all processes in the image from the menu item \menu{world main docking bar~\go{} Extras~\go{} Start Profiler}.
 Alternatively, you can also let it observe sections of code by selecting the code, opening the yellow button menu, and choosing \menu{spy on it}.
 Note, that the message tally is a sampling profiler, so for detailed information, you will have to let your code run for some seconds (e.g. by running it 1000 times if it only takes little time).
 
