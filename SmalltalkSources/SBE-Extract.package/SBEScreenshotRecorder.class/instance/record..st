@@ -1,4 +1,6 @@
 recording
 record: aBlock
 
-	^ worldHelper beActiveDuring: [aBlock value: self cull: worldHelper]
+	self setUpWorld.
+	^ [worldHelper beActiveDuring: [aBlock value: self cull: worldHelper]]
+		ensure: [self tearDownWorld]
