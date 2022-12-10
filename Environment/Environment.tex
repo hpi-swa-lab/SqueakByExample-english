@@ -537,12 +537,17 @@ It's basically the same as the class browser, but it knows about the naming conv
 You will have noticed that the names of categories have two parts.
 For example, the \ct{ScaleMorph} class belongs to the \scat{Morphic-Widgets} category.
 \label{sec:package-names}
-The package browser assumes that the part before the hyphen, \ct{Morphic} is the name of a ``package'', and adds a fifth pane that allows you to browse only those categories in a particular package.
+The package browser assumes that the part before the hyphen, \ct{Morphic}, is the name of a ``package'', and adds a fifth pane that allows you to browse only those categories in a particular package.
 However, if you select no package at all, then all the categories are available, just as with the ordinary four-pane browser.
+You can also open a package pane browser from a regular browser by yellow-clicking any system category on the left and choosing \menu{browse package}.
 
-Note that the meaning of the term \ind{package} as used in the package pane browser is different from the concept of Monticello
-packages.
-To browse all classes of a Monticello package, you can open a Snapshot Browser from the Monticello Browser by selecting a package and then pressing \button{Browse}.
+
+\SqVersionSwitch{6.1}{%
+	We will describe packages in more detail in \secref{packages_and_monticello}.
+}{% % http://lists.squeakfoundation.org/pipermail/squeak-dev/2022-September/222175.html
+	Note that the meaning of the term \ind{package} as used in the package pane browser is different from the concept of Monticello packages.
+	To browse all classes of a Monticello package, you can open a Snapshot Browser from the Monticello Browser by selecting a package and then pressing \button{Browse}.
+}
 
 %---------------------------------------------------------
 \subsection{Browsing programmatically}
@@ -589,7 +594,8 @@ The problem of understanding code is one of the greatest challenges of large-sca
 % section browser (end)
 
 %=========================================================
-\section{Monticello}
+\section{Packages and Monticello}
+\label{sec:packages_and_monticello}
 
 We gave you a quick overview of \ind{Monticello}, Squeak's packaging tool, in \secref{Monticello}.
 However, Monticello has many more features than were discussed there.
@@ -610,6 +616,8 @@ You have decided to call your framework \ct{SqueakLink}, and have created a seri
 \item The category \ct{'SqueakLink-Model'} contains \ct{DBTable}, \ct{DBRow}, \ct{DBQuery}
 \end{itemize}
 
+\subsubsection{Extension methods}
+
 However, not all of your code will reside in these classes.
 For example, you may also have a series of methods to convert objects into an SQL-friendly format:
 
@@ -620,27 +628,56 @@ Date>>>asSQL
 \end{code}
 
 \noindent
-These methods belong in \damien{don't we say 'belong to'?} the same package as the classes in the categories \ct{SqueakLink-Connections} and \ct{SqueakLink-Model}.
+These methods belong in the same package as the classes in the categories \ct{SqueakLink-Connections} and \ct{SqueakLink-Model}.
 But clearly the whole of class \ct{Object} does not belong in your package!
 So you need a way of putting certain \emph{methods} in a package, even though the rest of the class is in another package.
 \index{package!extension}
-\seeindex{extension package}{package, extension}
+\seeindex{extension method}{package, extension}
 
-The way that you do this is by placing those methods in a protocol (of \ct{Object}, \ct{String}, \ct{Date}, and so on) named \prot{*SqueakLink} (note the initial asterisk).
-The combination of the \scat{SqueakLink-...} categories and the \prot{*SqueakLink} protocols form a package named \ct{SqueakLink}.
+This is where the concept of \ind{extension methods} comes in.
+You can mark these converter methods as extension methods by placing them in a protocol (of \ct{Object}, \ct{String}, \ct{Date}, and so on) named \prot{*SqueakLink-Model-converting} (note the initial asterisk).
+As a result, the three methods are now being managed as part of the SqueakLink package.
+In general, any method in any protocol that starts with an asterisk, followed by a package name, followed by a hyphen, is an extension method to that package.
+
+\subsubsection{Override methods}
+
+Sometimes, you may also want to alter a method from another package that already exists and store the changed method in your package.
+For instance, this can be required if you need to extend an existing feature or fix a bug in the standard Squeak image.
+Let's say that you want to add a menu item to an inspector's context menu for opening its SQL version.
+Therefore, you have edited \ct{Inspector>>addObjectItemsTo:} and now would like to check it into your package repository.
+
+\index{package!extension!overriding}
+\seeindex{override method}{package, extension, overriding}
+
+While you could place it in a simple extension protocol as above, this would introduce some problems:
+First, the method would be displayed as missing in the original package, so the package would unintentionally become \emph{dirty} (\ie it would be considered containing changes that were not yet saved to any repository).
+Second, if you unloaded your own package again, the original method would be lost.
+
+A better way to do this is to mark the method as an \ind{overriding method} by placing it in a protocol named \prot{*SqueakLink-menu-override}.
+In general, an override protocol is an extension protocol that ends with the suffix \prot{-override}.
+Usually, it's a good idea to repeat the name of the original protocol in the override protocol name.
+
+However, beware that every change to an existing package might break other packages that depend on it.
+Thus, use override methods as seldom as possible.
+Often, there are better ways to extend the functionality of a package, such as subclassing or using explicit hooks.\footnote{Actually, there is an even better way to extend the menu in our example: Place a new (non-override) extension method named \ct{squeakLinkMenu:} in the \ct{Inspector} class and add the pragma \ct{<fieldListMenu>} to it.}
+
+\subsubsection{Surveying the contents of a package}
+
+The combination of the \scat{SqueakLink-...} categories and the \prot{*SqueakLink-...} protocols form a package named \ct{SqueakLink}.
 To be precise, the rules for what goes in a package are as follows.
 
 A package named \ct{Foo} contains:
 
-\begin{enumerate}		\label{sec:packageRules}
-	\item{} all class definitions of classes in the category \scat{Foo}, or in categories with names starting with \scat{Foo-},
+\begin{enumerate}\label{sec:packageRules}
+	\item{} all class definitions of classes in the category \scat{Foo}, or in categories with names starting with \scat{Foo-} (or \scat{foo-}, \scat{fOO}, \autc, as Monticello actually always ignores the case of the letters),
 	and
-	\item{} \label{env:extensions} all method definitions in any class in a protocol named \prot{*Foo} or whose name starts with \prot{*Foo-} (when performing this name comparison, the case of the letters in the names is actually ignored),
+	\item{} \label{env:extensions} all method definitions in any class in a protocol named \prot{*Foo} or whose name starts with \prot{*Foo-},
 	and
 	\item{} all methods in classes in the category \scat{Foo} or in a category whose name starts with \scat{Foo-}, \emph{except} for those methods in protocols whose names start with \prot{*}.
 \end{enumerate}
 \noindent
 A consequence of these rules is that each class definition and each method belongs to exactly one package.
+% ct: In fact, e.g., Kernel and Kernel-Exceptions and could be defined as overlapping packages. However, this is commonly not an intended usage of packages so we omit it for sake of simplicity here.
 The \emph{exception} in the last rule takes care of excluding methods that belong to other packages.
 
 The class \ct{PackageInfo} implements these rules, and one way to get a feel for them is to experiment with this class.
@@ -667,6 +704,27 @@ This includes, for example, \ct{Object>>>asDraggableMorph:} and \ct{Text>>>embed
 You can send \ct{fileOut} to an instance of \ct{PackageInfo} to get a change set of the entire package.
 For more sophisticated versioning of packages, we use Monticello.
 \index{file!filing out}
+
+\begin{ExecuteSmalltalkScript}
+	SBEScreenshotRecorder writeTo: './figures/browsePackageExtensions.png' building: [:helper | | window |
+	Browser open.
+	window := helper foregroundWindow.
+	helper
+		selectAnyListIn: window at: 'Morphic-Kernel' andScrollIntoViewBy: 1;
+		selectAnyListIn: window at: 'Morph' andScrollIntoViewBy: 1.
+	helper
+		click: window at: (window pointAtFraction: 1 / 4 * 2 / 3 @ 0) + (7 px @ 40 px) buttons: #(right);
+		mouseMoveTo: (helper menuItemMorphLabeled: 'browse package*' in: helper world) center buttons: #() in: helper world;
+		mouseMoveTo: (helper menuItemMorphLabeled: 'extensions' in: helper world) center buttons: #() in: helper world].
+\end{ExecuteSmalltalkScript}
+\begin{figure}
+	\includegraphics[width=\textwidth]{browsePackageExtensions.png}
+	\caption{Browsing all extension methods of the package \ct{Morphic}.}
+	\label{fig:browsePackageExtensions}
+\end{figure}
+
+If you do not feel like playing with the \ct{PackageInfo} class manually, you can also use the package pane browser introduced in \secref{otherBrowsers}.
+You can also browse all extension methods of a package by opening a yellow-button menu on any package or system category in the browser and selecting \ct{browse package extensions} (see \figref{browsePackageExtensions}).
 
 %---------------------------------------------------------
 \subsection{Basic Monticello}
@@ -1089,7 +1147,7 @@ To see the difference, we'll \emph{explore} the same object that we were just in
 \dothis{Select \menu{self} in the inspector's left-hand pane, and choose \menu{explore (I)} from the \ind{yellow button} menu.}
 The \ind{explorer} window looks like \figref{exploreTimeStampNow}.
 If you click on the small triangle next to \ct{root}, the view will change to \figref{exploreTimeStampNow2}, which shows the instance variables of the object that you are exploring.
-Click on the triangle next to \ct{localOffsetSeconds}, and you will see \emph{its} instance variables. (Actually, in this example \ct{hexadecimal}, \ct{octal} etc. are no instance variables of the Integer object, but rather different representations.)
+Click on the triangle next to \ct{localOffsetSeconds}, and you will see \emph{its} instance variables. (Actually, in this example, \ct{hexadecimal}, \ct{octal}, \etc are no instance variables of the Integer object, but rather different representations.)
 The explorer is really useful when you need to explore a complex hierarchic structure\,---\,hence the name.
 \index{keyboard shortcut!explore it}
 
