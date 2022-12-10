@@ -636,18 +636,20 @@ So you need a way of putting certain \emph{methods} in a package, even though th
 
 This is where the concept of \ind{extension methods} comes in.
 You can mark these converter methods as extension methods by placing them in a protocol (of \ct{Object}, \ct{String}, \ct{Date}, and so on) named \prot{*SqueakLink-Model-converting} (note the initial asterisk).
-% In general, any method in any protocol that starts with an asterisk, followed by a package name, followed by a hyphen, is an extension method to that package.
+As a result, the three methods are now being managed as part of the SqueakLink package.
+In general, any method in any protocol that starts with an asterisk, followed by a package name, followed by a hyphen, is an extension method to that package.
 
 \subsubsection{Override methods}
 
 Sometimes, you may also want to alter a method from another package that already exists and store the changed method in your package.
 For instance, this can be required if you need to extend an existing feature or fix a bug in the standard Squeak image.
-Let's say that you want to add a menu item to an inspector's context menu for opening its SQL version, so you have edited \ct{Inspector>>addObjectItemsTo:} and now would like to check it into your package repository.
+Let's say that you want to add a menu item to an inspector's context menu for opening its SQL version.
+ Therefore, you have edited \ct{Inspector>>addObjectItemsTo:} and now would like to check it into your package repository.
 \index{package!extension!overriding}
 \seeindex{override method}{package, extension, overriding}
 
 While you could place it in a simple extension protocol as above, this would introduce some problems:
-First, the method would be displayed as missing in the original package, so the package would unintentionally become dirty.
+First, the method would be displayed as missing in the original package, so the package would unintentionally become \emph{dirty} (\ie it would be considered containing changes that were not yet saved to any repository).
 Second, if you unloaded your own package again, the original method would be lost.
 
 A better way to do this is to mark the method as an \ind{overriding method} by placing it in a protocol named \prot{*SqueakLink-menu-override}.
@@ -656,7 +658,7 @@ Usually, it's a good idea to repeat the name of the original protocol in the ove
 
 However, beware that every change to an existing package might break other packages that depend on it.
 Thus, use override methods as seldom as possible.
-Often, there are better ways to extend the functionality of a package, such as subclassing or using explicit hooks.\footnote{Actually, there is a better way to extend the menu in our example: Place a new (non-override) extension method named \ct{squeakLinkMenu:} in the \ct{Inspector} class and add the pragma \ct{<fieldListMenu>} to it.}
+Often, there are better ways to extend the functionality of a package, such as subclassing or using explicit hooks.\footnote{Actually, there is an even better way to extend the menu in our example: Place a new (non-override) extension method named \ct{squeakLinkMenu:} in the \ct{Inspector} class and add the pragma \ct{<fieldListMenu>} to it.}
 
 \subsubsection{Surveying the contents of a package}
 
@@ -674,7 +676,7 @@ A package named \ct{Foo} contains:
 \end{enumerate}
 \noindent
 A consequence of these rules is that each class definition and each method belongs to exactly one package.
-% ct: This is NOT true if you define multiple packages that overlap each other, e.g., Kernel and Kernel-Exceptions! Should we mention that?
+% ct: In fact, e.g., Kernel and Kernel-Exceptions and could be defined as overlapping packages. However, this is commonly not an intended usage of packages so we omit it for sake of simplicity here.
 The \emph{exception} in the last rule takes care of excluding methods that belong to other packages.
 
 The class \ct{PackageInfo} implements these rules, and one way to get a feel for them is to experiment with this class.
