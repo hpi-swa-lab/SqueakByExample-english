@@ -32,7 +32,7 @@ else
 endif
 
 # --------------------------------------------------------------------------------
-all : book
+all : complete
 
 # NB: be sure to use texlive and to set the TEXINPUTS variable accordingly
 # See README.md
@@ -58,7 +58,7 @@ index :
 	${MAKEINDEX} ${BOOK}
 
 complete : book index
-	time ${PDFLATEX} ${BOOK}
+	time ${PDFLATEX} '${TEXINPUT}'
 
 etc :
 	time ${PDFLATEX} ${ETC}

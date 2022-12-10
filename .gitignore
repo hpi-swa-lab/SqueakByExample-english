@@ -14,13 +14,15 @@ SBE*.pdf
 *.toc
 *.url
 
-*.changes
-*.image
 ListingSources/
 warnings.txt
 bin/gdrive
 **/figures/*.png
 
+# Squeak
+*.changes
+*.image
+SqueakDebug.log
+
 # Editors
 .vscode/
-SqueakDebug.log
