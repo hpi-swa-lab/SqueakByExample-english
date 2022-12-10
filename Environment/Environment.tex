@@ -1608,11 +1608,11 @@ This can quickly become overwhelming.
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/methodNamesRandom.png' building: [:helper |
 	| methodList |
-	(MessageNames methodBrowserSearchingFor: 'random') openInWorld.
+	(MessageNames methodBrowserSearchingFor: '*random*point*') openInWorld.
 	helper scaleWindow: helper foregroundWindow.
 	helper
-		selectAnyListIn: helper foregroundWindow at: 'atRandom:';
-		selectAnyListIn: helper foregroundWindow at: 'Integer*'.
+		selectAnyListIn: helper foregroundWindow at: 'randomPoint:';
+		selectAnyListIn: helper foregroundWindow at: 'Rectangle*'.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
@@ -1628,13 +1628,14 @@ SBEScreenshotRecorder writeTo: './figures/methodNamesRandom.png' building: [:hel
 \index{message names browser}
 The \emph{message names} browser has more limited search functionality:
 You type a fragment of a message selector in the search box, and the browser lists all methods that contain that fragment in their names, as shown in \figref{methodNamesRandom}.
+Instead of the fragment, you can also specify a search term with wildcards (\ct{*} for zero or more characters, and \ct{#} for exactly one character).
 However, it is a full-fledged browser:
 If you select one of the names in the left pane, all of the methods with that name are listed in the right pane and can be browsed in the bottom pane.
 As with the class browser, the message names browser has a button bar that can be used to open other  browsers on the selected method or its class.
 
 \index{global method search}
 The \emph{search bar} in the top right corner allows you to quickly access any method in the system.
-You can either directly enter the full selector of the method, which will open a class browser, or enter a search term including wildcards represented by ``*'', which will open a message names browser.
+You can either directly enter the full selector of the method, which will open a class browser, or enter a search term including wildcards, which will open a message names browser.
 You can also use the search bar to search for classes also using wildcards.
 As this search bar allows you to quickly jump to methods, it is also accessible via the keyboard shortcut \short{0}.
 
