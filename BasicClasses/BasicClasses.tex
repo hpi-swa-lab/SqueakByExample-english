@@ -385,6 +385,7 @@ Form>>>postCopy
 %-----------------------------------------------------------------
 \subsection{Debugging}
 
+\seeindex{breakpoint}{Object, \ct{halt}}
 The most important method here is \mthind{Object}{halt}.
 In order to set a breakpoint in a method, simply insert the message send \ct{self halt} at some point in the body of the method.
 When this message is sent, execution will be interrupted and a \ind{debugger} will open to this point in your program.
