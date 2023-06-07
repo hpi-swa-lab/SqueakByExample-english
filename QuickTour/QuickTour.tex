@@ -574,27 +574,29 @@ As we shall see, there are several interesting browsers available for \sq, but t
 SBEScreenshotRecorder writeTo: './figures/ClassBrowser2.png' frame: #morphs building: [:helper |
 	| class selector window codePane |
 	class := Object. selector := #printString.
-	Browser fullOnClass: class selector: selector.
+	ToolSet browse: class selector: selector.
 	window := helper foregroundWindow.
 	helper displayForegroundWindowFocused.
 
 	Dictionary new
-		at: class category put: 'System categories';
-		at: ('\s*' , class) asRegex put: 'Classes';
-		at: (class whichCategoryIncludesSelector: selector) put: 'Protocols';
-		at: selector put: 'Methods';
-		keysAndValuesDo: [:item :description |
-			(NewBalloonMorph string: description for: (helper listMorphIncludingMatch: item in: window))
+		at: #systemCategoryList put: 'System categories';
+		at: #classList put: 'Classes';
+		at: #messageCategoryList put: 'Protocols';
+		at: #messageList put: 'Methods';
+		keysAndValuesDo: [:name :description |
+			(NewBalloonMorph string: description for: (helper morphByExternalName: name in: window))
 				popUp].
 	codePane := helper codePaneOfBrowser: window.
-	(NewBalloonMorph string: 'name of method' for: codePane)
-			popUpAt: codePane topLeft + (10 @ 5).
+	(SBEBalloonMorph string: 'name of method' for: codePane)
+			popUpAt: codePane topLeft + (80 @ 10)
+			orientation: #topLeft.
 	(SBEBalloonMorph string: 'method comment' for: codePane)
-			popUpTaillessAt: (codePane bounds pointAtFraction: 0.93 @ 0.12).
+			popUpAt: (codePane bounds pointAtFraction: 0.7 @ 0.2).
 	(SBEBalloonMorph
 		string: ('code of method\"{1}"' withCRs format: {selector})
 		for: codePane)
-			popUpTaillessAt: (codePane bounds pointAtFraction: 1 / 3 @ (1 / 2)).
+			popUpAt: (codePane bounds pointAtFraction: 0.38 @ 0.4)
+			orientation: #topLeft.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
@@ -649,8 +651,8 @@ There is also a \ind{keyboard shortcut} \short{b} (browse) that you can use in a
 \dothis{Use the keyboard shortcut to browse the class \ct{Boolean}.}
 
 \begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder writeTo: './figures/Kernel-objects-boolean.png' frame: #morphs building: [:helper | | workspace |
-  Browser fullOnClass: Boolean
+SBEScreenshotRecorder writeTo: './figures/Kernel-objects-boolean.png' frame: #morphs building: [:helper |
+	ToolSet browseClass:  Boolean
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[hbt]
@@ -681,12 +683,10 @@ This will open a hierarchy browser showing the superclasses and subclasses of \c
 % (\figref{booleanhierarchybrowser}).
 
 \begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder writeTo: './figures/BooleanHierarchyBrowser.png' frame: [:morphsRect | morphsRect] building: [:helper | | browser browserMorph splitter |
-	browser := HierarchyBrowser new.
-	browser setClass: Boolean.
-	browser buildDefaultBrowserWith: ToolBuilder default.
-	browserMorph := ToolBuilder open: browser.
-	splitter := browserMorph allMorphs detect: [:m |
+SBEScreenshotRecorder writeTo: './figures/BooleanHierarchyBrowser.png' frame: [:morphsRect | morphsRect] building: [:helper |
+	| splitter |
+	ToolSet browseHierarchy: Boolean selector: nil.
+	splitter := helper foregroundWindow allMorphs detect: [:m |
 		(m isKindOf: ProportionalSplitterMorph) and: [m splitsTopAndBottom]].
 	splitter repositionBy: 0 @ 60.
 	helper closeBalloons.
@@ -706,29 +706,21 @@ Choose one, say, \ct{Time}, and the browser will show it.
 \index{keyboard shortcut!find ...}
 
 \begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder writeTo: './figures/FindIt.png' frame: #morphs building: [:helper | | browser |
-  browser := ToolBuilder open: Browser.
-  browser position: 0 @ 0.
+SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
+	| browser systemCategoryList |
+	SystemBrowser defaultOpenBrowser.
+	browser := helper foregroundWindow.
+	browser position: 0 @ 0.
 
-  helper
-    runModal: [helper keyStroke: browser submorphs sixth key: $f modifiers: #(cmd)]
-    then: [helper dialogWindow position: 60 asPoint]
-]
-\end{ExecuteSmalltalkScript}
-
-\begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder writeTo: './figures/TimeClasses.png' frame: #morphs building: [:helper | | browser |
-  browser := ToolBuilder open: Browser.
-  browser position: 0 @ 0.
-
-  helper
-    runModal: [helper keyStroke: browser submorphs sixth key: $f modifiers: #(cmd)]
-    then: [
-      helper dialogWindow position: 60 asPoint.
-      helper type: 'time' into: (helper morphByExternalName: 'searchText' in: helper world).
-      helper closeBalloons.
-    ].
-
+	systemCategoryList := helper morphByExternalName: #systemCategoryList in: helper foregroundWindow.
+	helper
+		runModal: [helper keyStroke: systemCategoryList key: $f modifiers: #(cmd)]
+		then: [
+			helper dialogWindow position: 60 asPoint.
+			picture writeTo: 'FindIt.png' building: [].
+			picture writeTo: 'TimeClasses.png' building: [
+				helper type: 'time' into: (helper morphByExternalName: 'searchText' in: helper world).
+				helper closeBalloons]].
 ]
 \end{ExecuteSmalltalkScript}
 
@@ -861,7 +853,7 @@ In this case, the \ct{shout} method that we are testing will go in class \clsind
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/StringTest-newMethodTemplate.png' frame: #morphs building: [:helper |
-	Browser fullOnClass: StringTest category: #'tests - converting'.
+	ToolSet browseClass: StringTest category: #'tests - converting'.
 	(helper codePaneOfBrowser: helper foregroundWindow) setSelection: (1 to: 0).
 ]
 \end{ExecuteSmalltalkScript}
@@ -890,7 +882,7 @@ This can be quite useful if you have merely made a typing mistake, but in this c
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/testShoutConfirm.png' frame: #morphs building: [:helper | | textField |
-	Browser fullOnClass: StringTest category: #'tests - converting'.
+	ToolSet browseClass: StringTest category: #'tests - converting'.
 	textField := helper codePaneOfBrowser: helper foregroundWindow.
 	helper click: textField.
 	helper keyStroke: textField key: $a modifiers: #(cmd).
@@ -899,7 +891,7 @@ SBEScreenshotRecorder writeTo: './figures/testShoutConfirm.png' frame: #morphs b
 			helper
 				type: 'testShout\\	self assert: ''DON''''T PANIC!'' equals: ''Don''''t panic'' shout' withCRs into: textField;
 				keyStroke: textField key: $s modifiers: #(cmd)]]
-		then: [helper dialogWindow position: 500 @ 40].
+		then: [helper dialogWindow position: 525 @ 40].
 ]
 \end{ExecuteSmalltalkScript}
 
