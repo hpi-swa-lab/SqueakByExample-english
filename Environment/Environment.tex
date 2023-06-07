@@ -865,8 +865,7 @@ You can of course save the new version to the repository too; once you \button{R
 
 \begin{ExecuteSmalltalkScript}
 "SBEMonticelloSeries"
-SBEScreenshotRecorder writeInto: './figures' record
- [:picture :helper |
+SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 	thisContext wrap: [:block | helper mcIgnoreAllModificationsBut: #('SBE') during: block].
 	helper hideProgressMorph.
 
