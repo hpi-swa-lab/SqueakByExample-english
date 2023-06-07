@@ -717,7 +717,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 		runModal: [helper keyStroke: systemCategoryList key: $f modifiers: #(cmd)]
 		then: [
 			helper dialogWindow position: 60 asPoint.
-			picture writeTo: 'FindIt.png' building: [].
+			picture writeTo: 'FindIt.png'.
 			picture writeTo: 'TimeClasses.png' building: [
 				helper type: 'time' into: (helper morphByExternalName: 'searchText' in: helper world).
 				helper closeBalloons]].
