@@ -526,12 +526,16 @@ It's basically the same as the class browser, but it knows about the naming conv
 You will have noticed that the names of categories have two parts.
 For example, the \ct{ScaleMorph} class belongs to the \scat{Morphic-Widgets} category.
 \label{sec:package-names}
-The package browser assumes that the part before the hyphen, \ct{Morphic} is the name of a ``package'', and adds a fifth pane that allows you to browse only those categories in a particular package.
+The package browser assumes that the part before the hyphen, \ct{Morphic}, is the name of a ``package'', and adds a fifth pane that allows you to browse only those categories in a particular package.
 However, if you select no package at all, then all the categories are available, just as with the ordinary four-pane browser.
+You can also open a package pane browser from a regular browser by yellow-clicking any system category on the left and choosing \menu{browse package}.
 
-Note that the meaning of the term \ind{package} as used in the package pane browser is different from the concept of Monticello
-packages.
-To browse all classes of a Monticello package, you can open a Snapshot Browser from the Monticello Browser (see \secref{MonticelloVCS}) by selecting a package and then pressing \button{Browse}.
+\SqVersionSwitch{6.1}{%
+	We will describe packages in more detail in \secref{packages_and_monticello}.
+}{% % http://lists.squeakfoundation.org/pipermail/squeak-dev/2022-September/222175.html
+	Note that the meaning of the term \ind{package} as used in the package pane browser is different from the concept of Monticello packages.
+	To browse all classes of a Monticello package, you can open a Snapshot Browser from the Monticello Browser by selecting a package and then pressing \button{Browse}.
+}
 
 %---------------------------------------------------------
 \subsection{Browsing programmatically}

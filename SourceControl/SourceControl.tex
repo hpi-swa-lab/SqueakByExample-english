@@ -155,6 +155,27 @@ You can send \ct{fileOut} to an instance of \ct{PackageInfo} to get a change set
 For more sophisticated versioning of packages, we use Monticello.
 \index{file!filing out}
 
+\begin{ExecuteSmalltalkScript}
+	SBEScreenshotRecorder writeTo: './figures/browsePackageExtensions.png' building: [:helper | | window |
+	Browser open.
+	window := helper foregroundWindow.
+	helper
+		selectAnyListIn: window at: 'Morphic-Kernel' andScrollIntoViewBy: 1;
+		selectAnyListIn: window at: 'Morph' andScrollIntoViewBy: 1.
+	helper
+		click: window at: (window pointAtFraction: 1 / 4 * 2 / 3 @ 0) + (7 px @ 40 px) buttons: #(right);
+		mouseMoveTo: (helper menuItemMorphLabeled: 'browse package*' in: helper world) center buttons: #() in: helper world;
+		mouseMoveTo: (helper menuItemMorphLabeled: 'extensions' in: helper world) center buttons: #() in: helper world].
+\end{ExecuteSmalltalkScript}
+\begin{figure}
+	\includegraphics[width=\textwidth]{figures/browsePackageExtensions.png}
+	\caption{Browsing all extension methods of the package \ct{Morphic}.}
+	\label{fig:browsePackageExtensions}
+\end{figure}
+
+If you do not feel like playing with the \ct{PackageInfo} class manually, you can also use the package pane browser introduced in \secref{otherBrowsers}.
+You can also browse all extension methods of a package by opening a yellow-button menu on any package or system category in the browser and selecting \ct{browse package extensions} (see \figref{browsePackageExtensions}).
+
 %---------------------------------------------------------
 \subsection{Basic Monticello}
 
