@@ -158,16 +158,21 @@ For more sophisticated versioning of packages, we use Monticello.
 \index{file!filing out}
 
 \begin{ExecuteSmalltalkScript}
-	SBEScreenshotRecorder writeTo: './figures/browsePackageExtensions.png' building: [:helper | | window |
-	Browser open.
+SBEScreenshotRecorder writeTo: './figures/browsePackageExtensions.png' building: [:helper |
+	| browser window |
+	browser := SystemBrowser defaultOpenBrowser.
 	window := helper foregroundWindow.
-	helper
-		selectAnyListIn: window at: 'Morphic-Kernel' andScrollIntoViewBy: 1;
-		selectAnyListIn: window at: 'Morph' andScrollIntoViewBy: 1.
+	browser class name = #TreeBrowser
+		ifTrue: [ ">= Squeak 6.1"
+			helper selectAnyListOrTreeIn: window at: (browser systemCategoryLabel: #Morphic) andScrollIntoViewBy: 9]
+		ifFalse:
+			[helper selectAnyListIn: window at: 'Morphic-Kernel' andScrollIntoViewBy: 9].
+	"helper selectAnyListOrTreeIn: window at: 'Morph' andScrollIntoViewBy: 1." "too much visual clutter"
 	helper
 		click: window at: (window pointAtFraction: 1 / 4 * 2 / 3 @ 0) + (7 px @ 40 px) buttons: #(right);
 		mouseMoveTo: (helper menuItemMorphLabeled: 'browse package*' in: helper world) center buttons: #() in: helper world;
-		mouseMoveTo: (helper menuItemMorphLabeled: 'extensions' in: helper world) center buttons: #() in: helper world].
+		mouseMoveTo: (helper menuItemMorphLabeled: 'extensions' in: helper world) center buttons: #() in: helper world
+].
 \end{ExecuteSmalltalkScript}
 \begin{figure}
 	\includegraphics[width=\textwidth]{browsePackageExtensions.png}

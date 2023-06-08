@@ -92,7 +92,7 @@ We will take a look at the standard \ind{system browser} first since the others 
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/SystemBrowser0.png' frame: #morphs building: [:helper |
-	Browser open.
+	SystemBrowser defaultOpenBrowser.
 	helper scaleWindow: helper foregroundWindow.
 ]
 \end{ExecuteSmalltalkScript}
@@ -111,7 +111,7 @@ The leftmost pane lists \emph{categories} of classes; select one (say \scat{Kern
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/SystemBrowser1.png' frame: #morphs building: [:helper |
-	Browser fullOnClass: Model.
+	ToolSet browseClass: Model.
 	helper scaleWindow: helper foregroundWindow.
 ]
 \end{ExecuteSmalltalkScript}
@@ -134,7 +134,7 @@ If you select the class \menu{Model}, the protocol \protind{dependents}, and the
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/SystemBrowserMyDependents.png' frame: #morphs building: [:helper |
-	Browser fullOnClass: Model selector: #myDependents.
+	ToolSet browse: Model selector: #myDependents.
 	helper scaleWindow: helper foregroundWindow.
 ]
 \end{ExecuteSmalltalkScript}
@@ -161,7 +161,7 @@ Enter the name of the new thing in the dialog, and you are done: there is nothin
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/SystemBrowserClassCreation.png' frame: #morphs building: [:helper |
-	Browser fullOnCategory: 'Kernel-Objects'.
+	ToolSet browseCategory: 'Kernel-Objects'.
 	helper scaleWindow: helper foregroundWindow.
 ]
 \end{ExecuteSmalltalkScript}
@@ -201,7 +201,7 @@ The browser will display a method-creation template, as shown in \figref{SystemB
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/SystemBrowserMethodTemplate.png' frame: #morphs building: [:helper |
-	Browser fullOnClass: Model category: #'morphic ui'.
+	ToolSet browseClass: Model category: #'morphic ui'.
 	helper scaleWindow: helper foregroundWindow.
 	helper focus: (helper codePaneOfBrowser: helper foregroundWindow).
 ]
@@ -736,7 +736,7 @@ Open the root object (by clicking in its triangle), open its \ct{submorphs}, and
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/explorePluggableListMorph.png' building: [:helper |
 	| lists tree |
-	Browser open.
+	SystemBrowser defaultOpenBrowser.
 	lists := (helper foregroundWindow submorphsSatisfying: #isPluggableListMorph)
 		collect: [:list | list center x -> list] as: Dictionary.
 	(lists at: lists keys max) explore.
