@@ -585,7 +585,7 @@ SBEScreenshotRecorder writeTo: './figures/installNewChangeSet.png' building: [:h
 	helper
 		runModal: [
 			helper world
-				dropFiles: {FileStream readOnlyFileNamed: './SourceControl/figures/her cool change set.1.cs'}
+				dropFiles: {FileStream readOnlyFileNamed: (helper resourceDirectory resolve: './SourceControl/figures/her cool change set.1.cs') fullName}
 				event: (helper generateMouseEvent: #mouseEnter at: helper world center buttons: #() start: helper world center)]
 		then: [helper select: helper dialogWindow at: 'install into new change set']]
 \end{ExecuteSmalltalkScript}
