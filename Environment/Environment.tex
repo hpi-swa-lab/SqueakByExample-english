@@ -1088,27 +1088,7 @@ self assert: ''txt'' equals: ''readme.txt'' suffix'
 	\label{fig:fixOffByOne}
 \end{figure}
 
-There are a few other ways to get into the debugger in addition to catching errors and assertion failures.
-If you execute code that goes into an infinite loop, you can interrupt it and open a debugger on the computation by typing \short{.} (that's a full stop or a period, depending on where you learned English).
-You can also just edit the suspect code to insert \ct{self halt}.
-So, for example, we might edit the \ct{suffix} method to read as follows:
-\index{process!interrupting}
-
-\needspace{11ex}
-\begin{method}[suffix]{Inserting a \ct{halt} into the \ct{suffix} method.}
-suffix
-	"assumes that I'm a file name, and answers my suffix, the part after the last dot"
-
-	| dot dotPosition |
-	dot := FileDirectory dot asCharacter.
-	dotPosition := (self size to: 1 by: -1) detect: [:i | (self at: i) = dot].
-	self halt.
-	^ self copyFrom: dotPosition to: self size
-\end{method}
-
-When we run this method, the execution of the \ct{self halt} will bring up the \ind{pre-debugger}, from where we can proceed, or go into the debugger and look at variables, step the computation, and edit the code.
-
-That's all there is to the debugger, but it's not all there is to the \ct{suffix} method.
+That's all there is to our initial test, but it's not all there is to the \ct{suffix} method.
 The initial bug should have made you realize that if there is no dot in the target string, the \ct{suffix} method will raise an error.
 This isn't the behavior that we want, so let's add a second test to specify what should happen in this case.
 
@@ -1127,10 +1107,40 @@ The easiest and clearest way to do this is to replace the \ct{detect:} message b
 
 We will learn more about SUnit in \charef{SUnit}.
 
+\subsection{Ways into the Debugger}
+
+There are a few other ways to get into the debugger in addition to catching errors and assertion failures.
+First of all, you can interrupt processes and open them in the debugger interactively.
+If you execute code that goes into an infinite loop, you can interrupt it and open a debugger on the computation by typing \short{.} (that's a full stop or a period, depending on where you learned English).
+You can also open a debugger on almost all running processes (see \secref{process-browser}). To do so, open the process browser and in the yellow button menu of a process, you can select to \menu{debug} it.
+
+When you open a debugger on a computation interactively, you suspend the computation wherever it is at that moment.
+Sometimes, you want to specify exactly at what point in the code you want to open a debugger.
+Therefore, you edit the suspect code and insert \ct{self halt} at the point at which you want to open a debugger.
+So, for example, we might edit the \ct{suffix} method to read as follows:
+\index{process!interrupting}
+
+\needspace{11ex}
+\begin{method}[suffix]{Inserting a \ct{halt} into the \ct{suffix} method.}
+suffix
+	"assumes that I'm a file name, and answers my suffix, the part after the last dot"
+
+	| dot dotPosition |
+	dot := FileDirectory dot asCharacter.
+	dotPosition := (self size to: 1 by: -1) detect: [:i | (self at: i) = dot].
+	self halt.
+	^ self copyFrom: dotPosition to: self size
+\end{method}
+
+When we run this method, the execution of the \ct{self halt} will bring up the \ind{pre-debugger}, from where we can proceed, or go into the debugger and look at variables, step the computation, and edit the code.
+
+
+
 % section debugger (end)
 
 %=========================================================
 \section{The process browser}
+\label{process-browser}
 
 \st is a multi-threaded system: there are many lightweight processes (also known as threads) running concurrently in your image.
 The \sq virtual machine implements concurrency by time-slicing.
