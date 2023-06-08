@@ -52,7 +52,7 @@ Even before the first public release of Smalltalk in 1983, Smalltalk had a self-
 Let's start by looking at the main tools in \Squeak, all of which can be opened through the \emph{Tools} menu in the world docking bar at the top of the screen. Some of the tools can also be opened directly from the world menu.
 
 \begin{itemize}
-	\item {The \menu{Browser}} is the central development tool.
+	\item {The \menu{Browser}} is a central development tool.
 		You will use it to create, define, and organize your classes and methods.
 		Using it you can also navigate through all the library classes:
 		Unlike other environments where the source code is stored in separate files, in Smalltalk, all classes and methods are contained in the image.
@@ -174,8 +174,8 @@ SBEScreenshotRecorder writeTo: './figures/SystemBrowserClassCreation.png' frame:
    \label{fig:SystemBrowserClassCreation}}
 \end{figure}
 
-Finally, you can influence what kind of information you want to see about a class, through the three buttons below the second pane.
-By default, the \button{instance} view is selected, that shows you the ordinary methods provided by the class.
+Finally, you can influence what kind of information you want to see about a class through the three buttons below the second pane.
+By default, the \button{instance} view is selected that shows you the ordinary methods provided by the class.
 The \button{class} button changes the view to show the methods understood by the class itself (for more details see \charef{SqueakModel} and \charef{metaclasses}).
 The \button{?} button changes the view to show the class comment of the class in the bottom pane, where you can edit and save it as you would with a method.
 
@@ -221,7 +221,7 @@ SBEScreenshotRecorder writeTo: './figures/SystemBrowserMethodTemplate.png' frame
 
 The system browser provides several tools for exploring and analyzing code.
 Those tools are most simply accessed from the horizontal \subind{system browser}{button bar} in the middle of the browser window.
-The buttons are labeled \button{browse}, \button{senders}, \button{implementors}\ldots{}\ %
+The buttons are labeled \button{browse}, \button{senders}, \button{implementors}, \ldots{}\ %
 \figref{SystemBrowserMethodTemplate} shows the complete set.
 
 \subsubsection{Browsing code}
@@ -278,7 +278,7 @@ While viewing any one of these methods, try browsing the senders of the \ct{draw
 We found 72 methods that send this message.
 You can also bring up an implementors browser at any time by selecting a message (including the arguments if it is a keyword message) and typing \short{m}.
 
-The \menu{senders} button lists \emph{all} methods that send the chosen message: not all of these sends will necessarily result in the execution of the method you are currently looking at..
+The \menu{senders} button lists \emph{all} methods that send the chosen message: not all of these sends will necessarily result in the execution of the method you are currently looking at.
 Indeed, much of the power of object-oriented programming comes from the fact that every message send is potentially \emph{polymorphic}, that is, it can work equally well on objects of any class.  Sometimes it is easy to figure out which method will be executed as result of a particular message send, and sometimes it is impossible; the senders and implementors tools don't try.
 
 \begin{ExecuteSmalltalkScript}
@@ -302,7 +302,7 @@ SBEScreenshotRecorder writeTo: './figures/CanvasDraw.png' frame: #morphs buildin
 
 As an example, we can look at the method \ct{Canvas>>>draw}, shown in \figref{CanvasDraw}.
 You can see that this method sends \ct{drawOn:} to whatever object is passed to it as an argument, which could potentially be an instance of any class at all.
-In general, there is no simple way for the browser to know which message sends might cause which methods to be executed\footnote{dataflow analysis can generally help figure out the class of the receiver of some messages, but it is not applied in the Smalltalk tools}.
+In general, there is no simple way for the browser to know which message sends might cause which methods to be executed\footnote{Dataflow analysis can generally help figure out the class of the receiver of some messages, but it is not applied in the Smalltalk tools}.
 For this reason,  the ``senders'' browser shows exactly what its name suggests: all of the senders of the message with the chosen selector.
 The \button{senders} button is nevertheless extremely useful when you need to understand how you can \emph{use} a method: it lets you navigate quickly through example uses.
 Since all of the methods with the same selector ought to be used in the same way, all of the uses of a given message ought to be similar.
@@ -372,8 +372,8 @@ Smalltalkers rate code readability extremely highly.
 
 \hint{What if you delete a method entirely, and then decide that you want it back?
 	You can find the deletion in a change set, where you can ask to see versions with the \ind{yellow button} menu.
-	The change set browser is described in \secref{vc:changeSet}.
-	If you do not have a change set for the method, you can also browse your changes log using the \ind{Recover changes} dialog from the Extras menu in the main docking bar, see \secref{cantLoseCode}.}
+	The change set browser is described in \secref{sc:changeSet}.
+	If you do not have a change set for the method, you can also browse your changes log using the \ind{Recover changes} or the \ind{Recover method versions} dialog from the \menu{Extras} menu in the main docking bar, see \secref{cantLoseCode}.}
 
 \subsubsection{Method overridings}
 \label{sec:overriding}
@@ -434,6 +434,10 @@ The hierarchy browser is designed to make it easy to navigate through the inheri
 In \figref{hierarchyBrowser}, the hierarchy browser reveals that the direct superclass of \clsind{ScaleMorph} is \clsind{RectangleMorph}.
 \index{system browser!hierarchy button}
 
+\SqVersionSwitch{6.1}{
+	\hint{Double-click on a class name in the hierarchy browser to add all of its subclasses to the class list.}
+}{}
+
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/hierarchyBrowser.png' frame: #morphs building: [:helper |
 	ScaleMorph browseHierarchy.
@@ -453,9 +457,9 @@ SBEScreenshotRecorder writeTo: './figures/hierarchyBrowser.png' frame: #morphs b
 \subsubsection{Finding variable or class references}
 \label{sec:variables}
 
-\index{system browser!vars button}
+\index{system browser!variables button}
 \index{system browser!references}
-The \button{vars} button helps you find where an instance variable or a class variable is used; the same information is accessible from the \ind{yellow button} menu item \menu{references} in the class pane.
+The \button{variables} button helps you find where an instance variable or a class variable is used; the same information is accessible from the \ind{yellow button} menu item \menu{references} in the class pane.
 The menu also includes \menu{assignments}, which shows the subset of the instance variable references that assign to the variable.
 Once you click on the button or select the menu item, you will be presented with a dialog that invites you to choose a variable from all of the variables defined in the current class, and all of the variables that it inherits.
 The list is in inheritance order; it can often be useful to bring up this list just to remind yourself of the name of an instance variable.
@@ -494,12 +498,12 @@ Although this may seem obvious, it can be a source of confusion for beginners.
 \index{file!filing out}
 
 Possibly the most useful menu item for navigating is \menu{find class\ldots (f)} in the category pane.
-Although the categories are useful for the code that we are actively developing, most of us do not know the categorization of the whole system, and it is much faster to type \short{f} followed by the first few characters of the name of a class than to guess which category it might be in.
-\menu{recent classes\ldots (r)} can also help you quickly go back to a class that you have browsed recently, even if you have forgotten its name.
+Although the categories are useful for the code that we are actively developing, most of us do not know the categorization of the whole system, and it is much faster to type \short{f} followed by a few subsequent characters from the name of a class than to guess which category it might be in.
+The find dialog also shows the classes that you have browsed recently, even if you have forgotten its name.
 \index{class!finding}
 \index{class!recent}
 
-In the class pane, there are two menu items usefule for browsing a particular method: \menu{find method} and \menu{find method wildcard\ldots}.
+In the class pane, \menu{find method} is a similar menu item for browsing a particular method.
 However, unless the list of methods is very long, it is often quicker to browse the \prot{-{}-all-{}-} protocol (which is the default), place the mouse in the method pane, and type the first letter of the name of the method that you are looking for.
 This will filter the elements in the list so that the sought-for method name is visible.
 \index{method!finding}
@@ -855,7 +859,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 	\label{fig:PreDebugWindow}
 \end{figure}
 
-The \ct{PreDebugWindow} has a title-bar that tells us what error occurred, and shows us a \emphind{stack trace} of the messages that led up to the error.
+The \ct{PreDebugWindow} has a title bar that tells us what error occurred, and shows us a \emphind{stack trace} of the messages that led up to the error.
 Starting from the bottom of the trace, \ct{UndefinedObject>>>DoIt} represents the code that was compiled and run when we selected \ct{'readme.txt' suffix} in the workspace and asked \sq to \menu{print it}.
 This code, of course, sent the message \ct{suffix} to a \clsind{ByteString} object (\ct{'readme.txt'}).
 This caused the inherited \ct{suffix} method in class \ct{String} to execute; all this information is encoded in the next line of the stack trace, \ct{ByteString(String)>>>suffix}.
@@ -878,7 +882,7 @@ To find out \emph{why} the dot was not found, we need the debugger itself, so cl
 	If you do this, the debugger will open already focussed on the corresponding method.}
 
 The debugger is shown in \figref{debuggerDetect}; it looks intimidating at first, but it is quite easy to use.
-The title-bar and the top pane are very similar to those that we saw in the \lct{PreDebugWindow}.
+The title bar and the top pane are very similar to those that we saw in the \lct{PreDebugWindow}.
 However, the debugger combines the stack trace with a method browser, so when you select a line in the stack trace, the corresponding method is shown in the pane below.
 It's important to realize that the execution that caused the error is still in your image, but in a suspended state.
 Each line of the stack trace represents a frame on the execution stack that contains all of the information necessary to continue the execution.
@@ -890,8 +894,8 @@ The method body is displayed in the center pane; the blue highlight in the sourc
 The four panes at the bottom of the debugger are really two mini-inspectors (without workspace panes).
 The inspector on the left shows the current object, that is, the object named \self in the center pane.
 As you select different stack frames, the identity of \self may change, and so will the contents of the \self{}-inspector.
-If you click on \self in the bottom-left pane, you will see that \self is the interval \ct{(10 to: 1 by -1)}, which is what we expect.
-The workspace panes are not needed in the debugger's mini-inspectors because all of the variables are also in scope in the method pane; you should feel free to type or select expressions in this pane and evaluate them.
+If you click on \self in the bottom-left pane, you will see that \self is the interval \ct{(10 to: 1 by: -1)}, which is what we expect.
+The workspace panes are not needed in the debugger's mini-inspectors because all of the variables are also in scope in their value panes and in the method pane; you should feel free to type or select expressions in this pane and evaluate them.
 You can always \menu{cancel (l)} your changes using the menu or \short{\textit{l}}.
 % apb: that lower-case-L is in italics so that it doesn't look like a 1 or a |
 \index{keyboard shortcut!cancel}
@@ -1111,7 +1115,7 @@ This isn't the behavior that we want, so let's add a second test to specify what
 \begin{method}[testNoSuffix]{A second test for the \ct{suffix} method: the target has no suffix.}
 testSuffixNotFound
 
-	self assert: 'readme' suffix = ''.
+	self assert: '' equals: 'readme' suffix.
 \end{method}
 
 \needlines{2}
@@ -1223,10 +1227,10 @@ Whenever you use a class in a method, the method then depends on the presence of
 If the class is not in the environment, running the method will result in an exception, as \sq does not know who should receive the message.
 This is relevant, for example, whenever you use a class that is not part of the base system but stems from a project you installed.
 Using the \ind{dependency browser} you can see the dependencies of your package.
-You can open the dependency browser through \menu{world main docking bar~\go{} Apps~\go{} Dependency Browser}.
+You can open the dependency browser through \menu{world main docking bar~\go{} Apps~\go{} Dependency Browser} or from the context menu of a system category in a browser.
 
 \paragraph{Lexicon}
-Objects understand all messages for which their class or their super classes have methods.
+Objects understand all messages for which their class or their superclasses have methods.
 The system browser introduced earlier can only show you the methods of one class.
 If you want to know all the methods an instance of a class understands you can open the \ind{lexicon}.
 You can get the lexicon from the system browser by opening the yellow button menu for the class and selecting \menu{browse protocol (p)}.

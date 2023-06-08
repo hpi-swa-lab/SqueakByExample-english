@@ -26,13 +26,13 @@
 \renewcommand{\nnbb}[2]{} % Disable editorial comments
 \fi
 %=================================================================
-\chapter{Tools for sharing and storing source code}
+\chapter{Tools for storing and sharing source code}
 \label{cha:VersionControl}
 
 The consequence of programming in a world of live objects rather than with files and a text editor is that you have to do something explicit to export your program from your Smalltalk image.
 The old way of doing this, also supported by all Smalltalk dialects, is by creating a \emph{fileout} or a \emph{change set}, which are essentially encoded text files that can be imported into another system.
-The new way of doing this in \Squeak is to upload your code to a versioned repository on a server.
-This is done using a tool called \ind{Monticello}, and is a much more powerful and effective way to work, especially when working in a team.
+A newer way of doing this in \Squeak is to upload your code to a versioned repository on a server using a tool called \ind{Monticello}.
+Both have their strengths and weaknesses: Monticello makes it easier to track and distribute changes, especially when working in a team, while change sets do not require you to set up a server repository and a package organization.
 \seeindex{change set}{file, filing out}
 \index{file!filing out}
 
@@ -48,7 +48,7 @@ In this chapter, we will look at the tools that \Squeak provides for sharing and
 
 %=========================================================
 \section{Packages and Monticello}
-\label{sec:MonticelloVCS}
+\label{sec:packages_and_monticello}
 
 We gave you a quick overview of \ind{Monticello}, \Squeak's packaging tool, in \secref{Monticello}.
 However, Monticello has many more features than were discussed there.
@@ -62,11 +62,11 @@ It leverages the long-used naming convention of \sq (\secref{package-names}), bu
 
 Let's look at this in an example.
 Suppose that you are developing a framework to facilitate the use of relational databases from Squeak.
-You have decided to call your framework \ct{SqueakLink}, and have created a series of system categories to contain all of the classes that you have written, \eg
+You have decided to call your framework \ct{SqueakLink}, and have created a series of system categories to contain all of the classes that you have written, \eg*:
 
 \begin{itemize}
-\item The category \ct{'SqueakLink-Connections'} contains classes \ct{OracleConnection}, \ct{MySQLConnection}, \ct{PostgresConnection}
-\item The category \ct{'SqueakLink-Model'} contains \ct{DBTable}, \ct{DBRow}, \ct{DBQuery}
+\item the category \ct{'SqueakLink-Connections'} contains classes \ct{OracleConnection}, \ct{MySQLConnection}, \ct{PostgresConnection},
+\item the category \ct{'SqueakLink-Model'} contains \ct{DBTable}, \ct{DBRow}, \ct{DBQuery}.
 \end{itemize}
 
 \subsubsection{Extension methods}
@@ -87,7 +87,7 @@ So you need a way of putting certain \emph{methods} in a package, even though th
 \index{package!extension}
 \seeindex{extension method}{package, extension}
 
-This is where the concept of \ind{extension methods} comes in.
+This is where the concept of \emphind{extension methods} comes in.
 You can mark these converter methods as extension methods by placing them in a protocol (of \ct{Object}, \ct{String}, \ct{Date}, and so on) named \prot{*SqueakLink-Model-converting} (note the initial asterisk).
 As a result, the three methods are now being managed as part of the SqueakLink package.
 In general, any method in any protocol that starts with an asterisk, followed by a package name, followed by a hyphen, is an extension method to that package.
@@ -111,7 +111,7 @@ Usually, it's a good idea to repeat the name of the original protocol in the ove
 
 However, beware that every change to an existing package might break other packages that depend on it.
 Thus, use override methods as seldom as possible.
-Often, there are better ways to extend the functionality of a package, such as subclassing or using explicit hooks.\footnote{Actually, there is a better way to extend the menu in our example: Place a new (non-override) extension method named \ct{squeakLinkMenu:} in the \ct{Inspector} class and add the pragma \ct{<fieldListMenu>} to it.}
+Often, there are better ways to extend the functionality of a package, such as subclassing or using explicit hooks\footnote{Actually, there is a better way to extend the menu in our example: Place a new (non-override) extension method named \ct{squeakLinkMenu:} in the \ct{Inspector} class and add the pragma \ct{<fieldListMenu>} to it.}.
 
 \subsubsection{Surveying the contents of a package}
 
@@ -121,8 +121,7 @@ To be precise, the rules for what goes in a package are as follows.
 A package named \ct{Foo} contains:
 
 \begin{enumerate}\label{sec:packageRules}
-	\item{} all class definitions of classes in the category \scat{Foo}, or in categories with names starting with \scat{Foo-} (or \scat{foo-}, \scat{fOO}, \autc, as Monticello actually always ignores the case of the letters),
-	and
+	\item{} all class definitions of classes in the category \scat{Foo}, or in categories with names starting with \scat{Foo-} (or \scat{foo-}, \scat{fOO}, \autc, as Monticello ignores the case of the letters),
 	\item{} \label{env:extensions} all method definitions in any class in a protocol named \prot{*Foo} or whose name starts with \prot{*Foo-},
 	and
 	\item{} all methods in classes in the category \scat{Foo} or in a category whose name starts with \scat{Foo-}, \emph{except} for those methods in protocols whose names start with \prot{*}.
@@ -175,7 +174,9 @@ SBEScreenshotRecorder writeTo: './figures/browsePackageExtensions.png' building:
 ].
 \end{ExecuteSmalltalkScript}
 \begin{figure}
-	\includegraphics[width=\textwidth]{browsePackageExtensions.png}
+	\begin{center}
+		\includegraphics[width=\textwidth]{browsePackageExtensions.png}
+	\end{center}
 	\caption{Browsing all extension methods of the package \ct{Morphic}.}
 	\label{fig:browsePackageExtensions}
 \end{figure}
@@ -209,7 +210,7 @@ The left-hand pane lists all of the packages that have been loaded into the imag
 
 The right-hand pane lists all of the source-code repositories that Monticello knows about, usually because it has loaded code from them.  If you select a package in the left pane, the right pane is filtered to show only those repositories that contain versions of the selected package.
 
-One of the repositories is a directory named \emph{package-cache}, which is a sub-directory of the directory in which your image is running.
+One of the repositories is a directory named \emph{package-cache}, which is a subdirectory of the directory in which your image is running.
 When you load code from or write code to a remote repository, a copy is also saved in the package cache.
 This can be useful if the network is not available and you need to access a package.
 Also, if you are given a Monticello (.mcz) file directly, for example as an email attachment, the most convenient way to access it is to place it in the package-cache directory.
@@ -302,7 +303,7 @@ SBEScreenshotRecorder writeTo: './figures/MCnewmethod.png' frame: #morphs buildi
 \end{figure}
 
 To tell Monticello about your package, click on \button{+Package}, and type the name of the package, in this case ``SBE''.
-Monticello will add \ct{SBE} to its list of packages; the package entry will be marked with an asterisk to show that the changes in the image have not yet been written to any repository.
+Monticello will add \ct{SBE} to its list of packages; the package entry will be marked as \emph{dirty} with an asterisk to show that the changes in the image have not yet been written to any repository.
 
 Initially, the only repository associated with this package will be your package cache, as shown in \figref{MC+SBE}.
 That's OK:
@@ -347,8 +348,8 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 				messageField := helper textMorphIn: helper foregroundWindow withTextMatching: '*log message*'.
 				helper focus: messageField.
 				messageField textMorph editor selectAt: 1; selectLine; backTo: 1.
-				helper type: 'Change a few things' into: messageField.
-				"messageField setText: 'Change a few things'; flag: #fallback."
+				helper type: 'Changes a few things.' into: messageField.
+				"messageField setText: 'Changes a few things.'; flag: #fallback."
 				helper scaleWindow: helper foregroundWindow extent: 375 @ 300.
 				helper takeScreenshotOf: helper foregroundWindow.
 
@@ -468,7 +469,7 @@ How is this accomplished using Monticello?  \ab{How indeed?  I hope that someone
 
 %=========================================================
 \section{Change sets and the change sorter}
-\label{sec:vc:changeSet} % (fold)
+\label{sec:sc:changeSet}
 
 Whenever you are working in \sq, any changes that you make to methods and classes are recorded in a \ct{change set}.
 This includes creating new classes, re-naming classes, changing categories, adding methods to existing classes\,---\,just about everything of significance.
@@ -501,7 +502,7 @@ SBEScreenshotRecorder writeTo: './figures/changeSetBrowser.png' building: [:help
 	buildChangeSorter value: helper.
 ].
 
-SBEScreenshotRecorder writeTo: './figures/changeSorter.png' building: [:helper |
+SBEScreenshotRecorder writeTo: './figures/dualChangeSorter.png' building: [:helper |
 	| sorter leftChangeSetMatch leftChangeList rightClassList |
 	thisContext wrap: [:block | buildChangeSet value: helper value: block].
 	thisContext wrap: [:block | ChangeSet newChangesNamed: 'String enhancements' during: block].
@@ -534,20 +535,20 @@ You can see which change set is current and can examine all of the change sets u
 \figref{changeSetBrowser} shows this browser.
 The title bar shows which change set is current, and this change set is selected when the browser opens.
 
-Other change sets can be selected in the top-left pane; the \ind{yellow button} menu allows you to make a different change set current, or to create a new change set.
+Other change sets can be selected in the top-left pane; the \ind{yellow button} menu allows you to make a different change set current (\menu{make changes go to me (m)}), or to create a new change set.
 The top-right pane lists all of the classes affected by the selected change set (with their categories).
 Selecting one of the classes displays the names of those of its methods that are also in the change set (\emph{not} all of the methods in the class) in the central pane, and selecting a method name displays the method definition in the bottom pane.
-Note that the browser does \emph{not} show you whether the creation of the class itself is part of the change set.
+If you do not select a method, the bottom pane also shows you whether the creation of the class itself is part of the change set.
 
 The change set browser also lets you delete classes and methods from the change set using the yellow button menu on the corresponding items.
-However, for more elaborate editing of change sets, you should use a second tool, the \textit{change sorter}, available under \menu{World docking bar~\go{} Tools} or by selecting \menu{World~\go{} open...~\go{} dual change sorter}, which is shown in \figref{changeSorter}.
+However, for more elaborate editing of change sets, you should use a second tool, the \textit{change sorter}, available under \menu{World docking bar~\go{} Tools} or by selecting \menu{World~\go{} open...~\go{} dual change sorter}, which is shown in \figref{dualChangeSorter}.
 
 \begin{figure}[btp]
 	\begin{center}
-		\includegraphics[width=\linewidth]{changeSorter}
+		\includegraphics[width=\linewidth]{dualChangeSorter}
 	\end{center}
-	\caption{The change sorter.}
-	\label{fig:changeSorter}
+	\caption{The dual change sorter.}
+	\label{fig:dualChangeSorter}
 \end{figure}
 
 The dual change sorter is essentially two change set browsers side by side; each side can focus on a different change set, class, or method.
@@ -720,7 +721,7 @@ So, if you have created any new classes, \emph{first} file-in the class creation
 \ind{Git} is a commonly used version control system.
 For sharing you projects via Git on platforms such as GitHub, GitLab, or Bitbucket, you can use the Squeak Git tools.
 The Git tools are not part of the standard environment and you have to install them.
-You can do so by clicking \menu{world docking bar~\go{} Tools~\go{} Git Browser (click to install)}.
+You can do so by clicking \menu{world docking bar~\go{} Tools~\go{} Git Browser}.
 The Git Browser allows you to manage a local Git repository directly from within the image using parts of the \ind{gitless}\footnote{\url{https://gitless.com/}} semantic.
 
 \section{Chapter summary}
