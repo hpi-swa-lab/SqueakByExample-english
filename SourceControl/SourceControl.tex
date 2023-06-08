@@ -581,11 +581,11 @@ They describe the state of the image should be in after they have been loaded.
 This permits Monticello to warn you about conflicts (when two packages require contradictory final states) and to offer to load a series of packages in their dependency order.
 
 \begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder debugging writeTo: './figures/installNewChangeSet.png' building: [:helper |
+SBEScreenshotRecorder writeTo: './figures/installNewChangeSet.png' building: [:helper |
 	helper
 		runModal: [
 			helper world
-				dropFiles: {FileStream readOnlyFileNamed: './figures/her cool change set.1.cs'}
+				dropFiles: {FileStream readOnlyFileNamed: './SourceControl/figures/her cool change set.1.cs'}
 				event: (helper generateMouseEvent: #mouseEnter at: helper world center buttons: #() start: helper world center)]
 		then: [helper select: helper dialogWindow at: 'install into new change set']]
 \end{ExecuteSmalltalkScript}
