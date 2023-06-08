@@ -997,6 +997,12 @@ Because we are executing code inside a block that is inside a \lct{detect:}, sev
 
 \dothis{Click \button{Restart} and then \button{Proceed}; the debugger window will vanish, and the evaluation of the expression \ct{'readme.txt' suffix} will complete, and print the answer \ct{'.txt'}}
 
+This was a first tour through the basic features of the debugger. 
+As a result of the reflective nature of the \squeak system, the debugger is a very powerful tool with numerous advanced features.
+You can discover some of them via the yellow button menu in the mini-inspectors, the stack trace, and the method browser.
+For example, you might want to try \menu{return entered value} in the yellow button menu of the stack trace, which directly returns from the context with the entered value.
+You might also want to try the following two features in the yellow button menu of the code editor: \menu{run to selection}, which runs the process up to the selected expression, and \menu{run until}, which asks you for an expression and continues to run the process until the expression evaluates to true.
+
 \subsection{From the debugger to tests and back again}
 
 Is the answer correct?
