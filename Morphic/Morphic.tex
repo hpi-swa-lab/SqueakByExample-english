@@ -703,12 +703,11 @@ For instance, the \mthind{UIManager}{request:initialAnswer:} method returns the 
 However, \clsind{UIManager} is an abstract class that has several subclasses such as \clsind{MorphicUIManager}, \clsind{MVCUIManager}, and others.
 What's the reason for this?
 
-\sq supports a wide range of different UI systems of which Morphic is only one of many.
-For instance, another UI system in \sq is \emph{MVC} (named after its tripartite Model-View-Controller architecture) which was the only available UI system in classic \st-80.
-To allow developers to write dialogs that work for any UI system, \sq provides the \clsind{UIManager} class that defines a consistent interface to invoke user dialogs for any UI system.
-To get the \clsind{UIManager} for our UI system, we can ask the class \clsind{Project} which represents a running UI system.
-The class \clsind{Project} takes care of instantiating the \clsind{UIManager} corresponding to our UI system.
-For this reason, the most idiomatic and thus recommended way to retrieve a \clsind{UIManager} instance is the method \cmind{Project class}{uiManager}.
+\sq supports a range of different UI systems, called \emph{\index{projects}}, of which Morphic is only one of many.
+For instance, another project type in \sq is \emph{\index{MVC}} (named after its tripartite Model-View-Controller architecture) which was the only available UI system in classic \st-80.
+To allow developers to write code that works in any kind of project, \sq provides the \clsind{UIManager} class hierarchy that defines a consistent interface to invoke user dialogs for any UI system.
+
+You can retrieve an appropriate subclass instance of \clsind{UIManager} for the current project by sending \ct{Project uiManager}\cmindex{Project}{uiManager}.
 
 For example, to display the request dialog in \figref{dialogName}, you can send the message \ct{request:initialAnswer:}:
 \begin{code}{}
