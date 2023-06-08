@@ -496,7 +496,8 @@ This message will return the test resource instance that is initialized for the 
 
 %=================================================================
 \section{Advanced features of SUnit}
-In addition to \ct{TestResource}, the current version of \sunit contains assertion description strings, logging support, and resumable test failures.
+In addition to \ct{TestResource}, the current version of \sunit contains assertion description strings and logging support. 
+% Currently broken as of 6.0, readd when fixed:  "and resumable test failures."
 
 %---------------------------------------------------------
 \subsection{Assertion description strings}
@@ -531,28 +532,29 @@ The description strings described above may also be logged to a \ct{Stream} such
 You can choose whether to log by overriding \cmind{TestCase}{isLogging} in your test class; you must also choose where to log by overriding \cmind{TestCase}{failureLog} to answer an appropriate stream.
 
 %---------------------------------------------------------
-\subsection{Continuing after a failure}
-\sunit also allows us to specify whether or not a test should continue after a failure.
-This is a really powerful feature that uses the exception mechanisms offered by \st.
-To see what this can be used for, let's look at an example.
-Consider the following test expression:
-\begin{code}{}
-(1 to: 10) do: [:each | self assert: each even]
-\end{code}
-In this case, as soon as the test finds the first element of the collection that isn't \ct{even}, the test stops.
-However, we would usually like to continue, and see both how many elements, and which elements, aren't \ct{even}, and maybe also log this information.
-You can do this as follows:
-\begin{code}{}
-(1 to: 10) do: [:each |
-	self
-		assert: each even
-		description: each printString , ' is not even'
-		resumable: true].
-\end{code}
-This will print out a message on your logging stream for each element that fails.
-It doesn't accumulate failures, \ie if the assertion fails 10~times in your test method, you'll still only see one failure.
-All the other assertion methods that we have seen are not resumable; \ct{assert: p description: s} is equivalent to \ct{assert: p description: s resumable: false}.
-\cmindex{Collection}{do:}
+% Currently broken as of 6.0, readd when fixed:
+% \subsection{Continuing after a failure}
+% \sunit also allows us to specify whether or not a test should continue after a failure.
+% This is a really powerful feature that uses the exception mechanisms offered by \st.
+% To see what this can be used for, let's look at an example.
+% Consider the following test expression:
+% \begin{code}{}
+% (1 to: 10) do: [:each | self assert: each even]
+% \end{code}
+% In this case, as soon as the test finds the first element of the collection that isn't \ct{even}, the test stops.
+% However, we would usually like to continue, and see both how many elements, and which elements, aren't \ct{even}, and maybe also log this information.
+% You can do this as follows:
+% \begin{code}{}
+% (1 to: 10) do: [:each |
+% 	self
+% 		assert: each even
+% 		description: each printString , ' is not even'
+% 		resumable: true].
+% \end{code}
+% This will print out a message on your logging stream for each element that fails.
+% It doesn't accumulate failures, \ie if the assertion fails 10~times in your test method, you'll still only see one failure.
+% All the other assertion methods that we have seen are not resumable; \ct{assert: p description: s} is equivalent to \ct{assert: p description: s resumable: false}.
+% \cmindex{Collection}{do:}
 %=================================================================
 \section{The implementation of SUnit}
 
