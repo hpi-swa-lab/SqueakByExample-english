@@ -1107,7 +1107,7 @@ The easiest and clearest way to do this is to replace the \ct{detect:} message b
 
 We will learn more about SUnit in \charef{SUnit}.
 
-\subsection{Ways into the Debugger}
+\subsection{Ways into the debugger}
 
 There are a few other ways to get into the debugger in addition to catching errors and assertion failures.
 First of all, you can interrupt processes and open them in the debugger interactively.
@@ -1119,6 +1119,9 @@ Sometimes, you want to specify exactly at what point in the code you want to ope
 Therefore, you edit the suspect code and insert \ct{self halt} at the point at which you want to open a debugger.
 So, for example, we might edit the \ct{suffix} method to read as follows:
 \index{process!interrupting}
+\index{Object, \ct{halt}}
+\seeindex{halt}{Object, \ct{halt}}
+\seeindex{breakpoint}{Object, \ct{halt}}
 
 \needspace{11ex}
 \begin{method}[suffix]{Inserting a \ct{halt} into the \ct{suffix} method.}
@@ -1134,7 +1137,25 @@ suffix
 
 When we run this method, the execution of the \ct{self halt} will bring up the \ind{pre-debugger}, from where we can proceed, or go into the debugger and look at variables, step the computation, and edit the code.
 
+\paragraph{Advanced ways into the debugger}
 
+Sometimes, a simple \ct{halt} can be problematic or insufficient. 
+For these cases, there are some special ways to interrupt and inspect the execution.
+
+For instance, when putting a \ct{halt} in code that restarts in another process whenever it is stopped, you would get an infinite number of debuggers.
+In such a situation, we might only want to interrupt the execution once, let the execution restart in another process, and leave that new process alone.
+For this use case, you can use \mthind{Object}{haltOnce}, which only interrupts the execution the first time it is executed. 
+You can use it in source code just like \ct{halt}, but before you start your execution, you first have to do \ct{0 setHaltOnce}, which activates the \ct{haltOnce} (actually the receiver of \ct{setHaltOnce} does not matter, send it to whoever you want).
+The corresponding message \mthind{Object}{inspectOnce} opens an inspector for whatever object the message was sent to and only does so once, again to save you from vast numbers of inspectors.
+
+Another problem you might encounter while debugging is that the system encounters your \ct{halt} repeatedly, but you have to proceed many of the debuggers to find the point in time you are interested in.
+For example, when you have a \ct{halt} in a loop working on the characters of a long string, you might only be interested in the loop iteration in which a separator is encountered, which unfortunately is the last third of the string.
+To only interrupt the execution whenever a condition is met, for example, the separator character was read from the string, you can use \mthind{Object}{haltIf:}.
+The method accepts a block that tests for the condition.
+
+Finally, you can interactively set for which methods the execution should be interrupted.
+You can do so in the yellow button menu on any list of methods via the option \menu{break on entry}.
+When you activate it, a debugger will open every time an execution enters the method.
 
 % section debugger (end)
 
