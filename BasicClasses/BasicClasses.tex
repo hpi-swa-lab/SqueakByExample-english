@@ -407,8 +407,8 @@ Stack>>>pop
     ^ self linkedList removeFirst element
 \end{method}
 
-Do not confuse \ct{Object>>>assert:} with \cmind{TestCase}{assert:}, which occurs in the SUnit testing framework (see \charef{SUnit}).
-While the former expects a block as its argument\footnote{Actually, it will take any argument that understands \ct{value}, including a \ct{Boolean}.}, the latter expects a \clsind{Boolean}.
+Do not confuse \cmind{Object}{assert:} with \cmind{TestCase}{assert:}, which occurs in the SUnit testing framework and raises a \clsind{TestFailure} (see \charef{SUnit}).
+While the latter also has variants such as \ct{assert:equals:} or \ct{deny:}, the former has no variants.
 Although both are useful for debugging, they each serve a very different intent.
 
 %-----------------------------------------------------------------
