@@ -208,7 +208,7 @@ SBEScreenshotRecorder writeTo: './figures/freshMonticello.png' frame: #morphs bu
 	\label{fig:freshMonticello}
 \end{figure}
 
-When you open the Monticello browser, you will see two list panes and a row of buttons, as shown in \figref{freshMonticello}.
+When you open the Monticello browser (\eg* in \menu{World docking bar~\go{} Apps~\go Monticello Browser} ), you will see two list panes and a row of buttons, as shown in \figref{freshMonticello}.
 The left-hand pane lists all of the packages that have been loaded into the image that you are running; the particular version of the package is shown in parentheses after the name.
 
 The right-hand pane lists all of the source-code repositories that Monticello knows about, usually because it has loaded code from them.  If you select a package in the left pane, the right pane is filtered to show only those repositories that contain versions of the selected package.
@@ -543,7 +543,7 @@ Selecting one of the classes displays the names of those of its methods that are
 If you do not select a method, the bottom pane also shows you whether the creation of the class itself is part of the change set.
 
 The change set browser also lets you delete classes and methods from the change set using the yellow button menu on the corresponding items.
-However, for more elaborate editing of change sets, you should use a second tool, the \textit{change sorter}, available under \menu{World docking bar~\go{} Tools} or by selecting \menu{World~\go{} open...~\go{} dual change sorter}, which is shown in \figref{dualChangeSorter}.
+However, for more elaborate editing of change sets, you should use a second tool, the \textit{Dual Change Sorter}, available under \menu{World docking bar~\go{} Tools} or by selecting \menu{World~\go{} open...~\go{} dual change sorter}, which is shown in \figref{dualChangeSorter}.
 
 \begin{figure}[btp]
 	\begin{center}
@@ -554,7 +554,7 @@ However, for more elaborate editing of change sets, you should use a second tool
 \end{figure}
 
 The dual change sorter is essentially two change set browsers side by side; each side can focus on a different change set, class, or method.
-This layout supports the change sorter's main feature, which is the ability to move or copy changes from one change set to another, as shown by the yellow button menu in \figref{changeSorter}.
+This layout supports the change sorter's main feature: the ability to move or copy changes from one change set to another, as shown by the yellow button menu in \figref{changeSorter}.
 It is also possible to copy individual methods from one side to the other.
 
 You may be wondering why you should care about the composition of a change set.
@@ -564,11 +564,13 @@ Repeated file-outs create new versions of the file, but change sets are not a ve
 They do not keep track of dependencies.
 \index{file!filing out}
 
-Before the advent of Monticello, change sets were the main means for exchanging code between \sq{} users.
-They have the advantage of simplicity (the file-out is just a text file, although we \emph{don't} recommend that you try to edit it with a text editor), and a degree of portability.
-It's also quite easy to create a change set that makes changes to many different, unrelated parts of the system\,---\,something that Monticello is not yet equipped to do.
+\subsection{Change sets vs. Monticello}
 
-The main drawback of change sets, compared to \ind{Monticello} packages, is that they do not support the notion of dependencies.
+Before the advent of Monticello, change sets were the main means for exchanging code between \sq{} users.
+They have the advantage of simplicity (the file-out is just a text file, although we \emph{don't} recommend that you try to edit it with a text editor) and a degree of portability.
+It's also relatively easy to create a change set that makes changes to many different, unrelated parts of the system\,---\,something that Monticello is not yet equipped to do.
+
+Compared to \ind{Monticello} packages, the main drawback of change sets is that they do not support the notion of dependencies.
 A filed-out change set is a set of \emph{actions} that change any image into which it is loaded.
 To successfully load a change set requires that the image be in an appropriate state.
 For example, the change set might contain an action to add a method to a class; this can only be accomplished if the class is already defined in the image.
