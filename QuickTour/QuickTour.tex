@@ -309,11 +309,12 @@ SBEScreenshotRecorder writeTo: './figures/BouncingAtoms.png' frame: #morphs buil
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/saveAs.png' frame: #morphs building: [:helper |
-  helper
-    runModal: [Smalltalk saveAs]
-    then: [
-      helper closeBalloons.
-      helper type: 'SBE' into: (helper morphByExternalName: 'inputText' in: helper world) firstSubmorph firstSubmorph].
+	helper
+		runModal: [Smalltalk saveAs]
+		then: [
+			helper closeBalloons.
+			helper scaleWindow: helper dialogWindow paneMorph extent: 400 px @ 290 px.
+			helper type: 'SBE' into: (helper morphByExternalName: 'inputText' in: helper world) firstSubmorph firstSubmorph].
 ]
 \end{ExecuteSmalltalkScript}
 
