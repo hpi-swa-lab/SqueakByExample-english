@@ -217,10 +217,10 @@ In addition to doing this programmatically, you can also embed morphs by direct 
 	% ct TODO DISCUSS: We should uncomment the above line.
 	Drag an ellipse and a star from the \menu{Supplies} flap.
 	Place the star over the ellipse, and yellow-click the star to bring up a menu\footnote{You can also blue-click the star to bring up the morphic halo, and then click the red menu handle.}.
-	Select \menu{embed into \go Ellipse}.
+	Select \menu{embed into~\go{} Ellipse}.
 	Now the star and the ellipse move together.}
 
-%\dothis{If you don't have a \menu{Supplies} flap at the bottom of your screen, execute \ct{Flaps enableGlobalFlaps} to create one.  Drag a yellow ellipse and a white star from the \menu{Supplies} flap.  Place the star over the ellipse, and yellow-click the star to bring up a menu\footnote{You can also blue-click the star to bring up the morphic halo, and then click the red menu handle.}.   Select \menu{embed into \go Ellipse}.  Now the star and the ellipse move together.}
+%\dothis{If you don't have a \menu{Supplies} flap at the bottom of your screen, execute \ct{Flaps enableGlobalFlaps} to create one.  Drag a yellow ellipse and a white star from the \menu{Supplies} flap.  Place the star over the ellipse, and yellow-click the star to bring up a menu\footnote{You can also blue-click the star to bring up the morphic halo, and then click the red menu handle.}.   Select \menu{embed into~\go{} Ellipse}.  Now the star and the ellipse move together.}
 
 To remove a sub-morph, do \ct{joe} \mthind{Morph}{removeMorph:} \ct{star} or \ct{star} \mthind{Morph}{delete}.
 This can also be done by direct manipulation:
@@ -665,7 +665,7 @@ Alternatively, you can modify the \ct{handleKeystroke:} method so that you can u
 		ifTrue: [self stopStepping].
 \end{code}
 
-% \on{You can also \menu{debug \go inspect morph} and evaluate: \ct{self currentWorld startStepping: self}.}
+% \on{You can also \menu{debug~\go{} inspect morph} and evaluate: \ct{self currentWorld startStepping: self}.}
 
 %=================================================================
 \section{Dialog windows}

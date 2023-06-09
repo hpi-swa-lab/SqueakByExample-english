@@ -138,7 +138,7 @@ You can collapse the windows (so that they can be expanded again later) by click
 
 A good place to get started is the \ind{world menu} shown in \figref{threeButtons:red}.
 
-\dothis{Click with the mouse on the background of the main window to show the world menu, then choose \menu{open \ldots \go workspace} to create a new workspace.}
+\dothis{Click with the mouse on the background of the main window to show the world menu, then choose \menu{open \ldots~\go{} workspace} to create a new workspace.}
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/worldMenu.png' frame: #morphs building: [:helper |
 	helper click: helper world at: helper world topCenter + (0 px @ 30 px) buttons: #(left).
@@ -218,7 +218,10 @@ The \emphind{yellow button} is the next most used button; it is used to bring up
 
 \dothis{Type \ct{Time now} in the workspace.
 Now click the yellow button in the workspace.
-Select \menu{print it}.}
+%Select \menu{print it}.}
+Select \emph{print it}.%
+% ct: HACK: \emph seems to break \soul :/
+}
 
 Finally, there is the \emphind{blue button} to activate the ``morphic \subind{Morphic}{halo}'', an array of handles that are used to perform operations on the on-screen objects themselves, such as rotating or resizing; see \figref{threeButtons:blue}.
 If you let the mouse linger over a handle, a help balloon will explain its function.
@@ -271,7 +274,7 @@ You can even move the menu around by grabbing its title bar.
 
 The world menu provides you a simple means to access many of the tools that \sq offers.
 
-\dothis{Have a closer look at the \menu{world\go{}open \ldots} menu.}
+\dothis{Have a closer look at the \menu{world~\go{} open \ldots} menu.}
 You will see a list of several of the core tools in \sq, including the system browser (one of many available class browsers) and the workspace.
 We will encounter most of them in the coming chapters.
 
@@ -296,7 +299,7 @@ SBEScreenshotRecorder writeTo: './figures/OpenMenu.png' frame: #morphs building:
 \section{Saving, quitting, and restarting a \sq session}
 
 \dothis{Bring up the world menu.
-Now select \menu{new morph \ldots} and navigate to \menu{from alphabetical list{\go}A-C{\go}BouncingAtomsMorph}.
+Now select \menu{new morph \ldots} and navigate to \menu{from alphabetical list~\go{} A-C~\go{} BouncingAtomsMorph}.
 You now have a morph full of bouncing atoms ``in hand''.
 Put the atoms morph down (by clicking) somewhere.}
 \index{Morphic}
@@ -336,9 +339,9 @@ SBEScreenshotRecorder writeTo: './figures/saveAs.png' frame: #morphs building: [
 \end{minipage}
 \end{figure}
 
-\dothis{Select \menu{World\go{}save as \ldots}, and enter the name ``SBE''.
+\dothis{Select \menu{World~\go{} save as \ldots}, and enter the name ``SBE''.
 	Now click on the \menu{Accept(s)} button.
-	Now select \menu{World\go{}save and quit}.}
+	Now select \menu{World~\go{} save and quit}.}
 
 Now if you go to the location where the original image and changes files were, you will find two new files called ``SBE.\ind{image}'' and ``SBE.\ind{changes}'' that represent the working state of the \sq image at the moment before you told \sq to \menu{save and quit}.
 If you wish, you can move these two files anywhere that you like on your disk, but if you do so you may (depending on your operating system) need to also move, copy or link to the virtual machine and the \emph{.source} file.
@@ -570,7 +573,7 @@ As we shall see, there are several interesting browsers available for \sq, but t
 \seeindex{class browser}{system browser}
 \seeindex{browser}{system browser}
 
-\dothis{Open a browser by selecting \menu{World \go Browser}, or by selecting \menu{Tools \go Browser} in the world menu bar.}
+\dothis{Open a browser by selecting \menu{World~\go{} Browser}, or by selecting \menu{Tools~\go{} Browser} in the world menu bar.}
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/ClassBrowser2.png' frame: #morphs building: [:helper |
@@ -756,7 +759,7 @@ The \emphind{method finder} can help you.
 \seeindex{system browser!finding methods}{method, finding}
 \index{method!finding}
 
-\dothis{Select \menu{Tools \go Method Finder} in the menu bar at the top or open the world menu and select \menu{open\ldots \go method finder}.
+\dothis{Select \menu{Tools~\go{} Method Finder} in the menu bar at the top or open the world menu and select \menu{open\ldots~\go{} method finder}.
 Type ``now'' in the top left pane, and \menu{accept} it (or just press the \textsc{return} key).}
 The method finder will display a list of all the method names that contain the substring ``now''.
 To scroll to \ct{now} itself, move the cursor to the list and type ``\ct{n}''; this trick works in all scrolling windows.
@@ -910,7 +913,7 @@ SBEScreenshotRecorder writeTo: './figures/testShoutConfirm.png' frame: #morphs b
 \label{fig:testShoutConfirm}}
 \end{figure}
 
-\dothis{Run your newly created test: open the \ind{SUnit} \emphind{TestRunner}, either by dragging it from the \toolsflapind, or by selecting \menu{World \go open... \go Test Runner}.}
+\dothis{Run your newly created test: open the \ind{SUnit} \emphind{TestRunner}, either by dragging it from the \toolsflapind, or by selecting \menu{World~\go{} open...~\go{} Test Runner}.}
 
 The leftmost two panes are a bit like the top panes in the system browser.
 The left pane contains a list of system categories, but it's restricted to those categories that contain test classes.
