@@ -52,7 +52,8 @@ In this chapter, we will look at the tools that \Squeak provides for sharing and
 
 We gave you a quick overview of \ind{Monticello}, \Squeak's packaging tool, in \secref{Monticello}.
 However, Monticello has many more features than were discussed there.
-Monticello manages \emph{Packages}. Before telling you more about Monticello, we will first explain exactly what a \ind{package} is, as Monticello is centered around this concept.
+Monticello manages \emph{Packages}. 
+Thus, before telling you more about Monticello, we will first explain exactly what a \ind{package} is.
 
 %---------------------------------------------------------
 \subsection{Packages: declarative categorization of Squeak code}
@@ -68,6 +69,8 @@ You have decided to call your framework \ct{SqueakLink}, and have created a seri
 \item the category \ct{'SqueakLink-Connections'} contains classes \ct{OracleConnection}, \ct{MySQLConnection}, \ct{PostgresConnection},
 \item the category \ct{'SqueakLink-Model'} contains \ct{DBTable}, \ct{DBRow}, \ct{DBQuery}.
 \end{itemize}
+
+We will manage the code for these classes in a package named \ct{SqueakLink}.
 
 \subsubsection{Extension methods}
 
@@ -115,7 +118,7 @@ Often, there are better ways to extend the functionality of a package, such as s
 
 \subsubsection{Surveying the contents of a package}
 
-The combination of the \scat{SqueakLink-...} categories and the \prot{*SqueakLink-...} protocols form a package named \ct{SqueakLink}.
+The combination of the \scat{SqueakLink-...} categories and the \prot{*SqueakLink-...} protocols form the package named \ct{SqueakLink}.
 To be precise, the rules for what goes in a package are as follows.
 
 A package named \ct{Foo} contains:
@@ -221,8 +224,6 @@ Let's add an HTTP repository.
 
 \dothis{Open Monticello, click on \button{+Repository}, and select \menu{HTTP}.
 Edit the dialog to read:}
-%\ab{How does one continue the $\backslash$dothis to include the code?}
-%\on{Don't.  Just close the \dothis{} and follow with the code.}
 \needlines{4}
 \begin{code}{}
 MCHttpRepository
@@ -311,7 +312,8 @@ You can still save the code, which will cause it to be written to the package ca
 Just click \button{Save} and you will be invited to provide a log message for the version of the package that you are about to save, as shown in \figref{SBE-apb}; when you accept the message, Monticello will save your package.
 To indicate this, the asterisk decorating the name in Monticello's package pane will be removed, and the version number added.
 
-If you then make a change to the package\,---\,say by adding a method to one of the classes\,---\,the asterisk will re-appear, showing that you have unsaved changes.  If you open a repository browser on the package cache, you can select the saved version, and use \button{Changes} and the other buttons.
+If you then make a change to the package\,---\,say by adding a method to one of the classes\,---\,the asterisk will re-appear, showing that you have unsaved changes.
+If you open a repository browser on the package cache, you can select the saved version, and use \button{Changes} and the other buttons.
 You can of course save the new version to the repository too; once you \button{Refresh} the repository view, it should look like \figref{package-cache-browser}.
 \index{package!cache}
 
@@ -399,7 +401,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 
 To save the new package to a repository other than the package cache, you need to first make sure that Monticello knows about the repository, adding it if necessary.
 Then you can use the \button{Copy} in the package-cache repository browser, and select the repository to which the package should be copied.
-You can also associate the desired repository with the package by using the \ind{yellow button} menu item \menu{add to package...} on the repository, as shown in \figref{associateRepository}.
+You can also associate the desired repository with the package by using the yellow button menu item \menu{add to package...} on the repository, as shown in \figref{associateRepository}.
 Once the package knows about a repository, you can save a new version by selecting the repository and the package in the Monticello Browser, and clicking \button{Save}.
 Of course, you must have permission to write to a repository.
 The \ct{SqueakByExample} repository on \emphind{SqueakSource} is world readable but not world writable, so if you try and save there, you will see an error message.
@@ -432,7 +434,7 @@ SBEScreenshotRecorder writeTo: './figures/MCaddToPackage.png' building: [:helper
 \end{figure}
 
 If you do try and save to a repository where you don't have write permission, a version will nevertheless be written to the package-cache.
-So you can recover by editing the repository information (\ind{yellow button} menu in the Monticello Browser) or choosing a different repository, and then using \button{Copy} from the package-cache browser.
+So you can recover by editing the repository information (yellow button menu in the Monticello Browser) or choosing a different repository, and then using \button{Copy} from the package-cache browser.
 
 \on{I have commented out the Advanced Monticello section for now, as it will surely not be ready for the first release.}
 \begin{comment}
@@ -535,7 +537,7 @@ You can see which change set is current and can examine all of the change sets u
 \figref{changeSetBrowser} shows this browser.
 The title bar shows which change set is current, and this change set is selected when the browser opens.
 
-Other change sets can be selected in the top-left pane; the \ind{yellow button} menu allows you to make a different change set current (\menu{make changes go to me (m)}), or to create a new change set.
+Other change sets can be selected in the top-left pane; the yellow button menu allows you to make a different change set current (\menu{make changes go to me (m)}), or to create a new change set.
 The top-right pane lists all of the classes affected by the selected change set (with their categories).
 Selecting one of the classes displays the names of those of its methods that are also in the change set (\emph{not} all of the methods in the class) in the central pane, and selecting a method name displays the method definition in the bottom pane.
 If you do not select a method, the bottom pane also shows you whether the creation of the class itself is part of the change set.
@@ -552,7 +554,7 @@ However, for more elaborate editing of change sets, you should use a second tool
 \end{figure}
 
 The dual change sorter is essentially two change set browsers side by side; each side can focus on a different change set, class, or method.
-This layout supports the change sorter's main feature, which is the ability to move or copy changes from one change set to another, as shown by the \ind{yellow button} menu in \figref{changeSorter}.
+This layout supports the change sorter's main feature, which is the ability to move or copy changes from one change set to another, as shown by the yellow button menu in \figref{changeSorter}.
 It is also possible to copy individual methods from one side to the other.
 
 You may be wondering why you should care about the composition of a change set.
@@ -565,8 +567,6 @@ They do not keep track of dependencies.
 Before the advent of Monticello, change sets were the main means for exchanging code between \sq{} users.
 They have the advantage of simplicity (the file-out is just a text file, although we \emph{don't} recommend that you try to edit it with a text editor), and a degree of portability.
 It's also quite easy to create a change set that makes changes to many different, unrelated parts of the system\,---\,something that Monticello is not yet equipped to do.
-\ab{Or is it?}
-\on{you mean something different than extensions to foreign packages using the *package protocol notation?}
 
 The main drawback of change sets, compared to \ind{Monticello} packages, is that they do not support the notion of dependencies.
 A filed-out change set is a set of \emph{actions} that change any image into which it is loaded.
@@ -668,7 +668,7 @@ In \figref{fileList}, the file name has the suffix \ct{.cs}, so the browser assu
 \end{figure}
 
 Because the choice of buttons to display depends on the file's \emph{name}, and not on its contents, sometimes the button that you want won't be on the screen.
-However, the full set of options is always available from the \ind{yellow button} \menu{more...} menu, so you can easily work around this problem.
+However, the full set of options is always available from the yellow button \menu{more...} menu, so you can easily work around this problem.
 
 The \button{code} button is perhaps the most useful for working with change sets; it opens a browser on the contents of the change set file; an example is shown in \figref{fileContentsBrowser}.
 The file contents browser is similar to the system browser except that it does not show categories, just classes, protocols and methods.
@@ -703,8 +703,8 @@ To start recovering, restart \sq from the most recent snapshot. Then select \men
 Normally, it's sufficient to browse changes as far back as the last snapshot.
 
 Once you have a \emph{recent changes} browser, showing, say, changes back as far as your last snapshot, you will have a list of everything that you have done in \sq during that time.
-You can delete items from this list using the \ind{yellow button} menu.
-When you are satisfied, you can file-in what is left also using the \ind{yellow button} menu, thus incorporating the changes into your new image.
+You can delete items from this list using the yellow button menu.
+When you are satisfied, you can file-in what is left also using the yellow button menu, thus incorporating the changes into your new image.
 
 One useful thing to do in the \emph{recent changes} browser is to \menu{remove doIts}.
 Usually, you won't want to file in (and thus re-execute) doIts.
