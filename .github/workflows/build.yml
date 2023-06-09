@@ -43,7 +43,7 @@ jobs:
         id: prepare
         run: |
           echo "draft-release=${{ inputs.draft-release || 'false' }}" >> $GITHUB_OUTPUT
-          echo "squeak-versions=${{ toJson(fromJson(inputs.squeak-versions || '["Trunk", "6.0"]')) }}" >> $GITHUB_OUTPUT
+          echo "squeak-versions<<EOF\n${{ toJson(fromJson(inputs.squeak-versions || '["Trunk", "6.0"]')) }}\nEOF" >> $GITHUB_OUTPUT
           echo "scale-factor=${{ inputs.scale-factor || '2.5' }}" >> $GITHUB_OUTPUT
   tests:
     name: 🐞 Internal tests [${{ matrix.smalltalk }}]
