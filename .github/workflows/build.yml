@@ -64,7 +64,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        smalltalk: ${{ fromJson(needs.args.outputs.squeak-versions) }}
+        smalltalk: [Trunk, '6.0'] # DEBUG
     env:
       SBE_SCALE_FACTOR: ${{ needs.args.outputs.scale-factor }}
     steps:
