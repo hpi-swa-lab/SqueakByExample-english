@@ -58,7 +58,7 @@ jobs:
     env:
       SBE_SCALE_FACTOR: ${{ needs.args.outputs.scale-factor }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: hpi-swa/setup-smalltalkCI@v1
         with:
           smalltalk-image: Squeak64-${{ matrix.smalltalk }}
@@ -76,7 +76,7 @@ jobs:
       matrix:
         smalltalk: ${{ fromJson(needs.args.outputs.squeak-versions) }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: hpi-swa/setup-smalltalkCI@v1
         with:
           smalltalk-image: Squeak64-${{ matrix.smalltalk }}
@@ -87,7 +87,7 @@ jobs:
     name: 📄 Collect listings from SmalltalkSources
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - run: make listings
       - name: 💾 Store listings
         uses: actions/upload-artifact@master
@@ -103,7 +103,7 @@ jobs:
       matrix:
         smalltalk: ${{ fromJson(needs.args.outputs.squeak-versions) }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: hpi-swa/setup-smalltalkCI@v1
         with:
           smalltalk-image: Squeak64-${{ matrix.smalltalk }}
