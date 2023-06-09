@@ -15,7 +15,7 @@ on:
         description: 'List of Squeak versions to test (JSON array)'
         type: string
         required: false
-        default: "['Trunk', '6.0']"
+        default: '["Trunk", "6.0"]'
       scale-factor:
         description: 'Scale factor for screenshots'
         type: number
@@ -31,15 +31,30 @@ on:
 #---
 
 jobs:
+  args:
+    name: 📦 Prepare arguments
+    runs-on: ubuntu-latest
+    outputs:
+      draft-release: ${{ inputs.draft-release }}
+      squeak-versions: ${{ steps.prepare.outputs.squeak-versions }}
+      scale-factor: ${{ steps.prepare.outputs.scale-factor }}
+    steps:
+      - name: Prepare
+        id: prepare
+        run: |
+          echo ::set-output name=draft-release::${{ inputs.draft-release || 'false' }}
+          echo ::set-output name=squeak-versions::${{ toJson(fromJson(inputs.squeak-versions || '["Trunk", "6.0"]')) }}
+          echo ::set-output name=scale-factor::${{ inputs.scale-factor || '2.5' }}
   tests:
     name: 🐞 Internal tests [${{ matrix.smalltalk }}]
+    needs: [args]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        smalltalk: ${{ fromJson(inputs.squeak-versions) }}
+        smalltalk: ${{ needs.args.outputs.squeak-versions }}
     env:
-      SBE_SCALE_FACTOR: ${{ inputs.scale-factor }}
+      SBE_SCALE_FACTOR: ${{ needs.args.outputs.scale-factor }}
     steps:
       - uses: actions/checkout@v2
       - uses: hpi-swa/setup-smalltalkCI@v1
@@ -52,11 +67,12 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}  # for coverage reports
   tex-assertions:
     name: 🧪 @TEST assertions [${{ matrix.smalltalk }}]
+    needs: [args]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        smalltalk: ${{ fromJson(inputs.squeak-versions) }}
+        smalltalk: ${{ fromJson(needs.args.outputs.squeak-versions) }}
     steps:
       - uses: actions/checkout@v2
       - uses: hpi-swa/setup-smalltalkCI@v1
@@ -78,12 +94,12 @@ jobs:
           path: ListingSources
   build:
     name: 📖 Build book [${{ matrix.smalltalk }}]
-    needs: [listings]
+    needs: [args, listings]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        smalltalk: ${{ fromJson(inputs.squeak-versions) }}
+        smalltalk: ${{ fromJson(needs.args.outputs.squeak-versions) }}
     steps:
       - uses: actions/checkout@v2
       - uses: hpi-swa/setup-smalltalkCI@v1
@@ -130,7 +146,7 @@ jobs:
           exit 1
   release:
     name: ✈ ${{ inputs.draft-release == 'true' && 'Draft release' || 'Create pre-release' }}
-    needs: [tests, tex-assertions, build]
+    needs: [args, tests, tex-assertions, build]
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
@@ -144,7 +160,7 @@ jobs:
           path: listings
       - uses: benjlevesque/short-sha@v1.2
         id: short-sha
-      - name: 📣 ${{ inputs.draft-release == 'true' && 'Draft release' || 'Create pre-release' }}
+      - name: 📣 ${{ needs.args.outputs.draft-release == 'true' && 'Draft release' || 'Create pre-release' }}
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
@@ -153,12 +169,12 @@ jobs:
           files: |
             book-*/SBE-*.pdf
             ListingSources.zip
-          prerelease: ${{ inputs.draft-release == 'true' && 'false' || 'true' }}
-          draft: ${{ inputs.draft-release == 'true' && 'true' || 'false' }}
+          prerelease: ${{ needs.args.outputs.draft-release == 'true' && 'false' || 'true' }}
+          draft: ${{ needs.args.outputs.draft-release == 'true' && 'true' || 'false' }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
       - uses: dev-drprasad/delete-older-releases@v0.2.0
-        if: ${{ inputs.draft-release == 'true' && false || true }}
+        if: ${{ needs.args.outputs.draft-release == 'true' && false || true }}
         with:
           delete_tag_pattern: untagged-
           keep_latest: 1
