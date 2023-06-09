@@ -4,6 +4,23 @@ on:
   push:
   schedule:
     - cron: "0 0 * * 1"  # every monday
+  workflow_dispatch:
+    inputs:
+      draft-release:
+        description: 'Draft an actual release (instead of creating a pre-release)'
+        type: boolean
+        required: false
+        default: false
+      squeak-versions:
+        description: 'List of Squeak versions to test (JSON array)'
+        type: string
+        required: false
+        default: "['Trunk', '6.0']"
+      scale-factor:
+        description: 'Scale factor for screenshots'
+        type: number
+        required: false
+        default: '2.5'
 
 # not yet implemented: https://github.community/t/how-to-set-and-access-a-workflow-variable/17335/6?u=linqlover
 # ---
@@ -20,7 +37,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        smalltalk: [Trunk, '6.0']
+        smalltalk: ${{ fromJson(inputs.squeak-versions) }}
+    env:
+      SBE_SCALE_FACTOR: ${{ inputs.scale-factor }}
     steps:
       - uses: actions/checkout@v2
       - uses: hpi-swa/setup-smalltalkCI@v1
@@ -37,7 +56,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        smalltalk: [Trunk, '6.0']
+        smalltalk: ${{ fromJson(inputs.squeak-versions) }}
     steps:
       - uses: actions/checkout@v2
       - uses: hpi-swa/setup-smalltalkCI@v1
@@ -64,7 +83,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        smalltalk: [Trunk, '6.0']
+        smalltalk: ${{ fromJson(inputs.squeak-versions) }}
     steps:
       - uses: actions/checkout@v2
       - uses: hpi-swa/setup-smalltalkCI@v1
@@ -110,7 +129,7 @@ jobs:
           echo "DEBUG_FIGURES=true" >> $GITHUB_ENV
           exit 1
   release:
-    name: ✈ Create pre-release
+    name: ✈ ${{ inputs.draft-release == 'true' && 'Draft release' || 'Create pre-release' }}
     needs: [tests, tex-assertions, build]
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
@@ -125,7 +144,8 @@ jobs:
           path: listings
       - uses: benjlevesque/short-sha@v1.2
         id: short-sha
-      - name: 📣 Create pre-release
+      - name: 📣 ${{ inputs.draft-release == 'true' && 'Draft release' || 'Create pre-release' }}
+        id: create_release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: untagged-${{ steps.short-sha.outputs.sha }}
@@ -133,10 +153,12 @@ jobs:
           files: |
             book-*/SBE-*.pdf
             ListingSources.zip
-          prerelease: true
+          prerelease: ${{ inputs.draft-release == 'true' && 'false' || 'true' }}
+          draft: ${{ inputs.draft-release == 'true' && 'true' || 'false' }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
       - uses: dev-drprasad/delete-older-releases@v0.2.0
+        if: ${{ inputs.draft-release == 'true' && false || true }}
         with:
           delete_tag_pattern: untagged-
           keep_latest: 1
