@@ -44,7 +44,7 @@ jobs:
         run: |
           echo "draft-release=${{ inputs.draft-release && true || false }}" >> $GITHUB_OUTPUT
           echo "squeak-versions<<EOF
-          ${{ toJson(fromJson(inputs.squeak-versions || '[\"Trunk\", \"6.0\"]')) }}
+          ${{ toJson(fromJson(inputs.squeak-versions || '["Trunk", "6.0"]')) }}
           EOF" >> $GITHUB_OUTPUT
           echo "scale-factor=${{ inputs.scale-factor || '2.5' }}" >> $GITHUB_OUTPUT
   debug-args:
@@ -56,6 +56,7 @@ jobs:
         run: |
           echo "draft-release=${{ needs.args.outputs.draft-release }}"
           echo "squeak-versions=${{ needs.args.outputs.squeak-versions }}"
+          echo "squeak-versions joined=${{ join(fromJson(needs.args.outputs.squeak-versions), '---') }}"
           echo "squeak-versions joined=${{ join(fromJson(needs.args.outputs.squeak-versions), '---') }}"
           echo "scale-factor=${{ needs.args.outputs.scale-factor }}"
   tests:
