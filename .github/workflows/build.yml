@@ -47,6 +47,16 @@ jobs:
           ${{ toJson(fromJson(inputs.squeak-versions || '["Trunk", "6.0"]')) }}
           EOF" >> $GITHUB_OUTPUT
           echo "scale-factor=${{ inputs.scale-factor || '2.5' }}" >> $GITHUB_OUTPUT
+  debug-args:
+    name: 📦 Debug arguments
+    needs: [args]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Debug
+        run: |
+          echo "draft-release=${{ needs.args.outputs.draft-release }}"
+          echo "squeak-versions=${{ needs.args.outputs.squeak-versions }}"
+          echo "scale-factor=${{ needs.args.outputs.scale-factor }}"
   tests:
     name: 🐞 Internal tests [${{ matrix.smalltalk }}]
     needs: [args]
