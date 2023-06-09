@@ -42,9 +42,9 @@ jobs:
       - name: Prepare
         id: prepare
         run: |
-          echo ::set-output name=draft-release::${{ inputs.draft-release || 'false' }}
-          echo ::set-output name=squeak-versions::${{ toJson(fromJson(inputs.squeak-versions || '["Trunk", "6.0"]')) }}
-          echo ::set-output name=scale-factor::${{ inputs.scale-factor || '2.5' }}
+          echo "draft-release=${{ inputs.draft-release || 'false' }}" >> $GITHUB_OUTPUT
+          echo "squeak-versions=${{ toJson(fromJson(inputs.squeak-versions || '["Trunk", "6.0"]')) }}" >> $GITHUB_OUTPUT
+          echo "scale-factor=${{ inputs.scale-factor || '2.5' }}" >> $GITHUB_OUTPUT
   tests:
     name: 🐞 Internal tests [${{ matrix.smalltalk }}]
     needs: [args]
