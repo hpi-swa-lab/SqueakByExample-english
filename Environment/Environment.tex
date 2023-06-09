@@ -786,7 +786,7 @@ Instead of getting the expected answer \ct{'txt'}, a \clsind{PreDebugWindow} pop
 \begin{ExecuteSmalltalkScript}
 "debuggers"
 SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
-	| home debugger codePane contextVarList |
+	| home workspace debugger codePane contextVarList |
 	home := thisContext.
 	recorder writeTo: 'PreDebugWindow.png' building: [:helper |
 		thisContext wrap: [:block | helper restoreMethods: {String >> #suffix} after: block].
@@ -798,8 +798,13 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 	^ self copyFrom: dotPosition to: self size'
 .
 		helper
-			runModal: ['readme.txt' suffix]
+			runModal: [
+				"don't run the code directly but use printIt to set up the DoIt context stack"
+				'''readme.txt'' suffix' edit.
+				workspace := helper foregroundWindow.
+				helper keyStroke: workspace key: $p modifiers: #(cmd)]
 			then: [
+				workspace delete.
 				helper takeScreenshot.
 
 				"Next screenshots"
