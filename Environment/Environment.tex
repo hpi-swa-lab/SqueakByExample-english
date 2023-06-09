@@ -1158,10 +1158,15 @@ Another problem you might encounter while debugging is that the system encounter
 For example, when you have a \ct{halt} in a loop working on the characters of a long string, you might only be interested in the loop iteration in which a separator is encountered, which unfortunately is the last third of the string.
 To only interrupt the execution whenever a condition is met, for example, the separator character was read from the string, you can use \mthind{Object}{haltIf:}.
 The method accepts a block that tests for the condition.
+Alternatively, you can pass a selector and the debugger will stop as soon as a method appears on the stack that matches this selector.
 
-Finally, you can interactively set for which methods the execution should be interrupted.
+You can also interactively set for which methods the execution should be interrupted.
 You can do so in the yellow button menu on any list of methods via the option \menu{break on entry}.
 When you activate it, a debugger will open every time an execution enters the method.
+
+\SqVersionSwitch{6.1}{%
+	Finally, there is the combination of the two special selectors, combining their features: \mthind{Object}{haltOnceIf:}.
+}
 
 % section debugger (end)
 
