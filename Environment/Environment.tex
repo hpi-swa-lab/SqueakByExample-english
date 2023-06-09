@@ -264,11 +264,11 @@ SBEScreenshotRecorder writeTo: './figures/SendersOfCheckExtent.png' frame: #morp
 \begin{figure}[htbp]
 	\begin{center}
    \ifluluelse
-		{\includegraphics[width=\textwidth]{SendersOfcheckExtent}}
-		{\includegraphics[scale=0.7]{SendersOfcheckExtent}}
+		{\includegraphics[width=\textwidth]{SendersOfCheckExtent}}
+		{\includegraphics[scale=0.7]{SendersOfCheckExtent}}
 	\end{center}
 	\caption{A Class Browser opened on the \lct{ScaleMorph} class. Note the horizontal bar of buttons at the center of the browser; here we are using the \lct{senders} button.}
-	\label{fig:SendersOfcheckExtent}
+	\label{fig:SendersOfCheckExtent}
 \end{figure}
 
 \index{system browser!implementors button}
@@ -556,17 +556,17 @@ Many of the functions offered by the classic browser are implemented by \ct{Syst
 \dothis{
 Open a workspace and \menu{do it} the following code to browse the senders of \ct{checkExtent:}:}
 \begin{code}{}
-SystemNavigation default browseAllCallsOn: #checkExtent:.
+self systemNavigation browseAllCallsOn: #checkExtent:.
 \end{code}
 To restrict the search for senders to the methods of a specific class:
 \begin{code}{}
-SystemNavigation default browseAllCallsOn: #drawOn: from: ScaleMorph.
+self systemNavigation browseAllCallsOn: #drawOn: from: ScaleMorph.
 \end{code}
 Because the development tools are objects, they are completely accessible from programs and you can develop your own tools or adapt the existing tools to your needs.
 
 The programmatic equivalent to the \button{implementors} button is:
 \begin{code}{}
-SystemNavigation default browseAllImplementorsOf: #checkExtent:.
+self systemNavigation browseAllImplementorsOf: #checkExtent:.
 \end{code}
 
 To learn more about what is available, explore the class \ct{SystemNavigation} with the browser.
@@ -1019,7 +1019,7 @@ The method comment in \ct{suffix} is not very precise.
 A good way to avoid this kind of problem is to write an \ind{SUnit} test that defines the answer.
 As you will see in the following example, we can also use the tests to advance our debugging sessions quickly.
 
-We start by adding the following test method \mthref{testSuffix} to \ct{StringTest}.
+We start by adding the following test \mthref{testSuffix} to \ct{StringTest}.
 
 \begin{method}[testSuffix]{A simple test for the \ct{suffix} method}
 testSuffixFound
@@ -1302,7 +1302,7 @@ In order to develop effectively with Squeak, it is important to invest some effo
   The system browser offers several useful buttons to directly jump to senders or implementors of a message, versions of a method, and so on.
   \item There exist several different class browsers (such as the System Browser and the Snapshot Browser from Monticello), and several specialized browsers (such as the hierarchy browser) which provide different views of classes and methods.
   \item From any of the tools, you can highlight the name of a class or a method and immediately jump to a browser by using the keyboard shortcut \short{b}.
-  \item You can also browse the \st system programmatically by sending messages to \ct{SystemNavigation default}.
+  \item You can also browse the \st system programmatically by sending messages to \ct{self systemNavigation}.
   \item The \emph{inspector} (\short{i}) and the \emph{explorer} (\short{I}) are two tools that are useful for exploring and interacting with live objects in your image.
   You can even inspect tools by blue-clicking to bring up their morphic halo and selecting the debug handle \debugHandle.
   \item The \emph{debugger} is a tool that not only lets you inspect the run-time stack of your program when an error is raised, but it also enables you to interact with all of the objects of your application, including the source code.

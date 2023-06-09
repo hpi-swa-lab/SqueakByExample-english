@@ -185,7 +185,7 @@ SBEScreenshotRecorder writeTo: './figures/AcceptClassDef.png' frame: [:rect | re
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{AcceptClassDef}}}
 	{\centerline {\includegraphics[scale=0.7]{AcceptClassDef}}}
-\caption{The class-creation template.
+\caption{Accepting the new class definition.
 \label{fig:acceptClassDef}}
 \end{figure}
 
@@ -324,18 +324,25 @@ Notice how the bounds reported by the inspector also change.
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/SBECellResize.png' frame: #morphs building: [:helper |
-  | cell window list bottomPane |
-  cell := SBECell new.
-  cell inspect.
-  window := helper foregroundWindow.
-  list := helper listMorphIncludingMatch: #bounds in: window.
-  list changeModelSelection: 3.
-  bottomPane := window findDeepSubmorphThat: [:m | m isTextView and: [m text isEmptyOrNil]] ifAbsent: [self error: 'bottom pane not found'].
-  bottomPane setText: 'self openInWorld'; doIt.
-  cell position: 100 px @ 100 px; extent: 98 px @ 89 px.
-  window position: 350 px @ 50 px.
-  cell addHalo.
-  (NewBalloonMorph string: 'Change size' for: cell) popUpAt: cell bottomRight + 31 px.
+	| cell window list bottomPane |
+	cell := SBECell new.
+	cell inspect.
+
+	window := helper foregroundWindow.
+	list := helper listMorphIncludingMatch: #bounds in: window.
+	helper select: list at: 'bounds'.
+	bottomPane := window findDeepSubmorphThat: [:m | m isTextView and: [m text isEmptyOrNil]] ifAbsent: [self error: 'bottom pane not found'].
+	bottomPane setText: 'self openInWorld'; doIt.
+
+	cell position: 100 px @ 100 px; extent: 98 px @ 89 px.
+	window position: 350 px @ 50 px.
+	cell addHalo.
+
+	helper mouseMoveTo: ((cell halo handles detectMax: [:h | h position r]) pointAtFraction: 2 / 3) buttons: #() in: helper world.
+	Preferences balloonHelpDelayTime milliSeconds wait.
+	helper world doOneCycleNow.
+	(helper world findA: NewBalloonMorph) setText: 'Change size'.
+	helper spawnBalloon; spawnHand
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htbp]
@@ -760,7 +767,7 @@ There is a variety of ways to do this, from ad-hoc sharing via exported files, t
 The simplest way of doing this is by \emph{filing out} the code.
 The yellow-button menu in the System Categories pane will give you the option to file out the whole of category \scat{SBE-Quinto}.
 The resulting file is more or less human-readable, but is really intended for computers, not humans.
-You can email this file to your friends, and they can file it into their own \squeak images using the file list browser.
+You can email this file to your friends, and they can file it into their own \squeak images using drag-and-drop.
 \seeindex{saving code}{categories}
 \seeindex{category!filing out}{file, filing out}
 \seeindex{class!filing out}{file, filing out}
@@ -771,7 +778,7 @@ You can email this file to your friends, and they can file it into their own \sq
 You should now find a file called ``SBE-Quinto.st'' in the same folder on disk where your image is saved.
 Have a look at this file with a text editor.
 
-\dothis{Open a fresh \squeak image and drag the exported file onto the running Squeak.
+\dothis{Open a fresh \squeak image, drag the exported file onto the running Squeak, and choose \emph{file in entire file}.
 Verify that the game now works in the new image.}
 \seeindex{category!filing in}{file, filing in}
 \seeindex{class!filing in}{file, filing in}
@@ -812,7 +819,7 @@ At the top of the list in the Monticello browser is a repository in a local dire
 This local cache is really handy because it lets you keep your own local history; it also allows you to work in places where you do not have internet access, or where access is slow and you do not want to save to a remote repository frequently.
 
 
-\subsection{Saving and loading code with Monticello.}
+\subsection{Saving and loading code with Monticello}
 On the left-hand side of the Monticello browser is a list of packages that have a version loaded into the image; packages that have been modified since they were loaded are marked with an asterisk.
 (These are sometimes referred to as \emph{\subind{package}{dirty} packages}.)
 If you select a package, the list of repositories is restricted to just those repositories that contain a copy of the selected package.
@@ -825,7 +832,7 @@ Since we put all of the code for the Quinto game into the class category called 
 
 \dothis{Add the \ct{SBE-Quinto} package to your Monticello browser using the \button{+Package} button and type \ct{SBE-Quinto}.}
 
-\subsection{\ind{SqueakSource}: a sharing platform for Monticello.}
+\subsection{\ind{SqueakSource}: a sharing platform for Monticello}
 We think that the best way to save your code and share it is to create an account for your project on a SqueakSource server.
 SqueakSource is like GitHub\footnote{\url{www.github.com}}:
 It is a web front-end to an HTTP Monticello server that lets you manage your projects.
@@ -909,7 +916,7 @@ You have seen how to use the system browser, the inspector, the debugger, and th
   \item The system browser detects usage of undeclared methods and variables, and offers possible corrections.
   \item The \ct{initialize} method is automatically executed after an object is created in \squeak.
   You can put any initialization code there.
-  \item The debugger provides a high-level GUI to inspect and modify the state of a running program.
+  \item The debugger provides a high-level GUI to inspect the state of a halted program and run it step-by-step.
   \item You can share source code \emph{filing out} a category.
   \item A better way to share code is to use Monticello to manage an external repository, for example, defined as a SqueakSource project.
 \end{itemize}

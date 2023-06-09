@@ -247,10 +247,13 @@
 			buildingForm: [ :helper |
 				helper haloHandleFormFor: each second ] ]
 \end{ExecuteSmalltalkScript}
-\newcommand{\grabHandle}{\raisebox{-0.2ex}{\includegraphics[width=1em]{blackHandle}}}
-\newcommand{\moveHandle}{\raisebox{-0.2ex}{\includegraphics[width=1em]{moveHandle}}}
-\newcommand{\debugHandle}{\raisebox{-0.2ex}{\includegraphics[width=1em]{debugHandle}}}
-\newcommand{\rotateHandle}{\raisebox{-0.2ex}{\includegraphics[width=1em]{rotateHandle}}}
+\usepackage{textcomp}  % Required for encoding \textbigcircle
+\usepackage{scalerel}  % Required for emoji \scalerel
+\newcommand{\haloHandle}[1]{\scalerel*{\includegraphics{#1}}{\textrm{\textbigcircle}}}
+\newcommand{\grabHandle}{\haloHandle{blackHandle}}
+\newcommand{\moveHandle}{\haloHandle{moveHandle}}
+\newcommand{\debugHandle}{\haloHandle{debugHandle}}
+\newcommand{\rotateHandle}{\haloHandle{rotateHandle}}
 %=============================================================
 %:Highlighting Important stuff (doublebox)
 %
@@ -608,3 +611,19 @@
 %\setlength{\marginparsep}{2mm}
 %\renewcommand{\baselinestretch}{1.1}
 %=============================================================
+
+
+\makeatletter \def\IfEnvir #1%
+% implicit #2 "what if true"
+% implicit #3 "what if false"
+{%
+  \ifnum \pdfstrcmp{\@currenvir}{#1}=0
+    \expandafter\@firstoftwo
+  \else
+    \expandafter\@secondoftwo
+  \fi
+}
+
+\makeatother
+
+\newcommand{\tikzifintikzpicture}[2]{\IfEnvir{tikzpicture}{#1}{#2}}

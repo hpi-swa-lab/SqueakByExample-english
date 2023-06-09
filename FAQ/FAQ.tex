@@ -145,8 +145,8 @@ How do I find/browse all sends to super?
 \answer
 The second solution is much faster:
 \begin{code}{}
-SystemNavigation default browseMethodsWithSourceString: 'super'.
-SystemNavigation default browseAllSelect: [:method | method sendsToSuper ].
+self systemNavigation browseMethodsWithSourceString: 'super'.
+self systemNavigation browseAllSelect: [:method | method sendsToSuper ].
 \end{code}
 \index{browsing programmatically}
 \clsindex{SystemNavigation}
@@ -156,7 +156,7 @@ How do I browse all super \subind{super}{send}{}s within a hierarchy?
 \end{faq}
 \answer
 \begin{code}{}
-browseSuperSends := [:aClass | SystemNavigation default
+browseSuperSends := [:aClass | self systemNavigation
 	browseMessageList: (aClass withAllSubclasses gather: [ :each |
 		(each methodDict associations
 			select: [ :assoc | assoc value sendsToSuper ])
@@ -221,7 +221,7 @@ Smalltalk allClasses select: [:each | each hasTraitComposition]
 How can I show images in Morphic?
 \end{faq}
 \answer
-An first and easy way to get an image into \sq is by dragging the image file into the environment and dropping it directly within the world and selecting \menu{open graphic in a window}.
+A first and easy way to get an image into \sq is by dragging the image file into the environment and dropping it directly within the world and selecting \menu{open graphic in a window}.
 This will create an \clsind{ImageMorph} in the world.
 
 \noindent Alternatively, you can also create an \ct{ImageMorph} through code, for example using the following expression, if the image file is in the default folder:

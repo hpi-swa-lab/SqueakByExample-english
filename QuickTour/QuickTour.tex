@@ -960,25 +960,24 @@ If you click on that line of text, the erroneous test will run again, this time 
 \seeindex{\ct{>>}}{Behavior, \ct{>>}}
 \cmindex{Behavior}{>>}
 
-The window that opens with the error message is the \st debugger (see \figref{predebugger}).
-\ab{Well, it's actually the \emph{pre-}debugger.  Does this matter?}\damien{I don't think it's important at this point.}
-We will look at the \ind{debugger} and how to use it in \charef{env}.
-
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/Predebugger.png' frame: #morphs building: [:helper |
-	helper restoreMethods: ((String lookupSelector: #shout) ifNotNil: [{String>>#shout}] ifNil: [#()]) after: [
-		String removeSelector: #shout.
-		helper runModal: [StringTest new testShout].
-	]
+		helper restoreMethods: ((String lookupSelector: #shout) ifNotNil: [{String>>#shout}] ifNil: [#()]) after: [
+			String removeSelector: #shout.
+			helper runModal: [StringTest new testShout].
+		]
 ]
 \end{ExecuteSmalltalkScript}.
 \begin{figure}[hbt]
-\ifluluelse
-	{\centerline {\includegraphics[width=0.75\textwidth]{Predebugger}}}
-	{\centerline {\includegraphics[scale=0.7]{Predebugger}}}
-\caption{The (pre-)debugger.}
-\label{fig:predebugger}
+	\ifluluelse
+		{\centerline {\includegraphics[width=0.75\textwidth]{Predebugger}}}
+		{\centerline {\includegraphics[scale=0.7]{Predebugger}}}
+	\caption{The (pre-)debugger.}
+	\label{fig:predebugger}
 \end{figure}
+
+The window that opens with the error message is the \st debugger (see \figref{predebugger}).
+We will look at the \ind{debugger} and how to use it in \charef{env}.
 
 The error is, of course, exactly what we expected:
 Running the test generates an error because we haven't yet written a method that tells strings how to \ct{shout}.
