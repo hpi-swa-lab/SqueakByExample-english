@@ -330,7 +330,7 @@ SBEScreenshotRecorder writeTo: './figures/SBECellResize.png' frame: #morphs buil
 
 	window := helper foregroundWindow.
 	list := helper listMorphIncludingMatch: #bounds in: window.
-	list select: list at: 'bounds'.
+	helper select: list at: 'bounds'.
 	bottomPane := window findDeepSubmorphThat: [:m | m isTextView and: [m text isEmptyOrNil]] ifAbsent: [self error: 'bottom pane not found'].
 	bottomPane setText: 'self openInWorld'; doIt.
 
