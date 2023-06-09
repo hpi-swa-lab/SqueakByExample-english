@@ -1,0 +1,741 @@
+% $Author$
+% $Date$
+% $Revision$
+%=================================================================
+\ifx\wholebook\relax\else
+% --------------------------------------------
+% Lulu:
+\documentclass[a4paper,10pt,twoside]{book}
+\usepackage[
+	papersize={6.13in,9.21in},
+	hmargin={.815in,.815in},
+	vmargin={.98in,.98in},
+	ignoreheadfoot
+]{geometry}
+\input{../common.tex}
+\pagestyle{headings}
+\setboolean{lulu}{true}
+% --------------------------------------------
+% A4:
+%	\documentclass[a4paper,11pt,twoside]{book}
+%	\input{../common.tex}
+%	\usepackage{a4wide}
+% --------------------------------------------
+\graphicspath{{figures/} {../figures/}}
+\begin{document}
+\renewcommand{\nnbb}[2]{} % Disable editorial comments
+\fi
+%=================================================================
+\chapter{Storing and sharing source code}
+\label{cha:VersionControl}
+
+The consequence of programming in a world of live objects rather than with files and a text editor is that you have to do something explicit to export your program from your Smalltalk image.
+The old way of doing this, also supported by all Smalltalk dialects, is by creating a \emph{fileout} or a \emph{change set}, which are essentially encoded text files that can be imported into another system.
+A newer way of doing this in \Squeak is to upload your code to a versioned repository on a server using a tool called \ind{Monticello}.
+Both have their strengths and weaknesses: Monticello makes it easier to track and distribute changes, especially when working in a team, while change sets do not require you to set up a server repository and a package organization.
+\seeindex{change set}{file, filing out}
+\index{file!filing out}
+
+In this chapter, we will look at the tools that \Squeak provides for sharing and storing source code:
+
+\begin{itemize}
+	\item{The \menu{Monticello Browser}} is the starting point for loading code from, and saving code in, \ind{Monticello} packages.
+	\item{Using the \menu{Change Sorter},} you can organize your source code modifications, review the code, and write it to a file.
+	\item{The \menu{File List Browser} allows you to browse the local file system on your machine, including an option to load source code from a file into your image.}
+	\item{Through the \menu{Change List Browser}}, you can recover any code changes that you have made to your image, even if you have not saved your image.
+	\item{\menu{Git Tools}} make it possible to manage your source code using the \ind{Git} version control system from within \Squeak.
+\end{itemize}
+
+%=========================================================
+\section{Packages and Monticello}
+\label{sec:packages_and_monticello}
+
+We gave you a quick overview of \ind{Monticello}, \Squeak's packaging tool, in \secref{Monticello}.
+However, Monticello has many more features than were discussed there.
+Monticello manages \emph{Packages}. 
+Thus, before telling you more about Monticello, we will first explain exactly what a \ind{package} is.
+
+%---------------------------------------------------------
+\subsection{Packages: declarative categorization of Squeak code}
+
+The package system is a simple, lightweight way of organizing Smalltalk source code.
+It leverages the long-used naming convention of \sq (\secref{package-names}), but adds to it in an important way.
+
+Let's look at this in an example.
+Suppose that you are developing a framework to facilitate the use of relational databases from Squeak.
+You have decided to call your framework \ct{SqueakLink}, and have created a series of system categories to contain all of the classes that you have written, \eg*:
+
+\begin{itemize}
+\item the category \ct{'SqueakLink-Connections'} contains classes \ct{OracleConnection}, \ct{MySQLConnection}, \ct{PostgresConnection},
+\item the category \ct{'SqueakLink-Model'} contains \ct{DBTable}, \ct{DBRow}, \ct{DBQuery}.
+\end{itemize}
+
+We will manage the code for these classes in a package named \ct{SqueakLink}.
+
+\subsubsection{Extension methods}
+
+However, not all of your code will reside in these classes.
+For example, you may also have a series of methods to convert objects into an SQL-friendly format:
+
+\begin{code}{}
+Object>>>asSQL
+String>>>asSQL
+Date>>>asSQL
+\end{code}
+
+\noindent
+These methods belong in the same package as the classes in the categories \ct{SqueakLink-Connections} and \ct{SqueakLink-Model}.
+But clearly the whole of class \ct{Object} does not belong in your package!
+So you need a way of putting certain \emph{methods} in a package, even though the rest of the class is in another package.
+\index{package!extension}
+\seeindex{extension method}{package, extension}
+
+This is where the concept of \emphind{extension methods} comes in.
+You can mark these converter methods as extension methods by placing them in a protocol (of \ct{Object}, \ct{String}, \ct{Date}, and so on) named \prot{*SqueakLink-Model-converting} (note the initial asterisk).
+As a result, the three methods are now being managed as part of the SqueakLink package.
+In general, any method in any protocol that starts with an asterisk, followed by a package name, followed by a hyphen, is an extension method to that package.
+
+\subsubsection{Override methods}
+
+Sometimes, you may also want to alter a method from another package that already exists and store the changed method in your package.
+For instance, this can be required if you need to extend an existing feature or fix a bug in the standard Squeak image.
+Let's say that you want to add a menu item to an inspector's context menu for opening its SQL version.
+Therefore, you have edited \ct{Inspector>>addObjectItemsTo:} and now would like to check it into your package repository.
+\index{package!extension!overriding}
+\seeindex{override method}{package, extension, overriding}
+
+While you could place it in a simple extension protocol as above, this would introduce some problems:
+First, the method would be displayed as missing in the original package, so the package would unintentionally become dirty.
+Second, if you unloaded your own package again, the original method would be lost.
+
+A better way to do this is to mark the method as an \ind{overriding method} by placing it in a protocol named \prot{*SqueakLink-menu-override}.
+In general, an override protocol is an extension protocol that ends with the suffix \prot{-override}.
+Usually, it's a good idea to repeat the name of the original protocol in the override protocol name.
+
+However, beware that every change to an existing package might break other packages that depend on it.
+Thus, use override methods as seldom as possible.
+Often, there are better ways to extend the functionality of a package, such as subclassing or using explicit hooks\footnote{Actually, there is a better way to extend the menu in our example: Place a new (non-override) extension method named \ct{squeakLinkMenu:} in the \ct{Inspector} class and add the pragma \ct{<fieldListMenu>} to it.}.
+
+\subsubsection{Surveying the contents of a package}
+
+The combination of the \scat{SqueakLink-...} categories and the \prot{*SqueakLink-...} protocols form the package named \ct{SqueakLink}.
+To be precise, the rules for what goes in a package are as follows.
+
+A package named \ct{Foo} contains:
+
+\begin{enumerate}\label{sec:packageRules}
+	\item{} all class definitions of classes in the category \scat{Foo}, or in categories with names starting with \scat{Foo-} (or \scat{foo-}, \scat{fOO}, \autc, as Monticello ignores the case of the letters),
+	\item{} \label{env:extensions} all method definitions in any class in a protocol named \prot{*Foo} or whose name starts with \prot{*Foo-},
+	and
+	\item{} all methods in classes in the category \scat{Foo} or in a category whose name starts with \scat{Foo-}, \emph{except} for those methods in protocols whose names start with \prot{*}.
+\end{enumerate}
+\noindent
+A consequence of these rules is that each class definition and each method belongs to exactly one package.
+% ct: This is NOT true if you define multiple packages that overlap each other, e.g., Kernel and Kernel-Exceptions! Should we mention that?
+The \emph{exception} in the last rule takes care of excluding methods that belong to other packages.
+
+The class \ct{PackageInfo} implements these rules, and one way to get a feel for them is to experiment with this class.
+
+\dothis{Try this in your image, which should contain the classes \ct{PackageInfo} and \ct{Morph}.}
+
+The Morphic code uses these package naming conventions, with \lct{Morphic} as the package name.
+In a workspace, create a model of this package with
+\index{refactoring}
+
+\begin{code}{}
+morphic := PackageInfo named: 'Morphic'.
+\end{code}
+
+It is now possible to introspect on this package.
+For example, \ct{morphic classes} will return the long list of classes from the core of Morphic as well as a number of specific Morph classes.
+\ct{morphic coreMethods} will return a list of \ct{MethodReference}s for all of the methods in those classes.
+\ct{morphic extensionMethods} is perhaps one of the most interesting queries:
+It will return a list of all methods contained in the \ct{Morphic} package but not contained within a \lct{Morphic} class.
+This includes, for example, \ct{Object>>>asDraggableMorph:} and \ct{Text>>>embeddedMorphs}.
+
+\dothis{Evaluate \ct{(PackageInfo named: 'Collections') externalSubclasses}; this expression will answer a list of all subclasses of \ct{Collection} that are \emph{not} in the \ct{Collections} package.}
+
+You can send \ct{fileOut} to an instance of \ct{PackageInfo} to get a change set of the entire package.
+For more sophisticated versioning of packages, we use Monticello.
+\index{file!filing out}
+
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/browsePackageExtensions.png' building: [:helper |
+	| browser window |
+	browser := SystemBrowser defaultOpenBrowser.
+	window := helper foregroundWindow.
+	browser class name = #TreeBrowser
+		ifTrue: [ ">= Squeak 6.1"
+			helper selectAnyListOrTreeIn: window at: (browser systemCategoryLabel: #Morphic) andScrollIntoViewBy: 9]
+		ifFalse:
+			[helper selectAnyListIn: window at: 'Morphic-Kernel' andScrollIntoViewBy: 9].
+	"helper selectAnyListOrTreeIn: window at: 'Morph' andScrollIntoViewBy: 1." "too much visual clutter"
+	helper
+		click: window at: (window pointAtFraction: 1 / 4 * 2 / 3 @ 0) + (7 px @ 40 px) buttons: #(right);
+		mouseMoveTo: (helper menuItemMorphLabeled: 'browse package*' in: helper world) center buttons: #() in: helper world;
+		mouseMoveTo: (helper menuItemMorphLabeled: 'extensions' in: helper world) center buttons: #() in: helper world
+].
+\end{ExecuteSmalltalkScript}
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=\textwidth]{browsePackageExtensions.png}
+	\end{center}
+	\caption{Browsing all extension methods of the package \ct{Morphic}.}
+	\label{fig:browsePackageExtensions}
+\end{figure}
+
+If you do not feel like playing with the \ct{PackageInfo} class manually, you can also use the package pane browser introduced in \secref{otherBrowsers}.
+You can also browse all extension methods of a package by opening a yellow-button menu on any package or system category in the browser and selecting \ct{browse package extensions} (see \figref{browsePackageExtensions}).
+
+%---------------------------------------------------------
+\subsection{Basic Monticello}
+
+\ind{Monticello} is named after the mountaintop home of Thomas Jefferson, third president of the United States and author of the Statute of Virginia for Religious Freedom.
+The name means ``little mountain'' in Italian and so it is always pronounced with an Italian ``c'' (\textipa{[m\textsecstress OntIS"EloU]}, which sounds like \emph{Mont-y'-che-llo}).
+
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/freshMonticello.png' frame: #morphs building: [:helper |
+  MCWorkingCopyBrowser open
+]
+\end{ExecuteSmalltalkScript}
+\begin{figure}[btp]
+	\begin{center}
+	\ifluluelse
+		{\includegraphics[width=\textwidth]{freshMonticello}}
+		{\includegraphics[scale=0.7]{freshMonticello}}
+	\end{center}
+	\caption{The Monticello browser.}
+	\label{fig:freshMonticello}
+\end{figure}
+
+When you open the Monticello browser, you will see two list panes and a row of buttons, as shown in \figref{freshMonticello}.
+The left-hand pane lists all of the packages that have been loaded into the image that you are running; the particular version of the package is shown in parentheses after the name.
+
+The right-hand pane lists all of the source-code repositories that Monticello knows about, usually because it has loaded code from them.  If you select a package in the left pane, the right pane is filtered to show only those repositories that contain versions of the selected package.
+
+One of the repositories is a directory named \emph{package-cache}, which is a subdirectory of the directory in which your image is running.
+When you load code from or write code to a remote repository, a copy is also saved in the package cache.
+This can be useful if the network is not available and you need to access a package.
+Also, if you are given a Monticello (.mcz) file directly, for example as an email attachment, the most convenient way to access it is to place it in the package-cache directory.
+\index{package!cache}
+
+To add a new repository to the list, click the \button{+Repository}, and choose the kind of repository from the pop-up menu.
+Let's add an HTTP repository.
+
+\dothis{Open Monticello, click on \button{+Repository}, and select \menu{HTTP}.
+Edit the dialog to read:}
+\needlines{4}
+\begin{code}{}
+MCHttpRepository
+	location: 'http://squeaksource.com/SqueakByExample'
+	user: ''
+	password: ''
+\end{code}
+
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/SqueakSource-SBE.png' frame: #morphs building: [:helper |
+	| window packageList |
+	helper mcCachePackages: #('SBE-QuickTour' 'SBE-Streams') during: [
+		helper hideProgressMorph.
+		MCCacheRepository default morphicOpen.
+		window := helper foregroundWindow.
+		packageList := helper listMorphIncludingMatch: 'SBE-QuickTour' in: window.
+		window model versionSelection: 1]
+]
+\end{ExecuteSmalltalkScript}
+\begin{figure}[btp]
+	\begin{center}
+	\ifluluelse
+		{\includegraphics[width=\textwidth]{SqueakSource-SBE}}
+		{\includegraphics[scale=0.7]{SqueakSource-SBE}}
+	\end{center}
+	\caption{A repository browser.}
+	\label{fig:SqueakSource:SBE}
+\end{figure}
+\noindent
+Then click on \button{Open} to open a repository browser on this repository.
+You should see something like \figref{SqueakSource:SBE}.
+On the left is a list of all of the packages in the repository; if you select one, then the pane on the right will show all of the versions of the selected package in this repository.
+
+If you select one of the versions, you can \button{Browse} it (without loading it into your image), \button{Load} it, or look at the \button{Changes} that will be made to your image by loading the selected version.
+If you have local changes to the package you want to load, you should use \button{Merge}, as \button{Load} will fully load the selected version and thereby delete your own changes.
+You can also make a \button{Copy} of a version of a package, which you can then write to another repository.
+
+As you can see, the names of versions contain the name of the package, the initials of the author of the version, and a version number.
+The version name is also the name of the file in the repository.
+Never change these names; the correct functionality of Monticello depends on them!
+Monticello version files are just zip archives, and if you are curious you can unpack them with a zip tool, but the best way to look at their contents is using Monticello itself.
+
+To create a package with Monticello, you have to do two things: write some code, and tell Monticello about it.
+
+\dothis{Create a category called \scat{SBE-Monticello}, and put a couple of classes in it, as shown in \figref{MCnewcategory}.
+	Also, create a method in an existing class, and put it in the same package as your classes, using the rules from page \pageref{sec:packageRules}\,---\,see \figref{MCnewmethod}.}
+
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/MCnewcategory.png' frame: #morphs building: [:helper |
+	ToolSet browse: SBEGoodClass selector: #trialMethod.
+	helper scaleWindow: helper foregroundWindow.
+]
+\end{ExecuteSmalltalkScript}
+\begin{figure}[btp]
+	\begin{center}
+	\ifluluelse
+		{\includegraphics[width=\textwidth]{MCnewcategory}}
+		{\includegraphics[scale=0.7]{MCnewcategory}}
+	\end{center}
+	\caption{Two classes in the ``SBE'' package.}
+	\label{fig:MCnewcategory}
+\end{figure}
+
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/MCnewmethod.png' frame: #morphs building: [:helper |
+	ToolSet browse: Object selector: #exampleMethod.
+	helper scaleWindow: helper foregroundWindow.
+]
+\end{ExecuteSmalltalkScript}
+\begin{figure}[btp]
+	\begin{center}
+	\ifluluelse
+		{\includegraphics[width=\textwidth]{MCnewmethod}}
+		{\includegraphics[scale=0.7]{MCnewmethod}}
+	\end{center}
+	\caption{An extension method that will also be in the ``SBE'' package.}
+	\label{fig:MCnewmethod}
+\end{figure}
+
+To tell Monticello about your package, click on \button{+Package}, and type the name of the package, in this case ``SBE''.
+Monticello will add \ct{SBE} to its list of packages; the package entry will be marked as \emph{dirty} with an asterisk to show that the changes in the image have not yet been written to any repository.
+
+Initially, the only repository associated with this package will be your package cache, as shown in \figref{MC+SBE}.
+That's OK:
+You can still save the code, which will cause it to be written to the package cache.
+Just click \button{Save} and you will be invited to provide a log message for the version of the package that you are about to save, as shown in \figref{SBE-apb}; when you accept the message, Monticello will save your package.
+To indicate this, the asterisk decorating the name in Monticello's package pane will be removed, and the version number added.
+
+If you then make a change to the package\,---\,say by adding a method to one of the classes\,---\,the asterisk will re-appear, showing that you have unsaved changes.
+If you open a repository browser on the package cache, you can select the saved version, and use \button{Changes} and the other buttons.
+You can of course save the new version to the repository too; once you \button{Refresh} the repository view, it should look like \figref{package-cache-browser}.
+\index{package!cache}
+
+\begin{ExecuteSmalltalkScript}
+"SBEMonticelloSeries"
+SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
+	thisContext wrap: [:block | helper mcIgnoreAllModificationsBut: #('SBE') during: block].
+	helper hideProgressMorph.
+
+	MCWorkingCopyBrowser open.
+	picture writeTo: 'MC+SBE.png' frame: #morphs building: [
+		[helper click: (helper buttonLabeled: '+Package' in: helper foregroundWindow)]
+			valueSupplyingAnswer: #('Name of package*' 'SBE').
+		helper selectAnyListIn: helper foregroundWindow at: '(\* )?SBE \(.*\)' asRegex andScrollIntoViewBy: 5.
+	].
+	picture writeTo: 'SBE-apb.png' frame: #morphs building: [
+		helper selectAnyListIn: helper foregroundWindow at: '*package-cache*' andScrollIntoViewBy: 5.
+
+		[| relevantOperations |
+		relevantOperations := ((MCWorkingCopy forPackageNamed: 'SBE-Monticello') package snapshot
+			patchRelativeToBase: MCSnapshot empty) operations.
+		helper hideProgressMorph.
+		[[helper click: (helper buttonLabeled: 'Save' in: helper foregroundWindow)]
+			on: MCVersionNameAndMessageRequest
+			do: [:ex | ex resumeExcluding: relevantOperations]]
+				valueSuppressingMessages: #('*versions*may be newer*').
+		helper foregroundWindow delete] value.
+
+		helper
+			runModal: [helper click: (helper buttonLabeled: 'Save' in: helper foregroundWindow)]
+			then: [| messageField |
+				helper hideProgressMorph.
+				helper foregroundWindow comeToFront.
+				messageField := helper textMorphIn: helper foregroundWindow withTextMatching: '*log message*'.
+				helper focus: messageField.
+				messageField textMorph editor selectAt: 1; selectLine; backTo: 1.
+				helper type: 'Changes a few things.' into: messageField.
+				"messageField setText: 'Changes a few things.'; flag: #fallback."
+				helper scaleWindow: helper foregroundWindow extent: 375 @ 300.
+				helper takeScreenshotOf: helper foregroundWindow.
+
+				"This is preparation for the next screenshot"
+					[[helper click: (helper buttonLabeled: 'Accept' in: helper foregroundWindow)]
+							ifCurtailed: [helper world exportAsPNGNamed: (picture fileDirectory resolve: 'package-cache-browser.png') pathString; flag: #debug "https://github.com/hpi-swa-lab/SqueakByExample-english/issues/132"]]
+						valueSuppressingMessages: #('*message*empty*');
+						flag: #workaround].
+	].
+	picture writeTo: 'package-cache-browser.png' building: [
+		| window |
+		MCCacheRepository default morphicOpen.
+		helper hideProgressMorph.
+		window := helper foregroundWindow.
+		helper selectAnyListIn: helper foregroundWindow at: 'SBE'.
+		window model versionSelection: 1.
+		helper scaleWindow: helper foregroundWindow extent: 400 @ 275.
+		helper takeScreenshotOf: window.
+	].
+]
+\end{ExecuteSmalltalkScript}
+\begin{figure}[tbp]
+	\begin{center}
+		\includegraphics[width=\textwidth]{MC+SBE}
+	\end{center}
+	\caption{The as-yet-unsaved SBE package in Monticello.}
+	\label{fig:MC+SBE}
+\end{figure}
+
+\begin{figure}[tbp]
+	\begin{center}
+	\ifluluelse
+		{\includegraphics[scale=0.55]{SBE-apb}}
+		{\includegraphics[scale=0.6]{SBE-apb}}
+	\end{center}
+	\caption{Providing a log message for a new version of a package.}
+	\label{fig:SBE-apb}
+\end{figure}
+
+\begin{figure}[tbp]
+	\begin{center}
+	\includegraphics[width=0.6\textwidth]{package-cache-browser}
+	\end{center}
+	\caption{Two versions of our package are now in the package cache.}
+	\label{fig:package-cache-browser}
+\end{figure}
+
+To save the new package to a repository other than the package cache, you need to first make sure that Monticello knows about the repository, adding it if necessary.
+Then you can use the \button{Copy} in the package-cache repository browser, and select the repository to which the package should be copied.
+You can also associate the desired repository with the package by using the yellow button menu item \menu{add to package...} on the repository, as shown in \figref{associateRepository}.
+Once the package knows about a repository, you can save a new version by selecting the repository and the package in the Monticello Browser, and clicking \button{Save}.
+Of course, you must have permission to write to a repository.
+The \ct{SqueakByExample} repository on \emphind{SqueakSource} is world readable but not world writable, so if you try and save there, you will see an error message.
+However, you can create your own repository on \emph{SqueakSource} by using the web interface at \url{http://www.squeaksource.com}, and use this to save your work.
+This is especially useful as a mechanism to share your code with friends, or if you use multiple computers.
+
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/MCaddToPackage.png' building: [:helper |
+	| repositoryMatch repositoryList |
+	thisContext wrap: [:block | helper mcIgnoreAllModificationsDuring: block].
+	MCWorkingCopyBrowser open.
+	repositoryMatch := MCRepository packageCache description.
+	repositoryList := helper listMorphIncludingMatch: repositoryMatch in: helper foregroundWindow.
+	helper select: repositoryList at: repositoryMatch.
+	helper keyStroke: repositoryList key: Character escape.
+	helper menu
+		center: repositoryList center x @ 0;
+		top: ((helper boundsOfItemMatching: repositoryMatch in: repositoryList)
+			pointAtFraction: 0 @ 0.75) y.
+	helper select: helper menu at: 'add to package*'.
+	helper closeBalloons.
+]
+\end{ExecuteSmalltalkScript}
+\begin{figure}[tbp]
+	\begin{center}
+		\includegraphics[width=\textwidth]{MCaddToPackage}
+	\end{center}
+	\caption{Adding a repository to the set of repositories associated with a package.}
+	\label{fig:associateRepository}
+\end{figure}
+
+If you do try and save to a repository where you don't have write permission, a version will nevertheless be written to the package-cache.
+So you can recover by editing the repository information (yellow button menu in the Monticello Browser) or choosing a different repository, and then using \button{Copy} from the package-cache browser.
+
+\on{I have commented out the Advanced Monticello section for now, as it will surely not be ready for the first release.}
+\begin{comment}
+%---------------------------------------------------------
+\subsection{Advanced Monticello} % TO DO! <=======
+
+Monticello provides some quite sophisticated features for managing versions.
+\ab{I've no idea what these things are.}
+
+\damien{Moved from FirstApp where it was too complicated: A good trick
+  is to always develop in the same folder. This way you get a copy of
+  all the code that you publish on squeaksource on your local
+  machine. You can then backup and browse at will.
+
+}
+\subsubsection{Scripts}
+
+\subsubsection{Backporting}
+
+\subsubsection{Differences}
+
+\subsubsection{Adopting a new ancestor}
+
+\subsubsection{Setting dependencies}
+
+\subsubsection{Nested packages}
+
+One of the most important functions for a version management tool is to let the user build a package out of a number of smaller packages.
+For example, a complex package like refactoring support might be made up of the refactoring engine itself, a GUI, and the services interface that makes it accessible to other tools.
+Each of these components goes in its own package, and yet,  for the convenience of the user, the whole needs to be available as a single package.
+
+How is this accomplished using Monticello?  \ab{How indeed?  I hope that someone can write this section, because I haven't a clue, but would really like to know.}
+\end{comment}
+
+%=========================================================
+\section{Change sets and the change sorter}
+\label{sec:sc:changeSet}
+
+Whenever you are working in \sq, any changes that you make to methods and classes are recorded in a \ct{change set}.
+This includes creating new classes, re-naming classes, changing categories, adding methods to existing classes\,---\,just about everything of significance.
+However, arbitrary \emph{doits} are not included, so if, for example, you create a new global variable by assigning to it in a workspace, the variable creation will not make it into a \subind{file}{change set}.
+\index{change set browser}
+
+\begin{ExecuteSmalltalkScript}"changeSetBrowsers"
+| buildChangeSet buildChangeSorter |
+buildChangeSet := [:helper :outerBlock |
+	| methods |
+	thisContext wrap: [:block | ChangeSet newChangesNamed: 'My cool changeset' during: block].
+	methods := {
+		String >> #suffix.
+		StringTest >> #testSuffixFound }.
+	thisContext wrap: [:block | helper restoreMethods: methods after: block].
+helper touchMethods: methods.
+	outerBlock value].
+
+buildChangeSorter := [:helper |
+	| classList |
+	classList := helper selectAnyListIn: helper foregroundWindow at: 'String {*}'.
+	helper selectAnyListIn: helper foregroundWindow at: 'suffix*'.
+	helper hand newKeyboardFocus: nil.
+	classList].
+
+SBEScreenshotRecorder writeTo: './figures/changeSetBrowser.png' building: [:helper |
+	thisContext wrap: [:block | buildChangeSet value: helper value: block].
+	ChangeSorter open.
+	helper scaleWindow: helper foregroundWindow.
+	buildChangeSorter value: helper.
+].
+
+SBEScreenshotRecorder writeTo: './figures/dualChangeSorter.png' building: [:helper |
+	| sorter leftChangeSetMatch leftChangeList rightClassList |
+	thisContext wrap: [:block | buildChangeSet value: helper value: block].
+	thisContext wrap: [:block | ChangeSet newChangesNamed: 'String enhancements' during: block].
+	sorter := DualChangeSorter new.
+	sorter open.
+	helper scaleWindow: helper foregroundWindow.
+	leftChangeSetMatch := ChangeSet secondaryChangeSet name.
+	leftChangeList := helper foregroundWindow
+		findDeepSubmorphThat: [:m | m isPluggableListMorph and: [sorter isLeftSide: m model] and: [m getList anySatisfy: [:ea | leftChangeSetMatch match: ea]]]
+		ifAbsent: [NotFound signal].
+	helper select: leftChangeList at: leftChangeSetMatch asString.
+	rightClassList := buildChangeSorter value: helper.
+	helper click: rightClassList at: (helper boundsOfItemMatching: 'String*' in: rightClassList) center buttons: #(right).
+	helper select: helper menu at: 'move*to other*'.
+]
+\end{ExecuteSmalltalkScript}
+\begin{figure}[btp]
+	\begin{center}
+	\ifluluelse
+		{\includegraphics [width=\textwidth]{changeSetBrowser}}
+		{\includegraphics[scale=0.7]{changeSetBrowser}}
+	\end{center}
+	\caption{The change set browser.}
+	\label{fig:changeSetBrowser}
+\end{figure}
+
+At any time, many change sets exist, but only one of them\,---\,\ct{ChangeSet current}\,---\,is collecting the changes that are being made to the image.
+You can see which change set is current and can examine all of the change sets using the  change set browser, available from \menu{World~\go{} open...~\go{} simple change sorter} or \menu{World docking bar~\go{} Tools}.
+
+\figref{changeSetBrowser} shows this browser.
+The title bar shows which change set is current, and this change set is selected when the browser opens.
+
+Other change sets can be selected in the top-left pane; the yellow button menu allows you to make a different change set current (\menu{make changes go to me (m)}), or to create a new change set.
+The top-right pane lists all of the classes affected by the selected change set (with their categories).
+Selecting one of the classes displays the names of those of its methods that are also in the change set (\emph{not} all of the methods in the class) in the central pane, and selecting a method name displays the method definition in the bottom pane.
+If you do not select a method, the bottom pane also shows you whether the creation of the class itself is part of the change set.
+
+The change set browser also lets you delete classes and methods from the change set using the yellow button menu on the corresponding items.
+However, for more elaborate editing of change sets, you should use a second tool, the \textit{change sorter}, available under \menu{World docking bar~\go{} Tools} or by selecting \menu{World~\go{} open...~\go{} dual change sorter}, which is shown in \figref{dualChangeSorter}.
+
+\begin{figure}[btp]
+	\begin{center}
+		\includegraphics[width=\linewidth]{dualChangeSorter}
+	\end{center}
+	\caption{The dual change sorter.}
+	\label{fig:dualChangeSorter}
+\end{figure}
+
+The dual change sorter is essentially two change set browsers side by side; each side can focus on a different change set, class, or method.
+This layout supports the change sorter's main feature, which is the ability to move or copy changes from one change set to another, as shown by the yellow button menu in \figref{changeSorter}.
+It is also possible to copy individual methods from one side to the other.
+
+You may be wondering why you should care about the composition of a change set.
+The answer is that change sets provide a simple mechanism for exporting code from \sq to the file system, from where it can be imported into another \sq image, or into another non-\sq \st.
+Change set export is known as ``filing-out'', and can be accomplished using the yellow button menu on any change set, class, or method in either browser.
+Repeated file-outs create new versions of the file, but change sets are not a versioning tool like Monticello:
+They do not keep track of dependencies.
+\index{file!filing out}
+
+Before the advent of Monticello, change sets were the main means for exchanging code between \sq{} users.
+They have the advantage of simplicity (the file-out is just a text file, although we \emph{don't} recommend that you try to edit it with a text editor), and a degree of portability.
+It's also quite easy to create a change set that makes changes to many different, unrelated parts of the system\,---\,something that Monticello is not yet equipped to do.
+
+The main drawback of change sets, compared to \ind{Monticello} packages, is that they do not support the notion of dependencies.
+A filed-out change set is a set of \emph{actions} that change any image into which it is loaded.
+To successfully load a change set requires that the image be in an appropriate state.
+For example, the change set might contain an action to add a method to a class; this can only be accomplished if the class is already defined in the image.
+Similarly, the change set might rename or re-categorize a class, which obviously will only work if the class is present in the image; methods may use instance variables that were declared when they were filed out, but which do not exist in the image into which they are imported.
+The problem is that change sets do not explicitly describe the conditions under which they can be filed in:
+The file-in process just hopes for the best, usually resulting in a cryptic error message and a stack trace when things go wrong.
+Even if the file-in works, one change set might silently undo a change made by another change set.
+
+In contrast, Monticello packages represent code in a declarative fashion:
+They describe the state of the image should be in after they have been loaded.
+This permits Monticello to warn you about conflicts (when two packages require contradictory final states) and to offer to load a series of packages in their dependency order.
+
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/installNewChangeSet.png' building: [:helper |
+	helper
+		runModal: [
+			helper world
+				dropFiles: {FileStream readOnlyFileNamed: (helper resourceDirectory resolve: './SourceControl/figures/her cool change set.1.cs') fullName}
+				event: (helper generateMouseEvent: #mouseEnter at: helper world center buttons: #() start: helper world center)]
+		then: [helper select: helper dialogWindow at: 'install into new change set']]
+\end{ExecuteSmalltalkScript}
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=0.3\linewidth]{installNewChangeSet}
+	\end{center}
+	\caption{Dropping a change set file into the image to file it in.}
+	\label{fig:installNewChangeSet}
+\end{figure}
+
+In spite of these shortcomings, change sets still have their uses; in particular, you may find change sets on the Internet that you want to look at and perhaps use.
+So, having filed-out a change set using the change sorter, we will now tell you how to file one in.
+The simplest way to do this is to drag a change set file from your host system's file browser, drop it on the \sq image, and then choose \menu{install into new changeset} (see \figref{installNewChangeSet}).
+Alternatively, you can file in a change set without leaving your \sq image by using another tool, the file list browser.
+
+% section changeSet (end)
+
+%=========================================================
+\section{The file list browser}
+
+\begin{ExecuteSmalltalkScript}"fileListBrowser"
+SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder :helper |
+	helper hideProgressMorph.
+	recorder writeTo: 'fileList.png' building: [
+		| csName |
+		csName := 'my cool changeset'.
+		thisContext wrap: [:block | ChangeSet newChangesNamed: csName during: block].
+		thisContext wrap: [:block | helper restoreMethods: {SearchBar >> #buildWith:. TheWorldMainDockingBar >> #createDockingBar} after: block].
+		SearchBar compile: ((SearchBar sourceCodeAt: #buildWith:)
+			copyReplaceAll: 'Search or evaluate...' with: 'Carpe Squeak!').
+		TheWorldMainDockingBar compile: ((TheWorldMainDockingBar sourceCodeAt: #createDockingBar)
+			copyReplaceAll: #adhereToTop with: #adhereToBottom).
+		ChangeSet current fileOut.
+		FileList open.
+		helper selectAnyListIn: helper foregroundWindow at: ('*{1}*.cs' format: {csName})].
+	recorder writeTo: 'fileContentsBrowser.png' building: [
+		helper click: (helper buttonLabeled: 'Code' in: helper foregroundWindow).
+		helper foregroundWindow model
+			selectClassNamed: #SearchBar;
+			selectMessageNamed: #buildWith:.
+		helper takeScreenshotOf: helper foregroundWindow].
+]
+\end{ExecuteSmalltalkScript}
+\begin{figure}[btp]
+	\begin{center}
+	\ifluluelse
+		{\includegraphics[width=\textwidth]{fileList}}
+		{\includegraphics[scale=0.7]{fileList}}
+	\end{center}
+	\caption{A file list browser.}
+	\label{fig:fileList}
+\end{figure}
+
+The \ind{file list browser} is in fact a general-purpose tool for browsing the file system (and also FTP servers) from \sq.
+You can open it from the \menu{World~\go{} open...~\go{} file list} menu, or \menu{World docking bar~\go{} Tools}.
+What you see of course depends on the contents of your local file system, but a typical view is shown in \figref{fileList}.
+\seeindex{file!browsing}{file list browser}
+
+When you first open a file list browser, it will be focused on the current directory, that is, the one from which you started \sq.
+The title bar shows the path to this directory.
+The larger pane on the left-hand side can be used to navigate the file system in the conventional way.
+When a directory is selected, the files that it contains (but not the directories) are displayed on the right.
+This list of files can be filtered by entering a Unix-style pattern in the small box at the top-left of the window.
+Initially, this pattern is the current folder followed by a \ct{*}, which matches all file names in the folder, but you can type a different string there and accept it, changing the pattern.
+(Note that a \ct{*} is implicitly prepended and appended to the pattern that you type.)
+The sort order of the files can be changed using the \button{name}, \button{date} and \button{size} buttons.
+The rest of the buttons depends on the name of the file selected in the browser.
+In \figref{fileList}, the file name has the suffix \ct{.cs}, so the browser assumes that it is a change set, and provides buttons to \button{install} it (which \textit{files it in} to a new change set whose name is derived from the name of the file), to browse the \button{changes} in the file, to examine the \button{code} in the file, and to \button{filein} the code into the \emph{current} change set.
+
+\begin{figure}[btp]
+	\begin{center}
+	\ifluluelse
+		{\includegraphics[width=\textwidth]{fileContentsBrowser}}
+		{\includegraphics[scale=0.7]{fileContentsBrowser}}
+	\end{center}
+	\caption{A file contents browser.}
+	\label{fig:fileContentsBrowser}
+\end{figure}
+
+Because the choice of buttons to display depends on the file's \emph{name}, and not on its contents, sometimes the button that you want won't be on the screen.
+However, the full set of options is always available from the yellow button \menu{more...} menu, so you can easily work around this problem.
+
+The \button{code} button is perhaps the most useful for working with change sets; it opens a browser on the contents of the change set file; an example is shown in \figref{fileContentsBrowser}.
+The file contents browser is similar to the system browser except that it does not show categories, just classes, protocols and methods.
+For each class, the browser will tell you whether the class already exists in the system and whether it is defined in the file.
+It will show the methods in each class, and (as shown in \figref{fileContentsBrowser}) will show you the differences between the current version and the version in the file.
+Yellow-button menu items in each of the top four panes will also let you file in the whole of the change set, or the corresponding class, protocol or method.
+
+%=========================================================
+\section{In Smalltalk, you can't lose code}
+\label{sec:cantLoseCode} % (fold)
+
+It is quite possible to crash \sq: as a system designed to be open to experimenting, \sq lets you change anything, including things that are vital to make \sq work!
+
+\dothis{To maliciously crash \sq, try \ct{Object removeFromSystem}.}
+
+The good news is that you need never lose any work, even if you crash and go back to the last saved version of your image, which might be hours old.
+This is because all of the code that you executed or saved is stored in the \emph{.changes} file.
+All of it!
+This includes one-liners that you evaluate in a workspace, as well as code that you add to a class while programming.
+\index{changes}
+
+So here are the instructions on how to get your code back.
+There is no need to read this until you need it.
+However, when you do need it, you'll find it here waiting for you.
+
+In the worst case, you can use a text editor on the \emph{.changes} file, but since it is many megabytes in size, this can be slow and is not recommended.
+\sq offers you better ways.
+
+%---------------------------------------------------------
+\subsection{How to get your code back}
+To start recovering, restart \sq from the most recent snapshot. Then select \menu{World Docking Bar~\go{} Extras~\go{} Recover Changes}. This will ask you how far back in history you wish to browse. The list includes snapshots that get older the further down they are in the list. The topmost snapshot is the most recent one. Selecting it will give you all changes that have been recorded since this snapshot.
+Normally, it's sufficient to browse changes as far back as the last snapshot.
+
+Once you have a \emph{recent changes} browser, showing, say, changes back as far as your last snapshot, you will have a list of everything that you have done in \sq during that time.
+You can delete items from this list using the yellow button menu.
+When you are satisfied, you can file-in what is left also using the yellow button menu, thus incorporating the changes into your new image.
+
+One useful thing to do in the \emph{recent changes} browser is to \menu{remove doIts}.
+Usually, you won't want to file in (and thus re-execute) doIts.
+However, there is an exception.
+Creating a class shows up as a \menu{doIt}.
+\emph{Before you can file in the methods for a class, the class must exist.}
+So, if you have created any new classes, \emph{first} file-in the class creation doIts, then \menu{remove doIts} and file in the methods.
+\lr{Maybe mention that class renames are not logged and completely screw up the change-set mechanism. (p. 174)}
+% ct: This approach is as ugly as the tool itself. The current description will file-in any methods that were first created and then removed again. Personally, I always select all methods and source-code related doIts (class creation, organization, removal) and then file-in them altogether.
+
+% section cantLoseCode (end)
+
+\section{Git tools}
+\ind{Git} is a commonly used version control system.
+For sharing you projects via Git on platforms such as GitHub, GitLab, or Bitbucket, you can use the Squeak Git tools.
+The Git tools are not part of the standard environment and you have to install them.
+You can do so by clicking \menu{world docking bar~\go{} Tools~\go{} Git Browser}.
+The Git Browser allows you to manage a local Git repository directly from within the image using parts of the \ind{gitless}\footnote{\url{https://gitless.com/}} semantic.
+
+\section{Chapter summary}
+\label{sec:chapterSummary} % (fold)
+
+In this chapter, you have met some tools that are useful for managing, versioning, and sharing your code.
+
+\begin{itemize}
+	\item \emph{Monticello} is a tool for exporting, importing, versioning and sharing packages of classes and methods.
+	A Monticello package consists of a system category, subcategories, and related methods protocols in other categories.
+	\item \emph{Change sets} are automatically generated logs of all changes to the source code of your image.
+	They have largely been superseded by Monticello as a means to store and exchange versions of your source code, but are still useful, especially for recovering from catastrophic failures, however rare these may be.
+	\item The \emph{file list browser} is a tool for browsing the file system.
+	It also allows you to \menu{filein} source code from the file system.
+	\item In case your image crashes before you could save it or backup your source code with Monticello, you can always recover your most recent changes using a \emph{change list browser}.
+	You can then select the changes you want to replay and file them into the most recent copy of your image.
+\end{itemize}
