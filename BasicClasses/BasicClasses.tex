@@ -511,7 +511,7 @@ Of course, numbers are implemented efficiently in the virtual machine, but the \
 
 \begin{figure}[ht]
 \centerline {\includegraphics[width=8cm]{NumberHierarchy}}
-\caption{The Number Hierarchy \label{fig:numbers}.}
+\caption{The Number Hierarchy.\label{fig:numbers}}
 \end{figure}
 
 Numbers are found in the \scatind{Kernel-Numbers} category.
@@ -524,7 +524,7 @@ For the most part, users do not need to be aware of the difference between the t
 \subsection{Magnitude}
 
 \clsindmain{Magnitude} is the parent not only of the \clsind{Number} classes, but also of other classes supporting comparison operations, such as \clsind{Character}, \clsind{Duration} and \clsind{Timespan}.
-(\clsind{Complex} numbers are not comparable, and so do not inherit from \clsind{Number}.)
+(\clsind{Complex} numbers are not comparable, and so do not inherit from \clsind{Number} nor from \clsind{Magnitude}.)
 
 The methods \cmind{Magnitude}{<} and \cmind{Magnitude}{=} are abstract.
 The remaining operators are defined generically.
@@ -606,7 +606,7 @@ Float infinity isInfinite --> true
 %-----------------------------------------------------------------
 \subsection{Fraction}
 
-\clsind{Fraction}s are represented by instance variables for the numerator and denominator, which should be \ct{Integer}s.
+\clsindplural{Fraction} are represented by instance variables for the numerator and denominator, which should be \ct{Integer}s.
 \ct{Fraction}s are normally created by \ct{Integer} division (rather than using the constructor method \cmind{Fraction}{numerator:denominator:}):
 
 \begin{code}{@TEST}
