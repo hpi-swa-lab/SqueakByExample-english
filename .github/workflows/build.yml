@@ -147,7 +147,7 @@ jobs:
           echo "DEBUG_FIGURES=true" >> $GITHUB_ENV
           exit 1
   release:
-    name: ✈ ${{ inputs.draft-release == 'true' && 'Draft release' || 'Create pre-release' }}
+    name: Create release
     needs: [args, tests, tex-assertions, build]
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
