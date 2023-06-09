@@ -100,7 +100,11 @@ SBEScreenshotRecorder writeTo: './figures/AddCategory.png' frame: [:bounds | bou
 \end{ExecuteSmalltalkScript}
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/ClassTemplate.png' frame: [:bounds | bounds * (0 asPoint corner: 0.4 @ 0.75)] building: [:helper |
+	thisContext wrap: [:block |
+		helper emptyOrganizer: self environment organization atCategory: 'SBE-Quinto' during: block].
+
 	ToolSet browseCategory: 'SBE-Quinto'.
+	helper takeScreenshot.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
@@ -205,7 +209,14 @@ A class \subind{class}{comment} need not contain a detailed description of the i
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/SBECell.png' frame: #morphs building: [:helper |
-  SBECell browse
+	thisContext wrap: [:block |
+		helper emptyOrganizer: self environment organization atCategory: 'SBE-Quinto' during: block].
+	self environment organization classify: SBECell name under: 'SBE-Quinto'.
+	thisContext wrap: [:block |
+		helper emptyClass: SBECell during: block].
+
+	SBECell browse.
+	helper takeScreenshot.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[h!t]
@@ -397,7 +408,7 @@ SBEScreenshotRecorder writeTo: './figures/DeclareInstanceVar.png' frame: #morphs
 \begin{minipage}[t]{0.42\textwidth}
 	\centering
 	\ifluluelse
-		{\includegraphics[width=0.7\textwidth]{UnknownSelector}}
+		{\includegraphics[width=0.8\textwidth]{UnknownSelector}}
 		{\includegraphics[scale=0.7]{UnknownSelector}}
 	\caption{\squeak detecting an unknown selector.\label{fig:unknownSelector}}
 \end{minipage}
@@ -477,9 +488,12 @@ This is why the browser also offers us the \prot{-{}-all-{}-} virtual protocol, 
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/Categorize.png' frame: [:bounds | bounds * (1 @ 0 rect: 1 @ 3 / 4)] building: [:helper |
-	| browser class window |
-  browser := Browser newSubclass.
-	ToolSet browseClass: class.
+	| window |
+	thisContext wrap: [:block |
+		helper emptyClass: SBEGame during: block].
+	SBEGame organization classify: #initialize under: SBEGame organization class default.
+
+	ToolSet browseClass: SBEGame.
 	window := helper foregroundWindow.
 	window bounds: (0 px @ 120 px extent: 600 px @ 350 px).
 	helper click: window at: window topCenter + (30 px @ 60 px) buttons: #(right).
@@ -487,6 +501,7 @@ SBEScreenshotRecorder writeTo: './figures/Categorize.png' frame: [:bounds | boun
 	helper hand releaseMouseFocus.
 	helper mouseEnter: (helper menuItemMorphLabeled: 'categorize all uncategorized' in: helper world).
 	helper closeBalloons.
+	helper takeScreenshot.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htbp]
@@ -496,7 +511,7 @@ SBEScreenshotRecorder writeTo: './figures/Categorize.png' frame: [:bounds | boun
 
 If you have followed along with this example, the third pane may well contain the protocol \protind{as yet unclassified}.
 
-\dothis{Select the \ind{yellow button} menu item \menu{categorize all uncategorized} to fix this, and move the \ct{initialize} methods to a new protocol called \protind{initialization}.}
+\dothis{Select the \ind{yellow button} menu item \menu{categorize all uncategorized} to fix this, and the \ct{initialize} method will be moved to a new protocol called \protind{initialization}.}
 How does \squeak{} know that this is the right protocol?
 Well, in general \squeak{} can't know, but in this case, there is also an \ct{initialize} method in a superclass, and \squeak assumes that our \ct{initialize} method should go in the same protocol as the one that it overrides.
 \index{method!categorize}

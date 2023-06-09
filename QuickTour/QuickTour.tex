@@ -885,9 +885,11 @@ Because there is as yet no method called \ct{shout}, the browser will ask you to
 This can be quite useful if you have merely made a typing mistake, but in this case, we really \emph{do} mean \ct{shout}, since that is the method we are about to create, so we have to confirm this by selecting the first option from the menu of choices, as shown in \figref{testShoutConfirm}.
 
 \begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder writeTo: './figures/testShoutConfirm.png' frame: #morphs building: [:helper | | textField |
+SBEScreenshotRecorder writeTo: './figures/testShoutConfirm.png' frame: #morphs building: [:helper |
+	| browser textField |
 	ToolSet browseClass: StringTest category: #'tests - converting'.
-	textField := helper codePaneOfBrowser: helper foregroundWindow.
+	browser := helper foregroundWindow.
+	textField := helper codePaneOfBrowser: browser.
 	helper click: textField.
 	helper keyStroke: textField key: $a modifiers: #(cmd).
 	helper
@@ -895,7 +897,7 @@ SBEScreenshotRecorder writeTo: './figures/testShoutConfirm.png' frame: #morphs b
 			helper
 				type: 'testShout\\	self assert: ''DON''''T PANIC!'' equals: ''Don''''t panic'' shout' withCRs into: textField;
 				keyStroke: textField key: $s modifiers: #(cmd)]]
-		then: [helper dialogWindow position: 525 px @ 40 px].
+		then: [helper dialogWindow position: (browser pointAtFraction: 0.58 @ 0.2)].
 ]
 \end{ExecuteSmalltalkScript}
 
@@ -1007,7 +1009,8 @@ Don't worry about this.
 SBEScreenshotRecorder writeTo: './figures/String-Shout.png' frame: #morphs building: [:helper |
 	helper restoreMethods: {String >> #shout} after: [
 		String organization classify: #shout under: 'converting' logged: true.
-		ToolSet browse: String selector: #shout]
+		ToolSet browse: String selector: #shout.
+		helper takeScreenshot]
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[hbt]

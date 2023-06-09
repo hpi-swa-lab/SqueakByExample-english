@@ -1626,7 +1626,7 @@ SBEScreenshotRecorder writeTo: './figures/methodNamesRandom.png' building: [:hel
 		{\includegraphics[width=\textwidth]{methodNamesRandom}}
 		{\includegraphics[scale=0.7]{methodNamesRandom}}
 	\end{center}
-	\caption{The method names browser showing all methods containing the substring \ct{random} in their selectors.}
+	\caption{The method names browser showing all methods containing the substring \ct{random}, followed by anything else, followed by the substring \ct{point} in their selectors.}
 	\label{fig:methodNamesRandom}
 \end{figure}
 
@@ -1681,6 +1681,7 @@ SBEScreenshotRecorder writeTo: './figures/changeSetBrowser.png' building: [:help
 	ChangeSorter open.
 	helper scaleWindow: helper foregroundWindow.
 	buildChangeSorter value: helper.
+	helper takeScreenshot.
 ].
 
 SBEScreenshotRecorder writeTo: './figures/changeSorter.png' building: [:helper |
@@ -1698,6 +1699,7 @@ SBEScreenshotRecorder writeTo: './figures/changeSorter.png' building: [:helper |
 	rightClassList := buildChangeSorter value: helper.
 	helper click: rightClassList at: (helper boundsOfItemMatching: 'String*' in: rightClassList) center buttons: #(right).
 	helper select: helper menu at: 'move*to other*'.
+	helper takeScreenshot.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
