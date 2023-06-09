@@ -579,6 +579,11 @@ SBEScreenshotRecorder writeTo: './figures/DragMethod.png' frame: [:rectangle | r
    \ifluluelse
 		{\includegraphics[width=\textwidth]{DragMethod} }
 		{\includegraphics[scale=0.7]{DragMethod} }
+	\caption{Drag a method to a protocol.\label{fig:dragMethod}}
+\end{figure}
+
+To complete the Quinto game, we need to define two more methods in class \ct{SBECell} to handle mouse events.
+\needlines{3}
 \numFiletreeMethodInput[mouseAction:]%
 {A typical setter method.}%
 {ListingSources/SBE-Quinto.package/SBECell.class/instance/mouseAction..st}

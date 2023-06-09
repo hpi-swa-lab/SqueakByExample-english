@@ -591,7 +591,7 @@ SBEScreenshotRecorder writeTo: './figures/ClassBrowser2.png' frame: #morphs buil
 			(SBEBalloonMorph string: description for: list)
 				popUpTaillessAt: (list center x @ (listBalloonHeight ifNil: [listBalloonHeight := list center y]))].
 	codePane := helper codePaneOfBrowser: window.
-	(NewBalloonMorph string: 'name of method' for: codePane)
+	(SBEBalloonMorph string: 'name of method' for: codePane)
 		popUpAt: codePane topLeft + (10 px @ 58 px);
 		orientation: #topLeft.
 	(SBEBalloonMorph string: 'method comment' for: codePane)
