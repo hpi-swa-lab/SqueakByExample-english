@@ -595,11 +595,12 @@ SBEScreenshotRecorder writeTo: './figures/ClassBrowser2.png' frame: #morphs buil
 		popUpAt: codePane topLeft + (10 px @ 58 px);
 		orientation: #topLeft.
 	(SBEBalloonMorph string: 'method comment' for: codePane)
-		popUpTaillessAt: (codePane bounds pointAtFraction: 0.82 @ 0.22).
+		popUpAt: (codePane bounds pointAtFraction: 0.7 @ 0.2).
 	(SBEBalloonMorph
 		string: ('code of method\"{1}"' withCRs format: {selector})
 		for: codePane)
-			popUpTaillessAt: (codePane bounds pointAtFraction: 1 / 2 @ (2 / 3)).
+		popUpAt: (codePane bounds pointAtFraction: 0.38 @ 0.4)
+		orientation: #topLeft.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
