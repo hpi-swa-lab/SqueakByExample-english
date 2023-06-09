@@ -76,10 +76,10 @@ In fact, this sends the message \ct{printString} to the returned object.
 The method \mthind{Object}{printString}, which is a \ind{template method}, at its core sends the message \mthind{Object}{printOn:} to its receiver.
 The message \ct{printOn:} is a hook that can be specialized.
 
-\ct{Object>>>printOn:} is very likely one of the methods that you will most frequently override.
+\cmind{Object}{printOn:} is very likely one of the methods that you will most frequently override.
 This method takes as its argument a \clsind{Stream} (for more on streams see \charef{streams}) on which a \clsind{String} representation of the object will be written.
 The default implementation simply writes the class name preceded by ``\ct{a}'' or ``\ct{an}''.
-\ct{Object>>>printString} returns the \ct{String} that is written.
+\cmind{Object}{printString} returns the \ct{String} that is written.
 
 For example, the class \clsind{Browser} does not redefine the method \ct{printOn:} and sending the message \ct{printString} to a \ct{Browser} instance executes the method defined in \ct{Object}.
 \begin{code}{@TEST}
@@ -205,8 +205,7 @@ Complex>>>= anObject
 		ifFalse: [^ anObject adaptToComplex: self andSend: #=]
 \end{method}
 
-The default implementation of \ct{Object>>>~=} simply negates \ct{Object>>>=}, and should not normally need to be changed.
-%\cmindex{Object}{\~=}
+The default implementation of \cmind{Object}{~=} simply negates \ct{Object>>>=}, and should not normally need to be changed.
 \index{Object!~=@\ct{~=}} % needs special treatment due to ~
 
 \begin{code}{@TEST}
@@ -394,7 +393,7 @@ When this message is sent, execution will be interrupted and a \ind{debugger} wi
 
 The next most important message is \mthind{Object}{assert:}, which takes a \ind{block} as its argument.
 If the block returns \ct{true}, execution continues.
-Otherwise, an \ct{AssertionFailure} exception will be raised, which is a subclass of \ct{Error}.
+Otherwise, an \clsind{AssertionFailure} exception will be raised, which is a subclass of \ct{Error}.
 If this exception is not otherwise caught, the debugger will open to this point in the execution.
 \ct{assert:} is especially useful to support \emphind{design by contract}.
 The most typical usage is to check non-trivial pre-conditions to public methods of objects.
@@ -527,7 +526,7 @@ For the most part, users do not need to be aware of the difference between the t
 \clsindmain{Magnitude} is the parent not only of the \clsind{Number} classes, but also of other classes supporting comparison operations, such as \clsind{Character}, \clsind{Duration} and \clsind{Timespan}.
 (\clsind{Complex} numbers are not comparable, and so do not inherit from \clsind{Number}.)
 
-Methods \mthind{Magnitude}{<} and \mthind{Magnitude}{=} are abstract.
+The methods \cmind{Magnitude}{<} and \cmind{Magnitude}{=} are abstract.
 The remaining operators are defined generically.
 For example:
 
@@ -556,7 +555,7 @@ There are also numerous \emphind{shortcut constructor methods}, such as \mthind{
 
 \ct{Numbers} directly support common \emph{math functions} such as \mthind{Number}{sin}, \mthind{Number}{log}, \mthind{Number}{raiseTo:}, \mthind{Number}{squared}, \mthind{Number}{sqrt}, and so on.
 
-\cmind{Number}{printOn:} is implemented in terms of the abstract method \ct{Number>>>printOn:base:}.
+\cmind{Number}{printOn:} is implemented in terms of the abstract method \cmind{Number}{printOn:base:}.
 (The default base is 10.)
 
 Testing methods include \mthind{Number}{even}, \mthind{Number}{odd}, \mthind{Number}{positive}, and \mthind{Number}{negative}.
@@ -847,7 +846,7 @@ There are numerous subclasses of \ct{Exception} representing specific exceptions
 In particular, subclasses of \ct{Error} represent erroneous situations, subclasses of \ct{Notification} indicate that something interesting occurred.
 
 To raise an exception you can use the method \mthind{Exception}{signal}.
-If you want to pass a message along to help users figure out what happened, you can use \ct{Exception>>>signal:}.
+If you want to pass a message along to help users figure out what happened, you can use \cmind{Exception}{signal:}.
 When an exception is not handled by anyone, a debugger will open.
 
 \begin{code}{NB: CANNOT TEST}
@@ -857,7 +856,7 @@ Error signal: 'We wanted this to happen' --> "Will open a debugger with a messag
 
 As we do not want to present users with debuggers every time something unexpected happens, we can also handle exceptions directly within our code.
 The methods for handling exceptions are associated with blocks, so you can find them in the \ct{exceptions} protocol of the class \ct{BlockClosure}.
-To catch an exception you can use the method \ct{BlockClosure>>>on:do:}\cmindex{BlockClosure}{on:do:}\footnote{This is similar to \ct{try...catch} in other languages.}, which takes an exception class (or \ct{ExceptionSet}) as the first argument and a block as the second.
+To catch an exception you can use the method \cmind{BlockClosure}{on:do:}\footnote{This is similar to \ct{try...catch} in other languages.}, which takes an exception class (or \ct{ExceptionSet}) as the first argument and a block as the second.
 
 \begin{code}{NB: CANNOT TEST}
 [(10 to: -10 by: -1) collect: [:i | 100 / i]]
@@ -869,7 +868,7 @@ The code above does not return a collection, as the block was interrupted by the
 
 Sometimes you might not be interested in handling an exception.
 Instead you might only want to ensure that some code is always executed after your block, regardless of whether an exception occurs, the block returns early, or the block finishes normally.
-To achieve this, use the method \ct{BlockClosure>>>ensure:}\footnote{This is similar to \ct{finally} in other languages.} which will always execute the block passed to it.
+To achieve this, use the method \cmind{BlockClosure}{ensure:}\footnote{This is similar to \ct{finally} in other languages.} which will always execute the block passed to it.
 
 \begin{code}{NB: CANNOT TEST}
 [connectedSocket sendData: 'my network message']
@@ -884,7 +883,7 @@ To achieve this, use the method \ct{BlockClosure>>>ensure:}\footnote{This is sim
 % - Exception sets
 % - Resuming
 % - Passing along state
-% As we sometimes want to catch several kinds of exceptions, you can combine \ct{Exception}s into an \ct{ExceptionSet} by sending the message \ct{Exception>>>,}.
+% As we sometimes want to catch several kinds of exceptions, you can combine \ct{Exception}s into an \ct{ExceptionSet} by sending the message \cmind{Exception}{,}.
 
 Further, \ct{Exception}s have several rich features such as resuming, restarting, or signaling other exceptions.
 Browse the class \lct{Exception} to learn more.

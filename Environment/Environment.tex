@@ -301,10 +301,10 @@ SBEScreenshotRecorder writeTo: './figures/CanvasDraw.png' frame: #morphs buildin
 		{\includegraphics[width=\textwidth]{CanvasDraw}}
 		{\includegraphics[scale=0.7]{CanvasDraw}}
 	\end{center}
-	\caption{The Senders Browser showing that the \ct{Canvas>>>draw} method sends the \ct{drawOn:} message to its argument.	\label{fig:CanvasDraw}}
+	\caption{The Senders Browser showing that the \cmind{Canvas}{draw:} method sends the \ct{drawOn:} message to its argument.	\label{fig:CanvasDraw}}
 \end{figure}
 
-As an example, we can look at the method \ct{Canvas>>>draw}, shown in \figref{CanvasDraw}.
+As an example, we can look at the method \cmind{Canvas}{draw:}, shown in \figref{CanvasDraw}.
 You can see that this method sends \ct{drawOn:} to whatever object is passed to it as an argument, which could potentially be an instance of any class at all.
 In general, there is no simple way for the browser to know which message sends might cause which methods to be executed\footnote{Dataflow analysis can generally help figure out the class of the receiver of some messages, but it is not applied in the Smalltalk tools}.
 For this reason,  the ``senders'' browser shows exactly what its name suggests: all of the senders of the message with the chosen selector.
