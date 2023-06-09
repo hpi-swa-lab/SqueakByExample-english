@@ -1,4 +1,4 @@
 *SBE-Extract-accessing
 selection
 
-	^ selectedMorph contents
+	^ selectedMorph ifNotNil: #contents
