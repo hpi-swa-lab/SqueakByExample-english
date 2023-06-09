@@ -35,7 +35,7 @@ jobs:
     name: 📦 Prepare arguments
     runs-on: ubuntu-latest
     outputs:
-      draft-release: ${{ inputs.draft-release }}
+      draft-release: ${{ steps.prepare.outputs.draft-release }}
       squeak-versions: ${{ steps.prepare.outputs.squeak-versions }}
       scale-factor: ${{ steps.prepare.outputs.scale-factor }}
     steps:
