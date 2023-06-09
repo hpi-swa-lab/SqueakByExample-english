@@ -189,6 +189,7 @@ However, this is largely irrelevant to you as a programmer:
 You are concerned with defining the behavior of your objects and the classes that create them.
 
 \begin{ExecuteSmalltalkScript}
+<timeout: 40 "seconds">
 SBEScreenshotRecorder
 	writeTo: './figures/Color-Buttons_browseInstance.png' building: [:helper |
 		ToolSet browse: Color selector: #hue.

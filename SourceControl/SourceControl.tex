@@ -52,7 +52,7 @@ In this chapter, we will look at the tools that \Squeak provides for sharing and
 
 We gave you a quick overview of \ind{Monticello}, \Squeak's packaging tool, in \secref{Monticello}.
 However, Monticello has many more features than were discussed there.
-Monticello manages \emph{Packages}. 
+Monticello manages \emph{Packages}.
 Thus, before telling you more about Monticello, we will first explain exactly what a \ind{package} is.
 
 %---------------------------------------------------------
@@ -352,7 +352,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 				messageField textMorph editor selectAt: 1; selectLine; backTo: 1.
 				helper type: 'Changes a few things.' into: messageField.
 				"messageField setText: 'Changes a few things.'; flag: #fallback."
-				helper scaleWindow: helper foregroundWindow extent: 375 @ 300.
+				helper scaleWindow: helper foregroundWindow extent: 450 px @ 300 px.
 				helper takeScreenshotOf: helper foregroundWindow.
 
 				"This is preparation for the next screenshot"
@@ -368,7 +368,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 		window := helper foregroundWindow.
 		helper selectAnyListIn: helper foregroundWindow at: 'SBE'.
 		window model versionSelection: 1.
-		helper scaleWindow: helper foregroundWindow extent: 400 @ 275.
+		helper scaleWindow: helper foregroundWindow extent: 450 px @ 275 px.
 		helper takeScreenshotOf: window.
 	].
 ]
@@ -383,9 +383,7 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 
 \begin{figure}[tbp]
 	\begin{center}
-	\ifluluelse
-		{\includegraphics[scale=0.55]{SBE-apb}}
-		{\includegraphics[scale=0.6]{SBE-apb}}
+		\includegraphics[width=.65\textwidth]{SBE-apb}
 	\end{center}
 	\caption{Providing a log message for a new version of a package.}
 	\label{fig:SBE-apb}
@@ -418,7 +416,7 @@ SBEScreenshotRecorder writeTo: './figures/MCaddToPackage.png' building: [:helper
 	helper select: repositoryList at: repositoryMatch.
 	helper keyStroke: repositoryList key: Character escape.
 	helper menu
-		center: repositoryList center x @ 0;
+		center: repositoryList center x @ 0 px;
 		top: ((helper boundsOfItemMatching: repositoryMatch in: repositoryList)
 			pointAtFraction: 0 @ 0.75) y.
 	helper select: helper menu at: 'add to package*'.
@@ -479,6 +477,7 @@ However, arbitrary \emph{doits} are not included, so if, for example, you create
 \index{change set browser}
 
 \begin{ExecuteSmalltalkScript}"changeSetBrowsers"
+<timeout: 40 "seconds">
 | buildChangeSet buildChangeSorter |
 buildChangeSet := [:helper :outerBlock |
 	| methods |
@@ -487,7 +486,7 @@ buildChangeSet := [:helper :outerBlock |
 		String >> #suffix.
 		StringTest >> #testSuffixFound }.
 	thisContext wrap: [:block | helper restoreMethods: methods after: block].
-helper touchMethods: methods.
+	helper touchMethods: methods.
 	outerBlock value].
 
 buildChangeSorter := [:helper |
@@ -502,6 +501,7 @@ SBEScreenshotRecorder writeTo: './figures/changeSetBrowser.png' building: [:help
 	ChangeSorter open.
 	helper scaleWindow: helper foregroundWindow.
 	buildChangeSorter value: helper.
+	helper takeScreenshot.
 ].
 
 SBEScreenshotRecorder writeTo: './figures/dualChangeSorter.png' building: [:helper |
@@ -519,6 +519,7 @@ SBEScreenshotRecorder writeTo: './figures/dualChangeSorter.png' building: [:help
 	rightClassList := buildChangeSorter value: helper.
 	helper click: rightClassList at: (helper boundsOfItemMatching: 'String*' in: rightClassList) center buttons: #(right).
 	helper select: helper menu at: 'move*to other*'.
+	helper takeScreenshot.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
@@ -594,7 +595,7 @@ SBEScreenshotRecorder writeTo: './figures/installNewChangeSet.png' building: [:h
 \end{ExecuteSmalltalkScript}
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=0.3\linewidth]{installNewChangeSet}
+		\includegraphics[width=0.5\linewidth]{installNewChangeSet}
 	\end{center}
 	\caption{Dropping a change set file into the image to file it in.}
 	\label{fig:installNewChangeSet}

@@ -6,6 +6,7 @@ useScreenshotSettingsDuring: aBlock
 		wrap: [:block | self useScreenshotPreferencesDuring: block];
 		wrap: [:block | Utilities useAuthorInitials: self authorInitials during: block];
 		wrap: [:block | self useWorldAndHandDuring: block];
+		wrap: [:block | self useScaleFactorDuring: block];
 		wrap: [:block | ToolSet setDefault: StandardToolSet during: block];
 		wrap: [:block | self useTemporaryChangeSetDuring: block].
 	

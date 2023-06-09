@@ -245,16 +245,16 @@ You can also open a browser on a class named by any selected text using the \sho
 \index{system browser!senders button}
 The \button{senders} button will give you a list of all methods that may use the selected method.
 With the browser open on \ct{ScaleMorph}, click on the \mthind{ScaleMorph}{checkExtent:} method in the method pane near the top right corner of the browser; the body of \ct{checkExtent:} displays in the bottom part of the browser.
-If you now press the \button{senders} button, a menu will appear with \ct{checkExtent:} as the topmost item, and below it, all the messages that \ct{checkExtent:} sends (see \figref{SendersOfCheckEvent}).
+If you now press the \button{senders} button, a menu will appear with \ct{checkExtent:} as the topmost item, and below it, all the messages that \ct{checkExtent:} sends (see \figref{SendersOfCheckExtent}).
 Selecting an item in this menu will open a browser with the list of all methods in the image that send the selected message.
 You can also quickly access the senders of messages by typing \short{n} (for {se\textbf{n}ders}).
 
 \begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder writeTo: './figures/SendersOfCheckEvent.png' frame: #morphs building: [:helper |
+SBEScreenshotRecorder writeTo: './figures/SendersOfCheckExtent.png' frame: #morphs building: [:helper |
 	| window sendersButton |
 	ToolSet browse: ScaleMorph selector: #checkExtent:.
 	window := helper foregroundWindow.
-	helper scaleWindow: window extent: 600 @ 400.
+	helper scaleWindow: window extent: 600 px @ 400 px.
 	sendersButton := helper buttonLabeled: 'senders' in: window.
 	helper
 		runModal: [helper click: sendersButton buttons: #(left)]
@@ -264,11 +264,11 @@ SBEScreenshotRecorder writeTo: './figures/SendersOfCheckEvent.png' frame: #morph
 \begin{figure}[htbp]
 	\begin{center}
    \ifluluelse
-		{\includegraphics[width=\textwidth]{SendersOfCheckEvent}}
-		{\includegraphics[scale=0.7]{SendersOfCheckEvent}}
+		{\includegraphics[width=\textwidth]{SendersOfcheckExtent}}
+		{\includegraphics[scale=0.7]{SendersOfcheckExtent}}
 	\end{center}
 	\caption{A Class Browser opened on the \lct{ScaleMorph} class. Note the horizontal bar of buttons at the center of the browser; here we are using the \lct{senders} button.}
-	\label{fig:SendersOfCheckEvent}
+	\label{fig:SendersOfcheckExtent}
 \end{figure}
 
 \index{system browser!implementors button}
@@ -291,7 +291,7 @@ SBEScreenshotRecorder writeTo: './figures/CanvasDraw.png' frame: #morphs buildin
 	helper systemNavigation browseAllCallsOn: #drawOn:.
 	method := 'Canvas draw:*'.
 	window := helper foregroundWindow.
-	window extent: 600 @ 300; fullBounds.
+	window extent: 600 px @ 300 px; fullBounds.
 	helper selectAnyListIn: helper foregroundWindow at: method andScrollIntoViewBy: 3.
 ]
 \end{ExecuteSmalltalkScript}
@@ -343,7 +343,7 @@ SBEScreenshotRecorder writeTo: './figures/VersionsOfMouseUp.png' frame: #morphs 
 				crtab: 2; nextPutAll: 'ifTrue: [mouseAction value]'])
 			classified: (SBECell whichCategoryIncludesSelector: #mouseUp:).
 		ToolSet browseVersionsOf: SBECell selector: #mouseUp:.
-		helper scaleWindow: helper foregroundWindow extent: 500 @ 250.
+		helper scaleWindow: helper foregroundWindow extent: 500 px @ 250 px.
 		list := helper listMorphIncludingMatch: '*mouseUp*' in: helper foregroundWindow.
 		list changeModelSelection: 1.
 		helper takeScreenshot]
@@ -412,7 +412,7 @@ SBEScreenshotRecorder writeTo: './figures/inheritanceOverriding.png' frame: #mor
 	self systemNavigation
 		methodHierarchyBrowserForClass: ScaleMorph
 		selector: #defaultColor.
-	helper scaleWindow: helper foregroundWindow extent: 500 @ 250.
+	helper scaleWindow: helper foregroundWindow extent: 500 px @ 250 px.
 	helper selectAnyListIn: helper foregroundWindow at: '*Morph*'.
 ]
 \end{ExecuteSmalltalkScript}
@@ -445,7 +445,7 @@ In \figref{hierarchyBrowser}, the hierarchy browser reveals that the direct supe
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/hierarchyBrowser.png' frame: #morphs building: [:helper |
 	ScaleMorph browseHierarchy.
-	helper scaleWindow: helper foregroundWindow extent: 600 @ 400.
+	helper scaleWindow: helper foregroundWindow extent: 600 px @ 400 px.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
@@ -615,12 +615,12 @@ SBEScreenshotRecorder writeTo: './figures/inspectTimeNow1.png' building: [:helpe
 	helper scaleWindow: window.
 	splitter := window allMorphs detect: [:m |
 		(m isKindOf: ProportionalSplitterMorph) and: [m splitsLeftAndRight]].
-	splitter repositionBy: 50 @ 0
+	splitter repositionBy: 50 px @ 0 px
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[btp]
 	\begin{center}
-		\includegraphics[scale=0.65]{inspectTimeNow1}
+		\includegraphics[width=0.65\textwidth]{inspectTimeNow1}
 	\end{center}
 	\caption{Inspecting \ct{TimeStamp now}.}
 	\label{fig:inspectTimeNow1}
@@ -654,20 +654,20 @@ For instance, if you inspect an \ct{EllipseMorph} by doing \ct{EllipseMorph new 
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/inspectMorph.png' building: [:helper | | window splitter |
-	EllipseMorph new openInWorld; inspect.
+	EllipseMorph new extent: 50 px @ 40 px; openInWorld; inspect.
 	helper selectAnyListIn: helper foregroundWindow at: #screenshot.
 	window := helper foregroundWindow.
-	window extent: 360 @ 270.
+	window extent: 360 px @ 270 px.
 	splitter := window allMorphs detect: [:m |
 		(m isKindOf: ProportionalSplitterMorph) and: [m splitsTopAndBottom]].
-	splitter repositionBy: 0 @ 45.
+	splitter repositionBy: 0 @ 45 px.
 	helper takeScreenshotOf: window.
 ]
 \end{ExecuteSmalltalkScript}
 
 \begin{figure}[btp]
 	\begin{center}
-		\includegraphics[scale=0.65]{inspectMorph}
+		\includegraphics[width=0.65\textwidth]{inspectMorph}
 	\end{center}
 	\caption{Inspecting an \ct{ElipseMorph}.}
 	\label{fig:inspectMorph}
@@ -752,13 +752,13 @@ SBEScreenshotRecorder writeTo: './figures/explorePluggableListMorph.png' buildin
 	(lists at: lists keys max) explore.
 	tree := helper foregroundWindow findA: PluggableTreeMorph.
 	tree roots first openPathMatching: (#('root.*' 'submorphs.*' '1.*') collect: #asRegex).
-	helper scaleWindow: helper foregroundWindow extent: 500 @ 350.
+	helper scaleWindow: helper foregroundWindow extent: 500 px @ 350 px.
 	helper takeScreenshotOf: helper foregroundWindow.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[tbp]
 	\begin{center}
-		\includegraphics[scale=0.45]{explorePluggableListMorph}
+		\includegraphics[width=0.65\textwidth]{explorePluggableListMorph}
 	\end{center}
 	\caption{Exploring a \ct{PluggableListMorph}.}
 	\label{fig:explorePluggableListMorph}
@@ -791,6 +791,7 @@ Instead of getting the expected answer \ct{'txt'}, a \clsind{PreDebugWindow} pop
 
 \begin{ExecuteSmalltalkScript}
 "debuggers"
+<timeout: 120 "seconds">
 SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 	| home debugger codePane contextVarList |
 	home := thisContext.
@@ -1003,7 +1004,7 @@ Because we are executing code inside a block that is inside a \lct{detect:}, sev
 
 \dothis{Click \button{Restart} and then \button{Proceed}; the debugger window will vanish, and the evaluation of the expression \ct{'readme.txt' suffix} will complete, and print the answer \ct{'.txt'}}
 
-This was a first tour through the basic features of the debugger. 
+This was a first tour through the basic features of the debugger.
 As a result of the reflective nature of the \squeak system, the debugger is a very powerful tool with numerous advanced features.
 You can discover some of them via the yellow button menu in the mini-inspectors, the stack trace, and the method browser.
 For example, you might want to try \menu{return entered value} in the yellow button menu of the stack trace, which directly returns from the context with the entered value.
@@ -1046,6 +1047,7 @@ Because it tells the reader what the method should do if there is more than one 
 
 
 \begin{ExecuteSmalltalkScript}
+<timeout: 40 "seconds">
 SBEScreenshotRecorder writeTo: './figures/fixOffByOne.png' building: [:helper |
 	| testRunner |
 	thisContext wrap: [:block | helper restoreMethods: {
@@ -1151,12 +1153,12 @@ When we run this method, the execution of the \ct{self halt} will bring up the \
 
 \paragraph{Advanced ways into the debugger}
 
-Sometimes, a simple \ct{halt} can be problematic or insufficient. 
+Sometimes, a simple \ct{halt} can be problematic or insufficient.
 For these cases, there are some special ways to interrupt and inspect the execution.
 
 For instance, when putting a \ct{halt} in code that restarts in another process whenever it is stopped, you would get an infinite number of debuggers.
 In such a situation, we might only want to interrupt the execution once, let the execution restart in another process, and leave that new process alone.
-For this use case, you can use \mthind{Object}{haltOnce}, which only interrupts the execution the first time it is executed. 
+For this use case, you can use \mthind{Object}{haltOnce}, which only interrupts the execution the first time it is executed.
 You can use it in source code just like \ct{halt}, but before you start your execution, you first have to do \ct{0 setHaltOnce}, which activates the \ct{haltOnce} (actually the receiver of \ct{setHaltOnce} does not matter, send it to whoever you want).
 The corresponding message \mthind{Object}{inspectOnce} opens an inspector for whatever object the message was sent to and only does so once, again to save you from vast numbers of inspectors.
 
@@ -1244,7 +1246,7 @@ SBEScreenshotRecorder writeTo: './figures/methodNamesRandom.png' building: [:hel
 		{\includegraphics[width=\textwidth]{methodNamesRandom}}
 		{\includegraphics[scale=0.7]{methodNamesRandom}}
 	\end{center}
-	\caption{The method names browser showing all methods containing the substring \ct{random} in their selectors.}
+	\caption{The method names browser showing all methods containing the substring \ct{random}, followed by anything else, followed by the substring \ct{point} in their selectors.}
 	\label{fig:methodNamesRandom}
 \end{figure}
 

@@ -70,7 +70,7 @@ SBEScreenshotRecorder writeTo: 'figures/detachingMenu.png' frame: [:bounds | bou
 	helper
 		mouseDrag: handle
 			from: handle center
-			to: handle center + (-100 @ 15)
+			to: handle center + (-100 px @ 15 px)
 			buttons: #(left);
 		spawnHand
 ]
@@ -187,20 +187,22 @@ For example, to center the star inside joe, execute \ct{star} \mthind{Morph}{cen
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: 'figures/joeStar.png' building: [:helper |
 	| bill joe star |
-	bill := Morph new color: Color red .
+	bill := Morph new color: Color red.
+	bill extent: 50 px @ 40 px.
 	bill openInWorld.
 	joe := Morph new color: (Color blue alpha: 0.5).
-	joe extent: 55@60.
+	joe extent: 55 px @ 60 px.
 	joe openInWorld.
-	bill position: joe position - (27@20).
+	bill position: joe position - (27 px @ 20 px).
 	star := StarMorph new color: Color yellow.
+	star extent: 29 px @ 29 px.
 	joe addMorph: star.
 	star center: joe center.
 	helper centerAllMorphs.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[ht]
-	\centerline{\includegraphics{joeStar}}
+	\centerline{\includegraphics[width=0.4\textwidth]{joeStar}}
 	\caption{The star is contained inside joe, the translucent blue morph.
 		\label{fig:joeStar}}
 \end{figure}
@@ -275,7 +277,7 @@ SBEScreenshotRecorder writeInto: 'figures' recordSeries: [:recorder :helper |
 	recorder writeTo: 'NewCross.png' building: [
 		| cross |
 		cross := SBECrossMorph new
-			extent: 123 asPoint;
+			extent: 123 px asPoint;
 			openInWorld.
 		helper centerAllMorphs.
 		cross addHalo
@@ -287,7 +289,7 @@ SBEScreenshotRecorder writeInto: 'figures' recordSeries: [:recorder :helper |
 	aCanvas fillRectangle: self horizontalBar color: self color.
 	aCanvas fillRectangle: self verticalBar color: self color'
 		.
-		cross := SBECrossMorph newBounds: (0 @ 0 corner: 160 @ 160).
+		cross := SBECrossMorph newBounds: (0 px @ 0 px corner: 160 px @ 160 px).
 		cross openInWorld.
 		cross color: (Color blue alpha: 0.3).
 		helper centerAllMorphs.
@@ -299,7 +301,7 @@ SBEScreenshotRecorder writeInto: 'figures' recordSeries: [:recorder :helper |
 	aCanvas fillRectangle: self horizontalBar color: self color.
 	topAndBottom := self verticalBar areasOutside: (self horizontalBar in: [:bar |
 		self flag: #hacked.
-		bar withHeight: bar height + 1]).
+		bar withHeight: bar height + 1 px]).
 	topAndBottom do: [ :each | aCanvas fillRectangle: each color: self color]'
 			.
 	]
@@ -393,7 +395,7 @@ This doesn't matter when we fill the cross with an opaque color, but the bug bec
 \begin{figure}[t]
 \begin{minipage}[t]{0.48\textwidth}
 	\ifluluelse
-		{\centerline{\includegraphics[scale=0.6]{overdrawBug}}}
+		{\centerline{\includegraphics[width=0.3\textwidth]{overdrawBug}}}
 		{\centerline{\includegraphics{overdrawBug}}}
 	\caption{The center of the cross is filled twice with the color.
 		\label{fig:overdrawBug}}
@@ -401,7 +403,7 @@ This doesn't matter when we fill the cross with an opaque color, but the bug bec
 \hfill
 \begin{minipage}[t]{0.48\textwidth}
 	\ifluluelse
-		{\centerline{\includegraphics[scale=0.6]{hairlineBug}}}
+		{\centerline{\includegraphics[width=0.3\textwidth]{hairlineBug}}}
 		{\centerline{\includegraphics{hairlineBug}}}
 	\caption{The cross-shaped morph, showing a row of unfilled pixels.
 		\label{fig:bug}}
@@ -678,7 +680,7 @@ SBEScreenshotRecorder writeTo: 'figures/dialog.png' building: [:helper |
 \end{ExecuteSmalltalkScript}
 \begin{figure}
 \centering
-\begin{minipage}[t]{0.35\textwidth}
+\begin{minipage}[t]{0.4\textwidth}
 	\centerline{\includegraphics[width=\textwidth]{dialog}}
 	\caption{Dialog displayed by \ct{UIManager>>>request:initialAnswer:}.
 		\label{fig:dialogName}}
@@ -691,7 +693,7 @@ SBEScreenshotRecorder writeTo: 'figures/popup.png' building: [:helper |
 			chooseFrom: #('circle' 'oval' 'square' 'rectangle' 'triangle')]
 ]
 \end{ExecuteSmalltalkScript}
-\begin{minipage}[t]{0.56\textwidth}
+\begin{minipage}[t]{0.4\textwidth}
 	\centerline{\includegraphics[width=\textwidth]{popup}}
 	\caption{Dialog displayed by \ct{UIManager>>>chooseFrom:}.
 		\label{fig:dialogChoosing}}
@@ -837,8 +839,12 @@ Let's design a morph to roll a die.
 Clicking on it will display the values of all sides of the die in a quick loop, and another click will stop the animation.
 
 \begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder writeTo: 'figures/die.png' building: [:helper |
-	SBEDieMorph new
+SBEScreenshotRecorder writeTo: 'figures/die.png' building: [:helper | | die |
+	die := SBEDieMorph new.
+	die
+		extent: die extent * RealEstateAgent scaleFactor;
+		borderWidth: 2 px.
+	die
 		openCenteredInWorld;
 		stopStepping;
 		dieValue: 5;
@@ -846,7 +852,7 @@ SBEScreenshotRecorder writeTo: 'figures/die.png' building: [:helper |
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[ht]
-	\centerline{\includegraphics[scale=0.65]{die}}
+	\centerline{\includegraphics[width=0.3\textwidth]{die}}
 	\caption{The die in Morphic.
 		\label{fig:dialogDie}}
 \end{figure}
@@ -1041,7 +1047,7 @@ If you're curious, have a look at the \mthind{Canvas}{asAlphaBlendingCanvas:} me
 You can also get antialiasing by using \clsind{BalloonCanvas} and transforming the die drawing methods as shown in \mthsref{aadie}.
 
 \begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder writeTo: 'figures/multiMorphs.png' building: [:helper |
+SBEScreenshotRecorder writeTo: 'figures/multiMorphs.png' building: [:helper | | die |
 	thisContext wrap: [:block | helper restoreMethods: {SBEDieMorph >> #drawOn:} after: block].
 	SBEDieMorph compile: 'drawOn: aCanvas
 	| theCanvas |
@@ -1051,19 +1057,23 @@ SBEScreenshotRecorder writeTo: 'figures/multiMorphs.png' building: [:helper |
 		do: [:aPoint | self drawDotOn: theCanvas at: aPoint]'
 	.
 	{ Morph new
-		position: 30 @ 0;
+		position: 30 px @ 0 px;
+		extent: 50 px @ 40 px;
 		color: Color red.
 	Morph new
-		position: 0 @ 20;
+		position: 0 px @ 28 px;
+		extent: 50 px @ 47 px;
 		color: Color blue.
-	SBEDieMorph new
-		position: 25 @ 18;
-		extent: 75 @ 75 } do: #openInWorld.
+	(die := SBEDieMorph new)
+		position: 25 px @ 18 px;
+		extent: 75 px @ 75 px;
+		borderWidth: 2 px } do: #openInWorld.
+	die stopStepping; dieValue: 6.
 	helper takeScreenshot. "before the drawing method is reverted"
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[ht]
-	\centerline{\includegraphics[scale=0.7]{multiMorphs}}
+	\centerline{\includegraphics[width=0.3\textwidth]{multiMorphs}}
 	\caption{The die displayed with alpha-transparency.
 		\label{fig:multiMorphs}}
 \end{figure}

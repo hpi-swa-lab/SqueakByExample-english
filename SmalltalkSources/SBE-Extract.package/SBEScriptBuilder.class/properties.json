@@ -3,7 +3,8 @@
 	"classinstvars" : [
 		 ],
 	"classvars" : [
-		"ResourceDirectory" ],
+		"ResourceDirectory",
+		"ScaleFactor" ],
 	"commentStamp" : "ct 11/18/2019 14:02",
 	"instvars" : [
 		 ],
