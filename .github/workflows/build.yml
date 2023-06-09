@@ -90,7 +90,7 @@ jobs:
         with:
           run: |
             apk add make
-            make book-pages
+            make
         env:
           SQUEAK_VERSION: ${{ matrix.smalltalk }}
           BASH_V5: true

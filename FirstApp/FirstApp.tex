@@ -90,9 +90,9 @@ Select \menu{add item \ldots}.}
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/AddCategory.png' frame: [:bounds | bounds * (0 asPoint corner: 0.4 @ 0.75)] building: [:helper |
 	| window |
-	Browser open.
+	SystemBrowser defaultOpenBrowser.
 	window := helper foregroundWindow.
-	helper click: window at: window topLeft + (30 px @ 30 px) buttons: #(right).
+	helper click: window at: window topLeft + (50 px @ 40 px) buttons: #(right).
 	helper hand releaseMouseFocus.
 	helper mouseEnter: (helper menuItemMorphLabeled: 'add item*' in: helper world).
 	helper closeBalloons.
@@ -100,7 +100,7 @@ SBEScreenshotRecorder writeTo: './figures/AddCategory.png' frame: [:bounds | bou
 \end{ExecuteSmalltalkScript}
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/ClassTemplate.png' frame: [:bounds | bounds * (0 asPoint corner: 0.4 @ 0.75)] building: [:helper |
-	Browser fullOnCategory: 'SBE-Quinto'.
+	ToolSet browseCategory: 'SBE-Quinto'.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
@@ -479,20 +479,17 @@ This is why the browser also offers us the \prot{-{}-all-{}-} virtual protocol, 
 SBEScreenshotRecorder writeTo: './figures/Categorize.png' frame: [:bounds | bounds * (1 @ 0 rect: 1 @ 3 / 4)] building: [:helper |
 	| browser class window |
   browser := Browser newSubclass.
-  browser compile: 'hasClassSelected ^true'.
-  class := Object newSubclass.
-  class compile: 'initialize'.
-  browser fullOnClass: class.
-  window := helper foregroundWindow.
-  window bounds: (0 px @ 120 px extent: 550 px @ 350 px).
-  helper click: window at: window topCenter + (30 px @ 60 px) buttons: #(right).
-  helper hand releaseMouseFocus.
-  helper mouseEnter: (helper menuItemMorphLabeled: 'categorize all uncategorized' in: helper world).
-  helper closeBalloons.
+	ToolSet browseClass: class.
+	window := helper foregroundWindow.
+	window bounds: (0 px @ 120 px extent: 600 px @ 350 px).
+	helper click: window at: window topCenter + (30 px @ 60 px) buttons: #(right).
+	helper menu top: helper menu top + 10.
+	helper hand releaseMouseFocus.
+	helper mouseEnter: (helper menuItemMorphLabeled: 'categorize all uncategorized' in: helper world).
+	helper closeBalloons.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htbp]
-   \centering
    \includegraphics[width=0.65\textwidth]{Categorize}
    \caption{Categorize all uncategorized methods.\label{fig:categorize}}
 \end{figure}
@@ -567,12 +564,12 @@ SBEScreenshotRecorder writeTo: './figures/DragMethod.png' frame: [:rectangle | r
 	SBEGame browse.
 	window := helper foregroundWindow.
 	window extent: 600 px @ 300 px.
-	messageList := helper listMorphIncludingMatch: #toggleNeighboursOfCellAt:at: in: window.
-	categoryList := helper listMorphIncludingMatch: 'game logic' in: window.
+	messageList := helper morphByExternalName: #messageList in: window.
+	categoryList := helper morphByExternalName: #messageCategoryList in: window.
 	helper
 		mouseDrag: messageList
 		from: (helper boundsOfItemMatching: #toggleNeighboursOfCellAt:at: in: messageList) center
-		to: ((helper boundsOfItemMatching: 'game logic' in: categoryList) pointAtFraction: 0.2 @ 0.6)
+		to: ((helper boundsOfItemMatching: 'game logic' in: categoryList) pointAtFraction: 0 @ 0.75) + (10 "must not depend on width of item which may be infinite in tree browser" @ 0)
 		buttons: #(left).
 	helper spawnHand.
 ]
@@ -582,15 +579,9 @@ SBEScreenshotRecorder writeTo: './figures/DragMethod.png' frame: [:rectangle | r
    \ifluluelse
 		{\includegraphics[width=\textwidth]{DragMethod} }
 		{\includegraphics[scale=0.7]{DragMethod} }
-   \caption{Drag a method to a protocol.\label{fig:dragMethod}}
-\end{figure}
-
-To complete the Quinto game, we need to define two more methods in class \ct{SBECell} to handle mouse events.
-\needlines{3}
 \numFiletreeMethodInput[mouseAction:]%
 {A typical setter method.}%
 {ListingSources/SBE-Quinto.package/SBECell.class/instance/mouseAction..st}
-\cmindex{SBECell}{mouseAction:}
 
 \Mthref{mouseAction:} does nothing more than set the cell's \ct{mouseAction} variable to the argument, and then answers the new value.
 Any method that \emph{changes} the value of an instance variable in this way is called a \emph{setter method}; a method that \emph{answers} the current value of an instance variable is called a \emph{getter method}.
@@ -803,7 +794,7 @@ This local cache is really handy because it lets you keep your own local history
 
 \subsection{Saving and loading code with Monticello.}
 On the left-hand side of the Monticello browser is a list of packages that have a version loaded into the image; packages that have been modified since they were loaded are marked with an asterisk.
-(These are sometimes referred to as \subind{package}{dirty} packages.)
+(These are sometimes referred to as \emph{\subind{package}{dirty} packages}.)
 If you select a package, the list of repositories is restricted to just those repositories that contain a copy of the selected package.
 \seeindex{*}{package, dirty}
 \seeindex{dirty package}{package, dirty}
