@@ -189,6 +189,7 @@ However, this is largely irrelevant to you as a programmer:
 You are concerned with defining the behavior of your objects and the classes that create them.
 
 \begin{ExecuteSmalltalkScript}
+<timeout: 40 "seconds">
 SBEScreenshotRecorder
 	writeTo: './figures/Color-Buttons_browseInstance.png' building: [:helper |
 		ToolSet browse: Color selector: #hue.
@@ -257,7 +258,7 @@ Indeed, many of them will contain a comment designed to make it easy to execute 
 
 \dothis{Browse method \ct{Color class>>>showColorCube}, double-click just inside the quotes on the comment \ct{"Color showColorCube"} and type \short{d}.}
 You will see the effect of executing this method directly within the world.
-(Select \menu{World \go \ind{restore display}~(r)} to undo the effects.)
+(Select \menu{World~\go{} \ind{restore display}\,(r)} to undo the effects.)
 
 For those familiar with \ind{Java} and \ind{C++}, class methods may seem similar to static methods.
 However, the uniformity of \st means that they are somewhat different:
@@ -424,7 +425,7 @@ Unless you have a very good reason to do otherwise, when creating application cl
 
 \dothis{A new class is normally created by sending a message to an existing class, most often the message \ct{subclass:instanceVariableNames: ...}.
 There are a few other methods to create classes.
-Have a look at the protocol \prot{Kernel-Classes \go Class \go subclass creation} to see what they are.}
+Have a look at the protocol \prot{Kernel-Classes~\go{} Class~\go{} subclass creation} to see what they are.}
 \scatindex{Kernel-Classes}
 \protindex{creation}
 

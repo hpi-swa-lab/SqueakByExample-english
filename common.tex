@@ -56,6 +56,12 @@
 \usepackage{wrapfig}
 \usepackage{pdfpages}
 \usepackage{tikz}
+\usepackage{tipa}
+
+\usepackage{soul}
+\soulregister{\allowbreak}{0}
+\soulregister{~}{0}
+\soulregister{\ind}{1}
 
 \usepackage{environ}
 % https://tex.stackexchange.com/a/6391/221054
@@ -106,7 +112,7 @@
 \newcommand{\sunit}{SUnit\xspace}
 \newcommand{\xUnit}{$x$Unit\xspace}
 \newcommand{\JUnit}{JUnit\xspace}
-\newcommand{\st}{Smalltalk\xspace}
+\renewcommand{\st}{Smalltalk\xspace} % more important than soul's striketrough
 \newcommand{\Squeak}{Squeak\xspace}
 \newcommand{\sq}{Squeak\xspace}
 \newcommand{\sqmap}{SqueakMap\xspace}
@@ -146,8 +152,11 @@
 \newcommand{\here}{\nnbb{CONTINUE}{HERE}}
 %=============================================================
 %:Abbreviation macros
+\usepackage{suffix}
 \newcommand{\ie}{\emph{i.e.},\xspace}
+\WithSuffix\newcommand\ie*{\emph{i.e.}\xspace}
 \newcommand{\eg}{\emph{e.g.},\xspace}
+\WithSuffix\newcommand\eg*{\emph{e.g.}\xspace}
 \newcommand{\etc}{etc.\xspace}
 \newcommand{\autc}{autc.\xspace}
 %=============================================================
@@ -190,14 +199,14 @@
 %:Menu item macro
 % for menu items, so we can change our minds on how to print them! (apb)
 \definecolor{lightgray}{gray}{0.89}
-\newcommand{\menu}[1]{{%
+\DeclareRobustCommand{\menu}[1]{{%
 	\setlength{\fboxsep}{0pt}%
-	\colorbox{lightgray}{{{\upshape\sffamily\strut \,#1\,}}}}}
+	\sethlcolor{lightgray}\hl{\upshape\sffamily\strut #1}}}
 \newcommand{\link}[1]{{%
 	\fontfamily{lmr}\selectfont
  	\upshape{\sffamily \underline{#1}}}}
 % For submenu items:
-\newcommand{\go}{\,$\triangleright$\,}
+\newcommand{\go}{\,$\triangleright$}
 % \newcommand{\go}{\,$\blacktriangleright$\,}
 % For keyboard shortcuts:
 %\newcommand{\short}[1]{\mbox{$\langle${\sc CMD}$\rangle$-#1}\xspace}
@@ -229,7 +238,9 @@
 %=================================================================
 % graphics for Morphic handles
 \begin{ExecuteSmalltalkScript}
+<timeout: 60 "seconds">
 "MorphicHandles"
+<timeout: 80 "seconds">
 #(('blackHandle' 'Halo-Grab') ('moveHandle' 'Halo-Drag') ('debugHandle' 'Halo-Debug') ('rotateHandle' 'Halo-Rot'))
 	do: [ :each |
 		SBEScreenshotRecorder
@@ -558,7 +569,7 @@
 %\newcommand{\sep}{{$\gg$}}
 \newcommand{\sep}{\mbox{>>}}
 \newcommand{\self}{\lct{self}\xspace}
-\newcommand{\super}{\lct{super}\xspace}
+\renewcommand{\super}{\lct{super}\xspace}
 \newcommand{\nil}{\lct{nil}\xspace}
 %=============================================================
 % be less conservative about float placement
