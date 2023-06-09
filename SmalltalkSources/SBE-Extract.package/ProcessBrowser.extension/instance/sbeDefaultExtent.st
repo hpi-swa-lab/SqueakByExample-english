@@ -1,4 +1,4 @@
 *SBE-Extract-scaling
 sbeDefaultExtent
 
-	^ 500 @ 300
+	^ 650 px @ 375 px

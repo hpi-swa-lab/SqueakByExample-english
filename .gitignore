@@ -1,26 +1,28 @@
 *.aux
-SBE.blg
-SBE.glo
-SBE.idx
-SBE.ilg
-SBE.log
-SBE.out
-SBE.pdf
-SBE_*.pdf
-SBE.toc
-SBE.url
 *.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.glo
+*.idx
+*.ilg
 *.ind
-*.changes
-*.image
+*.log
+*.out
+SBE*.pdf
+*.synctex*
+*.toc
+*.url
+
 ListingSources/
 warnings.txt
 bin/gdrive
 **/figures/*.png
-*.log
-*.fls
-*.fdb_latexmk
+
+# Squeak
+*.changes
+*.image
+SqueakDebug.log
 
 # Editors
 .vscode/
-SqueakDebug.log

@@ -103,9 +103,10 @@ SBEScreenshotRecorder writeTo: './figures/startup.png' frame: #fullScreen buildi
 	| balloon |
 	helper world
 		color: (Color gray: 15 / 16); "Think green & save ink"
-		extent: 800 @ 450.
-	balloon := Form fromFileNamed: (helper resourceDirectory
-		/ 'branding' / 'balloon.png') fullName.
+		extent: 800 px @ 450 px.
+	balloon := (Form fromFileNamed: (helper resourceDirectory
+		/ 'branding' / 'balloon.png') fullName)
+			magnifyBy: RealEstateAgent scaleFactor.
 	ReleaseBuilder openWelcomeWorkspacesWith: balloon.
 	helper foregroundWindow
 		height: helper world height * 0.75;
@@ -140,7 +141,7 @@ A good place to get started is the \ind{world menu} shown in \figref{threeButton
 \dothis{Click with the mouse on the background of the main window to show the world menu, then choose \menu{open \ldots~\go{} workspace} to create a new workspace.}
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/worldMenu.png' frame: #morphs building: [:helper |
-	helper click: helper world at: helper world topCenter + (0 @ 30) buttons: #(left).
+	helper click: helper world at: helper world topCenter + (0 px @ 30 px) buttons: #(left).
 	helper hand releaseMouseFocus.
 	helper mouseEnter: (helper menuItemMorphLabeled: 'open...' in: helper world).
 	helper closeBalloons.
@@ -153,12 +154,12 @@ SBEScreenshotRecorder writeTo: './figures/yellowButtonMenuOnWorkspace.png' frame
 	workspace := ToolBuilder open: Workspace new.
 	helper type: 'Time now ' into: workspace.
 
-	helper click: workspace at: workspace topCenter + (0 @ 30) buttons: #(right).
+	helper click: workspace at: workspace topCenter + (0 px @ 30 px) buttons: #(right).
 	helper hand releaseMouseFocus.
 	helper mouseEnter: (helper menuItemMorphLabeled: 'print it (p)' in: helper world).
 	helper closeBalloons.
 	menu := helper foregroundMorph.
-	menu position: menu position + (30 @ 0).
+	menu position: menu position + (30 px @ 0 px).
 ]
 \end{ExecuteSmalltalkScript}
 
@@ -226,7 +227,7 @@ Finally, there is the \emphind{blue button} to activate the ``morphic \subind{Mo
 If you let the mouse linger over a handle, a help balloon will explain its function.
 
 \dothis{Click the blue button on the workspace.
-Grab the \rotateHandle handle near the bottom left corner and drag it to rotate the workspace.}
+Grab the \rotateHandle{} handle near the bottom left corner and drag it to rotate the workspace.}
 
 We recommend that right-handed people configure their mouse to put the \ind{red button} on the left side of their mouse, the \ind{yellow button} on the right, and use a clickable scroll wheel, if one is available, for the blue button.
 If you don't have a clickable scroll wheel, then you can get the Morphic halo by holding down the \ct{alt} or \ct{option} key while clicking the \ind{red button}.
@@ -245,7 +246,7 @@ SBEScreenshotRecorder writeTo: './figures/PreferenceBrowser.png' frame: #morphs 
 	| browser searchBox |
 	PreferenceBrowser open.
 	browser := helper foregroundWindow.
-	browser extent: 600 @ 275.
+	browser extent: 600 px @ 275 px.
 	searchBox := helper morphWithBalloonText: 'Search preference*' in: browser.
 	helper type: 'swap' into: searchBox.
 	searchBox model searchSelected.
@@ -289,8 +290,8 @@ SBEScreenshotRecorder writeTo: './figures/OpenMenu.png' frame: #morphs building:
 \begin{figure}[htb]
 \ifluluelse
 	%{\centerline {\includegraphics[width=0.3\textwidth]{OpenMenu}}}
-	{\centerline {\includegraphics[scale=0.4]{OpenMenu}}}
-	{\centerline {\includegraphics[scale=0.7]{OpenMenu}}}
+	{\centerline {\includegraphics[width=0.3\textwidth]{OpenMenu}}}
+	{\centerline {\includegraphics[width=0.4\textwidth]{OpenMenu}}}
 \caption{The \menu{open \ldots} dialogue of the world menu.\label{fig:openmenu}}
 \end{figure}
 
@@ -311,11 +312,12 @@ SBEScreenshotRecorder writeTo: './figures/BouncingAtoms.png' frame: #morphs buil
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/saveAs.png' frame: #morphs building: [:helper |
-  helper
-    runModal: [Smalltalk saveAs]
-    then: [
-      helper closeBalloons.
-      helper type: 'SBE' into: (helper morphByExternalName: 'inputText' in: helper world) firstSubmorph firstSubmorph].
+	helper
+		runModal: [Smalltalk saveAs]
+		then: [
+			helper closeBalloons.
+			helper scaleWindow: helper dialogWindow paneMorph extent: 400 px @ 290 px.
+			helper type: 'SBE' into: (helper morphByExternalName: 'inputText' in: helper world) firstSubmorph firstSubmorph].
 ]
 \end{ExecuteSmalltalkScript}
 
@@ -428,19 +430,19 @@ Do it again.
 More on this in the next section!)
 
 \begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder writeTo: './figures/Doit.png' frame: [:morphsRect | morphsRect withBottom: morphsRect bottom - 150] building: [:helper |
+SBEScreenshotRecorder writeTo: './figures/Doit.png' frame: [:morphsRect | morphsRect withBottom: morphsRect bottom - 150 px] building: [:helper |
   | workspace |
   ToolBuilder open: Transcript.
   Transcript show: 'hello world'; cr.
-  helper foregroundWindow bounds: (0 @ 120 extent: 450 @ 230).
+  helper foregroundWindow bounds: (0 px @ 120 px extent: 450 px @ 230 px).
 
   workspace := ToolBuilder open: Workspace new.
-  workspace position: 200 @ 100.
+  workspace position: 200 px @ 100 px.
 
   helper type: 'Transcript show: ''hello world''; cr.' into: workspace.
   helper keyStroke: workspace key: $a modifiers: #(cmd).
 
-  helper click: workspace at: workspace topCenter + (0 @ 30) buttons: #(right).
+  helper click: workspace at: workspace topCenter + (10 px @ 30 px) buttons: #(right).
   helper hand releaseMouseFocus.
   helper mouseEnter: (helper menuItemMorphLabeled: 'do it (d)' in: helper world).
   helper closeBalloons.
@@ -449,7 +451,7 @@ SBEScreenshotRecorder writeTo: './figures/Doit.png' frame: [:morphsRect | morphs
 \begin{figure}[htb]
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{Doit}}}
-	{\centerline {\includegraphics[scale=0.65]{Doit}}}
+	{\centerline {\includegraphics[width=\textwidth]{Doit}}}
 \caption{``Doing'' an expression\label{fig:doit}.}
 \end{figure}
 
@@ -493,14 +495,14 @@ This time we see the result we expect (\figref{printit}).
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/PrintIt.png' frame: #morphs building: [:helper | | workspace |
   workspace := ToolBuilder open: Workspace new.
-  workspace extent: 277 @ 143.
+  workspace extent: 277 px @ 143 px.
 
   helper type: '3 + 4' into: workspace.
   helper keyStroke: workspace key: $p modifiers: #(cmd).
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
-\centerline {\includegraphics[scale=0.65]{PrintIt}}
+\centerline {\includegraphics[width=0.65\textwidth]{PrintIt}}
 \caption{``Print it'' rather than ``do it''. \label{fig:printit}}
 \end{figure}
 
@@ -524,16 +526,16 @@ The bottom panel can be used to write expressions to send messages to the object
 SBEScreenshotRecorder writeTo: './figures/InspectIt.png' frame: #morphs building: [:helper |
 	| workspace |
 	workspace := ToolBuilder open: Workspace new.
-	workspace bounds: (0 @ 30 extent: 277 @ 143).
+	workspace bounds: (0 px @ 30 px extent: 277 px @ 143 px).
 
 	helper type: '3 + 4' into: workspace.
 	helper keyStroke: workspace key: $i modifiers: #(cmd).
 	(helper windowLabeled: 'SmallInteger#*')
-		position: 120 @ 20; extent: 300 @ 185.
+		position: 120 px @ 20 px; extent: 300 px @ 185 px.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
-\centerline {\includegraphics[scale=0.65]{InspectIt}}
+\centerline {\includegraphics[width=0.65\textwidth]{InspectIt}}
 \caption{Inspecting an object. \label{fig:inspectit}}
 \end{figure}
 
@@ -555,7 +557,7 @@ SBEScreenshotRecorder writeTo: './figures/ExploreIt.png' frame: #morphs building
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
-\centerline {\includegraphics[scale=0.65]{ExploreIt}}
+\centerline {\includegraphics[width=0.55\textwidth]{ExploreIt}}
 \caption{Exploring an object. \label{fig:exploreit}}
 \end{figure}
 
@@ -575,31 +577,34 @@ As we shall see, there are several interesting browsers available for \sq, but t
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/ClassBrowser2.png' frame: #morphs building: [:helper |
-	| class selector window codePane |
+	| class selector window listBalloonHeight codePane |
 	class := Object. selector := #printString.
 	ToolSet browse: class selector: selector.
 	window := helper foregroundWindow.
 	helper displayForegroundWindowFocused.
 
+	listBalloonHeight := nil.
 	Dictionary new
 		at: #systemCategoryList put: 'System categories';
 		at: #classList put: 'Classes';
 		at: #messageCategoryList put: 'Protocols';
 		at: #messageList put: 'Methods';
 		keysAndValuesDo: [:name :description |
-			(NewBalloonMorph string: description for: (helper morphByExternalName: name in: window))
-				popUp].
+			| list |
+			list := helper morphByExternalName: name in: window.
+			(SBEBalloonMorph string: description for: list)
+				popUpTaillessAt: (list center x @ (listBalloonHeight ifNil: [listBalloonHeight := list center y]))].
 	codePane := helper codePaneOfBrowser: window.
 	(SBEBalloonMorph string: 'name of method' for: codePane)
-			popUpAt: codePane topLeft + (80 @ 10)
-			orientation: #topLeft.
+		popUpAt: codePane topLeft + (10 px @ 58 px);
+		orientation: #topLeft.
 	(SBEBalloonMorph string: 'method comment' for: codePane)
-			popUpAt: (codePane bounds pointAtFraction: 0.7 @ 0.2).
+		popUpAt: (codePane bounds pointAtFraction: 0.7 @ 0.2).
 	(SBEBalloonMorph
 		string: ('code of method\"{1}"' withCRs format: {selector})
 		for: codePane)
-			popUpAt: (codePane bounds pointAtFraction: 0.38 @ 0.4)
-			orientation: #topLeft.
+		popUpAt: (codePane bounds pointAtFraction: 0.38 @ 0.4)
+		orientation: #topLeft.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
@@ -691,7 +696,7 @@ SBEScreenshotRecorder writeTo: './figures/BooleanHierarchyBrowser.png' frame: [:
 	ToolSet browseHierarchy: Boolean selector: nil.
 	splitter := helper foregroundWindow allMorphs detect: [:m |
 		(m isKindOf: ProportionalSplitterMorph) and: [m splitsTopAndBottom]].
-	splitter repositionBy: 0 @ 60.
+	splitter repositionBy: 0 @ 60 px.
 	helper closeBalloons.
 ]
 \end{ExecuteSmalltalkScript}
@@ -713,13 +718,13 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
 	| browser systemCategoryList |
 	SystemBrowser defaultOpenBrowser.
 	browser := helper foregroundWindow.
-	browser position: 0 @ 0.
+	browser position: 0 px @ 0 px.
 
 	systemCategoryList := helper morphByExternalName: #systemCategoryList in: helper foregroundWindow.
 	helper
 		runModal: [helper keyStroke: systemCategoryList key: $f modifiers: #(cmd)]
 		then: [
-			helper dialogWindow position: 60 asPoint.
+			helper dialogWindow position: 60 px asPoint.
 			picture writeTo: 'FindIt.png'.
 			picture writeTo: 'TimeClasses.png' building: [
 				helper type: 'time' into: (helper morphByExternalName: 'searchText' in: helper world).
@@ -764,9 +769,9 @@ Select ``now'' and the right-hand pane shows you the three classes that define a
 SBEScreenshotRecorder writeTo: './figures/methodFinder-now.png' frame: #morphs building: [:helper |
 	| window inputField hitList |
 	window := ToolBuilder open: SelectorBrowser new.
-	window extent: 500 @ 210.
-	inputField := (window rootMorphsAt: window topLeft + 30) first.
-	hitList := (window rootMorphsAt: inputField bottomLeft + 30) first.
+	window extent: 500 px @ 210 px.
+	inputField := (window rootMorphsAt: window topLeft + 30 px) first.
+	hitList := (window rootMorphsAt: inputField bottomLeft + 30 px) first.
 	helper
 		type: 'now' into: inputField;
 		keyStroke: inputField key: Character enter;
@@ -797,13 +802,13 @@ So \cmind{Character}{asUppercase} was not executed on our example, because \ct{'
 SBEScreenshotRecorder writeTo: './figures/MethodFinder-example1.png' frame: #morphs building: [:helper |
 	| window inputField hitList |
 	window := ToolBuilder open: SelectorBrowser.
-	window extent: 500 @ 210.
-	inputField := (window rootMorphsAt: window topLeft + 30) first.
-	hitList := (window rootMorphsAt: inputField bottomLeft + 30) first.
+	window extent: 500 px @ 210 px.
+	inputField := (window rootMorphsAt: window topLeft + 30 px) first.
+	hitList := (window rootMorphsAt: inputField bottomLeft + 30 px) first.
 	helper
 		type: '''eureka''. ''EUREKA''' into: inputField;
 		keyStroke: inputField key: $s modifiers: #(cmd).
-	helper click: hitList at: hitList topLeft + 10 buttons: #(left)
+	helper click: hitList at: hitList topLeft + 10 px buttons: #(left)
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[hbt]
@@ -884,9 +889,11 @@ Because there is as yet no method called \ct{shout}, the browser will ask you to
 This can be quite useful if you have merely made a typing mistake, but in this case, we really \emph{do} mean \ct{shout}, since that is the method we are about to create, so we have to confirm this by selecting the first option from the menu of choices, as shown in \figref{testShoutConfirm}.
 
 \begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder writeTo: './figures/testShoutConfirm.png' frame: #morphs building: [:helper | | textField |
+SBEScreenshotRecorder writeTo: './figures/testShoutConfirm.png' frame: #morphs building: [:helper |
+	| browser textField |
 	ToolSet browseClass: StringTest category: #'tests - converting'.
-	textField := helper codePaneOfBrowser: helper foregroundWindow.
+	browser := helper foregroundWindow.
+	textField := helper codePaneOfBrowser: browser.
 	helper click: textField.
 	helper keyStroke: textField key: $a modifiers: #(cmd).
 	helper
@@ -894,7 +901,7 @@ SBEScreenshotRecorder writeTo: './figures/testShoutConfirm.png' frame: #morphs b
 			helper
 				type: 'testShout\\	self assert: ''DON''''T PANIC!'' equals: ''Don''''t panic'' shout' withCRs into: textField;
 				keyStroke: textField key: $s modifiers: #(cmd)]]
-		then: [helper dialogWindow position: 525 @ 40].
+		then: [helper dialogWindow position: (browser pointAtFraction: 0.58 @ 0.2)].
 ]
 \end{ExecuteSmalltalkScript}
 
@@ -915,11 +922,17 @@ The left pane contains a list of system categories, but it's restricted to those
 The names of the classes are already selected, so click \menu{Run Selected} to run all these tests.}
 
 \begin{ExecuteSmalltalkScript}
-<timeout: 30 "seconds">
 SBEScreenshotRecorder writeTo: './figures/testRunnerOnStringTest.png' frame: #morphs building: [:helper |
 	| testRunner categoryIndex |
-	thisContext wrap: [:block | helper restoreMethods: {StringTest >> #testShout} after: block].
+	thisContext wrap: [:block |
+		helper
+		restoreMethods:
+			{StringTest >> #testShout.
+			StringTest >> #testPercentEncodingJa}
+		after: block].
 	StringTest compile: 'testShout self assert: false'.
+	StringTest removeSelector: #testPercentEncodingJa. "very slow"
+
 	testRunner := (ToolBuilder open: TestRunner new) model.
 	categoryIndex := testRunner categoryList indexOf: 'CollectionsTests-Text'.
 	testRunner
@@ -947,25 +960,24 @@ If you click on that line of text, the erroneous test will run again, this time 
 \seeindex{\ct{>>}}{Behavior, \ct{>>}}
 \cmindex{Behavior}{>>}
 
-The window that opens with the error message is the \st debugger (see \figref{predebugger}).
-\ab{Well, it's actually the \emph{pre-}debugger.  Does this matter?}\damien{I don't think it's important at this point.}
-We will look at the \ind{debugger} and how to use it in \charef{env}.
-
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/Predebugger.png' frame: #morphs building: [:helper |
-	helper restoreMethods: ((String lookupSelector: #shout) ifNotNil: [{String>>#shout}] ifNil: [#()]) after: [
-		String removeSelector: #shout.
-		helper runModal: [StringTest new testShout].
-	]
+		helper restoreMethods: ((String lookupSelector: #shout) ifNotNil: [{String>>#shout}] ifNil: [#()]) after: [
+			String removeSelector: #shout.
+			helper runModal: [StringTest new testShout].
+		]
 ]
 \end{ExecuteSmalltalkScript}.
 \begin{figure}[hbt]
-\ifluluelse
-	{\centerline {\includegraphics[width=0.75\textwidth]{Predebugger}}}
-	{\centerline {\includegraphics[scale=0.7]{Predebugger}}}
-\caption{The (pre-)debugger.}
-\label{fig:predebugger}
+	\ifluluelse
+		{\centerline {\includegraphics[width=0.75\textwidth]{Predebugger}}}
+		{\centerline {\includegraphics[scale=0.7]{Predebugger}}}
+	\caption{The (pre-)debugger.}
+	\label{fig:predebugger}
 \end{figure}
+
+The window that opens with the error message is the \st debugger (see \figref{predebugger}).
+We will look at the \ind{debugger} and how to use it in \charef{env}.
 
 The error is, of course, exactly what we expected:
 Running the test generates an error because we haven't yet written a method that tells strings how to \ct{shout}.
@@ -1000,7 +1012,8 @@ Don't worry about this.
 SBEScreenshotRecorder writeTo: './figures/String-Shout.png' frame: #morphs building: [:helper |
 	helper restoreMethods: {String >> #shout} after: [
 		String organization classify: #shout under: 'converting' logged: true.
-		ToolSet browse: String selector: #shout]
+		ToolSet browse: String selector: #shout.
+		helper takeScreenshot]
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[hbt]

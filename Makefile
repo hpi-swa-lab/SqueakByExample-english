@@ -137,6 +137,9 @@ clean : clean_listings
 	-rm -f common*.url common*.pdf SBE.url
 	-rm -f test.*
 
+clean_figures :
+	git clean -dfX -n | cut -d " " -f 3 | grep 'figures/$$\|\.png$$' | xargs rm -rf
+
 clean_listings :
 	-rm -rf ListingSources ||:
 
