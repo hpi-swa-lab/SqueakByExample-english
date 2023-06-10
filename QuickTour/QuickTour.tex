@@ -415,7 +415,7 @@ Workspaces are often used to hold documentation about a captured image, as is th
 
 \dothis{Type the following text into the workspace:}
 \begin{code}{}
-Transcript show: 'hello world'; cr.
+Transcript showln: 'hello world'.
 \end{code}
 
 Try double-clicking in the workspace at various points in the text you have just typed.
@@ -433,13 +433,13 @@ More on this in the next section!)
 SBEScreenshotRecorder writeTo: './figures/Doit.png' frame: [:morphsRect | morphsRect withBottom: morphsRect bottom - 150 px] building: [:helper |
   | workspace |
   ToolBuilder open: Transcript.
-  Transcript show: 'hello world'; cr.
+  Transcript showln: 'hello world'.
   helper foregroundWindow bounds: (0 px @ 120 px extent: 450 px @ 230 px).
 
   workspace := ToolBuilder open: Workspace new.
   workspace position: 200 px @ 100 px.
 
-  helper type: 'Transcript show: ''hello world''; cr.' into: workspace.
+  helper type: 'Transcript showln: ''hello world''.' into: workspace.
   helper keyStroke: workspace key: $a modifiers: #(cmd).
 
   helper click: workspace at: workspace topCenter + (10 px @ 30 px) buttons: #(right).

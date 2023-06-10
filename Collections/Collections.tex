@@ -860,7 +860,7 @@ It applies its argument (a block taking a single argument) to each element of th
 The following example prints all the strings contained in the receiver to the transcript.
 
 \begin{code}{}
-#('bob' 'joe' 'toto') do: [:each | Transcript show: each; cr].
+#('bob' 'joe' 'toto') do: [:each | Transcript showln: each].
 \end{code}
 
 \paragraph{Variants.}
@@ -898,9 +898,9 @@ When the message \mthind{Dictionary}{do:} is sent to a dictionary, the elements 
 
 \begin{code}{}
 colors := Dictionary newFrom: {#yellow -> Color yellow . #blue -> Color blue . #red -> Color red}.
-colors keysDo: [:key | Transcript show: key; cr].                    "displays keys"
-colors valuesDo: [:value | Transcript show: value;cr].            "displays values"
-colors associationsDo: [:value | Transcript show: value; cr].  "displays associations"
+colors keysDo: [:key | Transcript showln: key].                    "displays keys"
+colors valuesDo: [:value | Transcript showln: value].            "displays values"
+colors associationsDo: [:value | Transcript showln: value].  "displays associations"
 \end{code}
 
 %---------------------------------------------------------

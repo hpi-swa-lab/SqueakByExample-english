@@ -194,7 +194,7 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 
 \item[Pragmas.]
 	Angle brackets \ct{< >} right after a method header denote a \ind{pragma} which is a possibility to add static annotations to a method.
-	The kind of pragma you will probably see most frequently in \sq are \emph{\ind{primitive}} pragmas which are indicated by the pragma selector \ct{#primitive:} and its siblings \ct{#primitive:error:}, \ct{#primitive:module:} \etc.
+	The kind of pragma you will probably see most frequently in \sq are \emph{\ind{primitive}} pragmas which are indicated by the pragma selector \ct{#primitive:} and its siblings \ct{#primitive:error:}, \ct{#primitive:module:} \etc*.
 	Primitives denote an invocation of a \ind{virtual machine} \ind{primitive.}
 	For instance, \ct{<primitive: 1>} is the VM primitive for \ct{SmallInteger>>>+}.
 	Any code following the primitive is executed only if the primitive fails.
@@ -492,7 +492,7 @@ The two arguments are the upper bound, and a block that takes the current value 
 \needlines{4}
 \begin{code}{@TEST | result |}
 result := String new.
-1 to: 10 do: [:n | result := result , n printString , ' '].
+1 to: 10 do: [:n | result := result , n , ' '].
 result --> '1 2 3 4 5 6 7 8 9 10 '
 \end{code}
 
@@ -509,7 +509,7 @@ The argument is a block that is evaluated for each element of the collection.
 
 \begin{code}{@TEST | result |}
 result := String new.
-(1 to: 10) do: [:n | result := result , n printString , ' '].
+(1 to: 10) do: [:n | result := result , n , ' '].
 result --> '1 2 3 4 5 6 7 8 9 10 '
 \end{code}
 

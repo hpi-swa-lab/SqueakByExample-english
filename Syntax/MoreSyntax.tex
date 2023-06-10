@@ -398,8 +398,8 @@ Note that the block used for conditional are blocks without argument and that as
 
 \begin{script}[xxx]{xxx}
 10 factorial isOdd
-   ifTrue: [Transcript show: 'odd Number'; cr ]
-   ifFalse: [Transcript show: 'even Number'; cr.
+   ifTrue: [Transcript showln: 'odd Number' ]
+   ifFalse: [Transcript showln: 'even Number'.
                 \st beep]
 \end{script}
 
@@ -460,9 +460,9 @@ behavior:
 
 \begin{script}[xxx]{xxx}
 4 timesRepeat: [Beeper beep]
-1 to: 3 do: [:i | Transcript show: i printString ;cr]
+1 to: 3 do: [:i | Transcript showln: i]
 "This sends #to:do: (with two parameters) to integer 1"
-(1 to: 3) do:  [:i | Transcript show: i printString ;cr]
+(1 to: 3) do:  [:i | Transcript showln: i]
 "This sends #do: to the Interval given by evaluating '1 to: 3'"
 \end{script}
 
@@ -495,13 +495,13 @@ The behavior of these method is the following:
 
 \begin{script}{Cool iterators}
 #(15 10 19 68) do:
-   [:i | Transcript show: i printString ; cr ]
+   [:i | Transcript showln: i]
 
 #(15 10 19 68) collect: [:i | i odd ]
    --> #(true false true false)
 
 #(1 2 3) with: #(10 20 30)
-   do: [:x :y| Transcript show: (y ** x) printString ; cr ]
+   do: [:x :y| Transcript showln: y ** x]
 \end{script}
 
 
