@@ -870,7 +870,7 @@ To catch an exception, you can use the method \cmind{BlockClosure}{on:do:}\footn
 The code above does not return a collection, as the block was interrupted by the \ct{ZeroDivide} exception before it was able to return the result of the \ct{#collect:} send.
 Instead of doing nothing, you can also return another value from the handler block:
 
-\begin{code}{@TEST}
+\begin{code}{@TEST | result |}
 result := (-2 to: 2) collect: [:i |
     [100 / i]
         on: ZeroDivide
