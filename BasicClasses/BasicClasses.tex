@@ -862,7 +862,7 @@ The methods for handling exceptions are associated with blocks, so you can find 
 To catch an exception, you can use the method \cmind{BlockClosure}{on:do:}\footnote{This is similar to \ct{try...catch} in other languages.}, which takes an exception class as the first argument and a block as the second:
 
 \begin{code}{@TEST}
-[(-2 to:2) collect: [:i | 100 / i]]
+[(-2 to: 2) collect: [:i | 100 / i]]
    on: ZeroDivide
    do: [:ex | "do nothing"].
 \end{code}
@@ -871,10 +871,11 @@ The code above does not return a collection, as the block was interrupted by the
 Instead of doing nothing, you can also return another value from the handler block:
 
 \begin{code}{@TEST}
-(-2 to: 2) collect: [:i |
+result := (-2 to: 2) collect: [:i |
     [100 / i]
         on: ZeroDivide
-        do: [:ex | Float nan]]. --> {-50 . -100 . NaN . 100 . 50}
+        do: [:ex | Float nan]].
+result --> {-50 . -100 . NaN . 100 . 50}
 \end{code}
 
 There are also ways to handle multiple exceptions at once.
