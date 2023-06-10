@@ -82,50 +82,6 @@ SuperClass variableWordSubclass: #NameOfClass
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Exceptions}
-
-\on{where do we put this??? -- Basic Classes?}
-
-\sq supports ANSI standard exceptions. Exceptions are objects too. Exceptions are again not another construct. They are just methods associated with blocks. To catch an exception use the method \lct{on: anException do: aUnaryBlock}. To raise an exception use the method \lct{signal} defined on the class \lct{Exception}.
-
-\begin{script}[xxx]{xxx}
-[| tmp |
-10 to: -10 by: -1 do: [:i | Transcript show: (100 / i) printString ; cr]]
-   on: ZeroDivide
-   do: [:ex |  ]
-\end{script}
-
-The most important messages defined on the class \lct{BlockContext} are:
-\lct{ensure: aTerminationBlock} which evaluates aTerminationBlock after evaluating the receiver, regardless of whether the receiver's evaluation completes, \lct{ifCurtailed: aTerminationBlock} which evaluate the receiver. If it terminates abnormally, evaluates aTerminationBlock, and \lct{on: exception do: handlerActionBlock} which evaluates the receiver in the scope of an exception handler, \lct{handlerActionBlock}.
-
-\begin{script}[xxx]{xxx}
-["target code, which may abort"]
-   ensure:
-      ["code that will always be executed after the target code,
-      whatever whatever may happen"]
-
-["target code, which may abort"]
-   ifCurtailed:
-      ["code that will be executed whenever the
-      target code terminates without a normal return"]
-
-["target code, which may abort"]
-   on: Exception
-   do:
-      [:exception |
-      "code that will be executed whenever the identified Exception
-      is signaled."]
-\end{script}
-
-Exception have rich possibilities such as been resumed, restarted, or
-signal other exception. Browse the class \lct{Exception} if you want
-to know more.
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Comments and identifiers}
 \paragraph{Comments.}
 
