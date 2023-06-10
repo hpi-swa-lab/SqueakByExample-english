@@ -157,7 +157,9 @@
 \newcommand{\eg}{\emph{e.g.},\xspace}
 \WithSuffix\newcommand\eg*{\emph{e.g.}\xspace}
 \newcommand{\etc}{etc.\xspace}
+\WithSuffix\newcommand\etc*{etc}
 \newcommand{\autc}{autc.\xspace}
+\WithSuffix\newcommand\autc*{autc}
 %=============================================================
 %:Cross reference macros
 \newcommand{\charef}[1]{Chapter~\ref{cha:#1}\xspace}
@@ -274,6 +276,9 @@
   \end{center}}
 % Use this:
 \newcommand{\important}[1]{\begin{doublebox}#1\end{doublebox}}
+%=============================================================
+%:Bold text
+\newcommand{\strong}[1]{\textbf{#1}}
 %=============================================================
 %:Section depth
 \setcounter{secnumdepth}{2}
@@ -525,6 +530,7 @@
 \newcommand{\cmind}[2]{\index{#1!#2@\ct{#2}}\ct{#1>>>#2}\xspace} % show class>>method
 \newcommand{\toolsflapind}{\index{Tools flap}\toolsflap} % index tools flap
 % The following only generate an index entry:
+\newcommand{\subindex}[2]{\index{#1!#2}} % subindex under #1
 % \newcommand{\clsindex}[1]{\index{#1@\textsf{#1} (class)}}
 \newcommand{\clsindex}[1]{\index{#1!\#@(class)}} % class
 \newcommand{\cmindex}[2]{\index{#1!#2@\ct{#2}}} % class>>method

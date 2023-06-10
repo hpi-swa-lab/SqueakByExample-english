@@ -36,7 +36,7 @@
 %=============================================================
 \section{Introduction}
 
-To make good use of the collection classes, \st programmers needs at least an overview of the wide variety of collections, and their commonalities and differences.
+To make good use of the collection classes, \st programmers need at least an overview of the wide variety of collections and their commonalities and differences.
 %
 Programming with collections rather than individual elements is an important way to raise the level of abstraction of a program.
 The \ind{Lisp} function \ct{map}, which applies an argument function to every element of a list and returns a new list containing the results is an early example of this style. \st-80 adopted collection-based programming as a central tenet.
@@ -181,7 +181,7 @@ Note that this is quite different from using a loop, where one must know whether
 \caption{The collection classes in \squeak. Indentation indicates subclassing.
 \textit{\textsf{Italicized}} classes are abstract.
 {\textbf{Bold}} classes are described in the ``Blue Book".
-If the class name is followed by ... than some or all subclasses have been omitted.}
+If the class name is followed by ... then some or all subclasses have been omitted.}
 \label{fig:CollClassesList}
 \end{center}
 \end{figure}
@@ -231,7 +231,7 @@ If the class name is followed by ... than some or all subclasses have been omitt
 
 \clearpage
 
-\st provides a number of different kinds of collections, that all are represented as subclasses of \clsindmain{Collection}. In \squeak, the abstract class \ct{Collection} has 99 subclasses, but many of these (like \mbox{\clsind{Bitmap},} or \clsind{CompiledMethod}) are special-purpose classes crafted for use in other parts of the system or in applications, and hence not categorized as ``Collections'' by the system organization. For the purposes of this chapter, we use the term ``Collection Hierarchy'' to mean \ct{Collection} and its 64 subclasses that are \emph{also} in the system categories labeled \scat{Collections-*}. The full list is shown in \figref{CollClassesList}\footnote{The group of classes that appears in the ``\ind{Blue Book}''~\cite{Gold83a} contains 17 subclasses of \ct{Collection}, and had already been redesigned several times before the \st-80 system was released.
+\st provides a number of different kinds of collections, that all are represented as subclasses of \clsindmain{Collection}. In \squeak, the abstract class \ct{Collection} has 101 subclasses, but many of these (like \mbox{\clsind{Bitmap},} or \clsind{CompiledMethod}) are special-purpose classes crafted for use in other parts of the system or in applications, and hence not categorized as ``Collections'' by the system organization. For the purposes of this chapter, we use the term ``Collection Hierarchy'' to mean \ct{Collection} and its 65 subclasses that are \emph{also} in the system categories labeled \scat{Collections-*}. The full list is shown in \figref{CollClassesList}\footnote{The group of classes that appears in the ``\ind{Blue Book}''~\cite{Gold83a} contains 17 subclasses of \ct{Collection}, and had already been redesigned several times before the \st-80 system was released.
 This group of classes is often considered to be a paradigmatic example of object-oriented design.}. In this chapter, we focus mainly on the subset of collection classes shown in \figref{CollClassesTree}.
 
 In \st, when one speaks of a collection without being more specific about the kind of collection, one means an object that supports well-defined protocols for testing membership and enumerating the elements.
@@ -270,10 +270,10 @@ Let us briefly survey some of the key differences:
 	\clsindex{Symbol}
 
   \item {\bf Growable:}
-    Instances of \ct{Interval} and \clsind{Array} are always of a fixed size.
+    (Sub-)instances of \ct{Interval} and \clsind{ArrayedCollection} are always of a fixed size.
     Other kinds of collections (sorted collections, ordered collections, and linked lists) can grow after creation.
 
-	The class \clsind{OrderedCollection} is more general than \ct{Array}; the size of an \ct{OrderedCollection} grows on demand, and it has methods for \mthind{OrderedCollection}{addFirst:} and \mthind{OrderedCollection}{addLast:} as well as \mthind{OrderedCollection}{at:} and \mthind{OrderedCollection}{at:put:}.
+	The class \clsind{OrderedCollection} is more flexible than \ct{Array}; the size of an \ct{OrderedCollection} grows on demand, and it has methods for \mthind{OrderedCollection}{addFirst:} and \mthind{OrderedCollection}{addLast:} as well as \mthind{OrderedCollection}{at:} and \mthind{OrderedCollection}{at:put:}.
 
   \item {\bf Accepts duplicates:}
   	A \clsind{Set} will filter out duplicates, but a \clsind{Bag} will not.
@@ -282,8 +282,8 @@ Let us briefly survey some of the key differences:
 
   \item {\bf Heterogeneous:}
   	Most collections will hold any kind of element.
-	A \clsind{String}, \clsind{CharacterArray} or \clsind{Symbol}, however, only holds \ct{Character}s.
-	An \clsind{Array} will hold any mix of objects, but a \lct{ByteArray} only holds \ct{Byte}s, an \clsind{IntegerArray} only holds \ct{Integer}s and a \clsind{FloatArray} only holds \ct{Float}s.
+	A \clsind{String}, \clsind{CharacterArray}, or \clsind{Symbol}, however, only holds \ct{Character}s.
+	An \clsind{Array} will hold any mix of objects, but this is not true for \clsindplural{RawBitsArray}: a \lct{ByteArray} only holds single bytes (\ie \clsindplural{SmallInteger} between \ct{0} and {255}), a \clsind{FloatArray} only holds \clsindplural{Float}, a \clsind{ColorArray} only holds \clsindplural{Color} \etc*.
 	A \clsind{LinkedList} is constrained to hold elements that conform to the \prot{Link~\go{} accessing} protocol.
 
 \end{itemize}
@@ -312,17 +312,14 @@ These categorizations by functionality are not our only concern; we must also co
 As shown in \figref{collsByImpl}, five main implementation techniques are employed.
 
 \begin{enumerate}
-  \item Arrays store their elements in the (indexable) instance variables of the collection object itself; as a consequence, arrays must be of a fixed size, but can be created with a single memory allocation message.
+  \item \clsindplural{ArrayedCollection} store their elements in the (indexable) instance variables of the collection object itself; as a consequence, arrays must be of a fixed size, but can be created with a single memory allocation message.
   \clsindex{Array}
-  \item \clsind{OrderedCollection}s and \clsind{SortedCollection}s store their elements in an array that is referenced by one of the instance variables of the collection.
+  \item \clsindplural{OrderedCollection} and \clsindplural{SortedCollection} store their elements in an array that is referenced by one of the instance variables of the collection.
   Consequently, the internal array can be replaced with a larger one if the collection grows beyond its storage capacity.
-  \item The various kinds of set and dictionary also reference a subsidiary array for storage but use the array as a hash table.
-  Bags use a subsidiary \ct{Dictionary}, with the elements of the bag as keys and the number of occurrences as values.
-  \clsindex{Bag}
-  \item LinkedLists use a standard singly-linked representation.
-  \clsindex{LinkedList}
-  \item Intervals are represented by three integers that record the two endpoints and the step size.
-  \clsindex{Interval}
+  \item The various kinds of \clsind{Set} and \clsind{Dictionary} also reference a subsidiary array for storage but use the array as a hash table.
+  \clsindplural{Bag} use a subsidiary \ct{Dictionary}, with the elements of the bag as keys and the number of occurrences as values.
+  \item \clsindplural{LinkedList} use a standard singly-linked representation.
+  \item \clsindplural{Interval} are represented by three integers that record the two endpoints and the step size.
 \end{enumerate}
 In addition to these classes, there are also ``\subind{Collection}{weak}'' variants of \ct{Array}, \ct{Set}, and of the various kinds of dictionary.
 These collections hold onto their elements weakly, \ie in a way that does not prevent the elements from being garbage collected.
@@ -350,7 +347,7 @@ The most generic ones use the methods \mthind{Collection class}{new:} and \mthin
 \mthind{Collection class}{with:} \ct{anObject} creates a collection and adds \ct{anObject} to the created collection.
 Different collections will realize this behavior differently.
 
-You can create collections with initial elements using the methods \mthind{Collection class}{with:}, \mthind{Collection class}{with:with:} \etc for up to six elements.
+You can create collections with initial elements using the methods \mthind{Collection class}{with:}, \mthind{Collection class}{with:with:}, \etc for up to six elements.
 
 \begin{code}{@TEST}
 Array with: 1 --> #(1)
@@ -367,8 +364,6 @@ You can also use \ct{addAll:} to add all elements of one kind of collection to a
 \begin{code}{@TEST}
 (1 to: 5) asOrderedCollection addAll: '678'; yourself --> an OrderedCollection(1 2 3 4 5 $6 $7 $8)
 \end{code}
-\noindent
-Take care that \mthind{Collection}{addAll:} also returns its argument, and not the receiver!
 
 You can also create many collections with \mthind{Collection class}{withAll:} or \mthind{Collection class}{newFrom:}
 
@@ -404,11 +399,14 @@ The following code creates an array of size 5, puts values in the first 3 locati
 
 \begin{code}{@TEST | anArray | }
 anArray := Array new: 5.
-anArray at: 1 put: 4.
+anArray at: 1 put: 4. --> 4
 anArray at: 2 put: 3 / 2.
 anArray at: 3 put: 'ssss'.
 anArray at: 1 --> 4
 \end{code}
+\noindent
+
+Take care that \ct{at:put:} returns the argument and not the receiver, so you often need to build a cascade \mthind{Object}{yourself}!
 
 There are several ways to create instances of the class \clsind{Array}.
 We can use \ct{new:}, \ct{with:}, and  the constructs \ct{#( )} and \ct|{ }|.
@@ -428,13 +426,12 @@ Array with: 4 with: 3 / 2 with: 'lulu' -->  {4 . (3/2) . 'lulu'}
 The following code creates an array of size 2 where the first element is the (literal) number \ct{1} and the second the (literal) string \ct{'here'}.
 
 \seeindex{\#@{\textsf{\#( )}}}{Array, literal}
-\seeindex{\{@{\textsf{\{ \}}}}{Array, dynamic}
 
 \begin{code}{@TEST | anArray |}
 #(1 'here') size --> 2
 \end{code}
 
-Now, if you evaluate \ct{#(1 + 2)}, you do not get an array with a single element \ct{3} but instead you get the array \ct{#(1 #+ 2)} \ie with three elements: \ct{1}, the symbol \ct{#+}, and the number \ct{2}.
+Now, if you evaluate \ct{#(1 + 2)}, you do not get an array with a single element \ct{3} but instead you get the array \ct{#(1 #+ 2)}, \ie with three elements: \ct{1}, the symbol \ct{#+}, and the number \ct{2}.
 
 \begin{code}{@TEST}
 #(1 + 2) -->  #(1 #+ 2)
@@ -443,12 +440,15 @@ Now, if you evaluate \ct{#(1 + 2)}, you do not get an array with a single elemen
 \noindent
 This occurs because the construct \ct{#()} causes the compiler to interpret literally the expressions contained in the array.
 The expression is scanned and the resulting elements are fed to a new array.
-Literal arrays contain numbers, \ct{nil}, \ct{true}, \ct{false}, symbols, and strings.
+Literal arrays can contain numbers, \ct{nil}, \ct{true}, \ct{false}, characters, strings, symbols, and nested literal arrays.
+\subindex{Array}{literal}
 
 \paragraph{Dynamic creation with \ct|\{ \}|.}
 Finally, you can create a dynamic array using the construct \ct|{}|.
 \ct|{a . b}| is equivalent to \lct{Array with: a with: b}.
 This means in particular that the expressions enclosed by \ct|{| and \ct|}| are executed.
+
+\seeindex{\{@{\textsf{\{ \}}}}{Array, dynamic}
 
 \begin{code}{@TEST | anArray |}
 {1 + 2} --> #(3)
@@ -470,7 +470,7 @@ anArray at: 3 --> 33
 \noindent
 Be careful with code that modifies literal arrays!
 The compiler allocates space just once for literal arrays.
-Unless you copy the array, the VM will treat it as a \emph{read-only object} and raise a \clsind{ModificationForbidden} error every time you try to alter it.
+Unless you copy the array, it will be a \emph{read-only object} and raise a \clsind{ModificationForbidden} error every time you try to alter it.
 Dynamic arrays do not have this problem.
 
 %---------------------------------------------------------
@@ -480,25 +480,28 @@ It offers a variety of methods such as \mthind{OrderedCollection}{add:}, \mthind
 
 \begin{code}{@TEST | ordCol |}
 ordCol := OrderedCollection new.
-ordCol add: 'Seaside'; add: 'SqueakSource'; addFirst: 'Monticello'.
-ordCol --> an OrderedCollection('Monticello' 'Seaside' 'SqueakSource')
+ordCol add: 'Seaside'. --> 'Seaside'
+ordCol addFirst: 'Monticello'. --> 'Monticello'
+ordCol add: 'SqueakSource; yourself --> an OrderedCollection('Monticello' 'Seaside' 'SqueakSource')
 \end{code}
+\noindent
+
+Similarly to \cmind{Collection}{at:put:}, all \ct{add} methods return the argument and not the receiver.
 
 \paragraph{Removing Elements.}
-The method \mthind{OrderedCollection}{remove:} \ct{anObject} removes the first occurrence of an object from the collection.
+The method \mthind{OrderedCollection}{remove:} \ct{anObject} removes the first occurrence of an object from the collection and returns it.
 If the collection does not include such an object, it raises an error.
 
 \begin{code}{@TEST | ordCol | ordCol := OrderedCollection with: 'Monticello' with: 'Seaside' with: 'SqueakSource'.}
 ordCol add: 'Monticello'.
-ordCol remove: 'Monticello'.
+ordCol remove: 'Monticello'. --> 'Monticello'
 ordCol --> an OrderedCollection('Seaside' 'SqueakSource' 'Monticello')
 \end{code}
 
 There is a variant of \ct{remove:} named \mthind{OrderedCollection}{remove:ifAbsent:} that allows one to specify as second argument a block that is executed in case the element to be removed is not in the collection.
 
-\begin{code}{@TEST | ordCol res | ordCol := OrderedCollection with: 'Seaside' with: 'SqueakSource' with: 'Monticello'.}
-res := ordCol remove: 'zork' ifAbsent: [33].
-res --> 33
+\begin{code}{@TEST | ordCol | ordCol := OrderedCollection with: 'Seaside' with: 'SqueakSource' with: 'Monticello'.}
+ordCol remove: 'zork' ifAbsent: [33]. --> 33
 \end{code}
 
 \paragraph{Conversion.}
@@ -559,7 +562,7 @@ Among the most commonly used messages of dictionary you will find \mthind{Dictio
 colors := Dictionary new.
 colors at: #yellow put: Color yellow.
 colors at: #blue put: Color blue.
-colors at: #red put: Color red.
+colors at: #red put: Color red. --> Color red
 colors at: #yellow --> Color yellow
 colors keys          --> #(#red #yellow #blue)
 colors values       -->  {Color red . Color yellow . Color blue}
@@ -616,7 +619,7 @@ Objects put in a set should implement the methods \ct{hash} and \ct{=}.
 
 \begin{code}{@TEST | s | }
 s := Set new.
-s add: 4 / 2; add: 4; add:2.
+s add: 4 / 2; add: 4; add: 2.
 s size --> 2
 \end{code}
 
@@ -633,7 +636,8 @@ You can also create sets using \cmind{Set class}{newFrom:} or the conversion mes
 \end{code}
 
 \noindent
-The result of the example is 2, as the color white was included twice in the collection. Once as the result of \ct{Color white}, and once as the result of the combination of red, blue, and green.
+The result of the example is \ct{2}, as the color white was included twice in the collection. Once as the result of \ct{Color white}, and once as the result of the combination of red, blue, and green.
+However, if you are working with a sequenceable collection and want to preserve its type or order, you can use \mthind{SequenceableCollection}{withoutDuplicates} instead.
 
 A \clsindmain{Bag} is much like a \ct{Set} except that it does allow duplicates:
 \begin{code}{@TEST}
@@ -641,7 +645,7 @@ A \clsindmain{Bag} is much like a \ct{Set} except that it does allow duplicates:
 \end{code}
 
 The set operations \emph{union}, \emph{intersection}, and \emph{membership test} are implemented by the \ct{Collection} messages \mthind{Collection}{union:}, \mthind{Collection}{intersection:}, and \mthind{Collection}{includes:}.
-The receiver is first converted to a \ct{Set}, so these operations work for all kinds of collections!
+The receiver may be first converted to a \ct{Set}, so these operations work for all kinds of collections!
 \seeindex{Set!union}{Collection, \ct{union:}}
 \seeindex{Set!intersection}{Collection, \ct{intersection:}}
 \seeindex{Set!membership}{Collection, \ct{includes:}}
@@ -699,15 +703,16 @@ For example, we can mix different kinds of numbers such as integers, floats, and
 \end{code}
 
 Imagine that you want to sort objects that do not define the method \ct{<=} or that you would like to have a different sorting criterion.
-You can do this by supplying a two-argument block, called a sort block, to the sorted collection.
-For example, the class \ct{Color} is not a Magnitude and it does not implement the method \ct{<=}, but we can specify a block stating that the colors should be sorted according to their luminance (a measure of brightness).
+You can do this by supplying a so-called sort function to the sorted collection.
+For example, the class \ct{Color} is not a Magnitude and it does not implement the method \ct{<=}, but we can specify that the colors should be sorted according to their luminance (a measure of brightness).
 
 \begin{code}{@TEST | col |}
-col := SortedCollection sortBlock: [:c1 :c2 | c1 luminance <= c2 luminance].
-col addAll: { Color red . Color yellow . Color white . Color black }.
-col --> a SortedCollection(Color black Color red Color yellow Color white)
+col := { Color red . Color yellow . Color white . Color black }.
+col asSortedCollection: #luminance ascending --> a SortedCollection(Color black Color red Color yellow Color white)
 \end{code}
 \cmindex{SortedCollection class}{sortBlock:}
+
+We will explain sort functions in more detail in \secref{sorting}.
 
 %---------------------------------------------------------
 \subsection{String}
@@ -733,7 +738,7 @@ s := 'no' , ' ' , 'worries'.
 s -->  'no worries'
 \end{code}
 
-Since a string is a mutable collection we can also change it using the method \mthind{String}{at:put:}.
+Since a string is a mutable collection (unless it is a method literal) we can also change it using the method \mthind{String}{at:put:}.
 
 \begin{code}{@TEST |s| s := 'no', ' ', 'worries'.}
 s at: 4 put: $h; at: 5 put: $u.
@@ -843,7 +848,7 @@ See also \charef{basic} for more about \clsind{String} and \clsind{Symbol}.
 \section{Collection iterators}
 \label{sec:iterators}
 
-In \st loops and conditionals are simply messages sent to collections or other objects such as integers or blocks (see also \charef{syntax}).
+In \st, loops and conditionals are simply messages sent to collections or other objects such as integers or blocks (see also \charef{syntax}).
 In addition to low-level messages such as \ct{to:do:} which evaluates a block with an argument ranging from an initial to a final number, the \st collection hierarchy offers various high-level iterators.
 Using such iterators will make your code more robust and compact.
 \index{Collection!iteration}
@@ -879,19 +884,13 @@ res --> 'bob.joe.toto'
 \noindent
 Note that this code is not especially efficient since it creates intermediate strings and it would be better to use a write stream to buffer the result (see \charef{streams}):
 \begin{code}{@TEST}
-String streamContents: [:stream | #('bob' 'joe' 'toto') asStringOn: stream delimiter: '.'] --> 'bob.joe.toto'
+String streamContents: [:stream | #('bob' 'joe' 'toto') joinOn: stream separatedBy: '.'] --> 'bob.joe.toto'
 \end{code}
-
-% DAMIEN: I would write it:
-%res := String streamContents: [:stream |
-%  #('bob' 'joe' 'toto')
-%       do: [:e | stream nextPutAll: e]
-%       separatedBy: [stream nextPut: $.]].
-%res --> 'bob.joe.toto'
-%Or even simpler:
-%res := String streamContents: [:stream | #('bob' 'joe' 'toto')
-%asStringOn: stream delimiter: '.' ].
-%res --> 'bob.joe.toto'
+\noindent
+This particular example can be expressed even more concisely as follows:
+\begin{code}{@TEST}
+#('bob' 'joe' 'toto') joinSeparatedBy: '.' --> 'bob.joe.toto'
+\end{code}
 
 
 \paragraph{Dictionaries.}
@@ -914,7 +913,7 @@ Using the method \ct{do:} we must write the following:
 
 \begin{code}{@TEST | double |}
 double := OrderedCollection new.
-#(1 2 3 4 5 6) do: [:e | double add: 2 * e].
+#(1 2 3 4 5 6) do: [:e | double add: e * 2].
 double --> an OrderedCollection(2 4 6 8 10 12)
 \end{code}
 
@@ -922,7 +921,7 @@ double --> an OrderedCollection(2 4 6 8 10 12)
 The method \mthind{Collection}{collect:} executes its argument block for each element and returns a new collection containing the results.
 Using \ct{collect:} instead, the code is much simpler:
 \begin{code}{@TEST}
-#(1 2 3 4 5 6) collect: [:e | 2 * e] --> #(2 4 6 8 10 12)
+#(1 2 3 4 5 6) collect: [:e | e * 2] --> #(2 4 6 8 10 12)
 \end{code}
 
 The advantages of \ct{collect:} over \mthind{Collection}{do:} are even more dramatic in the following example, where we take a collection of integers and generate as a result a collection of absolute values of these integers:
@@ -982,7 +981,7 @@ In the case of an \ct{Interval}, the species is actually \ct{Array}!
 
 %---------------------------------------------------------
 \subsection{Identifying an element with \lct{detect:}}
-The method \mthind{OrderedCollection}{detect:} returns the first element of the receiver that matches the block argument.
+The method \mthind{Collection}{detect:} returns the first element of the receiver that matches the block argument.
 
 \begin{code}{@TEST}
 'through' detect: [:each | each isVowel] --> $o
@@ -1003,11 +1002,11 @@ Correspondingly, there is also the variant \mthind{Collection}{detect:ifFound:} 
 \end{code}
 
 %---------------------------------------------------------
-\subsection{Accumulating results with \lct{inject:into:}}
+\subsection{Accumulating results}
 Functional programming languages often provide a higher-order function called \emph{fold} or \emph{reduce} to accumulate a result by applying some binary operator iteratively over all elements of a collection.
-In \sq this is done by \cmind{Collection}{inject:into:}.
+In \sq this is done by \cmind{Collection}{inject:into:} or \cmind{Collection}{fold:} (also available as \cmind{Collection}{reduce:}).
 
-The first argument is an initial value, and the second argument is a two-argument block which is applied to the result this far, and each element in turn.
+The first argument of \ct{inject:into:} is an initial value, and the second argument is a two-argument block which is applied to the result this far, and each element in turn.
 
 A trivial application of \ct{inject:into:} is to produce the sum of a collection of numbers.
 For example, we could write this expression to sum the first 100 integers:
@@ -1019,6 +1018,15 @@ Another example is the following one-argument block which computes factorials:
 \begin{code}{@TEST |factorial|}
 factorial := [:n | (1 to: n) inject: 1 into: [:product :each | product * each]].
 factorial value: 10 --> 3628800
+\end{code}
+
+\ct{fold:} is a simpler version of \ct{inject:into:} that uses the first element of the collection as the initial value.
+However, it signals an error if the collection is empty, whereas \ct{inject:into:} lets you specify a default value in that case.
+
+\begin{code}{NB: CANNOT TEST}
+#(1 2 3 4) fold: [:sum :each | sum + each] --> 10
+#() fold: [:sum :each | sum + each] --> !\emph{Error: Cannot fold over an empty collection.}!
+
 \end{code}
 
 %---------------------------------------------------------
@@ -1040,14 +1048,17 @@ colors := {Color white . Color yellow. Color red . Color blue . Color orange}.
 colors includes: Color blue. --> true
 \end{code}
 
-\paragraph{\mthind{OrderedCollection}{anySatisfy:}.}
+\paragraph{\mthind{Collection}{anySatisfy:}.}
 The message \ct{anySatisfy:} answers true if at least one element of the collection satisfies the condition represented by the argument.
+Analogously, there are also \strong{\mthind{Collection}{allSatisfy:}} and \strong{\mthind{Collection}{noneSatisfy:}}.
 
 \begin{code}{@TEST | colors | colors := {Color white . Color yellow. Color red . Color blue . Color orange}.}
 colors anySatisfy: [:color | color red > 0.5] --> true
+colors allSatisfy: [:color | color red > 0.5] --> false
+colors noneSatisfy: [:color | color red > 1] --> true
 \end{code}
 
-\paragraph{\mthind{OrderedCollection}{gather:}.}
+\paragraph{\mthind{Collection}{gather:}.}
 The message \mthind{Collection}{gather:} can be used to turn nested collections into a flat collection while at the same time converting the values. Some languages refer to this collection operation as flat map\seeindex{flat map}{Collection, gather:}.
 
 \begin{code}{@TEST | colors | colors := {Color white . Color yellow. Color red . Color blue . Color orange}.}
@@ -1084,7 +1095,7 @@ collection := OrderedCollection new add: 1; add: 2; yourself --> an OrderedColle
 
 \paragraph{Removing an element of the collection you are iterating on.}
 Another mistake you may make is to remove an element from a collection you are currently iterating over.
-\mthind{Collection}{remove:}
+\cmindex{Collection}{remove:}
 \begin{code}{@TEST |range|}
 range := (2 to: 20) asOrderedCollection.
 range do: [:aNumber | aNumber isPrime ifFalse: [range remove: aNumber]].
@@ -1101,9 +1112,9 @@ range --> an OrderedCollection(2 3 5 7 11 13 17 19)
 \end{code}
 
 \paragraph{Redefining both \ct{=} and \ct{hash}.}
-A difficult error to spot is when you redefine \ct{=} but not \ct{hash}.
+A difficult error to spot is when you redefine \mthind{Object}{=} but not \mthind{Object}{hash}.
 The symptoms are that you will lose elements that you put in sets or other strange behavior.
-One solution proposed by Kent Beck is to use \ct{xor:} to redefine \ct{hash}.
+One solution proposed by Kent Beck is to use \mthind{Integer}{bitXor:} to redefine \ct{hash}.
 Suppose that we want two books to be considered equal if their titles and authors are the same.
 Then we would redefine not only \ct{=} but also \ct{hash} as follows:
 \index{Dictionary!overriding \ct{=} and \ct{hash}}
@@ -1117,12 +1128,13 @@ Book>>>= aBook
 
 Book>>>hash
 
-   ^ title hash xor: authors hash
+   ^ title hash bitXor: authors hash
 \end{method}
 % ct TODO DISCUSS: I always use "{title. authors} = {aBook title. aBook authors}" and "{title. authors} hash" instead to increase reuse and write less low-level code. Is there anything wrong with my approach or could we simplify the above example?
 
 Another nasty problem arises if you use a mutable object, \ie an object that can change its hash value over time, as an element of a \ct{Set} or as a key to a \ct{Dictionary}.
 Don't do this unless you love debugging!
+(If you need to do it anyway, you can send the message \mthind{HashedCollection}{rehash} to the collection to force it to recompute the hash values of all its elements.)
 
 \section{Sorting collections}
 \label{sec:sorting}
@@ -1131,9 +1143,7 @@ So when should you use which of them?
 Actually, \ct{sort} is only defined on certain specializations of \ct{Collection}, such as \ct{ArrayedCollection} or \ct{OrderedCollection}.
 This message performs an in-place-sort on the collection, \ie after sending \ct{sort} to a collection instance, the order of its elements will have been updated.
 Conversely, \ct{sorted:} performs an out-of-place sort that will not modify the original collection but will answer a sorted copy of the receiver.
-While an in-place-sort might reach higher performance in some situations, an out-of-place sort is the preferable option in most situations because \begin{enumerate*}[label={\alph*)}]\item it helps you avoid unintended side-effects that eventually can make your code harder to debug and understand\footnote{%
-    Actually, it is dangerous to modify an inline array or string from your code in-place (and thus forbidden since \sq 5.3).%
-} and \item it does not restrict the collection you use to be an array or an ordered collection\end{enumerate*}.
+While an in-place-sort might reach higher performance in some situations, an out-of-place sort is the preferable option in most situations because \begin{enumerate*}[label={\alph*)}]\item it does not restrict the collection you use to be an array or an ordered collection, \item it is applicable to read-only literal arrays and strings as well, and \item it helps you avoid unintended side-effects that eventually can make your code harder to debug and understand\end{enumerate*}.
 
 The following examples illustrates the difference between in-place and out-of-place sorting:
 
@@ -1161,7 +1171,7 @@ Here is a simple example of how to use a sort block:
 \end{code}
 
 In many cases, you will need to sort a collection by a particular property or transformation of each element.
-This is often realized by implementing the property function twice, e.g. (beware, negative example!):
+This is often realized by implementing the property function twice, \eg* (beware, negative example!):
 \begin{code}{@TEST}
 (1 to: 10) sorted: [:a :b | (a raisedTo: 2 modulo: 3) <= (b raisedTo: 2 modulo: 3)] --> #(3 6 9 1 2 4 5 7 8 10)
 \end{code}
@@ -1173,7 +1183,7 @@ It can be instantiated from any unary block by sending the message \mthind{Block
 (1 to: 10) sorted: [:ea | ea raisedTo: 2 modulo: 3] ascending --> #(3 6 9 1 2 4 5 7 8 10)
 \end{code}
 
-\mthind{Symbol}{ascending} and \mthind{BlockClosure}{descending} are defined on \clsind{Symbol} as well, so we could also write the previous example in the following way (however, the former version is more efficient, and it also would be considered better style):
+\mthind{Symbol}{ascending} and \mthind{BlockClosure}{descending} are defined on \clsind{Symbol} as well, so we could also write the previous example in the following way (however, the former version is more efficient, easier to debug, and often would be considered better style):
 
 \begin{code}{@TEST}
 #('Foo' 'Bar' 'baz') sorted: #asUppercase descending --> #('Foo' 'baz' 'Bar')
@@ -1187,7 +1197,7 @@ Let's lump them all together to demonstrate the overwhelming power of sort funct
 {1. 100. nil. 1000. 10} sorted: [:ea | ea ifNotNil: [ea asWords first]] ascending undefinedLast , SortFunction default reversed. --> #(1000 100 1 10 nil)
 \end{code}
 
-For further information on sort functions, you can browse the system category \ct{Collections-SortFunctions} and in particular its extension methods on \clsind{BlockClosure} and \clsind{Symbol}.
+For further information on sort functions, you can browse the system category \scatind{Collections-SortFunctions} and its extension methods on \ct{BlockClosure} and \ct{Symbol}.
 
 %=========================================================
 \section{Chapter summary}
@@ -1196,8 +1206,8 @@ The \st collection hierarchy provides a common vocabulary for uniformly manipula
 
 \begin{itemize}
   \item A key distinction is between \ct{SequenceableCollection}s, which maintain their elements in a given order, \ct{Dictionary} and its subclasses, which maintain key-to-value associations, and \ct{Set}s and \ct{Bag}s, which are unordered.
-  \item You can convert most collections to another kind of collection by sending them the messages \ct{asArray}, \ct{asOrderedCollection} \etc.
-  \item To sort a collection, send it the message \ct{sorted} or \ct{sorted:}, to sort it in-place, send \ct{sort} or \ct{sort:}, and to create a collection that always keeps its element sorted send \ct{asSortedCollection}.
+  \item You can convert most collections to another kind of collection by sending them the messages \ct{asArray}, \ct{asOrderedCollection} \etc*.
+  \item To sort a collection, send it the message \ct{sorted} or \ct{sorted:}, to sort it in-place, send \ct{sort} or \ct{sort:}, and to create a collection that always keeps its element sorted send \ct{asSortedCollection} or \ct{asSortedCollection:}.
   \item Literal \ct{Array}s are created with the special syntax \ct{#(...)}.
   Dynamic \ct{Array}s are created with the syntax \ct|{...}|.
   \item A \ct{Dictionary} compares keys by equality.
