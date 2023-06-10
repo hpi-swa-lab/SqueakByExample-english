@@ -496,7 +496,7 @@ This message will return the test resource instance that is initialized for the 
 
 %=================================================================
 \section{Advanced features of SUnit}
-In addition to \ct{TestResource}, the current version of \sunit contains assertion description strings and logging support. 
+In addition to \ct{TestResource}, the current version of \sunit contains assertion description strings and logging support.
 % Currently broken as of 6.0, readd when fixed:  "and resumable test failures."
 
 %---------------------------------------------------------
@@ -708,11 +708,6 @@ Here is some advice on how to design tests.
 %  What specifically should I do or not do?
 %  Give an example!}
 
-%\item[Do not over-test.] Try to build your tests so that they do not
-%  overlap.  It is annoying to have many tests covering the same
-%  functionality, because one bug in the code will then break many tests at the same time.
-%  This is covered by Black's rule, below.
-
 \index{Feathers, Michael}
 \item[Feathers' Rules for Unit tests.]
 	Michael Feathers, an  agile process consultant and author, writes:\footnote{See \url{https://web.archive.org/web/20060212020903/http://www.artima.com/weblogs/viewpost.jsp?thread=126923}.}
@@ -744,7 +739,7 @@ Here is some advice on how to design tests.
 	Such tests might exercise many classes, and might take a long time to run because they touch the file system.
 	You can write them using \sunit, but you won't want to run them each time you make a small change, so they should be separated from the true unit tests.
 
-\item[Black's Rule of Testing.]
+\item[One Test per Property.]
 	For every test in the system, you should be able to identify some property for which the test increases your confidence.
 	Obviously there should be no important property that you are not testing.
 	This rule states the less obvious fact that there should be no test that does not add value to the system by increasing your confidence that a useful property holds.
