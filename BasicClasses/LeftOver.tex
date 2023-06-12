@@ -37,7 +37,7 @@ The \emph{associating} method category contains a single method \ct{->}, which i
 Dictionary newFrom: { #start -> (1@1) . #end -> (3@4) } --> a Dictionary(#end->3@4 #start->1@1 )
 \end{code}
 
-\ct{Object>>>-->} is an example of a \emph{Shortcut Constructor Method}\footnote{See: Kent Beck, \emph{Smalltalk Best Practice Patterns}, Prentice-Hall, 1997.}, which allows you to construct an object by sending a message to one of its constructor arguments. Shortcut Constructor Methods have the great advantage that they make object creation much more concise, but if abused they can clutter the receiver class with many methods unrelated to the key responsibilities of the class.
+\cmind{Object}{-->} is an example of a \emph{Shortcut Constructor Method}\footnote{See: Kent Beck, \emph{Smalltalk Best Practice Patterns}, Prentice-Hall, 1997.}, which allows you to construct an object by sending a message to one of its constructor arguments. Shortcut Constructor Methods have the great advantage that they make object creation much more concise, but if abused they can clutter the receiver class with many methods unrelated to the key responsibilities of the class.
 
 %-----------------------------------------------------------------
 \subsection{Converting}
