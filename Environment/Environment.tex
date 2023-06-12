@@ -787,15 +787,15 @@ suffix
 
 Of course, we are sure that such a trivial method will work, so instead of writing an SUnit test, we just type \ct{'readme.txt' suffix} into a workspace and \menu{print it (p)}.
 What a surprise!
-Instead of getting the expected answer \ct{'txt'}, a \clsind{PreDebugWindow} pops up, as shown in \figref{PreDebugWindow}.
+Instead of getting the expected answer \ct{'txt'}, a \emphind{predebugger} pops up, as shown in \figref{predebugger}.
 
 \begin{ExecuteSmalltalkScript}
 "debuggers"
 <timeout: 120 "seconds">
 SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
-	| home debugger codePane contextVarList |
+	| home workspace debugger codePane contextVarList |
 	home := thisContext.
-	recorder writeTo: 'PreDebugWindow.png' building: [:helper |
+	recorder writeTo: 'predebugger.png' building: [:helper |
 		thisContext wrap: [:block | helper restoreMethods: {String >> #suffix} after: block].
 		String compile: 'suffix
 	"assumes that I''m a file name, and answers my suffix, the part after the last dot"
@@ -805,8 +805,13 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 	^ self copyFrom: dotPosition to: self size'
 .
 		helper
-			runModal: ['readme.txt' suffix]
+			runModal: [
+				"don't run the code directly but use printIt to set up the DoIt context stack"
+				'''readme.txt'' suffix' edit.
+				workspace := helper foregroundWindow.
+				helper keyStroke: workspace key: $p modifiers: #(cmd)]
 			then: [
+				workspace delete.
 				helper takeScreenshot.
 
 				"Next screenshots"
@@ -859,14 +864,14 @@ SBEScreenshotRecorder writeInto: './figures' recordSeries: [:recorder |
 \begin{figure}[btp]
 	\begin{center}
 	\ifluluelse
-		{\includegraphics[width=0.7\textwidth]{PreDebugWindow}}
-		{\includegraphics[scale=0.7]{PreDebugWindow}}
+		{\includegraphics[width=0.7\textwidth]{predebugger}}
+		{\includegraphics[scale=0.7]{predebugger}}
 	\end{center}
-	\caption{A \ct{PreDebugWindow} notifies us of a bug.}
-	\label{fig:PreDebugWindow}
+	\caption{A predebugger notifies us of a bug.}
+	\label{fig:predebugger}
 \end{figure}
 
-The \ct{PreDebugWindow} has a title bar that tells us what error occurred, and shows us a \emphind{stack trace} of the messages that led up to the error.
+The predebugger has a title bar that tells us what error occurred, and shows us a \emphind{stack trace} of the messages that led up to the error.
 Starting from the bottom of the trace, \ct{UndefinedObject>>>DoIt} represents the code that was compiled and run when we selected \ct{'readme.txt' suffix} in the workspace and asked \sq to \menu{print it}.
 This code, of course, sent the message \ct{suffix} to a \clsind{ByteString} object (\ct{'readme.txt'}).
 This caused the inherited \ct{suffix} method in class \ct{String} to execute; all this information is encoded in the next line of the stack trace, \ct{ByteString(String)>>>suffix}.
@@ -889,7 +894,7 @@ To find out \emph{why} the dot was not found, we need the debugger itself, so cl
 	If you do this, the debugger will open already focussed on the corresponding method.}
 
 The debugger is shown in \figref{debuggerDetect}; it looks intimidating at first, but it is quite easy to use.
-The title bar and the top pane are very similar to those that we saw in the \lct{PreDebugWindow}.
+The title bar and the top pane are very similar to those that we saw in the predebugger.
 However, the debugger combines the stack trace with a method browser, so when you select a line in the stack trace, the corresponding method is shown in the pane below.
 It's important to realize that the execution that caused the error is still in your image, but in a suspended state.
 Each line of the stack trace represents a frame on the execution stack that contains all of the information necessary to continue the execution.
