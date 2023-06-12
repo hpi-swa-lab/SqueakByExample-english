@@ -1303,7 +1303,6 @@ SBEScreenshotRecorder writeTo: './figures/TimeProfile.png' building: [:helper |
 	[World imageForm] timeProfile.
 	sem signal] fork.
 	sem wait.
-	Transcript showln: 'then'.
 	window := helper foregroundWindow.
 	helper scaleWindow: window extent: 580 px @ 425 px.
 	splitter := window allMorphs detect: [:m |
