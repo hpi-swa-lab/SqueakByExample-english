@@ -502,7 +502,7 @@ result --> '1 2 3 4 5 6 7 8 9 10 '
 \paragraph{Higher-order iterators.}
 Collections comprise a large number of different classes, many of which support the same protocol.
 The most important messages for iterating over collections include
-\mthind{Collection}{do:}, \mthind{Collection}{collect:}, \mthind{Collection}{select:}, \mthind{Collection}{reject:}, \mthind{Collection}{detect:} and \mthind{Collection}{inject:into:}.
+\mthind{Collection}{do:}, \mthind{Collection}{collect:}, \mthind{Collection}{select:}, \mthind{Collection}{reject:}, \mthind{Collection}{detect:}, and \mthind{Collection}{inject:into:}.
 These messages define high-level iterators that allow one to write very compact code.
 
 An \clsind{Interval} is a collection that lets one iterate over a sequence of numbers from the starting point to the end.
@@ -534,7 +534,6 @@ Don't forget that strings are also collections, so you can iterate over all the 
 Finally, you should be aware that collections also support a functional-style generic \emph{fold} message called \ct{inject:into:}.
 This lets you generate a cumulative result using an expression that starts with a seed value and injects each element of the collection.
 Sums and products are typical examples.
-\seeindex{fold}{\ct{Collection>>>inject:into}}
 
 \begin{code}{@TEST}
 (1 to: 10) inject: 0 into: [:sum :each | sum + each] --> 55
