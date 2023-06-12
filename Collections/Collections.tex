@@ -242,7 +242,7 @@ This group of classes is often considered to be a paradigmatic example of object
 
 In \st, when one speaks of a collection without being more specific about the kind of collection, one means an object that supports well-defined protocols for testing membership and enumerating the elements.
 \emph{All} collections understand the \protind{testing} messages \mbox{\mthind{Collection}{includes:},} \mthind{Collection}{isEmpty}, and \mbox{\mthind{Collection}{occurrencesOf:}.}
-\emph{All} collections understand the \prot{enumeration} messages \mthind{Collection}{do:}, \mthind{Collection}{select:}, \mthind{Collection}{reject:} (which is the opposite of \ct{select:}), \mthind{Collection}{collect:} (which is like lisp's \ct{map}), \mthind{Collection}{detect:ifNone:}, \mthind{Collection}{inject:into:} (which performs a left fold), and many more.
+\emph{All} collections understand the \prot{enumeration} messages \mthind{Collection}{do:}, \mthind{Collection}{select:}, \mthind{Collection}{reject:} (which is the opposite of \ct{select:}) (which is like \ct{filter} in \ind{Lisp}, JavaScript, and others), \mthind{Collection}{collect:} (which is like \ct{map} in Lisp \etc), \mthind{Collection}{detect:ifNone:}, \mthind{Collection}{inject:into:} (which performs a left fold), and many more.
 It is the ubiquity of this protocol, as well as its variety, that makes it so powerful.
 
 \figref{protocols} summarizes the standard protocols supported by most of the classes in the collection hierarchy.
