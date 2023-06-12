@@ -896,7 +896,7 @@ To achieve this, use the method \cmind{BlockClosure}{ensure:}\footnote{This is s
 		ensure: [Transcript showln: 'My execution is ensured.'].
 \end{code}
 
-Note that under normal circumstraints, you should never place a return statement (\ct{^}) in an ensure block.
+Note that under normal circumstances, you should never place a return statement (\ct{^}) in an ensure block.
 If you do so, the execution will not reach further \ct{ensure:} blocks but will continue as if no exception had occurred.
 In particular, this can create a zombie process when you abandon a program from a debugger.
 
