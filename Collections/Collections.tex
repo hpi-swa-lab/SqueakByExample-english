@@ -988,7 +988,6 @@ In particular, this includes the classes \clsind{Symbol} and \clsind{MessageSend
 Thus, you could also write the above expression as follows:
 \begin{code}{@TEST}
 #(2 -3 4 -35 4 -11) collect: #abs --> #(2 3 4 35 4 11)
-#(2 -3 4 -35 4 -11) collect: (Message selector: #abs) --> #(2 3 4 35 4 11)
 \end{code}
 \cmindex{Symbol}{value:}
 \cmindex{MessageSend}{value:}
