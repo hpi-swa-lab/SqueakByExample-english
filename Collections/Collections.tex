@@ -956,6 +956,8 @@ A further advantage of the second solution is that it will also work for sets an
 
 Generally, you should only use \ct{do:} when you only want to send messages to each of the elements of a collection.
 
+\paragraph{Collection types.}
+
 Note that sending the message \ct{collect:} returns the same kind of collection as the receiver.
 For this reason, the following code fails.
 (A \ct{String} cannot hold integer values.)
@@ -977,6 +979,22 @@ In the case of an \ct{Interval}, the species is actually \ct{Array}!
 \begin{code}{@TEST}
 (1 to: 5) collect: [:each | each * 2] --> #(2 4 6 8 10)
 \end{code}
+
+\paragraph{Shortcuts.}
+
+If you look up the implementation of \ct{collect:}, \ct{do:}, \autc in any collection class, you will find that they evaluate the argument block by sending the message \mthind{BlockClosure}{value:} to it.
+That means that you actually can pass any other object that understands the message \ct{value:} to \ct{collect:}, \ct{do:}, \etc*.
+In particular, this includes the classes \clsind{Symbol} and \clsind{MessageSend}.
+Thus, you could also write the above expression as follows:
+\begin{code}{@TEST}
+#(2 -3 4 -35 4 -11) collect: #abs --> #(2 3 4 35 4 11)
+#(2 -3 4 -35 4 -11) collect: (Message selector: #abs) --> #(2 3 4 35 4 11)
+\end{code}
+\cmindex{Symbol}{value:}
+\cmindex{MessageSend}{value:}
+\noindent
+While using a \subind{message}{selector} symbol instead of a block is a popular shortcut, it is not always considered good style.
+As opposed to blocks, symbols are slower to evaluate, and you cannot directly step into them with the debugger.
 
 %---------------------------------------------------------
 \subsection{Selecting and rejecting elements}
@@ -1026,6 +1044,11 @@ A trivial application of \ct{inject:into:} is to produce the sum of a collection
 For example, we could write this expression to sum the first 100 integers:
 \begin{code}{@TEST}
 (1 to: 100) inject: 0 into: [:sum :each | sum + each] --> 5050
+\end{code}
+\noindent
+Because \ct{Symbol} also understands \cmind{Symbol}{value:value:}, we can also write this:
+\begin{code}{@TEST}
+(1 to: 100) inject: 0 into: #+ --> 5050
 \end{code}
 
 Another example is the following one-argument block which computes factorials:
@@ -1197,7 +1220,7 @@ It can be instantiated from any unary block by sending the message \mthind{Block
 (1 to: 10) sorted: [:ea | ea raisedTo: 2 modulo: 3] ascending --> #(3 6 9 1 2 4 5 7 8 10)
 \end{code}
 
-\mthind{Symbol}{ascending} and \mthind{BlockClosure}{descending} are defined on \clsind{Symbol} as well, so we could also write the previous example in the following way (however, the former version is more efficient, easier to debug, and often would be considered better style):
+\mthind{Symbol}{ascending} and \mthind{Symbol}{descending} are defined on \clsind{Symbol} as well, so we could also write the previous example in the following way:
 
 \begin{code}{@TEST}
 #('Foo' 'Bar' 'baz') sorted: #asUppercase descending --> #('Foo' 'baz' 'Bar')
