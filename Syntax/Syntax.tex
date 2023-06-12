@@ -258,7 +258,7 @@ It is the unique instance of the class \clsind{UndefinedObject}.
 For further details see \charef{model}.
 
 \ct{thisContext} is a pseudo-variable that represents the top frame of the run-time stack.
-In other words, it represents the currently executing \clsind{MethodContext} or \clsind{BlockContext}.
+In other words, it represents the currently executing \clsind{Context}.
 \ct{thisContext} is normally not of interest to most programmers, but it is essential for implementing development tools like the debugger and it is also used to implement exception handling and continuations.
 
 %=================================================================
@@ -420,7 +420,7 @@ x := 1.
 [:y | x + y] value: 2 --> 3
 \end{code}
 
-Blocks are instances of the class \clsind{BlockContext}.
+Blocks are instances of the class \clsind{BlockClosure}.
 This means that they are objects, so they can be assigned to variables and passed as arguments just like any other object.
 
 \paragraph{Returning inside blocks.}
