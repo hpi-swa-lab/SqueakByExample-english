@@ -1039,7 +1039,7 @@ However, it signals an error if the collection is empty, whereas \ct{inject:into
 
 \begin{code}{NB: CANNOT TEST}
 #(1 2 3 4) fold: [:sum :each | sum + each] --> 10
-#() fold: [:sum :each | sum + each] --> !\emph{Error: Cannot fold over an empty collection.}!
+#() fold: [:sum :each | sum + each] --> !\emph{Error: This collection is empty.}!
 
 \end{code}
 
