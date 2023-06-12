@@ -428,9 +428,10 @@ Array with: 4 with: 3 / 2 with: 'lulu' -->  {4 . (3/2) . 'lulu'}
 \end{code}
 
 \paragraph{Literal creation with \ct|\#()|.}
-\ct{#()} creates \ind{literal arrays} with static (or ``\subind{Array}{literal}'') elements that have to be known when the expression is compiled, and not when it is executed.
+\ct{#()} creates an \emph{array literal} with static (or ``literal'') elements that have to be known when the expression is compiled, and not when it is executed.
 The following code creates an array of size 2 where the first element is the (literal) number \ct{1} and the second the (literal) string \ct{'here'}.
 
+\subindex{Array}{literal}
 \seeindex{\#@{\textsf{\#( )}}}{Array, literal}
 
 \begin{code}{@TEST | anArray |}
@@ -446,15 +447,20 @@ Now, if you evaluate \ct{#(1 + 2)}, you do not get an array with a single elemen
 \noindent
 This occurs because the construct \ct{#()} causes the compiler to interpret literally the expressions contained in the array.
 The expression is scanned and the resulting elements are fed to a new array.
-Literal arrays can contain numbers, \ct{nil}, \ct{true}, \ct{false}, characters, strings, symbols, and nested literal arrays.
+Array literals can contain numbers, \ct{nil}, \ct{true}, \ct{false}, characters, strings, symbols, and nested array literals.
 \subindex{Array}{literal}
 
+Analogously, \emph{byte arrays} that are created using \ct{#[ ]} are literal as well.
+\subindex{ByteArray}{literal}
+\seeindex{\#@{\textsf{\#[ ]}}}{ByteArray, literal}
+
 \paragraph{Dynamic creation with \ct|\{ \}|.}
-Finally, you can create a dynamic array using the construct \ct|{}|.
+Finally, you can create an array dynamically using the brace construct \ct|{}|.
 \ct|{a . b}| is equivalent to \lct{Array with: a with: b}.
 This means in particular that the expressions enclosed by \ct|{| and \ct|}| are executed.
 
-\seeindex{\{@{\textsf{\{ \}}}}{Array, dynamic}
+\subindex{Array}{brace construct}
+\seeindex{\{@{\textsf{\{ \}}}}{Array, brace construct}
 
 \begin{code}{@TEST | anArray |}
 {1 + 2} --> #(3)
@@ -474,10 +480,10 @@ anArray at: 3 --> 33
 \cmindex{Array}{copy}
 
 \noindent
-Be careful with code that modifies literal arrays!
-The compiler allocates space just once for literal arrays.
-Unless you copy the array, it will be a \emph{read-only object} and raise a \clsind{ModificationForbidden} error every time you try to alter it.
-Dynamic arrays do not have this problem.
+Be careful with code that modifies array literals!
+The compiler allocates space just once for them.
+Unless you copy the array, it will be a \emphind{read-only object} and raise a \clsind{ModificationForbidden} error every time you try to alter it.
+Dynamically created arrays do not have this problem.
 
 %---------------------------------------------------------
 \subsection{OrderedCollection}
