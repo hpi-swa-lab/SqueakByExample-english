@@ -76,10 +76,10 @@ In fact, this sends the message \ct{printString} to the returned object.
 The method \mthind{Object}{printString}, which is a \ind{template method}, at its core sends the message \mthind{Object}{printOn:} to its receiver.
 The message \ct{printOn:} is a hook that can be specialized.
 
-\ct{Object>>>printOn:} is very likely one of the methods that you will most frequently override.
+\cmind{Object}{printOn:} is very likely one of the methods that you will most frequently override.
 This method takes as its argument a \clsind{Stream} (for more on streams see \charef{streams}) on which a \clsind{String} representation of the object will be written.
 The default implementation simply writes the class name preceded by ``\ct{a}'' or ``\ct{an}''.
-\ct{Object>>>printString} returns the \ct{String} that is written.
+\cmind{Object}{printString} returns the \ct{String} that is written.
 
 For example, the class \clsind{Browser} does not redefine the method \ct{printOn:} and sending the message \ct{printString} to a \ct{Browser} instance executes the method defined in \ct{Object}.
 \begin{code}{@TEST}
@@ -91,7 +91,7 @@ In addition to the usual name of the class, it prints the name of the package as
 
 \needlines{7}
 \begin{method}[zork]{printOn: redefinition.}
-PackagInfo>>>printOn: aStream
+PackageInfo>>>printOn: aStream
 	super printOn: aStream.
 	aStream
 		nextPut: $(;
@@ -205,8 +205,7 @@ Complex>>>= anObject
 		ifFalse: [^ anObject adaptToComplex: self andSend: #=]
 \end{method}
 
-The default implementation of \ct{Object>>>~=} simply negates \ct{Object>>>=}, and should not normally need to be changed.
-%\cmindex{Object}{\~=}
+The default implementation of \cmind{Object}{~=} simply negates \ct{Object>>>=}, and should not normally need to be changed.
 \index{Object!~=@\ct{~=}} % needs special treatment due to ~
 
 \begin{code}{@TEST}
@@ -394,7 +393,7 @@ When this message is sent, execution will be interrupted and a \ind{debugger} wi
 
 The next most important message is \mthind{Object}{assert:}, which takes a \ind{block} as its argument.
 If the block returns \ct{true}, execution continues.
-Otherwise, an \ct{AssertionFailure} exception will be raised, which is a subclass of \ct{Error}.
+Otherwise, an \clsind{AssertionFailure} exception will be raised, which is a subclass of \ct{Error}.
 If this exception is not otherwise caught, the debugger will open to this point in the execution.
 \ct{assert:} is especially useful to support \emphind{design by contract}.
 The most typical usage is to check non-trivial pre-conditions to public methods of objects.
@@ -408,8 +407,8 @@ Stack>>>pop
     ^ self linkedList removeFirst element
 \end{method}
 
-Do not confuse \ct{Object>>>assert:} with \cmind{TestCase}{assert:}, which occurs in the SUnit testing framework (see \charef{SUnit}).
-While the former expects a block as its argument\footnote{Actually, it will take any argument that understands \ct{value}, including a \ct{Boolean}.}, the latter expects a \clsind{Boolean}.
+Do not confuse \cmind{Object}{assert:} with \cmind{TestCase}{assert:}, which occurs in the SUnit testing framework and raises a \clsind{TestFailure} (see \charef{SUnit}).
+While the latter also has variants such as \ct{assert:equals:} or \ct{deny:}, the former has no variants.
 Although both are useful for debugging, they each serve a very different intent.
 
 %-----------------------------------------------------------------
@@ -448,7 +447,7 @@ Object>>>subclassResponsibility
             format: {self className. thisContext sender selector})
 \end{method}
 
-\clsind{Magnitude}, \clsind{Number} and \clsind{Boolean} are classical examples of \subind{class}{abstract} classes that we shall see shortly in this chapter.
+\clsind{Magnitude}, \clsind{Number}, and \clsind{Boolean} are classical examples of \subind{class}{abstract} classes that we shall see shortly in this chapter.
 
 \begin{code}{NB: CANNOT TEST}
 Number new + 1 --> !\emph{Error: My subclass should have overridden \#+}!
@@ -512,7 +511,7 @@ Of course, numbers are implemented efficiently in the virtual machine, but the \
 
 \begin{figure}[ht]
 \centerline {\includegraphics[width=8cm]{NumberHierarchy}}
-\caption{The Number Hierarchy \label{fig:numbers}.}
+\caption{The Number Hierarchy.\label{fig:numbers}}
 \end{figure}
 
 Numbers are found in the \scatind{Kernel-Numbers} category.
@@ -525,9 +524,9 @@ For the most part, users do not need to be aware of the difference between the t
 \subsection{Magnitude}
 
 \clsindmain{Magnitude} is the parent not only of the \clsind{Number} classes, but also of other classes supporting comparison operations, such as \clsind{Character}, \clsind{Duration} and \clsind{Timespan}.
-(\clsind{Complex} numbers are not comparable, and so do not inherit from \clsind{Number}.)
+(\clsind{Complex} numbers are not comparable, and so do not inherit from \clsind{Number} nor from \clsind{Magnitude}.)
 
-Methods \mthind{Magnitude}{<} and \mthind{Magnitude}{=} are abstract.
+The methods \cmind{Magnitude}{<} and \cmind{Magnitude}{=} are abstract.
 The remaining operators are defined generically.
 For example:
 
@@ -556,7 +555,7 @@ There are also numerous \emphind{shortcut constructor methods}, such as \mthind{
 
 \ct{Numbers} directly support common \emph{math functions} such as \mthind{Number}{sin}, \mthind{Number}{log}, \mthind{Number}{raiseTo:}, \mthind{Number}{squared}, \mthind{Number}{sqrt}, and so on.
 
-\cmind{Number}{printOn:} is implemented in terms of the abstract method \ct{Number>>>printOn:base:}.
+\cmind{Number}{printOn:} is implemented in terms of the abstract method \cmind{Number}{printOn:base:}.
 (The default base is 10.)
 
 Testing methods include \mthind{Number}{even}, \mthind{Number}{odd}, \mthind{Number}{positive}, and \mthind{Number}{negative}.
@@ -607,7 +606,7 @@ Float infinity isInfinite --> true
 %-----------------------------------------------------------------
 \subsection{Fraction}
 
-\clsind{Fraction}s are represented by instance variables for the numerator and denominator, which should be \ct{Integer}s.
+\clsindplural{Fraction} are represented by instance variables for the numerator and denominator, which should be \ct{Integer}s.
 \ct{Fraction}s are normally created by \ct{Integer} division (rather than using the constructor method \cmind{Fraction}{numerator:denominator:}):
 
 \begin{code}{@TEST}
@@ -760,12 +759,23 @@ For example:
 
 Strings support rather a large number of conversion methods.
 Many of these are \ind{shortcut constructor methods} for other classes, such as \mthind{String}{asDate}, \mthind{String}{asFileName}, and so on.
-There are also a number of useful methods for converting a string to another string, such as \mthind{String}{capitalized} and \mthind{String}{translateToLowercase}.
+There are also a number of useful methods for converting a string to another string, such as \mthind{String}{capitalized} and \mthind{String}{asLowercase}.
 
 For more on strings and collections, see \charef{collections}.
 
 \on{There is more material we could use here:
 \url{http://www.dmu.com/crb/crb7.html}.}
+
+
+\paragraph{A note on protocols.}
+
+As you have seen, many classes such as \ct{String} or \ct{Integer} provide you with dozens of useful selectors, and we only introduced a few of them here.
+It is hard to memorize the full protocol of all basic classes, and many Squeakers frequently look up the relevant selectors.
+When you are trying to do something with some object while writing a script or application, it is often a good idea to keep a \ind{browser} browser open (see \secref{browsing}) on its class and consult it from time to time as you are searching for a specific functionality.
+
+\dothis{Open a browser on the class \ct{String}, focus the message list, and type \ct{numb} to discover messages that you can send your string to convert it into a number.}
+
+Also remember that you can use the method finder (see \secref{methodFinder}) for finding messages based on their output rather than their name, which works especially well for strings, collections, and numbers.
 
 %=================================================================
 \section{Booleans}
