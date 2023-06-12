@@ -635,7 +635,7 @@ There are easy ways to convert back and forth between streams and collections.
 	\item Streams may be either readable, writeable, or both readable and writeable.
 	\item To get a stream for a collection, create a stream ``on'' a collection, \eg \ct{ReadStream on: (1 to: 1000)}, or send the messages \ct{readStream} \etc to the collection.
 	\item To get the collection of a stream, send the message \ct{contents}.
-	\item To concatenate large collections, instead of using the comma operator, it is more efficient to create a stream, append the collections to the stream with \ct{nextPutAll:}, and extract the result by sending \ct{contents}.
+	\item To concatenate large collections, instead of using the concatenation operator, it is more efficient to create a stream, append the collections to the stream with \ct{nextPutAll:}, and extract the result by sending \ct{contents}.
   \item File streams are by default character-based.
   Send \ct{binary} to explicitly make them binary.
 \end{itemize}

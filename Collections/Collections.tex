@@ -735,7 +735,10 @@ When we instantiate a \ct{String} we actually get either an 8-bit \clsind{ByteSt
 To keep things simple, we usually ignore the difference and just talk about instances of \ct{String}.
 
 Two instances of \ct{String} can be concatenated with a comma.
-\index{Collection!comma operator}
+\seeindex{Collection!concatenation}{Collection, \ct{,}}
+\seeindex{,}{Collection, \ct{,}}
+\seeindex{comma}{Collection, concatenation}
+\cmindex{Collection}{,}
 \begin{code}{@TEST |s|}
 s := 'no' , ' ' , 'worries'.
 s -->  'no worries'
@@ -752,9 +755,8 @@ Note that the comma method is defined by \ct{Collection}, so it will work for an
 \begin{code}{@TEST}
 (1 to: 3) , '45' --> #(1 2 3 $4 $5)
 \end{code}
-\seeindex{String!concatenation}{Collection, comma operator}
-\seeindex{String!comma}{Collection, comma operator}
-\index{Collection!comma operator}
+\seeindex{String!concatenation}{String, \ct{,}}
+\cmindex{String}{,}
 
 We can also modify an existing string in place using \mthind{String}{replaceAll:with:} or \mthind{String}{replaceFrom:to:with:} as shown below. Note that the number of characters and the interval should have the same size.
 
