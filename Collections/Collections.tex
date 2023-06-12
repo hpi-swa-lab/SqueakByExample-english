@@ -694,7 +694,7 @@ How do you get a \ct{String} back from this result?
 'hello' asSortedCollection asString --> 'a SortedCollection($e $h $l $l $o)'
 \end{code}
 \noindent
-The correct answer is to either use \ct{String class>>>newFrom:}, \ct{String class>>>withAll:}, or \ct{Object>>>as:}:
+The correct answer is to either use \cmind{String class}{newFrom:}, \cmind{String class}{withAll:}, or \cmind{Object}{as:}:
 \begin{code}{@TEST}
 'hello' asSortedCollection as: String              --> 'ehllo'
 String newFrom: ('hello' asSortedCollection) --> 'ehllo'

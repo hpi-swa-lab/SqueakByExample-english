@@ -162,7 +162,7 @@ jobs:
           path: listings
       - uses: benjlevesque/short-sha@v1.2
         id: short-sha
-      - name: 📣 ${{ needs.args.outputs.draft-release && 'Draft release' || 'Create pre-release' }}
+      - name: 📣 ${{ fromJson(needs.args.outputs.draft-release) && 'Draft release' || 'Create pre-release' }}
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
@@ -171,12 +171,13 @@ jobs:
           files: |
             book-*/SBE-*.pdf
             ListingSources.zip
-          prerelease: ${{ needs.args.outputs.draft-release && 'false' || 'true' }}
-          draft: ${{ needs.args.outputs.draft-release && 'true' || 'false' }}
+          prerelease: ${{ !fromJson(needs.args.outputs.draft-release) }}
+          draft: ${{ fromJson(needs.args.outputs.draft-release) }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
-      - uses: dev-drprasad/delete-older-releases@v0.2.0
-        if: ${{ needs.args.outputs.draft-release && false || true }}
+      - name: Delete older pre-releases
+        uses: dev-drprasad/delete-older-releases@v0.2.0
+        if: ${{ !fromJson(needs.args.outputs.draft-release) }}
         with:
           delete_tag_pattern: untagged-
           keep_latest: 1

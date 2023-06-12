@@ -196,7 +196,7 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 	Angle brackets \ct{< >} right after a method header denote a \ind{pragma} which is a possibility to add static annotations to a method.
 	The kind of pragma you will probably see most frequently in \sq are \emph{\ind{primitive}} pragmas which are indicated by the pragma selector \ct{#primitive:} and its siblings \ct{#primitive:error:}, \ct{#primitive:module:} \etc*.
 	Primitives denote an invocation of a \ind{virtual machine} \ind{primitive.}
-	For instance, \ct{<primitive: 1>} is the VM primitive for \ct{SmallInteger>>>+}.
+	For instance, \ct{<primitive: 1>} is the VM primitive for \cmind{SmallInteger}{+}.
 	Any code following the primitive is executed only if the primitive fails.
 
 \item[Unary messages] consist of a single word (such as \ct{factorial}) sent to a receiver (like the number \ct{3}).
