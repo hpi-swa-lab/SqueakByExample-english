@@ -145,6 +145,7 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 \item[Symbols] are like Strings, in that they contain a sequence of characters.
 	However, unlike a string, a literal \subind{literal}{symbol} is guaranteed to be globally unique.
 	There is only one Symbol object \ct{#Hello} but there may be multiple String objects with the value \ct{'Hello'}.
+	Amongst others, symbols are used for referencing messages by their \subind{message}{selector}.
 	\seeindex{\#@{\textsf{\#}}}{literal symbol}
 
 \item[Run-time arrays.]
@@ -212,9 +213,10 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 	\seeindex{binary message}{message, binary}
 
 \item[Keyword messages] consist of multiple keywords (like \ct{raisedTo:modulo:}), each ending with a colon and taking a single argument.
-	In the expression \ct{2 raisedTo: 6 modulo: 10}, the \emphind{message selector} \ct{raisedTo:modulo:} takes the two arguments \ct{6} and \ct{10}, one following each colon.
+	In the expression \ct{2 raisedTo: 6 modulo: 10}, the \emph{message selector} \ct{raisedTo:modulo:} takes the two arguments \ct{6} and \ct{10}, one following each colon.
 	We send the message to the receiver \ct{2}.
-	\index{message!keyword}
+	\subindex{message}{selector}
+	\subindex{message}{keyword}
 	\seeindex{keyword message}{message, keyword}
 
 \item[Method return.]
