@@ -1322,7 +1322,8 @@ SBEScreenshotRecorder writeTo: './figures/SpaceTally.png' building: [:helper |
 ]
 \end{ExecuteSmalltalkScript}
 
-First, you can send the message \mthind{BlockClosure}{timeToRun} to a block to measure the time it takes to execute it:
+First, you can send the message \mthind{BlockClosure}{timeToRun} to a block to measure the time in milliseconds it takes to execute it:
+
 \begin{code}{NB: CANNOT TEST}
 [10000 factorial] timeToRun --> 27
 \end{code}
@@ -1356,7 +1357,7 @@ If you have discovered that your code is too slow, you might wonder which parts 
 For that, \sq provides the \emphind{message tally} tool.
 You can start it to record the execution times for your code by selecting the code and choosing \menu{spy on it} from the context menu.
 Alternatively, you can let it observe all processes in the image from the menu item \menu{world main docking bar~\go{} Apps~\go{} Message Tally}.
-Note that the message tally is a sampling profiler, so for detailed information, you will have to let your code run for some seconds (e.g. by running it 1000 times if it only takes a little time).
+Note that the message tally is a sampling profiler, so for detailed information, you will have to let your code run for some seconds (\eg by running it 1000 times if it only takes a little time).
 
 An extension of the message tally is the \emphind{time profile browser} which allows you to browse the results of a message tally conveniently (see \figref{TimeProfile}).
 You can invoke it by sending \mthind{BlockClosure}{timeProfile} to a block.
