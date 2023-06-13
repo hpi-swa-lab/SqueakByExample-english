@@ -1,6 +1,6 @@
 {
 	"class" : {
-		"buildingSelectorPattern" : "ct 11/23/2019 19:14",
+		"buildingSelectorPattern" : "ct 10/10/2022 17:20",
 		"debugging" : "ct 11/20/2019 12:38",
 		"doesNotUnderstand:" : "ct 11/23/2019 19:05",
 		"newAtDirectory:" : "ct 11/20/2019 12:18",
@@ -12,11 +12,11 @@
 		"defaultFileDirectory" : "ct 11/20/2019 12:21",
 		"fileDirectory" : "ct 11/20/2019 12:21",
 		"fileDirectory:" : "ct 11/20/2019 12:14",
-		"initialize" : "ct 11/20/2019 11:56",
-		"paperColor" : "ct 11/22/2019 20:57",
-		"record:" : "ct 11/23/2019 19:31",
+		"paperColor" : "ct 11/7/2022 23:29",
+		"record:" : "ct 6/13/2023 20:46",
 		"setFileDirectoryFrom:" : "ct 11/20/2019 12:22",
 		"setUpWorld" : "ct 11/23/2019 18:02",
+		"tearDownWorld" : "ct 10/6/2022 20:32",
 		"useHelper:during:" : "ct 11/20/2019 11:01",
 		"worldSize" : "ct 9/28/2022 13:30",
 		"writeScene:to:" : "ct 11/23/2019 17:48",
