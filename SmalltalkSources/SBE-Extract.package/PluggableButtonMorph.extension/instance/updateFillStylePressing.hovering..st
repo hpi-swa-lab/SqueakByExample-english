@@ -3,7 +3,7 @@ updateFillStylePressing: isPressing hovering: isHovering
 
 	| gradient cc |
 	((Smalltalk at: #SBEDebugUpdateFillStye ifAbsent: []) = true and: [self model isKindOf: ObjectExplorer]) ifTrue: [
-		Transcript showln: {self. isPressing. isHovering. (String streamContents: [:s | thisContext errorReportOn: s])}].
+		Transcript showln: {self. isPressing. isHovering. self currentEvent. (String streamContents: [:s | thisContext errorReportOn: s])}].
 	
 	"Migrate old instances."
 	hoverColor ifNil: [hoverColor := onColor darker].
