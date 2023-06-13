@@ -56,6 +56,12 @@
 \usepackage{wrapfig}
 \usepackage{pdfpages}
 \usepackage{tikz}
+\usepackage{tipa}
+
+\usepackage{soul}
+\soulregister{\allowbreak}{0}
+\soulregister{~}{0}
+\soulregister{\ind}{1}
 
 \usepackage{environ}
 % https://tex.stackexchange.com/a/6391/221054
@@ -106,13 +112,12 @@
 \newcommand{\sunit}{SUnit\xspace}
 \newcommand{\xUnit}{$x$Unit\xspace}
 \newcommand{\JUnit}{JUnit\xspace}
-\newcommand{\st}{Smalltalk\xspace}
+\renewcommand{\st}{Smalltalk\xspace} % more important than soul's striketrough
 \newcommand{\Squeak}{Squeak\xspace}
 \newcommand{\sq}{Squeak\xspace}
 \newcommand{\sqmap}{SqueakMap\xspace}
 \newcommand{\squeak}{Squeak\xspace}
 \newcommand{\sbeRepoUrl}{\url{https://github.com/hpi-swa-lab/SqueakByExample-english}\xspace}
-\newcommand{\sba}{\url{SquareBracketAssociates.org}\xspace}
 \newcommand{\hpiswa}{\url{hpi.de/swa}\xspace}
 %=============================================================
 %:Markup macros for proof-reading
@@ -146,9 +151,13 @@
 \newcommand{\here}{\nnbb{CONTINUE}{HERE}}
 %=============================================================
 %:Abbreviation macros
+\usepackage{suffix}
 \newcommand{\ie}{\emph{i.e.},\xspace}
+\WithSuffix\newcommand\ie*{\emph{i.e.}\xspace}
 \newcommand{\eg}{\emph{e.g.},\xspace}
+\WithSuffix\newcommand\eg*{\emph{e.g.}\xspace}
 \newcommand{\etc}{etc.\xspace}
+\newcommand{\autc}{autc.\xspace}
 %=============================================================
 %:Cross reference macros
 \newcommand{\charef}[1]{Chapter~\ref{cha:#1}\xspace}
@@ -189,14 +198,14 @@
 %:Menu item macro
 % for menu items, so we can change our minds on how to print them! (apb)
 \definecolor{lightgray}{gray}{0.89}
-\newcommand{\menu}[1]{{%
+\DeclareRobustCommand{\menu}[1]{{%
 	\setlength{\fboxsep}{0pt}%
-	\colorbox{lightgray}{{{\upshape\sffamily\strut \,#1\,}}}}}
+	\sethlcolor{lightgray}\hl{\upshape\sffamily\strut #1}}}
 \newcommand{\link}[1]{{%
 	\fontfamily{lmr}\selectfont
  	\upshape{\sffamily \underline{#1}}}}
 % For submenu items:
-\newcommand{\go}{\,$\triangleright$\,}
+\newcommand{\go}{\,$\triangleright$}
 % \newcommand{\go}{\,$\blacktriangleright$\,}
 % For keyboard shortcuts:
 %\newcommand{\short}[1]{\mbox{$\langle${\sc CMD}$\rangle$-#1}\xspace}
@@ -228,7 +237,9 @@
 %=================================================================
 % graphics for Morphic handles
 \begin{ExecuteSmalltalkScript}
+<timeout: 60 "seconds">
 "MorphicHandles"
+<timeout: 80 "seconds">
 #(('blackHandle' 'Halo-Grab') ('moveHandle' 'Halo-Drag') ('debugHandle' 'Halo-Debug') ('rotateHandle' 'Halo-Rot'))
 	do: [ :each |
 		SBEScreenshotRecorder
@@ -236,10 +247,13 @@
 			buildingForm: [ :helper |
 				helper haloHandleFormFor: each second ] ]
 \end{ExecuteSmalltalkScript}
-\newcommand{\grabHandle}{\raisebox{-0.2ex}{\includegraphics[width=1em]{blackHandle}}}
-\newcommand{\moveHandle}{\raisebox{-0.2ex}{\includegraphics[width=1em]{moveHandle}}}
-\newcommand{\debugHandle}{\raisebox{-0.2ex}{\includegraphics[width=1em]{debugHandle}}}
-\newcommand{\rotateHandle}{\raisebox{-0.2ex}{\includegraphics[width=1em]{rotateHandle}}}
+\usepackage{textcomp}  % Required for encoding \textbigcircle
+\usepackage{scalerel}  % Required for emoji \scalerel
+\newcommand{\haloHandle}[1]{\scalerel*{\includegraphics{#1}}{\textrm{\textbigcircle}}}
+\newcommand{\grabHandle}{\haloHandle{blackHandle}}
+\newcommand{\moveHandle}{\haloHandle{moveHandle}}
+\newcommand{\debugHandle}{\haloHandle{debugHandle}}
+\newcommand{\rotateHandle}{\haloHandle{rotateHandle}}
 %=============================================================
 %:Highlighting Important stuff (doublebox)
 %
@@ -554,7 +568,7 @@
 %\newcommand{\sep}{{$\gg$}}
 \newcommand{\sep}{\mbox{>>}}
 \newcommand{\self}{\lct{self}\xspace}
-\newcommand{\super}{\lct{super}\xspace}
+\renewcommand{\super}{\lct{super}\xspace}
 \newcommand{\nil}{\lct{nil}\xspace}
 %=============================================================
 % be less conservative about float placement
@@ -597,3 +611,19 @@
 %\setlength{\marginparsep}{2mm}
 %\renewcommand{\baselinestretch}{1.1}
 %=============================================================
+
+
+\makeatletter \def\IfEnvir #1%
+% implicit #2 "what if true"
+% implicit #3 "what if false"
+{%
+  \ifnum \pdfstrcmp{\@currenvir}{#1}=0
+    \expandafter\@firstoftwo
+  \else
+    \expandafter\@secondoftwo
+  \fi
+}
+
+\makeatother
+
+\newcommand{\tikzifintikzpicture}[2]{\IfEnvir{tikzpicture}{#1}{#2}}

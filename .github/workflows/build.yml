@@ -4,6 +4,23 @@ on:
   push:
   schedule:
     - cron: "0 0 * * 1"  # every monday
+  workflow_dispatch:
+    inputs:
+      draft-release:
+        description: 'Draft an actual release (instead of creating a pre-release)'
+        type: boolean
+        required: false
+        default: false
+      squeak-versions:
+        description: 'List of Squeak versions to test (JSON array)'
+        type: string
+        required: false
+        default: '["Trunk", "6.0"]'
+      scale-factor:
+        description: 'Scale factor for screenshots'
+        type: number
+        required: false
+        default: '2.5'
 
 # not yet implemented: https://github.community/t/how-to-set-and-access-a-workflow-variable/17335/6?u=linqlover
 # ---
@@ -14,15 +31,32 @@ on:
 #---
 
 jobs:
+  args:
+    name: 📦 Prepare arguments
+    runs-on: ubuntu-latest
+    outputs:
+      draft-release: ${{ steps.prepare.outputs.draft-release }}
+      squeak-versions: ${{ steps.prepare.outputs.squeak-versions }}
+      scale-factor: ${{ steps.prepare.outputs.scale-factor }}
+    steps:
+      - name: Prepare
+        id: prepare
+        run: |
+          echo "draft-release=${{ inputs.draft-release && true || false }}" >> $GITHUB_OUTPUT
+          echo 'squeak-versions<<EOF
+          ${{ toJson(fromJson(inputs.squeak-versions || '["Trunk", "6.0"]')) }}
+          EOF' >> $GITHUB_OUTPUT
+          echo "scale-factor=${{ inputs.scale-factor || '2.5' }}" >> $GITHUB_OUTPUT
   tests:
     name: 🐞 Internal tests [${{ matrix.smalltalk }}]
+    needs: [args]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        smalltalk: [Trunk, '6.0']
+        smalltalk: ${{ fromJson(needs.args.outputs.squeak-versions) }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: hpi-swa/setup-smalltalkCI@v1
         with:
           smalltalk-image: Squeak64-${{ matrix.smalltalk }}
@@ -33,13 +67,14 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}  # for coverage reports
   tex-assertions:
     name: 🧪 @TEST assertions [${{ matrix.smalltalk }}]
+    needs: [args]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        smalltalk: [Trunk, '6.0']
+        smalltalk: ${{ fromJson(needs.args.outputs.squeak-versions) }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: hpi-swa/setup-smalltalkCI@v1
         with:
           smalltalk-image: Squeak64-${{ matrix.smalltalk }}
@@ -50,7 +85,7 @@ jobs:
     name: 📄 Collect listings from SmalltalkSources
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - run: make listings
       - name: 💾 Store listings
         uses: actions/upload-artifact@master
@@ -59,22 +94,24 @@ jobs:
           path: ListingSources
   build:
     name: 📖 Build book [${{ matrix.smalltalk }}]
-    needs: [listings]
+    needs: [args, listings]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        smalltalk: [Trunk, '6.0']
+        smalltalk: ${{ fromJson(needs.args.outputs.squeak-versions) }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: hpi-swa/setup-smalltalkCI@v1
         with:
           smalltalk-image: Squeak64-${{ matrix.smalltalk }}
       - id: figures
         name: 🖼 Build Squeak figures
         run: smalltalkci -s Squeak64-${{ matrix.smalltalk }} SBE-Extract.smalltalk.ston
-        timeout-minutes: 15
+        timeout-minutes: 30
         continue-on-error: true
+        env:
+          SBE_SCALE_FACTOR: ${{ needs.args.outputs.scale-factor }}
       - if: (steps.figures.outcome == 'failure')
         name: Configure DEBUG_FIGURES
         run: |
@@ -110,8 +147,8 @@ jobs:
           echo "DEBUG_FIGURES=true" >> $GITHUB_ENV
           exit 1
   release:
-    name: ✈ Create pre-release
-    needs: [tests, tex-assertions, build]
+    name: Create release
+    needs: [args, tests, tex-assertions, build]
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
@@ -125,7 +162,8 @@ jobs:
           path: listings
       - uses: benjlevesque/short-sha@v1.2
         id: short-sha
-      - name: 📣 Create pre-release
+      - name: 📣 ${{ fromJson(needs.args.outputs.draft-release) && 'Draft release' || 'Create pre-release' }}
+        id: create_release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: untagged-${{ steps.short-sha.outputs.sha }}
@@ -133,10 +171,13 @@ jobs:
           files: |
             book-*/SBE-*.pdf
             ListingSources.zip
-          prerelease: true
+          prerelease: ${{ !fromJson(needs.args.outputs.draft-release) }}
+          draft: ${{ fromJson(needs.args.outputs.draft-release) }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
-      - uses: dev-drprasad/delete-older-releases@v0.2.0
+      - name: Delete older pre-releases
+        uses: dev-drprasad/delete-older-releases@v0.2.0
+        if: ${{ !fromJson(needs.args.outputs.draft-release) }}
         with:
           delete_tag_pattern: untagged-
           keep_latest: 1

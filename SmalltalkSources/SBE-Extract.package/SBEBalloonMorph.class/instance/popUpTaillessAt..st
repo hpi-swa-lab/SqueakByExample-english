@@ -15,7 +15,7 @@ popUpTaillessAt: point
 		| pointWithOffset |
 		self orientation: nextOrientation.
 		pointWithOffset := point + self tailOffset.
-		self move: pointWithOffset.
+		self center: pointWithOffset.
 		self bounds: (self bounds translatedToBeWithin: w bounds).
 		(self bounds perform: self orientation) = pointWithOffset] ifNone: ["Keep last try."].	
 	

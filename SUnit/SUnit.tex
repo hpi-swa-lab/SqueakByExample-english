@@ -264,7 +264,7 @@ Note the use of the method \mthind{TestCase}{deny:} to assert something that sho
 %---------------------------------------------------------
 \subsection{Step 4: run the tests}
 
-The easiest way to execute the tests is with the \sunit \emphind{Test Runner}, which you can open from the \menu{World \go Test Runner} menu, or from \menu{World docking bar \go Tools}.
+The easiest way to execute the tests is with the \sunit \emphind{Test Runner}, which you can open from the \menu{World~\go{} Test Runner} menu, or from \menu{World docking bar~\go{} Tools}.
 The \emph{TestRunner}, shown in \figref{test-runner}, is designed to make it easy to execute groups of tests.
 The left-most pane lists all of the system categories that contain test classes (\ie  subclasses of \ct{TestCase}); when some of these categories are selected, the test classes that they contain appear in the pane to the right.
 Abstract classes are italicized, and the test class hierarchy is shown by indentation, so subclasses of \ct{ClassTestCase} are indented more than subclasses of \ct{TestCase}.
@@ -496,7 +496,8 @@ This message will return the test resource instance that is initialized for the 
 
 %=================================================================
 \section{Advanced features of SUnit}
-In addition to \ct{TestResource}, the current version of \sunit contains assertion description strings, logging support, and resumable test failures.
+In addition to \ct{TestResource}, the current version of \sunit contains assertion description strings and logging support.
+% Currently broken as of 6.0, readd when fixed:  "and resumable test failures."
 
 %---------------------------------------------------------
 \subsection{Assertion description strings}
@@ -531,28 +532,29 @@ The description strings described above may also be logged to a \ct{Stream} such
 You can choose whether to log by overriding \cmind{TestCase}{isLogging} in your test class; you must also choose where to log by overriding \cmind{TestCase}{failureLog} to answer an appropriate stream.
 
 %---------------------------------------------------------
-\subsection{Continuing after a failure}
-\sunit also allows us to specify whether or not a test should continue after a failure.
-This is a really powerful feature that uses the exception mechanisms offered by \st.
-To see what this can be used for, let's look at an example.
-Consider the following test expression:
-\begin{code}{}
-(1 to: 10) do: [:each | self assert: each even]
-\end{code}
-In this case, as soon as the test finds the first element of the collection that isn't \ct{even}, the test stops.
-However, we would usually like to continue, and see both how many elements, and which elements, aren't \ct{even}, and maybe also log this information.
-You can do this as follows:
-\begin{code}{}
-(1 to: 10) do: [:each |
-	self
-		assert: each even
-		description: each printString , ' is not even'
-		resumable: true].
-\end{code}
-This will print out a message on your logging stream for each element that fails.
-It doesn't accumulate failures, \ie if the assertion fails 10~times in your test method, you'll still only see one failure.
-All the other assertion methods that we have seen are not resumable; \ct{assert: p description: s} is equivalent to \ct{assert: p description: s resumable: false}.
-\cmindex{Collection}{do:}
+% Currently broken as of 6.0, readd when fixed:
+% \subsection{Continuing after a failure}
+% \sunit also allows us to specify whether or not a test should continue after a failure.
+% This is a really powerful feature that uses the exception mechanisms offered by \st.
+% To see what this can be used for, let's look at an example.
+% Consider the following test expression:
+% \begin{code}{}
+% (1 to: 10) do: [:each | self assert: each even]
+% \end{code}
+% In this case, as soon as the test finds the first element of the collection that isn't \ct{even}, the test stops.
+% However, we would usually like to continue, and see both how many elements, and which elements, aren't \ct{even}, and maybe also log this information.
+% You can do this as follows:
+% \begin{code}{}
+% (1 to: 10) do: [:each |
+% 	self
+% 		assert: each even
+% 		description: each printString , ' is not even'
+% 		resumable: true].
+% \end{code}
+% This will print out a message on your logging stream for each element that fails.
+% It doesn't accumulate failures, \ie if the assertion fails 10~times in your test method, you'll still only see one failure.
+% All the other assertion methods that we have seen are not resumable; \ct{assert: p description: s} is equivalent to \ct{assert: p description: s resumable: false}.
+% \cmindex{Collection}{do:}
 %=================================================================
 \section{The implementation of SUnit}
 
@@ -706,11 +708,6 @@ Here is some advice on how to design tests.
 %  What specifically should I do or not do?
 %  Give an example!}
 
-%\item[Do not over-test.] Try to build your tests so that they do not
-%  overlap.  It is annoying to have many tests covering the same
-%  functionality, because one bug in the code will then break many tests at the same time.
-%  This is covered by Black's rule, below.
-
 \index{Feathers, Michael}
 \item[Feathers' Rules for Unit tests.]
 	Michael Feathers, an  agile process consultant and author, writes:\footnote{See \url{https://web.archive.org/web/20060212020903/http://www.artima.com/weblogs/viewpost.jsp?thread=126923}.}
@@ -742,7 +739,7 @@ Here is some advice on how to design tests.
 	Such tests might exercise many classes, and might take a long time to run because they touch the file system.
 	You can write them using \sunit, but you won't want to run them each time you make a small change, so they should be separated from the true unit tests.
 
-\item[Black's Rule of Testing.]
+\item[One Test per Property.]
 	For every test in the system, you should be able to identify some property for which the test increases your confidence.
 	Obviously there should be no important property that you are not testing.
 	This rule states the less obvious fact that there should be no test that does not add value to the system by increasing your confidence that a useful property holds.

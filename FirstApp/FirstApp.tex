@@ -46,7 +46,15 @@ We will explain the details of the syntax, the object model, and message passing
 SBEScreenshotRecorder writeTo: './figures/GameBoard.png' frame: #morphs building: [:helper |
 	| game |
 	game := SBEGame new openInWorld.
-	helper click: game at: (game bounds pointAtFraction: 4 @ 6 - 0.5 / 10) buttons: #(left).
+
+	self flag: #workaround. "SBECell's fullBounds > SBECell's bounds because the empty label has a larger extent. In high-dpi mode, this leads to huge protuding spacing."
+	game submorphsDo: [:cell | cell firstSubmorph "label" delete].
+
+	game addFlexShell
+		scale: RealEstateAgent scaleFactor;
+		openInWorld.
+
+	helper click: game at: (game boundsInWorld pointAtFraction: 4 @ 6 - 0.5 / 10) buttons: #(left).
 	helper spawnHand.
 ]
 \end{ExecuteSmalltalkScript}
@@ -82,9 +90,9 @@ Select \menu{add item \ldots}.}
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/AddCategory.png' frame: [:bounds | bounds * (0 asPoint corner: 0.4 @ 0.75)] building: [:helper |
 	| window |
-	Browser open.
+	SystemBrowser defaultOpenBrowser.
 	window := helper foregroundWindow.
-	helper click: window at: window topLeft + (30 @ 30) buttons: #(right).
+	helper click: window at: window topLeft + (50 px @ 40 px) buttons: #(right).
 	helper hand releaseMouseFocus.
 	helper mouseEnter: (helper menuItemMorphLabeled: 'add item*' in: helper world).
 	helper closeBalloons.
@@ -92,7 +100,11 @@ SBEScreenshotRecorder writeTo: './figures/AddCategory.png' frame: [:bounds | bou
 \end{ExecuteSmalltalkScript}
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/ClassTemplate.png' frame: [:bounds | bounds * (0 asPoint corner: 0.4 @ 0.75)] building: [:helper |
-	Browser fullOnCategory: 'SBE-Quinto'.
+	thisContext wrap: [:block |
+		helper emptyOrganizer: self environment organization atCategory: 'SBE-Quinto' during: block].
+
+	ToolSet browseCategory: 'SBE-Quinto'.
+	helper takeScreenshot.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
@@ -155,15 +167,16 @@ To actually send this message, you must \menu{accept} it.
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/AcceptClassDef.png' frame: [:rect | rect bottomHalf] building: [:helper |
-	| window menu |
+	| window codePane menu |
 	SBECell browse.
 	window := helper foregroundWindow.
-	window bounds: (0 @ 120 extent: 500 @ 400).
-	(helper codePaneOfBrowser: window) hasUnacceptedEdits: true.
-	helper click: window at: window bottomCenter - (0 @ 30) buttons: #(right).
+	window bounds: (0 px @ 120 px extent: 500 px @ 400 px).
+	codePane := helper codePaneOfBrowser: window.
+	codePane hasUnacceptedEdits: true.
+	helper click: window at: codePane center buttons: #(right).
 	helper closeBalloons.
 	menu := helper foregroundMorph.
-	menu bottomRight: window bottomRight - (50 @ 30).
+	menu bottomRight: window bottomRight - (50 px @ 35 px).
 	helper hand releaseMouseFocus.
 	helper mouseEnter: (helper menuItemMorphLabeled: 'accept*' in: helper world).
 ]
@@ -172,7 +185,7 @@ SBEScreenshotRecorder writeTo: './figures/AcceptClassDef.png' frame: [:rect | re
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{AcceptClassDef}}}
 	{\centerline {\includegraphics[scale=0.7]{AcceptClassDef}}}
-\caption{The class-creation template.
+\caption{Accepting the new class definition.
 \label{fig:acceptClassDef}}
 \end{figure}
 
@@ -196,7 +209,14 @@ A class \subind{class}{comment} need not contain a detailed description of the i
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/SBECell.png' frame: #morphs building: [:helper |
-  SBECell browse
+	thisContext wrap: [:block |
+		helper emptyOrganizer: self environment organization atCategory: 'SBE-Quinto' during: block].
+	self environment organization classify: SBECell name under: 'SBE-Quinto'.
+	thisContext wrap: [:block |
+		helper emptyClass: SBECell during: block].
+
+	SBECell browse.
+	helper takeScreenshot.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[h!t]
@@ -284,7 +304,7 @@ SBEScreenshotRecorder writeTo: './figures/SBECellInspector.png' frame: #morphs b
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htbp]
    \centering
-   \includegraphics[scale=0.7]{SBECellInspector}
+   \includegraphics[width=0.55\textwidth]{SBECellInspector}
    \caption{The inspector used to examine a SBECell object.\label{fig:SBECellInspector}}
 \end{figure}
 
@@ -304,24 +324,31 @@ Notice how the bounds reported by the inspector also change.
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/SBECellResize.png' frame: #morphs building: [:helper |
-  | cell window list bottomPane |
-  cell := SBECell new.
-  cell inspect.
-  window := helper foregroundWindow.
-  list := helper listMorphIncludingMatch: #bounds in: window.
-  list changeModelSelection: 3.
-  bottomPane := window findDeepSubmorphThat: [:m | m isTextView and: [m text isEmptyOrNil]] ifAbsent: [self error: 'bottom pane not found'].
-  bottomPane setText: 'self openInWorld'; doIt.
-  cell position: 100 @ 100; extent: 98 @ 89.
-  window position: 350 @ 50.
-  cell addHalo.
-  (NewBalloonMorph string: 'Change size' for: cell) popUpAt: cell bottomRight + 31.
+	| cell window list bottomPane |
+	cell := SBECell new.
+	cell inspect.
+
+	window := helper foregroundWindow.
+	list := helper listMorphIncludingMatch: #bounds in: window.
+	helper select: list at: 'bounds'.
+	bottomPane := window findDeepSubmorphThat: [:m | m isTextView and: [m text isEmptyOrNil]] ifAbsent: [self error: 'bottom pane not found'].
+	bottomPane setText: 'self openInWorld'; doIt.
+
+	cell position: 100 px @ 100 px; extent: 98 px @ 89 px.
+	window position: 350 px @ 50 px.
+	cell addHalo.
+
+	helper mouseMoveTo: ((cell halo handles detectMax: [:h | h position r]) pointAtFraction: 2 / 3) buttons: #() in: helper world.
+	Preferences balloonHelpDelayTime milliSeconds wait.
+	helper world doOneCycleNow.
+	(helper world findA: NewBalloonMorph) setText: 'Change size'.
+	helper spawnBalloon; spawnHand
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htbp]
 \centering
 \ifluluelse
-	{\includegraphics[width=\textwidth]{SBECellResize} }
+	{\includegraphics[width=0.8\textwidth]{SBECellResize} }
 	{\includegraphics[scale=0.7]{SBECellResize} }
 \caption{Resizing the cell.\label{fig:cellresize}}
 \end{figure}
@@ -388,7 +415,7 @@ SBEScreenshotRecorder writeTo: './figures/DeclareInstanceVar.png' frame: #morphs
 \begin{minipage}[t]{0.42\textwidth}
 	\centering
 	\ifluluelse
-		{\includegraphics[width=\textwidth]{UnknownSelector}}
+		{\includegraphics[width=0.8\textwidth]{UnknownSelector}}
 		{\includegraphics[scale=0.7]{UnknownSelector}}
 	\caption{\squeak detecting an unknown selector.\label{fig:unknownSelector}}
 \end{minipage}
@@ -396,7 +423,7 @@ SBEScreenshotRecorder writeTo: './figures/DeclareInstanceVar.png' frame: #morphs
 \begin{minipage}[t]{0.56\textwidth}
 	\centering
 	\ifluluelse
-		{\includegraphics[width=\textwidth]{DeclareInstanceVar}}
+		{\includegraphics[width=0.6\textwidth]{DeclareInstanceVar}}
 		{\includegraphics[scale=0.7]{DeclareInstanceVar}}
 	\caption{Declaring a new instance variable.\label{fig:declareInstance}}
 \end{minipage}
@@ -468,29 +495,30 @@ This is why the browser also offers us the \prot{-{}-all-{}-} virtual protocol, 
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/Categorize.png' frame: [:bounds | bounds * (1 @ 0 rect: 1 @ 3 / 4)] building: [:helper |
-	| browser class window |
-  browser := Browser newSubclass.
-  browser compile: 'hasClassSelected ^true'.
-  class := Object newSubclass.
-  class compile: 'initialize'.
-  browser fullOnClass: class.
-  window := helper foregroundWindow.
-  window bounds: (0 @ 120 extent: 550 @ 350).
-  helper click: window at: window topCenter + (30 @ 60) buttons: #(right).
-  helper hand releaseMouseFocus.
-  helper mouseEnter: (helper menuItemMorphLabeled: 'categorize all uncategorized' in: helper world).
-  helper closeBalloons.
+	| window |
+	thisContext wrap: [:block |
+		helper emptyClass: SBEGame during: block].
+	SBEGame organization classify: #initialize under: SBEGame organization class default.
+
+	ToolSet browseClass: SBEGame.
+	window := helper foregroundWindow.
+	window bounds: (0 px @ 120 px extent: 600 px @ 350 px).
+	helper click: window at: window topCenter + (30 px @ 60 px) buttons: #(right).
+	helper menu top: helper menu top + 10.
+	helper hand releaseMouseFocus.
+	helper mouseEnter: (helper menuItemMorphLabeled: 'categorize all uncategorized' in: helper world).
+	helper closeBalloons.
+	helper takeScreenshot.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htbp]
-   \centering
-   \includegraphics[scale=0.65]{Categorize}
+   \includegraphics[width=0.65\textwidth]{Categorize}
    \caption{Categorize all uncategorized methods.\label{fig:categorize}}
 \end{figure}
 
 If you have followed along with this example, the third pane may well contain the protocol \protind{as yet unclassified}.
 
-\dothis{Select the \ind{yellow button} menu item \menu{categorize all uncategorized} to fix this, and move the \ct{initialize} methods to a new protocol called \protind{initialization}.}
+\dothis{Select the \ind{yellow button} menu item \menu{categorize all uncategorized} to fix this, and the \ct{initialize} method will be moved to a new protocol called \protind{initialization}.}
 How does \squeak{} know that this is the right protocol?
 Well, in general \squeak{} can't know, but in this case, there is also an \ct{initialize} method in a superclass, and \squeak assumes that our \ct{initialize} method should go in the same protocol as the one that it overrides.
 \index{method!categorize}
@@ -557,13 +585,13 @@ SBEScreenshotRecorder writeTo: './figures/DragMethod.png' frame: [:rectangle | r
 	| window messageList categoryList |
 	SBEGame browse.
 	window := helper foregroundWindow.
-	window extent: 600 @ 300.
-	messageList := helper listMorphIncludingMatch: #toggleNeighboursOfCellAt:at: in: window.
-	categoryList := helper listMorphIncludingMatch: 'game logic' in: window.
+	window extent: 600 px @ 300 px.
+	messageList := helper morphByExternalName: #messageList in: window.
+	categoryList := helper morphByExternalName: #messageCategoryList in: window.
 	helper
 		mouseDrag: messageList
 		from: (helper boundsOfItemMatching: #toggleNeighboursOfCellAt:at: in: messageList) center
-		to: ((helper boundsOfItemMatching: 'game logic' in: categoryList) pointAtFraction: 0.2 @ 0.6)
+		to: ((helper boundsOfItemMatching: 'game logic' in: categoryList) pointAtFraction: 0 @ 0.75) + (10 "must not depend on width of item which may be infinite in tree browser" @ 0)
 		buttons: #(left).
 	helper spawnHand.
 ]
@@ -573,7 +601,7 @@ SBEScreenshotRecorder writeTo: './figures/DragMethod.png' frame: [:rectangle | r
    \ifluluelse
 		{\includegraphics[width=\textwidth]{DragMethod} }
 		{\includegraphics[scale=0.7]{DragMethod} }
-   \caption{Drag a method to a protocol.\label{fig:dragMethod}}
+	\caption{Drag a method to a protocol.\label{fig:dragMethod}}
 \end{figure}
 
 To complete the Quinto game, we need to define two more methods in class \ct{SBECell} to handle mouse events.
@@ -581,7 +609,6 @@ To complete the Quinto game, we need to define two more methods in class \ct{SBE
 \numFiletreeMethodInput[mouseAction:]%
 {A typical setter method.}%
 {ListingSources/SBE-Quinto.package/SBECell.class/instance/mouseAction..st}
-\cmindex{SBECell}{mouseAction:}
 
 \Mthref{mouseAction:} does nothing more than set the cell's \ct{mouseAction} variable to the argument, and then answers the new value.
 Any method that \emph{changes} the value of an instance variable in this way is called a \emph{setter method}; a method that \emph{answers} the current value of an instance variable is called a \emph{getter method}.
@@ -644,7 +671,10 @@ SBEScreenshotRecorder writeTo: './figures/Error.png' frame: #morphs building: [:
 		helper
 			runModal: [helper click: game]
 			then: [
-				helper hand dropMorphs.
+				helper world
+					allMorphsDo: [:m | (m respondsTo: #updateFillStyle) ifTrue: [m updateFillStyle]];
+					flag: #workaround. "Avoid to display all buttons as pressed.
+						MorphicDebugger class>>#openOn:context:label:contents:fullView: schedules a deferred UI message for building the debugger. In the UI message, it reactivates the original current event, which is a mouseDown event in this context. During UI building, #updateFillStyle is sent to all buttons when their getStateSelector is set. Because of the current mouseDown event, #updateFillStyle will give a pressed look to any button that is under the cursor. As the buttons are not yet layouted properly during initialization, for some scale factors, all buttons initially appear under the cursor and are thus associated with an erroneous pressed look. It's hard to tell where this bug originates: in the debugger, which reuses the current event, or in the #updateFillStyle:, which does not check the mouseFocus of the current event. This workaround just updates the fill style of every button after the mouseDown event has been deactivated."
 				game abandon]]
 ]
 \end{ExecuteSmalltalkScript}
@@ -682,7 +712,7 @@ SBEScreenshotRecorder writeTo: './figures/Debugger.png' frame: #morphs building:
 				game abandon.
 				stackList := helper listMorphIncludingMatch: '*toggleNeighboursOfCellAt:at:*' in: helper foregroundWindow.
 				helper keyStroke: stackList key: Character arrowDown.
-				helper foregroundWindow extent: 600 @ 400]]
+				helper foregroundWindow extent: 600 px @ 400 px]]
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[ht]
@@ -697,7 +727,7 @@ At the bottom of the debugger are two small inspector windows.
 On the left, you can inspect the object that is the receiver of the message that caused the selected method to execute, so you can look here to see the values of the instance variables.
 On the right you can inspect an object that represents the currently executing method itself, so you can look here to see the values of the method's parameters and temporary variables.
 
-Using the debugger, you can execute code step by step, inspect objects in parameters and local variables, evaluate code just as you can in a workspace, and, most surprisingly to those used to other debuggers, change the code while it is being debugged!
+Using the debugger, you can execute code step by step, inspect objects in parameters and temporary variables, evaluate code just as you can in a workspace, and, most surprisingly to those used to other debuggers, change the code while it is being debugged!
 Some Smalltalkers program in the debugger almost all the time, rather than in the browser.
 The advantage of this is that you see the method that you are writing as it will be executed, with real parameters in the actual execution context.
 
@@ -737,7 +767,7 @@ There is a variety of ways to do this, from ad-hoc sharing via exported files, t
 The simplest way of doing this is by \emph{filing out} the code.
 The yellow-button menu in the System Categories pane will give you the option to file out the whole of category \scat{SBE-Quinto}.
 The resulting file is more or less human-readable, but is really intended for computers, not humans.
-You can email this file to your friends, and they can file it into their own \squeak images using the file list browser.
+You can email this file to your friends, and they can file it into their own \squeak images using drag-and-drop.
 \seeindex{saving code}{categories}
 \seeindex{category!filing out}{file, filing out}
 \seeindex{class!filing out}{file, filing out}
@@ -748,7 +778,7 @@ You can email this file to your friends, and they can file it into their own \sq
 You should now find a file called ``SBE-Quinto.st'' in the same folder on disk where your image is saved.
 Have a look at this file with a text editor.
 
-\dothis{Open a fresh \squeak image and drag the exported file onto the running Squeak.
+\dothis{Open a fresh \squeak image, drag the exported file onto the running Squeak, and choose \emph{file in entire file}.
 Verify that the game now works in the new image.}
 \seeindex{category!filing in}{file, filing in}
 \seeindex{class!filing in}{file, filing in}
@@ -769,7 +799,7 @@ In fact, Monticello is a distributed version control system just like Git; this 
 You can also send a \ct{.mcz} file by email.
 The recipient will have to place it in her \emph{package-cache} folder; she will then be able to use Monticello to browse and load it.
 
-\dothis{Open the Monticello browser by selecting \menu{World \go open\,\ldots \go Monticello browser}.}
+\dothis{Open the Monticello browser by selecting \menu{World~\go{} open\,\ldots~\go{} Monticello browser}.}
 In the right-hand pane of the browser (see \figref{monticello1}) is a list of Monticello repositories, which will include all of the repositories from which code has been loaded into the image that you are using.
 
 \begin{ExecuteSmalltalkScript}
@@ -789,9 +819,9 @@ At the top of the list in the Monticello browser is a repository in a local dire
 This local cache is really handy because it lets you keep your own local history; it also allows you to work in places where you do not have internet access, or where access is slow and you do not want to save to a remote repository frequently.
 
 
-\subsection{Saving and loading code with Monticello.}
+\subsection{Saving and loading code with Monticello}
 On the left-hand side of the Monticello browser is a list of packages that have a version loaded into the image; packages that have been modified since they were loaded are marked with an asterisk.
-(These are sometimes referred to as \subind{package}{dirty} packages.)
+(These are sometimes referred to as \emph{\subind{package}{dirty} packages}.)
 If you select a package, the list of repositories is restricted to just those repositories that contain a copy of the selected package.
 \seeindex{*}{package, dirty}
 \seeindex{dirty package}{package, dirty}
@@ -802,7 +832,7 @@ Since we put all of the code for the Quinto game into the class category called 
 
 \dothis{Add the \ct{SBE-Quinto} package to your Monticello browser using the \button{+Package} button and type \ct{SBE-Quinto}.}
 
-\subsection{\ind{SqueakSource}: a sharing platform for Monticello.}
+\subsection{\ind{SqueakSource}: a sharing platform for Monticello}
 We think that the best way to save your code and share it is to create an account for your project on a SqueakSource server.
 SqueakSource is like GitHub\footnote{\url{www.github.com}}:
 It is a web front-end to an HTTP Monticello server that lets you manage your projects.
@@ -886,7 +916,7 @@ You have seen how to use the system browser, the inspector, the debugger, and th
   \item The system browser detects usage of undeclared methods and variables, and offers possible corrections.
   \item The \ct{initialize} method is automatically executed after an object is created in \squeak.
   You can put any initialization code there.
-  \item The debugger provides a high-level GUI to inspect and modify the state of a running program.
+  \item The debugger provides a high-level GUI to inspect the state of a halted program and run it step-by-step.
   \item You can share source code \emph{filing out} a category.
   \item A better way to share code is to use Monticello to manage an external repository, for example, defined as a SqueakSource project.
 \end{itemize}

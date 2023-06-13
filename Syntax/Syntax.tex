@@ -71,8 +71,8 @@ Expressions are composed of the following building blocks:
 		\toprule
 		Syntax & What it represents \\
 		\midrule
-		\lct{startPoint}			&	a variable name\\
-		\lct{Transcript}			&	a global variable name\\
+		\lct{startPoint}			&	a local variable name\\
+		\lct{Transcript}			&	a shared variable name\\
 		\lct{self}				&	pseudo-variable \\
 		\midrule
 		\lct{1}				 	&	decimal integer \\
@@ -88,7 +88,7 @@ Expressions are composed of the following building blocks:
 		\midrule
 		\lct{"a comment"} 		&	a comment \\
 		\midrule
-		\lct{|x y|}				&	declaration of variables \lct{x} and \lct{y}	\\
+		\lct{|x y|}				&	declaration of temporary variables \lct{x} and \lct{y}	\\
 		\lct{x := 1}				&	assign 1 to \lct{x} \\
 		\lct{[x + y]}			&	a block that evaluates to \lct{x+y} \\
 		\lct{<primitive: 1>}		&	primitive pragma to invoke virtual machine \\
@@ -128,6 +128,7 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 \item[Integers.]
 	In addition to ordinary decimal integers like \ct{42}, \sq also provides a \ind{radix notation}.
 	\ct{2r101} is \ct{101} in radix 2 (\ie binary), which is equal to decimal 5.
+	\ct{16rFf} is \ct{FF} in radix 16 (\ie hexadecimal), which is equal to decimal 255.
 	\index{literal}
 	\index{literal!number}
 
@@ -168,11 +169,11 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 	\ct{"hello"} is a \ind{comment}, not a string, and is ignored by the \sq compiler.
 	Comments may span multiple lines.
 
-\item[Local variable definitions.]
-	Vertical bars \ct{| |} enclose the \subind{variable}{declaration} of one or more local variables in a method (and also in a block).
-	% \seeindex{\|@{\textsf{\|\|}}}{assignment}
-	% Can't seem to index or-bars! (special char for index macro)
-	\seeindex{declaration}{variable declaration}
+\item[Temporary variable declaration.]
+	Vertical bars \ct{| |} enclose the \subind{variable}{declaration} of one or more temporary variables in a method (and also in a block).
+	\seeindex{$\vert\ \vert$@{\textsf{$\vert\ \vert$}}}{temporary variable declaration}
+	\seeindex{variable declaration}{temporary variable declaration}
+	\seeindex{declaration}{temporary variable declaration}
 
 \item[Assignment.]
 	\ct{:=} assigns an object to a variable.
@@ -187,7 +188,7 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 
 \item[Blocks.]
 	Square brackets \ct{[ ]} define a \ind{block}, also known as a block closure or a lexical closure, which is a first-class object representing a function.
-	As we shall see, blocks may take arguments and can have local variables.
+	As we shall see, blocks may take arguments and can have temporary variables.
 	\seeindex{[ ]@{\textsf{[ ]}}}{block}
 	\seeindex{closure}{block}
 	\seeindex{lexical closure}{block}
@@ -196,7 +197,7 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 	Angle brackets \ct{< >} right after a method header denote a \ind{pragma} which is a possibility to add static annotations to a method.
 	The kind of pragma you will probably see most frequently in \sq are \emph{\ind{primitive}} pragmas which are indicated by the pragma selector \ct{#primitive:} and its siblings \ct{#primitive:error:}, \ct{#primitive:module:} \etc.
 	Primitives denote an invocation of a \ind{virtual machine} \ind{primitive.}
-	For instance, \ct{<primitive: 1>} is the VM primitive for \ct{SmallInteger>>>+}.
+	For instance, \ct{<primitive: 1>} is the VM primitive for \cmind{SmallInteger}{+}.
 	Any code following the primitive is executed only if the primitive fails.
 
 \item[Unary messages] consist of a single word (such as \ct{factorial}) sent to a receiver (like the number \ct{3}).
@@ -248,7 +249,7 @@ They are called \subind{variable}{pseudo}-variables because they are predefined 
 See \charef{basic} for more details.
 
 \ct{nil} is the undefined object.
-Instance variables, class variables, and local variables are initialized to \ct{nil}.
+Instance variables, class variables, and temporary variables are initialized to \ct{nil}.
 It is the unique instance of the class \clsind{UndefinedObject}.
 
 \pvind{self} always refers to the receiver of the currently executing method.
@@ -257,7 +258,7 @@ It is the unique instance of the class \clsind{UndefinedObject}.
 For further details see \charef{model}.
 
 \ct{thisContext} is a pseudo-variable that represents the top frame of the run-time stack.
-In other words, it represents the currently executing \clsind{MethodContext} or \clsind{BlockContext}.
+In other words, it represents the currently executing \clsind{Context}.
 \ct{thisContext} is normally not of interest to most programmers, but it is essential for implementing development tools like the debugger and it is also used to implement exception handling and continuations.
 
 %=================================================================
@@ -360,7 +361,7 @@ Syntactically, a method consists of:
 \begin{enumerate}
   \item the method pattern, containing the name (\ie \ct{lineCount}) and any arguments (none in this example);
   \item comments (these may occur anywhere, but the convention is to put one at the top that explains what the method does);
-  \item declarations of local variables (\ie \ct{cr} and \ct{count}); and
+  \item declarations of temporary variables (\ie \ct{cr} and \ct{count}); and
   \item any number of expressions separated by dots; here there are four.
 \end{enumerate}
 
@@ -368,7 +369,7 @@ The evaluation of any expression preceded by a \ct{^} (typed as \verb|^|) will c
 A method that terminates without explicitly returning some expression will implicitly \ind{return} \pvind{self}.
 \index{return!implicit}
 
-Arguments and local variables should always start with lower case letters.
+Arguments and temporary variables should always start with lower case letters.
 Names starting with upper-case letters are assumed to be global variables.
 Class names, like \ct{Character}, for example, are simply global variables referring to the object representing that class.
 
@@ -402,7 +403,7 @@ A two-parameter block must be sent \mthind{BlockClosure}{value:value:}, and so o
 If you have a block with more than four parameters, you must use \mthind{BlockClosure}{valueWithArguments:} and pass the arguments in an array.
 (A block with a large number of parameters is often a sign of a design problem.)
 
-Blocks may also declare local variables, which are surrounded by vertical bars, just like local variable declarations in a method.
+Blocks may also declare temporary variables, which are surrounded by vertical bars, just like temporary variable declarations in a method.
 Locals are declared after any arguments:
 \index{variable!declaration}
 
@@ -419,7 +420,7 @@ x := 1.
 [:y | x + y] value: 2 --> 3
 \end{code}
 
-Blocks are instances of the class \clsind{BlockContext}.
+Blocks are instances of the class \clsind{BlockClosure}.
 This means that they are objects, so they can be assigned to variables and passed as arguments just like any other object.
 
 \paragraph{Returning inside blocks.}
@@ -624,7 +625,7 @@ Pragmas don't have any effect on the method by themselves, but other objects can
 \item	A \emph{cascaded} message send is a sequence of messages sent to the same target, separated by semi-colons:
 		\ct{OrderedCollection new add: #calvin; add: #hobbes; size --> 2}
 
-\item	Local variables are declared with vertical bars.
+\item	Temporary variables are declared with vertical bars.
 		Use \ct{:=} for assignment.
 		\ct{| x | x := 1}
 

@@ -283,7 +283,7 @@ Let us briefly survey some of the key differences:
   	Most collections will hold any kind of element.
 	A \clsind{String}, \clsind{CharacterArray} or \clsind{Symbol}, however, only holds \ct{Character}s.
 	An \clsind{Array} will hold any mix of objects, but a \lct{ByteArray} only holds \ct{Byte}s, an \clsind{IntegerArray} only holds \ct{Integer}s and a \clsind{FloatArray} only holds \ct{Float}s.
-	A \clsind{LinkedList} is constrained to hold elements that conform to the \prot{Link \go accessing} protocol.
+	A \clsind{LinkedList} is constrained to hold elements that conform to the \prot{Link~\go{} accessing} protocol.
 
 \end{itemize}
 
@@ -683,7 +683,7 @@ How do you get a \ct{String} back from this result?
 'hello' asSortedCollection asString --> 'a SortedCollection($e $h $l $l $o)'
 \end{code}
 \noindent
-The correct answer is to either use \ct{String class>>>newFrom:}, \ct{String class>>>withAll:}, or \ct{Object>>>as:}:
+The correct answer is to either use \cmind{String class}{newFrom:}, \cmind{String class}{withAll:}, or \cmind{Object}{as:}:
 \begin{code}{@TEST}
 'hello' asSortedCollection as: String              --> 'ehllo'
 String newFrom: ('hello' asSortedCollection) --> 'ehllo'
@@ -785,11 +785,10 @@ Another useful method is \ct{findString:}.
 'GNU/Linux mag' findString: 'linux' startingAt: 1 caseSensitive: false  --> 5
 \end{code}
 
-More advanced pattern matching facilities based on regular expressions are provided by the \ind{regular expression package} named \ind{Regex}, based on the package by Vassili Bykov.
-\index{Bykov, Vassili}}
+More advanced pattern matching facilities based on \ind{regular expressions} are provided by the \ind{Regex} package.}
 
 \paragraph{Some tests on strings.}
-The  following examples illustrate the use of \mbox{\mthind{String}{isEmpty},} \mthind{String}{includes:}, and \mthind{String}{anySatisfy:} which are further messages defined not only on Strings but more generally on collections.
+The following examples illustrate the use of \mbox{\mthind{String}{isEmpty},} \mthind{String}{includes:}, and \mthind{String}{anySatisfy:} which are further messages defined not only on Strings but more generally on collections.
 
 \begin{code}{@TEST}
 'Hello' isEmpty --> false

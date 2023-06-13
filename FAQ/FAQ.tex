@@ -68,16 +68,14 @@ First, you can always download sar- or mcz-files and simply drop them into \sq.
 Second, you can use the class \clsind{Installer}, which provides methods for installing several kinds of packages from different sources, \eg Squeaksource.
 To start using the \ct{Installer} you can take a look at the class comment.
 Finally, you can currently find an increasing number of \sq projects on GitHub, many of them to be installed via \ind{Metacello}.
-Metacello is a configuration management project for specifying dependencies between \st projects.
-Before you can install a project via Metacello you may have to setup Metacello in your environment.
-You can do so via \ct{Installer ensureRecentMetacello}.
+Metacello is a configuration management project for specifying dependencies between \st projects which installs itself on first usage.
 
 \begin{faq}
 Some code triggered a lot of debuggers and my whole screen is filled with them.
 How can I get rid of them?
 \end{faq}
 \answer
-You can close all windows that look similar at once by selecting \menu{World docking bar \go Windows \go Bad Window \go Close all like this}.
+You can close all windows that look similar at once by selecting \menu{World docking bar~\go{} Windows~\go{} Bad Window~\go{} Close all like this}.
 
 %=================================================================
 \section{Collections}
@@ -139,7 +137,7 @@ How do I search for a class?
 How do I browse all references to a given class?
 \end{faq}
 \answer
-Select the class name and press \short{N}, or open the yellow button menu and select \menu{more \go references to it}.
+Select the class name and press \short{N}, or open the yellow button menu and select \menu{more~\go{} references to it}.
 
 \begin{faq}
 How do I find/browse all sends to super?
@@ -147,8 +145,8 @@ How do I find/browse all sends to super?
 \answer
 The second solution is much faster:
 \begin{code}{}
-SystemNavigation default browseMethodsWithSourceString: 'super'.
-SystemNavigation default browseAllSelect: [:method | method sendsToSuper ].
+self systemNavigation browseMethodsWithSourceString: 'super'.
+self systemNavigation browseAllSelect: [:method | method sendsToSuper ].
 \end{code}
 \index{browsing programmatically}
 \clsindex{SystemNavigation}
@@ -158,7 +156,7 @@ How do I browse all super \subind{super}{send}{}s within a hierarchy?
 \end{faq}
 \answer
 \begin{code}{}
-browseSuperSends := [:aClass | SystemNavigation default
+browseSuperSends := [:aClass | self systemNavigation
 	browseMessageList: (aClass withAllSubclasses gather: [ :each |
 		(each methodDict associations
 			select: [ :assoc | assoc value sendsToSuper ])
@@ -223,10 +221,10 @@ Smalltalk allClasses select: [:each | each hasTraitComposition]
 How can I show images in Morphic?
 \end{faq}
 \answer
-An first and easy way to get an image into \sq is by dragging the image file into the environment and dropping it directly within the world and selecting \menu{open graphic in a window}.
+A first and easy way to get an image into \sq is by dragging the image file into the environment and dropping it directly within the world and selecting \menu{open graphic in a window}.
 This will create an \clsind{ImageMorph} in the world.
 
-\noindent Alternatively you can also create an \ct{ImageMorph} through code, for example using the following expression, if the image file is in the default folder:
+\noindent Alternatively, you can also create an \ct{ImageMorph} through code, for example using the following expression, if the image file is in the default folder:
 \begin{code}{}
 ImageMorph new
     image: (Form fromFileNamed: 'anImage.jpg');
@@ -258,9 +256,8 @@ You can add \ct{TextAttribute}s to section of text by using the messages in the 
 text := 'yellow and green' asText.
 text
 	addAttribute: TextColor yellow from: 1 to: 6;
-	addAttribute: TextEmphasis italic from: 1 to: 6;
 	addAttribute: TextColor green from: 12 to: 16;
-	addAttribute: TextEmphasis bold from: 12 to: 16.
+	addAllAttributes: {TextEmphasis italic. TextEmphasis bold}.
 text asMorph openInHand.
 \end{code}
 
@@ -282,7 +279,7 @@ I have created concurrent behavior, but lost track of some of the processes I st
 What can I do?
 \end{faq}
 \answer
-There is a tool called \ind{Process Browser} which you can either open from \menu{World menu \go open} or \menu{World docking bar \go Tools}.
+There is a tool called \ind{Process Browser} which you can either open from \menu{World menu~\go{} open} or \menu{World docking bar~\go{} Tools}.
 The process browser lists all processes and the yellow button menu allows you to control the process, \eg terminate it.
 
 \begin{faq}
@@ -307,8 +304,8 @@ How do I load a \ind{Squeaksource} project?
 \begin{enumerate}
   \item Find the project you want in \url{squeaksource.com}
   \item Copy the registration code snippet
-  \item Select \menu{World docking bar \go Tools \go Monticello browser}
-  \item Select \menu{+Repository \go HTTP}
+  \item Select \menu{World docking bar~\go{} Tools~\go{} Monticello browser}
+  \item Select \menu{+Repository~\go{} HTTP}
   \item Paste and accept the Registration code snippet; enter your password
   \item Select the new repository and \menu{Open} it
   \item Select and load the latest version
@@ -323,10 +320,10 @@ How do I create a SqueakSource project?
   \item Register yourself as a new member
   \item Register a project (name = category)
   \item Copy the Registration code snippet
-  \item \menu{open \go Monticello browser}
+  \item \menu{open~\go{} Monticello browser}
   \item \menu{+Package} to add the category
   \item Select the package
-  \item \menu{+Repository \go HTTP}
+  \item \menu{+Repository~\go{} HTTP}
   \item Paste and accept the Registration code snippet; enter your password
   \item \menu{Save} to save the first version
 \end{enumerate}
@@ -346,7 +343,7 @@ Doing everything with the mouse take so much time.
 Which keyboard shortcuts are there?
 \end{faq}
 \answer
-You can find a list of available keyboard shortcuts directly in the environment at \menu{World docking bar \go Help \go Keyboard Shortcuts}.
+You can find a list of available keyboard shortcuts directly in the environment at \menu{World docking bar~\go{} Help~\go{} Keyboard Shortcuts}.
 
 \begin{faq}
 Some menus are quite large and I struggle to find what I am looking for.
@@ -361,26 +358,43 @@ How do I find out what makes them slow?
 \end{faq}
 \answer
 You can use the \ct{MessageTally} tool that allows you to profile your code.
-To profile all processes currently running in the process, you can open the tool from \menu{World docking bar \go Extras \go Start Profiler}\index{Profiler}.
+To profile all processes currently running in the process, you can open the tool from \menu{World docking bar~\go{} Extras~\go{} Start Profiler}\index{Profiler}.
 If you only want to profile a specific message send, you can use \mthind{MessageTally class}{spyOn:}, for example:
 \begin{code}{}
 MessageTally spyOn: [10000 timesRepeat: [1.23 printString]]
 \end{code}
 You can achieve the same by selecting an expression and select \menu{spy on it} from the yellow button menu.
 
+%\begin{faq}
+%How do I programmatically open the \ind{SUnit} \ind{TestRunner}?
+%\end{faq}
+%\answer
+%Evaluate \ct{TestRunner open}.
 \begin{faq}
-How do I programmatically open the \ind{SUnit} \ind{TestRunner}?
+How do I programmatically trigger any UI logic in Morphic?
 \end{faq}
 \answer
-Evaluate \ct{TestRunner open}.
+Imagine you want to write a method that opens a test runner, reverts an earlier version of a method, or saves a new Monticello version.
+For tasks like this, you need to figure out the implementation behind certain graphical tools in the UI.
+Luckily, Morphic provides some tools to facilitate such exploration.
+
+To introspect on the object behind any morph (e.g., a window or a menu item), make a blue-button click on it to open a halo, click on the debug handle \debugHandle{}, and select \menu{inspect morph} or \menu{explore morph}.
+You can also choose \menu{browse morph class} to jump to the class definition of the morph directly.
+For many windows and their contents, the underlying \emph{model} is more interesting, so you can also select \menu{inspect model} or \menu{explore model}.
+In the case of a test runner, the model is a \clsind{TestRunner} instance, which you can use to programmatically open another test runner window.
+Open a halo on the existing window, select \menu{browse model class} from the debug menu, and browse the class side of \ct{TestRunner} to find the message \mthind{TestRunner class}{open}.
+
+For some widgets such as buttons, you can also observe its specific \emph{action code}.
+For instance, to find out what happens when you click on the \menu{Save} button in the Monticello browser, open a halo on the button and select \menu{browse action code} from the debug menu.
+You can also start a \ind{debugger} on the action code by selecting \menu{debug action code}, which allows you to follow the button's implementation in context and step-by-step.
+
+For more complex \ind{UI automation} tasks and \ind{UI testing} purposes, you can also use a UI automation framework such as the \ind{MorphicTestingFramework} (load it from \url{https://github.com/hpi-swa-teaching/Morphic-Testing-Framework}).
 
 \begin{faq}
 Where can I find the \ind{Refactoring Browser}?
 \end{faq}
 \answer
-Load AST then Refactoring Engine from squeaksource.com:
-\url{www.squeaksource.com/AST}
-\url{www.squeaksource.com/RefactoringEngine}
+From the docking bar, select \menu{Apps \go Preference Wizard}, then click on \menu{Configure}, \menu{Done}, tick ``Refactoring support in code browsers'', and confirm via \menu{Yes, install selected packages}.
 
 \begin{faq}
 How do I register the browser that I want to be the default?
@@ -389,13 +403,23 @@ How do I register the browser that I want to be the default?
 Click the menu icon in the top left of the Browser window.
 
 %=================================================================
-\section{Regular expressions and parsing}
+\section{Additional Packages}
 
 \begin{faq}
-Where is the documentation for the RegEx package?
+Where is the documentation for the \ind{Regex} package?
+\index{regular expressions}
 \end{faq}
 \answer
 Look at the \menu{DOCUMENTATION} protocol of \ct{RxParser class} in the \menu{Regex-Core} category.
+
+\begin{faq}
+How can I make web requests or start a web server from Squeak?
+\end{faq}
+\answer
+The most convenient way for handling web connections is to use the \ind{WebClient} packages.
+You can use the class \clsind{WebClient} to make \ind{HTTP}/\ind{HTTPS} requests and the class \clsind{WebServer} to start a web server.
+Comprehensive documentation is available in the tutorials in the package WebClient-Help.
+To read these tutorials, go to the docking bar, select \menu{Help \go Help Browser}, and choose \menu{WebClient} or \menu{WebServer} from the pane on the left.
 
 \begin{faq}
 Are there tools for writing parsers?
