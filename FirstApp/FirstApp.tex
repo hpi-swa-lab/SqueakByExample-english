@@ -836,7 +836,7 @@ Since we put all of the code for the Quinto game into the class category called 
 We think that the best way to save your code and share it is to create an account for your project on a SqueakSource server.
 SqueakSource is like GitHub\footnote{\url{www.github.com}}:
 It is a web front-end to an HTTP Monticello server that lets you manage your projects.
-There is a public SqueakSource server at \url{http://www.squeaksource.com}, and a copy of the code related to our game is stored there at \url{http://www.squeaksource.com/QuintoExampleSBE.html}.
+There is a public SqueakSource server at \url{http://www.squeaksource.com}, and a copy of the code related to our game is stored there at \sbeSqueaksourceUrl.
 You can look at this project with a web browser, but it's a lot more productive to do so from inside \squeak, using the Monticello browser, which lets you manage your packages.
 
 \dothis{Open a web browser to \url{www.squeaksource.com}.
@@ -853,7 +853,7 @@ You should copy the presented template to identify your SqueakSource project, pa
 \needlines{5}
 \begin{code}{}
 MCHttpRepository
-    location: 'http://www.squeaksource.com/!\emph{YourProject}!'
+    location: '!\sbeSqueaksourceUrl!'
     user: '!\emph{yourInitials}!'
     password: '!\emph{yourPassword}!'
 \end{code}
@@ -864,7 +864,7 @@ If you provide empty initials and password strings, you can still load the proje
 \needlines{5}
 \begin{code}{}
 MCHttpRepository
-    location: 'http://www.squeaksource.com/!\emph{YourProject}!'
+    location: '!\sbeSqueaksourceUrl!'
     user: ''
     password: ''
 \end{code}
