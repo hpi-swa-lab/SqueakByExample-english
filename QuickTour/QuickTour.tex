@@ -553,7 +553,10 @@ Click on the triangle to open it up (\figref{exploreit}).
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/ExploreIt.png' frame: #morphs building: [:helper |
-  Object explore
+	thisContext wrap: [:block |
+		Smalltalk at: #SBEDebugUpdateFillStye put: true.
+		block ensure: [Smalltalk at: #SBEDebugUpdateFillStye put: false]].
+	Object explore
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
