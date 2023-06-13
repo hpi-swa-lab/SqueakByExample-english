@@ -834,7 +834,7 @@ Since we put all of the code for the Quinto game into the class category called 
 
 \subsection{\ind{SqueakSource}: a sharing platform for Monticello}
 We think that the best way to save your code and share it is to create an account for your project on a SqueakSource server.
-SqueakSource is like GitHub\footnote{\url{www.github.com}}:
+SqueakSource is similar to GitHub\footnote{\url{www.github.com}}:
 It is a web front-end to an HTTP Monticello server that lets you manage your projects.
 There is a public SqueakSource server at \url{http://www.squeaksource.com}, and a copy of the code related to our game is stored there at \sbeSqueaksourceUrl.
 You can look at this project with a web browser, but it's a lot more productive to do so from inside \squeak, using the Monticello browser, which lets you manage your packages.
@@ -891,13 +891,16 @@ SBEScreenshotRecorder writeTo: './figures/BrowseRepository.png' frame: #morphs b
 \label{fig:monticello3}}
 \end{figure}
 
-\dothis{Click on \button{Save} to save the first version of your Quinto game on SqueakSource.}
-
 To load a package into your image, you must first select a particular version.
 You can do this in the repository browser, which you can open using the \button{Open} button or the yellow-button menu.
 Once you have selected a version, you can load it onto your image.
 
-\dothis{Open the \ct{SBE-Quinto} repository you have just saved.}
+\dothis{Load the latest version of the \ct{SBE-Quinto} repository.}
+
+You can also use the \button{Save} button to save another version of your package to the repository.
+This requires you to have write access to the repository.
+
+\dothis{Select the \ct{package-cache} repository in the repository browser and click on \button{Save} to save the your own version of the Quinto game on your machine.}
 
 Monticello has many more capabilities, which will be discussed in depth in \charef{env}.
 %You can also look at the on-line documentation for Monticello at \url{http://www.wiresong.ca/Monticello/}.
