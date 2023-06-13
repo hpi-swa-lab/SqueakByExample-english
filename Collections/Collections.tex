@@ -242,7 +242,7 @@ This group of classes is often considered to be a paradigmatic example of object
 
 In \st, when one speaks of a collection without being more specific about the kind of collection, one means an object that supports well-defined protocols for testing membership and enumerating the elements.
 \emph{All} collections understand the \protind{testing} messages \mbox{\mthind{Collection}{includes:},} \mthind{Collection}{isEmpty}, and \mbox{\mthind{Collection}{occurrencesOf:}.}
-\emph{All} collections understand the \prot{enumeration} messages \mthind{Collection}{do:}, \mthind{Collection}{select:}, \mthind{Collection}{reject:} (which is the opposite of \ct{select:}) (which is like \ct{filter} in \ind{Lisp}, JavaScript, and others), \mthind{Collection}{collect:} (which is like \ct{map} in Lisp \etc), \mthind{Collection}{detect:ifNone:}, \mthind{Collection}{inject:into:} (which performs a left fold), and many more.
+\emph{All} collections understand the \prot{enumeration} messages \mthind{Collection}{do:}, \mthind{Collection}{select:} (which is like \ct{filter} in \ind{Lisp}, JavaScript, and others), \mthind{Collection}{reject:} (which is the opposite of \ct{select:}), \mthind{Collection}{collect:} (which is like \ct{map} in Lisp \etc), \mthind{Collection}{detect:ifNone:}, \mthind{Collection}{inject:into:} (which performs a left fold), and many more.
 It is the ubiquity of this protocol, as well as its variety, that makes it so powerful.
 
 \figref{protocols} summarizes the standard protocols supported by most of the classes in the collection hierarchy.
@@ -412,7 +412,7 @@ anArray at: 1 --> 4
 \end{code}
 \noindent
 
-Take care that \ct{at:put:} returns the argument and not the receiver, so you often need to build a cascade \mthind{Object}{yourself}!
+Beware that \ct{at:put:} returns the argument and not the receiver, so you often need to build a cascade \mthind{Object}{yourself}!
 
 There are several ways to create instances of the class \clsind{Array}.
 We can use \ct{new:}, \ct{with:}, and  the constructs \ct{#( )} and \ct|{ }|.
@@ -483,7 +483,7 @@ anArray at: 3 --> 33
 Be careful with code that modifies array literals!
 The compiler allocates space just once for them.
 Unless you copy the array, it will be a \emphind{read-only object} and raise a \clsind{ModificationForbidden} error every time you try to alter it.
-Dynamically created arrays do not have this problem.
+Dynamically created arrays do not have this constraint.
 
 %---------------------------------------------------------
 \subsection{OrderedCollection}
