@@ -853,7 +853,7 @@ You should copy the presented template to identify your SqueakSource project, pa
 \needlines{5}
 \begin{code}{}
 MCHttpRepository
-    location: '!\sbeSqueaksourceUrl!'
+    location: 'http://www.squeaksource.com/!\emph{YourProject}!'
     user: '!\emph{yourInitials}!'
     password: '!\emph{yourPassword}!'
 \end{code}
@@ -864,7 +864,7 @@ If you provide empty initials and password strings, you can still load the proje
 \needlines{5}
 \begin{code}{}
 MCHttpRepository
-    location: '!\sbeSqueaksourceUrl!'
+    location: 'http://www.squeaksource.com/!\emph{YourProject}!'
     user: ''
     password: ''
 \end{code}
@@ -891,16 +891,13 @@ SBEScreenshotRecorder writeTo: './figures/BrowseRepository.png' frame: #morphs b
 \label{fig:monticello3}}
 \end{figure}
 
+\dothis{Click on \button{Save} to save the first version of your Quinto game on SqueakSource.}
+
 To load a package into your image, you must first select a particular version.
 You can do this in the repository browser, which you can open using the \button{Open} button or the yellow-button menu.
 Once you have selected a version, you can load it onto your image.
 
-\dothis{Load the latest version of the \ct{SBE-Quinto} repository.}
-
-You can also use the \button{Save} button to save another version of your package to the repository.
-This requires you to have write access to the repository.
-
-\dothis{Select the \ct{package-cache} repository in the repository browser and click on \button{Save} to save the your own version of the Quinto game on your machine.}
+\dothis{Open the \ct{SBE-Quinto} repository you have just saved.}
 
 Monticello has many more capabilities, which will be discussed in depth in \charef{env}.
 %You can also look at the on-line documentation for Monticello at \url{http://www.wiresong.ca/Monticello/}.
