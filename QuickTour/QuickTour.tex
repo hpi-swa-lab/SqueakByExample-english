@@ -100,10 +100,10 @@ Do whatever works best for your style of working and your operating system.
 %-----------------------------------------------------------------
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/startup.png' frame: #fullScreen building: [:helper |
-	| balloon |
+	| balloon dockingBar |
 	helper world
 		color: (Color gray: 15 / 16); "Think green & save ink"
-		extent: 800 px @ 450 px.
+		extent: 900 px @ 450 px.
 	balloon := (Form fromFileNamed: (helper resourceDirectory
 		/ 'branding' / 'balloon.png') fullName)
 			magnifyBy: RealEstateAgent scaleFactor.
@@ -113,6 +113,8 @@ SBEScreenshotRecorder writeTo: './figures/startup.png' frame: #fullScreen buildi
 		center: helper world center.
 	PreferenceWizardMorph open.
 	self flag: #sq60 "ct: After Objectland has been merged into Trunk, simplify this call and don't ask PreferenceWizardMorph".
+	dockingBar := TheWorldMainDockingBar new createDockingBar.
+	helper world addMorph: dockingBar.
 ]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[htb]
