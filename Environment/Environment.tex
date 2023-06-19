@@ -779,26 +779,29 @@ You can open an instance browser from the explorer.
 In the new browser (\figref{fig:instanceBrowser}), you can see a list of methods on the top right, which contains all methods the object can execute, gathered from its class and all its superclasses.
 The methods are categorized according to their protocols on the top left.
 At the bottom you see a code pane, just like in an ordinary browser.
-However, this window is special as it still knows about the \ct{PluggableListMorph} for which we opened it.
+However, this window is more interesting as it still knows about the \ct{PluggableListMorph} for which we opened it.
 Thus, we can evaluate code in the code pane.
-\dothis{In the browser, open the method \ct{fullListSize} by selecting it in the list at the top right. Then navigate to the last code line and \menu{print it} (\short{p}). 
+\dothis{In the browser, open the method \ct{fullListSize} by selecting it in the list at the top right.
+Then, navigate to the last code line and \menu{print it} (\short{p}). 
 You should see the result of evaluating the expression right within the code editor.}
 
 \begin{ExecuteSmalltalkScript}
 	SBEScreenshotRecorder writeTo: './figures/instanceBrowser.png' building: [:helper |
 		| lists list browser textField |
-		SystemBrowser defaultOpenBrowser.
+		SystemBrowser defaultOpenBrowser
+			selectSystemCategory: #'Collections-Strings';
+			selectClass: String.
 		lists := (helper foregroundWindow submorphsSatisfying: #isPluggableListMorph)
 			collect: [:alist | alist center x -> alist] as: Dictionary.
 		list := (lists at: lists keys max).
 		browser := InstanceBrowser new openOnObject: list showingSelector: #fullListSize.
 		browser selectSelectorItsNaturalCategory: #fullListSize. "To work around a defect in *showingSelector:"
 
-		textField := helper codePaneOfBrowser: browser.
+		textField := helper codePaneOfBrowser: helper foregroundWindow.
 		helper click: textField.
 		helper
 			keyStroke: textField key: $a modifiers: #(cmd);
-			type: 'fullListSize\\	"Number of items in the unfiltered list."\\	\\	^ self getFullList size' withCRs into: textField;
+			type: 'fullListSize\	"Number of items in the unfiltered list."\\	^ self getFullList size' withCRs into: textField;
 			keyStroke: textField key: $p modifiers: #(cmd).
 		helper takeScreenshotOf: helper foregroundWindow.
 	]
