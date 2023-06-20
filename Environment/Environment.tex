@@ -738,7 +738,7 @@ The workspace pane of the object explorer works slightly differently to that of 
 To see the value of the explorer, let's use it to explore a deeply-nested structure of objects.
 
 \dothis{Open a browser, and blue-click twice on the method pane to bring-up the Morphic halo on the \ct{PluggableListMorph} that is used to represent the list of messages.
-Click on the \emph{debug} handle \debugHandle{} and select \menu{explore morph} from the menu that appears.  
+Click on the \emph{debug} handle \debugHandle{} and select \menu{explore morph} from the menu that appears.
 This will open an Explorer on the \clsind{PluggableListMorph} object that represents the method list on the screen.
 Open the root object (by clicking in its triangle), open its \ct{submorphs}, and continue exploring the structure of the objects that underlie this Morph, as shown in \figref{explorePluggableListMorph}.}
 \index{red button}
@@ -768,21 +768,25 @@ SBEScreenshotRecorder writeTo: './figures/explorePluggableListMorph.png' buildin
 \subsection{The instance browser}
 
 Sometimes, you might want to explore what a specific object can do.
-In the class browser, you can look through the methods to learn what they should do, but you can not execute them and see what they actually do.
-In the inspector or explorer, you can see the state of an object and execute methods, but you can not directly see the code corresponding to the methods.
+In the class browser, you can look through the methods to learn what they should do, but you cannot execute them and see what they actually do.
+In the inspector or explorer, you can see the state of an object and execute methods, but you cannot directly see the code corresponding to the methods.
 In case you want both, reading code and evaluating code for a single object, you can use the \emph{instance browser} tool.
 \index{instance browser}
 The instance browser allows you to read the code of all methods that an object can execute, and evaluate any code snippets in the context of this object.
 
 You can open an instance browser from the explorer.
+
 \dothis{In the explorer above, select the root entry for the \ct{PluggableListMorph}, open the yellow button menu, and choose \menu{browse protocol (p)}.}
-In the new browser (\figref{fig:instanceBrowser}), you can see a list of methods on the top right, which contains all methods the object can execute, gathered from its class and all its superclasses.
+
+In the new browser (\figref{instanceBrowser}), you can see a list of methods on the top right, which contains all methods the object can execute, gathered from its class and all its superclasses.
 The methods are categorized according to their protocols on the top left.
 At the bottom you see a code pane, just like in an ordinary browser.
 However, this window is more interesting as it still knows about the \ct{PluggableListMorph} for which we opened it.
 Thus, we can evaluate code in the code pane.
+
 \dothis{In the browser, open the method \ct{fullListSize} by selecting it in the list at the top right.
 Then, navigate to the last code line and \menu{print it} (\short{p}). 
+
 You should see the result of evaluating the expression right within the code editor.}
 
 \begin{ExecuteSmalltalkScript}
@@ -803,16 +807,15 @@ You should see the result of evaluating the expression right within the code edi
 			keyStroke: textField key: $a modifiers: #(cmd);
 			type: 'fullListSize\	"Number of items in the unfiltered list."\\	^ self getFullList size' withCRs into: textField;
 			keyStroke: textField key: $p modifiers: #(cmd).
-		helper takeScreenshotOf: helper foregroundWindow.
 	]
-	\end{ExecuteSmalltalkScript}
-	\begin{figure}[tbp]
-		\begin{center}
-			\includegraphics[width=\textwidth]{instanceBrowser}
-		\end{center}
-		\caption{Exploring the method \ct{fullListSize} for a \ct{PluggableListMorph}.}
-		\label{fig:instanceBrowser}
-	\end{figure}
+\end{ExecuteSmalltalkScript}
+\begin{figure}[tbp]
+	\begin{center}
+		\includegraphics[width=\textwidth]{instanceBrowser}
+	\end{center}
+	\caption{Exploring the method \ct{fullListSize} for a \ct{PluggableListMorph}.}
+	\label{fig:instanceBrowser}
+\end{figure}
 	
 
 
