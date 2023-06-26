@@ -79,6 +79,7 @@ Expressions are composed of the following building blocks:
 		\lct{2r101}				&	binary integer \\
 		\lct{1.5}					&	floating point number \\
 		\lct{2.4e7}				&	exponential notation \\
+		\lct{1.79s2}			&	scaled decimal \\
 		\lct{\$a}					&	the character `a' \\
 		\lct{'Hello'}				&	the string ``Hello'' \\
 		\lct{\#Hello}				&	the symbol \lct{\#Hello} \\
@@ -134,6 +135,13 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 
 \item[Floating point numbers] can be specified with their base-ten \ind{exponent}: \mbox{\ct{2.4e7}} is $2.4\times 10^7$.
 	\index{floating point number}
+
+\item[Scaled decimals] are fixed-point numbers with a fixed number of digits after the decimal point.
+	They support unbounded precision, but are slower than floating point numbers.
+	For example, \ct{1.79s2} is equal to \ct{179/100}.
+	You can omit the scale, in which case it is taken from the number of digits specified: \ct{1.99s} is equivalent to \ct{1.99s2} and \ct{1s2} is equivalent to \ct{1.00s2}.
+	\index{scaled decimal}
+	\index{literal!number}
 
 \item[Characters.]
 	A dollar sign introduces a literal \subind{literal}{character}: \ct{$a}\ignoredollar$ is the literal for `a'.

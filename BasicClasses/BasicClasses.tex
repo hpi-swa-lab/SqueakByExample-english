@@ -513,6 +513,7 @@ Of course, numbers are implemented efficiently in the virtual machine, but the \
 \centerline {\includegraphics[width=8cm]{NumberHierarchy}}
 \caption{The Number Hierarchy.\label{fig:numbers}}
 \end{figure}
+% TODO: ct: insert ScaledDecimal under number (right to Integer)
 
 Numbers are found in the \scatind{Kernel-Numbers} category.
 The abstract root of this hierarchy is \clsind{Magnitude}, which represents all kinds of classes supporting comparison operators.
@@ -649,6 +650,31 @@ We have already seen a similar example in \charef{syntax}:
 n := 2.
 3 timesRepeat: [n := n * n].
 n --> 256
+\end{code}
+
+%-----------------------------------------------------------------
+\subsection{ScaledDecimal}
+
+\clsindmain{ScaledDecimal} represents a decimal number with a fixed number of digits after the decimal point.
+\index{scaled decimal}
+Other than floats, they do not suffer from rounding errors and can represent numbers of arbitrary size; however, they also take up more space and time to calculate.
+
+You can create a literal scaled decimal by putting the letter \ct{s} at the end of a literal number, followed by an integer that specifies the number of digits after the decimal point.
+If you omit the scale after the \ct{s}, the number of visible digits will be used:
+
+\begin{code}{@TEST}
+2.5    --> 2.5         "a Float"
+2.5s1 --> 2.5s1     "a ScaledDecimal"
+2.5s2 --> 2.50s2   "same value, but with a higher precision"
+2.5s0 --> 2s0        "same value, but with a lower precision"
+2.5s  --> 2.5s1      "same value, but with automatic precision"
+2s2 --> 2.00s2      "a ScaledDecimal without a decimal point"
+\end{code}
+
+You can also create a \ct{ScaledDecimal} from another number by sending it the message \mthind{Number}{asScaledDecimal:}, indicating the number of digits after the decimal point:
+
+\begin{code}{@TEST}
+(1.342 asScaledDecimal: 2) --> 1.34s2
 \end{code}
 
 %=================================================================
