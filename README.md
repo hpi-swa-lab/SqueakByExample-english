@@ -101,6 +101,37 @@ For more insights into the build process, have a look at the [`Makefile`](/Makef
 The book has been reformatted to 6"x9" (for Lulu). If you want to print any
 part of the book, you will find that printing 2 up at 140% works well.
 
+## Release Process
+
+### 1. Actual release
+
+- Make sure the CI is green.
+- Check the relevant PDF from the latest prerelase manually for any slips (i.e., search for `missing figure` and `??`, check for layout quirks, maybe scan the build log for warnings).
+- Trigger a new release from the <kbd>Actions</kbd> tab of the GitHub repository and update the settings:
+
+  ![GitHub Actions: Run workflow](gh-actions-release.png)
+  
+  - Tick the `Draft` checkbox.
+  - Specify the Squeak version for the intended edition only (e.g., `["6.0"]`).
+  - Increase the scale factor to `10` at will.
+
+  Wait for the CI workflow to complete (might take 10 - 20 minutes depending on the scale factor) and recheck the PDF to be sure (esp. for a different scale factor, some figures could look different).
+
+- Update the sources in the SqueakSource repository (see [SmalltalkSources](#smalltalk-sources)).
+- Select the draft release from the <kbd>Releases</kbd> section on GitHub, edit it, and publish it.
+- Publish the PDF using Lulu or whatever else (maybe we should document this process here as well).
+- Announce the new release on the mailing list, squeak.org, etc.
+
+### 2. Prepare the repository for the next edition
+
+- Secure the current state of the book in a new release branch (e.g., `release/6.0`).
+- Replace the old version with the new version in the CI scripts.
+- Drop support for the old edition from the default branch:
+  - Search the tex sources for all occurrences of `\SqVersionSwitch` and replace them with the argument for the latest version.
+  - Search the Smalltalk sources (`*.{st,cs}`) for version switches (`(>=|<=) Squeak`) and replace them with the latest version.
+  - To be sure, search the entire book for mentions of the old Squeak version.
+- Update the copyright notice.
+
 ---
 
 # Style Rules
@@ -212,12 +243,14 @@ When the `make` command is run, the bibliography is automatically built as well.
 
 # Smalltalk Sources
 
-The "Squeak by Example" Monticello Repository can be found as a [FileTree](https://github.com/dalehenrich/filetree) repository in the `SmalltalkSources` folder.
+The "Squeak by Example" Monticello Repository can be found as a [FileTree](https://github.com/dalehenrich/filetree) repository in the `SmalltalkSources` folder but is best loaded and saved using [Squot](https://github.com/hpi-swa/Squot).
 
-The package SBE-Testing includes as dependencies the code for the hands-on chapters.
+The package `SBE-Testing` includes as dependencies the code for the hands-on chapters.
 It will run all the test code in the latex sources and exercise the hands-on code.
 
-The repository was previously hosted on [squeaksource](http://www.squeaksource.com/@QJbXgqmsC7AwLgNB/jkjcsr-2).
+All packages that contain examples relevant to the user are also hosted at SqueakSource at <http://www.squeaksource.com/SqueakByExample60/>.
+Before releasing a new edition of the book, make sure to update these sources using the `SBESqueaksource` class from the `SBE-Extract` package.
+The SqueakSource repository is world-readable and can be written by the administrators, which are currently ct and pre.
 
 # Coding Style Guide
 
