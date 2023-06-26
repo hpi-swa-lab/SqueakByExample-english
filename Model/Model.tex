@@ -1030,9 +1030,9 @@ Our advice is to avoid them; you will need them only in rare and specific circum
 Our goal here is therefore to explain \subind{variable}{pool} variables just enough so that you can understand them when you are reading code.
 
 A class that accesses a pool variable must mention the pool in its class definition.
-For example, the class \clsind{Text} indicates that it is using the pool dictionary \ct{TextConstants}, which contains all the text constants such as \glbind{CR} and \glbind{LF}.
-This dictionary has a key \ct{#CR} that is bound to the value \ct{Character cr}, \ie the carriage return character.
-\cmindex{Character class}{cr}
+For example, the class \clsind{Text} indicates that it is using the pool dictionary \ct{TextConstants}, which contains all the text constants such as \glbind{Tab} and \glbind{CrLf}.
+This dictionary has a key \ct{#Tab} that is bound to the value \ct{Character tab}, \ie the tabulator character.
+\cmindex{Character class}{tab}
 
 \begin{classdef}[textpooldict]{Pool dictionaries in the \ct{Text} class.}
 ArrayedCollection subclass: #Text
