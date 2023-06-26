@@ -914,27 +914,21 @@ So far, we only have \emph{returned} from an exception.
 However, exception handlers have a couple of other options for dealing with exceptions by sending messages to them:
 
 \begin{itemize}
-    \item \mthind{Exception}{return:} returns a value from the handler block.
-    This is the implicit default behavior of every handler block.
-    For instance, the following  would be equivalent to the first example above:
-
-    \begin{code}{@TEST}
-    [(-2 to:2) collect: [:i | 100 / i]]
-       on: ZeroDivide
-       do: [:ex | ex return: nil].
-    \end{code}
-
     \item \mthind{Exception}{pass} passes the exception to the next handler on the stack\footnote{This is similar to a plain \ct{throw} in other languages.} (or to the \mthind{Exception}{defaultAction}, if there is no further exception handler).
+    Unlike sending \mthind{Exception}{signal} again to the exception, \ct{pass} will maintain the existing signaler stack, which is usually desired behavior (as you can debug and resume from the exception).
     Using \ct{pass}, you can design your exception handlers to only handle some exceptions based on their state and pass all others to the next handler:
 
     \begin{code}{NB: CANNOT TEST}
     [self downloadData]
         on: ConnectionRefused do: [:ex |
-            self cache at: ex host ifPresent: [:cached | ex return: cached].
-            ex pass].
+            self cache at: ex host ifAbsent: [ex pass]].
     \end{code}
 
-    \item \mthind{Exception}{resume} continues the execution of the method that raised the exception\footnote{Most other languages not support resumable exceptions. However, there are some similar concepts such as \ct{On Error Resume Next} in Visual Basic, \ct{begin...rescue...retry} in Ruby, or \ct{restart-case} in Common Lisp.}.
+    This example tries to download some data from a server, but if the connection is refused, it will try to fallback to an offline cache.
+    If the data is in that cache, it will return it.
+    If the cache does not contain the data either, it will pass the exception to the next handler, which will open a debugger.
+
+    \item \mthind{Exception}{resume} continues the execution of the method that raised the exception\footnote{Most other languages do not support resumable exceptions. However, there are some similar concepts such as \ct{On Error Resume Next} in Visual Basic, \ct{begin...rescue...retry} in Ruby, or \ct{restart-case} in Common Lisp.}.
     This is similar to pressing \menu{Proceed} in the debugger for an exception.
     You can also pass a value along with \mthind{Exception}{resume:} which will be returned from the original \mthind{Exception}{signal:} send.
     This is a powerful mechanism that allows your code to communicate with other methods on the stack that it does not know about.
@@ -949,10 +943,21 @@ However, exception handlers have a couple of other options for dealing with exce
         do: [:ex | ex resume: 'myMorph.png']. --> "no dialog opens, the file is saved as 'myMorph.png'"
     \end{code}
 
-    However, specifically for handling \clsindplural{ProvideAnswerNotification}, there are the more convenient methods \cmind{BlockClosure}{valueSupplyingAnswers:} and \cmind{BlockClosure}{valueSuppressingMessages:}.
+    Note that specifically for handling \clsindplural{ProvideAnswerNotification}, there are the more convenient methods \cmind{BlockClosure}{valueSupplyingAnswers:} and \cmind{BlockClosure}{valueSuppressingMessages:}.
 
     \item \mthind{Exception}{retry} restarts the execution of the block that raised the exception.
     However, you should use this with caution as the exact method that will raise an exception is often unknown, and restarting the wrong method can lead to unexpected behavior and infinite loops.
+
+    \item \mthind{Exception}{return} returns from the handler, and \mthind{Exception}{return:} passes along a value.
+    This is the implicit default behavior of every handler block.
+    The advantage of using \ct{return} explicitly is that you can leave the handler block immediately, similar to a \ct{^} return statement in a method.
+    For instance, the following would be equivalent to the first example above:
+
+    \begin{code}{@TEST}
+    [(-2 to:2) collect: [:i | 100 / i]]
+       on: ZeroDivide
+       do: [:ex | ex return: nil].
+    \end{code}
 \end{itemize}
 
 As exceptions are instances of classes like any other objects, it is a good practice to define your own exceptions by subclassing \clsind{Error} or \clsind{Notification}.
