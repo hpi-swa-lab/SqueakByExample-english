@@ -1,4 +1,4 @@
-*SBE-Extract-overriding-morphic ui
+*SBE-Extract-morphic ui-override
 answer: anObject
 	(modalProcess notNil and: [modalProcess isTerminated])
 		ifTrue: [^self inform: 'This modal dialog was interrupted, please close it'].

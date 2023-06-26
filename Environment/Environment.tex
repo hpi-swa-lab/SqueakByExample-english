@@ -725,7 +725,7 @@ SBEScreenshotRecorder writeInto: './figures/' recordSeries: [:recorder |
 The \emph{object explorer} is conceptually similar to the inspector, but presents its information in a different way.
 To see the difference, we'll \emph{explore} the same object that we were just inspecting.
 
-\dothis{Select \menu{self} in the inspector's left-hand pane, and choose \menu{explore (I)} from the \ind{yellow button} menu.}
+\dothis{Select \menu{self} in the inspector's left-hand pane, and choose \menu{explore (I)} from the yellow button menu.}
 The \ind{explorer} window looks like \figref{exploreTimeStampNow}.
 If you click on the small triangle next to \ct{root}, the view will change to \figref{exploreTimeStampNow2}, which shows the instance variables of the object that you are exploring.
 Click on the triangle next to \ct{localOffsetSeconds}, and you will see \emph{its} instance variables. (Actually, in this example, \ct{hexadecimal}, \ct{octal}, \etc are no instance variables of the Integer object, but rather different representations.)
@@ -738,8 +738,8 @@ The workspace pane of the object explorer works slightly differently to that of 
 To see the value of the explorer, let's use it to explore a deeply-nested structure of objects.
 
 \dothis{Open a browser, and blue-click twice on the method pane to bring-up the Morphic halo on the \ct{PluggableListMorph} that is used to represent the list of messages.
-Click on the \emph{debug} handle \debugHandle{} and select \menu{explore morph}
-from the menu that appears.  This will open an Explorer on the \clsind{PluggableListMorph} object that represents the method list on the screen.
+Click on the \emph{debug} handle \debugHandle{} and select \menu{explore morph} from the menu that appears.
+This will open an Explorer on the \clsind{PluggableListMorph} object that represents the method list on the screen.
 Open the root object (by clicking in its triangle), open its \ct{submorphs}, and continue exploring the structure of the objects that underlie this Morph, as shown in \figref{explorePluggableListMorph}.}
 \index{red button}
 
@@ -763,6 +763,58 @@ SBEScreenshotRecorder writeTo: './figures/explorePluggableListMorph.png' buildin
 	\caption{Exploring a \ct{PluggableListMorph}.}
 	\label{fig:explorePluggableListMorph}
 \end{figure}
+
+
+\subsection{The instance browser}
+
+Sometimes, you might want to explore what a specific object can do.
+In the class browser, you can look through the methods to learn what they should do, but you cannot execute them and see what they actually do.
+In the inspector or explorer, you can see the state of an object and execute methods, but you cannot directly see the code corresponding to the methods.
+In case you want both, reading code and evaluating code for a single object, you can use the \emph{instance browser} tool.
+\index{instance browser}
+The instance browser allows you to read the code of all methods that an object can execute, and evaluate any code snippets in the context of this object.
+
+You can open an instance browser from the explorer.
+
+\dothis{In the explorer above, select the root entry for the \ct{PluggableListMorph}, open the yellow button menu, and choose \menu{browse protocol (p)}.}
+
+In the new browser (\figref{instanceBrowser}), you can see a list of methods on the top right, which contains all methods the object can execute, gathered from its class and all its superclasses.
+The methods are categorized according to their protocols on the top left.
+At the bottom you see a code pane, just like in an ordinary browser.
+However, this window is more interesting as it still knows about the \ct{PluggableListMorph} for which we opened it.
+Thus, we can evaluate code in the code pane.
+
+\dothis{In the browser, open the method \ct{fullListSize} by selecting it in the list at the top right. Then, navigate to the last code line and \menu{print it} (\short{p}). You should see the result of evaluating the expression right within the code editor.}
+
+\begin{ExecuteSmalltalkScript}
+	SBEScreenshotRecorder writeTo: './figures/instanceBrowser.png' building: [:helper |
+		| lists list browser textField |
+		SystemBrowser defaultOpenBrowser
+			selectSystemCategory: #'Collections-Strings';
+			selectClass: String.
+		lists := (helper foregroundWindow submorphsSatisfying: #isPluggableListMorph)
+			collect: [:alist | alist center x -> alist] as: Dictionary.
+		list := (lists at: lists keys max).
+		browser := InstanceBrowser new openOnObject: list showingSelector: #fullListSize.
+		browser selectSelectorItsNaturalCategory: #fullListSize. "To work around a defect in *showingSelector:"
+
+		textField := helper codePaneOfBrowser: helper foregroundWindow.
+		helper click: textField.
+		helper
+			keyStroke: textField key: $a modifiers: #(cmd);
+			type: 'fullListSize\	"Number of items in the unfiltered list."\\	^ self getFullList size' withCRs into: textField;
+			keyStroke: textField key: $p modifiers: #(cmd).
+	]
+\end{ExecuteSmalltalkScript}
+\begin{figure}[tbp]
+	\begin{center}
+		\includegraphics[width=\textwidth]{instanceBrowser}
+	\end{center}
+	\caption{Exploring the method \ct{fullListSize} for a \ct{PluggableListMorph}.}
+	\label{fig:instanceBrowser}
+\end{figure}
+	
+
 
 %=========================================================
 \section{The debugger}
@@ -1282,7 +1334,7 @@ Whenever you use a class in a method, the method then depends on the presence of
 Running the method will result in an exception if the class is not in the environment, as \sq does not know who should receive the message.
 This can occur, for example, whenever you use a class that is not part of the base system but stems from a project you installed.
 Using the \ind{dependency browser} you can see the dependencies of your package.
-You can open the dependency browser through \menu{world main docking bar~\go{} Apps~\go{} Dependency Browser} or from the context menu of a system category in a browser.
+You can open the dependency browser through \menu{world main docking bar~\go{} Apps~\go{} Dependency Browser} or from the context menu of a system category in a browser (\menu{browse package~\go{} dependencies}).
 
 \paragraph{Lexicon}
 Objects understand all messages for which their class or their superclasses have methods.
@@ -1290,12 +1342,99 @@ The system browser introduced earlier can only show you the methods of one class
 If you want to know all the methods an instance of a class understands you can open the \ind{lexicon}.
 You can get the lexicon from the system browser by opening the yellow button menu for the class and selecting \menu{browse protocol (p)}.
 
-\paragraph{Message tally}
+\paragraph{Profiling tools}
 Sometimes you might write code that is too slow.
-The \ind{Message Tally} tool, sometimes also called \ind{profiler}, can help you to determine which parts of your program are slow.
-You can start it to record the execution times for all processes in the image from the menu item \menu{world main docking bar~\go{} Extras~\go{} Start Profiler}.
-Alternatively, you can also let it observe sections of code by selecting the code, opening the yellow button menu, and choosing \menu{spy on it}.
-Note, that the message tally is a sampling profiler, so for detailed information, you will have to let your code run for some seconds (e.g. by running it 1000 times if it only takes little time).
+For that, \sq provides a number of profiling tools to measure execution time and help you find bottlenecks.
+\index{profiling tools}
+
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/TimeProfile.png' building: [:helper |
+	| sem window splitter list |
+	sem := Semaphore new.
+	[Processor activeProcess environmentAt: ActiveWorldVariable put: helper world. "avoid #useWorldAndHandDuring: to keep stack clean"
+	[World imageForm] timeProfile.
+	sem signal] fork.
+	sem wait.
+	window := helper foregroundWindow.
+	helper scaleWindow: window extent: 580 px @ 425 px.
+	splitter := window allMorphs detect: [:m |
+	(m isKindOf: ProportionalSplitterMorph) and: [m splitsTopAndBottom]].
+	splitter repositionBy: 0 px @ 110 px.
+	helper selectAnyListIn: window at: '##Leaves##' andScrollIntoViewBy: 3.
+	list := helper listMorphIncludingMatch: '##Leaves##' in: window.
+	helper
+		type: '>>frameAndFillRectangle:fillStyle:borderStyle:' into: list;
+		keyStroke: list key: Character return.
+]
+\end{ExecuteSmalltalkScript}
+\begin{ExecuteSmalltalkScript}
+SBEScreenshotRecorder writeTo: './figures/SpaceTally.png' building: [:helper |
+	(SpaceTally new depth: 2; spaceTally: (PackageInfo named: #Morphic) classes) exploreWithLabel: 'SpaceTally'.
+	helper scaleWindow: helper foregroundWindow extent: 500 px @ 225 px.
+]
+\end{ExecuteSmalltalkScript}
+
+First, you can send the message \mthind{BlockClosure}{timeToRun} to a block to measure the time in milliseconds it takes to execute it:
+
+\begin{code}{NB: CANNOT TEST}
+[10000 factorial] timeToRun --> 27
+\end{code}
+\noindent
+Alternatively, you can select a piece of code in a workspace, debugger, \autc, open the yellow button menu, and select \menu{tally it}.
+If a single execution of the code is too fast to measure (confidently), you can also \emph{benchmark} it by sending \mthind{BlockClosure}{bench} or \mthind{BlockClosure}{benchFor:} to a block.
+This will run the block repeatedly and compute a few statistics about the execution time.
+\begin{code}{NB: CANNOT TEST}
+[10 factorial] bench --> '14,500,000 per second. 68.8 nanoseconds per run. 0 % GC time.'
+\end{code}
+\index{benchmarks}
+
+\begin{figure}[btp]
+	\begin{minipage}[t]{0.48\textwidth}
+		\ifluluelse
+			{\includegraphics[width=\textwidth]{TimeProfile}}
+			{\includegraphics[scale=0.7]{TimeProfile}}
+		\label{fig:TimeProfile}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{0.48\textwidth}
+		\ifluluelse
+			{\includegraphics[width=\textwidth]{SpaceTally}}
+			{\includegraphics[scale=0.7]{exploreWithLabel: 'SpaceTally'}}
+		\label{fig:SpaceTally}
+	\end{minipage}
+	\caption{A time profiler (left) and a space tally (right).}
+\end{figure}
+
+If you have discovered that your code is too slow, you might wonder which parts of your code are responsible for the slowness.
+For that, \sq provides the \emphind{message tally} tool.
+You can start it to record the execution times for your code by selecting the code and choosing \menu{spy on it} from the context menu.
+Alternatively, you can let it observe all processes in the image from the menu item \menu{world main docking bar~\go{} Apps~\go{} Message Tally}.
+Note that the message tally is a sampling profiler, so for detailed information, you will have to let your code run for some seconds (\eg by running it 1000 times if it only takes a little time).
+
+An extension of the message tally is the \emphind{time profile browser} which allows you to browse the results of a message tally conveniently (see \figref{TimeProfile}).
+You can invoke it by sending \mthind{BlockClosure}{timeProfile} to a block.
+To get rid of the long stack of the existing process, a practical way to invoke it is:
+\begin{code}{NB: CANNOT TEST}
+[[10000 factorial] timeProfile] fork
+\end{code}
+
+Time is not the only resource that is unfortunately limited.
+You can also use the \emphind{space tally} to find out which objects consume the most memory:
+\begin{code}{@TEST}
+SpaceTally new spaceForInstance: Object new depth: 0.	--> 16
+SpaceTally new spaceForInstance: Morph new depth: 0.	--> 56
+SpaceTally new spaceForInstance: Morph new depth: 1.	--> 144
+SpaceTally new spaceForInstance: Morph new depth: 2.	--> 208
+\end{code}
+\noindent
+The \ct{depth} parameter specifies how many levels of the object graph should be traversed.
+As you can see, even a plain \ct{Object} instance consumes 16 bytes.
+Like the message tally, you can also ask a space tally to analyze all objects in the system by providing a list of classes and exploring the result (see \figref{SpaceTally}):
+\begin{code}{NB: CANNOT TEST}
+SpaceTally new spaceTally: {TextMorph. Point}.
+SpaceTally new depth: 2; spaceTally: (PackageInfo named: #Morphic) classes.
+SpaceTally new systemWideSpaceTally.
+\end{code}
 
 %=========================================================
 \section{Chapter summary}
