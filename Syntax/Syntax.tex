@@ -135,6 +135,7 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 	\index{literal!number}
 
 \item[Floating point numbers] can be specified with their base-ten \ind{exponent}: \mbox{\ct{2.4e7}} is $2.4\times 10^7$.
+	Floats also support radix notation, but the exponent is always in base ten: \ct{2r0.1e2} is $0.5\times 10^{2}$, which is equal to $2$.
 	\index{floating point number}
 	\clsindexmain{Float}
 
@@ -142,6 +143,8 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 	They support unbounded precision, but are slower than floating point numbers.
 	For example, \ct{1.79s2} is equal to \ct{179/100}.
 	You can omit the scale, in which case it is taken from the number of digits specified: \ct{1.99s} is equivalent to \ct{1.99s2} and \ct{1s2} is equivalent to \ct{1.00s2}.
+	%Like integers and floats, scaled decimals can also be provided in radix notation, but the scale is always in base ten: \ct{2r0.101s2} is equivalent to ???
+	%TODO: ct: nope, we cannot bring that, see open discussion on https://lists.squeakfoundation.org/archives/list/squeak-dev@lists.squeakfoundation.org/thread/EIAUU63CQBA5LRWK5XOSRABRTHTU36LK/"
 	\index{scaled decimal}
 	\index{literal!number}
 	\clsindexmain{ScaledDecimal}
