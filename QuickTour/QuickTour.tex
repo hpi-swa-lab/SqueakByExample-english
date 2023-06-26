@@ -482,7 +482,7 @@ Depending on your platform, you may have to press one of the modifier keys (cont
 (We will indicate these generically as \short{\emph{key}}.)
 
 \dothis{Evaluate the expression in the workspace again, but using the keyboard shortcut: \short{d}.}
-\index{keyboard shortcut!do it}
+\index{keyboard shortcuts!do it}
 
 In addition to \menu{do it}, you will have noticed \menu{print it}, \menu{inspect it} and \menu{explore it}.
 Let's have a quick look at each of these.
@@ -497,7 +497,7 @@ If you want to see the result, you should \menu{print it} instead.
 
 \dothis{Select \ct{3 + 4} and \menu{print it} (\short{p}).}
 This time we see the result we expect (\figref{printit}).
-\index{keyboard shortcut!print it}
+\index{keyboard shortcuts!print it}
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/PrintIt.png' frame: #morphs building: [:helper | | workspace |
@@ -551,7 +551,7 @@ SBEScreenshotRecorder writeTo: './figures/InspectIt.png' frame: #morphs building
 \needlines{2}
 \dothis{Close the inspector.
 	Type the expression \ct{Object} in a workspace and this time \menu{explore it} (\short{I}, uppercased i).}
-\index{keyboard shortcut!explore it}
+\index{keyboard shortcuts!explore it}
 \index{explorer}
 
 This time you should see a window labeled \clsind{Object} containing the text
@@ -661,7 +661,7 @@ Suppose we want to browse the class \clsind{Boolean}.
 
 \dothis{Type \ct{Boolean browse} into a workspace and \menu{do it}.}
 A browser will open on the Boolean class (\figref{browseBoolean}).
-There is also a \ind{keyboard shortcut} \short{b} (browse) that you can use in any tool where you find a class name; \index{keyboard shortcut!browse it}, select the name and type \short{b}.
+There is also a keyboard shortcut \short{b} (browse) that you can use in any tool where you find a class name; \index{keyboard shortcuts!browse it}, select the name and type \short{b}.
 
 \dothis{Use the keyboard shortcut to browse the class \ct{Boolean}.}
 
@@ -718,7 +718,7 @@ For example, suppose that you are looking for some unknown class that represents
 \noindent
 You will be presented with a list of classes whose names contain ``time'' (see \figref{findit}).
 Choose one, say, \ct{Time}, and the browser will show it.
-\index{keyboard shortcut!find ...}
+\index{keyboard shortcuts!find ...}
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeInto: './figures' recordSeries: [:picture :helper |
@@ -888,9 +888,8 @@ Delete this and enter the code from \mthref{stringtesttestshout}.}
 Once you have typed the text into the browser, notice that the bottom pane is outlined in red.
 This is a reminder that the pane contains unsaved changes.
 So select \menu{accept (s)} from the yellow-button menu in the bottom pane, or just type \short{s}, to compile and save your method.
-\index{keyboard shortcuts}
-\index{keyboard shortcut!accept}
-\seeindex{accept it}{keyboard shortcut, accept}
+\index{keyboard shortcuts!accept}
+\seeindex{accept it}{keyboard shortcuts, accept}
 
 Because there is as yet no method called \ct{shout}, the browser will ask you to confirm that this is the name that you really want\,---\,and it will suggest some other names that you might have intended (\figref{testShoutConfirm}).
 This can be quite useful if you have merely made a typing mistake, but in this case, we really \emph{do} mean \ct{shout}, since that is the method we are about to create, so we have to confirm this by selecting the first option from the menu of choices, as shown in \figref{testShoutConfirm}.

@@ -233,9 +233,9 @@ The buttons are labeled \button{browse}, \button{senders}, \button{implementors}
 The \button{browse} button opens a new system browser on the class or method that is currently selected.
 It's often useful to have multiple browsers open at the same time.
 When you are writing code you will almost certainly need at least two: one for the method that you are typing, and another to browse around the system to see what to type.
-You can also open a browser on a class named by any selected text using the \short{b} \ind{keyboard shortcut}.
+You can also open a browser on a class named by any selected text using the \short{b} keyboard shortcut.
 \index{system browser!browse button}
-\index{keyboard shortcut!browse it}
+\index{keyboard shortcuts!browse it}
 
 \dothis{Try this: in a workspace window, type the name of a class (for instance \ct{ScaleMorph}), select it, and then press \short{b}. This trick is often useful; it works in any text window.}
 
@@ -605,7 +605,7 @@ By all means experiment, but save your image first!
 (It's not necessary to select the text before using the menu; if no text is selected, the menu operations work on the whole of the current line.
 You can also type \short{i} for \menu{\textbf{i}nspect it}.)}
 \clsindex{TimeStamp}
-\index{keyboard shortcut!inspect it}
+\index{keyboard shortcuts!inspect it}
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/inspectTimeNow1.png' building: [:helper | | window splitter |
@@ -730,7 +730,7 @@ The \ind{explorer} window looks like \figref{exploreTimeStampNow}.
 If you click on the small triangle next to \ct{root}, the view will change to \figref{exploreTimeStampNow2}, which shows the instance variables of the object that you are exploring.
 Click on the triangle next to \ct{localOffsetSeconds}, and you will see \emph{its} instance variables. (Actually, in this example, \ct{hexadecimal}, \ct{octal}, \etc are no instance variables of the Integer object, but rather different representations.)
 The explorer is really useful when you need to explore a complex hierarchic structure\,---\,hence the name.
-\index{keyboard shortcut!explore it}
+\index{keyboard shortcuts!explore it}
 
 The workspace pane of the object explorer works slightly differently to that of the inspector.
 \ct{self} is not bound to the root object, but rather to the object that is currently selected; the instance variables of the selected object are also in scope.
@@ -813,7 +813,7 @@ Thus, we can evaluate code in the code pane.
 	\caption{Exploring the method \ct{fullListSize} for a \ct{PluggableListMorph}.}
 	\label{fig:instanceBrowser}
 \end{figure}
-	
+
 
 
 %=========================================================
@@ -962,7 +962,7 @@ If you click on \self in the bottom-left pane, you will see that \self is the in
 The workspace panes are not needed in the debugger's mini-inspectors because all of the variables are also in scope in their value panes and in the method pane; you should feel free to type or select expressions in this pane and evaluate them.
 You can always \menu{cancel (l)} your changes using the menu or \short{\textit{l}}.
 % apb: that lower-case-L is in italics so that it doesn't look like a 1 or a |
-\index{keyboard shortcut!cancel}
+\index{keyboard shortcuts!cancel}
 
 The inspector on the right shows the temporary variables of the current context.
 In \figref{debuggerDetect}, \ct{value} was sent to the parameter \ct{exceptionBlock}.
@@ -973,8 +973,8 @@ So, it is not surprising that we see the corresponding error message.}
 
 Incidentally, if you want to open a full inspector or explorer on one of the variables shown in the mini-inspectors, select the name of the variable and choose \menu{inspect (i)} or \menu{explore (I)} from the yellow button menu.
 This can be useful if you want to watch how a variable changes while you execute other code.
-\index{keyboard shortcut!inspect it}
-\index{keyboard shortcut!explore it}
+\index{keyboard shortcuts!inspect it}
+\index{keyboard shortcuts!explore it}
 
 Looking back at the method window, we see that we expected the penultimate line of the \ct{suffix} method to find \ct{dot} in the string \ct{'readme.txt'}, and that execution should never have reached the final line.
 \sq does not let us run an execution backward, but it does let us start a method again, which works very well in code such as this that does not mutate objects, but instead creates new ones.
@@ -1320,6 +1320,7 @@ The \emph{search bar} in the top right corner allows you to quickly access any m
 You can either directly enter the full selector of the method, which will open a class browser, or enter a search term including wildcards, which will open a message names browser.
 You can also use the search bar to search for classes also using wildcards.
 As this search bar allows you to quickly jump to methods, it is also accessible via the keyboard shortcut \short{0}.
+\index{keyboard shortcuts!search bar}
 
 
 % section methodFinder (end)
