@@ -138,12 +138,19 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 \item[Characters.]
 	A dollar sign introduces a literal \subind{literal}{character}: \ct{$a}\ignoredollar$ is the literal for `a'.
 	Instances of non-printing characters can be obtained by sending appropriately named messages to the \clsind{Character} class, such as \ct{Character space} \cmindex{Character class}{space} and \ct{Character tab}\cmindex{Character class}{tab}.
+	Nevertheless, you can also write any non-printing character verbatim after the dollar sign, but this is often hard to read:
+
+	\begin{code}{@TEST}
+	$  = Character space --> true
+	$
+	 = Character cr          --> true
+	\end{code}
 
 \item[Strings.]
 	Single quotes are used to define a literal \subind{literal}{string}.
 	If you want a string with a quote inside, just double the quote, as in \ct{'G''day'}.
 
-\item[Symbols] are like Strings, in that they contain a sequence of characters.
+\item[Symbols] are like strings in that they contain a sequence of characters.
 	However, unlike a string, a literal \subind{literal}{symbol} is guaranteed to be globally unique.
 	There is only one Symbol object \ct{#Hello} but there may be multiple String objects with the value \ct{'Hello'}.
 	Amongst others, symbols are used for referencing messages by their \subind{message}{selector}.
