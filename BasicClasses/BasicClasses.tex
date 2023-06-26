@@ -846,7 +846,7 @@ While you have the choice, by default you should always use the lazy conjunction
 %=================================================================
 \section{Exceptions}
 
-\ct{Exceptions}\clsindexmain{Exception} might not be the first class you will need when starting to explore \sq.
+\clsind{Exception} might not be the first class you will need when starting to explore \sq.
 However, \ct{Exceptions} provide a fundamental way to influence the control flow in your application, thus we already introduce them with the other basic classes.
 
 Similar to \ct{ifTrue:} and \ct{ifFalse:}, exceptions are not part of the language, but implemented as ordinary objects in the class library.
@@ -854,31 +854,46 @@ Thus, we can work with them as we would work with any other object.
 
 The common superclass of all exceptions is the abstract class \ct{Exception}.
 There are numerous subclasses of \ct{Exception} representing specific exceptions, such as \ct{ZeroDivide}, \ct{MessageNotUnderstood}, or \ct{ProgressNotification}.
-In particular, subclasses of \ct{Error} represent erroneous situations, subclasses of \ct{Notification} indicate that something interesting occurred.
+In particular, subclasses of \clsind{Error} represent erroneous situations, and subclasses of \clsind{Notification} indicate that something interesting occurred.
 
-To raise an exception you can use the method \mthind{Exception}{signal}.
-If you want to pass a message along to help users figure out what happened, you can use \cmind{Exception}{signal:}.
-When an exception is not handled by anyone, a debugger will open.
+To signal (or raise) an exception, you can use the message \mthind{Exception}{signal}.
+If you want to pass a message along to help users figure out what happened, you can use \mthind{Exception}{signal:}.
+When an exception is not handled by anyone, it is sent the message \mthind{Exception}{defaultAction} which is implemented differently by different types of exceptions.
+The default action for \ct{Error}s is to open a debugger, while the default action for \ct{Notification}s is to do nothing but proceed with the execution of the program:
 
 \begin{code}{NB: CANNOT TEST}
 Error signal --> "Will open a debugger"
 Error signal: 'We wanted this to happen' --> "Will open a debugger with a message"
+Notification signal: 'We wanted this to happen' --> "Nothing happensBANG"
 \end{code}
 
-As we do not want to present users with debuggers every time something unexpected happens, we can also handle exceptions directly within our code.
+As we do not want to present users with debuggers every time something unexpected happens, we can also \emph{handle} exceptions directly within our code.
 The methods for handling exceptions are associated with blocks, so you can find them in the \ct{exceptions} protocol of the class \ct{BlockClosure}.
-To catch an exception you can use the method \cmind{BlockClosure}{on:do:}\footnote{This is similar to \ct{try...catch} in other languages.}, which takes an exception class (or \ct{ExceptionSet}) as the first argument and a block as the second.
+To catch an exception, you can use the method \cmind{BlockClosure}{on:do:}\footnote{This is similar to \ct{try...catch} in other languages.}, which takes an exception class as the first argument and a block as the second:
 
-\begin{code}{NB: CANNOT TEST}
-[(10 to: -10 by: -1) collect: [:i | 100 / i]]
+\begin{code}{@TEST}
+[(-2 to: 2) collect: [:i | 100 / i]]
    on: ZeroDivide
    do: [:ex | "do nothing"].
 \end{code}
 
 The code above does not return a collection, as the block was interrupted by the \ct{ZeroDivide} exception before it was able to return the result of the \ct{#collect:} send.
+Instead of doing nothing, you can also return another value from the handler block:
+
+\begin{code}{@TEST | result |}
+result := (-2 to: 2) collect: [:i |
+    [100 / i]
+        on: ZeroDivide
+        do: [:ex | Float nan]].
+result --> {-50 . -100 . NaN . 100 . 50}
+\end{code}
+
+There are also ways to handle multiple exceptions at once.
+You can combine many exceptions into an \ct{ExceptionSet} using the method \cmind{Exception}{,} and pass that \ct{ExceptionSet} to \ct{on:do:}.
+Another option is to use \cmind{BlockClosure}{on:do:on:do:}, \ct{BlockClosure>>>on:do:on:do:on:do:}, \etc for attaching multiple different handlers to a block.
 
 Sometimes you might not be interested in handling an exception.
-Instead you might only want to ensure that some code is always executed after your block, regardless of whether an exception occurs, the block returns early, or the block finishes normally.
+Instead, you might only want to \emph{ensure} that some code is always executed after your block, regardless of whether an exception occurs, the block returns early, or the block finishes normally.
 To achieve this, use the method \cmind{BlockClosure}{ensure:}\footnote{This is similar to \ct{finally} in other languages.} which will always execute the block passed to it.
 
 \begin{code}{NB: CANNOT TEST}
@@ -891,13 +906,64 @@ To achieve this, use the method \cmind{BlockClosure}{ensure:}\footnote{This is s
 		ensure: [Transcript showln: 'My execution is ensured.'].
 \end{code}
 
-% - Exception sets
-% - Resuming
-% - Passing along state
-% As we sometimes want to catch several kinds of exceptions, you can combine \ct{Exception}s into an \ct{ExceptionSet} by sending the message \cmind{Exception}{,}.
+Note that under normal circumstances, you should never place a return statement (\ct{^}) in an ensure block.
+If you do so, the execution will not reach further \ct{ensure:} blocks but will continue as if no exception had occurred.
+In particular, this can create a zombie process when you abandon a program from a debugger.
 
-Further, \ct{Exception}s have several rich features such as resuming, restarting, or signaling other exceptions.
-Browse the class \lct{Exception} to learn more.
+So far, we only have \emph{returned} from an exception.
+However, exception handlers have a couple of other options for dealing with exceptions by sending messages to them:
+
+\begin{itemize}
+    \item \mthind{Exception}{pass} passes the exception to the next handler on the stack\footnote{This is similar to a plain \ct{throw} in other languages.} (or to the \mthind{Exception}{defaultAction}, if there is no further exception handler).
+    Unlike sending \mthind{Exception}{signal} again to the exception, \ct{pass} will maintain the existing signaler stack, which is usually desired behavior (as you can debug and resume from the original exception).
+    Using \ct{pass}, you can design your exception handlers to only handle some exceptions based on their state and pass all others to the next handler:
+
+    \begin{code}{NB: CANNOT TEST}
+    [self downloadData]
+        on: ConnectionRefused do: [:ex |
+            self cache at: ex host ifAbsent: [ex pass]].
+    \end{code}
+
+    This example tries to download some data from a server, but if the connection is refused, it will try to fallback to an offline cache.
+    If the data is in that cache, it will return it.
+    If the cache does not contain the data either, it will pass the exception to the next handler, which will open a debugger.
+
+    \item \mthind{Exception}{resume} continues the execution of the method that signaled the exception\footnote{Most other languages do not support resumable exceptions. However, there are some similar concepts such as \ct{On Error Resume Next} in Visual Basic, \ct{begin...rescue...retry} in Ruby, or \ct{restart-case} in Common Lisp.}.
+    This is similar to pressing \menu{Proceed} in the debugger for an exception.
+    You can also pass a value along with \mthind{Exception}{resume:} which will be returned from the original \mthind{Exception}{signal:} send.
+    This is a powerful mechanism that allows your code to communicate with other methods on the stack that it does not know about.
+
+    For instance, most dialogs in \sq signal a \clsind{ProvideAnswerNotification} before they show up to the user, which allows the code that eventually triggered the dialog to automatically answer the question:
+
+    \begin{code}{NB: CANNOT TEST}
+    Morph new exportAsPNG. --> "a file dialog opens for entering a file name"
+
+    [Morph new exportAsPNG]
+        on: ProvideAnswerNotification
+        do: [:ex | ex resume: 'myMorph.png']. --> "no dialog opens, the file is saved as 'myMorph.png'"
+    \end{code}
+
+    Note that specifically for handling \clsindplural{ProvideAnswerNotification}, there are the more convenient methods \cmind{BlockClosure}{valueSupplyingAnswers:} and \cmind{BlockClosure}{valueSuppressingMessages:}.
+
+    \item \mthind{Exception}{retry} restarts the execution of the block that signaled the exception.
+    However, you should use this with caution as the exact method that will signal an exception is often unknown, and restarting the wrong method can lead to unexpected behavior and infinite loops.
+
+    \item \mthind{Exception}{return} returns from the handler, and \mthind{Exception}{return:} passes along a value.
+    This is the implicit default behavior of every handler block.
+    The advantage of using \ct{return} explicitly is that you can leave the handler block immediately, similar to a \ct{^} return statement in a method.
+    For instance, the following would be equivalent to the first example above:
+
+    \begin{code}{@TEST}
+    [(-2 to:2) collect: [:i | 100 / i]]
+       on: ZeroDivide
+       do: [:ex | ex return: nil].
+    \end{code}
+\end{itemize}
+
+As exceptions are instances of classes like any other objects, it is a good practice to define your own exceptions by subclassing \clsind{Error} or \clsind{Notification}.
+This allows you to handle them with ease and to add instance variables and accessors, which can be useful for passing additional information to the exception handler.
+There are other subclasses of \ct{Exception} as well, but most of the time you will not have to deal with them.
+In particular, you should never instantiate, subclass, or handle the abstract base class \ct{Exception} itself.
 
 
 %=================================================================
@@ -930,6 +996,10 @@ Browse the class \lct{Exception} to learn more.
   \item \ct{Symbols} are unique; \ct{Strings} are not.
 
   \item \ct{Strings} and \ct{Symbols} are \ct{Collections} and therefore support the usual \ct{Collection} methods.
+
+  \item Signal errors using \ct{Object>>>error:} or \ct{Exception>>>signal:} and handle them using \ct{BlockClosure>>>on:do:}.
+
+  \item You can return, resume, pass, or retry exceptions.
 
 \end{itemize}
 
