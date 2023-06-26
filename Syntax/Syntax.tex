@@ -130,11 +130,13 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 	In addition to ordinary decimal integers like \ct{42}, \sq also provides a \ind{radix notation}.
 	\ct{2r101} is \ct{101} in radix 2 (\ie binary), which is equal to decimal 5.
 	\ct{16rFf} is \ct{FF} in radix 16 (\ie hexadecimal), which is equal to decimal 255.
+	\clsindexmain{Integer}
 	\index{literal}
 	\index{literal!number}
 
 \item[Floating point numbers] can be specified with their base-ten \ind{exponent}: \mbox{\ct{2.4e7}} is $2.4\times 10^7$.
 	\index{floating point number}
+	\clsindexmain{Float}
 
 \item[Scaled decimals] are fixed-point numbers with a fixed number of digits after the decimal point.
 	They support unbounded precision, but are slower than floating point numbers.
@@ -142,20 +144,24 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 	You can omit the scale, in which case it is taken from the number of digits specified: \ct{1.99s} is equivalent to \ct{1.99s2} and \ct{1s2} is equivalent to \ct{1.00s2}.
 	\index{scaled decimal}
 	\index{literal!number}
+	\clsindexmain{ScaledDecimal}
 
 \item[Characters.]
 	A dollar sign introduces a literal \subind{literal}{character}: \ct{$a}\ignoredollar$ is the literal for `a'.
 	Instances of non-printing characters can be obtained by sending appropriately named messages to the \clsind{Character} class, such as \ct{Character space} \cmindex{Character class}{space} and \ct{Character tab}\cmindex{Character class}{tab}.
+	\clsindexmain{Character}
 
 \item[Strings.]
 	Single quotes are used to define a literal \subind{literal}{string}.
 	If you want a string with a quote inside, just double the quote, as in \ct{'G''day'}.
+	\clsindexmain{String}
 
 \item[Symbols] are like Strings, in that they contain a sequence of characters.
 	However, unlike a string, a literal \subind{literal}{symbol} is guaranteed to be globally unique.
 	There is only one Symbol object \ct{#Hello} but there may be multiple String objects with the value \ct{'Hello'}.
 	Amongst others, symbols are used for referencing messages by their \subind{message}{selector}.
 	\seeindex{\#@{\textsf{\#}}}{literal symbol}
+	\clsindexmain{Symbol}
 
 \item[Run-time arrays.]
 	Curly braces \ct|{ }| create an array dynamically at run-time. \index{Array, brace construct}
