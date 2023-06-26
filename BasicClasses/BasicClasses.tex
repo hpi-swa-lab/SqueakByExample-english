@@ -915,7 +915,7 @@ However, exception handlers have a couple of other options for dealing with exce
 
 \begin{itemize}
     \item \mthind{Exception}{pass} passes the exception to the next handler on the stack\footnote{This is similar to a plain \ct{throw} in other languages.} (or to the \mthind{Exception}{defaultAction}, if there is no further exception handler).
-    Unlike sending \mthind{Exception}{signal} again to the exception, \ct{pass} will maintain the existing signaler stack, which is usually desired behavior (as you can debug and resume from the exception).
+    Unlike sending \mthind{Exception}{signal} again to the exception, \ct{pass} will maintain the existing signaler stack, which is usually desired behavior (as you can debug and resume from the original exception).
     Using \ct{pass}, you can design your exception handlers to only handle some exceptions based on their state and pass all others to the next handler:
 
     \begin{code}{NB: CANNOT TEST}
