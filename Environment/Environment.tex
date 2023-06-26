@@ -549,7 +549,7 @@ You can also open a package pane browser from a regular browser by yellow-clicki
 %---------------------------------------------------------
 \subsection{Browsing programmatically}
 
-The class \glbind{SystemNavigation} provides a number of utility methods that are useful for navigating around the system.
+The class \clsind{SystemNavigation} provides a number of utility methods that are useful for navigating around the system.
 Many of the functions offered by the classic browser are implemented by \ct{SystemNavigation}.
 \index{browsing programmatically}
 
@@ -558,6 +558,7 @@ Open a workspace and \menu{do it} the following code to browse the senders of \c
 \begin{code}{}
 self systemNavigation browseAllCallsOn: #checkExtent:.
 \end{code}
+\cmindex{SystemNavigation}{browseAllCallsOn:}
 To restrict the search for senders to the methods of a specific class:
 \begin{code}{}
 self systemNavigation browseAllCallsOn: #drawOn: from: ScaleMorph.
@@ -568,7 +569,10 @@ The programmatic equivalent to the \button{implementors} button is:
 \begin{code}{}
 self systemNavigation browseAllImplementorsOf: #checkExtent:.
 \end{code}
+\cmindex{SystemNavigation}{browseAllImplementorsOf:}
 
+You can also find methods or classes based on custom criteria using \cmind{SystemNavigation}{browseAllSelect:} or \cmind{ClassListBrowser class}{browseClassesSatisfying:title:}.
+% ct TODO: Once System-ct.1417 is merged, recommend \mthind{SystemNavigation}{browseClassesSelect:} instead for 6.1Alpha.
 To learn more about what is available, explore the class \ct{SystemNavigation} with the browser.
 Further navigation examples can be found in the FAQ (\appref{faq}).
 
