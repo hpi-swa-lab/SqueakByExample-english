@@ -482,7 +482,7 @@ anArray at: 3 --> 33
 \noindent
 Be careful with code that modifies array literals!
 The compiler allocates space just once for them.
-Unless you copy the array, it will be a \emphind{read-only object} and raise a \clsind{ModificationForbidden} error every time you try to alter it.
+Unless you copy the array, it will be a \emphind{read-only object} and signal a \clsind{ModificationForbidden} error every time you try to alter it.
 Dynamically created arrays do not have this constraint.
 
 %---------------------------------------------------------
