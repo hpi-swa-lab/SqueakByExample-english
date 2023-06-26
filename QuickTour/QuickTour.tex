@@ -422,7 +422,7 @@ Workspaces are often used to hold documentation about a captured image, as is th
 
 \dothis{Type the following text into the workspace:}
 \begin{code}{}
-Transcript show: 'hello world'; cr.
+Transcript showln: 'hello world'.
 \end{code}
 
 Try double-clicking in the workspace at various points in the text you have just typed.
@@ -440,13 +440,13 @@ More on this in the next section!)
 SBEScreenshotRecorder writeTo: './figures/Doit.png' frame: [:morphsRect | morphsRect withBottom: morphsRect bottom - 150 px] building: [:helper |
   | workspace |
   ToolBuilder open: Transcript.
-  Transcript show: 'hello world'; cr.
+  Transcript showln: 'hello world'.
   helper foregroundWindow bounds: (0 px @ 120 px extent: 450 px @ 230 px).
 
   workspace := ToolBuilder open: Workspace new.
   workspace position: 200 px @ 100 px.
 
-  helper type: 'Transcript show: ''hello world''; cr.' into: workspace.
+  helper type: 'Transcript showln: ''hello world''.' into: workspace.
   helper keyStroke: workspace key: $a modifiers: #(cmd).
 
   helper click: workspace at: workspace topCenter + (10 px @ 30 px) buttons: #(right).
@@ -1002,8 +1002,7 @@ shout
 
 The comma is the string concatenation operation, so the body of this method appends an exclamation mark to an upper-case version of whatever \ct{String} object the \ct{shout} message was sent to.
 The \ct{^} tells \sq that the expression that follows is the answer to be returned from the method, in this case, the new concatenated string.
-\seeindex{comma}{Collection, comma operator}
-\index{Collection!comma operator}
+\cmindex{String}{,}
 
 Does this method work?
 Let's run the tests and see.
