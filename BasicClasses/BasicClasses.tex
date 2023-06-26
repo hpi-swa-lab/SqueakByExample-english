@@ -564,19 +564,24 @@ Unsurprisingly, \ct{Number} overrides \lct{is\-Num\-ber}.
 More interesting, \mthind{Number}{isInfinite} is defined to return \ct{false}.
 
 \emph{Truncation} methods include \mthind{Number}{floor}, \mthind{Number}{ceiling}, \mthind{Number}{integerPart}, \mthind{Number}{fractionPart}, and so on.
+\emph{Rounding} methods include \mthind{Number}{rounded}, \mthind{Number}{roundTo:}, \mthind{Number}{roundUpTo:}, and so on.
 
 \begin{code}{@TEST}
 1 + 2.5     --> 3.5             "Addition of two numbers"
 10 - 8.5   --> 1.5              "Subtraction of two numbers"
 3.4 * 5      --> 17.0           "Multiplication of two numbers"
 8 / 2         --> 4                 "Division of two numbers"
-2 ** 3         --> 8                 "Exponentiation of a number"
+2 ** 3       --> 8                  "Exponentiation of a number"
 12 = 11    --> false           "Equality between two numbers"
 12 ~= 11 --> true            "Test if two numbers are different"
 12 > 9      --> true            "Greater than"
 12 >= 10  --> true            "Greater or equal  than"
 12 < 10    --> false           "Smaller than"
-100 @ 10   --> 100@10    "Point creation"
+100 @ 10 --> 100@10    "Point creation"
+
+2.718 truncated       -->   2         "Truncate to integer"
+2.718 rounded        -->   3         "Round to integer"
+2.718 roundTo: 0.01 -->  2.72   "Round to a given precision"
 \end{code}
 \on{Should check how tabbing works in the listings package ...}
 
