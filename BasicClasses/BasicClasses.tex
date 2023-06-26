@@ -856,7 +856,7 @@ The common superclass of all exceptions is the abstract class \ct{Exception}.
 There are numerous subclasses of \ct{Exception} representing specific exceptions, such as \ct{ZeroDivide}, \ct{MessageNotUnderstood}, or \ct{ProgressNotification}.
 In particular, subclasses of \clsind{Error} represent erroneous situations, and subclasses of \clsind{Notification} indicate that something interesting occurred.
 
-To raise an exception, you can use the message \mthind{Exception}{signal}.
+To signal (or raise) an exception, you can use the message \mthind{Exception}{signal}.
 If you want to pass a message along to help users figure out what happened, you can use \mthind{Exception}{signal:}.
 When an exception is not handled by anyone, it is sent the message \mthind{Exception}{defaultAction} which is implemented differently by different types of exceptions.
 The default action for \ct{Error}s is to open a debugger, while the default action for \ct{Notification}s is to do nothing but proceed with the execution of the program:
@@ -928,7 +928,7 @@ However, exception handlers have a couple of other options for dealing with exce
     If the data is in that cache, it will return it.
     If the cache does not contain the data either, it will pass the exception to the next handler, which will open a debugger.
 
-    \item \mthind{Exception}{resume} continues the execution of the method that raised the exception\footnote{Most other languages do not support resumable exceptions. However, there are some similar concepts such as \ct{On Error Resume Next} in Visual Basic, \ct{begin...rescue...retry} in Ruby, or \ct{restart-case} in Common Lisp.}.
+    \item \mthind{Exception}{resume} continues the execution of the method that signaled the exception\footnote{Most other languages do not support resumable exceptions. However, there are some similar concepts such as \ct{On Error Resume Next} in Visual Basic, \ct{begin...rescue...retry} in Ruby, or \ct{restart-case} in Common Lisp.}.
     This is similar to pressing \menu{Proceed} in the debugger for an exception.
     You can also pass a value along with \mthind{Exception}{resume:} which will be returned from the original \mthind{Exception}{signal:} send.
     This is a powerful mechanism that allows your code to communicate with other methods on the stack that it does not know about.
@@ -945,8 +945,8 @@ However, exception handlers have a couple of other options for dealing with exce
 
     Note that specifically for handling \clsindplural{ProvideAnswerNotification}, there are the more convenient methods \cmind{BlockClosure}{valueSupplyingAnswers:} and \cmind{BlockClosure}{valueSuppressingMessages:}.
 
-    \item \mthind{Exception}{retry} restarts the execution of the block that raised the exception.
-    However, you should use this with caution as the exact method that will raise an exception is often unknown, and restarting the wrong method can lead to unexpected behavior and infinite loops.
+    \item \mthind{Exception}{retry} restarts the execution of the block that signaled the exception.
+    However, you should use this with caution as the exact method that will signal an exception is often unknown, and restarting the wrong method can lead to unexpected behavior and infinite loops.
 
     \item \mthind{Exception}{return} returns from the handler, and \mthind{Exception}{return:} passes along a value.
     This is the implicit default behavior of every handler block.
@@ -997,7 +997,7 @@ In particular, you should never instantiate, subclass, or handle the abstract ba
 
   \item \ct{Strings} and \ct{Symbols} are \ct{Collections} and therefore support the usual \ct{Collection} methods.
 
-  \item Raise errors using \ct{Object>>>error:} or \ct{Exception>>>signal:} and handle them using \ct{BlockClosure>>>on:do:}.
+  \item Signal errors using \ct{Object>>>error:} or \ct{Exception>>>signal:} and handle them using \ct{BlockClosure>>>on:do:}.
 
   \item You can return, resume, pass, or retry exceptions.
 
