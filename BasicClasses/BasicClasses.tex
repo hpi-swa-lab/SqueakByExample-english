@@ -126,7 +126,7 @@ $a         --> $a
 
 Note that some objects, such as arrays, are self-evaluating or not depending on the objects they contain.
 For example, an array of booleans is self-evaluating whereas an array of persons is not.
-The following example shows that a \subind{Array}{dynamic} array is self-evaluating only if its elements are:
+The following example shows that an array is self-evaluating only if its elements are:
 \begin{code}{@TEST}
 {10 @ 10 . 100 @ 100}          --> {10@10 . 100@100}
 {Browser new . 100 @ 100} --> {a Browser . 100@100}
@@ -416,7 +416,7 @@ Although both are useful for debugging, they each serve a very different intent.
 
 This protocol contains several methods useful for signaling run-time errors.
 
-Sending \lct{self deprecated: \emph{anExplanationString}} signals that the current method should no longer be used, if deprecation has been turned on in the \protind{debug} protocol of the \ind{preference browser}.
+Sending \lct{self deprecated: \emph{anExplanationString}} signals that the current method should no longer be used, if deprecation warnings have been turned on in the ``Debug''category of the \ind{preference browser}.
 The \ct{String} argument should offer an alternative.
 \cmindex{Object}{deprecated:}
 \index{deprecation}
