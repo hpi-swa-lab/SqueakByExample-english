@@ -356,7 +356,7 @@ Object subclass: #SBEWebServer
 	category: 'Web'
 \end{classdef}
 
-Then, clicking on the \button{class} button, we add the instance variable \ct{uniqueInstance} to the \subind{system browser}{class side}.
+Then, we click on the \button{class} button to switch to the \subind{system browser}{class side} and add the instance variable \ct{uniqueInstance} there.
 
 \begin{classdef}[sbewebserver]{The class side of the singleton class.}
 SBEWebServer class
@@ -807,14 +807,14 @@ Because this is a \super send, the lookup now starts in the superclass of the cl
 We then immediately find and evaluate \ct{Morph>>>fullPrintOn:}.
 
 Note that the \super lookup did not start in the superclass of the receiver.
-This would have caused lookup to start from \ct{BorderedMorph}, resulting in an infinite loop!
+This would have caused the lookup to start from \ct{BorderedMorph}, resulting in an infinite loop!
 
 \important{A \super send triggers a \emph{static} method lookup starting in the superclass of the class of the method performing the \super send.}
 
 If you think carefully about \super sends and \figref{initStringLookup}, you will realize that \super bindings are static: all that matters is the class in which the text of the \super send is found.
 By contrast, the meaning of \self is dynamic:
 It always represents the receiver of the currently executing message.
-This means that \emph{all} messages sent to \self are looked-up by starting in the receiver's class.
+This means that \emph{all} messages sent to \self are looked up by starting in the receiver's class.
 
 %---------------------------------------------------------
 \subsection{Message not understood}
@@ -824,7 +824,7 @@ What happens if the method we are looking for is not found?
 
 Suppose we send the message \ct{foo} to our ellipse.
 First, the normal method lookup would go through the inheritance chain all the way up to \clsind{Object} (or rather \clsind{ProtoObject}) looking for this method.
-When this method is not found, the \ind{virtual machine} will cause the object to send \ct{self doesNotUnderstand: #foo}.
+When this method is not found, the \ind{virtual machine} will notify the object of the failure by causing to send \ct{self doesNotUnderstand: #foo}.
 (See \figref{fooNotFound}.)
 
 \begin{ExecuteSmalltalkScript}
