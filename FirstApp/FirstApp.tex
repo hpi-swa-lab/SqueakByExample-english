@@ -748,8 +748,6 @@ By default, a method returns \ct{self}, which in the case of \ct{newCellAt:at:} 
 \numFiletreeMethodInput[newCellAt:at:nobug]{Fixing the bug.}{ListingSources/SBE-Quinto.package/SBEGame.class/instance/newCellAt.at..st}
 \cmindex{SBEGame}{newCellAt:at:}
 
-\index{^@{$\uparrow$}|see{return}}
-
 Often, you can fix the code directly in the debugger window and click \menu{Proceed} to continue running the application.
 In our case, because the bug was in the initialization of an object, rather than in the method that failed, the easiest thing to do is to close the debugger window, destroy the running instance of the game (with the \subind{Morphic}{halo}), and create a new one.
 
