@@ -511,8 +511,9 @@ Of course, numbers are implemented efficiently in the virtual machine, but the \
 
 \begin{figure}[ht]
 \centerline {\includegraphics[width=8cm]{NumberHierarchy}}
-\caption{The Number Hierarchy.\label{fig:numbers}}
+\caption{The number hierarchy (excerpt).\label{fig:numbers}}
 \end{figure}
+% TODO: ct: insert ScaledDecimal under number (right to Integer)
 
 Numbers are found in the \scatind{Kernel-Numbers} category.
 The abstract root of this hierarchy is \clsind{Magnitude}, which represents all kinds of classes supporting comparison operators.
@@ -523,7 +524,7 @@ For the most part, users do not need to be aware of the difference between the t
 %-----------------------------------------------------------------
 \subsection{Magnitude}
 
-\clsindmain{Magnitude} is the parent not only of the \clsind{Number} classes, but also of other classes supporting comparison operations, such as \clsind{Character}, \clsind{Duration} and \clsind{Timespan}.
+\clsindmain{Magnitude} is the parent not only of the \clsind{Number} classes, but also of other classes supporting comparison operations, such as \clsind{Character}, \clsind{Duration}, and \clsind{Timespan}.
 (\clsind{Complex} numbers are not comparable, and so do not inherit from \clsind{Number} nor from \clsind{Magnitude}.)
 
 The methods \cmind{Magnitude}{<} and \cmind{Magnitude}{=} are abstract.
@@ -563,19 +564,24 @@ Unsurprisingly, \ct{Number} overrides \lct{is\-Num\-ber}.
 More interesting, \mthind{Number}{isInfinite} is defined to return \ct{false}.
 
 \emph{Truncation} methods include \mthind{Number}{floor}, \mthind{Number}{ceiling}, \mthind{Number}{integerPart}, \mthind{Number}{fractionPart}, and so on.
+\emph{Rounding} methods include \mthind{Number}{rounded}, \mthind{Number}{roundTo:}, \mthind{Number}{roundUpTo:}, and so on.
 
 \begin{code}{@TEST}
 1 + 2.5     --> 3.5             "Addition of two numbers"
 10 - 8.5   --> 1.5              "Subtraction of two numbers"
 3.4 * 5      --> 17.0           "Multiplication of two numbers"
 8 / 2         --> 4                 "Division of two numbers"
-2 ** 3         --> 8                 "Exponentiation of a number"
+2 ** 3       --> 8                  "Exponentiation of a number"
 12 = 11    --> false           "Equality between two numbers"
 12 ~= 11 --> true            "Test if two numbers are different"
 12 > 9      --> true            "Greater than"
 12 >= 10  --> true            "Greater or equal  than"
 12 < 10    --> false           "Smaller than"
-100 @ 10   --> 100@10    "Point creation"
+100 @ 10 --> 100@10    "Point creation"
+
+2.718 truncated       -->   2         "Truncate to integer"
+2.718 rounded        -->   3         "Round to integer"
+2.718 roundTo: 0.01 -->  2.72   "Round to a given precision"
 \end{code}
 \on{Should check how tabbing works in the listings package ...}
 
@@ -594,6 +600,7 @@ This is an excellent example of automatic coercion and exact handling of a numbe
 \subsection{Float}
 
 \clsindmain{Float} implements the abstract \ct{Number} methods for floating point numbers.
+\index{floating point number}
 
 More interestingly, \ct{Float class} (\ie the class-side of \ct{Float}) provides methods to return the following \emph{constants}: \mthind{Float class}{e}, \mthind{Float class}{infinity}, \mthind{Float class}{nan}, and \mthind{Float class}{pi}.
 
@@ -649,6 +656,31 @@ We have already seen a similar example in \charef{syntax}:
 n := 2.
 3 timesRepeat: [n := n * n].
 n --> 256
+\end{code}
+
+%-----------------------------------------------------------------
+\subsection{ScaledDecimal}
+
+\clsindmain{ScaledDecimal} represents a decimal number with a fixed number of digits after the decimal point.
+\index{scaled decimal}
+Other than floats, they do not suffer from rounding errors and can represent numbers of arbitrary size; however, they also take up more space and time to calculate.
+
+You can create a literal scaled decimal by putting the letter \ct{s} at the end of a literal number, followed by an integer that specifies the number of digits after the decimal point.
+If you omit the scale after the \ct{s}, the number of visible digits will be used:
+
+\begin{code}{@TEST}
+2.5    --> 2.5         "a Float"
+2.5s1 --> 2.5s1     "a ScaledDecimal"
+2.5s2 --> 2.50s2   "same value, but with a higher precision"
+2.5s0 --> 2s0        "same value, but with a lower precision"
+2.5s  --> 2.5s1      "same value, but with automatic precision"
+2s2 --> 2.00s2      "a ScaledDecimal without a decimal point"
+\end{code}
+
+You can also create a \ct{ScaledDecimal} from another number by sending it the message \mthind{Number}{asScaledDecimal:}, indicating the number of digits after the decimal point:
+
+\begin{code}{@TEST}
+(1.342 asScaledDecimal: 2) --> 1.34s2
 \end{code}
 
 %=================================================================
