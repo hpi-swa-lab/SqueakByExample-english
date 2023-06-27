@@ -152,9 +152,9 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 \item[Characters.]
 	A dollar sign introduces a literal \subind{literal}{character}: \ct{$a}\ignoredollar$ is the literal for `a'.
 	Instances of non-printing characters can be obtained by sending appropriately named messages to the \clsind{Character} class, such as \ct{Character space} \cmindex{Character class}{space} and \ct{Character tab}\cmindex{Character class}{tab}.
+	\seeindex{\textdollar@{\textsf{\$}}}{literal, character}
 	\clsindexmain{Character}
-
-Nevertheless, you can also write any non-printing character verbatim after the dollar sign, but this is often hard to read:
+	Nevertheless, you can also write any non-printing character verbatim after the dollar sign, but this is often hard to read:
 
 	\begin{code}{@TEST}
 	$  = Character space --> true
@@ -165,6 +165,7 @@ Nevertheless, you can also write any non-printing character verbatim after the d
 \item[Strings.]
 	Single quotes are used to define a literal \subind{literal}{string}.
 	If you want a string with a quote inside, just double the quote, as in \ct{'G''day'}.
+	\seeindex{\textquotesingle{} \textquotesingle@{\textsf{\textquotesingle{} \textquotesingle}}}{literal, string}
 	\clsindexmain{String}
 
 \item[Symbols] are like strings in that they contain a sequence of characters.
@@ -197,6 +198,7 @@ Nevertheless, you can also write any non-printing character verbatim after the d
 \item[Comments] are enclosed in double quotes.
 	\ct{"hello"} is a \ind{comment}, not a string, and is ignored by the \sq compiler.
 	Comments may span multiple lines.
+	\seeindex{"" ""@{\textsf{"" ""}}}{comment}
 
 \item[Temporary variable declaration.]
 	Vertical bars \ct{| |} enclose the \subind{variable}{declaration} of one or more temporary variables in a method (and also in a block).
@@ -211,7 +213,7 @@ Nevertheless, you can also write any non-printing character verbatim after the d
 	So, \ct{x := 1} is the same as \ct{x _ 1} or \ct{x UNDERSCORE 1}.
 	You should use \ct{:=} since the other representations have been deprecated since Squeak 3.9.
 	\index{assignment}
-	\seeindex{:=@{\textsf{:=}}}{assignment}
+	\seeindex{:=@{$:=$}}{assignment}
 	\seeindex{\_@{\textsf{\_}}}{assignment}
 	\seeindex{<-@{$\leftarrow$}}{assignment}
 
@@ -228,6 +230,7 @@ Nevertheless, you can also write any non-printing character verbatim after the d
 	Primitives denote an invocation of a \ind{virtual machine} \ind{primitive.}
 	For instance, \ct{<primitive: 1>} is the VM primitive for \cmind{SmallInteger}{+}.
 	Any code following the primitive is executed only if the primitive fails.
+	\seeindex{< >}{\textsf{< >}}{pragma}
 
 \item[Unary messages] consist of a single word (such as \ct{factorial}) sent to a receiver (like the number \ct{3}).
 	\index{message!unary}
@@ -248,6 +251,8 @@ Nevertheless, you can also write any non-printing character verbatim after the d
 \item[Method return.]
 	\ct{^} is used to \emphind{return} a value from a method.
 	\md{\ct{^} always returns from the method, even if used in a block, it returns from the enclosing method.}
+	\index{^@{$\uparrow$}|see{return}}
+	\seeindex{^@{\textsf{\textasciicircum}}}{return}
 
 \item[Sequences of statements.]
 	A period or full-stop (\ct{.}) is the \emph{statement} \emphsubind{statement}{separator}.
