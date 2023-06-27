@@ -824,7 +824,7 @@ What happens if the method we are looking for is not found?
 
 Suppose we send the message \ct{foo} to our ellipse.
 First, the normal method lookup would go through the inheritance chain all the way up to \clsind{Object} (or rather \clsind{ProtoObject}) looking for this method.
-When this method is not found, the \ind{virtual machine} will notify the object of the failure by causing to send \ct{self doesNotUnderstand: #foo}.
+When this method is not found, the \ind{virtual machine} will notify the object of the failure by causing it to send \ct{self doesNotUnderstand: #foo}.
 (See \figref{fooNotFound}.)
 
 \begin{ExecuteSmalltalkScript}
