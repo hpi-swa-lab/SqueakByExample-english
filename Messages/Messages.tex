@@ -50,7 +50,6 @@ We discuss the rules in detail in \secref{threeKindsOfMessages}.
 
 As most computation in \st is done by message passing, correctly identifying messages is crucial.
 The following terminology will help us:
-
 \begin{itemize}
   \item A message is composed of the message \emphsubind{message}{selector} and the optional message arguments.
   \item A message is sent to a \emphsubind{message}{receiver}.
@@ -228,7 +227,6 @@ nums --> #(6 2 3 4 5)
 %=============================================================
 \section{Message composition}
 The three kinds of messages each have different precedence, which allows them to be composed in an elegant way.
-
 \begin{enumerate}
 \item Unary messages are always sent first, then binary messages and finally keyword messages.
 \item Messages in \ind{parentheses} are sent prior to any kind of message.

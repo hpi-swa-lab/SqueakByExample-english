@@ -444,7 +444,7 @@ Finally, \squeak will complain about the message \ct{newCellAt:at:} sent on the 
 If you now look at the class definition once again (which you can do by clicking on the \button{instance} button), you will see that the browser has modified it to include the instance variable \ct{cells}.
 
 Let's look at our \ct{initialize} method.
-The line \ct{|height overallBorderWidth sampleCell width|}  declares 4 temporary variables.
+We declare 4 temporary variables with the line \ct{|height overallBorderWidth sampleCell width|}.
 They are called temporary variables because their scope and lifetime are limited to this method.
 Temporary variables with explanatory names are helpful in making code more readable.
 Smalltalk has no special syntax to distinguish constants and variables, and in fact all four of these ``variables'' are really constants.
