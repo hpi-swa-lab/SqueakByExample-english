@@ -79,6 +79,7 @@ Expressions are composed of the following building blocks:
 		\lct{2r101}				&	binary integer \\
 		\lct{1.5}					&	floating point number \\
 		\lct{2.4e7}				&	exponential notation \\
+		\lct{1.79s2}			&	scaled decimal \\
 		\lct{\$a}					&	the character `a' \\
 		\lct{'Hello'}				&	the string ``Hello'' \\
 		\lct{\#Hello}				&	the symbol \lct{\#Hello} \\
@@ -129,16 +130,31 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 	In addition to ordinary decimal integers like \ct{42}, \sq also provides a \ind{radix notation}.
 	\ct{2r101} is \ct{101} in radix 2 (\ie binary), which is equal to decimal 5.
 	\ct{16rFf} is \ct{FF} in radix 16 (\ie hexadecimal), which is equal to decimal 255.
+	\clsindexmain{Integer}
 	\index{literal}
 	\index{literal!number}
 
-\item[Floating point numbers] can be specified with their base-ten \ind{exponent}: \mbox{\ct{2.4e7}} is $2.4\times 10^7$.
+\item[Floating point numbers.] can be specified with their base-ten \ind{exponent}: \mbox{\ct{2.4e7}} is $2.4\times 10^7$.
+	Floats also support radix notation, but the exponent is always in base ten: \ct{2r0.1e2} is $0.5\times 10^{2}$, which is equal to $2$.
 	\index{floating point number}
+	\clsindexmain{Float}
+
+\item[Scaled decimals.] are fixed-point numbers with a fixed number of digits after the decimal point.
+	They support unbounded precision, but are slower than floating point numbers.
+	For example, \ct{1.79s2} is equal to \ct{179/100}.
+	You can omit the scale, in which case it is taken from the number of digits specified: \ct{1.99s} is equivalent to \ct{1.99s2} and \ct{1s2} is equivalent to \ct{1.00s2}.
+	%Like integers and floats, scaled decimals can also be provided in radix notation, but the scale is always in base ten: \ct{2r0.101s2} is equivalent to ???
+	%TODO: ct: nope, we cannot bring that, see open discussion on https://lists.squeakfoundation.org/archives/list/squeak-dev@lists.squeakfoundation.org/thread/EIAUU63CQBA5LRWK5XOSRABRTHTU36LK/"
+	\index{scaled decimal}
+	\index{literal!number}
+	\clsindexmain{ScaledDecimal}
 
 \item[Characters.]
 	A dollar sign introduces a literal \subind{literal}{character}: \ct{$a}\ignoredollar$ is the literal for `a'.
 	Instances of non-printing characters can be obtained by sending appropriately named messages to the \clsind{Character} class, such as \ct{Character space} \cmindex{Character class}{space} and \ct{Character tab}\cmindex{Character class}{tab}.
-	Nevertheless, you can also write any non-printing character verbatim after the dollar sign, but this is often hard to read:
+	\clsindexmain{Character}
+
+Nevertheless, you can also write any non-printing character verbatim after the dollar sign, but this is often hard to read:
 
 	\begin{code}{@TEST}
 	$  = Character space --> true
@@ -149,12 +165,14 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 \item[Strings.]
 	Single quotes are used to define a literal \subind{literal}{string}.
 	If you want a string with a quote inside, just double the quote, as in \ct{'G''day'}.
+	\clsindexmain{String}
 
-\item[Symbols] are like strings in that they contain a sequence of characters.
+\item[Symbols.] are like strings in that they contain a sequence of characters.
 	However, unlike a string, a literal \subind{literal}{symbol} is guaranteed to be globally unique.
 	There is only one Symbol object \ct{#Hello} but there may be multiple String objects with the value \ct{'Hello'}.
 	Amongst others, symbols are used for referencing messages by their \subind{message}{selector}.
 	\seeindex{\#@{\textsf{\#}}}{literal symbol}
+	\clsindexmain{Symbol}
 
 \item[Run-time arrays.]
 	Curly braces \ct|{ }| create an array dynamically at run-time. \index{Array, brace construct}
@@ -163,7 +181,7 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 	(The curly-brace notation is peculiar to the \sq dialect of \st!
 	In other \st{}s you must build up dynamic arrays explicitly.)
 
-\item[Array literals] are defined by \ct{#( )}, surrounding space-separated literals.
+\item[Array literals.] are defined by \ct{#( )}, surrounding space-separated literals.
 	Everything within the parentheses must be a compile-time constant.
 	These arrays are created at compile-time of the method.
 	For example, \ct{#(27 #(true false) abc)} is a \subind{Array}{literal} of three elements: the integer \ct{27}, the literal array containing the two booleans, and the symbol \ct{#abc}.
@@ -171,12 +189,12 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 	That is why these arrays are often used to represent constant values and avoid repeated array instantiations.
 	\seeindex{literal!array}{Array, literal}
 
-\item[Byte arrays] are defined by \ct{#[ ]}, surrounding integers between 0 and 255.
+\item[Byte arrays.] are defined by \ct{#[ ]}, surrounding integers between 0 and 255.
 	This creates an instance of \clsind{ByteArray} which can be used to work with binary data.
 	Just as for \ct{#( )}, byte arrays that are defined using \ct{#[ ]} are static literals.
 	\subindex{ByteArray}{literal}
 
-\item[Comments] are enclosed in double quotes.
+\item[Comments.] are enclosed in double quotes.
 	\ct{"hello"} is a \ind{comment}, not a string, and is ignored by the \sq compiler.
 	Comments may span multiple lines.
 
@@ -211,16 +229,16 @@ We can see examples of the various syntactic elements in \tabref{syntax}.
 	For instance, \ct{<primitive: 1>} is the VM primitive for \cmind{SmallInteger}{+}.
 	Any code following the primitive is executed only if the primitive fails.
 
-\item[Unary messages] consist of a single word (such as \ct{factorial}) sent to a receiver (like the number \ct{3}).
+\item[Unary messages.] consist of a single word (such as \ct{factorial}) sent to a receiver (like the number \ct{3}).
 	\index{message!unary}
 	\seeindex{unary message}{message, unary}
 
-\item[Binary messages] are operators (like \ct{+}) sent to a receiver and taking a single argument.
+\item[Binary messages.] are operators (like \ct{+}) sent to a receiver and taking a single argument.
 	In \ct{3 + 4}, the receiver is \ct{3} and the argument is \ct{4}.
 	\index{message!binary}
 	\seeindex{binary message}{message, binary}
 
-\item[Keyword messages] consist of multiple keywords (like \ct{raisedTo:modulo:}), each ending with a colon and taking a single argument.
+\item[Keyword messages.] consist of multiple keywords (like \ct{raisedTo:modulo:}), each ending with a colon and taking a single argument.
 	In the expression \ct{2 raisedTo: 6 modulo: 10}, the \emph{message selector} \ct{raisedTo:modulo:} takes the two arguments \ct{6} and \ct{10}, one following each colon.
 	We send the message to the receiver \ct{2}.
 	\subindex{message}{selector}
