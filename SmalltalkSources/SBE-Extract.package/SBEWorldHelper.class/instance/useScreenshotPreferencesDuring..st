@@ -10,10 +10,10 @@ useScreenshotPreferencesDuring: aBlock
 			#menuAppearance3d -> false.
 			#(DialogWindow >> roundedDialogCorners) -> true.
 			#(MenuMorph >> roundedMenuCorners) -> true.
-			#(Model >> #useColorfulWindows) -> true.
+			#(Model >> sbeBasicUseColorfulWindows) -> true.
 			#(PluggableButtonMorph >> roundedButtonCorners) -> true.
 			#(ScrollBar >> roundedScrollBarLook) -> true.
-			#(SystemWindow >> roundedWindowCorners) -> true.
+			#(SystemWindow >> sbeBasicRoundedWindowCorners) -> true.
 			#(Workspace >> #shouldStyle) -> true }
 				collect: [:setting | setting key join asSymbol -> setting value])
 		during: aBlock
