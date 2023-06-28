@@ -948,12 +948,28 @@ SBEScreenshotRecorder writeTo: './figures/testRunnerOnStringTest.png' frame: #mo
 ]
 \end{ExecuteSmalltalkScript}
 
-\begin{figure}[ht]
+\begin{figure}[htb]
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{testRunnerOnStringTest}}}
 	{\centerline {\includegraphics[scale=0.5]{testRunnerOnStringTest}}}
 \caption{Running the String tests.
 \label{fig:testRunnerTestShout}}
+\end{figure}
+
+\begin{ExecuteSmalltalkScript}
+	SBEScreenshotRecorder writeTo: './figures/Predebugger.png' frame: #morphs building: [:helper |
+			helper restoreMethods: ((String lookupSelector: #shout) ifNotNil: [{String>>#shout}] ifNil: [#()]) after: [
+				String removeSelector: #shout.
+				helper runModal: [StringTest new testShout].
+			]
+	]
+\end{ExecuteSmalltalkScript}
+\begin{figure}[htb]
+	\ifluluelse
+		{\centerline {\includegraphics[width=0.75\textwidth]{Predebugger}}}
+		{\centerline {\includegraphics[scale=0.7]{Predebugger}}}
+	\caption{The (pre-)debugger.}
+	\label{fig:quicktour-predebugger}
 \end{figure}
 
 You should see a message like that shown in \figref{testRunnerTestShout}, which indicates that there was an error in running the tests.
@@ -962,22 +978,6 @@ The list of tests that gave rise to errors is shown in the bottom right pane; as
 If you click on that line of text, the erroneous test will run again, this time in such a way that you see the error happen: ``\ct{MessageNotUnderstood: ByteString>>>shout}''.
 \seeindex{\ct{>>}}{Behavior, \ct{>>}}
 \cmindex{Behavior}{>>}
-
-\begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder writeTo: './figures/Predebugger.png' frame: #morphs building: [:helper |
-		helper restoreMethods: ((String lookupSelector: #shout) ifNotNil: [{String>>#shout}] ifNil: [#()]) after: [
-			String removeSelector: #shout.
-			helper runModal: [StringTest new testShout].
-		]
-]
-\end{ExecuteSmalltalkScript}
-\begin{figure}[hb]
-	\ifluluelse
-		{\centerline {\includegraphics[width=0.75\textwidth]{Predebugger}}}
-		{\centerline {\includegraphics[scale=0.7]{Predebugger}}}
-	\caption{The (pre-)debugger.}
-	\label{fig:quicktour-predebugger}
-\end{figure}
 
 The window that opens with the error message is the \st debugger (see \figref{quicktour-predebugger}).
 We will look at the \ind{debugger} and how to use it in \charef{env}.
