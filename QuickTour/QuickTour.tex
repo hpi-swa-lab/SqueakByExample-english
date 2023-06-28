@@ -948,7 +948,7 @@ SBEScreenshotRecorder writeTo: './figures/testRunnerOnStringTest.png' frame: #mo
 ]
 \end{ExecuteSmalltalkScript}
 
-\begin{figure}[hbt]
+\begin{figure}[ht]
 \ifluluelse
 	{\centerline {\includegraphics[width=\textwidth]{testRunnerOnStringTest}}}
 	{\centerline {\includegraphics[scale=0.5]{testRunnerOnStringTest}}}
@@ -971,15 +971,15 @@ SBEScreenshotRecorder writeTo: './figures/Predebugger.png' frame: #morphs buildi
 		]
 ]
 \end{ExecuteSmalltalkScript}
-\begin{figure}[hbt]
+\begin{figure}[hb]
 	\ifluluelse
 		{\centerline {\includegraphics[width=0.75\textwidth]{Predebugger}}}
 		{\centerline {\includegraphics[scale=0.7]{Predebugger}}}
 	\caption{The (pre-)debugger.}
-	\label{fig:predebugger}
+	\label{fig:quicktour-predebugger}
 \end{figure}
 
-The window that opens with the error message is the \st debugger (see \figref{predebugger}).
+The window that opens with the error message is the \st debugger (see \figref{quicktour-predebugger}).
 We will look at the \ind{debugger} and how to use it in \charef{env}.
 
 The error is, of course, exactly what we expected:
@@ -1008,22 +1008,6 @@ So do that right now!
 \footnotetext{Actually, you might not get a green bar since some images contain tests for bugs that still need to be fixed.
 Don't worry about this.
 \Squeak is constantly evolving.}
-
-\begin{ExecuteSmalltalkScript}
-SBEScreenshotRecorder writeTo: './figures/String-Shout.png' frame: #morphs building: [:helper |
-	helper restoreMethods: {String >> #shout} after: [
-		String organization classify: #shout under: 'converting' logged: true.
-		ToolSet browse: String selector: #shout.
-		helper takeScreenshot]
-]
-\end{ExecuteSmalltalkScript}
-\begin{figure}[hbt]
-\ifluluelse
-	{\centerline{\includegraphics[width=\textwidth]{String-Shout}}}
-	{\centerline{\includegraphics[scale=0.7]{String-Shout}}}
-\caption{The \ct{shout} method defined on class \ct{String}.
-\label{fig:String-shout}}
-\end{figure}
 
 %=================================================================
 \section{Chapter summary}
