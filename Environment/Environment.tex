@@ -808,6 +808,7 @@ Thus, we can evaluate code in the code pane.
 			keyStroke: textField key: $a modifiers: #(cmd);
 			type: 'fullListSize\	"Number of items in the unfiltered list."\\	^ self getFullList size' withCRs into: textField;
 			keyStroke: textField key: $p modifiers: #(cmd).
+   		helper takeScreenshotOf: helper foregroundWindow.
 	]
 \end{ExecuteSmalltalkScript}
 \begin{figure}[tbp]
