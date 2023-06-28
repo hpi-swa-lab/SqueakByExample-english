@@ -601,7 +601,7 @@ colors associations --> {#red->Color red . #yellow->Color yellow}
 \paragraph{IdentityDictionary.}
 While a dictionary uses the result of the messages \ct{=} and \ct{hash} to determine if two keys are the same, the class \clsindmain{IdentityDictionary} uses the identity (message \mthind{ProtoObject}{==}) of the key instead of its values, \ie it considers two keys to be equal \emph{only} if they are the same object.
 
-If your dictionary only uses \clsindplural{Symbol} as keys, you can also use an \ct{IdentityDictionary} since every symbol is guaranteed to be globally unique.
+If your dictionary only uses \clsindplural{Symbol} as keys, you can also instead use an \ct{IdentityDictionary} since every symbol is guaranteed to be globally unique.
 If, on the other hand, your keys are \ct{String}s, it is better to use a plain \ct{Dictionary}, or you may get into trouble:
 
 \begin{code}{@TEST | a b trouble |}

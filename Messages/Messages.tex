@@ -46,9 +46,9 @@ There are just three kinds of messages: \emphsubind{message}{unary}, \emphsubind
 Unary messages are always sent first, then binary messages and finally keyword ones.
 As in most languages, \ind{parentheses} can be used to change the order of evaluation.
 These rules make \st code as easy to read as possible.
-We discuss the rules in detail in \secref{threeKindsOfMessages}.
+We discuss the rules for evaluating messages in detail in \secref{threeKindsOfMessages}.
 
-As most computation in \st is done by message passing, correctly identifying messages is crucial.
+As most computation in \st is done by message passing, correctly identifying messages and their evaluation order is crucial.
 The following terminology will help us:
 \begin{itemize}
   \item A message is composed of the message \emphsubind{message}{selector} and the optional message arguments.

@@ -281,9 +281,9 @@ While viewing any one of these methods, try browsing the senders of the \ct{draw
 We found 72 methods that send this message (the number can vary depending on your image version).
 You can also bring up an implementors browser at any time by selecting a message (including the arguments if it is a keyword message) and typing \short{m}.
 
-The \menu{senders} button lists \emph{all} methods that send the chosen message: not all of these sends will necessarily result in the execution of the method you are currently looking at.
-Indeed, much of the power of object-oriented programming comes from the fact that every message send is potentially \emph{polymorphic}, that is, it can work equally well on objects of any class.
-Sometimes it is easy to figure out which method will be executed as the result of a particular message send, and sometimes it is impossible; the senders and implementors tools don't try.
+The \menu{senders} button lists \emph{all} methods that send the chosen message: not all of these sends will result in the execution of the method you are looking at.
+Indeed, much of the power of object-oriented programming comes from the fact that message sends are \emph{polymorphic}, that is, they can work equally well on objects of any class.
+Sometimes it is easy to figure out which method will be executed as the result of a message send, and sometimes it is impossible; the senders and implementors tools don't try.
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/CanvasDraw.png' frame: #morphs building: [:helper |
@@ -492,11 +492,11 @@ Focussing two browsers on the same method and selecting \menu{byteCodes} in one 
 \subsection{The browser menus}
 
 Many additional functions are available from the browser's yellow button menu.
-Since yellow button menus are context-sensitive,  each pane in the browser has its own menu.
+Since yellow button menus are context-sensitive, each pane in the browser has its own menu.
 Even if the labels on the menu items are the same, their \emph{meaning} depends on the context.
 For example, the category pane, the class pane, the protocol pane, and the messages pane all have a \menu{file out} menu item.
 However, they do different things:
-The category pane's \menu{file out} menu files out the whole category, the class pane's \menu{file out} menu files-out the whole class, the protocol pane's \menu{file out} menu files out the whole protocol, and the method pane's \menu{file out} menu files-out just the displayed method.
+In the category pane, it files out the whole category, in the class pane it files out the whole class, in the protocol pane it files out the whole protocol, and in the method pane it files out just the displayed method.
 Although this may seem obvious, it can be a source of confusion for beginners.
 \index{file!filing in}
 \index{file!filing out}
