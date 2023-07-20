@@ -4,9 +4,9 @@
 [![Latest release](https://img.shields.io/github/v/release/hpi-swa-lab/SqueakByExample-english)](https://github.com/hpi-swa-lab/SqueakByExample-english/releases/latest)
 [![Latest preprint](https://img.shields.io/github/v/release/hpi-swa-lab/SqueakByExample-english?include_prereleases&label=preprint)](https://github.com/hpi-swa-lab/SqueakByExample-english/releases)
 
-This is the LaTeX source repository of the _Squeak by Example_ book.
+Squeak is a modern, open-source development environment for the Smalltalk programming language promoting a vision of an environment where everything is an object and anything can at run-time.
 
-See the issues in the [Github repository](https://github.com/hpi-swa-lab/SqueakByExample-english) for the status of tasks for SBE.
+_Squeak by Example_, intended for both students and developers, will guide you through the Smalltalk language and the Squeak environment by means of a series of examples and exercises. The book helps you getting started with an initial tour of the environment before introducing the details of the language, the standard library, the tools, and the Morphic framework.
 
 # Repository structure
 
