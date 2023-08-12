@@ -16,7 +16,7 @@ _Squeak by Example_, intended for both students and developers, will guide you t
 
 | Edition	| PDF	| Printed	|
 | -------	| ---	| -------	|
-| **Squeak by Example 6.0 (latest release)**	| [![PDF - 6.0](https://img.shields.io/badge/PDF-v6.0-red)](https://github.com/hpi-swa-lab/SqueakByExample-english/releases/tag/6.0)	| [![lulu](https://img.shields.io/badge/lulu-v6.0-blue)](https://www.lulu.com/shop/patrick-rein-and-christoph-thiede/squeak-by-example-60/paperback/product-8vr2j2.html)	|
+| **Squeak by Example 6.0 (latest release)**<br>(ISBN: 978-1-4476-2948-1)	| [![PDF - 6.0](https://img.shields.io/badge/PDF-v6.0-red)](https://github.com/hpi-swa-lab/SqueakByExample-english/releases/tag/6.0)	| [![lulu](https://img.shields.io/badge/lulu-v6.0-blue)](https://www.lulu.com/shop/patrick-rein-and-christoph-thiede/squeak-by-example-60/paperback/product-8vr2j2.html)	|
 | Squeak by Example 5.3.1	| [![PDF - 5.3.1](https://img.shields.io/badge/PDF-v5.3.1-red)](https://github.com/hpi-swa-lab/SqueakByExample-english/releases/tag/5.3.1)	| _(not available)_	|
 | Original 2007 edition <br>(Andrew Black, Stéphane Ducasse, et al.)	| [![PDF](https://img.shields.io/badge/PDF-2007-red)](https://inria.hal.science/inria-00441576/document)	| [![lulu](https://img.shields.io/badge/lulu-2007-blue)](https://www.lulu.com/shop/andrew-p-black-and-damien-pollet-and-st%C3%A9phane-ducasse-and-oscar-nierstrasz/squeak-by-example/paperback/product-1mmdg6p.html)	|
 | _Latest prerelease (bleeding edge!)_	| [![PDF](https://img.shields.io/badge/PDF-preprint-orange)](https://github.com/hpi-swa-lab/SqueakByExample-english/releases)	| _(not available)_	|
