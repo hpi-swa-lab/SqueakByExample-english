@@ -21,6 +21,13 @@ _Squeak by Example_, intended for both students and developers, will guide you t
 | Original 2007 edition <br>(Andrew Black, Stéphane Ducasse, et al.)	| [![PDF](https://img.shields.io/badge/PDF-2007-red)](https://inria.hal.science/inria-00441576/document)	| [![lulu](https://img.shields.io/badge/lulu-2007-blue)](https://www.lulu.com/shop/andrew-p-black-and-damien-pollet-and-st%C3%A9phane-ducasse-and-oscar-nierstrasz/squeak-by-example/paperback/product-1mmdg6p.html)	|
 | _Latest prerelease (bleeding edge!)_	| [![PDF](https://img.shields.io/badge/PDF-preprint-orange)](https://github.com/hpi-swa-lab/SqueakByExample-english/releases)	| _(not available)_	|
 
+<a name="other-retailers">
+<details>
+	<summary>Other retailers</summary>
+	<p>Please consider buying the book on lulu if possible as it results in more royalties for the Squeak community.</p>
+	<a href="https://www.amazon.com/-/en/dp/1447629485"><img alt="amazon" src="https://img.shields.io/badge/amazon-v6.0-grey"></a>
+</details>
+
 # Repository structure
 
 The main file is SBE.tex.  Chapters are in subdirectories.
