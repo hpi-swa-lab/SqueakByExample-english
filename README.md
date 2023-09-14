@@ -28,6 +28,23 @@ _Squeak by Example_, intended for both students and developers, will guide you t
 	<a href="https://www.amazon.com/-/en/dp/1447629485"><img alt="amazon" src="https://img.shields.io/badge/amazon-v6.0-grey"></a>
 </details>
 
+### How to cite:
+
+<details>
+<summary>BibTeX</summary>
+<pre><code>@book{thiede2023squeak,
+	author = {Christoph Thiede and Patrick Rein},
+	title = {Squeak by Example},
+	volume = {6.0},
+	year = {2023},
+	numpages = {328},
+	url = {https://www.lulu.com/shop/patrick-rein-and-christoph-thiede/squeak-by-example-60/paperback/product-8vr2j2.html},
+	pdf = {https://github.com/hpi-swa-lab/SqueakByExample-english/releases/download/6.0/SBE-6.0.pdf},
+	publisher = {Lulu},
+	isbn = {9781447629481}
+}</code></pre>
+</details>
+
 # Repository structure
 
 The main file is SBE.tex.  Chapters are in subdirectories.
