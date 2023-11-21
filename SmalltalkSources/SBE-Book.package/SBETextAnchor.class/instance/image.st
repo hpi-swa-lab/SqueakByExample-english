@@ -1,4 +1,4 @@
 accessing
 image
 
-	^ self anchoredMorph
+	^ anchoredMorph

@@ -7,7 +7,7 @@ emitDoThisDuring: aBlock
 	self stream
 		withAttributes: {TextIndent tabs: 1. TextEmphasis italic}
 		do:
-			[self basicEmitImage: self doThisImage.
+			[self emitImage: self doThisImage dyeMode: self doThisImageDyeMode.
 			self stream space.
 			result := aBlock value].
 	self basicVisitLineBreak: aBlock; basicVisitLineBreak: aBlock.

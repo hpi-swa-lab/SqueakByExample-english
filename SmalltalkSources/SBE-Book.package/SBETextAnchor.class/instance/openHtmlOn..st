@@ -7,4 +7,5 @@ openHtmlOn: aHtmlReadWriter
 			base64Encoded.
 	
 	aHtmlReadWriter nextPutAll:
-		('<sbeTextAnchor data="{1}">' format: {data}).
+		('<sbeTextAnchor data="{1}" extent="{2}" dyeMode="{3}">' format:
+			{data. self extent storeString. self dyeMode storeString}).

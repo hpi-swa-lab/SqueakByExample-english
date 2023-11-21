@@ -1,9 +1,18 @@
 {
 	"class" : {
-		 },
+		"themeProperties" : "ct 11/21/2023 19:20" },
 	"instance" : {
-		"=" : "ct 11/20/2023 21:14",
+		"=" : "ct 11/21/2023 18:24",
+		"anchoredMorph" : "ct 11/21/2023 17:57",
+		"applyUserInterfaceTheme" : "ct 11/21/2023 19:12",
 		"closeHtmlOn:" : "ct 11/15/2023 19:36",
-		"hash" : "ct 11/20/2023 21:16",
-		"image" : "ct 11/20/2023 21:14",
-		"openHtmlOn:" : "ct 11/20/2023 21:14" } }
+		"dyeMode" : "ct 11/21/2023 18:11",
+		"dyeMode:" : "ct 11/21/2023 18:11",
+		"emphasizeScanner:" : "ct 11/21/2023 19:11",
+		"extent" : "ct 11/21/2023 18:02",
+		"extent:" : "ct 11/21/2023 18:02",
+		"hash" : "ct 11/21/2023 18:24",
+		"image" : "ct 11/21/2023 17:55",
+		"openHtmlOn:" : "ct 11/21/2023 18:17",
+		"resetCache" : "ct 11/21/2023 19:11",
+		"scaledImage" : "ct 11/21/2023 18:39" } }

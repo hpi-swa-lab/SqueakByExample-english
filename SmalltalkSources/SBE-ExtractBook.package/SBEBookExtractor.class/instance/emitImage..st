@@ -1,11 +1,11 @@
 emitting
 emitImage: aForm
 
-	| scaledForm |
-	scaledForm := figure
-		ifNotNil: [aForm scaledToSize: ((aForm extent / self imageScaleFactor) roundTo: 8)]
-		ifNil: [aForm scaledToHeight: TextStyle defaultFont height].
+	| extent |
+	extent := figure
+		ifNotNil: [(aForm extent / self imageScaleFactor) roundTo: 8]
+		ifNil: [#inline].
 	self stream
-		withAttribute: (SBETextOpenImageAction for: aForm initialExtent: scaledForm extent)
+		withAttribute: (SBETextOpenImageAction for: aForm initialExtent: extent)
 		do:
-			[super emitImage: scaledForm].
+			[self emitImage: aForm extent: extent].

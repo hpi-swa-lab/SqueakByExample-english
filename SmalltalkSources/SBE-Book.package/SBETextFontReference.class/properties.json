@@ -6,12 +6,9 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"extent",
-		"dyeMode",
-		"scaledImage",
-		"knownScanners" ],
-	"name" : "SBETextAnchor",
+		"style" ],
+	"name" : "SBETextFontReference",
 	"pools" : [
 		 ],
-	"super" : "TextAnchor",
+	"super" : "TextFontReference",
 	"type" : "normal" }

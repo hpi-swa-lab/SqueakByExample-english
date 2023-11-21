@@ -6,8 +6,10 @@ basicVisitGraphicsFile: file
 		[ImageReadWriter formFromStream: fileStream]
 			ifError:
 				[('<error reading graphics>' asText
-					addAttribute: TextColor red;
+					addAttribute: (SBETextColor property: #errorColor scope: #TestRunner);
+					addAttribute: TextFontChange font4;
 					asMorph)
-						imageForm]].
+						imageForm
+							magnifyBy: self imageScaleFactor]].
 	
 	self emitImage: image.

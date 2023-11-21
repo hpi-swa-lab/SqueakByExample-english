@@ -1,7 +1,7 @@
 emitting
 emitCodeDuring: aBlock
 
-	^ self stream withAttribute: TextColor blue do:
+	^ self stream withAttribute: (SBETextColor property: #integer scope: #SHTextStylerST80) do:
 		[| oldStream wasVerbatim code |
 		wasVerbatim := verbatim.
 		verbatim := true.

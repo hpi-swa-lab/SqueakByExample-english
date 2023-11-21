@@ -1,0 +1,4 @@
+accessing
+anchoredMorph
+
+	^ self scaledImage

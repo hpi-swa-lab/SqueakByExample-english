@@ -6,12 +6,12 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"extent",
-		"dyeMode",
-		"scaledImage",
+		"property",
+		"scope",
+		"actualColor",
 		"knownScanners" ],
-	"name" : "SBETextAnchor",
+	"name" : "SBETextColor",
 	"pools" : [
 		 ],
-	"super" : "TextAnchor",
+	"super" : "TextAttribute",
 	"type" : "normal" }
