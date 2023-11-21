@@ -13,4 +13,4 @@ openLabel: key in: aHelpBrowser
 	index := topic contents runs findFirst: [:attrs |
 		attrs anySatisfy: [:attr |
 			(attr isKindOf: SBETextLabelAnchor) and: [attr label = key]]].
-	(aHelpBrowser anyTextPaneWithSelector: #topicContents) selectionInterval: (index to: index - 1).
+	(aHelpBrowser anyTextPaneWithSelector: #topicContents) setSelection: (index to: index - 1).
