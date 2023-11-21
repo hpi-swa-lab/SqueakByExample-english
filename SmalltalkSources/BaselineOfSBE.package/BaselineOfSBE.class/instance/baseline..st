@@ -5,7 +5,7 @@ baseline: spec
 		spec baseline: 'FileSystem' with: [spec
 			repository: 'github://squeak-smalltalk/squeak-filesystem:master/src';
 			loads: #('default' 'tests')].
-		spec baseline: 'Sandblocks-TreeSitter' with: [spec
+		spec baseline: 'SBTreeSitter' with: [spec
 			repository: 'github://hpi-swa-lab/sb-tree-sitter:master/packages';
 			loads: 'Sandblocks-TreeSitter'].
 		spec
@@ -13,7 +13,7 @@ baseline: spec
 			package: #'SBE-Environment';
 			package: #'SBE-Extract' with: [spec requires: #('FileSystem')];
 			package: #'SBE-ExtractBook' with: [
-				spec requires: #(#'SBE-Book' 'FileSystem' 'Sandblocks-TreeSitter')];
+				spec requires: #(#'SBE-Book' 'FileSystem' 'SBTreeSitter')];
 			package: #'SBE-Monticello';
 			package: #'SBE-Morphic';
 			package: #'SBE-Quinto';
