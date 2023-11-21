@@ -31,3 +31,8 @@ baseline: spec
 			#'SBE-Streams'
 			#'SBE-Testing'
 			#'SBE-Tests')].
+	
+	spec for: #(#'squeak6.0.x.release') do: [
+		spec package: #'SBE-BookCompatibility-Squeak60'.
+		spec package: #'SBE-Book' with: [
+			spec includes: #'SBE-BookCompatibility-Squeak60']].
