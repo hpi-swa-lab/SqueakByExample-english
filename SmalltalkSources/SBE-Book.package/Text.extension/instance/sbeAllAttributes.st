@@ -1,5 +1,5 @@
 *SBE-Book-emphasis
-semanticAllAttributes
+sbeAllAttributes
 
 	self flag: #moveUpstream.
 	^ OrderedCollection streamContents: [:stream |
