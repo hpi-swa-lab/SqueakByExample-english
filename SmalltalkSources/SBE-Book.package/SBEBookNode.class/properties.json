@@ -1,0 +1,18 @@
+{
+	"category" : "SBE-Book",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"title",
+		"parent",
+		"children",
+		"text",
+		"extraLabels" ],
+	"name" : "SBEBookNode",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

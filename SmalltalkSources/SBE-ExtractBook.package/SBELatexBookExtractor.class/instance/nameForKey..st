@@ -1,0 +1,4 @@
+emitting
+nameForKey: key
+
+	^ key

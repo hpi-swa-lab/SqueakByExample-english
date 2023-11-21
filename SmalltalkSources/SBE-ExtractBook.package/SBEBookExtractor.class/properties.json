@@ -1,0 +1,19 @@
+{
+	"category" : "SBE-ExtractBook",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"book",
+		"squeakVersion",
+		"imageScaleFactor",
+		"nodeStack",
+		"pendingLabels",
+		"figure" ],
+	"name" : "SBEBookExtractor",
+	"pools" : [
+		 ],
+	"super" : "SBELatexBookExtractor",
+	"type" : "normal" }
