@@ -1,4 +1,4 @@
 accessing
 pages
 
-	^ #("introduction" "<- enable for edits" theBook)
+	^ #("introduction" "<- enable for edits" preface theBook)
