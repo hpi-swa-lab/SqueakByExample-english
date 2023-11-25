@@ -5,3 +5,4 @@ initialize
 		
 	self children: OrderedCollection new.
 	extraLabels := OrderedCollection new.
+	hasStarIndex := false.

@@ -1,0 +1,4 @@
+accessing
+index
+
+	^ self shouldNotImplement

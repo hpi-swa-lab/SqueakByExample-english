@@ -10,7 +10,11 @@
 		"parent",
 		"children",
 		"text",
-		"extraLabels" ],
+		"parseNode",
+		"index",
+		"hasStarIndex",
+		"extraLabels",
+		"typeName" ],
 	"name" : "SBEBookNode",
 	"pools" : [
 		 ],

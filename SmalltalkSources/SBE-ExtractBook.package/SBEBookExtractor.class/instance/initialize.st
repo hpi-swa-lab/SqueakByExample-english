@@ -10,3 +10,4 @@ initialize
 	nodeStack push: book.
 	pendingLabels := OrderedCollection new.
 	self imageScaleFactor: self defaultImageScaleFactor.
+	appendix := false.

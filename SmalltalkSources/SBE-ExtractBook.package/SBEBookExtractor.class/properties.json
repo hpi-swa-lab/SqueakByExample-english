@@ -11,7 +11,8 @@
 		"imageScaleFactor",
 		"nodeStack",
 		"pendingLabels",
-		"figure" ],
+		"figure",
+		"appendix" ],
 	"name" : "SBEBookExtractor",
 	"pools" : [
 		 ],

@@ -5,7 +5,10 @@ basicVisitRoot: node
 	result := super basicVisitRoot: node.
 	
 	file = rootFile ifTrue:
-		[oldNode := nodeStack top.
+		[self assert: book parseNode isNil.
+		book parseNode: node.
+		
+		oldNode := nodeStack top.
 		self stream contents withBlanksTrimmed ifNotEmpty: [:text |
 			self assert: oldNode text isNil.
 			oldNode text: text withBlanksTrimmed]].
