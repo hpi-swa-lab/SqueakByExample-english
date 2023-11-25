@@ -3,6 +3,9 @@ basicVisitLineBreak: lineBreak
 
 	verbatim ifTrue: [^ self stream cr].
 	
+	previousLineBreaks ifNil:
+		[previousLineBreaks := 1.
+		^ self].
 	previousLineBreaks = 0
 		ifTrue: [self stream space]
 		ifFalse:

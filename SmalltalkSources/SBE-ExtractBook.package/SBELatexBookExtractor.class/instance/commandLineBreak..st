@@ -14,9 +14,11 @@ commandLineBreak: arguments
 					unit := gen next.
 					self assert: gen peek contents = ']'.
 				
-					self stream cr]
+					self stream cr.
+					previousLineBreaks := nil]
 				ifFalse:
 					[self stream cr.
+					previousLineBreaks := nil.
 					
 					#back.
 					parseStack pop.
