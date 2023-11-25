@@ -146,7 +146,7 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: figures-${{ matrix.smalltalk }}
-          path: */**/*.png
+          path: ./*/**/*.png
       - if: (steps.figures.outcome == 'failure')
         name: Check DEBUG_FIGURES
         run: |
