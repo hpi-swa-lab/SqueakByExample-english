@@ -6,10 +6,16 @@ storeOn: aStream
 	title: {2};
 	addChildren: {3};
 	text: {4};
-	extraLabels: {5};
+	index: {5};
+	hasStarIndex: {6};
+	extraLabels: {7};
+	typeName: {8};
 	yourself)' format:
 		{self class name.
 		self title sbeStoreHtmlString.
 		self children storeString.
 		self text sbeStoreHtmlString.
-		self extraLabels storeString})
+		self index storeString.
+		self hasStarIndex storeString.
+		self extraLabels storeString.
+		self typeName storeString})

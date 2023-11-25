@@ -1,4 +1,4 @@
 accessing
 index: anInteger
 
-	self shouldNotImplement
+	self assert: anInteger isNil.
