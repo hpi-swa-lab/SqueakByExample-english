@@ -30,7 +30,7 @@ commandNumFileTreeMethodInput: arguments
 					[self visit: allArguments second]].
 			self basicVisitLineBreak: nil; basicVisitLineBreak: nil.
 			
-			self emitLabel: (self contentsIn: allArguments first) asString.
+			self emitLabel: 'mth:' , (self contentsIn: allArguments first) asString.
 			
 			listingFile := self tryResolveFile: (self contentsIn: allArguments third) asString.
 			listingSource := listingFile contents copyReplaceAll: String crlf with: String cr.
