@@ -201,6 +201,7 @@ $
 	\seeindex{"" ""@{\textsf{"" ""}}}{comment}
 
 \item[Temporary variable declaration.]
+	\index{temporary variable declaration}
 	Vertical bars \ct{| |} enclose the \subind{variable}{declaration} of one or more temporary variables in a method (and also in a block).
 	\seeindex{$\vert\ \vert$@{\textsf{$\vert\ \vert$}}}{temporary variable declaration}
 	\seeindex{variable declaration}{temporary variable declaration}
@@ -230,7 +231,7 @@ $
 	Primitives denote an invocation of a \ind{virtual machine} \ind{primitive.}
 	For instance, \ct{<primitive: 1>} is the VM primitive for \cmind{SmallInteger}{+}.
 	Any code following the primitive is executed only if the primitive fails.
-	\seeindex{< >}{\textsf{< >}}{pragma}
+	\seeindex{< >@\textsf{< >}}{pragma}
 
 \item[Unary messages] consist of a single word (such as \ct{factorial}) sent to a receiver (like the number \ct{3}).
 	\index{message!unary}
@@ -257,9 +258,9 @@ $
 \item[Sequences of statements.]
 	A period or full-stop (\ct{.}) is the \emph{statement} \emphsubind{statement}{separator}.
 	Putting a period between two expressions turns them into independent statements.
-	\seeindex{full stop}{statement separator}
-	\seeindex{period}{statement separator}
-	\seeindex{\ct{.}}{statement separator}
+	\seeindex{full stop}{statement, separator}
+	\seeindex{period}{statement, separator}
+	\seeindex{\ct{.}}{statement, separator}
 
 \item[Cascades.]
 	Semicolons can be used to send a \emphind{cascade} of messages to a single receiver.
@@ -419,7 +420,7 @@ Blocks provide a mechanism to defer the evaluation of expressions.
 A \ind{block} is essentially an anonymous function.
 A block is evaluated by sending it the message \mthind{BlockClosure}{value}.
 The block answers the value of the last expression in its body unless there is an explicit return (with \ct{^}), in which case it does not answer any value.
-\seeindex{value}{BlockClosure}
+\seeindex{value}{BlockClosure, value}
 
 \begin{code}{@TEST}
 [1 + 2] value --> 3
@@ -589,7 +590,7 @@ memory allocation (\mthind{Behavior}{new}, \mthind{Behavior}{new:}),
 bit manipulation (\mthind{Integer}{bitAnd:}, \mthind{Integer}{bitOr:}, \mthind{Integer}{bitShift:}),
 pointer and integer arithmetic (\ct{+}, \ct{-},  \ct{<},  \ct{>}, \ct{*}, \ct{/ }, \ct{=}, \ct{==}, ...),
 and array access (\mthind{Object}{at:}, \mthind{Object}{at:put:}).
-\seeindex{new@{\ct{new}}}{\ct{Behavior>>>new}}
+\seeindex{new@{\ct{new}}}{Behavior, new}
 
 Primitives are invoked with the syntax \ct{<primitive: aNumber>}.
 A method that invokes such a primitive may also include \st code, which will be evaluated \emph{only} if the primitive fails.
