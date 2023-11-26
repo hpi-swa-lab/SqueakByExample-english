@@ -70,7 +70,7 @@ If we begin to browse the protocols on the instance side of \ct{Object} we start
 %-----------------------------------------------------------------
 \subsection{Printing}
 Every object in Smalltalk can return a printed form of itself.
-You can select any expression in a workspace and select the \menu{print it} menu item:
+You can select any expression in a workspace and select the \menu{print it} menu item: \index{print it}
 This executes the expression and asks the returned object to print itself.
 In fact, this sends the message \ct{printString} to the returned object.
 The method \mthind{Object}{printString}, which is a \ind{template method}, at its core sends the message \mthind{Object}{printOn:} to its receiver.
