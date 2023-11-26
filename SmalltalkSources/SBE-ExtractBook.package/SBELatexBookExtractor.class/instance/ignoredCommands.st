@@ -8,4 +8,5 @@ ignoredCommands
 	'setlist' 'renewlist' 'setlistdepth'
 	'newlength' 'setlength' 'addtolength'
 	'hspace' 'hspace*' 'vspace' 'vspace*'
-	'needlines' 'needspace')
+	'needlines' 'needspace'
+	'bibliography')
