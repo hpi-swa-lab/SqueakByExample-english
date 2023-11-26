@@ -14,7 +14,8 @@
 		"index",
 		"hasStarIndex",
 		"extraLabels",
-		"typeName" ],
+		"typeName",
+		"cachedAnchorLabels" ],
 	"name" : "SBEBookNode",
 	"pools" : [
 		 ],
