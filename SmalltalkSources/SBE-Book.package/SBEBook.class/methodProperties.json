@@ -2,12 +2,14 @@
 	"class" : {
 		 },
 	"instance" : {
+		"bookIndex" : "ct 11/26/2023 18:00",
+		"bookIndex:" : "ct 11/26/2023 18:00",
 		"canonicalHierarchyOrder" : "ct 11/8/2023 22:38",
 		"index" : "ct 11/25/2023 23:09",
 		"index:" : "ct 11/25/2023 23:09",
 		"pdfUrl" : "ct 11/24/2023 18:38",
 		"pdfUrl:" : "ct 11/24/2023 18:38",
 		"pdfUrlFragment" : "ct 11/24/2023 18:30",
-		"storeOn:" : "ct 11/25/2023 23:01",
+		"storeOn:" : "ct 11/26/2023 18:01",
 		"textForHelp" : "ct 11/15/2023 18:02",
 		"type" : "ct 11/25/2023 19:50" } }

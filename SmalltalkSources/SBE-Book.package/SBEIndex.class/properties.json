@@ -6,10 +6,13 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"pdfUrl",
-		"bookIndex" ],
-	"name" : "SBEBook",
+		"key",
+		"label",
+		"entries",
+		"referenceKeys",
+		"forwardReference" ],
+	"name" : "SBEIndex",
 	"pools" : [
 		 ],
-	"super" : "SBEBookNode",
+	"super" : "Object",
 	"type" : "normal" }

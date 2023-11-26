@@ -14,4 +14,8 @@ preprocessedContentsFromFile: aFSReference
 	self flag: #workaround. "Smalltalk code can contain any strings that look like LaTeX ..."
 	contents := contents copyWithRegex: '\\begin\{ExecuteSmalltalkScript\}(?:(?!\\end\{ExecuteSmalltalkScript\}).)*\\end\{ExecuteSmalltalkScript\}' matchesReplacedWith: ''.
 	
+	self flag: #workaround. "current grammar gets in trouble with @ after command name"
+	contents := contents copyWithRegex: (matcher := '(\\seeindex[^\r\n]*\\text\w+)@(?=\{)' asRegex) matchesTranslatedUsing: [:match |
+		matcher subexpression: 2].
+	
 	^ contents

@@ -13,3 +13,6 @@ initialize
 	verbatim := false.
 	listModeStack := Stack new.
 	enumerateStack := Stack new.
+	index := SBEIndex new
+		key: #index;
+		yourself.

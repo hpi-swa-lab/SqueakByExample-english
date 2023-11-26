@@ -5,6 +5,7 @@ initialize
 	
 	book := SBEBook new
 		title: 'Squeak by Example';
+		bookIndex: index;
 		yourself.
 	nodeStack := Stack new.
 	nodeStack push: book.

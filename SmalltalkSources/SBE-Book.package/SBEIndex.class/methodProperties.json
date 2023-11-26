@@ -1,0 +1,24 @@
+{
+	"class" : {
+		"key:label:" : "ct 11/26/2023 03:28" },
+	"instance" : {
+		"addReferenceKey:" : "ct 11/26/2023 18:12",
+		"assureSubindexAt:" : "ct 11/26/2023 18:14",
+		"atPath:putKey:label:" : "ct 11/26/2023 03:07",
+		"entries" : "ct 11/26/2023 02:40",
+		"entries:" : "ct 11/26/2023 18:18",
+		"entriesDo:" : "ct 11/26/2023 18:02",
+		"forwardReference" : "ct 11/26/2023 18:13",
+		"forwardReference:" : "ct 11/26/2023 18:13",
+		"initialize" : "ct 11/26/2023 03:23",
+		"key" : "ct 11/26/2023 00:19",
+		"key:" : "ct 11/26/2023 00:20",
+		"keySortFunction" : "ct 11/26/2023 19:40",
+		"label" : "ct 11/26/2023 00:20",
+		"label:" : "ct 11/26/2023 00:20",
+		"makeEntryForKey:label:" : "ct 11/26/2023 18:13",
+		"makeSubindexForKey:" : "ct 11/26/2023 18:14",
+		"printOn:" : "ct 11/26/2023 19:15",
+		"referenceKeys" : "ct 11/26/2023 18:12",
+		"referenceKeys:" : "ct 11/26/2023 18:18",
+		"storeOn:" : "ct 11/26/2023 18:16" } }

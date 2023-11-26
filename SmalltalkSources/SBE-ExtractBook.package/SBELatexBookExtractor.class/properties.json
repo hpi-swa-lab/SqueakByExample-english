@@ -23,7 +23,8 @@
 		"enumerateStack",
 		"previousLineBreaks",
 		"graphicsPath",
-		"graphicsExtensions" ],
+		"graphicsExtensions",
+		"index" ],
 	"name" : "SBELatexBookExtractor",
 	"pools" : [
 		 ],
