@@ -2,10 +2,12 @@
 	"class" : {
 		"on:" : "ct 11/9/2023 21:39" },
 	"instance" : {
+		"allInvalidLinks" : "ct 11/26/2023 20:14",
 		"book" : "ct 11/15/2023 19:51",
 		"bookNode" : "ct 11/9/2023 21:37",
 		"bookNode:" : "ct 11/9/2023 21:37",
 		"contents" : "ct 11/9/2023 22:36",
+		"invalidLinks" : "ct 11/26/2023 20:15",
 		"key" : "ct 11/9/2023 21:47",
 		"key:" : "ct 11/15/2023 17:38",
 		"openInPDF" : "ct 11/24/2023 18:25",
