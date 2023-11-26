@@ -1,7 +1,5 @@
 mouse events
-actOnClickFor: anObject
+actOnClickFor: aHelpBrowser
 
-	| book |
-	book := anObject currentTopic book.
-	book openLabel: self label in: anObject.
+	self openLabelIn: aHelpBrowser.
 	^ true
