@@ -1,7 +1,7 @@
 visiting - nodes
-basicVisitText: aString
+basicVisitText: aStringOrText
 
-	(aString caseOf: {['\chapter'] -> [#chapter]. ['\section'] -> [#section]} otherwise: []) "work around some other grammar slips ..."
+	(aStringOrText caseOf: {['\chapter'] -> [#chapter]. ['\section'] -> [#section]} otherwise: []) "work around some other grammar slips ..."
 		ifNotNil: [:type |
 			parseStack push:
 				(Generator on: [:gen |
@@ -10,21 +10,27 @@ basicVisitText: aString
 					DCBlock new
 						type: type;
 						addMorphBack:
-							(DCText new contents: aString; yourself);
+							(DCText new contents: aStringOrText asString; yourself);
 						addMorphBack:
 							gen peek;
 						sbeVisit: self]).
 			^ self].
 	
 	pendingLabels ifNotEmpty:
-		[aString ifNotEmpty:
+		[aStringOrText ifNotEmpty:
 			[| currentLabels |
 			currentLabels := pendingLabels copy.
 			pendingLabels removeAll.
-			self basicVisitText: aString first asString.
+			self stream
+				withAttributes:
+					(aStringOrText isText
+						ifTrue: [aStringOrText attributesAt: 1]
+						ifFalse: [#()])
+				do:
+					[self basicVisitText: aStringOrText first asString].
 			currentLabels do: [:label |
 				self emitLabel: label].
-			self basicVisitText: aString allButFirst.
+			self basicVisitText: aStringOrText allButFirst.
 			^ self]].
 	
-	^ super basicVisitText: aString
+	^ super basicVisitText: aStringOrText
