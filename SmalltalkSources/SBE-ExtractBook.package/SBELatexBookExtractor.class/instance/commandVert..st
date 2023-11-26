@@ -1,6 +1,6 @@
 visiting - commands - characters and spacing
-commandLambda: arguments
-	<command: 'lambda'>
+commandVert: arguments
+	<command: 'vert'>
 
 	self assert: arguments isEmpty.
-	self basicVisitText: 'lambda'.
+	self basicVisitText: '|'.

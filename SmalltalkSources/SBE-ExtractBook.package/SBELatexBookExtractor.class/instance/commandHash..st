@@ -1,6 +1,6 @@
 visiting - commands - characters and spacing
-commandLambda: arguments
-	<command: 'lambda'>
+commandHash: arguments
+	<command: '#'>
 
 	self assert: arguments isEmpty.
-	self basicVisitText: 'lambda'.
+	self stream nextPut: $#.
