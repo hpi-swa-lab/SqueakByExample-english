@@ -1120,6 +1120,7 @@ SBEScreenshotRecorder writeTo: './figures/fixOffByOne.png' building: [:helper |
 			StringTest >> #testSuffixFound.
 			StringTest >> #testSuffixNotFound.
 			StringTest >> #testShout.
+			StringTest compiledMethodAt: #testFindLiteralBooleanOrNil ifAbsent: [].
 			StringTest >> #testPercentEncodingJa. }
 		after: block].
 	String compile: 'suffix
@@ -1136,6 +1137,7 @@ self assert: ''txt'' equals: ''readme.txt'' suffix'
 .
 	StringTest compile: 'testShout'. "To prevent a failure from this test"
 	StringTest removeSelector: #testSuffixNotFound.
+	StringTest removeSelector: #testFindLiteralBooleanOrNil.
 	StringTest removeSelector: #testPercentEncodingJa. "very slow"
 	testRunner := TestRunner newForSuite: StringTest suite.
 	testRunner runAll.
