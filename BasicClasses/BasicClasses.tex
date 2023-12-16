@@ -70,7 +70,7 @@ If we begin to browse the protocols on the instance side of \ct{Object} we start
 %-----------------------------------------------------------------
 \subsection{Printing}
 Every object in Smalltalk can return a printed form of itself.
-You can select any expression in a workspace and select the \menu{print it} menu item:
+You can select any expression in a workspace and select the \menu{print it} menu item: \index{print it}
 This executes the expression and asks the returned object to print itself.
 In fact, this sends the message \ct{printString} to the returned object.
 The method \mthind{Object}{printString}, which is a \ind{template method}, at its core sends the message \mthind{Object}{printOn:} to its receiver.
@@ -951,9 +951,9 @@ However, exception handlers have a couple of other options for dealing with exce
     Using \ct{pass}, you can design your exception handlers to only handle some exceptions based on their state and pass all others to the next handler:
 
     \begin{code}{NB: CANNOT TEST}
-    [self downloadData]
-        on: ConnectionRefused do: [:ex |
-            self cache at: ex host ifAbsent: [ex pass]].
+[self downloadData]
+    on: ConnectionRefused do: [:ex |
+        self cache at: ex host ifAbsent: [ex pass]].
     \end{code}
 
     This example tries to download some data from a server, but if the connection is refused, it will try to fallback to an offline cache.
@@ -968,11 +968,11 @@ However, exception handlers have a couple of other options for dealing with exce
     For instance, most dialogs in \sq signal a \clsind{ProvideAnswerNotification} before they show up to the user, which allows the code that eventually triggered the dialog to automatically answer the question:
 
     \begin{code}{NB: CANNOT TEST}
-    Morph new exportAsPNG. --> "a file dialog opens for entering a file name"
+Morph new exportAsPNG. --> "a file dialog opens for entering a file name"
 
-    [Morph new exportAsPNG]
-        on: ProvideAnswerNotification
-        do: [:ex | ex resume: 'myMorph.png']. --> "no dialog opens, the file is saved as 'myMorph.png'"
+[Morph new exportAsPNG]
+    on: ProvideAnswerNotification
+    do: [:ex | ex resume: 'myMorph.png']. --> "no dialog opens, the file is saved as 'myMorph.png'"
     \end{code}
 
     Note that specifically for handling \clsindplural{ProvideAnswerNotification}, there are the more convenient methods \cmind{BlockClosure}{valueSupplyingAnswers:} and \cmind{BlockClosure}{valueSuppressingMessages:}.
@@ -986,9 +986,9 @@ However, exception handlers have a couple of other options for dealing with exce
     For instance, the following would be equivalent to the first example above:
 
     \begin{code}{@TEST}
-    [(-2 to:2) collect: [:i | 100 / i]]
-       on: ZeroDivide
-       do: [:ex | ex return: nil].
+[(-2 to:2) collect: [:i | 100 / i]]
+    on: ZeroDivide
+    do: [:ex | ex return: nil].
     \end{code}
 \end{itemize}
 

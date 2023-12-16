@@ -235,7 +235,7 @@ It's often useful to have multiple browsers open at the same time.
 When you are writing code you will almost certainly need at least two: one for the method that you are typing, and another to browse around the system to see what to type.
 You can also open a browser on a class named by any selected text using the \short{b} keyboard shortcut.
 \index{system browser!browse button}
-\index{keyboard shortcuts!browse it}
+\index{browse it}
 
 \dothis{Try this: in a workspace window, type the name of a class (for instance \ct{ScaleMorph}), select it, and then press \short{b}. This trick is often useful; it works in any text window.}
 
@@ -608,6 +608,7 @@ By all means experiment, but save your image first!
 \subsection{The inspector}
 
 \dothis{As an illustration of what you can do with an \ind{inspector}, type \ct{TimeStamp now} in a workspace, and then choose \menu{inspect it} from the \ind{yellow button} menu.
+\index{inspect it}
 (It's not necessary to select the text before using the menu; if no text is selected, the menu operations work on the whole of the current line.
 You can also type \short{i} for \menu{\textbf{i}nspect it}.)}
 \clsindex{TimeStamp}
@@ -790,7 +791,7 @@ At the bottom, you see a code pane, just like in an ordinary browser.
 However, this window is more interesting as it still knows about the \ct{PluggableListMorph} for which we opened it.
 Thus, we can evaluate code in the code pane.
 
-\dothis{In the browser, open the method \ct{fullListSize} by selecting it in the list at the top right. Then, navigate to the last code line and \menu{print it} (\short{p}). You should see the result of evaluating the expression right within the code editor.}
+\dothis{In the browser, open the method \ct{fullListSize} by selecting it in the list at the top right. Then, navigate to the last code line and \menu{print it} (\short{p}). \index{print it} You should see the result of evaluating the expression right within the code editor.}
 
 \begin{ExecuteSmalltalkScript}
 	SBEScreenshotRecorder writeTo: './figures/instanceBrowser.png' building: [:helper |
@@ -1119,6 +1120,7 @@ SBEScreenshotRecorder writeTo: './figures/fixOffByOne.png' building: [:helper |
 			StringTest >> #testSuffixFound.
 			StringTest >> #testSuffixNotFound.
 			StringTest >> #testShout.
+			StringTest compiledMethodAt: #testFindLiteralBooleanOrNil ifAbsent: [].
 			StringTest >> #testPercentEncodingJa. }
 		after: block].
 	String compile: 'suffix
@@ -1135,6 +1137,7 @@ self assert: ''txt'' equals: ''readme.txt'' suffix'
 .
 	StringTest compile: 'testShout'. "To prevent a failure from this test"
 	StringTest removeSelector: #testSuffixNotFound.
+	StringTest removeSelector: #testFindLiteralBooleanOrNil.
 	StringTest removeSelector: #testPercentEncodingJa. "very slow"
 	testRunner := TestRunner newForSuite: StringTest suite.
 	testRunner runAll.
@@ -1273,7 +1276,7 @@ The process \subind{process}{browser} is a cousin of the debugger that lets you 
 \figref{processBrowser} shows a screenshot.
 The top-left pane lists all of the processes in \sq, in priority order, from the timer interrupt watcher at priority 80 to the idle process at priority 10.
 Of course, on a uniprocessor, when you look which program is running, the only process that can be running is the UI process, as it is currently displaying the information to you; all of the other will be waiting for some kind of event.
-By default, the display of processes is static; it can be updated using the \ind{yellow button} menu, which also provides an option to \menu{turn on auto-update (a)}
+By default, the display of processes is static; it can be updated using the \ind{yellow button} menu, which also provides an option to \menu{turn on auto-update (a)}.
 
 If you select a process in the top-left pane, its stack trace is displayed in the top-right pane, just as with the debugger.
 If you select a stack frame, the corresponding method is displayed in the bottom pane.
@@ -1407,7 +1410,7 @@ This will run the block repeatedly and compute a few statistics about the execut
 	\begin{minipage}[t]{0.48\textwidth}
 		\ifluluelse
 			{\includegraphics[width=\textwidth]{SpaceTally}}
-			{\includegraphics[scale=0.7]{exploreWithLabel: 'SpaceTally'}}
+			{\includegraphics[scale=0.7]{SpaceTally}}
 		\label{fig:SpaceTally}
 	\end{minipage}
 	\caption{A time profiler (left) and a space tally (right).}

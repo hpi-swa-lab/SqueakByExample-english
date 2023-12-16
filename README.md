@@ -113,6 +113,16 @@ The usual workflow to **add a scripted screenshot to the book** is as follows:
 
 2. Open the Git Browser and clone this repository. Install missing dependencies as specified in the baseline if necessary.
 
+   Alternatively, you can load the project via Metacello, but you won't be able to commit changes back to the repository without cloning it first:
+   
+   ```smalltalk
+   Metacello new
+   	baseline: 'SBE';
+   	repository: 'github://hpi-swa-lab/SqueakByExample-english:master/SmalltalkSources';
+   	get;
+   	load.
+   ```
+
 3. Make sure to set the resource directory to the path of your working copy:
 
    ```smalltalk
