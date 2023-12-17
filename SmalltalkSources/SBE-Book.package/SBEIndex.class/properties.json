@@ -1,0 +1,18 @@
+{
+	"category" : "SBE-Book",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"key",
+		"label",
+		"entries",
+		"referenceKeys",
+		"forwardReference" ],
+	"name" : "SBEIndex",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

@@ -1,0 +1,4 @@
+accessing
+bookNode
+
+	^ bookNode

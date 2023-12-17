@@ -1,0 +1,4 @@
+private
+doThisImage
+
+	^ MenuIcons squeakLogoIcon

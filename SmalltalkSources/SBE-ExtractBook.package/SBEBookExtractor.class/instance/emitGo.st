@@ -1,0 +1,4 @@
+emitting
+emitGo
+
+	self basicVisitText: '>'.
