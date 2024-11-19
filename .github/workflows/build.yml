@@ -56,7 +56,7 @@ jobs:
       matrix:
         smalltalk: ${{ fromJson(needs.args.outputs.squeak-versions) }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: hpi-swa/setup-smalltalkCI@v1
         with:
           smalltalk-image: Squeak64-${{ matrix.smalltalk }}
@@ -74,7 +74,7 @@ jobs:
       matrix:
         smalltalk: ${{ fromJson(needs.args.outputs.squeak-versions) }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: hpi-swa/setup-smalltalkCI@v1
         with:
           smalltalk-image: Squeak64-${{ matrix.smalltalk }}
@@ -85,7 +85,7 @@ jobs:
     name: 📄 Collect listings from SmalltalkSources
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: make listings
       - name: 💾 Store listings
         uses: actions/upload-artifact@master
@@ -101,7 +101,7 @@ jobs:
       matrix:
         smalltalk: ${{ fromJson(needs.args.outputs.squeak-versions) }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: hpi-swa/setup-smalltalkCI@v1
         with:
           smalltalk-image: Squeak64-${{ matrix.smalltalk }}
