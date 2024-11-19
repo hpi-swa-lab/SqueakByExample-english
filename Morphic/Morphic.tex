@@ -659,10 +659,10 @@ Alternatively, you can modify the \ct{handleKeystroke:} method so that you can u
 \dothis{Add the following code to \mthref{handleKeystroke}:}
 
 \begin{code}{}
-	keyValue = $+ asciiValue
-		ifTrue: [self startStepping].
-	keyValue = $- asciiValue
-		ifTrue: [self stopStepping].
+keyValue = $+ asciiValue
+	ifTrue: [self startStepping].
+keyValue = $- asciiValue
+	ifTrue: [self stopStepping].
 \end{code}
 
 % \on{You can also \menu{debug~\go{} inspect morph} and evaluate: \ct{self currentWorld startStepping: self}.}

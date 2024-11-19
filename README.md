@@ -113,6 +113,16 @@ The usual workflow to **add a scripted screenshot to the book** is as follows:
 
 2. Open the Git Browser and clone this repository. Install missing dependencies as specified in the baseline if necessary.
 
+   Alternatively, you can load the project via Metacello, but you won't be able to commit changes back to the repository without cloning it first:
+   
+   ```smalltalk
+   Metacello new
+   	baseline: 'SBE';
+   	repository: 'github://hpi-swa-lab/SqueakByExample-english:master/SmalltalkSources';
+   	get;
+   	load.
+   ```
+
 3. Make sure to set the resource directory to the path of your working copy:
 
    ```smalltalk
@@ -156,7 +166,18 @@ part of the book, you will find that printing 2 up at 140% works well.
 
 - Update the sources in the SqueakSource repository (see [SmalltalkSources](#smalltalk-sources)).
 - Select the draft release from the <kbd>Releases</kbd> section on GitHub, edit it, and publish it.
-- Publish the PDF using Lulu or whatever else (maybe we should document this process here as well).
+- Publish the PDF using Lulu or whatever else
+  - Lulu:
+    1. Create new project
+    2. Print book > publish book (via bookstore & global distribution)
+    3. Metadata: language (English), Category (Computer & Technology), edition statement, authors, license (CC BY-SA)
+    4. Use a free ISBN
+    5. Upload PDF (remove the cover page, will be provided separately!)
+    6. Paper options: 6x9 inch, color standard, white, paperback, matte
+    7. Upload cover & blurb PDF (see `figures/cover`)
+    8. Description: copy from previous edition
+    9. Category: Adult Education
+    10. Set price
 - Announce the new release on the mailing list, squeak.org, etc.
 
 ### 2. Prepare the repository for the next edition

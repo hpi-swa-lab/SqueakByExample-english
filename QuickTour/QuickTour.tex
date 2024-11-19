@@ -43,7 +43,7 @@ You will also learn how to define a new method, create an object, and send it me
 %=================================================================
 \section{Getting started}
 
-\sq is available as a free \ind{download} from \url{www.squeak.org}.
+\sq is available as a free \ind{download} from \url{https://www.squeak.org}.
 Your download will be an archive file that contents vary from platform to platform.
 However, there are two important components common to all versions (see \figref{download}).
 
@@ -428,6 +428,7 @@ Try double-clicking in the workspace at various points in the text you have just
 Notice how an entire word, entire string, or the whole text is selected, depending on where you click.
 
 \dothis{Select the text you have typed and yellow-click.
+\index{do it}
 Select \menu{do it (d)}.}
 Notice how the text ``hello world'' appears in the transcript window
 (\figref{doit}).
@@ -479,7 +480,8 @@ Depending on your platform, you may have to press one of the modifier keys (cont
 (We will indicate these generically as \short{\emph{key}}.)
 
 \dothis{Evaluate the expression in the workspace again, but using the keyboard shortcut: \short{d}.}
-\index{keyboard shortcuts!do it}
+\index{do it}
+\index{keyboard shortcuts!do it|seealso{do it}}
 
 In addition to \menu{do it}, you will have noticed \menu{print it}, \menu{inspect it} and \menu{explore it}.
 Let's have a quick look at each of these.
@@ -491,6 +493,7 @@ What you just did is send the message \ct{+} with argument \ct{4} to the number 
 Normally the result \ct{7} will have been computed and returned to you, but since the workspace did not know what to do with this answer, it simply threw the answer away.
 If you want to see the result, you should \menu{print it} instead.
 \menu{print it} actually compiles the expression, executes it, sends the message \ct{printString} to the result, and displays the resulting string.
+\index{print it}
 
 \dothis{Select \ct{3 + 4} and \menu{print it} (\short{p}).}
 This time we see the result we expect (\figref{printit}).
@@ -517,6 +520,8 @@ SBEScreenshotRecorder writeTo: './figures/PrintIt.png' frame: #morphs building: 
 \noindent
 We use the notation \ct{-->} as a convention in this book to indicate that a particular \sq expression yields a given result when you \menu{print it}.
 
+\index{inspect it}
+\index{keyboard shortcuts!inspect it|seealso{inspect it}}
 \dothis{Delete the highlighted text ``\ct{7}'' (\sq should have selected it for you, so you can just press the delete key).
 Select \ct{3 + 4} again and this time \menu{inspect it} (\short{i}).}
 \noindent
@@ -545,10 +550,11 @@ SBEScreenshotRecorder writeTo: './figures/InspectIt.png' frame: #morphs building
 
 \dothis{Type \ct{self squared} in the bottom panel of the inspector on \ct{7} and \menu{print it}.}
 
+\index{explore it}
 \needlines{2}
 \dothis{Close the inspector.
 	Type the expression \ct{Object} in a workspace and this time \menu{explore it} (\short{I}, uppercased i).}
-\index{keyboard shortcuts!explore it}
+\index{keyboard shortcuts!explore it|seealso{explore it}}
 \index{explorer}
 
 This time you should see a window labeled \clsind{Object} containing the text
@@ -639,7 +645,7 @@ If no \ind{protocol} is selected you should see all methods in the fourth pane.
 You may have to scroll down to find it.
 Now you will see in the fourth pane only methods related to printing.
 \index{category!method}
-\index{category!message|see method}
+\index{category!message|see category, method}
 
 \dothis{Select the \mthind{Object}{printString} method.}
 Now we see in the bottom pane the source code of the \ct{printString} method, shared by all objects in the system (except those that override it).
@@ -658,7 +664,9 @@ Suppose we want to browse the class \clsind{Boolean}.
 
 \dothis{Type \ct{Boolean browse} into a workspace and \menu{do it}.}
 A browser will open on the Boolean class (\figref{browseBoolean}).
-There is also a keyboard shortcut \short{b} (browse) that you can use in any tool where you find a class name; \index{keyboard shortcuts!browse it}, select the name and type \short{b}.
+There is also a keyboard shortcut \short{b} (browse) that you can use in any tool where you find a class name; select the name and type \short{b}.
+\index{browse it}
+\index{keyboard shortcuts!browse it|seealso{browse it}}
 
 \dothis{Use the keyboard shortcut to browse the class \ct{Boolean}.}
 
@@ -997,7 +1005,7 @@ shout
 \end{method}
 
 The comma is the string concatenation operation, so the body of this method appends an exclamation mark to an upper-case version of whatever \ct{String} object the \ct{shout} message was sent to.
-The \ct{^} tells \sq that the expression that follows is the answer to be returned from the method, in this case, the new concatenated string. 
+The \ct{^} tells \sq that the expression that follows is the answer to be returned from the method, in this case, the new concatenated string.
 \cmindex{String}{,}
 Does this method work? Let's run the tests and see.
 

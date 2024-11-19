@@ -80,7 +80,7 @@ We will now show you how to define these classes using the \squeak programming t
 
 We have already seen the \ind{system browser} in \charef{quick}, where we learned how to navigate to classes and methods, and saw how to define new methods.
 Now we will see how to create system categories and classes.
-\seeindex{system category}{category}
+\seeindex{system category}{category, system}
 \seeindex{class category}{system category}
 \index{category!creating}
 
@@ -133,16 +133,16 @@ If you selected an existing category first, then the new category will be positi
 
 As yet there are  of course no classes in the new category.
 However, the main editing pane displays a template to make it easy to create a new class (see \figref{classTemplate}).
-This template shows us a \st expression that sends a message to a class called \ct{Object}, asking it to create a subclass called \ct{NameOfSubClass}.
+This template shows us a \st expression that sends a message to a class called \ct{Object}, asking it to create a subclass called \ct{NameOfSubclass}.
 The new class has no variables and should belong to the category \scat{SBE-Quinto}.
 We now modify the template to create the class that we want.
 
 \dothis{Modify the class creation template as follows:}
-\begin{itemize}
+\begin{enumerate}
   \item Replace \clsind{Object} by \clsind{SimpleSwitchMorph}.
-  \item Replace \ct{NameOfSubClass} by \clsind{SBECell}.
+  \item Replace \ct{NameOfSubclass} by \clsind{SBECell}.
   \item Add \ct{mouseAction} to the list of instance variables.
-\end{itemize}
+\end{enumerate}
 The result should look like \clsref{firstClassDef}.
 
 \begin{classdef}[firstClassDef]{Defining the class \ct| SBECell|.}
@@ -289,7 +289,8 @@ You should be able to imagine the object talking to itself and saying ``\ct{Self
 You can test the effect of the code you have written by creating a new \ct{SBECell} object and inspecting it.
 
 \dothis{Open a workspace.
-	Type the expression \ct{SBECell new} and \menu{inspect it}.}
+	Type the expression \ct{SBECell new} and \menu{inspect it}.
+	\index{inspect it}}
 
 \begin{ExecuteSmalltalkScript}
 SBEScreenshotRecorder writeTo: './figures/SBECellInspector.png' frame: #morphs building: [:helper |
@@ -767,7 +768,7 @@ The simplest way of doing this is by \emph{filing out} the code.
 The yellow-button menu in the System Categories pane will give you the option to file out the whole of category \scat{SBE-Quinto}.
 The resulting file is more or less human-readable, but is really intended for computers, not humans.
 You can email this file to your friends, and they can file it into their own \squeak images using drag-and-drop.
-\seeindex{saving code}{categories}
+\seeindex{saving code}{file, filing out}
 \seeindex{category!filing out}{file, filing out}
 \seeindex{class!filing out}{file, filing out}
 \seeindex{method!filing out}{file, filing out}
@@ -786,7 +787,7 @@ Verify that the game now works in the new image.}
 
 \subsection{Monticello packages}
 Although fileouts are a convenient way of making a snapshot of the code you have written, they do not work well for long-running projects.
-Just as most open-source projects find it much more convenient to maintain their code in a repository using \ind{Git}\footnote{\url{www.git-scm.com}} or \ind{Mercurial}\footnote{\url{www.mercurial-scm.org}}, so \squeak programmers find it more convenient to manage their code using \ind{Monticello} packages.
+Just as most open-source projects find it much more convenient to maintain their code in a repository using \ind{Git}\footnote{\url{https://www.git-scm.com}} or \ind{Mercurial}\footnote{\url{https://www.mercurial-scm.org}}, so \squeak programmers find it more convenient to manage their code using \ind{Monticello} packages.
 These packages are represented as files with names ending in \ct{.mcz}; they are actually zip-compressed bundles that contain the complete code of your \ind{package}.
 
 Using the Monticello package browser, you can save packages to repositories on various types of servers, including FTP and HTTP servers; you can also just write the packages to a repository in a local file system directory.
@@ -833,12 +834,12 @@ Since we put all of the code for the Quinto game into the class category called 
 
 \subsection{\ind{SqueakSource}: a sharing platform for Monticello}
 We think that the best way to save your code and share it is to create an account for your project on a SqueakSource server.
-SqueakSource is similar to GitHub\footnote{\url{www.github.com}}:
+SqueakSource is similar to GitHub\footnote{\url{https://www.github.com}}:
 It is a web front-end to an HTTP Monticello server that lets you manage your projects.
-There is a public SqueakSource server at \url{http://www.squeaksource.com}, and a copy of the code related to our game is stored there at \sbeSqueaksourceUrl.
+There is a public SqueakSource server at \url{https://www.squeaksource.com}, and a copy of the code related to our game is stored there at \sbeSqueaksourceUrl.
 You can look at this project with a web browser, but it's a lot more productive to do so from inside \squeak, using the Monticello browser, which lets you manage your packages.
 
-\dothis{Open a web browser to \url{www.squeaksource.com}.
+\dothis{Open a web browser to \url{https://www.squeaksource.com}.
 Create an account for yourself and then create (\ie ``register'') a project for the Quinto game.}
 SqueakSource will show you the information that you should use when adding a repository using the Monticello browser.
 
