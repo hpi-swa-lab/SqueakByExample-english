@@ -461,8 +461,8 @@ SBEScreenshotRecorder writeTo: './figures/Doit.png' frame: [:morphsRect | morphs
 \end{figure}
 
 You have just evaluated your first \st expression!
-You just sent the message \ct{show: 'hello world'} to the \ct{Transcript} object, followed by the message \ct{cr} (carriage return).
-The \ct{Transcript} then decided what to do with this message, that is, it looked up its \emph{methods} for handling \ct{show:} and \ct{cr} messages and reacted appropriately.
+You just sent the message \ct{showln: 'hello world'} to the \ct{Transcript} object.
+The \ct{Transcript} then decided what to do with this message, that is, it looked up its \emph{methods} for handling \ct{showln:} messages and reacted appropriately.
 
 If you talk to Smalltalkers for a while, you will quickly notice that they generally do not use expressions like ``call an operation'' or ``invoke a method'', but instead they will say ``send a message''.
 This reflects the idea that objects are responsible for their own actions.
