@@ -8,6 +8,7 @@
 	"instvars" : [
 		"extent",
 		"dyeMode",
+		"morph",
 		"scaledImage",
 		"knownScanners" ],
 	"name" : "SBETextAnchor",
