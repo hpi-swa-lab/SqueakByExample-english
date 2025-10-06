@@ -1,4 +1,5 @@
 accessing
 image
 
-	^ anchoredMorph
+	self hasCompressedImage ifFalse: [^ self basicImage].
+	^ PNGReadWriter formFromStream: self basicImage readStream

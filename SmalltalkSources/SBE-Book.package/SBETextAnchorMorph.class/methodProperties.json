@@ -1,0 +1,9 @@
+{
+	"class" : {
+		"newFor:" : "ct 10/6/2025 00:09" },
+	"instance" : {
+		"drawOn:" : "ct 10/6/2025 00:18",
+		"initializeWithTextAnchor:" : "ct 10/6/2025 01:27",
+		"outOfWorld:" : "ct 10/6/2025 00:17",
+		"textAnchor" : "ct 10/6/2025 00:08",
+		"updateExtent" : "ct 10/6/2025 01:27" } }
