@@ -7,6 +7,7 @@ openPath: path in: aHelpBrowser
 		(ea isKindOf: SBEBookHelpTopic)
 			and: [(topic := ea) bookNode = topicNode]].
 	
+	topic contents ifNil: [^ self].
 	index := topic contents runs findFirst: [:attrs |
 		attrs anySatisfy: [:attr |
 			(attr isKindOf: SBETextLabelAnchor) and: [attr label = self label]]].
