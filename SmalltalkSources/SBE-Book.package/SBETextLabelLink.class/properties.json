@@ -1,0 +1,14 @@
+{
+	"category" : "SBE-Book",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"label" ],
+	"name" : "SBETextLabelLink",
+	"pools" : [
+		 ],
+	"super" : "TextAction",
+	"type" : "normal" }

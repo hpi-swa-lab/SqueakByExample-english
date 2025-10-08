@@ -1,0 +1,15 @@
+{
+	"category" : "SBE-Book",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"bookNode",
+		"subtopics" ],
+	"name" : "SBEBookHelpTopic",
+	"pools" : [
+		 ],
+	"super" : "AbstractHelpTopic",
+	"type" : "normal" }

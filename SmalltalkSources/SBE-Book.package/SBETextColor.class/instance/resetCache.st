@@ -1,0 +1,4 @@
+updating
+resetCache
+
+	actualColor := nil.

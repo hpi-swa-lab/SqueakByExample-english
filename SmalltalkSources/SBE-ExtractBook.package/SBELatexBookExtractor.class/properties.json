@@ -1,0 +1,32 @@
+{
+	"category" : "SBE-ExtractBook",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"stream",
+		"rootFile",
+		"file",
+		"buildDate",
+		"parseStack",
+		"ifstack",
+		"verbatim",
+		"commandHandlers",
+		"commandArguments",
+		"environmentHandlers",
+		"booleans",
+		"counters",
+		"labels",
+		"listModeStack",
+		"enumerateStack",
+		"previousLineBreaks",
+		"graphicsPath",
+		"graphicsExtensions",
+		"index" ],
+	"name" : "SBELatexBookExtractor",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

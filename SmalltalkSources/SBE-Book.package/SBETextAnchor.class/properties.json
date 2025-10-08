@@ -1,0 +1,18 @@
+{
+	"category" : "SBE-Book",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"extent",
+		"dyeMode",
+		"morph",
+		"scaledImage",
+		"knownScanners" ],
+	"name" : "SBETextAnchor",
+	"pools" : [
+		 ],
+	"super" : "TextAnchor",
+	"type" : "normal" }

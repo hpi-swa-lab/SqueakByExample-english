@@ -1,0 +1,14 @@
+{
+	"category" : "SBE-Book",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"style" ],
+	"name" : "SBETextFontReference",
+	"pools" : [
+		 ],
+	"super" : "TextFontReference",
+	"type" : "normal" }

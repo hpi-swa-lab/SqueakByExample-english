@@ -1,0 +1,14 @@
+{
+	"category" : "SBE-Book",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "SBEHtmlReadWriter",
+	"pools" : [
+		 ],
+	"super" : "HtmlReadWriter",
+	"type" : "normal" }

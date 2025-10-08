@@ -8,5 +8,8 @@ OrderedDictionary {
 	'SmalltalkSources/SBE-Extract.package' : #SquotCypressCodeSerializer,
 	'SmalltalkSources/BaselineOfSBE.package' : #SquotCypressCodeSerializer,
 	'SmalltalkSources/SBE-Monticello.package' : #SquotCypressCodeSerializer,
-	'SmalltalkSources/SBE-Tests.package' : #SquotCypressCodeSerializer
+	'SmalltalkSources/SBE-Tests.package' : #SquotCypressCodeSerializer,
+	'SmalltalkSources/SBE-Book.package' : #SquotCypressCodeSerializer,
+	'SmalltalkSources/SBE-ExtractBook.package' : #SquotCypressCodeSerializer,
+	'SmalltalkSources/SBE-BookCompatibility-Squeak60.package' : #SquotCypressCodeSerializer
 }

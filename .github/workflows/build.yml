@@ -135,11 +135,18 @@ jobs:
         run: mv SBE.pdf SBE-${{ matrix.smalltalk }}.pdf
         env:
           SQUEAK_VERSION: ${{ matrix.smalltalk }}
-      - name: 💾 Upload artifact
+      - name: 💾 Upload PDF
         uses: actions/upload-artifact@master
         with:
           name: book-${{ matrix.smalltalk }}
           path: SBE-${{ matrix.smalltalk }}.pdf
+      - name: 💾 Upload figures (for debugging and local builds)
+        # run even if figures failed but only when it has run
+        if: steps.figures.outcome == 'success' || steps.figures.outcome == 'failure'
+        uses: actions/upload-artifact@master
+        with:
+          name: figures-${{ matrix.smalltalk }}
+          path: ./*/**/*.png
       - if: (steps.figures.outcome == 'failure')
         name: Check DEBUG_FIGURES
         run: |

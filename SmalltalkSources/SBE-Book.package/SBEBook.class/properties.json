@@ -1,0 +1,15 @@
+{
+	"category" : "SBE-Book",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"pdfUrl",
+		"bookIndex" ],
+	"name" : "SBEBook",
+	"pools" : [
+		 ],
+	"super" : "SBEBookNode",
+	"type" : "normal" }

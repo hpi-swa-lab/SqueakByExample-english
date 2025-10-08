@@ -1,0 +1,14 @@
+{
+	"category" : "SBE-Book",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		"Book" ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "SBEHelp",
+	"pools" : [
+		 ],
+	"super" : "CustomHelp",
+	"type" : "normal" }

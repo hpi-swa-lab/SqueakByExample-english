@@ -1,0 +1,15 @@
+{
+	"category" : "SBE-Book",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"image",
+		"initialExtent" ],
+	"name" : "SBETextOpenImageAction",
+	"pools" : [
+		 ],
+	"super" : "TextAction",
+	"type" : "normal" }

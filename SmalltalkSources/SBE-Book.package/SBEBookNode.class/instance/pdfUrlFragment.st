@@ -1,0 +1,4 @@
+accessing
+pdfUrlFragment
+
+	^ self subclassResponsibility

@@ -1,0 +1,17 @@
+{
+	"category" : "SBE-Book",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"property",
+		"scope",
+		"actualColor",
+		"knownScanners" ],
+	"name" : "SBETextColor",
+	"pools" : [
+		 ],
+	"super" : "TextAttribute",
+	"type" : "normal" }

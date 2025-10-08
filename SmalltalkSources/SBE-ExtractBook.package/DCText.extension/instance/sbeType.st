@@ -1,0 +1,4 @@
+*SBE-ExtractBook
+sbeType
+
+	^ nil

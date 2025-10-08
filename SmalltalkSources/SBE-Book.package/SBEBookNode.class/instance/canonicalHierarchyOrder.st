@@ -1,0 +1,4 @@
+accessing
+canonicalHierarchyOrder
+
+	^ self subclassResponsibility

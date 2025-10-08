@@ -1,0 +1,4 @@
+testing
+shouldStyle
+
+	^ false

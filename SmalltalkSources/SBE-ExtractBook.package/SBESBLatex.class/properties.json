@@ -1,0 +1,14 @@
+{
+	"category" : "SBE-ExtractBook",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "SBESBLatex",
+	"pools" : [
+		 ],
+	"super" : "SBTSLanguage",
+	"type" : "normal" }
